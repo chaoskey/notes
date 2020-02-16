@@ -1,0 +1,29 @@
+#!/bin/bash
+
+function action(){
+    for file in `ls $1` 
+    do
+        if [ -d $1"/"$file ] 
+        then
+            action $1"/"$file
+        elif [ "${file#*.}"x = "md"x ]
+        then
+            # 方便发布到gitee
+            # sed -i '/\$\$/ { :begin; /\$\$[^$]*\$\$/! { $! { N; b begin }; }; }; s/\$\$\(\n[^$]*\n\)\$\$/{{< katex display >}}\1{{< \/katex >}}/g; s/\$\$\([^$]*\)\$\$/{{< katex >}}\1{{< \/katex >}}/g; s/!\[\s*\](\.\.\/images\//![](..\/..\/images\//g;'   $1"/"$file
+            sed -i '/```/ { :begin1; /```.*```/! { $! { N; b begin1 }; }; n; }; /\$\$/ { :begin2; /\$\$[^$]*\$\$/! { $! { N; b begin2 }; }; }; s/\$\$\(\n[^$]*\n\)\$\$/{{< katex display >}}\1{{< \/katex >}}/g; s/\$\$\([^$]*\)\$\$/{{< katex >}}\1{{< \/katex >}}/g; s/!\[\s*\](\.\.\/images\//![](..\/..\/images\//g;'  $1"/"$file
+        fi
+    done
+} 
+
+action ./content
+
+if [ "$1"x = "server"x ] 
+then
+    hugo server --disableFastRender -D
+else
+    hugo -D
+    ./fortypora
+fi
+
+
+
