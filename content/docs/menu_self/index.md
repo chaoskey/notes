@@ -3,6 +3,7 @@ headless = true
 +++
 
 
+- [**主动投资组合管理**]({{< relref "/docs/apm" >}})
 - [**微分几何笔记**]({{< relref "/docs/diffgeo" >}})
 - [**进行中......**]({{< relref "/docs/self" >}}) 
     - [整合Julia和Python的集成环境]({{< relref "/docs/self/0001" >}})  

@@ -2,6 +2,7 @@
 headless = true
 +++
 
+- [**主动投资组合管理**]({{< relref "/docs/apm" >}})
 - [**微分几何笔记**]({{< relref "/docs/diffgeo" >}})
     - [基于抽象指标的张量分析]({{< relref "/docs/diffgeo/0005" >}})  
     - [流形上的导数算符]({{< relref "/docs/diffgeo/0006" >}}) 
