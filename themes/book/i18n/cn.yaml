@@ -10,6 +10,12 @@
 - id: Expand
   translation: 展开
 
+- id: Categories
+  translation: 分类
+
+- id: Tags
+  translation: 标签
+
 - id: bookSearchConfig
   translation: |
     {

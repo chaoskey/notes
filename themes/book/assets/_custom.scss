@@ -1,3 +1,23 @@
 /* You can add custom styles here. */
 
 // @import "plugins/numbered";
+
+.post-pagination {
+    padding: 20px 35px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  
+    .newer-posts {
+      padding-right: 5px;
+      text-align: left;
+      width: 50%;
+    }
+  
+    .older-posts {
+      padding-left: 5px;
+      text-align: right;
+      width: 50%;
+    }
+  
+  }
