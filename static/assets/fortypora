@@ -9,7 +9,7 @@ function action(){
         elif [ "${file#*.}"x = "md"x ]
         then
             # 方便用typora阅读
-            sed -i 's/{{<\s*katex\s*>}}/$$/g; s/{{<\s*katex\s*display\s*>}}/$$/g; s/{{<\s*\/katex\s*>}}/$$/g; s/!\[\s*\](\.\.\/\.\.\/images\//![](..\/images\//g; '  $1"/"$file
+            sed -i 's/{{<\s*katex\s*>}}/$$/g; s/{{<\s*katex\s*display\s*>}}/$$/g; s/{{<\s*\/katex\s*>}}/$$/g; s/!\[.*\](\.\.\/\.\.\/images\//![](..\/images\//g; '  $1"/"$file
         fi
     done
 } 
