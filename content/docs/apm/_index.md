@@ -16,6 +16,8 @@ Active Portfolio Management：A Quantitative Approach for Providing Superior Ret
 
 [https://github.com/chaoskey/notes/tree/master/apm/pdf](https://github.com/chaoskey/notes/tree/master/apm/pdf)
 
+<!--more-->
+
 ## 目录
 
 [第一章 绪论]({{< relref "/docs/apm/0017" >}})

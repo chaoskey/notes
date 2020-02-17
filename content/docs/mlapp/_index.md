@@ -14,6 +14,8 @@ tags: []
 
 [随书代码](https://github.com/probml/pmtk3)
 
+<!--more-->
+
 [第一章 导论]({{< relref "/docs/mlapp/01introduction" >}})
 
 [第二章 概率]({{< relref "/docs/mlapp/02probability" >}})

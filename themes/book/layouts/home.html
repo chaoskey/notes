@@ -6,22 +6,22 @@
   {{ partial "docs/inject/head" . }}
 </head>
 {{ $content := `
-# Hugo Book Theme
-
-This is a placeholder for home page.  
-You can override this page in:
-
- - &#96;/content/_index.md&#96;
- - &#96;/layouts/home.html&#96;
-` }}
-<body>
-  <main class="flex justify-center">
-    <div class="book-home markdown">
-      {{ replace $content "&#96;" "`" | markdownify }}
-    </div>
-  </main>
-
-  {{ partial "docs/inject/body" . }}
-</body>
+  # Hugo Book Theme
+  
+  This is a placeholder for home page.  
+  You can override this page in:
+  
+   - &#96;/content/_index.md&#96;
+   - &#96;/layouts/home.html&#96;
+  ` }}
+  <body>
+    <main class="flex justify-center">
+      <div class="book-home markdown">
+        {{ replace $content "&#96;" "`" | markdownify }}
+      </div>
+    </main>
+  
+    {{ partial "docs/inject/body" . }}
+  </body>
 
 </html>
