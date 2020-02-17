@@ -22,7 +22,8 @@
 
       <footer class="book-footer">
         {{ template "footer" . }} <!-- Footer under page content -->
-        {{ template "comments" . }} <!-- Comments block -->
+        <!-- {{ template "comments" . }}  Comments block -->
+        <div id="gitalk-container"></div>
       </footer>
       {{ partial "docs/inject/footer" . }}
     </div>
