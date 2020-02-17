@@ -39,6 +39,7 @@ enableGitInfo = false
   contentDir = 'content'
   weight = 3
 
+
 [params]
   # (Optional, default true) Controls table of contents visibility on right side of pages.
   # Start and end levels can be controlled with markup.tableOfContents setting.
@@ -59,17 +60,17 @@ enableGitInfo = false
 
   # Set source repository location.
   # Used for 'Last Modified' and 'Edit this page' links.
-  BookRepo = 'https://gitee.com/chaoskey/notes'
+  BookRepo = 'https://gitee.com/-/ide/project/chaoskey/notes'
 
   # Enable "Edit this page" links for 'doc' page type.
   # Disabled by default. Uncomment to enable. Requires 'BookRepo' param.
   # Path must point to 'content' directory of repo.
-  # BookEditPath = 'edit/master/exampleSite/content'
+  BookEditPath = 'edit/master/-/content'
 
   # Configure the date format used on the pages
   # - In git information
   # - In blog posts
-  BookDateFormat = 'Jan 2, 2006'
+  BookDateFormat = '2006-01-02'
 
   # (Optional, default true) Enables search function with flexsearch,
   # Index is built on fly, therefore it might slowdown your website.
