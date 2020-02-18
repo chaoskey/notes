@@ -13,4 +13,8 @@
   {{ $title = .File.BaseFileName | humanize | title }}
 {{ end }}
 
-{{ return i18n $title }}
+{{ if ne (i18n $title) "" }}
+  {{ $title = (i18n $title) }}
+{{ end }}
+
+{{ return $title }}

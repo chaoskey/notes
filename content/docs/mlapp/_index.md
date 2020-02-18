@@ -1,5 +1,5 @@
 ---
-title: "机器学习：概率视角"
+title: "《机器学习：概率视角》"
 date: 2019-06-14T20:20:35+08:00
 draft: true
 categories: ["机器学习"]
@@ -7,6 +7,7 @@ tags: []
 ---
 
 # 《机器学习：概率视角》
+
 
 [原文: Machine Learning A Probabilistic Perspective, Kevin P. Murphy, MIT, 2012](https://github.com/chaoskey/notes/tree/master/mlapp/pdf)
 

@@ -20,7 +20,7 @@
 {{ end }}
 
 <!-- 分类菜单适时展示 -->
-{{ if and (ge (len $spath) 3) (eq .Site.Params.BookMenuBundle $menupath) }}
+{{ if or ((eq (len $spath) 1))  (and (ge (len $spath) 3) (eq (index $spath 1) "posts")) }}
 <hr>
 {{ partial "docs/taxonomy" . }} 
 {{ end }}
