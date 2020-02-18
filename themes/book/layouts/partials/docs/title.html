@@ -13,4 +13,4 @@
   {{ $title = .File.BaseFileName | humanize | title }}
 {{ end }}
 
-{{ return $title }}
+{{ return i18n $title }}

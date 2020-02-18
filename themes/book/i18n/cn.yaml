@@ -16,6 +16,9 @@
 - id: Tags
   translation: 标签
 
+- id: Posts
+  translation: 博客
+
 - id: bookSearchConfig
   translation: |
     {

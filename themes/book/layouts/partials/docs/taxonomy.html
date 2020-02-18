@@ -1,4 +1,3 @@
-<nav>
   <ul>
   {{ range $term, $_ := .Site.Taxonomies }}
     {{ with $.Site.GetPage (printf "/%s" $term | urlize) }}
@@ -16,4 +15,3 @@
     {{ end }}
   {{ end }}
   </ul>
-</nav>

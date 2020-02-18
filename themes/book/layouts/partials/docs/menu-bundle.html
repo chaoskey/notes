@@ -1,12 +1,27 @@
 
+<!-- 读取配置的菜单列表 -->
+{{ $bookmenus := (replace .Site.Params.BookMenus " " "")  }}
+{{ $bookmenus = (split (trim $bookmenus ",") ",")  }}
+
+<!-- 当前路径 -->
 {{ $spath := (split (trim $.RelPermalink "/") "/") }}
+
+<!-- 拼接菜单路径 -->
 {{ $menupath := .Site.Params.BookMenuBundle }}
-{{ if ge (len $spath) 3 }}
+{{ if and (ge (len $spath) 3) (in $bookmenus (index $spath 2)) }}
+    <!-- 完整路径 并且 存在 -->
     {{ $menupath = (printf "%s_%s" $menupath (index $spath 2)) }}
 {{ end }}
 
+<!-- 显示菜单 -->
 {{ with .Site.GetPage $menupath }}
   {{- $href := printf "href=\"%s\"" $.RelPermalink -}}
   {{- replace .Content $href (print $href "class=active") | safeHTML -}}
+{{ end }}
+
+<!-- 分类菜单适时展示 -->
+{{ if and (ge (len $spath) 3) (eq .Site.Params.BookMenuBundle $menupath) }}
+<hr>
+{{ partial "docs/taxonomy" . }} 
 {{ end }}
 
