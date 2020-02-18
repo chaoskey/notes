@@ -6,7 +6,7 @@ type: docs
 {{< columns >}}
 
 ## [**站点维护记录**]({{< relref "/posts" >}})
-- [基于Hugo的站点构建]({{< relref "/posts/0000" >}})  
+- [用Hugo+码云搭建支持Markdown+LaTeX的云笔记]({{< relref "/posts/0000" >}})  
 
 <--->
 
