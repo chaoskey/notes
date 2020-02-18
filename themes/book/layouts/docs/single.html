@@ -10,7 +10,6 @@
     最后一页
   </a>
   {{end}}
-  
   {{if .Prev}}
   <a class="older-posts" href="{{.Prev.Permalink}}">
       上一页<br>{{.Prev.Title}}
@@ -22,6 +21,8 @@
   {{end}}
 </nav>
 
+<hr>
+
 <article class="markdown">
   <h1>
     <a href="{{ .RelPermalink }}">{{ .Title }}</a>
@@ -29,6 +30,8 @@
   {{ partial "docs/post-meta" . }}
   {{- .Content -}}
 </article>
+
+<hr>
 
 <nav class="post-pagination">
   {{if .Next}}
