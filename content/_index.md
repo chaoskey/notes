@@ -7,6 +7,7 @@ type: docs
 
 ## [**站点维护记录**]({{< relref "/posts" >}})
 - [用Hugo+码云搭建支持Markdown+LaTeX的云笔记]({{< relref "/posts/0000" >}})  
+- [通过实例掌握流编辑器sed]({{< relref "/posts/0067" >}})  
 
 <--->
 
