@@ -4,10 +4,14 @@
     <li class="book-section-flat">
       <strong>{{ i18n .Title | title }}</strong>
       <ul>
+      {{ $links := dict }}
       {{ range .Pages }}
+        {{ $links = merge $links  (dict  .RelPermalink (dict "title" .Title "length" (len .Pages) ))  }}
+      {{ end }}
+      {{ range sort $links "length" "desc" }}
         <li class="flex justify-between">
-          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-          <span>{{ len .Pages }}</span>
+          <a href="{{ . }}">{{ .title }}</a>
+          <span>{{ .length }}</span>
         </li>
       {{ end }}
       </ul>
