@@ -10,7 +10,7 @@
       {{ end }}
       {{ range sort $links "length" "desc" }}
         <li class="flex justify-between">
-          <a href="{{ .link }}">{{ .title }}{{ .key }}</a>
+          <a href="{{ .link }}">{{ .title }}</a>
           <span>{{ .length }}</span>
         </li>
       {{ end }}
