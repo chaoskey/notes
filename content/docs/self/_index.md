@@ -24,3 +24,5 @@ tags: []
 
 [流形上的拉格朗日力学]({{< relref "/docs/self/0015" >}})
 
+[李群李代数]({{< relref "/docs/self/0016" >}})  
+

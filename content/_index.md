@@ -17,6 +17,7 @@ type: docs
 - [基于Julia的科学计算功能库整理]({{< relref "/docs/self/0003" >}})  
 - [小技巧备忘]({{< relref "/docs/self/0004" >}})    
 - [流形上的拉格朗日力学]({{< relref "/docs/self/0015" >}})  
+- [李群李代数]({{< relref "/docs/self/0016" >}})  
 
 {{< /columns >}}
 
