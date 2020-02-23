@@ -19,6 +19,7 @@ type: docs
 - [流形上的拉格朗日力学]({{< relref "/docs/self/0015" >}})  
 - [李群李代数]({{< relref "/docs/self/0016" >}}) 
 - [常用李群及其李代数]({{< relref "/docs/self/0068" >}})  
+- [李变换群]({{< relref "/docs/self/0069" >}}) 
 
 {{< /columns >}}
 

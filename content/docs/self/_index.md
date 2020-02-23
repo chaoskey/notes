@@ -28,3 +28,5 @@ tags: []
 
 [常用李群及其李代数]({{< relref "/docs/self/0068" >}}) 
 
+[李变换群]({{< relref "/docs/self/0069" >}}) 
+
