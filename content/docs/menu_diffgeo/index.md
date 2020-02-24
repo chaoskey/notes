@@ -15,6 +15,9 @@ headless = true
     - [子流形和超曲面]({{< relref "/docs/diffgeo/0012" >}}) 
     - [流形上的微分形式及其对偶]({{< relref "/docs/diffgeo/0013" >}})
     - [流形上的微积分]({{< relref "/docs/diffgeo/0014" >}}) 
+    - [李群李代数]({{< relref "/docs/diffgeo/0016" >}})  
+    - [常用李群及其李代数]({{< relref "/docs/diffgeo/0068" >}})  
+    - [李变换群]({{< relref "/docs/diffgeo/0069" >}}) 
 - [**机器学习：概率视角**]({{< relref "/docs/mlapp" >}})
 - [**主动投资组合管理**]({{< relref "/docs/apm" >}})
 

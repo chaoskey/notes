@@ -59,3 +59,9 @@ tags: []
 
 [流形上的微积分]({{< relref "/docs/diffgeo/0014" >}})
 
+[李群李代数]({{< relref "/docs/diffgeo/0016" >}})  
+
+[常用李群及其李代数]({{< relref "/docs/diffgeo/0068" >}}) 
+
+[李变换群]({{< relref "/docs/diffgeo/0069" >}}) 
+

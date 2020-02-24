@@ -17,9 +17,6 @@ type: docs
 - [基于Julia的科学计算功能库整理]({{< relref "/docs/self/0003" >}})  
 - [小技巧备忘]({{< relref "/docs/self/0004" >}})    
 - [流形上的拉格朗日力学]({{< relref "/docs/self/0015" >}})  
-- [李群李代数]({{< relref "/docs/self/0016" >}}) 
-- [常用李群及其李代数]({{< relref "/docs/self/0068" >}})  
-- [李变换群]({{< relref "/docs/self/0069" >}}) 
 
 {{< /columns >}}
 
@@ -36,6 +33,9 @@ type: docs
 - [子流形和超曲面]({{< relref "/docs/diffgeo/0012" >}}) 
 - [流形上的微分形式及其对偶]({{< relref "/docs/diffgeo/0013" >}})
 - [流形上的微积分]({{< relref "/docs/diffgeo/0014" >}}) 
+- [李群李代数]({{< relref "/docs/diffgeo/0016" >}})  
+- [常用李群及其李代数]({{< relref "/docs/diffgeo/0068" >}})  
+- [李变换群]({{< relref "/docs/diffgeo/0069" >}}) 
 
 <--->
 
