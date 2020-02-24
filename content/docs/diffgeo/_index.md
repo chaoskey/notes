@@ -65,3 +65,5 @@ tags: []
 
 [李变换群]({{< relref "/docs/diffgeo/0069" >}}) 
 
+[微分几何中的计算（Julia版）]({{< relref "/docs/diffgeo/0070" >}}) 
+
