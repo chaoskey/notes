@@ -26,4 +26,6 @@ tags: []
 
 [流形视角下的牛顿力学(杀鸡用牛刀)]({{< relref "/docs/self/0071" >}})
 
+[对称性与守恒律（Noether定理）]({{< relref "/docs/self/0072" >}})
+
 

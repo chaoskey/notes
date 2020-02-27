@@ -11,6 +11,7 @@ headless = true
     - [小技巧备忘]({{< relref "/docs/self/0004" >}})    
     - [流形上的拉格朗日力学]({{< relref "/docs/self/0015" >}}) 
     - [流形视角下的牛顿力学]({{< relref "/docs/self/0071" >}})
+    - [对称性与守恒律（Noether定理）]({{< relref "/docs/self/0072" >}})
 - [**微分几何笔记**]({{< relref "/docs/diffgeo" >}})
 - [**机器学习：概率视角**]({{< relref "/docs/mlapp" >}})
 - [**主动投资组合管理**]({{< relref "/docs/apm" >}})
