@@ -67,3 +67,5 @@ tags: []
 
 [微分几何中的计算（Julia版）]({{< relref "/docs/diffgeo/0070" >}}) 
 
+[辛群及其李代数]({{< relref "/docs/diffgeo/0073" >}}) 
+

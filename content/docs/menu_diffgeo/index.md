@@ -19,6 +19,7 @@ headless = true
     - [常用李群及其李代数]({{< relref "/docs/diffgeo/0068" >}})  
     - [李变换群]({{< relref "/docs/diffgeo/0069" >}}) 
     - [微分几何中的计算（Julia版）]({{< relref "/docs/diffgeo/0070" >}}) 
+    - [辛群及其李代数]({{< relref "/docs/diffgeo/0073" >}}) 
 - [**机器学习：概率视角**]({{< relref "/docs/mlapp" >}})
 - [**主动投资组合管理**]({{< relref "/docs/apm" >}})
 
