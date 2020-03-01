@@ -53,7 +53,7 @@ enableGitInfo = false
   # (Optional, default none) Set leaf bundle to render as side menu
   # When not specified file structure and weights will be used
   BookMenuBundle = '/menu'
-  BookMenus = "apm, diffgeo, mlapp, self"
+  BookMenus = "apm, diffgeo, mlapp, self, theophy"
 
   # (Optional, default docs) Specify section of content to render as menu
   # You can also set value to '*' to render all sections to menu

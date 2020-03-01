@@ -18,13 +18,16 @@ type: docs
 - [Julia中的数学符号演算]({{< relref "/docs/self/0002" >}}) 
 - [基于Julia的科学计算功能库整理]({{< relref "/docs/self/0003" >}})  
 - [小技巧备忘]({{< relref "/docs/self/0004" >}})    
-- [流形上的拉格朗日力学]({{< relref "/docs/self/0015" >}})  
-- [流形视角下的牛顿力学(杀鸡用牛刀)]({{< relref "/docs/self/0071" >}})
-- [对称性与守恒律（Noether定理）]({{< relref "/docs/self/0072" >}})
 
 {{< /columns >}}
 
 ----------
+
+## [**理论物理学习笔记**]({{< relref "/docs/theophy" >}})  
+- [1. 流形上的拉格朗日力学]({{< relref "/docs/theophy/0015" >}}) 
+- [2. 流形视角下的牛顿力学]({{< relref "/docs/theophy/0071" >}})
+- [3. 对称性与守恒律（Noether定理）]({{< relref "/docs/theophy/0072" >}})
+- [4. 辛流形上的哈密顿力学]({{< relref "/docs/theophy/0075" >}})
 
 ## [**微分几何笔记**]({{< relref "/docs/diffgeo" >}})
 
