@@ -48,6 +48,7 @@ type: docs
 - [13. 李变换群]({{< relref "/docs/diffgeo/0069" >}}) 
 - [14. 微分几何中的计算（Julia版）]({{< relref "/docs/diffgeo/0070" >}}) 
 - [15. 辛群及其李代数]({{< relref "/docs/diffgeo/0073" >}}) 
+- [16. 辛流形]({{< relref "/docs/diffgeo/0074" >}})
 
 {{< /columns >}}
 

@@ -69,3 +69,5 @@ tags: []
 
 [辛群及其李代数]({{< relref "/docs/diffgeo/0073" >}}) 
 
+[辛流形]({{< relref "/docs/diffgeo/0074" >}})
+
