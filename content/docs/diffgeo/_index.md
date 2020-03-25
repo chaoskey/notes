@@ -71,3 +71,5 @@ tags: []
 
 [辛流形]({{< relref "/docs/diffgeo/0074" >}})
 
+[流形上的旋量和旋量场（初步）]({{< relref "/docs/diffgeo/0076" >}})
+

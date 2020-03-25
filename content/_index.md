@@ -41,10 +41,10 @@ type: docs
 - [6. 流形上的李导数]({{< relref "/docs/diffgeo/0010" >}})  
 - [7. Killing矢量场]({{< relref "/docs/diffgeo/0011" >}})  
 - [8. 子流形和超曲面]({{< relref "/docs/diffgeo/0012" >}}) 
+- [9. 流形上的微分形式及其对偶]({{< relref "/docs/diffgeo/0013" >}})
 
 <--->
 
-- [9. 流形上的微分形式及其对偶]({{< relref "/docs/diffgeo/0013" >}})
 - [10. 流形上的微积分]({{< relref "/docs/diffgeo/0014" >}}) 
 - [11. 李群李代数]({{< relref "/docs/diffgeo/0016" >}})  
 - [12. 常用李群及其李代数]({{< relref "/docs/diffgeo/0068" >}})  
@@ -52,6 +52,7 @@ type: docs
 - [14. 微分几何中的计算（Julia版）]({{< relref "/docs/diffgeo/0070" >}}) 
 - [15. 辛群及其李代数]({{< relref "/docs/diffgeo/0073" >}}) 
 - [16. 辛流形]({{< relref "/docs/diffgeo/0074" >}})
+- [17. 流形上的旋量和旋量场（初步）]({{< relref "/docs/diffgeo/0076" >}})
 
 {{< /columns >}}
 
