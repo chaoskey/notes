@@ -21,8 +21,8 @@ if [ "$1"x = "server"x ]
 then
     hugo server --disableFastRender -D
 else
-    rm -rf public 
-    hugo -D
+    rm -rf docs
+    hugo -D docs
     ./fortypora
 fi
 
