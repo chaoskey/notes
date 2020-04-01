@@ -3,6 +3,7 @@
 baseURL = "https://chaoskey.gitee.io/notes/"
 title = "学习笔记"
 theme = "book"
+publishDir = "docs"
 
 DefaultContentLanguage = "cn"
 copyright = "一切都是我的"
