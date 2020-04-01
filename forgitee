@@ -22,7 +22,7 @@ then
     hugo server --disableFastRender -D
 else
     rm -rf docs
-    hugo -D docs
+    hugo -D
     ./fortypora
 fi
 
