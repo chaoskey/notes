@@ -73,3 +73,5 @@ tags: []
 
 [流形上的旋量和旋量场（初步）]({{< relref "/docs/diffgeo/0076" >}})
 
+[流形上的旋量和旋量场（几何解释）]({{< relref "/docs/diffgeo/0077" >}})
+
