@@ -42,10 +42,10 @@ type: docs
 - [7. Killing矢量场]({{< relref "/docs/diffgeo/0011" >}})  
 - [8. 子流形和超曲面]({{< relref "/docs/diffgeo/0012" >}}) 
 - [9. 流形上的微分形式及其对偶]({{< relref "/docs/diffgeo/0013" >}})
+- [10. 流形上的微积分]({{< relref "/docs/diffgeo/0014" >}}) 
 
 <--->
 
-- [10. 流形上的微积分]({{< relref "/docs/diffgeo/0014" >}}) 
 - [11. 李群李代数]({{< relref "/docs/diffgeo/0016" >}})  
 - [12. 常用李群及其李代数]({{< relref "/docs/diffgeo/0068" >}})  
 - [13. 李变换群]({{< relref "/docs/diffgeo/0069" >}}) 
@@ -54,6 +54,7 @@ type: docs
 - [16. 辛流形]({{< relref "/docs/diffgeo/0074" >}})
 - [17. 流形上的旋量和旋量场（初步）]({{< relref "/docs/diffgeo/0076" >}})
 - [18. 流形上的旋量和旋量场（几何解释）]({{< relref "/docs/diffgeo/0077" >}})
+- [19. 流形上的旋量和旋量场（导数算符和曲率]({{< relref "/docs/diffgeo/0078" >}})
 
 {{< /columns >}}
 
