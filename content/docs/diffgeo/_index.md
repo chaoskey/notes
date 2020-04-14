@@ -75,5 +75,30 @@ tags: []
 
 [流形上的旋量和旋量场（几何解释）]({{< relref "/docs/diffgeo/0077" >}})
 
-[流形上的旋量和旋量场（导数算符和曲率]({{< relref "/docs/diffgeo/0078" >}})
+[流形上的旋量和旋量场（导数算符和曲率)]({{< relref "/docs/diffgeo/0078" >}})
 
+[流形上的旋量和旋量场（自旋系数和克氏符）]({{< relref "/docs/diffgeo/0079" >}})
+
+
+
+## 参考文献
+
+1）现代物理基础丛书07-微分几何入门与广义相对论(上册.第2版)-梁灿彬＆周彬-科学出版社-2006
+
+2）现代物理基础丛书25-微分几何入门与广义相对论(中册.第2版)-梁灿彬＆周彬-科学出版社-2009
+
+3）现代物理基础丛书28-微分几何入门与广义相对论(下册.第2版)-梁灿彬＆周彬-科学出版社-2009
+
+4）现代物理基础丛书02-物理学家用微分几何(第2版)－侯伯元&侯伯宇-科学出版社-2004
+
+5）General Relativity（广义相对论）, Robert M.Wald, Chicago, 1984
+
+6）通向实在之路：宇宙法则的完全指南-[英]罗杰·彭罗斯-王文浩(译)-湖南科学技术出版社-6月, 2008
+
+7）Gravitation（引力论·大黑书）, Misner Thorne Wheeler , W.H.Freeman, 1973
+
+8）Spinors and Space-Time Vol.1：Two-spinor calculus and relativistic fields（旋量与时空 卷1：两旋量微积分与相对论场），R.Penrose W.Rindler，Cambridge，1984
+
+9）The Theory of Spinors（旋量理论），Elie.Cartan ，Dover，1981
+
+10）数学物理学百科全书(英文版.全5卷)-[法]费朗克斯-Elsevier出版-2007
