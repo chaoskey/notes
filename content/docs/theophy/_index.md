@@ -24,6 +24,6 @@ tags: []
 
 [辛流形上的哈密顿力学]({{< relref "/docs/theophy/0075" >}})
 
-[闵氏时空的对称性的三种观点]({{< relref "/docs/theophy/0080" >}})
+[闵氏时空对称性的三种观点]({{< relref "/docs/theophy/0080" >}})
 
 
