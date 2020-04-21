@@ -28,33 +28,33 @@ type: docs
 - [2. 流形视角下的牛顿力学]({{< relref "/docs/theophy/0071" >}})
 - [3. 对称性与守恒律（Noether定理）]({{< relref "/docs/theophy/0072" >}})
 - [4. 辛流形上的哈密顿力学]({{< relref "/docs/theophy/0075" >}})
+- [5. 闵氏时空的对称性的三种观点]({{< relref "/docs/theophy/0080" >}})
 
 ## [**微分几何笔记**]({{< relref "/docs/diffgeo" >}})
 
 {{< columns >}}
 
 - [1. 基于抽象指标的张量分析]({{< relref "/docs/diffgeo/0005" >}})  
-- [3. 流形上的平移]({{< relref "/docs/diffgeo/0007" >}})      
-- [5. 流形间的映射]({{< relref "/docs/diffgeo/0009" >}})   
+- [2. 流形上的导数算符]({{< relref "/docs/diffgeo/0006" >}}) 
+- [3. 流形上的平移]({{< relref "/docs/diffgeo/0007" >}})    
+- [4. 黎曼曲率张量]({{< relref "/docs/diffgeo/0008" >}})  
+- [5. 流形间的映射]({{< relref "/docs/diffgeo/0009" >}})  
+- [6. 流形上的李导数]({{< relref "/docs/diffgeo/0010" >}})  
 - [7. Killing矢量场]({{< relref "/docs/diffgeo/0011" >}})  
+- [8. 子流形和超曲面]({{< relref "/docs/diffgeo/0012" >}})
 - [9. 流形上的微分形式及其对偶]({{< relref "/docs/diffgeo/0013" >}})
-- [11. 李群李代数]({{< relref "/docs/diffgeo/0016" >}})
-- [13. 李变换群]({{< relref "/docs/diffgeo/0069" >}}) 
-- [15. 辛群及其李代数]({{< relref "/docs/diffgeo/0073" >}}) 
-- [17. 流形上的旋量和旋量场（初步）]({{< relref "/docs/diffgeo/0076" >}})
-- [19. 流形上的旋量和旋量场（导数算符和曲率)]({{< relref "/docs/diffgeo/0078" >}})
+- [10. 流形上的微积分]({{< relref "/docs/diffgeo/0014" >}}) 
 
 <--->
-
-- [2. 流形上的导数算符]({{< relref "/docs/diffgeo/0006" >}}) 
-- [4. 黎曼曲率张量]({{< relref "/docs/diffgeo/0008" >}})
-- [6. 流形上的李导数]({{< relref "/docs/diffgeo/0010" >}}) 
-- [8. 子流形和超曲面]({{< relref "/docs/diffgeo/0012" >}}) 
-- [10. 流形上的微积分]({{< relref "/docs/diffgeo/0014" >}}) 
-- [12. 常用李群及其李代数]({{< relref "/docs/diffgeo/0068" >}})  
+- [11. 李群李代数]({{< relref "/docs/diffgeo/0016" >}})
+- [12. 常用李群及其李代数]({{< relref "/docs/diffgeo/0068" >}})
+- [13. 李变换群]({{< relref "/docs/diffgeo/0069" >}}) 
 - [14. 微分几何中的计算（Julia版）]({{< relref "/docs/diffgeo/0070" >}}) 
+- [15. 辛群及其李代数]({{< relref "/docs/diffgeo/0073" >}}) 
 - [16. 辛流形]({{< relref "/docs/diffgeo/0074" >}})
+- [17. 流形上的旋量和旋量场（初步）]({{< relref "/docs/diffgeo/0076" >}})
 - [18. 流形上的旋量和旋量场（几何解释）]({{< relref "/docs/diffgeo/0077" >}})
+- [19. 流形上的旋量和旋量场（导数算符和曲率)]({{< relref "/docs/diffgeo/0078" >}})
 - [20. 流形上的旋量和旋量场（自旋系数和克氏符）]({{< relref "/docs/diffgeo/0079" >}})
 
 {{< /columns >}}
