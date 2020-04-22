@@ -44,9 +44,9 @@ type: docs
 - [8. 子流形和超曲面]({{< relref "/docs/diffgeo/0012" >}})
 - [9. 流形上的微分形式及其对偶]({{< relref "/docs/diffgeo/0013" >}})
 - [10. 流形上的微积分]({{< relref "/docs/diffgeo/0014" >}}) 
+- [11. 李群李代数]({{< relref "/docs/diffgeo/0016" >}})
 
 <--->
-- [11. 李群李代数]({{< relref "/docs/diffgeo/0016" >}})
 - [12. 常用李群及其李代数]({{< relref "/docs/diffgeo/0068" >}})
 - [13. 李变换群]({{< relref "/docs/diffgeo/0069" >}}) 
 - [14. 微分几何中的计算（Julia版）]({{< relref "/docs/diffgeo/0070" >}}) 
