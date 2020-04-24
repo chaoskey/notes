@@ -40,9 +40,14 @@
        url('fonts/roboto-mono-v6-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
-body {
-  font-family: 'Roboto', sans-serif;
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
+  color:#1a1a1a;
+  background:#f6f6f6;
+  -webkit-tap-highlight-color:rgba(26,26,26,0);
 }
+
 
 code {
   font-family: 'Roboto Mono', monospace;
