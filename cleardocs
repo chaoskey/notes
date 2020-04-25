@@ -1,16 +1,16 @@
 #!/bin/bash
 
-git filter-branch --force --index-filter 'git rm --cached -r --ignore-unmatch docs' --prune-empty --tag-name-filter cat -- --all
+git filter-branch --force --index-filter 'git rm --cached -r --ignore-unmatch public' --prune-empty --tag-name-filter cat -- --all
 
-git push gitee --force --all 
-git push github --force --all
+# git push gitee --force --all 
+# git push github --force --all
 
-git push gitee master --force --tags
-git push github master --force --tags
+# git push gitee master --force --tags
+# git push github master --force --tags
 
-rm -rf .git/refs/original/
-git reflog expire --expire=now --all
-git gc --prune=now
-git gc --aggressive --prune=now
+# rm -rf .git/refs/original/
+# git reflog expire --expire=now --all
+# git gc --prune=now
+# git gc --aggressive --prune=now
 
 
