@@ -3,14 +3,20 @@
 path=`pwd`
 if [ "${path##*/}"x = "notes"x ] 
 then
+    # 生成待发布的数据
+    ./forgitee
+    
     # 数据备份
-    cp publish ../
+    rm -rd ../public
     mv public ../
+    cp publish ../
 
     # 切换到发布分支
+    git add .
+    git commit -m "忘提交则补提交"
     git checkout gh-pages
 
-    # 重新执行
+    # # 重新执行
     cd ..
     ./publish
 elif  [ "${path##*/}"x = "Gitee"x ] 
@@ -24,7 +30,7 @@ then
     rm -rf *
 
     # 数据提交
-    cp  ../public/*  .
+    cp -r  ../public/*  ./
     git add .
     git commit -m "发布"
 
@@ -34,8 +40,8 @@ then
 
     # 复原
     git checkout master
-    mv  ../public .
-    rm publish
+    mv  ../public ./
+    rm ../publish
 else
     echo "没执行"
 fi
