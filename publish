@@ -1,0 +1,50 @@
+#!/bin/bash
+
+path=`pwd`
+if [ "${path##*/}"x = "notes"x ] 
+then
+    # 数据备份
+    cp publish ../
+    mv public ../
+
+    # 切换到发布分支
+    git checkout gh-pages
+
+    # 重新执行
+    cd ..
+    ./publish
+elif  [ "${path##*/}"x = "Gitee"x ] 
+then
+    cd notes
+
+    # 恢复到初始状态
+    # id=`git show v0.0 | grep -o 'commit .*'`
+    # git reset --hard  ${id#* }
+    git reset --hard e86182558bc21faa583c460a7bff0ecf890be6aa
+    rm -rf *
+
+    # 数据提交
+    cp  ../public/*  .
+    git add .
+    git commit -m "发布"
+
+    # 发布
+    git push gitee gh-pages --force
+    git push github gh-pages --force
+
+    # 复原
+    git checkout master
+    mv  ../public .
+    rm publish
+else
+    echo "没执行"
+fi
+
+
+
+
+
+
+
+
+# git push gitee gh-pages --force
