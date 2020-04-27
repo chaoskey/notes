@@ -40,7 +40,7 @@ then
 
     # 复原
     git checkout master
-    mv  ../public ./
+    rm -rf  ../public
     rm ../publish
 else
     echo "没执行"

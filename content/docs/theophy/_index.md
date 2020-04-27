@@ -16,15 +16,19 @@ tags: []
 
 ## 目录
 
-[流形上的拉格朗日力学]({{< relref "/docs/theophy/0015" >}})
+{{< columns >}}
 
-[流形视角下的牛顿力学(杀鸡用牛刀)]({{< relref "/docs/theophy/0071" >}})
+- [1. 流形上的拉格朗日力学]({{< relref "/docs/theophy/0015" >}}) 
+- [2. 流形视角下的牛顿力学]({{< relref "/docs/theophy/0071" >}})
+- [3. 对称性与守恒律（Noether定理）]({{< relref "/docs/theophy/0072" >}})
 
-[对称性与守恒律（Noether定理）]({{< relref "/docs/theophy/0072" >}})
+<--->
 
-[辛流形上的哈密顿力学]({{< relref "/docs/theophy/0075" >}})
+- [4. 辛流形上的哈密顿力学]({{< relref "/docs/theophy/0075" >}})
+- [5. 闵氏时空对称性的三种观点]({{< relref "/docs/theophy/0080" >}})
+- [6. 场及其对称性]({{< relref "/docs/theophy/0081" >}})
 
-[闵氏时空对称性的三种观点]({{< relref "/docs/theophy/0080" >}})
+{{< /columns >}}
 
 ## 参考文献
 
