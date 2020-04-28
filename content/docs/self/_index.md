@@ -14,13 +14,17 @@ tags: []
 
 ## 目录
 
-[整合Julia和Python的集成环境]({{< relref "/docs/self/0001" >}})
+{{< columns >}}
 
-[Julia中的数学符号演算]({{< relref "/docs/self/0002" >}}) 
+- [1. 整合Julia和Python的集成环境]({{< relref "/docs/self/0001" >}})  
+- [2. Julia中的数学符号演算]({{< relref "/docs/self/0002" >}}) 
 
-[基于Julia的科学计算功能库整理]({{< relref "/docs/self/0003" >}}) 
+<--->
 
-[小技巧备忘]({{< relref "/docs/self/0004" >}})  
+- [3. 基于Julia的科学计算功能库整理]({{< relref "/docs/self/0003" >}})  
+- [4. 小技巧备忘]({{< relref "/docs/self/0004" >}})    
+
+{{< /columns >}}
 
 
 
