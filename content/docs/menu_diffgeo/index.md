@@ -26,6 +26,7 @@ headless = true
     - [流形上的旋量和旋量场（几何解释）]({{< relref "/docs/diffgeo/0077" >}})
     - [流形上的旋量和旋量场（导数算符和曲率)]({{< relref "/docs/diffgeo/0078" >}})
     - [流形上的旋量和旋量场（自旋系数和克氏符）]({{< relref "/docs/diffgeo/0079" >}})
+    - [李群李代数伴随表示和Killing型、Casimir算符]({{< relref "/docs/diffgeo/0082" >}})
 - [**机器学习：概率视角**]({{< relref "/docs/mlapp" >}})
 - [**主动投资组合管理**]({{< relref "/docs/apm" >}})
 
