@@ -46,11 +46,3 @@ else
     echo "没执行"
 fi
 
-
-
-
-
-
-
-
-# git push gitee gh-pages --force
