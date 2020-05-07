@@ -15,7 +15,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
-   sodipodi:docname="0141.svg">
+   sodipodi:docname="0140.svg">
   <defs
      id="defs2">
     <marker
@@ -608,6 +608,21 @@
          style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
          transform="matrix(-0.4,0,0,-0.4,-4,0)" />
     </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-9"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path14816-5"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -616,9 +631,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.39"
-     inkscape:cx="836.96441"
-     inkscape:cy="2784.3043"
+     inkscape:zoom="0.51"
+     inkscape:cx="1741.5836"
+     inkscape:cy="2579.1761"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -639,7 +654,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -2121,7 +2136,7 @@
          sodipodi:role="line"
          id="tspan14799"
          x="240.52055"
-         y="85.450157"></tspan><tspan
+         y="85.450157" /><tspan
          sodipodi:role="line"
          id="tspan14801"
          x="240.52055"
@@ -2143,6 +2158,23 @@
        style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Mend-8)"
        d="m 312.48885,76.145311 38.66986,29.850439"
        id="path14805-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:Georgia;-inkscape-font-specification:'Georgia, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.26458332;"
+       x="495.89532"
+       y="-21.589615"
+       id="text322"><tspan
+         sodipodi:role="line"
+         id="tspan320"
+         x="495.89532"
+         y="-21.589615"
+         style="stroke-width:0.26458332;fill:#ff0000;fill-opacity:1;">这是例外群</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Mend-9)"
+       d="M 527.40341,-18.091393 497.19382,21.496353"
+       id="path14805-4"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
   </g>
