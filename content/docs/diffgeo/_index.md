@@ -66,6 +66,7 @@ tags: []
 - [20. 流形上的旋量和旋量场（自旋系数和克氏符）]({{< relref "/docs/diffgeo/0079" >}})
 - [21. 李群李代数伴随表示和Killing型、Casimir算符]({{< relref "/docs/diffgeo/0082" >}})
 - [22. 半单李代数的标准形式]({{< relref "/docs/diffgeo/0083" >}})
+- [23. 半单李代数的根系、权系和Dynkin图]({{< relref "/docs/diffgeo/0084" >}})
 
 {{< /columns >}}
 
