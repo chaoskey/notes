@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [ "${1#*.}"x = "md"x ]
+then
+    # Gitee的对应图片位置
+    img=${1/content/https:\/\/chaoskey.gitee.io\/notes}
+    img=${img%/*}
+    img=${img%/*}
+    img=${img//\//\\\/}
+    img=${img}"\/images"
+    echo $img
+
+
+    # 1）跳过代码块```code```
+    # 2）块公式跨行
+    # 3）块公式=>知乎公式链接
+    # 4）内联公式=>知乎公式链接
+    # 5）\textcolor => \color   知乎不支持textcolor
+    # 6）Gitee图片链接置换
+    sed -e '/```/ { :begin1; /```.*```/! { $! { N; b begin1 }; }; n; }; /\$\$/ { :begin2; /\$\$[^$]*\$\$/! { $! { N; b begin2 }; }; }; s/\$\$\(\n*\)\s*\([^$]*\)\(\n*\)\s*\$\$/\1<img src="https:\/\/www.zhihu.com\/equation?tex=\2" alt="\2" class="ee_img tr_noresize" eeimg="1">\3/g; s/\$\([^$]*\)\$/<img src="https:\/\/www.zhihu.com\/equation?tex=\1" alt="\1" class="ee_img tr_noresize" eeimg="1">/g; s/\\textcolor/\\color/g; s/!\[.*\](\.\.\/images\/\([0-9]\+\.\w\+\))/!\[\]('"${img}"'\/\1)/g; '  $1  > "../"${1##*/}
+else
+    echo "务必确认是md文件？"
+fi
+

@@ -9,8 +9,8 @@ function action(){
         elif [ "${file#*.}"x = "md"x ]
         then
             # 方便发布到gitee
-            # sed -i '/\$\$/ { :begin; /\$\$[^$]*\$\$/! { $! { N; b begin }; }; }; s/\$\$\(\n[^$]*\n\)\$\$/{{< katex display >}}\1{{< \/katex >}}/g; s/\$\$\([^$]*\)\$\$/{{< katex >}}\1{{< \/katex >}}/g; s/!\[\s*\](\.\.\/images\//![](..\/..\/images\//g;'   $1"/"$file
-            sed -i '/```/ { :begin1; /```.*```/! { $! { N; b begin1 }; }; n; }; /\$\$/ { :begin2; /\$\$[^$]*\$\$/! { $! { N; b begin2 }; }; }; s/\$\$\(\n[^$]*\n\)\$\$/{{< katex display >}}\1{{< \/katex >}}/g; s/\$\$\([^$]*\)\$\$/{{< katex >}}\1{{< \/katex >}}/g; s/!\[.*\](\.\.\/images\//![](..\/..\/images\//g;'  $1"/"$file
+            # sed -i '/```/ { :begin1; /```.*```/! { $! { N; b begin1 }; }; n; }; /\$\$/ { :begin2; /\$\$[^$]*\$\$/! { $! { N; b begin2 }; }; }; s/\$\$\(\n[^$]*\n\)\$\$/{{< katex display >}}\1{{< \/katex >}}/g; s/\$\$\([^$]*\)\$\$/{{< katex >}}\1{{< \/katex >}}/g; s/!\[.*\](\.\.\/images\//![](..\/..\/images\//g;'  $1"/"$file
+            sed -i '/```/ { :begin1; /```.*```/! { $! { N; b begin1 }; }; n; }; /\$\$/ { :begin2; /\$\$[^$]*\$\$/! { $! { N; b begin2 }; }; }; s/\$\$\(\n[^$]*\n\)\$\$/{{< katex display >}}\1{{< \/katex >}}/g; s/\$\$\([^$]*\)\$\$/{{< katex >}}\1{{< \/katex >}}/g; s/\$\([^$]*\)\$/{{< katex >}}\1{{< \/katex >}}/g; s/!\[.*\](\.\.\/images\//![](..\/..\/images\//g;'  $1"/"$file
         fi
     done
 } 
@@ -25,6 +25,4 @@ else
     hugo -D
     ./fortypora
 fi
-
-
 
