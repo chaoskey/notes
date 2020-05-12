@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# 执行后确保用Typora打开本地md文件可以正常渲染，特别是数学公式。
+# 将`{{</* katex [display] */>}}latex{{</* /katex */>}}`
+# 转换成$$格式
+# ./fortypora
+
 function action(){
     for file in `ls $1` 
     do
@@ -9,12 +14,9 @@ function action(){
         elif [ "${file#*.}"x = "md"x ]
         then
             # 方便用typora阅读
-            sed -i 's/{{<\s*katex\s*>}}/$$/g; s/{{<\s*katex\s*display\s*>}}/$$/g; s/{{<\s*\/katex\s*>}}/$$/g; s/!\[.*\](\.\.\/\.\.\/images\//![](..\/images\//g; '  $1"/"$file
+            sed -i 's/{{<\s*katex\s*>}}/$$/g; s/{{<\s*katex\s*display\s*>}}/$$/g; s/{{<\s*\/katex\s*>}}/$$/g; s/\$\$\([^$]*\)\$\$/$\1$/g; s/!\[.*\](\.\.\/\.\.\/images\//![](..\/images\//g; '  $1"/"$file
         fi
     done
 } 
 
 action ./content
-
-
-

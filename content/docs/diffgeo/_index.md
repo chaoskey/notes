@@ -67,7 +67,7 @@ tags: []
 - [21. 李群李代数伴随表示和Killing型、Casimir算符]({{< relref "/docs/diffgeo/0082" >}})
 - [22. 半单李代数的标准形式]({{< relref "/docs/diffgeo/0083" >}})
 - [23. 半单李代数的根系、权系和Dynkin图]({{< relref "/docs/diffgeo/0084" >}})
-- [24. 半单李代数的Casimir算符不变算符]({{< relref "/docs/diffgeo/0085" >}})
+- [24. 半单李代数的Casimir不变算符]({{< relref "/docs/diffgeo/0085" >}})
 
 {{< /columns >}}
 
