@@ -9,6 +9,7 @@ then
     # 数据备份
     rm -rd ../public
     mv public ../
+    cp .gitignore ../public/
     cp publish ../
 
     # 切换到发布分支
