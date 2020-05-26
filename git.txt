@@ -1,0 +1,46 @@
+#####################################
+#            本地仓库初始            #
+#####################################
+
+# clone默认分支（gitee）
+git clone git@gitee.com:chaoskey/notes.git  notes 
+# 为远程分支取别名
+git remote rename origin gitee
+
+# 支持多个多个远程仓库（并取别名）
+git remote add github git@github.com:chaoskey/notes.git
+
+# 一个别名all，包括多个远程
+git remote add all git@gitee.com:chaoskey/notes.git
+git remote set-url --add all git@github.com:chaoskey/notes.git
+
+# https://help.github.com/en/github/using-git/configuring-git-to-handle-line-endings
+# Linux下忽略换行符的差异
+git config --global core.autocrlf input
+# Windows下忽略换行符的差异
+git config --global core.autocrlf true
+
+# Windows下隐藏文件
+attrib +s +h  .git  
+# Windows下显示文件
+attrib -s -h  .git  
+
+#########################################
+#                日常操作                #
+#########################################
+
+# 查看本地分支
+git branch -a 
+
+# 拉取非默认分支
+git fetch gitee gh-pages 
+
+# 分支切换
+git checkout gh-pages
+git checkout master
+
+# 文件提交
+git add .
+git commit -m "提交git常用命令备忘"
+git push all master
+
