@@ -44,3 +44,26 @@ git add .
 git commit -m "提交git常用命令备忘"
 git push all master
 
+#########################################
+#              文件修改记录              #
+#########################################
+
+# 查看单文件修改历史
+git log --pretty=oneline  <filename>
+
+# 查看尚未暂存的文件更新了哪些部分
+git diff
+git diff git.txt
+
+# 查看已经暂存起来的文件和上次提交的版本之间的差异
+git diff --cached
+git diff --cached  git.txt
+
+# 查看某两个版本之间的差异
+git diff <id> <id>
+git diff <id>:<filename> <id>:<filename>
+
+# 显示具体的某次的改动的修改【进入行命令状态，:q 退出】
+git show <id>
+git log -p <filename>  
+
