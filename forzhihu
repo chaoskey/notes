@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# ./forzhihu  content/docs/self/0001.md
+
 if [ "${1#*.}"x = "md"x ]
 then
     # Gitee的对应图片位置
