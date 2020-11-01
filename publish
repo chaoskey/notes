@@ -20,7 +20,7 @@ then
     # # 重新执行
     cd ..
     ./publish
-elif  [ "${path##*/}"x = "gitee"x ] 
+elif  [ "${path##*/}"x = "Gitee"x ] 
 then
     cd notes
 
