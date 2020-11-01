@@ -4,7 +4,7 @@ headless = true
 
 
 - [**站点维护记录**]({{< relref "/posts" >}})
-- [**进行中......**]({{< relref "/docs/self" >}}) 
+- [**基于Julia科学计算**]({{< relref "/docs/julia" >}}) 
 - [**理论物理学习笔记**]({{< relref "/docs/theophy" >}})  
     - [流形上的拉格朗日力学]({{< relref "/docs/theophy/0015" >}}) 
     - [流形视角下的牛顿力学]({{< relref "/docs/theophy/0071" >}})

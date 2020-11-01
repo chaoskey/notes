@@ -3,7 +3,7 @@ headless = true
 +++
 
 - [**站点维护记录**]({{< relref "/posts" >}})
-- [**进行中......**]({{< relref "/docs/self" >}}) 
+- [**基于Julia科学计算**]({{< relref "/docs/julia" >}}) 
 - [**理论物理学习笔记**]({{< relref "/docs/theophy" >}})  
 - [**微分几何笔记**]({{< relref "/docs/diffgeo" >}})
     - [基于抽象指标的张量分析]({{< relref "/docs/diffgeo/0005" >}})  

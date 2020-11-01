@@ -11,29 +11,29 @@ type: docs
 
 
 - [1. 用Hugo+码云搭建支持Markdown+LaTeX的云笔记]({{< relref "/posts/0000" >}})  
+- [2. 通过实例掌握流编辑器sed]({{< relref "/posts/0067" >}})  
 
 <--->
 
-- [2. 通过实例掌握流编辑器sed]({{< relref "/posts/0067" >}})  
+- [3. 小技巧备忘]({{< relref "/posts/0004" >}})   
 
 {{< /columns >}}
 
 ----------
 
-## [**进行中......**]({{< relref "/docs/self" >}}) 
+## [**基于Julia科学计算**]({{< relref "/docs/julia" >}}) 
 
 {{< columns >}}
 
-- [1. 整合Julia和Python的集成环境]({{< relref "/docs/self/0001" >}})  
-- [2. Julia中的数学符号演算]({{< relref "/docs/self/0002" >}}) 
-- [3. 基于Julia的科学计算功能库整理]({{< relref "/docs/self/0003" >}})  
-- [4. 小技巧备忘]({{< relref "/docs/self/0004" >}})  
+- [1. 整合Julia和Python的集成环境]({{< relref "/docs/julia/0001" >}})  
+- [2. Julia中的数学符号演算]({{< relref "/docs/julia/0002" >}}) 
+- [3. 基于Julia的科学计算功能库整理]({{< relref "/docs/julia/0003" >}})  
 
 <--->
 
-- [5. 平面三体问题（Julia版）]({{< relref "/docs/self/0088" >}}) 
-- [6. 有限差分法求解一维热传导方程]({{< relref "/docs/self/0089" >}})    
-- [7. Galerkin法解常微分方程边值问题]({{< relref "/docs/self/0090" >}})  
+- [4. 平面三体问题]({{< relref "/docs/julia/0088" >}}) 
+- [5. 有限差分法求解一维热传导方程]({{< relref "/docs/julia/0089" >}})    
+- [6. Galerkin法解常微分方程边值问题]({{< relref "/docs/julia/0090" >}})  
 
 {{< /columns >}}
 
