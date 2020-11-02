@@ -28,12 +28,14 @@ type: docs
 - [1. 整合Julia和Python的集成环境]({{< relref "/docs/julia/0001" >}})  
 - [2. Julia中的数学符号演算]({{< relref "/docs/julia/0002" >}}) 
 - [3. 基于Julia的科学计算功能库整理]({{< relref "/docs/julia/0003" >}})  
+- [4. 微分几何中的计算]({{< relref "/docs/diffgeo/0070" >}})   
 
 <--->
 
-- [4. 平面三体问题]({{< relref "/docs/julia/0088" >}}) 
-- [5. 有限差分法求解一维热传导方程]({{< relref "/docs/julia/0089" >}})    
-- [6. Galerkin法解常微分方程边值问题]({{< relref "/docs/julia/0090" >}})  
+- [5. 平面三体问题]({{< relref "/docs/julia/0088" >}}) 
+- [6. 有限差分法求解一维热传导方程]({{< relref "/docs/julia/0089" >}})    
+- [7. Galerkin法解常微分方程边值问题]({{< relref "/docs/julia/0090" >}})  
+- [8. 有限元法解常微分方程边值问题]({{< relref "/docs/julia/0091" >}})    
 
 {{< /columns >}}
 
