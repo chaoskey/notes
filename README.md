@@ -2,15 +2,19 @@
 
 ## 目录
 
-[《机器学习：概率视角》](https://chaoskey.gitee.io/notes/docs/mlapp)
+[基于Julia科学计算](https://chaoskey.gitee.io/notes/docs/julia/)
 
-[主动投资组合管理](https://chaoskey.gitee.io/notes/docs/apm)
+[理论物理学习笔记](https://chaoskey.gitee.io/notes/docs/theophy/)
 
 [微分几何](https://chaoskey.gitee.io/notes/docs/diffgeo)
 
-[杂记](https://chaoskey.gitee.io/notes/docs/self)
+[机器学习：概率视角](https://chaoskey.gitee.io/notes/docs/mlapp)
+
+[主动投资组合管理](https://chaoskey.gitee.io/notes/docs/apm)
 
 ## 更新流程简单舒服，页面主题简洁，完全支持Markdown+LaTeX。
+
+以 [用Hugo+码云搭建支持Markdown+LaTeX的云笔记](https://chaoskey.gitee.io/notes/posts/0000/) 为准。
 
 1）**本地撰写**内容：用[Typora](https://www.typora.io/)写基于Markdown+LaTeX的内容。
 
