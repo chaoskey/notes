@@ -37,6 +37,7 @@ type: docs
 - [7. Galerkin法解常微分方程边值问题]({{< relref "/docs/julia/0090" >}})  
 - [8. 有限元法解常微分方程边值问题]({{< relref "/docs/julia/0091" >}})  
 - [9. 有限元之平面三角单元]({{< relref "/docs/julia/0092" >}})   
+- [10. 有限元之Delaunay三角剖分]({{< relref "/docs/julia/0093" >}})    
 
 {{< /columns >}}
 

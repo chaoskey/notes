@@ -14,6 +14,7 @@ headless = true
     - [Galerkin法解常微分方程边值问题]({{< relref "/docs/julia/0090" >}})   
     - [有限元法解常微分方程边值问题]({{< relref "/docs/julia/0091" >}})   
     - [有限元之平面三角单元]({{< relref "/docs/julia/0092" >}})     
+    - [有限元之Delaunay三角剖分]({{< relref "/docs/julia/0093" >}})    
 - [**理论物理学习笔记**]({{< relref "/docs/theophy" >}})  
 - [**微分几何笔记**]({{< relref "/docs/diffgeo" >}})
 - [**机器学习：概率视角**]({{< relref "/docs/mlapp" >}})
