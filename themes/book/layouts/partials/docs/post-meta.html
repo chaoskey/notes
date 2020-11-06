@@ -18,6 +18,15 @@
     |
   {{ end }}
 {{ end }}
+
+
+{{ if and .File .Site.Params.BookCommentLink .Site.Params.BookCommentPath }}
+    <a href="{{ .Site.Params.BookCommentLink }}/{{ .Site.Params.BookCommentPath }}/{{ replace .File.Path "\\" "/" }}#blob-comment" target="_blank" rel="noopener">
+      <img src="{{ "svg/edit.svg" | relURL }}" class="book-icon" alt="Comment" />
+      评论
+    </a>
+{{ end }}
+
 </div>
 
 

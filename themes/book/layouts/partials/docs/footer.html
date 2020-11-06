@@ -13,7 +13,15 @@
   </div>
 {{ end }}
 
-{{ if and .File .Site.Params.BookRepo .Site.Params.BookEditPath }}
+{{ if and .File .Site.Params.BookCommentLink .Site.Params.BookCommentPath }}
+  <div>
+    <a class="flex align-center" href="{{ .Site.Params.BookCommentLink }}/{{ .Site.Params.BookCommentPath }}/{{ replace .File.Path "\\" "/" }}#blob-comment" target="_blank" rel="noopener">
+      <img src="{{ "svg/edit.svg" | relURL }}" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  {{ end }}
+  {{ if and .File .Site.Params.BookRepo .Site.Params.BookEditPath }}
   <div>
     <a class="flex align-center" href="{{ .Site.Params.BookRepo }}/{{ .Site.Params.BookEditPath }}/{{ replace .File.Path "\\" "/" }}" target="_blank" rel="noopener">
       <img src="{{ "svg/edit.svg" | relURL }}" class="book-icon" alt="Edit" />
