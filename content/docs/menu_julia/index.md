@@ -5,7 +5,8 @@ headless = true
 
 - [**站点维护记录**]({{< relref "/posts" >}})
 - [**基于Julia科学计算**]({{< relref "/docs/julia" >}}) 
-    - [整合Julia和Python的集成环境]({{< relref "/docs/julia/0001" >}})  
+    - [整合Julia和Python的集成环境（Win10）]({{< relref "/docs/julia/0001" >}})  
+    - [科学计算环境搭建（Win10+WSL2+Ubuntu）]({{< relref "/docs/julia/0095" >}})  
     - [Julia中的数学符号演算]({{< relref "/docs/julia/0002" >}}) 
     - [基于Julia的科学计算功能库整理]({{< relref "/docs/julia/0003" >}})  
     - [微分几何中的计算]({{< relref "/docs/diffgeo/0070" >}})   
