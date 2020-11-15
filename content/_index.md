@@ -5,7 +5,8 @@ type: docs
 
 ----------
 
-## [**站点维护记录**]({{< relref "/posts" >}})
+## 站点维护记录
+[<img src="/notes/link.jpg" width="20" height="20"/>]({{< relref "/posts" >}})
 
 {{< columns >}}
 
@@ -21,7 +22,8 @@ type: docs
 
 ----------
 
-## [**基于Julia科学计算**]({{< relref "/docs/julia" >}}) 
+## 基于Julia科学计算 
+[<img src="/notes/link.jpg" width="20" height="20"/>]({{< relref "/docs/julia" >}})
 
 {{< columns >}}
 
@@ -45,7 +47,8 @@ type: docs
 
 ----------
 
-## [**理论物理学习笔记**]({{< relref "/docs/theophy" >}})  
+## 理论物理学习笔记
+[<img src="/notes/link.jpg" width="20" height="20"/>]({{< relref "/docs/theophy" >}})
 
 {{< columns >}}
 
@@ -63,7 +66,8 @@ type: docs
 
 ----------
 
-## [**微分几何笔记**]({{< relref "/docs/diffgeo" >}})
+## 微分几何笔记
+[<img src="/notes/link.jpg" width="20" height="20"/>]({{< relref "/docs/diffgeo" >}})
 
 {{< columns >}}
 
@@ -99,7 +103,8 @@ type: docs
 
 ----------
 
-## [**机器学习：概率视角**]({{< relref "/docs/mlapp" >}})
+## 机器学习：概率视角
+[<img src="/notes/link.jpg" width="20" height="20"/>]({{< relref "/docs/mlapp" >}})
 
 {{< columns >}}
 
@@ -118,7 +123,8 @@ type: docs
 
 ----------
 
-## [**主动投资组合管理**]({{< relref "/docs/apm" >}})
+## 主动投资组合管理
+[<img src="/notes/link.jpg" width="20" height="20"/>]({{< relref "/docs/apm" >}})
 
 {{< columns >}}
 
