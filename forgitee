@@ -41,6 +41,8 @@ then
 else
     rm -rf public
     hugo -D
-    ./fortypora
 fi
+
+# 复原
+./fortypora
 

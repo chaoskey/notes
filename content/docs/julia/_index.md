@@ -26,7 +26,8 @@ tags: []
 - [9. 有限元法解常微分方程边值问题]({{< relref "/docs/julia/0091" >}})    
 - [10. 有限元之平面三角单元]({{< relref "/docs/julia/0092" >}})    
 - [11. 有限元之Delaunay三角剖分]({{< relref "/docs/julia/0093" >}})    
-- [12. 有限元法解偏微分方程（FEniCS）]({{< relref "/docs/julia/0094" >}})    
+- [12. 有限元法解偏微分方程（FEniCS）]({{< relref "/docs/julia/0094" >}})   
+- [13. 有限元法求解牛顿流体（FEniCS）]({{< relref "/docs/julia/0096" >}})    
 
 {{< /columns >}}
 
