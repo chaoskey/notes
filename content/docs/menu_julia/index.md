@@ -4,6 +4,7 @@ headless = true
 
 
 - [**站点维护记录**]({{< relref "/posts" >}})
+- [**有限元法自动求解微分方程**]({{< relref "/docs/fem" >}})   
 - [**基于Julia科学计算**]({{< relref "/docs/julia" >}}) 
     - [整合Julia和Python的集成环境（Win10）]({{< relref "/docs/julia/0001" >}})  
     - [科学计算环境搭建（Win10+WSL2+Ubuntu）]({{< relref "/docs/julia/0095" >}})  

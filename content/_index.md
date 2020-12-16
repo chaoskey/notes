@@ -22,6 +22,20 @@ type: docs
 
 ----------
 
+## 《有限元法自动求解微分方程》【翻译】 
+[<img src="/notes/link.jpg" width="20" height="20"/>]({{< relref "/docs/fem" >}})
+
+{{< columns >}}
+
+- [第二章 有限元方法（一）]({{< relref "/docs/fem/0097" >}})    
+
+<--->    
+
+{{< /columns >}}
+
+
+----------
+
 ## 基于Julia科学计算 
 [<img src="/notes/link.jpg" width="20" height="20"/>]({{< relref "/docs/julia" >}})
 

@@ -4,6 +4,7 @@ headless = true
 
 
 - [**站点维护记录**]({{< relref "/posts" >}})
+- [**有限元法自动求解微分方程**]({{< relref "/docs/fem" >}})   
 - [**基于Julia科学计算**]({{< relref "/docs/julia" >}}) 
 - [**理论物理学习笔记**]({{< relref "/docs/theophy" >}})  
     - [流形上的拉格朗日力学]({{< relref "/docs/theophy/0015" >}}) 

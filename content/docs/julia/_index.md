@@ -1,8 +1,8 @@
 ---
 title: "基于Julia科学计算"
-date: 2020-01-23T20:20:35+08:00
+date: 2020-11-01T09:15:47+08:00
 draft: true
-categories: ["杂记"]
+categories: ["julia"]
 tags: []
 ---
 
