@@ -31,6 +31,8 @@ type: docs
 
 <--->    
 
+- [第二章 有限元方法（二）]({{< relref "/docs/fem/0098" >}})    
+
 {{< /columns >}}
 
 

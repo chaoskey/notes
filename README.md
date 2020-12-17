@@ -2,6 +2,8 @@
 
 ## 目录
 
+[《有限元法自动求解微分方程》【翻译】](https://chaoskey.gitee.io/notes/docs/fem/)
+
 [基于Julia科学计算](https://chaoskey.gitee.io/notes/docs/julia/)
 
 [理论物理学习笔记](https://chaoskey.gitee.io/notes/docs/theophy/)
