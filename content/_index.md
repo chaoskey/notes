@@ -33,6 +33,7 @@ type: docs
 <--->    
 
 - [3. 第二章 有限元方法（三）]({{< relref "/docs/fem/0099" >}})    
+- [4. 第三章 常见有限元（一）]({{< relref "/docs/fem/0100" >}})   
 
 
 {{< /columns >}}

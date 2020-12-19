@@ -8,6 +8,7 @@
 # ./forgitee server  # 站点预览
 
 function action(){
+    echo "确保站点可解析,转换中..."
     for file in `ls $1` 
     do
         if [ -d $1"/"$file ] 
@@ -31,6 +32,7 @@ function action(){
             sed -i '/```[^`]*```/n; /^```/ { :begin1; /^```.*\s*\n\s*```/! { $! { N; b begin1 }; }; n; }; /\$\$/ { :begin2; /\$\$[^$]*\$\$/! { $! { N; b begin2 }; }; }; s/\$\$\(\n[^$]*\n\)\$\$/{{< katex display >}}\1{{< \/katex >}}/g; s/\$\$\([^$]*\)\$\$/{{< katex >}}\1{{< \/katex >}}/g; s/\$\([^$]*\)\$/{{< katex >}}\1{{< \/katex >}}/g; s/!\[.*\](\.\.\/images\//![](..\/..\/images\//g;'  $1"/"$file
         fi
     done
+    echo "确保站点可解析,转换完成！"
 } 
 
 action ./content

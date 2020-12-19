@@ -19,15 +19,25 @@ then
 
     # # 重新执行
     cd ..
-    ./publish
+
+    if [ "$1"x = "force"x ] 
+    then
+        ./publish force
+    else
+        ./publish
+    fi
 elif  [ "${path##*/}"x = "Gitee"x ] 
 then
     cd notes
 
-    # 恢复到初始状态
-    # id=`git show v0.0 | grep -o 'commit .*'`
-    # git reset --hard  ${id#* }
-    git reset --hard e86182558bc21faa583c460a7bff0ecf890be6aa
+    if [ "$1"x = "force"x ] 
+    then
+        # 恢复到初始状态
+        # id=`git show v0.0 | grep -o 'commit .*'`
+        # git reset --hard  ${id#* }
+        git reset --hard e86182558bc21faa583c460a7bff0ecf890be6aa
+    fi
+
     rm -rf *
 
     # 数据提交
@@ -36,8 +46,14 @@ then
     git commit -m "发布"
 
     # 发布
-    git push gitee gh-pages --force
-    git push github gh-pages --force
+    if [ "$1"x = "force"x ] 
+    then
+        git push gitee gh-pages --force
+        git push github gh-pages --force
+    else
+        git push gitee gh-pages
+        git push github gh-pages
+    fi
 
     # 复原
     git checkout master
