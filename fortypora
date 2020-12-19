@@ -6,7 +6,6 @@
 # ./fortypora
 
 function action(){
-    echo "确保Markdown可解析,转换中..."
     for file in `ls $1` 
     do
         if [ -d $1"/"$file ] 
@@ -18,7 +17,8 @@ function action(){
             sed -i 's/{{<\s*katex\s*>}}/$$/g; s/{{<\s*katex\s*display\s*>}}/$$/g; s/{{<\s*\/katex\s*>}}/$$/g; s/\$\$\([^$]*\)\$\$/$\1$/g; s/!\[.*\](\.\.\/\.\.\/images\//![](..\/images\//g; '  $1"/"$file
         fi
     done
-    echo "确保Markdown可解析,转换完成！."
 } 
 
+echo "确保Markdown可解析,转换中..."
 action ./content
+echo "确保Markdown可解析,转换完成！"
