@@ -33,7 +33,9 @@ function action(){
     done
 } 
 
+echo "确保站点可解析,转换中..."
 action ./content
+echo "确保站点可解析,转换完成！"
 
 if [ "$1"x = "server"x ] 
 then
@@ -41,6 +43,8 @@ then
 else
     rm -rf public
     hugo -D
-    ./fortypora
 fi
+
+# 复原
+./fortypora
 

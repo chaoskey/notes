@@ -19,4 +19,6 @@ function action(){
     done
 } 
 
+echo "确保Markdown可解析,转换中..."
 action ./content
+echo "确保Markdown可解析,转换完成！"
