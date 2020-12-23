@@ -32,10 +32,14 @@ then
 
     if [ "$1"x = "force"x ] 
     then
-        # 恢复到初始状态
-        # id=`git show v0.0 | grep -o 'commit .*'`
-        # git reset --hard  ${id#* }
-        git reset --hard e86182558bc21faa583c460a7bff0ecf890be6aa
+        # 清空库
+	git checkout --orphan gh-pages-bak
+	git branch -D gh-pages
+	rm -rf *
+	touch commit
+	git add .
+	git commit -m "commit"
+	git branch -m gh-pages
     fi
 
     rm -rf *
