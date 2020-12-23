@@ -26,7 +26,7 @@ then
     else
         ./publish
     fi
-elif  [ "${path##*/}"x = "Gitee"x ] 
+elif  [ -d "./notes" ]    
 then
     cd notes
 
@@ -60,6 +60,6 @@ then
     rm -rf  ../public
     rm ../publish
 else
-    echo "没执行"
+    echo "此脚本只能在特定目录（notes目录或其父目录）中执行"
 fi
 

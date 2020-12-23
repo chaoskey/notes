@@ -31,20 +31,25 @@ function action(){
             sed -i '/```[^`]*```/n; /^```/ { :begin1; /^```.*\s*\n\s*```/! { $! { N; b begin1 }; }; n; }; /\$\$/ { :begin2; /\$\$[^$]*\$\$/! { $! { N; b begin2 }; }; }; s/\$\$\(\n[^$]*\n\)\$\$/{{< katex display >}}\1{{< \/katex >}}/g; s/\$\$\([^$]*\)\$\$/{{< katex >}}\1{{< \/katex >}}/g; s/\$\([^$]*\)\$/{{< katex >}}\1{{< \/katex >}}/g; s/!\[.*\](\.\.\/images\//![](..\/..\/images\//g;'  $1"/"$file
         fi
     done
-} 
+}
 
-echo "确保站点可解析,转换中..."
-action ./content
-echo "确保站点可解析,转换完成！"
-
-if [ "$1"x = "server"x ] 
+if [ -d "./content" ]
 then
-    hugo server --disableFastRender -D
-else
-    rm -rf public
-    hugo -D
-fi
+    echo "确保站点可解析,转换中..."
+    action ./content
+    echo "确保站点可解析,转换完成！"
 
-# 复原
-./fortypora
+    if [ "$1"x = "server"x ] 
+    then
+        hugo server --disableFastRender -D
+    else
+        rm -rf public
+        hugo -D
+    fi
+
+    # 复原
+    ./fortypora
+else
+    echo "此脚本只能在包含content的目录notes中执行"    
+fi
 

@@ -19,6 +19,12 @@ function action(){
     done
 } 
 
-echo "确保Markdown可解析,转换中..."
-action ./content
-echo "确保Markdown可解析,转换完成！"
+if [ -d "./content" ]
+then
+    echo "确保Markdown可解析,转换中..."
+    action ./content
+    echo "确保Markdown可解析,转换完成！"
+else
+    echo "此脚本只能在包含content的目录notes中执行"
+fi
+
