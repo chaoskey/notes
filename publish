@@ -36,9 +36,9 @@ then
 	git checkout --orphan gh-pages-bak
 	git branch -D gh-pages
 	rm -rf *
-	touch commit
+	touch init
 	git add .
-	git commit -m "commit"
+	git commit -m "init"
 	git branch -m gh-pages
     fi
 
@@ -47,14 +47,15 @@ then
     # 数据提交
     cp -r  ../public/*  ./
     git add .
-    git commit -m "发布"
 
-    # 发布
+    # 提交并发布
     if [ "$1"x = "force"x ] 
     then
+        git commit -m "发布(并且清空历史记录)"
         git push gitee gh-pages --force
         git push github gh-pages --force
     else
+        git commit -m "发布"
         git push gitee gh-pages
         git push github gh-pages
     fi
