@@ -20,7 +20,7 @@
 
 1）**本地撰写**内容：用[Typora](https://www.typora.io/)写基于Markdown+LaTeX的内容。
 
-2）利用静态网站生成器Hugo生成待发布的静态文件： 执行`./forgitee`([下载](https://chaoskey.gitee.io/notes/assets/forgitee))即可。
+2）利用静态网站生成器Hugo生成待发布的静态文件： 执行`./forgitee`([下载](https://gitee.com/chaoskey/notes/raw/master/forgitee))即可。
 
 - 这个脚本实际依次执行了：1. 对所有md文件进行部分内容替换，确保站点可以完全解析； 2. 执行`hugo -D`,生成待发布的静态文件，生成文件夹`public`;  3. 执行`./fortypora`对所有md文件进行逆向置换复原，确保Typora打开能完全显示正常。
 
