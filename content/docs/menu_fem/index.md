@@ -13,6 +13,7 @@ headless = true
     - [第三章 常见有限元（三）]({{< relref "/docs/fem/0102" >}})     
     - [第四章 构造通用参考单元（一）]({{< relref "/docs/fem/0103" >}})   
     - [第四章 构造通用参考单元（二）]({{< relref "/docs/fem/0104" >}})   
+    - [第五章 有限元变分形式]({{< relref "/docs/fem/0105" >}})   
 - [**基于Julia科学计算**]({{< relref "/docs/julia" >}})   
 - [**理论物理学习笔记**]({{< relref "/docs/theophy" >}})  
 - [**微分几何笔记**]({{< relref "/docs/diffgeo" >}})
