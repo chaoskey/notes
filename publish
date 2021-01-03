@@ -35,11 +35,6 @@ then
         # 清空库
 	git checkout --orphan gh-pages-bak
 	git branch -D gh-pages
-	rm -rf *
-	touch init
-	git add .
-	git commit -m "init"
-	git branch -m gh-pages
     fi
 
     rm -rf *
@@ -52,6 +47,7 @@ then
     if [ "$1"x = "force"x ] 
     then
         git commit -m "发布(并且清空历史记录)"
+        git branch -m gh-pages
         git push gitee gh-pages --force
         git push github gh-pages --force
     else
