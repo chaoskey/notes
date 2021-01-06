@@ -25,6 +25,8 @@ type: docs
 ## 《有限元法自动求解微分方程》【翻译】 
 [<img src="/notes/link.jpg" width="20" height="20"/>]({{< relref "/docs/fem" >}})
 
+### I.方法论
+
 {{< columns >}}
 
 - [1. 第二章 有限元方法（一）]({{< relref "/docs/fem/0097" >}})    
@@ -42,10 +44,10 @@ type: docs
 - [10. 第六章 有限元组装]({{< relref "/docs/fem/0106" >}})  
 - [11. 第七章 有限元变分形式的正交表示（一）]({{< relref "/docs/fem/0107" >}})    
 - [12. 第七章 有限元变分形式的正交表示（二）]({{< relref "/docs/fem/0108" >}})  
-- [13. 第八章 有限元变分形式的张量表示]({{< relref "/docs/fem/0109" >}})      
+- [13. 第八章 有限元变分形式的张量表示]({{< relref "/docs/fem/0109" >}})    
+- [14. 第九章 有限元矩阵计算的离散优化]({{< relref "/docs/fem/0110" >}})      
 
 {{< /columns >}}
-
 
 ----------
 
