@@ -19,6 +19,7 @@ headless = true
     - [第七章 有限元变分形式的正交表示（二）]({{< relref "/docs/fem/0108" >}})   
     - [第八章 有限元变分形式的张量表示]({{< relref "/docs/fem/0109" >}})    
     - [第九章 有限元矩阵计算的离散优化]({{< relref "/docs/fem/0110" >}})    
+    - [第十章 DOLFIN：C++/Python有限元库》概述/接口]({{< relref "/docs/fem/0111" >}})    
 - [**基于Julia科学计算**]({{< relref "/docs/julia" >}})   
 - [**理论物理学习笔记**]({{< relref "/docs/theophy" >}})  
 - [**微分几何笔记**]({{< relref "/docs/diffgeo" >}})
