@@ -12,7 +12,17 @@ tags: []
 
 [有限元法求解牛顿流体（FEniCS）]({{< relref "/docs/julia/0096" >}})
 
-这两篇笔记仅做入门之用。  为了深入掌握，建议阅读《Automated Solution of Differential Equations by the Finite Element Method》。 为此，我一边学习一边翻译权当笔记。
+这两篇笔记仅做入门之用【用来代替第1章】。  
+
+为了深入掌握，建议阅读《Automated Solution of Differential Equations by the Finite Element Method》。 为此，我一边学习一边翻译权当笔记。
+
+原书链接：https://pan.baidu.com/s/1v-hqfK0Z6HzA5AAQoaVRvg 
+提取码：ulss 
+【如果链接失效，评论中通知我，我看到会更新】
+
+$\color{red}{事实上，我只翻译了本书的核心部分：第2-10章。}$  
+
+<!--more-->
 
 ## **----------- I.方法论 -----------**
 
@@ -20,7 +30,7 @@ tags: []
 
 {{< columns >}}
 
-- [第二章 有限元方法]({{< relref "/docs/fem/0097" >}})
+- [有限元方法]({{< relref "/docs/fem/0097" >}})
     - [2.1 一个简单的模型问题]({{< relref "/docs/fem/0097" >}}#21-一个简单的模型问题) 
     - [2.2 有限元离散化]({{< relref "/docs/fem/0097" >}}#22-有限元离散化) 
         - [2.2.1 泊松方程离散化]({{< relref "/docs/fem/0097" >}}#221-泊松方程离散化) 
@@ -54,7 +64,7 @@ tags: []
 
 {{< columns >}}
 
-- [第三章 常见有限元]({{< relref "/docs/fem/0100" >}})   
+- [常见有限元]({{< relref "/docs/fem/0100" >}})   
     - [3.1 有限元定义]({{< relref "/docs/fem/0100" >}}#31-有限元定义)   
     - [3.2 记号]({{< relref "/docs/fem/0100" >}}#32-记号)   
     - [3.3 H¹有限元]({{< relref "/docs/fem/0100" >}}#33-h有限元)   
@@ -88,7 +98,7 @@ tags: []
 
 {{< columns >}}
 
-- [第四章 构造通用参考单元]({{< relref "/docs/fem/0103" >}})   
+- [构造通用参考单元]({{< relref "/docs/fem/0103" >}})   
     - [4.1 背景]({{< relref "/docs/fem/0103" >}}#41-背景)   
     - [4.2 预备]({{< relref "/docs/fem/0103" >}}#42-预备)  
     - [4.3 数学框架]({{< relref "/docs/fem/0103" >}}#43-数学框架)  
@@ -115,7 +125,7 @@ tags: []
 
 {{< columns >}}
 
-- [第五章 有限元变分形式]({{< relref "/docs/fem/0105" >}})  
+- [有限元变分形式]({{< relref "/docs/fem/0105" >}})  
     - [5.1 背景]({{< relref "/docs/fem/0105" >}}#51-背景)  
     - [5.2 多重线性形式]({{< relref "/docs/fem/0105" >}}#52-多重线性形式)  
         - [5.2.1 例子]({{< relref "/docs/fem/0105" >}}#521-例子)  
@@ -136,7 +146,7 @@ tags: []
 
 {{< columns >}}
 
-- [第六章 有限元组装]({{< relref "/docs/fem/0106" >}})   
+- [有限元组装]({{< relref "/docs/fem/0106" >}})   
     - [6.1 组装算法]({{< relref "/docs/fem/0106" >}}#61-组装算法)   
     - [6.2 实现]({{< relref "/docs/fem/0106" >}}#62-实现)   
 
@@ -153,7 +163,7 @@ tags: []
 
 {{< columns >}}
 
-- [第七章 有限元变分形式的正交表示]({{< relref "/docs/fem/0107" >}})   
+- [有限元变分形式的正交表示]({{< relref "/docs/fem/0107" >}})   
     - [7.1 标准正交表示]({{< relref "/docs/fem/0107" >}}#71-标准正交表示)   
     - [7.2 正交优化]({{< relref "/docs/fem/0107" >}}#72-正交优化)   
         - [7.2.1 零消除操作]({{< relref "/docs/fem/0107" >}}#721-零消除操作)   
@@ -177,7 +187,7 @@ tags: []
 
 {{< columns >}}
 
-- [第八章 有限元变分形式的张量表示]({{< relref "/docs/fem/0109" >}}) 
+- [有限元变分形式的张量表示]({{< relref "/docs/fem/0109" >}}) 
     - [8.1 泊松方程的张量表示]({{< relref "/docs/fem/0109" >}}#81-泊松方程的张量表示) 
 
 <--->
@@ -192,7 +202,7 @@ tags: []
 
 {{< columns >}}
 
-- [第九章 有限元矩阵计算的离散优化]({{< relref "/docs/fem/0110" >}})    
+- [有限元矩阵计算的离散优化]({{< relref "/docs/fem/0110" >}})    
     - [9.1 优化框架]({{< relref "/docs/fem/0110" >}}#91-优化框架)    
     - [9.2 拓扑优化]({{< relref "/docs/fem/0110" >}}#92-拓扑优化)    
     - [9.3 图问题]({{< relref "/docs/fem/0110" >}}#93-图问题)   
@@ -213,7 +223,7 @@ tags: []
 
 {{< columns >}}
 
-- [第十章 DOLFIN：C++/Python有限元库]({{< relref "/docs/fem/0111" >}})    
+- [DOLFIN：C++/Python有限元库]({{< relref "/docs/fem/0111" >}})    
     - [10.1 概述]({{< relref "/docs/fem/0111" >}}#101-概述)    
     - [10.2 用户接口]({{< relref "/docs/fem/0111" >}}#102-用户接口)    
         - [10.2.1 C++接口]({{< relref "/docs/fem/0111" >}}#1021-c接口)    
