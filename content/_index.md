@@ -38,7 +38,8 @@ type: docs
 - [第七章 有限元变分形式的正交表示]({{< relref "/docs/fem/0107" >}})    
 - [第八章 有限元变分形式的张量表示]({{< relref "/docs/fem/0109" >}})    
 - [第九章 有限元矩阵计算的离散优化]({{< relref "/docs/fem/0110" >}}) 
-- [第十章 DOLFIN：C++/Python有限元库]({{< relref "/docs/fem/0111" >}})         
+- [第十章 DOLFIN：C++/Python有限元库]({{< relref "/docs/fem/0111" >}})   
+- [第十七章 UFL：有限元形式语言]({{< relref "/docs/fem/0119" >}})          
 
 {{< /columns >}}
 

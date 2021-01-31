@@ -14,6 +14,7 @@ headless = true
     - [第八章 有限元变分形式的张量表示]({{< relref "/docs/fem/0109" >}})    
     - [第九章 有限元矩阵计算的离散优化]({{< relref "/docs/fem/0110" >}})    
     - [第十章 DOLFIN：C++/Python有限元库]({{< relref "/docs/fem/0111" >}})    
+    - [第十七章 UFL：有限元形式语言]({{< relref "/docs/fem/0119" >}})    
 - [**基于Julia科学计算**]({{< relref "/docs/julia" >}})   
 - [**理论物理学习笔记**]({{< relref "/docs/theophy" >}})  
 - [**微分几何笔记**]({{< relref "/docs/diffgeo" >}})
