@@ -27,19 +27,19 @@ type: docs
 
 {{< columns >}}
 
-- [第二章 有限元方法]({{< relref "/docs/fem/0097" >}})       
-- [第三章 常见有限元]({{< relref "/docs/fem/0100" >}})  
-- [第四章 构造通用参考单元]({{< relref "/docs/fem/0103" >}})   
-- [第五章 有限元变分形式]({{< relref "/docs/fem/0105" >}}) 
-- [第六章 有限元组装]({{< relref "/docs/fem/0106" >}})  
+- [第二章 有限元方法]({{< relref "/docs/fem" >}}#第二章-有限元方法)       
+- [第三章 常见有限元]({{< relref "/docs/fem" >}}#第三章-常见有限元)  
+- [第四章 构造通用参考单元]({{< relref "/docs/fem" >}}#第四章-构造通用参考单元)   
+- [第五章 有限元变分形式]({{< relref "/docs/fem" >}}#第五章-有限元变分形式) 
+- [第六章 有限元组装]({{< relref "/docs/fem" >}}#第六章-有限元组装)  
 
 <--->    
 
-- [第七章 有限元变分形式的正交表示]({{< relref "/docs/fem/0107" >}})    
-- [第八章 有限元变分形式的张量表示]({{< relref "/docs/fem/0109" >}})    
-- [第九章 有限元矩阵计算的离散优化]({{< relref "/docs/fem/0110" >}}) 
-- [第十章 DOLFIN：C++/Python有限元库]({{< relref "/docs/fem/0111" >}})   
-- [第十七章 UFL：有限元形式语言]({{< relref "/docs/fem/0119" >}})          
+- [第七章 有限元变分形式的正交表示]({{< relref "/docs/fem" >}}#第七章-有限元变分形式的正交表示)    
+- [第八章 有限元变分形式的张量表示]({{< relref "/docs/fem" >}}#第八章-有限元变分形式的张量表示)    
+- [第九章 有限元矩阵计算的离散优化]({{< relref "/docs/fem" >}}#第九章-有限元矩阵计算的离散优化) 
+- [第十章 DOLFIN：C++/Python有限元库]({{< relref "/docs/fem" >}}#第十章-dolfincpython有限元库)   
+- [第十七章 UFL：有限元形式语言]({{< relref "/docs/fem" >}}#第十七章-ufl有限元形式语言)          
 
 {{< /columns >}}
 
