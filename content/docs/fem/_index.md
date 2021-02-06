@@ -20,7 +20,7 @@ tags: []
 提取码：ulss 
 【如果链接失效，评论中通知我，我看到会更新】
 
-$\color{red}{事实上，我只翻译了本书的核心部分：第2-10、17章。}$  
+$\color{red}{学习进行中...}$  
 
 <!--more-->
 
@@ -313,6 +313,38 @@ $\color{red}{事实上，我只翻译了本书的核心部分：第2-10、17章�
         - [17.9.3 效率考量]({{< relref "/docs/fem/0123" >}}#1793-效率考量)
     - [17.10 结论和未来方向]({{< relref "/docs/fem/0123" >}}#1710-结论和未来方向)
     - [17.11 致谢]({{< relref "/docs/fem/0123" >}}#1711-致谢)
+
+{{< /columns >}}
+
+## 第十八章 Unicorn：统一的连续介质力学求解器
+
+{{< columns >}}
+
+- [Unicorn：统一的连续介质力学求解器]({{< relref "/docs/fem/0124" >}})  
+    - [18.1 背景]({{< relref "/docs/fem/0124" >}}#181-背景)  
+    - [18.2 统一的连续介质建模]({{< relref "/docs/fem/0124" >}}#182-统一的连续介质建模)  
+    - [18.3 时空的一般Galerkin离散化]({{< relref "/docs/fem/0124" >}}#183-时空的一般galerkin离散化)  
+        - [18.3.1 标准Galerkin]({{< relref "/docs/fem/0124" >}}#1831-标准galerkin)  
+        - [18.3.2 局域ALE]({{< relref "/docs/fem/0124" >}}#1832-局域ale)  
+        - [18.3.3 加权最小二乘稳定化]({{< relref "/docs/fem/0124" >}}#1833-加权最小二乘稳定化)  
+    - [18.4 实现]({{< relref "/docs/fem/0124" >}}#184-实现)  
+        - [18.4.1 Unicorn类/接口]({{< relref "/docs/fem/0124" >}}#1841-unicorn类接口)  
+        - [18.4.2 TimeDependentPDE]({{< relref "/docs/fem/0124" >}}#1842-timedependentpde)  
+        - 18.4.3 ErrorEstimate
+
+<--->  
+
+-
+    -
+        - 18.4.4 SpaceTimeFunction
+        - 18.4.5 SlipBC
+        - 18.4.6 ElasticSmoother
+        - 18.4.7 MeshAdaptInterface
+    - 18.5 解决连续介质力学问题
+        - 18.5.1 流固耦合
+        - 18.5.2 适应性
+        - 18.5.3 Unicorn-HPC安装和基本测试
+    - 18.6 致谢
 
 {{< /columns >}}
 
