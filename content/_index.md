@@ -28,19 +28,19 @@ type: docs
 {{< columns >}}
 
 - [[docs/fem/_index#第二章 有限元方法|第二章 有限元方法]]
-- [第三章 常见有限元]({{< relref "/docs/fem" >}}#第三章-常见有限元)  
-- [第四章 构造通用参考单元]({{< relref "/docs/fem" >}}#第四章-构造通用参考单元)   
-- [第五章 有限元变分形式]({{< relref "/docs/fem" >}}#第五章-有限元变分形式) 
-- [第六章 有限元组装]({{< relref "/docs/fem" >}}#第六章-有限元组装)  
-- [第七章 有限元变分形式的正交表示]({{< relref "/docs/fem" >}}#第七章-有限元变分形式的正交表示)    
+- [[docs/fem/_index#第三章 常见有限元|第三章 常见有限元]]
+- [[docs/fem/_index#第四章 构造通用参考单元|第四章 构造通用参考单元]]
+- [[docs/fem/_index#第五章 有限元变分形式|第五章 有限元变分形式]]
+- [[docs/fem/_index#第六章 有限元组装|第六章 有限元组装]]
+- [[docs/fem/_index#第七章 有限元变分形式的正交表示|第七章 有限元变分形式的正交表示]]    
 
 <--->    
 
-- [第八章 有限元变分形式的张量表示]({{< relref "/docs/fem" >}}#第八章-有限元变分形式的张量表示)    
-- [第九章 有限元矩阵计算的离散优化]({{< relref "/docs/fem" >}}#第九章-有限元矩阵计算的离散优化) 
-- [第十章 DOLFIN：C++/Python有限元库]({{< relref "/docs/fem" >}}#第十章-dolfincpython有限元库)   
-- [第十七章 UFL：有限元形式语言]({{< relref "/docs/fem" >}}#第十七章-ufl有限元形式语言)   
-- [第十八章 Unicorn：统一的连续介质力学求解器]({{< relref "/docs/fem" >}}#第十八章-unicorn统一的连续介质力学求解器)          
+- [[docs/fem/_index#第八章 有限元变分形式的张量表示|第八章 有限元变分形式的张量表示]]    
+- [[docs/fem/_index#第九章 有限元矩阵计算的离散优化|第九章 有限元矩阵计算的离散优化]] 
+- [[docs/fem/_index#第十章 DOLFIN：C＋＋／Python有限元库|第十章 DOLFIN：C＋＋／Python有限元库]]   
+- [[docs/fem/_index#第十七章 UFL：有限元形式语言|第十七章 UFL：有限元形式语言]]   
+- [[docs/fem/_index#第十八章 Unicorn：统一的连续介质力学求解器|第十八章 Unicorn：统一的连续介质力学求解器]]
 
 {{< /columns >}}
 

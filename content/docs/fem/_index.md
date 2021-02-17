@@ -219,7 +219,7 @@ $\color{red}{学习进行中...}$
 
 ## **----------- II.实现 -----------**
 
-## 第十章 DOLFIN：C++/Python有限元库
+## 第十章 DOLFIN：C＋＋／Python有限元库
 
 {{< columns >}}
 
