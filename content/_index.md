@@ -51,7 +51,7 @@ type: docs
 
 {{< columns >}}
 
-- [1. 整合Julia和Python的集成环境（Win10）]({{< relref "/docs/julia/0001" >}})  
+- [[0001|1. 整合Julia和Python的集成环境（Win10）]]
 - [2. 科学计算环境搭建（Win10+WSL2+Ubuntu）]({{< relref "/docs/julia/0095" >}})  
 - [3. Julia中的数学符号演算]({{< relref "/docs/julia/0002" >}}) 
 - [4. 基于Julia的科学计算功能库整理]({{< relref "/docs/julia/0003" >}})  

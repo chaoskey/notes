@@ -28,7 +28,7 @@ function action(){
             # 4）行内公式变换: $$online latex$$
             # 5）行内公式变换: $online latex$
             # 6）图片链接变换
-            sed -i '/```[^`]*```/n; /^```/ { :begin1; /^```.*\s*\n\s*```/! { $! { N; b begin1 }; }; n; }; /\$\$/ { :begin2; /\$\$[^$]*\$\$/! { $! { N; b begin2 }; }; }; s/\$\$\(\n[^$]*\n\)\$\$/{{< katex display >}}\1{{< \/katex >}}/g; s/\$\$\([^$]*\)\$\$/{{< katex >}}\1{{< \/katex >}}/g; s/\$\([^$]*\)\$/{{< katex >}}\1{{< \/katex >}}/g; s/!\[.*\](\.\.\/images\//![](..\/..\/images\//g;'  $1"/"$file
+            sed -i '/```[^`]*```/n; /^```/ { :begin1; /^```.*\s*\n\s*```/! { $! { N; b begin1 }; }; n; }; /\$\$/ { :begin2; /\$\$[^$]*\$\$/! { $! { N; b begin2 }; }; }; s/\$\$\(\n[^$]*\n\)\$\$/{{< katex display >}}\1{{< \/katex >}}/g; s/\$\$\([^$]*\)\$\$/{{< katex >}}\1{{< \/katex >}}/g; s/\$\([^$]*\)\$/{{< katex >}}\1{{< \/katex >}}/g; s/\[\[\([^[]*\)\]\]/{{< roamlink >}}\1{{< \/roamlink >}}/g; s/!\[.*\](\.\.\/images\//![](..\/..\/images\//g;'  $1"/"$file
         fi
     done
 }
