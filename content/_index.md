@@ -11,12 +11,12 @@ type: docs
 {{< columns >}}
 
 
-- [1. 用Hugo+码云搭建支持Markdown+LaTeX的云笔记]({{< relref "/posts/0000" >}})  
-- [2. 通过实例掌握流编辑器sed]({{< relref "/posts/0067" >}})  
+- [[0000|1. 用Hugo+码云搭建支持Markdown+LaTeX的云笔记]]
+- [[0067|2. 通过实例掌握流编辑器sed]]  
 
 <--->
 
-- [3. 小技巧备忘]({{< relref "/posts/0004" >}})   
+- [[0004|3. 小技巧备忘]]   
 
 {{< /columns >}}
 
@@ -27,7 +27,7 @@ type: docs
 
 {{< columns >}}
 
-- [第二章 有限元方法]({{< relref "/docs/fem" >}}#第二章-有限元方法)       
+- [[docs/fem/_index#第二章 有限元方法|第二章 有限元方法]]
 - [第三章 常见有限元]({{< relref "/docs/fem" >}}#第三章-常见有限元)  
 - [第四章 构造通用参考单元]({{< relref "/docs/fem" >}}#第四章-构造通用参考单元)   
 - [第五章 有限元变分形式]({{< relref "/docs/fem" >}}#第五章-有限元变分形式) 
