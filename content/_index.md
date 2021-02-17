@@ -52,21 +52,21 @@ type: docs
 {{< columns >}}
 
 - [[0001|1. 整合Julia和Python的集成环境（Win10）]]  
-- [2. 科学计算环境搭建（Win10+WSL2+Ubuntu）]({{< relref "/docs/julia/0095" >}})  
-- [3. Julia中的数学符号演算]({{< relref "/docs/julia/0002" >}}) 
-- [4. 基于Julia的科学计算功能库整理]({{< relref "/docs/julia/0003" >}})  
-- [5. 微分几何中的计算]({{< relref "/docs/diffgeo/0070" >}})   
-- [6. 平面三体问题]({{< relref "/docs/julia/0088" >}})  
+- [[0095|2. 科学计算环境搭建（Win10+WSL2+Ubuntu）]]
+- [[0002|3. Julia中的数学符号演算]] 
+- [[0003|4. 基于Julia的科学计算功能库整理]]  
+- [[0070|5. 微分几何中的计算]]   
+- [[0088|6. 平面三体问题]]
 
 <--->
 
-- [7. 有限差分法求解一维热传导方程]({{< relref "/docs/julia/0089" >}})  
-- [8. Galerkin法解常微分方程边值问题]({{< relref "/docs/julia/0090" >}})    
-- [9. 有限元法解常微分方程边值问题]({{< relref "/docs/julia/0091" >}})    
-- [10. 有限元之平面三角单元]({{< relref "/docs/julia/0092" >}})    
-- [11. 有限元之Delaunay三角剖分]({{< relref "/docs/julia/0093" >}})    
-- [12. 有限元法解偏微分方程（FEniCS）]({{< relref "/docs/julia/0094" >}})    
-- [13. 有限元法求解牛顿流体（FEniCS）]({{< relref "/docs/julia/0096" >}})        
+- [[0089|7. 有限差分法求解一维热传导方程]]
+- [[0090|8. Galerkin法解常微分方程边值问题]]    
+- [[0091|9. 有限元法解常微分方程边值问题]]    
+- [[0092|10. 有限元之平面三角单元]]    
+- [[0093|11. 有限元之Delaunay三角剖分]]    
+- [[0094|12. 有限元法解偏微分方程（FEniCS）]]    
+- [[0096|13. 有限元法求解牛顿流体（FEniCS）]]        
 
 {{< /columns >}}
 
@@ -77,15 +77,15 @@ type: docs
 
 {{< columns >}}
 
-- [1. 流形上的拉格朗日力学]({{< relref "/docs/theophy/0015" >}}) 
-- [2. 流形视角下的牛顿力学]({{< relref "/docs/theophy/0071" >}})
-- [3. 对称性与守恒律（Noether定理）]({{< relref "/docs/theophy/0072" >}})
-- [4. 辛流形上的哈密顿力学]({{< relref "/docs/theophy/0075" >}})
+- [[0015|1. 流形上的拉格朗日力学]]
+- [[0071|2. 流形视角下的牛顿力学]]
+- [[0072|3. 对称性与守恒律（Noether定理）]]
+- [[0075|4. 辛流形上的哈密顿力学]]
 
 <--->
-- [5. 闵氏时空对称性的三种观点]({{< relref "/docs/theophy/0080" >}})
-- [6. 场及其对称性]({{< relref "/docs/theophy/0081" >}})
-- [7. 庞加莱群的单粒子态的表示]({{< relref "/docs/theophy/0086" >}})
+- [[0080|5. 闵氏时空对称性的三种观点]]
+- [[0081|6. 场及其对称性]]
+- [[0086|7. 庞加莱群的单粒子态的表示]]
 
 {{< /columns >}}
 
@@ -96,33 +96,33 @@ type: docs
 
 {{< columns >}}
 
-- [1. 基于抽象指标的张量分析]({{< relref "/docs/diffgeo/0005" >}})  
-- [2. 流形上的导数算符]({{< relref "/docs/diffgeo/0006" >}}) 
-- [3. 流形上的平移]({{< relref "/docs/diffgeo/0007" >}})    
-- [4. 黎曼曲率张量]({{< relref "/docs/diffgeo/0008" >}})  
-- [5. 流形间的映射]({{< relref "/docs/diffgeo/0009" >}})  
-- [6. 流形上的李导数]({{< relref "/docs/diffgeo/0010" >}})  
-- [7. Killing矢量场]({{< relref "/docs/diffgeo/0011" >}})  
-- [8. 子流形和超曲面]({{< relref "/docs/diffgeo/0012" >}})
-- [9. 流形上的微分形式及其对偶]({{< relref "/docs/diffgeo/0013" >}})
-- [10. 流形上的微积分]({{< relref "/docs/diffgeo/0014" >}}) 
-- [11. 李群李代数]({{< relref "/docs/diffgeo/0016" >}})
-- [12. 常用李群及其李代数]({{< relref "/docs/diffgeo/0068" >}})
-- [13. 李变换群]({{< relref "/docs/diffgeo/0069" >}})
-- [14. 微分几何中的计算（Julia版）]({{< relref "/docs/diffgeo/0070" >}})
+- [[0005|1. 基于抽象指标的张量分析]]  
+- [[0006|2. 流形上的导数算符]]
+- [[0007|3. 流形上的平移]]    
+- [[0008|4. 黎曼曲率张量]]  
+- [[0009|5. 流形间的映射]]  
+- [[0010|6. 流形上的李导数]]  
+- [[0011|7. Killing矢量场]]  
+- [[0012|8. 子流形和超曲面]]
+- [[0013|9. 流形上的微分形式及其对偶]]
+- [[0014|10. 流形上的微积分]] 
+- [[0016|11. 李群李代数]]
+- [[0068|12. 常用李群及其李代数]]
+- [[0069|13. 李变换群]]
+- [[0070|14. 微分几何中的计算（Julia版）]]
 
 <--->
   
-- [15. 辛群及其李代数]({{< relref "/docs/diffgeo/0073" >}}) 
-- [16. 辛流形]({{< relref "/docs/diffgeo/0074" >}})
-- [17. 流形上的旋量和旋量场（初步）]({{< relref "/docs/diffgeo/0076" >}})
-- [18. 流形上的旋量和旋量场（几何解释）]({{< relref "/docs/diffgeo/0077" >}})
-- [19. 流形上的旋量和旋量场（导数算符和曲率)]({{< relref "/docs/diffgeo/0078" >}})
-- [20. 流形上的旋量和旋量场（自旋系数和克氏符）]({{< relref "/docs/diffgeo/0079" >}})
-- [21. 李群李代数伴随表示和Killing型、Casimir算符]({{< relref "/docs/diffgeo/0082" >}})
-- [22. 半单李代数的标准形式]({{< relref "/docs/diffgeo/0083" >}})
-- [23. 半单李代数的根系、权系和Dynkin图]({{< relref "/docs/diffgeo/0084" >}})
-- [24. 半单李代数的Casimir不变算符]({{< relref "/docs/diffgeo/0085" >}})
+- [[0073|15. 辛群及其李代数]] 
+- [[0074|16. 辛流形]]
+- [[0076|17. 流形上的旋量和旋量场（初步）]]
+- [[0077|18. 流形上的旋量和旋量场（几何解释）]]
+- [[0078|19. 流形上的旋量和旋量场（导数算符和曲率)]]
+- [[0079|20. 流形上的旋量和旋量场（自旋系数和克氏符）]]
+- [[0082|21. 李群李代数伴随表示和Killing型、Casimir算符]]
+- [[0083|22. 半单李代数的标准形式]]
+- [[0084|23. 半单李代数的根系、权系和Dynkin图]]
+- [[0085|24. 半单李代数的Casimir不变算符]]
 
 {{< /columns >}}
 
@@ -133,16 +133,16 @@ type: docs
 
 {{< columns >}}
 
-- [第一章 导论]({{< relref "/docs/mlapp/01introduction" >}})
-- [第二章 概率]({{< relref "/docs/mlapp/02probability" >}})
-- [第三章 基于离散数据的生成式模型]({{< relref "/docs/mlapp/03generative_models_for_discrete_data" >}})
-- [第四章 高斯模型]({{< relref "/docs/mlapp/04gaussian_models" >}})
+- [[docs/mlapp/01introduction/_index|第一章 导论]]
+- [[docs/mlapp/02probability/_index|第二章 概率]]
+- [[docs/mlapp/03generative_models_for_discrete_data/_index|第三章 基于离散数据的生成式模型]]
+- [[04gaussian_models|第四章 高斯模型]]
 
 <--->
 
-- [第五章 贝叶斯统计]({{< relref "/docs/mlapp/05bayesian_statistics" >}})
-- [第六章 频率派统计]({{< relref "/docs/mlapp/06frequentist_statistics" >}})
-- [第七章 线性回归]({{< relref "/docs/mlapp/07linear_regression" >}})
+- [[docs/mlapp/05bayesian_statistics/_index|第五章 贝叶斯统计]]
+- [[docs/mlapp/06frequentist_statistics/_index|第六章 频率派统计]]
+- [[docs/mlapp/07linear_regression/_index|第七章 线性回归]]
 
 {{< /columns >}}
 
@@ -153,17 +153,17 @@ type: docs
 
 {{< columns >}}
 
-- [第一章 绪论]({{< relref "/docs/apm/0017" >}})
-- [第二章 一致预期收益率：资本资产定价模型]({{< relref "/docs/apm/0018" >}})
-- [第三章 风险]({{< relref "/docs/apm/0019" >}})
-- [第四章 超常收益率、业绩基准和附加值]({{< relref "/docs/apm/0020" >}})
+- [[0017|第一章 绪论]]
+- [[0018|第二章 一致预期收益率：资本资产定价模型]]
+- [[0019|第三章 风险]]
+- [[0020|第四章 超常收益率、业绩基准和附加值]]
 
 <--->
 
-- [第五章 残差风险和残差收益率：信息率]({{< relref "/docs/apm/0021" >}})
-- [第六章 主动管理基本定律]({{< relref "/docs/apm/0022" >}})
-- [第七章 预期收益率和套利定价理论]({{< relref "/docs/apm/0023" >}})
-- [第八章 估值理论]({{< relref "/docs/apm/0024" >}})
+- [[0021|第五章 残差风险和残差收益率：信息率]]
+- [[0022|第六章 主动管理基本定律]]
+- [[0023|第七章 预期收益率和套利定价理论]]
+- [[0024|第八章 估值理论]]
 
 {{< /columns >}}
 
