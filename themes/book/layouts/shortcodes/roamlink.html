@@ -1,0 +1,13 @@
+{{ $keys := split .Inner "|" }}
+{{ $key := (index $keys 0) }}
+{{ $title := $key }}
+{{ if gt (len $keys) 1 }} 
+    {{ $title = (index $keys 1) }} 
+{{ end }}
+{{ range .Site.RegularPages }}
+    {{ if or (strings.HasSuffix (strings.TrimRight ".md" .File) $key) (in .Aliases $key)}}
+        <a href="{{ .Permalink }}">{{ $title }}</a>
+    {{ end }}
+{{ end }}
+
+
