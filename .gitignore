@@ -3,4 +3,5 @@
 /.vscode/*
 /public/*
 /content/.obsidian/*
+/content/private
 /content/private/*
