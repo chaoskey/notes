@@ -10,21 +10,21 @@ tags: []
 
 本节中的目录：
 
-- [2.1 导论]({{< relref "/docs/mlapp/02probability/0030" >}})
+- [[0030|2.1 导论]]
 
-- [2.2 概率论的简要回顾]({{< relref "/docs/mlapp/02probability/0031" >}})
+- [[0031|2.2 概率论的简要回顾]]
 
-- [2.3 一些常见的离散分布]({{< relref "/docs/mlapp/02probability/0032" >}})
+- [[0032|2.3 一些常见的离散分布]]
 
-- [2.4 一些常见的连续分布]({{< relref "/docs/mlapp/02probability/0033" >}})
+- [[0033|2.4 一些常见的连续分布]]
 
-- [2.5 联合概率分布]({{< relref "/docs/mlapp/02probability/0034" >}})
+- [[0034|2.5 联合概率分布]]
 
-- [2.6 Transformations of random variables]({{< relref "/docs/mlapp/02probability/0035" >}})
+- [[0035|2.6 Transformations of random variables]]
 
-- [2.7 Monte Carlo approximation]({{< relref "/docs/mlapp/02probability/0036" >}})
+- [[0036|2.7 Monte Carlo approximation]]
 
-- [2.8 Information theory]({{< relref "/docs/mlapp/02probability/0037" >}})
+- [[0037|2.8 Information theory]]
 
-- [Exercises]({{< relref "/docs/mlapp/02probability/0038" >}})
+- [[0038|Exercises]]
 

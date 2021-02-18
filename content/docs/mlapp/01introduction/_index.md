@@ -10,14 +10,14 @@ tags: []
 
 本节中的目录：
 
-- [1.1 机器学习：什么和为什么？]({{< relref "/docs/mlapp/01introduction/0025" >}})
+- [[0025|1.1 机器学习：什么和为什么？]]
 
-- [1.2 监督学习]({{< relref "/docs/mlapp/01introduction/0026" >}})
+- [[0026|1.2 监督学习]]
 
-- [1.3 无监督学习]({{< relref "/docs/mlapp/01introduction/0027" >}})
+- [[0027|1.3 无监督学习]]
 
-- [1.4 机器学习的一些基本概念]({{< relref "/docs/mlapp/01introduction/0028" >}})
+- [[0028|1.4 机器学习的一些基本概念]]
 
-- [Exercises]({{< relref "/docs/mlapp/01introduction/0029" >}})
+- [[0029|Exercises]]
 
 

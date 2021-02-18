@@ -10,17 +10,17 @@ tags: []
 
 本节中的目录：
 
-- [3.1 引言]({{< relref "/docs/mlapp/03generative_models_for_discrete_data/0039" >}})
+- [[0039|3.1 引言]]
 
-- [3.2 贝叶斯概念学习]({{< relref "/docs/mlapp/03generative_models_for_discrete_data/0040" >}})
+- [[0040|3.2 贝叶斯概念学习]]
 
-- [3.3 贝塔-二项模型]({{< relref "/docs/mlapp/03generative_models_for_discrete_data/0041" >}})
+- [[0041|3.3 贝塔-二项模型]]
 
-- [3.4 狄利克雷-多项模型]({{< relref "/docs/mlapp/03generative_models_for_discrete_data/0042" >}})
+- [[0042|3.4 狄利克雷-多项模型]]
 
-- [3.5 朴素贝叶斯分类器]({{< relref "/docs/mlapp/03generative_models_for_discrete_data/0043" >}})
+- [[0043|3.5 朴素贝叶斯分类器]]
 
-- [Exercises]({{< relref "/docs/mlapp/03generative_models_for_discrete_data/0044" >}})
+- [[0044|Exercises]]
 
 
 

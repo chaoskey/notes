@@ -10,19 +10,19 @@ tags: []
 
 本节中的目录：
 
-- [5.1 导言]({{< relref "/docs/mlapp/05bayesian_statistics/0045" >}})
+- [[0045|5.1 导言]]
 
-- [5.2 后验分布总结]({{< relref "/docs/mlapp/05bayesian_statistics/0046" >}})
+- [[0046|5.2 后验分布总结]]
 
-- [5.3 贝叶斯模型选择]({{< relref "/docs/mlapp/05bayesian_statistics/0047" >}})
+- [[0047|5.3 贝叶斯模型选择]]
 
-- [5.4 先验]({{< relref "/docs/mlapp/05bayesian_statistics/0048" >}})
+- [[0048|5.4 先验]]
 
-- [5.5 分层贝叶斯]({{< relref "/docs/mlapp/05bayesian_statistics/0049" >}})
+- [[0049|5.5 分层贝叶斯]]
 
-- [5.6 经验贝叶斯]({{< relref "/docs/mlapp/05bayesian_statistics/0050" >}})
+- [[0050|5.6 经验贝叶斯]]
 
-- [5.7 贝叶斯决策理论]({{< relref "/docs/mlapp/05bayesian_statistics/0051" >}})
+- [[0051|5.7 贝叶斯决策理论]]
 
-- [习题]({{< relref "/docs/mlapp/05bayesian_statistics/0052" >}})
+- [[0052|习题]]
 

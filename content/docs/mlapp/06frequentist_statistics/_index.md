@@ -10,19 +10,19 @@ tags: []
 
 本节中的目录：
 
-- [6.1 导论]({{< relref "/docs/mlapp/06frequentist_statistics/0053" >}})
+- [[0053|6.1 导论]]
 
-- [6.2 估计器的采样分布]({{< relref "/docs/mlapp/06frequentist_statistics/0054" >}})
+- [[0054|6.2 估计器的采样分布]]
 
-- [6.3 频率派决策理论]({{< relref "/docs/mlapp/06frequentist_statistics/0055" >}})
+- [[0055|6.3 频率派决策理论]]
 
-- [6.4 估计器的理想属性]({{< relref "/docs/mlapp/06frequentist_statistics/0056" >}})
+- [[0056|6.4 估计器的理想属性]]
 
-- [6.5 经验风险最小化]({{< relref "/docs/mlapp/06frequentist_statistics/0057" >}})
+- [[0057|6.5 经验风险最小化]]
 
-- [6.6 频率派统计的病态\*]({{< relref "/docs/mlapp/06frequentist_statistics/0058" >}})
+- [[0058|6.6 频率派统计的病态\*]]
 
-- [习题]({{< relref "/docs/mlapp/06frequentist_statistics/0059" >}})
+- [[0059|习题]]
 
 
 
