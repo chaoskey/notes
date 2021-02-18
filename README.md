@@ -34,4 +34,8 @@
 
 ![](https://chaoskey.gitee.io/notes/images/0103.jpg)
 
+## 支持双向链接（Roam Link）
+
+具体参见： [基于Obsidian＋Hugo＋Gitee的笔记系统](https://chaoskey.gitee.io/notes/posts/%E5%9F%BA%E4%BA%8EObsidianHugoGitee%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/)
+
 

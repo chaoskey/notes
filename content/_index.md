@@ -17,6 +17,7 @@ type: docs
 <--->
 
 - [[0004|3. 小技巧备忘]]   
+- [[基于Obsidian＋Hugo＋Gitee的笔记系统|4.基于Obsidian＋Hugo＋Gitee的笔记系统]]
 
 {{< /columns >}}
 
