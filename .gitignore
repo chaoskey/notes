@@ -2,6 +2,7 @@
 /code/.vscode/*
 /.vscode/*
 /public/*
+/content/.obsidian
 /content/.obsidian/*
 /content/private
 /content/private/*

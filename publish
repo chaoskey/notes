@@ -3,6 +3,13 @@
 path=`pwd`
 if [ "${path##*/}"x = "notes"x ] 
 then
+
+    # 私有数据备份
+    rm -rd ../private
+    rm -rd ../.obsidian
+    mv ./content/private ../
+    mv ./content/.obsidian ../
+
     # 生成待发布的数据
     ./forgitee
     
@@ -60,6 +67,9 @@ then
     git checkout master
     rm -rf  ../public
     rm ../publish
+
+    mv ../private ./content/ 
+    mv ../.obsidian ./content/
 else
     echo "此脚本只能在特定目录（notes目录或其父目录）中执行"
 fi
