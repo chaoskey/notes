@@ -327,19 +327,19 @@ $\color{red}{学习进行中...}$
         - [[0124#18·3·1 标准Galerkin|18·3·1 标准Galerkin]]
         - [[0124#18·3·2 局域ALE|18·3·2 局域ALE]]
         - [[0124#18·3·3 加权最小二乘稳定化|18·3·3 加权最小二乘稳定化]]
-    - [[0124#18·4 实现|18·4 实现]]
-        - [[0124#18·4·1 Unicorn类／接口|18·4·1 Unicorn类/接口]]
-        - [[0124#18·4·2 TimeDependentPDE|18·4·2 TimeDependentPDE]]
-        - 18·4·3 ErrorEstimate
+    - [[0125#18·4 实现|18·4 实现]]
+        - [[0125#18·4·1 Unicorn类／接口|18·4·1 Unicorn类/接口]]
+        - [[0125#18·4·2 TimeDependentPDE|18·4·2 TimeDependentPDE]]
+        - [[0125#18·4·3 ErrorEstimate|18·4·3 ErrorEstimate]]
 
 <--->  
 
 -
     -
-        - 18·4·4 SpaceTimeFunction
-        - 18·4·5 SlipBC
-        - 18·4·6 ElasticSmoother
-        - 18·4·7 MeshAdaptInterface
+        - [[0125#18·4·4 SpaceTimeFunction|18·4·4 SpaceTimeFunction]]
+        - [[0125#18·4·5 SlipBC|18·4·5 SlipBC]]
+        - [[0125#18·4·6 ElasticSmoother|18·4·6 ElasticSmoother]]
+        - [[0125#18·4·7 MeshAdaptInterface|18·4·7 MeshAdaptInterface]]
     - 18·5 解决连续介质力学问题
         - 18·5·1 流固耦合
         - 18·5·2 适应性

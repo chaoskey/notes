@@ -36,7 +36,7 @@ tags: ["hugo","码云","obsidian","markdown","latex"]
 
 这种功能，就是为`双向链接`量身定制的，因为```[[...]]```可能只给出一个文件名，而非完整的路径。
 
-### 实现方式：
+### 实现方式
 
 具体代码（Hugo短代码）见项目文件： [roamlink.html](https://gitee.com/chaoskey/notes/raw/master/themes/book/layouts/shortcodes/roamlink.html) 。
 
