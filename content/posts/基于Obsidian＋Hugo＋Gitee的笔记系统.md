@@ -6,6 +6,7 @@ categories: ["维护"]
 tags: ["hugo","码云","obsidian","markdown","latex"]
 ---
 
+
 > 本文基于`Typora＋Hugo＋Gitee的笔记系统`，仅把`Typora`改成`Obsidian`而已。
 > 
 > `Obsidian`是一个强大的知识库，可在纯文本Markdown文件的本地文件夹上运行。 支持`双向链接`（Roam Link）。
@@ -22,7 +23,7 @@ tags: ["hugo","码云","obsidian","markdown","latex"]
 
 ## 回顾基于Typora＋Hugo＋Gitee的笔记系统
 
-改进后的笔记系统，支持形如```[[...]]```的双向链接，自然就支持`Obsidian`； 如果你不使用双向链接，也可以使用`Typora`（甚至任意文本编辑器）。 所以`Typora＋Hugo＋Gitee的笔记系统`是基础，具体使用方法参见我的笔记主页：[https://gitee.com/chaoskey/notes](https://gitee.com/chaoskey/notes)。此处不再多说！
+改进后的笔记系统，支持形如```[[...]]```以及```![[...]]```的双向链接（后者支持图片），自然就支持`Obsidian`； 如果你不使用双向链接，也可以使用`Typora`（甚至任意文本编辑器）。 所以`Typora＋Hugo＋Gitee的笔记系统`是基础，具体使用方法参见我的笔记主页：[https://gitee.com/chaoskey/notes](https://gitee.com/chaoskey/notes)。此处不再多说！
 
 ## 用Hugo短代码获得目标页面路径
 
@@ -34,7 +35,7 @@ tags: ["hugo","码云","obsidian","markdown","latex"]
 
 如果没有重复的文件名，无须指定路径，通过hugo自定义短代吗，可以获得实际的页面路径（如第2例）；如果有重复文件名，则需要指定更详细的相对路径（如第1例）。
 
-这种功能，就是为`双向链接`量身定制的，因为```[[...]]```可能只给出一个文件名，而非完整的路径。
+这种功能，就是为`双向链接`量身定制的，因为```[[...]]```或```![[...]]```可能只给出一个文件名，而非完整的路径。
 
 ### 实现方式
 
@@ -48,21 +49,37 @@ tags: ["hugo","码云","obsidian","markdown","latex"]
     {{ $keys := (split (index .Params 0) "#") }}
     {{ $tag := "" }}
     {{ if (gt (len $keys) 1) }}
-        <!-- 将空格置换成"-"；此外，还要删除非中文&非字母&非数字的所有字符 -->
-        {{ $tag = (index $keys 1 | replaceRE "[^\\d\\sA-Za-z\u4e00-\u9fa5]" "" | replaceRE "\\s" "-" | lower) }}
+        <!-- 定位锚点 -->
+        {{ $tag = (index $keys 1  | urlize | lower) }}
     {{ end }}
     {{ $key := (index $keys 0) }}
-    {{ $ref := "" }}
-	<!-- 根据输入，搜索目标页面 -->
-    {{ range .Site.Pages }}
-        {{ if and .File (eq (len $ref) 0) }}
-            {{ if (strings.HasSuffix (replace (strings.TrimRight ".md" .File.Path) "\\" "/") $key) }}
-                {{ $ref = .RelPermalink }}
+    <!-- 扩展名解析 -->
+    {{ if not (findRE "\\.[^.]*$" $key) }}
+        {{ $key = add $key ".md" }}
+    {{ end }}
+    <!-- 没有扩展名，则默认md文件 ，否则搜索资源文件 -->
+    {{ if (strings.HasSuffix $key "md")  }}
+        {{ relref . $key }}{{ if $tag }}#{{ $tag }}{{ end }}
+    {{ else }}
+        <!-- 解析资源路径 -->
+        {{ $dir := (path.Split $key) }}
+        {{ $key = $dir.File }}
+        {{ if not $dir.Dir}}
+            <!-- 含资源路径的情况 -->
+            {{ relref . $dir.Dir }}{{ $key }}
+        {{ else }}
+            <!-- 不含资源路径，则进一步搜索 -->
+            {{ $rel :=  0  }}
+            {{ range where .Site.Pages "Kind" "section" }}
+                {{ if not $rel }}
+                    {{ $rel =  (.Resources.GetMatch $key)  }}
+                {{ end }}
+            {{ end }}
+            {{ if $rel }}
+                {{ ($rel).RelPermalink }}
             {{ end }}
         {{ end }}
     {{ end }}
-	<!-- 返回目标页面实际路径 -->
-	{{ $ref }}{{ if $tag }}#{{ $tag }}{{ end }}
 {{ end }}
 ```
 
@@ -97,6 +114,18 @@ s/\[\([^[]*\)\]({{</*\s*roamlink\s*"\([^"]*\)"\s**/>}})/[[\2|\1]]/g;
 ## 日常使用情景
 
 用`Obsidian`记笔记、写作，支持`双向链接`。 
+
+范例：
+
+- ```[[docs/fem/_index#第十八章 Unicorn：统一的连续介质力学求解器]|章节目录]]```
+- ```[[0115]]```
+- ```[[0115|DOLFIN：C++/Python有限元库》变分形式/组装/边界条件]]```
+- ```[[0115.md]]```
+- ```![[0257.jpg|图18.2]]```
+- ```![[0258.jpg]]```
+- ```![[docs/images/0258.jpg]]```
+
+【注意】```![[...]]```中的资源文件所在的目录中，必须存在`_index.md`（空文件文件也行），否则Hugo无法搜索到对应的资源文件。
 
 如果想发布成网页，先执行命令`./forgitee  server` 可在本地打开页面查看勘误。
 

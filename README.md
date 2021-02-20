@@ -36,6 +36,18 @@
 
 ## 支持双向链接（Roam Link）
 
+支持形如```[[...]]```以及```![[...]]```的双向链接（后者支持图片）。
+
+范例：
+
+- ```[[docs/fem/_index#第十八章 Unicorn：统一的连续介质力学求解器]|章节目录]]```
+- ```[[0115]]```
+- ```[[0115|DOLFIN：C++/Python有限元库》变分形式/组装/边界条件]]```
+- ```[[0115.md]]```
+- ```![[0257.jpg|图18.2]]```
+- ```![[0258.jpg]]```
+- ```![[docs/images/0258.jpg]]```
+
 具体参见： [基于Obsidian＋Hugo＋Gitee的笔记系统](https://chaoskey.gitee.io/notes/posts/%E5%9F%BA%E4%BA%8EObsidianHugoGitee%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/)
 
 
