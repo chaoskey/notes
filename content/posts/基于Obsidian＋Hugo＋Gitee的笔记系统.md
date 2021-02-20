@@ -64,7 +64,7 @@ tags: ["hugo","码云","obsidian","markdown","latex"]
         <!-- 解析资源路径 -->
         {{ $dir := (path.Split $key) }}
         {{ $key = $dir.File }}
-        {{ if not $dir.Dir}}
+        {{ if gt (len $dir.Dir) 0 }}
             <!-- 含资源路径的情况 -->
             {{ relref . $dir.Dir }}{{ $key }}
         {{ else }}
