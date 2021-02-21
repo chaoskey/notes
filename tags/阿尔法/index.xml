@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>阿尔法 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E9%98%BF%E5%B0%94%E6%B3%95/</link>
+    <description>Recent content in 阿尔法 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Wed, 23 May 2018 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E9%98%BF%E5%B0%94%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>第五章 残差风险和残差收益率：信息率</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0021/</link>
+      <pubDate>Wed, 23 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0021/</guid>
+      <description>&lt;h2 id=&#34;阿尔法&#34;&gt;阿尔法&lt;/h2&gt;
+&lt;p&gt;向未来看（先验），阿尔法是对残差收益率的预测；向过去看（后验），阿尔法是实现的残差收益率的均值。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;阿尔法&lt;/strong&gt;和&lt;strong&gt;贝塔&lt;/strong&gt;都源自线性回归模型（见第2章笔记：超额收益率分解）。&lt;/p&gt;
+&lt;p&gt;本章专注阿尔法的预测；第１２章将评估阿尔法预测的质量；第１７章考虑实现的阿尔法。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

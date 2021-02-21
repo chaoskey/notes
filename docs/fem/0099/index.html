@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="有限元方法（三）【翻译】"><meta property="og:title" content="有限元方法（三）【翻译】" />
+<meta property="og:description" content="I.方法论》2.有限元方法（三）
+【章节目录】
+2·6 有限元误差估计和适应性
+相对于（2.20）精确解
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+  \(u\)
+
+，有限元近似解
+
+
+
+  \(u_h\)
+
+的误差
+
+
+
+  \(e = u - u_h\)
+
+可以是先验的，也可以是后验的。
+先验误差估计表示精确（未知）解的规则性方面（terms of the regularity）的误差，并且可以提供有关有限元方法收敛顺序的有用信息。 后验误差估计以则可表示为计算量（如残差）的误差，并且（可能）表示为辅助对偶问题的解，具体如下所述。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/0099/" />
+<meta property="article:published_time" content="2020-12-18T15:43:50+08:00" />
+<meta property="article:modified_time" content="2020-12-18T15:43:50+08:00" />
+<title>有限元方法（三）【翻译】 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a>
+<ul>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E6%96%B9%E6%B3%95">第二章 有限元方法</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%B8%B8%E8%A7%81%E6%9C%89%E9%99%90%E5%85%83">第三章 常见有限元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8%E5%8F%82%E8%80%83%E5%8D%95%E5%85%83">第四章 构造通用参考单元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F">第五章 有限元变分形式</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%BB%84%E8%A3%85">第六章 有限元组装</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%AD%A3%E4%BA%A4%E8%A1%A8%E7%A4%BA">第七章 有限元变分形式的正交表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA">第八章 有限元变分形式的张量表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E7%9A%84%E7%A6%BB%E6%95%A3%E4%BC%98%E5%8C%96">第九章 有限元矩阵计算的离散优化</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E7%AB%A0-dolfincpython%E6%9C%89%E9%99%90%E5%85%83%E5%BA%93">第十章 DOLFIN：C++/Python有限元库</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-ufl%E6%9C%89%E9%99%90%E5%85%83%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80">第十七章 UFL：有限元形式语言</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-unicorn%E7%BB%9F%E4%B8%80%E7%9A%84%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6%E6%B1%82%E8%A7%A3%E5%99%A8">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>有限元方法（三）【翻译】</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#i方法论2有限元方法三">I.方法论》2.有限元方法（三）</a>
+      <ul>
+        <li><a href="#26-有限元误差估计和适应性">2·6 有限元误差估计和适应性</a>
+          <ul>
+            <li><a href="#261-先验误差分析">2·6·1 先验误差分析</a></li>
+            <li><a href="#262-后验误差分析">2·6·2 后验误差分析</a></li>
+            <li><a href="#263-适应性">2·6·3 适应性</a></li>
+          </ul>
+        </li>
+        <li><a href="#27-自动化有限元方法">2·7 自动化有限元方法</a></li>
+        <li><a href="#28-历史评注">2·8 历史评注</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0100/">
+    下一页<br>常见有限元（一）【翻译】
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0098/">
+      上一页<br>有限元方法（二）【翻译】
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/fem/0099/">有限元方法（三）【翻译】</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-12-18</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/FEniCS">FEniCS</a>
+      , 
+      <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95">有限元法</a>
+      , 
+      <a href="/notes/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">偏微分方程</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0099.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h1 id="i方法论2有限元方法三">I.方法论》2.有限元方法（三）</h1>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e4%ba%8c%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e6%96%b9%e6%b3%95">章节目录</a>】</p>
+<h2 id="26-有限元误差估计和适应性">2·6 有限元误差估计和适应性</h2>
+<p>相对于（2.20）精确解
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(u\)
+</span>
+，有限元近似解
+
+
+<span class="katex">
+  \(u_h\)
+</span>
+的误差
+
+
+<span class="katex">
+  \(e = u - u_h\)
+</span>
+可以是<code>先验的</code>，也可以是<code>后验的</code>。</p>
+<p><code>先验</code>误差估计表示精确（未知）解的规则性方面（terms of the regularity）的误差，并且可以提供有关有限元方法收敛顺序的有用信息。 <code>后验</code>误差估计以则可表示为计算量（如残差）的误差，并且（可能）表示为辅助对偶问题的解，具体如下所述。</p>
+<h3 id="261-先验误差分析">2·6·1 先验误差分析</h3>
+<p>我们考虑这个线性变分问题（2.20）。 我们首先假设双线性形式
+
+
+<span class="katex">
+  \(a\)
+</span>
+和线性形式
+
+
+<span class="katex">
+  \(L\)
+</span>
+是连续的（有界的）。 也就是说，存在一个常数
+
+
+<span class="katex">
+  \(C>0\)
+</span>
+，使得</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}a(v, w) &\le C \|v\|_V  \|w\|_V \\ L(v) &\le  C \|v\|_V\end{aligned} \tag{2.61}
+\]
+</span>
+
+<p>
+
+
+<span class="katex">
+  \(\forall v, w \in V\)
+</span>
+。为简单起见，我们在本节中假设
+
+
+<span class="katex">
+  \(V = \hat{V}\)
+</span>
+是希尔伯特空间。 对于（2.1），这对应于齐次Dirichlet边界条件和
+
+
+<span class="katex">
+  \(V = H_0^1(\Omega)\)
+</span>
+的情况。 完全可以扩展到一般情况
+
+
+<span class="katex">
+  \(V = \hat{V}\)
+</span>
+； 参见例如Oden和Demkowicz（1996）。 我们进一步假设双线性形式
+
+
+<span class="katex">
+  \(a\)
+</span>
+是矫顽的 (V-椭圆)； 也就是说，存在一个常数
+
+
+<span class="katex">
+  \(\alpha>0\)
+</span>
+，使得</p>
+
+
+
+<span class="katex">
+  \[
+a(v, v) \ge \alpha \|v\|_V^2, \quad \forall v \in V \tag{2.62}
+\]
+</span>
+
+<p>然后根据Lax-Milgram定理（Lax和Milgram，1954），存在一个唯一解
+
+
+<span class="katex">
+  \(u \in V\)
+</span>
+满足变分问题（2.20）。</p>
+<p>为了推导出由离散变分问题（2.22）定义的近似解
+
+
+<span class="katex">
+  \(u_h\)
+</span>
+的<code>先验</code>误差估计，我们首先注意到</p>
+
+
+
+<span class="katex">
+  \[
+a(u-u_h, v) = a(u, v)-a(u_h, v) = L(v) - L(v) = 0  \tag{2.63}
+\]
+</span>
+
+<p>对于所有
+
+
+<span class="katex">
+  \(v \in V_h \subset V\)
+</span>
+（Galerkin正交）。 通过双线性形式
+
+
+<span class="katex">
+  \(a\)
+</span>
+的矫顽性和连续性，我们发现</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\alpha \|u - u_h\|_V^2 &\le a(u - u_h, u - u_h) \\ &= a(u - u_h, u - v) + a(u_h - u, v - u_h) \\ &= a(u - u_h, u - v) \le C\|u - u_h\|_V \|u - v\|_V \end{aligned} \tag{2.64}
+\]
+</span>
+
+<p>即有，</p>
+
+
+
+<span class="katex">
+  \[
+\|u - u_h\|_V \le \frac{C}{\alpha} \|u - v\|_V,\quad  \forall v \in V_h \tag{2.65}
+\]
+</span>
+
+<p>估计值（2.65）被称为Cea引理。 我们注意到，当双线性形式
+
+
+<span class="katex">
+  \(a\)
+</span>
+是对称时，它也是一个内积。 然后我们可以取
+
+
+<span class="katex">
+  \(\|v\|_V = \sqrt{a(v, v)}\)
+</span>
+和
+
+
+<span class="katex">
+  \(C=\alpha=1\)
+</span>
+。 在这种情况下，
+
+
+<span class="katex">
+  \(u_h\)
+</span>
+是
+
+
+<span class="katex">
+  \(u\)
+</span>
+在
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+的a-投影，而Cea引理指出：</p>
+
+
+
+<span class="katex">
+  \[
+\|u - u_h\|_V \le \|u - v\|_V,\quad \forall v \in V_h  \tag{2.66}
+\]
+</span>
+
+<p>也就是说，
+
+
+<span class="katex">
+  \(u_h\)
+</span>
+是子空间
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+中变分问题（2.20）的最佳解。 如图2.7所示。</p>
+<p><img src="/notes/images/0184.jpg" alt="0184.jpg"></p>
+<center>图2.7 如果双线性形式
+
+
+<span class="katex">
+  \(a\)
+</span>
+是对称的，则有限元解
+
+
+<span class="katex">
+  \(u_h \in V_h \subset V\)
+</span>
+是
+
+
+<span class="katex">
+  \(u\in V\)
+</span>
+在子空间
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+上的a-投影，进而是子空间
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+中u的最佳近似（对于由双线性形式a所定义范数而言）。  并且采用Galerkin正交化
+
+
+<span class="katex">
+  \(\langle u - u_h, v \rangle_a \equiv a(u - uh,v)= 0,\quad  v \in V_h\)
+</span>
+。 </center>
+<p>Cea的引理配合适当的插值估计，现在能产生
+
+
+<span class="katex">
+  \(u_h\)
+</span>
+的<code>先验</code>误差估计。 通过选择
+
+
+<span class="katex">
+  \(v =\pi_h u\)
+</span>
+，其中
+
+
+<span class="katex">
+  \(\pi_h:V \to V_h\)
+</span>
+是到
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+的插值算子，我们发现</p>
+
+
+
+<span class="katex">
+  \[
+\|u - u_h\|_V \le \frac{C}{\alpha}\|u - \pi_h u\|_V \le \frac{C C_i}{\alpha} \|h^p D^{q+1} u\|_{L^2}  \tag{2.67}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(C_i\)
+</span>
+是一个插值常数，p和q的值取决于插值的精度和
+
+
+<span class="katex">
+  \(\|\cdot\|_V\)
+</span>
+的定义。 对于
+
+
+<span class="katex">
+  \(V = H_0^1\)
+</span>
+中的泊松方程解，我们有
+
+
+<span class="katex">
+  \(C=\alpha=1\)
+</span>
+和
+
+
+<span class="katex">
+  \(p=q=1\)
+</span>
+。</p>
+<h3 id="262-后验误差分析">2·6·2 后验误差分析</h3>
+<p><code>能量范数误差估计</code>（Energy norm error estimates）。 双线性形式的连续性和矫顽性还允许导出后验误差估计。 这种类型的误差估计，是将误差的大小关联到由下式定义的（弱）残差
+
+
+<span class="katex">
+  \(r : V \to \mathbb{R}\)
+</span>
+的大小 ：</p>
+
+
+
+<span class="katex">
+  \[
+r(v) = L(v) - a(u_h, v) \tag{2.68}
+\]
+</span>
+
+<p>注意：弱残差在形式上与<code>强残差</code>
+
+
+<span class="katex">
+  \(R \in \hat{V}'\)
+</span>
+相关，即
+
+
+<span class="katex">
+  \(r(v) = \langle R, v\rangle ,\quad \forall v \in \hat{V}\)
+</span>
+。</p>
+<p>我们首先注意到，误差
+
+
+<span class="katex">
+  \(e=u-u_h\)
+</span>
+的V-范数 等于 残差
+
+
+<span class="katex">
+  \(r\)
+</span>
+的V'-范数。 要看清这一点，请注意，利用双线性形式a的连续性，我们有</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}r(v) &= L(v) - a(u_h, v) = a(u, v) - a(u_h, v) \\ &= a(u - u_h, v)  \le C\|u - u_h\|_V \|v\|_V  \end{aligned}  \tag{2.69} 
+\]
+</span>
+
+<p>此外，利用矫顽性，我们发现</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\alpha \|u - u_h\|_V^2 &\le a(u - u_h, u - u_h) = a(u, u - u_h) - a(u_h, u - u_h) \\ &= L(u - u_h) - a(u_h, u - u_h) = r(u - u_h)  \end{aligned} \tag{2.70}
+\]
+</span>
+
+<p>即有：</p>
+
+
+
+<span class="katex">
+  \[
+\alpha \|u - u_h\|_V \le \|r\|_{V'} \le C \|u - u_h\|_V \tag{2.71}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(\|r\|_{V'} = \sup_{v \in V,v \ne 0} r(v)/\|v\|_V\)
+</span>
+。.</p>
+<p>估计式（2.67）和（2.71）有时称为<code>能量范数</code>误差估计。 当双线性形式a是对称时，进而可定义一个内积时，就是这种情况。 然后可以取
+
+
+<span class="katex">
+  \(\|v\|_V=a(v, v)\)
+</span>
+和
+
+
+<span class="katex">
+  \(C=\alpha=1\)
+</span>
+。在这种情况下，得出</p>
+
+
+
+<span class="katex">
+  \[
+\eta \equiv \|e\|_V = \|r\|_{V'}  \tag{2.72}
+\]
+</span>
+
+<p>术语<code>能量范数</code>所指的
+
+
+<span class="katex">
+  \(a(v,v)\)
+</span>
+，在许多应用中对应于物理能量。</p>
+<p><code>面向目标的错误估计</code>(Goal-oriented error estimates)。 经典先验和后验误差估计（2.67）和（2.71）,分别与精确解u的规则性误差
+
+
+<span class="katex">
+  \(e=u-u_h\)
+</span>
+的V-范数  和 有限元解
+
+
+<span class="katex">
+  \(u_h\)
+</span>
+的残差
+
+
+<span class="katex">
+  \(r = L(v)-a(u_h,v)\)
+</span>
+ 有关。 但是，在应用中，通常需要将计算出的解的某个输出函数
+
+
+<span class="katex">
+  \(\mathcal{M}:V\to \mathbb{R}\)
+</span>
+中的误差控制在给定的公差
+
+
+<span class="katex">
+  \(\epsilon> 0\)
+</span>
+内。 典型的函数是计算出的解的平均值，例如浸入流场中的物体的升力或阻力。 在这种情况下，理想的情况是选择有限元空间
+
+
+<span class="katex">
+  \(V_h \subset V\)
+</span>
+，以使有限元解
+
+
+<span class="katex">
+  \(u_h\)
+</span>
+满足</p>
+
+
+
+<span class="katex">
+  \[
+\eta \equiv |\mathcal{M}(u) - \mathcal{M}(u_h)| \le \epsilon \tag{2.73}
+\]
+</span>
+
+<p>为了最少的计算量。 我们在这里假设输出函数和变分问题都是线性的，但是分析很容易扩展到完全非线性的情况[Eriksson et al.1995, Becker and Rannacher 2001]。</p>
+<p>为了估计输出函数
+
+
+<span class="katex">
+  \(\mathcal{M}\)
+</span>
+的误差，我们引入了一个辅助对偶问题：找到
+
+
+<span class="katex">
+  \(z \in V\)
+</span>
+，使得</p>
+
+
+
+<span class="katex">
+  \[
+a^*(z, v) = \mathcal{M}(v) \quad \forall v \in \hat{V}^* \tag{2.74}
+\]
+</span>
+
+<p>在这里对偶问题中，我们注意到函数
+
+
+<span class="katex">
+  \(\mathcal{M}\)
+</span>
+作为数据输入。 对偶（伴随）双线性形式
+
+
+<span class="katex">
+  \(a^*: V^* \times \hat{V}^* \to \mathbb{R}\)
+</span>
+由下式定义：</p>
+
+
+
+<span class="katex">
+  \[
+a^*(v, w) = a(w, v) \quad \forall (v, w) \in  V^* \times \hat{V}^* \tag{2.75}
+\]
+</span>
+
+<p>对偶的试探空间和测试空间，则由下式给出：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}V^* &= Vˆ \\  \hat{V}^* &= V_0 = \{v - w : v, w \in V\} \end{aligned} \tag{2.76}
+\]
+</span>
+
+<p>也就是说，对偶的试探空间对应原始的测试空间，  对偶的测试空间则是原始的试探空间（满足模边界条件，modulo boundary conditions）。 特别是，如果
+
+
+<span class="katex">
+  \(V = u_0 + \hat{V}\)
+</span>
+，则
+
+
+<span class="katex">
+  \(V^* = \hat{V}^* = \hat{V}\)
+</span>
+，对偶测试函数和对偶试探函数都在Dirichlet边界处消失。 对偶问题的定义使我们得出以下误差表示：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned} \mathcal{M}(u) - \mathcal{M}(u_h) &= \mathcal{M}(u - u_h) \\  &= a^*(z, u - u_h) = a(u - u_h, z) \\ & = L(z) - a(u_h, z) \\ &= r(z) \end{aligned} \tag{2.77}
+\]
+</span>
+
+<p>据此发现，这个误差可由对偶解的残差来精确表示：</p>
+
+
+
+<span class="katex">
+  \[
+\mathcal{M}(u) - \mathcal{M}(u_h) = r(z) \tag{2.78}
+\]
+</span>
+
+<h3 id="263-适应性">2·6·3 适应性</h3>
+<p>如前所述，可以根据已经算出的有限元解
+
+
+<span class="katex">
+  \(u_h\)
+</span>
+， 基于V-范数来估计误差， 或者基于输出函数来估计残差
+
+
+<span class="katex">
+  \(r\)
+</span>
+的大小。 这可以以几种不同的方式来完成。 该估算通常涉及各部分的集成，以恢复原始PDE的逐元强残差，可能要与胞元或拼接在一起的胞元组上的局部问题的解相结合。 对于泊松方程（2.1）的标准分段线性有限元逼近，可以得到以下估计：</p>
+
+
+
+<span class="katex">
+  \[
+\|u − u_h\|_V \equiv \|\nabla e\|_{L^2} \le C \left(\sum_{T \in \mathcal{T}_h} h^2_T\|R\|^2_T + h_T\|[\partial_n u_h]\|^2_{\partial T} \right)^{1/2}  \tag{2.79}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(R|_T = f|_T+\Delta u_h|_T\)
+</span>
+是强残差，
+
+
+<span class="katex">
+  \(h_T\)
+</span>
+表示网格大小（每个胞元T周围最小外接球的直径），
+
+
+<span class="katex">
+  \([\partial_n u_h]\)
+</span>
+表示法向导数跨过网格维面（facet）的跳跃 。有关此估计的推导，请参见例如 Elman et al. (2005)。 令
+
+
+<span class="katex">
+  \(\eta_T^2= h^2_T \|R\|^2_T + h_T \|[\nabla_n u_h]\|^2_{\partial T}\)
+</span>
+，我们得到的估计：</p>
+
+
+
+<span class="katex">
+  \[
+\|u - u_h\|_V \le \eta_h \equiv C \left(\sum_T {\eta^2_T}\right)^{1/2} \tag{2.80}
+\]
+</span>
+
+<p>自适应算法试图确定网格大小
+
+
+<span class="katex">
+  \(h=h(x)\)
+</span>
+，使得
+
+
+<span class="katex">
+  \(\eta_h \le \epsilon\)
+</span>
+。 从初始的粗网格开始，逐个检查每个胞元，如果误差指示器
+
+
+<span class="katex">
+  \(\eta_T\)
+</span>
+比较大，那么细化该网格。 有几种可用的策略，例如细化所有
+
+
+<span class="katex">
+  \(\eta_T\)
+</span>
+较大的胞元的上半部分，即按
+
+
+<span class="katex">
+  \(\eta_T\)
+</span>
+的大小排序的所有胞元的前20％。 其他策略包括细化所有
+
+
+<span class="katex">
+  \(\eta_T\)
+</span>
+高于
+
+
+<span class="katex">
+  \(\max_{T\in \mathcal{T}_h}\eta_T\)
+</span>
+特定比例(比如：&gt;MAX10%)的胞元，或细化所有胞元的最高特定比例（比如：TOP10%），以使它们的误差指标之和占
+
+
+<span class="katex">
+  \(\eta_h\)
+</span>
+的重要部分（所谓的Dörﬂer标记（Dörﬂer （1996））。</p>
+<p><img src="/notes/images/0185.jpg" alt="0185.jpg"></p>
+<center>图2.8 通过对原始粗网格的连续细化获得的一系列自适应细网格。 </center>
+<p>一旦网格被细化，就可以计算出新的解和新的误差指示器。 然后重复该过程，直到要么
+
+
+<span class="katex">
+  \(\eta_h \le \epsilon\)
+</span>
+（停止标准），要么可用资源（CPU时间和内存）耗尽为止。 自适应算法会产生一系列连续细分的网格，如图2.8所示。 对于与时间依赖的问题，自适应算法需要根据空间和时间确定局部网格大小和（局部）时间步长。 理想情况下，误差估计
+
+
+<span class="katex">
+  \(\eta_h\)
+</span>
+接近实际误差，这是由效率指标
+
+
+<span class="katex">
+  \(\eta_h/\eta\)
+</span>
+测得的，效率指标
+
+
+<span class="katex">
+  \(\eta_h/\eta\)
+</span>
+应当接近并以1为界。</p>
+<h2 id="27-自动化有限元方法">2·7 自动化有限元方法</h2>
+<p>FEniCS项目寻求使微分方程的求解自动化。 这是一项艰巨的任务，但可以通过有限元方法的自动化来解决。 特别是，这种自动化依赖于以下关键步骤：</p>
+<ul>
+<li>
+<p>(i) 离散化的自动化，</p>
+</li>
+<li>
+<p>(ii) 离散解的自动化，</p>
+</li>
+<li>
+<p>(iii) 自动化的误差控制。</p>
+</li>
+</ul>
+<p>自2003年成立以来，FEniCS项目主要关注离散化的自动化，从而开发了形式编译器（the form compilers）FFC和SyFi/SFC，代码生成接口UFC，形式语言（the form language）UFL，以及作为为DOLFIN的一部分的<code>一般组装实现</code>（a generic assembler implemented）。 结果，现在可以使用FEniCS通过有限元方法自动离散化大量偏微分方程对应的变分问题。 用于离散解的自动化； 也就是说，由于变分问题的自动离散化而产生的线性和非线性系统的解，线性代数的最新库的接口已经作为DOLFIN的一部分实现了。 现在正在进行的工作正在寻求通过自动误差估计和适应性来自动进行误差控制。 在接下来的章节中，我们将回到有限元方法自动化的特定方面，这些方法是FEniCS项目的一部分。 FEniCS项目背后的数学方法也已经在许多科学著作中进行了描述。 欲了解更多信息，请参见Logg（2007）； Logg and Wells（2010）； Kirby（2004）; Kirby和Logg（2006）； Alnæs等。 （2009）； Alnæs和Mardal（2010）； Kirby等。 （2005，2006）; Kirby and Logg（2007，2008）; Kirby and Scott（2007）； Kirby（2006b）; Ølgaard等。 （2008）； Rognes等。 （2009）； Ølgaard和Wells（2010）； Logg（2009）。</p>
+<h2 id="28-历史评注">2·8 历史评注</h2>
+<p>1915年，鲍里斯·格里高里维奇·加勒金（Boris Grigoryevich Galerkin）提出了求解微分方程的通用方法（Galerkin，1915年）。   Bubnov早些时候提出了一种类似的方法。 Galerkin方法或Bubnov–Galerkin方法最初是用全局多项式表述的，可以追溯到莱布尼兹，欧拉，拉格朗日，狄里克雷特，哈密顿，卡斯蒂利亚诺（Castigliano，1879），瑞利（Rayleigh，1870）和里兹（ Ritz，1908年）。 具有分段多项式空间
+
+
+<span class="katex">
+  \((V_h,\hat{V}_h)\)
+</span>
+的Galerkin方法被称为<code>有限元方法</code>。 有限元方法是工程师在1950年代为结构分析而引入的，并且由库兰特（Courant，1943年）独立提出的。  在1960年代，工程师和数学家对有限元方法的使用激增。 从那时起，有限元方法的机制被扩展并精炼为用于设计和分析微分方程数值方法的综合框架。 参见Zienkiewicz等。 （2005）； Strang和Fix（1973）； Ciarlet（1976）； Becker等（1981）； Hughes（1987）; Brenner and Scott（2008）。 最近，对混合变分问题的兼容（稳定）离散的追求导致有限元外部演算的发展（Arnold等，2006a）。</p>
+<p>对有限元方法进行后验误差分析的工作可以追溯到Babuška和Rheinboldt（1978）的开创性工作。 重要参考资料包括Bank and Weiser（1985）的著作。 Zienkiewicz和Zhu（1987）； Eriksson和Johnson（1991，1995a）; Eriksson and Johnson，1995b，c）； Eriksson等（1998）； Ainsworth and Oden（1993）和评议论文（Eriksson等，1995；Verfürth，1994，1999； Ainsworth和Oden，2000； Becker和Rannacher，2001）。</p>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e4%ba%8c%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e6%96%b9%e6%b3%95">章节目录</a>】</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0100/">
+    下一页<br>常见有限元（一）【翻译】
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0098/">
+      上一页<br>有限元方法（二）【翻译】
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0099.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/fem/0099.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#i方法论2有限元方法三">I.方法论》2.有限元方法（三）</a>
+      <ul>
+        <li><a href="#26-有限元误差估计和适应性">2·6 有限元误差估计和适应性</a>
+          <ul>
+            <li><a href="#261-先验误差分析">2·6·1 先验误差分析</a></li>
+            <li><a href="#262-后验误差分析">2·6·2 后验误差分析</a></li>
+            <li><a href="#263-适应性">2·6·3 适应性</a></li>
+          </ul>
+        </li>
+        <li><a href="#27-自动化有限元方法">2·7 自动化有限元方法</a></li>
+        <li><a href="#28-历史评注">2·8 历史评注</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

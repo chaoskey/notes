@@ -1,0 +1,1310 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>机器学习 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</link>
+    <description>Recent content in 机器学习 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Tue, 23 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>7.6 贝叶斯线性回归</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0065/</link>
+      <pubDate>Tue, 23 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0065/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;虽然岭回归是计算点估计的有用方法，但有时我们想要计算关于
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{w}\)
+&lt;/span&gt;
+和
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\sigma^2\)
+&lt;/span&gt;
+的完全后验。 为简单起见，我们首先假设噪声方差
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\sigma^2\)
+&lt;/span&gt;
+是已知的，因此我们专注于计算
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(\boldsymbol{w}| \mathcal{D},\sigma^2)\)
+&lt;/span&gt;
+。 然后在7.6.3节我们将考虑一般情况，也就是计算
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(\boldsymbol{w},\sigma^2|\mathcal{D})\)
+&lt;/span&gt;
+。 我们假设始终是高斯似然模型。 以稳健拟然执行贝叶斯推断也是可能的，但需要更高级的技术（参见练习24.5）。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Exercises</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0066/</link>
+      <pubDate>Tue, 23 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0066/</guid>
+      <description>返回本章目录</description>
+    </item>
+    
+    <item>
+      <title>7.5 岭回归</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0064/</link>
+      <pubDate>Mon, 22 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0064/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;最大拟然估计(MLE)的一个问题是它可能导致过拟合。 在本节中，我们将讨论一种通过使用高斯先验的最大后验估计(MAP)的方法来改善此问题。 为简单起见，我们假设高斯似然，而不是稳定性拟然。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>7.4 稳健线性回归*</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0063/</link>
+      <pubDate>Sun, 21 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0063/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在回归模型中，使用零均值和常数方差的高斯分布对噪声进行建模是很常见的。
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\epsilon_i \sim \mathcal{N}(0,\sigma^2)\)
+&lt;/span&gt;
+ ，其中
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\epsilon_i=y_i-\boldsymbol{w}^T \boldsymbol{x}_i\)
+&lt;/span&gt;
+。 在这种情况下，最大化拟然等价于最小化残差平方和。 但是，如果我们的数据中存在&lt;strong&gt;异常值&lt;/strong&gt;，则可能导致拟合不良，如图7.6（a）所示。 （异常值是图底部的点。）这是因为平方误差以二次方处理偏差，因此远离线的点对拟合的影响大于线附近的点。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>7.3 最大似然估计（最小二乘）</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0062/</link>
+      <pubDate>Sat, 20 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0062/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;估计统计模型参数的常用方法是计算MLE，其定义为&lt;/p&gt;
+
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+\hat{\boldsymbol{\theta}} \overset{\Delta}{=} \underset{\boldsymbol{\theta}}{\rm argmax} \log p(\mathcal{D}|\boldsymbol{\theta})  \tag{7.4}
+\]
+&lt;/span&gt;</description>
+    </item>
+    
+    <item>
+      <title>7.2 模型选择</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0061/</link>
+      <pubDate>Fri, 19 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0061/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;正如我们在1.4.5节中讨论的那样，线性回归是一个形如下式的模型&lt;/p&gt;
+
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+p(y|\boldsymbol{x},\boldsymbol{\theta})=\mathcal{N}(y | \boldsymbol{w}^T\boldsymbol{x},\sigma^2)    \tag{7.1}
+\]
+&lt;/span&gt;</description>
+    </item>
+    
+    <item>
+      <title>7.1 导论</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0060/</link>
+      <pubDate>Thu, 18 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0060/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;线性回归是统计学和（监督）机器学习的“驮马(work horse)”。 当对核或其他形式的基函数进行扩展时，它也能模拟非线性关系。 当用伯努利或广义伯努利分布代替高斯分布输出时，它可以用于分类，我们将在下面看到这点。 因此，详细研究这个模型是值得的。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>第七章 线性回归</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/</link>
+      <pubDate>Thu, 18 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/</guid>
+      <description>第七章 线性回归 本节中的目录：
+  7.1 导论
+  7.2 模型选择
+  7.3 最大似然估计（最小二乘）
+  7.4 稳健线性回归*
+  7.5 岭回归
+  7.6 贝叶斯线性回归
+  Exercises
+  </description>
+    </item>
+    
+    <item>
+      <title>习题</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0059/</link>
+      <pubDate>Wed, 17 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0059/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;练习6.1&lt;/strong&gt; LOOCV的最坏情况&lt;/p&gt;
+&lt;p&gt;（来源：Witten05，p152。）。 假设我们有一个完全随机标记的数据集（即，特征
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{x}\)
+&lt;/span&gt;
+没有告诉我们关于类标签
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(y\)
+&lt;/span&gt;
+的任何内容），其中类1有
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(N_1\)
+&lt;/span&gt;
+个样本，类2有
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(N_2\)
+&lt;/span&gt;
+个样本，并且
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(N_1 = N_2\)
+&lt;/span&gt;
+。 任何方法可以实现的最佳错分率是多少？ 使用LOOCV对同一方法的估计的错分类率是多少？&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>6.5 经验风险最小化</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0057/</link>
+      <pubDate>Tue, 16 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0057/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;频率派决策理论存在一个根本问题，即人们实际上无法计算风险函数，因为它依赖于知道真实的数据分布。 （相比之下，贝叶斯后验预期损失总是可以计算，因为它更取决于数据，而不是
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\theta^{\\*}\)
+&lt;/span&gt;
+。）但是，有一个设置可以避免这个问题，这就是预测可观察性量的任务，而不是估计隐藏变量或参数。 也就是说，不再关注形如
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(L(\boldsymbol{\theta},\delta(\mathcal{D}))\)
+&lt;/span&gt;
+的损失函数，其中
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{\theta}\)
+&lt;/span&gt;
+是真实但未知的参数，而
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\delta(\mathcal{D})\)
+&lt;/span&gt;
+是我们的估计器; 而是让我们关注形如
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(L(y,\delta(\boldsymbol{x}))\)
+&lt;/span&gt;
+的损失函数，其中
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(y\)
+&lt;/span&gt;
+是真实但未知的响应，
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\delta(\boldsymbol{x})\)
+&lt;/span&gt;
+是给定输入
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{x}\)
+&lt;/span&gt;
+的预测。 在这种情况下，频率派风险变为&lt;/p&gt;
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+R(p_{\\*},\delta)\overset{\Delta}{=}\mathbb{E}_{(\boldsymbol{x},y) \sim p_{\\*}}\left[L(y,\delta(\boldsymbol{x}))\right]=\sum_{\boldsymbol{x}}{\sum_y{L(y,\delta(\boldsymbol{x}))p_{\\*}(\boldsymbol{x},y)}}   \tag{6.47}
+\]
+&lt;/span&gt;</description>
+    </item>
+    
+    <item>
+      <title>6.6 频率派统计的病态*</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0058/</link>
+      <pubDate>Tue, 16 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0058/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我认为说服一个认为&amp;quot;现在的[频率派]统计实践是明智的&amp;quot;的聪明人是很难的，但通过拟然和贝叶斯定理的方法困难会更少。 - George Box，1962年。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;频率派统计表现出各种形式的奇怪和不良行为，称之为&lt;strong&gt;病态&lt;/strong&gt;(&lt;strong&gt;pathologies&lt;/strong&gt;)。 我们在下面举几个例子，以提醒读者; 这些和其他实例在（Lindley 1972; Lindley和Phillips 1976; Lindley 1982; Berger 1985; Jaynes 2003; Minka 1999）中有更详细的解释。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>6.4 估计器的理想属性</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0056/</link>
+      <pubDate>Mon, 15 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0056/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;由于频率派决策理论没有提供选择最佳估计器的自动方法，我们需要提出其他启发式方法来选择它们。 在本节中，我们将讨论我们所希望估计器应该具有的一些属性。 不幸的是，我们将看到我们无法同时实现所有这些属性。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>6.3 频率派决策理论</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0055/</link>
+      <pubDate>Sun, 14 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0055/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在频率派或经典决策理论中，存在一个损失函数和一个拟然，但没有先验因而没有后验或后验预期损失。 因此，与贝叶斯情况不同，没有自动推导出最优估计器的方法。 相反，在频率派方法中，我们可以自由选择我们想要的任何估计器或决策程序
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\delta：\mathcal{X} \to \mathcal{A}\)
+&lt;/span&gt;
+。&lt;/p&gt;
+&lt;p&gt;选择估计器后，我们将其预期损失或&lt;strong&gt;风险&lt;/strong&gt;定义如下：&lt;/p&gt;
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+R(\theta^{\\*},\delta)\overset{\Delta}{=}\mathbb{E}_{p(\tilde{\mathcal{D}}|\theta^{\\*})}\left[L(\theta^{\\*},\delta(\tilde{\mathcal{D}}))\right]=\int{L(\theta^{\\*},\delta(\tilde{\mathcal{D}}))p(\tilde{\mathcal{D}}|\theta^{\\*})d\tilde{\mathcal{D}}} \tag{6.9}
+\]
+&lt;/span&gt;</description>
+    </item>
+    
+    <item>
+      <title>6.2 估计器的采样分布</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0054/</link>
+      <pubDate>Sat, 13 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0054/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在频率派统计中，通过将&lt;strong&gt;估计器&lt;/strong&gt;
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\delta\)
+&lt;/span&gt;
+应用在某些数据
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathcal{D}\)
+&lt;/span&gt;
+来计算参数估计
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\hat{\boldsymbol{\theta}}\)
+&lt;/span&gt;
+，因此
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\hat{\boldsymbol{\theta}}=δ(\mathcal{D})\)
+&lt;/span&gt;
+。 该参数被视为固定的，并且数据被视为随机的，这与贝叶斯方法完全相反。 可以通过计算估计器的&lt;strong&gt;采样分布&lt;/strong&gt;来测量参数估计的不确定性。 为了理解这个概念，想象从一些真实模型
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(·|\boldsymbol{\theta}^*)\)
+&lt;/span&gt;
+中采样许多不同的数据集
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathcal{D}^{(s)}\)
+&lt;/span&gt;
+，即让
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathcal{D}^{(s)}= \left\{x_i^{(s)}\right\}_{i=1}^N\)
+&lt;/span&gt;
+，其中
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(x_i^s \sim p(·|\boldsymbol{\theta}^*)\)
+&lt;/span&gt;
+，
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{\theta}^*\)
+&lt;/span&gt;
+是真实参数。 这里
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(s = 1:S\)
+&lt;/span&gt;
+已采样数据集的索引，
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(N\)
+&lt;/span&gt;
+是每个这样的数据集的大小。 现在将估计器
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\hat{\theta}(·)\)
+&lt;/span&gt;
+应用到每个
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathcal{D}^{(s)}\)
+&lt;/span&gt;
+以获得一组估计
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\{\hat{\boldsymbol{\theta}}(\mathcal{D}^{(s)})\}\)
+&lt;/span&gt;
+。 当我们让
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(S\to \infty\)
+&lt;/span&gt;
+时，在
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\hat{\theta}(·)\)
+&lt;/span&gt;
+上诱导的分布就是估计器的采样分布。 我们将在后面的章节中讨论使用采样分布的各种方法。 但首先我们描绘了两种计算采样分布本身的方法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>6.1 导论</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0053/</link>
+      <pubDate>Fri, 12 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0053/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我们在第5章中描述的统计推断方法称为贝叶斯统计。 也许令人惊讶的是，这被一些人认为是有争议的，而贝叶斯应用于非统计问题 - 例如医疗诊断（第2.2.3.1节），垃圾邮件过滤（第3.4.4.1节）或飞机跟踪（第18.2.1节）。 - 没有争议。 反对的原因与统计模型的参数和其他类型的未知量之间的误导性区别有关。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>第六章 频率派统计</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/</link>
+      <pubDate>Fri, 12 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/</guid>
+      <description>第六章 频率派统计 本节中的目录：
+  6.1 导论
+  6.2 估计器的采样分布
+  6.3 频率派决策理论
+  6.4 估计器的理想属性
+  6.5 经验风险最小化
+  6.6 频率派统计的病态*
+  习题
+  </description>
+    </item>
+    
+    <item>
+      <title>习题</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0052/</link>
+      <pubDate>Thu, 11 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0052/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;习题5.1&lt;/strong&gt; 证明共轭先验的混合确实是共轭的&lt;/p&gt;
+&lt;p&gt;推导等式5.69.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>5.7 贝叶斯决策理论</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0051/</link>
+      <pubDate>Wed, 10 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0051/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我们已经看到概率论如何用来表示和更新我们对世界状况的信念( beliefs)。 然而，最终我们的目标是将我们的信念转化为行动。 在本节中，我们将讨论实现此目的的最佳方法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>5.6 经验贝叶斯</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0050/</link>
+      <pubDate>Tue, 09 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0050/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在分层贝叶斯模型中，我们需要计算多个级别潜在变量的后验。 例如，在两级模型中，我们需要计算&lt;/p&gt;
+
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+p(\boldsymbol{\eta}, \boldsymbol{\theta} | \mathcal{D}) \propto p(\mathcal{D} | \boldsymbol{\theta}) p(\boldsymbol{\theta} | \boldsymbol{\eta}) p(\boldsymbol{\eta})  \tag{5.78}
+\]
+&lt;/span&gt;</description>
+    </item>
+    
+    <item>
+      <title>5.5 分层贝叶斯</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0049/</link>
+      <pubDate>Mon, 08 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0049/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;计算后验
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(\boldsymbol{\theta} | \mathcal{D})\)
+&lt;/span&gt;
+的关键要求是先验
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(\boldsymbol{\theta} | \boldsymbol{\eta})\)
+&lt;/span&gt;
+的指定，其中
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{\eta}\)
+&lt;/span&gt;
+是超参数。 如果我们不知道如何设置
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{\eta}\)
+&lt;/span&gt;
+怎么办？ 在某些情况下，我们可以使用无信息的先验，我们在上面讨论过。 更多贝叶斯方法是在我们的先验前再放置一个先验！ 在图模型（第10章）术语下，我们可以表示如下情况：&lt;/p&gt;
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+\boldsymbol{\eta} \to \boldsymbol{\theta} \to \mathcal{D} \tag{5.76}
+\]
+&lt;/span&gt;</description>
+    </item>
+    
+    <item>
+      <title>5.4 先验</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0048/</link>
+      <pubDate>Sun, 07 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0048/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;贝叶斯统计数据中最具争议的方面是它依赖于先验。 贝叶斯认为这是不可避免的，因为没有人是&lt;strong&gt;白板&lt;/strong&gt;(&lt;strong&gt;tabula rasa&lt;/strong&gt;或&lt;strong&gt;blank slate&lt;/strong&gt;)：所有的推论都必须以某些关于世界的假设为条件。 然而，人们可能有兴趣尽量减少先验假设的影响。 我们将在下面简要讨论一些方法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>5.3贝叶斯模型选择</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0047/</link>
+      <pubDate>Sat, 06 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0047/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在图1.18中，我们看到使用过高度数多项式会导致过拟合，而使用过低度数会导致欠拟合。类似地，在图7.8（a）中，我们看到使用太小正则化参数会导致过拟合，而太大值会导致欠拟合。一般来说，当面对一组不同复杂度的模型（即参数分布族）时，我们应该如何选择最好的模型呢？这称为&lt;strong&gt;模型选择&lt;/strong&gt;问题。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>5.2 后验分布总结</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0046/</link>
+      <pubDate>Fri, 05 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0046/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;后验
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(\boldsymbol{\theta} | \mathcal{D})\)
+&lt;/span&gt;
+总结了我们所知道的关于未知量
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{\theta}\)
+&lt;/span&gt;
+的一切。 在本节中，我们将讨论一些可以从概率分布中导出的简单量，例如后验。这些摘要统计数据通常比完整联合更容易理解和可视化。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>5.1 导言</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0045/</link>
+      <pubDate>Thu, 04 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0045/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我们已经看到了各种不同的概率模型，并且也讨论了如何拟合数据，即我们讨论过使用各种不同的先验来计算MAP参数估计
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\hat{\boldsymbol{\theta}}={\rm argmax} \ p(\boldsymbol{\theta} | \mathcal{D})\)
+&lt;/span&gt;
+。 我们还讨论了对于某些特殊情况如何计算完整的后验
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(\boldsymbol{\theta} | \mathcal{D})\)
+&lt;/span&gt;
+，以及后验预测密度
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(\boldsymbol{x} | \mathcal{D})\)
+&lt;/span&gt;
+（在后面的章节中，我们将讨论一般情况下的算法）。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>第五章 贝叶斯统计</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/</link>
+      <pubDate>Thu, 04 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/</guid>
+      <description>第五章 贝叶斯统计 本节中的目录：
+  5.1 导言
+  5.2 后验分布总结
+  5.3 贝叶斯模型选择
+  5.4 先验
+  5.5 分层贝叶斯
+  5.6 经验贝叶斯
+  5.7 贝叶斯决策理论
+  习题
+  </description>
+    </item>
+    
+    <item>
+      <title>第四章 高斯模型</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/04gaussian_models/</link>
+      <pubDate>Wed, 03 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/04gaussian_models/</guid>
+      <description>待续</description>
+    </item>
+    
+    <item>
+      <title>Exercises</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0044/</link>
+      <pubDate>Tue, 02 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0044/</guid>
+      <description>返回本章目录</description>
+    </item>
+    
+    <item>
+      <title>3.5 朴素贝叶斯分类器</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0043/</link>
+      <pubDate>Mon, 01 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0043/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在本节中，我们将讨论如何对离散值特征的向量进行分类，
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{x} \in {1,\dots,K}^D\)
+&lt;/span&gt;
+，其中
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(K\)
+&lt;/span&gt;
+是每个特征的值域数， 
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(D\)
+&lt;/span&gt;
+是特征的数量。我们将使用生成方法。这要求我们指定类条件分布
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(\boldsymbol{x} | y=c)\)
+&lt;/span&gt;
+。最简单的方法是假设特征是&lt;strong&gt;条件独立的&lt;/strong&gt;, 对给定类标签。这使我们可以将类条件密度写成一维密度的乘积:&lt;/p&gt;
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+p(\boldsymbol{x} | y=c, \boldsymbol{\theta}) = \prod_{j=1}^D {p(\boldsymbol{x}_j | y=c, \theta_{jc}) } \tag{3.54}
+\]
+&lt;/span&gt;
+
+&lt;p&gt;此模型被称为 &lt;strong&gt;朴素贝叶斯分类器&lt;/strong&gt; （NBC）。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>3.4 狄利克雷-多项模型</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0042/</link>
+      <pubDate>Sun, 30 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0042/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在上一节中，我们讨论了如何推断硬币&amp;quot;正面&amp;quot;出现的概率。在本节中，我们推广这些结果，以推断出有
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(K\)
+&lt;/span&gt;
+面的骰子出现第
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(k\)
+&lt;/span&gt;
+面的概率。这似乎是另一种玩具练习，但将在后面看到, 我们的研究方法将被广泛用于分析文本数据，生物序列数据等。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>3.3 贝塔-二项模型</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0041/</link>
+      <pubDate>Sat, 29 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0041/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在给定一离散观察序列的情况下, 数字游戏涉及从有限假设空间推断出离散变量的分布, 
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(h \in \mathcal{H}\)
+&lt;/span&gt;
+。这使计算变得特别简单：我们只需要求和，乘和除。然而，在许多应用中，未知参数是连续的，因此假设空间是
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathbb{R}^K\)
+&lt;/span&gt;
+的某个子集, 其中
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(K\)
+&lt;/span&gt;
+是参数的个数. 这使数学变得复杂，因为我们必须用积分代替和。但是，基本思路是一样的。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>3.2 贝叶斯概念学习</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0040/</link>
+      <pubDate>Fri, 28 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0040/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;考虑孩子如何学习理解单词的含义，例如“狗”。据推测，孩子的父母指出了这个概念的正面例子，说“看着可爱的小狗！”或“小心小狗”等等。然而，他们提供反面的例子是不太可能的，“看看那只非狗“?。当然，在积极的学习过程中可能会得到负面的例子 - 孩子说“看狗”，父母说“那是猫，亲爱的，不是狗” - 但心理学研究表明，人们可以仅从正面例子来学习概念（Xu和Tenenbaum 2007）。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>3.1 引言</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0039/</link>
+      <pubDate>Thu, 27 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0039/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在第2.2.3.2中，我们讨论了如何对特征矢量
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{x}\)
+&lt;/span&gt;
+进行分类: 应用贝叶斯法则得到形如下式的生成式分类器:&lt;/p&gt;
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+p(y=c | \boldsymbol{x},\boldsymbol{\theta}) \propto p(\boldsymbol{x} | y=c ,\boldsymbol{\theta}) p(y=c |\boldsymbol{\theta}) \tag{3.1}
+\]
+&lt;/span&gt;</description>
+    </item>
+    
+    <item>
+      <title>第三章 基于离散数据的生成式模型</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/</link>
+      <pubDate>Thu, 27 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/</guid>
+      <description>第三章 基于离散数据的生成式模型 本节中的目录：
+  3.1 引言
+  3.2 贝叶斯概念学习
+  3.3 贝塔-二项模型
+  3.4 狄利克雷-多项模型
+  3.5 朴素贝叶斯分类器
+  Exercises
+  </description>
+    </item>
+    
+    <item>
+      <title>Exercises</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0038/</link>
+      <pubDate>Wed, 26 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0038/</guid>
+      <description>返回本章目录</description>
+    </item>
+    
+    <item>
+      <title>2.6 Transformations of random variables</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0035/</link>
+      <pubDate>Tue, 25 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0035/</guid>
+      <description>返回本章目录</description>
+    </item>
+    
+    <item>
+      <title>2.7 Monte Carlo approximation</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0036/</link>
+      <pubDate>Tue, 25 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0036/</guid>
+      <description>返回本章目录</description>
+    </item>
+    
+    <item>
+      <title>2.8 Information theory</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0037/</link>
+      <pubDate>Tue, 25 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0037/</guid>
+      <description>返回本章目录</description>
+    </item>
+    
+    <item>
+      <title>2.5 联合概率分布</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0034/</link>
+      <pubDate>Mon, 24 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0034/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;到目前为止，我们一直专注于建模单变量概率分布。 在本节中，我们开始讨论在多个相关随机变量上建立联合概率分布的更具挑战性的问题; 这将是本书的核心主题。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;联合概率分布&lt;/strong&gt;形如
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(x_1,\dots,x_D),D&gt;1\)
+&lt;/span&gt;
+，并且模拟变量之间的（随机）关系。 如果所有变量都是离散的，我们可以将联合分布表示为一个大的多维数组，每个维度有一个变量。 但是，定义这种模型所需的参数数量是
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(O(K^D)\)
+&lt;/span&gt;
+，其中K是每个变量的状态数。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2.4 一些常见的连续分布</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0033/</link>
+      <pubDate>Sun, 23 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0033/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在本节中，我们展现了一些常用的单变量（一维）连续概率分布。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2.3 一些常见的离散分布</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0032/</link>
+      <pubDate>Sat, 22 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0032/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在本节中，我们将回顾在离散状态空间(包括有限状态和可数无限状态)上定义的一些常用参数分布。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2.2 概率论的简要回顾</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0031/</link>
+      <pubDate>Fri, 21 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0031/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;本节是对概率论基础知识的简要回顾，仅仅是对可能“荒疏”的读者的复习。 已经熟悉这些基础知识的读者可以安全地跳过本节。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2.1 导论</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0030/</link>
+      <pubDate>Thu, 20 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0030/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;概率论只不过是把常识归纳为计算问题。 - 皮埃尔·拉普拉斯，1812年&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在前一章中，我们看到了概率如何在机器学习中发挥有用的作用。 在本章中，我们将更详细地讨论概率论。 我们没有足够的空间来详细说明 - 为此，你最好查阅一些关于这个主题的优秀教科书，例如（Jaynes 2003; Bertsekas和Tsitsiklis 2008; Wasserman 2004）。 但我们将简要回顾一下您在后面章节中需要的许多关键想法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>第二章 概率</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/</link>
+      <pubDate>Thu, 20 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/</guid>
+      <description>第二章 概率 本节中的目录：
+  2.1 导论
+  2.2 概率论的简要回顾
+  2.3 一些常见的离散分布
+  2.4 一些常见的连续分布
+  2.5 联合概率分布
+  2.6 Transformations of random variables
+  2.7 Monte Carlo approximation
+  2.8 Information theory
+  Exercises
+  </description>
+    </item>
+    
+    <item>
+      <title>Exercises</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0029/</link>
+      <pubDate>Wed, 19 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0029/</guid>
+      <description>返回本章目录</description>
+    </item>
+    
+    <item>
+      <title>1.4 机器学习的一些基本概念</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0028/</link>
+      <pubDate>Tue, 18 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0028/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/01introduction/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在本节中，我们将介绍机器学习中的一些关键思想。 我们将在本书后面对这些概念进行扩展，但我们将在此简要介绍它们，以便给引起大家兴趣。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>1.3 无监督学习</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0027/</link>
+      <pubDate>Mon, 17 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0027/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/01introduction/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我们现在考虑&lt;strong&gt;无监督学习&lt;/strong&gt;，我们只给出输出数据，没有任何输入。目标是在数据中发现“有趣的结构”;这有时被称为&lt;strong&gt;知识发现&lt;/strong&gt;。与监督学习不同，我们没有被告知每个输入所期望输出是什么。相反，我们将我们的任务形式化为&lt;strong&gt;密度估计&lt;/strong&gt;中的一种，也就是说，我们想要构建形如
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(\boldsymbol{x}_i | \boldsymbol{\theta})\)
+&lt;/span&gt;
+的模型。与有监督情形有两点不同。首先，我们写了
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(\boldsymbol{x}_i | \boldsymbol{\theta})\)
+&lt;/span&gt;
+而不是
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(y_i | \boldsymbol{x}_i,\boldsymbol{\theta})\)
+&lt;/span&gt;
+;也就是说，监督学习是条件密度估计，而无监督学习是无条件密度估计。其次，
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{x}_i\)
+&lt;/span&gt;
+是特征向量，因此我们需要创建多变量概率模型。相比之下，在监督学习中，
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(y_i\)
+&lt;/span&gt;
+通常只是我们试图预测的单个变量。这意味着对于大多数监督学习问题，我们可以使用单变量概率模型（参数依赖的输入），这显着简化了问题。 （我们将在第19章讨论多输出分类，我们将在其中看到它还涉及多变量概率模型。）&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>1.2 监督学习</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0026/</link>
+      <pubDate>Sun, 16 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0026/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/01introduction/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我们通过讨论监督学习来开始我们对机器学习的研究，监督学习是在实践中最广泛使用的ML的形式。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>1.1 机器学习：什么和为什么？</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0025/</link>
+      <pubDate>Sat, 15 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0025/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/01introduction/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我们淹没在信息中，渴望知识。 — John Naisbitt。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我们正在进入&lt;strong&gt;大数据&lt;/strong&gt;时代。 例如，有大约1万亿个网页; YouTube一个小时的视频上传，每天相当于10年的内容;1000多人的基因组，每个人的长度为3.8×109个碱基对，已被各种实验室测序; 沃尔玛每小时处理超过1M笔交易，数据库包含超过2.5千兆字节（2.5×1015）的信息（Cukier 2010）; 等等。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>第一章 导论</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/</link>
+      <pubDate>Sat, 15 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/</guid>
+      <description>第一章 导论 本节中的目录：
+  1.1 机器学习：什么和为什么？
+  1.2 监督学习
+  1.3 无监督学习
+  1.4 机器学习的一些基本概念
+  Exercises
+  </description>
+    </item>
+    
+    <item>
+      <title>《机器学习：概率视角》</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/</link>
+      <pubDate>Fri, 14 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/</guid>
+      <description>&lt;h1 id=&#34;机器学习概率视角&#34;&gt;《机器学习：概率视角》&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/chaoskey/notes/tree/master/mlapp/pdf&#34;&gt;原文: Machine Learning A Probabilistic Perspective, Kevin P. Murphy, MIT, 2012&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;译者: 混沌(joistwang@sina.com)&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/probml/pmtk3&#34;&gt;随书代码&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

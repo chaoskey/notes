@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>力学 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E5%8A%9B%E5%AD%A6/</link>
+    <description>Recent content in 力学 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Fri, 24 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E5%8A%9B%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>流形上的拉格朗日力学</title>
+      <link>https://chaoskey.gitee.io/notes/docs/theophy/0015/</link>
+      <pubDate>Fri, 24 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0015/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;一个具有约束的力学系的&lt;code&gt;位形空间&lt;/code&gt;是一个&lt;code&gt;微分流形&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;拉格朗日力学&lt;/code&gt;其实就是个理论框架。&lt;/p&gt;
+&lt;p&gt;有限自由度系统可直接&lt;code&gt;拉格朗日量&lt;/code&gt;描述。&lt;/p&gt;
+&lt;p&gt;场论（无限自由度系统）则可用&lt;code&gt;拉格朗日密度&lt;/code&gt;描述。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

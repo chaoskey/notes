@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>联合概率 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E8%81%94%E5%90%88%E6%A6%82%E7%8E%87/</link>
+    <description>Recent content in 联合概率 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Fri, 21 Jun 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E8%81%94%E5%90%88%E6%A6%82%E7%8E%87/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2.2 概率论的简要回顾</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0031/</link>
+      <pubDate>Fri, 21 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0031/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;本节是对概率论基础知识的简要回顾，仅仅是对可能“荒疏”的读者的复习。 已经熟悉这些基础知识的读者可以安全地跳过本节。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

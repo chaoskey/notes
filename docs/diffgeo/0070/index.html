@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="微分几何中的计算（Julia版 计划长期维护）"><meta property="og:title" content="微分几何中的计算（Julia版 计划长期维护）" />
+<meta property="og:description" content="
+Julia，对数学符号真太友好了。
+前面的笔记中，我曾穿插了些相关的符号计算，本文作为一个汇总，并且未来的一些有特点的代码，我也将汇总于此，用作备忘。
+用Julia进行张量符号计算的关键：1）先要写出（多重）数组友好的公式，然后用Julia实现之； 2）使用了SymPy，外加Julia本身的语法优势。
+我曾想过将代码封装成函数，但发现直接用代码似乎更好。首先代码不复杂，其次， 暴露代码细节还能和数学公式相互对照，不容易出错。 有种“所见即所得”的感觉。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/diffgeo/0070/" />
+<meta property="article:published_time" content="2020-02-24T09:44:05+08:00" />
+<meta property="article:modified_time" content="2020-02-24T09:44:05+08:00" />
+<title>微分几何中的计算（Julia版 计划长期维护） | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a>
+<ul>
+<li><a href="/notes/docs/diffgeo/0005/">基于抽象指标的张量分析</a></li>
+<li><a href="/notes/docs/diffgeo/0006/">流形上的导数算符</a></li>
+<li><a href="/notes/docs/diffgeo/0007/">流形上的平移</a></li>
+<li><a href="/notes/docs/diffgeo/0008/">黎曼曲率张量</a></li>
+<li><a href="/notes/docs/diffgeo/0009/">流形间的映射</a></li>
+<li><a href="/notes/docs/diffgeo/0010/">流形上的李导数</a></li>
+<li><a href="/notes/docs/diffgeo/0011/">Killing矢量场</a></li>
+<li><a href="/notes/docs/diffgeo/0012/">子流形和超曲面</a></li>
+<li><a href="/notes/docs/diffgeo/0013/">流形上的微分形式及其对偶</a></li>
+<li><a href="/notes/docs/diffgeo/0014/">流形上的微积分</a></li>
+<li><a href="/notes/docs/diffgeo/0016/">李群李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0068/">常用李群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0069/">李变换群</a></li>
+<li><a href="/notes/docs/diffgeo/0070/"class=active>微分几何中的计算（Julia版）</a></li>
+<li><a href="/notes/docs/diffgeo/0073/">辛群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0074/">辛流形</a></li>
+<li><a href="/notes/docs/diffgeo/0076/">流形上的旋量和旋量场（初步）</a></li>
+<li><a href="/notes/docs/diffgeo/0077/">流形上的旋量和旋量场（几何解释）</a></li>
+<li><a href="/notes/docs/diffgeo/0078/">流形上的旋量和旋量场（导数算符和曲率)</a></li>
+<li><a href="/notes/docs/diffgeo/0079/">流形上的旋量和旋量场（自旋系数和克氏符）</a></li>
+<li><a href="/notes/docs/diffgeo/0082/">李群李代数伴随表示和Killing型、Casimir算符</a></li>
+<li><a href="/notes/docs/diffgeo/0083/">半单李代数的标准形式</a></li>
+<li><a href="/notes/docs/diffgeo/0084/">半单李代数的根系、权系和Dynkin图</a></li>
+<li><a href="/notes/docs/diffgeo/0085/">半单李代数的Casimir不变算符</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>微分几何中的计算（Julia版 计划长期维护）</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#张量变换">张量变换</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#克氏符">克氏符</a></li>
+        <li><a href="#黎曼曲率张量">黎曼曲率张量</a></li>
+        <li><a href="#killing方程">Killing方程</a></li>
+        <li><a href="#levi-civita记号">Levi-Civita记号</a></li>
+        <li><a href="#关于逆变指标和协变指标">关于逆变指标和协变指标</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/theophy/0071/">
+    下一页<br>流形视角下的牛顿力学(杀鸡用牛刀)
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0069/">
+      上一页<br>李变换群
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/diffgeo/0070/">微分几何中的计算（Julia版 计划长期维护）</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-02-24</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95">微分几何</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E6%B5%81%E5%BD%A2">流形</a>
+      , 
+      <a href="/notes/tags/julia">julia</a>
+      , 
+      <a href="/notes/tags/%E5%BC%A0%E9%87%8F">张量</a>
+      , 
+      <a href="/notes/tags/%E5%85%8B%E6%B0%8F%E7%AC%A6">克氏符</a>
+      , 
+      <a href="/notes/tags/%E9%BB%8E%E6%9B%BC%E6%9B%B2%E7%8E%87">黎曼曲率</a>
+      , 
+      <a href="/notes/tags/killing">killing</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0070.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<blockquote>
+<p><code>Julia</code>，对数学符号真太友好了。</p>
+<p>前面的笔记中，我曾穿插了些相关的符号计算，本文作为一个汇总，并且未来的一些有特点的代码，我也将汇总于此，用作备忘。</p>
+<p>用<code>Julia</code>进行张量符号计算的关键：1）先要写出（多重）数组友好的公式，然后用<code>Julia</code>实现之； 2）使用了<code>SymPy</code>，外加<code>Julia</code>本身的语法优势。</p>
+<p>我曾想过将代码封装成函数，但发现直接用代码似乎更好。首先代码不复杂，其次， 暴露代码细节还能和数学公式相互对照，不容易出错。 有种“所见即所得”的感觉。</p>
+</blockquote>
+<h2 id="张量变换">张量变换</h2>
+<p>首先将张量变换关系写成具体指标，并调整成矩阵友好的形式:</p>
+
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \[
+\eta'_{\mu\upsilon}=\frac{dx^\alpha}{dx'^\mu}\frac{dx^\beta}{dx'^\upsilon}\eta_{\alpha\beta}=\frac{dx^\alpha}{dx'^\mu}\eta_{\alpha\beta}\frac{dx^\beta}{dx'^\upsilon}
+\]
+</span>
+
+<h4 id="1-同维变换---比如坐标变换引起的张量变换">1） 同维变换   比如，坐标变换引起的张量变换</h4>
+<p>以笛卡尔坐标到球坐标的变换为例求球坐标下的度规，用<code>Julia</code>实现之：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#66d9ef">using</span> SymPy
+
+<span style="color:#a6e22e">@vars</span> r θ φ real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+
+<span style="color:#75715e"># 笛卡尔坐标到球坐标的变换</span>
+X <span style="color:#f92672">=</span> [r<span style="color:#f92672">*</span>sin(θ)<span style="color:#f92672">*</span>cos(φ), r<span style="color:#f92672">*</span>sin(θ)<span style="color:#f92672">*</span>sin(φ), r<span style="color:#f92672">*</span>cos(θ)]
+Q <span style="color:#f92672">=</span> [r, θ, φ]
+
+<span style="color:#75715e"># 欧氏度规及逆度规</span>
+g <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>eye(<span style="color:#ae81ff">3</span>) <span style="color:#f92672">.*</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>] 
+gi <span style="color:#f92672">=</span> inv(g)
+
+<span style="color:#75715e"># 文中公式最后一项的最后一个因子</span>
+M<span style="color:#f92672">=</span>[diff(x, q) <span style="color:#66d9ef">for</span> x <span style="color:#66d9ef">in</span> X, q <span style="color:#66d9ef">in</span> Q]
+
+<span style="color:#75715e"># 球坐标下的度规  看文中改写的公式</span>
+h <span style="color:#f92672">=</span> simplify<span style="color:#f92672">.</span>(sympy<span style="color:#f92672">.</span><span style="color:#66d9ef">Matrix</span>(M<span style="color:#f92672">&#39;*</span>g<span style="color:#f92672">*</span>M))
+h
+</code></pre></div><p><img src="/notes/images/0109.jpg" alt="0109.jpg"></p>
+<h4 id="2降维变换--比如求子流形的诱导度规">2）降维变换  比如，求子流形的诱导度规</h4>
+<p>上面类似的方法也用来计算球面上的诱导度规，用<code>Julia</code>实现之（只有注释对应的代码和前面不一样）：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e">#</span>
+<span style="color:#75715e">#   除了注释部分，其它和前一段代码完全一样</span>
+<span style="color:#75715e">#</span>
+<span style="color:#66d9ef">using</span> SymPy
+
+<span style="color:#a6e22e">@vars</span> r, θ φ real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+
+X <span style="color:#f92672">=</span> [r<span style="color:#f92672">*</span>sin(θ)<span style="color:#f92672">*</span>cos(φ), r<span style="color:#f92672">*</span>sin(θ)<span style="color:#f92672">*</span>sin(φ), r<span style="color:#f92672">*</span>cos(θ)]
+<span style="color:#75715e"># 球面只有两个参数， r是常量，所以不在坐标列表中</span>
+Q <span style="color:#f92672">=</span> [θ, φ]
+
+g <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>eye(<span style="color:#ae81ff">3</span>) <span style="color:#f92672">.*</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>] 
+gi <span style="color:#f92672">=</span> inv(g)
+
+M<span style="color:#f92672">=</span>[diff(x, q) <span style="color:#66d9ef">for</span> x <span style="color:#66d9ef">in</span> X, q <span style="color:#66d9ef">in</span> Q]
+h <span style="color:#f92672">=</span> simplify<span style="color:#f92672">.</span>(sympy<span style="color:#f92672">.</span><span style="color:#66d9ef">Matrix</span>(M<span style="color:#f92672">&#39;*</span>g<span style="color:#f92672">*</span>M))
+h
+</code></pre></div><p><img src="/notes/images/0110.jpg" alt="0110.jpg"></p>
+<h2 id="克氏符">克氏符</h2>
+<p><code>克氏符</code>的分量（具体指标）表达式：</p>
+
+
+
+<span class="katex">
+  \[
+\Gamma^\sigma_{\ \ \mu \upsilon}=\frac{1}{2}g^{\sigma \rho}[g_{\upsilon \rho,\mu}+g_{\mu \rho,\upsilon}-g_{\mu \upsilon,\rho}]
+\]
+</span>
+
+<p>显然，这个计算要用到三重数组。我们约定表示克氏符数组的头两个位置分配给下指标，最后一个位置分配给上指标，即用
+
+
+<span class="katex">
+  \(\Gamma[\mu,\upsilon,\sigma]\)
+</span>
+代表
+
+
+<span class="katex">
+  \(\Gamma^\sigma_{\ \ \mu \upsilon}\)
+</span>
+。</p>
+<p>此外，
+
+
+<span class="katex">
+  \(g_{\upsilon \rho,\mu}=\partial_\mu g_{\upsilon \rho}\)
+</span>
+， 而
+
+
+<span class="katex">
+  \(\{g^{\sigma\rho}\}\)
+</span>
+是
+
+
+<span class="katex">
+  \(\{g_{\sigma\rho}\}\)
+</span>
+的逆矩阵，在数组中分别表示为
+
+
+<span class="katex">
+  \(\mathrm{gi}[\sigma,\rho]\)
+</span>
+和
+
+
+<span class="katex">
+  \(g[\sigma,\rho]\)
+</span>
+。</p>
+<p>【范例】 求度规
+
+
+<span class="katex">
+  \(ds^2=z^{-1/2}(-dt^2+dz^2)+z(dx^2+dy^2)\)
+</span>
+的克氏符在
+
+
+<span class="katex">
+  \(\{t,x,y,z\}\)
+</span>
+系的全部分量。</p>
+<p>有了这些约定，很容易用<code>Julia</code>计算之：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#66d9ef">using</span> SymPy
+
+<span style="color:#a6e22e">@vars</span> t x y z real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+
+<span style="color:#75715e"># 坐标变量</span>
+X <span style="color:#f92672">=</span> [t,x,y,z]
+
+<span style="color:#75715e"># 度规张量及其逆</span>
+g <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>eye(<span style="color:#ae81ff">4</span>) <span style="color:#f92672">.*</span> [<span style="color:#f92672">-</span>z<span style="color:#f92672">^</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">//</span><span style="color:#ae81ff">2</span>),z,z,z<span style="color:#f92672">^</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">//</span><span style="color:#ae81ff">2</span>)]
+gi <span style="color:#f92672">=</span> inv(g);
+
+<span style="color:#75715e"># 根据度规计算克氏符</span>
+Γ <span style="color:#f92672">=</span> sum([(<span style="color:#ae81ff">1</span><span style="color:#f92672">//</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">*</span>gi[σ,ρ]<span style="color:#f92672">*</span>(diff(g[υ,ρ],X[μ])<span style="color:#f92672">+</span>
+            diff(g[μ,ρ],X[υ])<span style="color:#f92672">-</span>diff(g[μ,υ],X[ρ]))  <span style="color:#75715e"># 公式部分</span>
+        <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>, υ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>, σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>]   <span style="color:#75715e"># 三重数组生成指标</span>
+    <span style="color:#66d9ef">for</span> ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>)  <span style="color:#75715e"># 缩并求和指标</span>
+
+<span style="color:#75715e"># 显示所有分量（剔除了０分量和对称分量）</span>
+[symbols(<span style="color:#e6db74">&#34;Γ^{</span><span style="color:#e6db74">$σ</span><span style="color:#e6db74">}_{</span><span style="color:#e6db74">$μ$υ</span><span style="color:#e6db74">}&#34;</span>)⩵Γ[μ,υ,σ] 
+        <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,υ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span> ,σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>
+            <span style="color:#66d9ef">if</span> Γ[μ,υ,σ]<span style="color:#f92672">!=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> μ<span style="color:#f92672">&lt;=</span>υ]<span style="color:#f92672">.</span>T
+</code></pre></div><p><img src="/notes/images/0111.jpg" alt="0111.jpg"></p>
+<h2 id="黎曼曲率张量">黎曼曲率张量</h2>
+<p>黎曼曲率张量分量：</p>
+
+
+
+<span class="katex">
+  \[
+R^{\ \quad \rho}_{\mu \upsilon \sigma}=\Gamma^\rho_{\ \ \mu \sigma,\upsilon}-\Gamma^\rho_{\ \ \upsilon \sigma,\mu}+\Gamma^\lambda_{\ \ \sigma\mu}\Gamma^\rho_{\ \ \upsilon \lambda}-\Gamma^\lambda_{\ \ \sigma\upsilon }\Gamma^\rho_{\ \ \mu \lambda} \\ R_{\mu \sigma}=R^{\ \quad \upsilon}_{\mu \upsilon \sigma}
+\]
+</span>
+
+<p>黎曼曲率张量涉及四重数组，约定表示黎曼曲率张量数组的头三个位置分配给下指标，最后一个位置分配给上指标，即用
+
+
+<span class="katex">
+  \(R[\mu,\upsilon,\sigma,\rho]\)
+</span>
+代表
+
+
+<span class="katex">
+  \(R^{\ \quad \rho}_{\mu \upsilon \sigma}\)
+</span>
+。</p>
+<p>继续沿用克氏符的范例，用<code>Julia</code>计算之：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e">#　根据克氏符计算黎曼曲率张量</span>
+R<span style="color:#f92672">=</span>[diff(Γ[μ,σ,ρ],X[υ])<span style="color:#f92672">-</span>diff(Γ[υ,σ,ρ],X[μ])<span style="color:#f92672">+</span>
+    sum(Γ[μ,σ,λ]<span style="color:#f92672">*</span>Γ[υ,λ,ρ]<span style="color:#f92672">-</span>Γ[υ,σ,λ]<span style="color:#f92672">*</span>Γ[μ,λ,ρ]  <span style="color:#75715e"># 公式部分</span>
+        <span style="color:#66d9ef">for</span> λ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>) <span style="color:#75715e"># 第3、4项的缩并求和指标</span>
+    <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,υ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span> ,σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>] <span style="color:#75715e"># 四重数组生成指标</span>
+
+<span style="color:#75715e"># 显示所有分量（剔除了０分量和反对称分量）</span>
+reshape([symbols(<span style="color:#e6db74">&#34;R_{</span><span style="color:#e6db74">$μ$υ$σ</span><span style="color:#e6db74">}^{</span><span style="color:#e6db74">$ρ</span><span style="color:#e6db74">}&#34;</span>)⩵R[μ,υ,σ,ρ] 
+        <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,υ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span> ,σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span> 
+            <span style="color:#66d9ef">if</span> R[μ,υ,σ,ρ]<span style="color:#f92672">!=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> μ<span style="color:#f92672">&lt;=</span>υ],(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>))
+</code></pre></div><p><img src="/notes/images/0112.jpg" alt="0112.jpg"></p>
+<p>继续计算里奇张量：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 根据黎曼曲率张量计算里奇张量</span>
+RR<span style="color:#f92672">=</span>[sum(R[μ,υ,σ,υ] 
+        <span style="color:#66d9ef">for</span> υ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>)  <span style="color:#75715e"># 缩并求和指标</span>
+    <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>] <span style="color:#75715e"># 矩阵生成指标</span>
+</code></pre></div><p><img src="/notes/images/0113.jpg" alt="0113.jpg"></p>
+<h2 id="killing方程">Killing方程</h2>
+<p>Killing方程的分量形式，并改写成数组友好的形式：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}&\nabla_\mu\xi_\upsilon+\nabla_\upsilon\xi_\mu=0\\ \Leftrightarrow \quad & \partial_\mu\xi_\upsilon+\partial_\upsilon\xi_\mu-2\Gamma^\sigma_{\ \ \mu\upsilon}\xi_\sigma=0\\ \Leftrightarrow \quad & \boxed{\partial_\mu (g_{\upsilon\rho}\xi^\rho)+\partial_\upsilon(g_{\mu\rho}\xi^\rho)-2\Gamma^\sigma_{\ \ \mu\upsilon}g_{\sigma\rho}\xi^\rho=0}\end{aligned}
+\]
+</span>
+
+<p>【范例】3维欧氏空间
+
+
+<span class="katex">
+  \((\mathbb{R}^3,\delta_{ab})\)
+</span>
+中的2维球面
+
+
+<span class="katex">
+  \((S^2,h_{ab})\)
+</span>
+。根据方框中的公式用<code>Julia</code>很容易列出所有Killing方程</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#66d9ef">using</span> SymPy
+
+<span style="color:#a6e22e">@vars</span> θ φ real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+
+<span style="color:#75715e"># 待求的Killing矢量场的分量</span>
+ξ <span style="color:#f92672">=</span> SymFunction(<span style="color:#e6db74">&#34;ξ^1,ξ^2&#34;</span>)
+
+<span style="color:#75715e"># 坐标变换</span>
+X<span style="color:#f92672">=</span>[sin(θ)<span style="color:#f92672">*</span>cos(φ),sin(θ)<span style="color:#f92672">*</span>sin(φ),cos(θ)]
+Q<span style="color:#f92672">=</span>[θ,φ]
+
+<span style="color:#75715e"># 三维欧氏度规矩阵</span>
+g <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>eye(<span style="color:#ae81ff">3</span>) <span style="color:#f92672">.*</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>]
+
+<span style="color:#75715e"># 计算二维球面上的诱导度规矩阵h，及其逆hi</span>
+M<span style="color:#f92672">=</span>[diff(x,q) <span style="color:#66d9ef">for</span> x <span style="color:#66d9ef">in</span> X, q <span style="color:#66d9ef">in</span> Q]
+h<span style="color:#f92672">=</span> simplify<span style="color:#f92672">.</span>(sympy<span style="color:#f92672">.</span><span style="color:#66d9ef">Matrix</span>(M<span style="color:#f92672">&#39;*</span>g<span style="color:#f92672">*</span>M))
+hi <span style="color:#f92672">=</span> inv(h)
+
+<span style="color:#75715e"># 根据度规计算克氏符</span>
+Γ <span style="color:#f92672">=</span> sum([(<span style="color:#ae81ff">1</span><span style="color:#f92672">//</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">*</span>hi[σ,ρ]<span style="color:#f92672">*</span>(diff(h[υ,ρ],Q[μ])<span style="color:#f92672">+</span>
+            diff(h[μ,ρ],Q[υ])<span style="color:#f92672">-</span>diff(h[μ,υ],Q[ρ])) 
+        <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>,υ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span> ,σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>] 
+    <span style="color:#66d9ef">for</span> ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>)
+
+<span style="color:#75715e"># 列出所有独立Killing方程</span>
+eqs <span style="color:#f92672">=</span> [(<span style="color:#ae81ff">0</span>⩵diff(sum(h[υ,ρ]<span style="color:#f92672">*</span>ξ[ρ](θ,φ) <span style="color:#66d9ef">for</span> ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>),Q[μ])<span style="color:#f92672">+</span>
+        diff(sum(h[μ,ρ]<span style="color:#f92672">*</span>ξ[ρ](θ,φ) <span style="color:#66d9ef">for</span> ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>),Q[υ])<span style="color:#f92672">-</span>
+        <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>sum(Γ[μ,υ,σ]<span style="color:#f92672">*</span>sum(h[σ,ρ]<span style="color:#f92672">*</span>ξ[ρ](θ,φ) <span style="color:#66d9ef">for</span> ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>) 
+            <span style="color:#66d9ef">for</span> σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>)) 
+    <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>,υ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>  <span style="color:#66d9ef">if</span> μ <span style="color:#f92672">≤</span> υ ]
+</code></pre></div><p><img src="/notes/images/0114.jpg" alt="0114.jpg"></p>
+<p>至于，这个方程组通解的求解，还是要靠手工进行。【参见：<a href="/notes/docs/diffgeo/0069/">李变换群</a> 的末尾部分】</p>
+<h2 id="levi-civita记号">Levi-Civita记号</h2>
+<blockquote>
+<p>20200425 追加</p>
+</blockquote>
+<p>以三指标<code>Levi-Civita记号</code>
+
+
+<span class="katex">
+  \(\varepsilon_{ijk}\)
+</span>
+为例。下面这个段代码关键点：1）重复指标取0；2）求逆序数。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e">#  三指标Levi-Civita记号</span>
+ε<span style="color:#f92672">=</span> [ Sym((length(<span style="color:#66d9ef">Set</span>([i,j,k]))<span style="color:#f92672">==</span><span style="color:#ae81ff">3</span>)<span style="color:#f92672">*</span>       <span style="color:#75715e">#  存在重复指标，取0</span>
+    (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">^</span>(sum([i,j,k][σ]<span style="color:#f92672">&gt;</span>[i,j,k][ρ]   
+            <span style="color:#66d9ef">for</span> σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>,ρ <span style="color:#66d9ef">in</span>  <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>  <span style="color:#66d9ef">if</span> σ<span style="color:#f92672">&lt;</span>ρ) <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>)) <span style="color:#75715e"># 计算逆序数。偶数取1，奇数取-1</span>
+    <span style="color:#66d9ef">for</span>  i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>, j <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>, k <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span> ] ;
+
+<span style="color:#75715e">#  四维evi-Civita记号</span>
+ε4<span style="color:#f92672">=</span> [ Sym((length(<span style="color:#66d9ef">Set</span>([i,j,k,l]))<span style="color:#f92672">==</span><span style="color:#ae81ff">4</span>)<span style="color:#f92672">*</span>       <span style="color:#75715e">#  存在重复指标，取0</span>
+    (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">^</span>(sum([i,j,k,l][σ]<span style="color:#f92672">&gt;</span>[i,j,k,l][ρ]   
+            <span style="color:#66d9ef">for</span> σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,ρ <span style="color:#66d9ef">in</span>  <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>  <span style="color:#66d9ef">if</span> σ<span style="color:#f92672">&lt;</span>ρ) <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>)) <span style="color:#75715e"># 计算逆序数。偶数取1，奇数取-1</span>
+    <span style="color:#66d9ef">for</span>  i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>, j <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>, k <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,l <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span> ] ;
+</code></pre></div><p>对于更多指标的情况，只需要将这段代码多加一个指标，然后3改成4即可。</p>
+<h2 id="关于逆变指标和协变指标">关于逆变指标和协变指标</h2>
+<blockquote>
+<p>20200514追加</p>
+</blockquote>
+<p>首先，作为符号而言
+
+
+<span class="katex">
+  \(\textcolor{red}{A_1^2}\)
+</span>
+，在<code>julia</code>中会解释成
+
+
+<span class="katex">
+  \(A_1\)
+</span>
+的2次幂。所以为了能在<code>julia</code>中有进行相关的计算，必须作些约定：</p>
+<ul>
+<li>1）<code>julia</code>中的指标统统表示逆变指标【以逆变指标作为默认】，比如对应记作
+
+
+<span class="katex">
+  \(\textcolor{red}{A}\)
+</span>
+；</li>
+<li>2）假设存在度规；</li>
+<li>3）所有协变指标的分量通过度规用逆变指标表出，对应记作
+
+
+<span class="katex">
+  \(\textcolor{red}{Ai}\)
+</span>
+。</li>
+</ul>
+<p>举个例子【对应的<code>julia</code>代码见后，其中有详细注释】：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{P^2=P_\mu P^\mu,\qquad W^2=W_\mu W^\mu}\\  W^\mu=-\frac{1}{2}\varepsilon^{\mu\upsilon\rho\sigma}J_{\upsilon\rho}P_\sigma\quad  W_\mu=-\frac{1}{2}\varepsilon_{\mu\upsilon\rho\sigma}J^{\upsilon\rho}P^\sigma\\ J^{\upsilon\rho}=\begin{pmatrix}0 & -K^1 & -K^2 & -K^3\\K^1 & 0 & J^3 & -J^2\\K^2 & -J^3 & 0 & J^1\\K^3 & J^2 & -J^1 & 0\end{pmatrix}\\\quad \\ \textcolor{red}{计算：}{W_\mu W^\mu=????}
+\]
+</span>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#66d9ef">using</span> SymPy
+<span style="color:#66d9ef">using</span> LinearAlgebra
+
+<span style="color:#75715e">#  三指标Levi-Civita记号</span>
+ε<span style="color:#f92672">=</span> [ Sym((length(<span style="color:#66d9ef">Set</span>([i,j,k]))<span style="color:#f92672">==</span><span style="color:#ae81ff">3</span>)<span style="color:#f92672">*</span> 
+    (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">^</span>(sum([i,j,k][σ]<span style="color:#f92672">&gt;</span>[i,j,k][ρ]   
+            <span style="color:#66d9ef">for</span> σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>,ρ <span style="color:#66d9ef">in</span>  <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>  <span style="color:#66d9ef">if</span> σ<span style="color:#f92672">&lt;</span>ρ) <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>))
+    <span style="color:#66d9ef">for</span>  i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>, j <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>, k <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span> ] ;
+                            
+<span style="color:#75715e">#  四指标evi-Civita记号</span>
+ε4<span style="color:#f92672">=</span> [ Sym((length(<span style="color:#66d9ef">Set</span>([i,j,k,l]))<span style="color:#f92672">==</span><span style="color:#ae81ff">4</span>)<span style="color:#f92672">*</span> 
+    (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">^</span>(sum([i,j,k,l][σ]<span style="color:#f92672">&gt;</span>[i,j,k,l][ρ]   
+            <span style="color:#66d9ef">for</span> σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,ρ <span style="color:#66d9ef">in</span>  <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>  <span style="color:#66d9ef">if</span> σ<span style="color:#f92672">&lt;</span>ρ) <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>))
+    <span style="color:#66d9ef">for</span>  i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>, j <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>, k <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,l <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span> ] ;
+
+<span style="color:#75715e"># 闵氏度规</span>
+η <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>diag(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>);
+
+<span style="color:#75715e"># 庞加莱群的十个无穷小生成元</span>
+<span style="color:#75715e"># E[1:4] 对应4个平移生成元</span>
+<span style="color:#75715e"># E[5:7] 对应3个转动生成元</span>
+<span style="color:#75715e"># E[8:10]对应3个伪转动生成元</span>
+<span style="color:#a6e22e">@vars</span> P0 P1 P2 P3 J1 J2 J3 K1 K2 K3 real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+E<span style="color:#f92672">=</span>[P0,P1,P2,P3,J1,J2,J3,K1,K2,K3];
+                            
+<span style="color:#75715e"># J:  两上标洛伦兹生成元矩阵</span>
+<span style="color:#75715e"># Ji: 两下标洛伦兹生成元矩阵</span>
+J<span style="color:#f92672">=</span>[Sym(<span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span> , j <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>];
+J[<span style="color:#ae81ff">2</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">2</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>]<span style="color:#f92672">=</span>[sum(ε[k,i,j]<span style="color:#f92672">*</span>E[<span style="color:#ae81ff">4</span><span style="color:#f92672">+</span>k] <span style="color:#66d9ef">for</span> k <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>,j <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>];
+J[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>]<span style="color:#f92672">=-</span>E[<span style="color:#ae81ff">8</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>];
+J[<span style="color:#ae81ff">2</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">1</span>]<span style="color:#f92672">=</span>E[<span style="color:#ae81ff">8</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>];
+Ji<span style="color:#f92672">=</span>[sum(J[μ,υ]<span style="color:#f92672">*</span>η[μ,ρ]<span style="color:#f92672">*</span>η[υ,σ] <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,υ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>)  <span style="color:#66d9ef">for</span> ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>];
+
+<span style="color:#75715e"># P:  逆变平移生成元</span>
+<span style="color:#75715e"># Pi: 协变平移生成元</span>
+P<span style="color:#f92672">=</span>E[<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>];
+Pi <span style="color:#f92672">=</span> [sum(η[υ,σ]<span style="color:#f92672">*</span>P[σ] <span style="color:#66d9ef">for</span> σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>) <span style="color:#66d9ef">for</span> υ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>];
+
+<span style="color:#75715e"># W:  上标Pauli–Lubanski矢量</span>
+<span style="color:#75715e"># Wi: 下标Pauli–Lubanski矢量</span>
+W<span style="color:#f92672">=</span>Sym(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">//</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">*</span>[sum(ε4[μ,υ,ρ,σ]<span style="color:#f92672">*</span>Ji[υ,ρ]<span style="color:#f92672">*</span>Pi[σ] 
+        <span style="color:#66d9ef">for</span> υ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>) 
+    <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>];
+Wi<span style="color:#f92672">=</span>Sym(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">//</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">*</span>[sum(ε4[μ,υ,ρ,σ]<span style="color:#f92672">*</span>J[υ,ρ]<span style="color:#f92672">*</span>P[σ] 
+        <span style="color:#66d9ef">for</span> υ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>) 
+    <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>];
+
+<span style="color:#75715e"># 两个Casimir不变算符</span>
+PP <span style="color:#f92672">=</span> sum(P[μ]<span style="color:#f92672">*</span>Pi[μ] <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>);
+WW <span style="color:#f92672">=</span> sum(W[μ]<span style="color:#f92672">*</span>Wi[μ] <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>);
+[PP,WW] <span style="color:#f92672">.|&gt;</span> simplify
+
+<span style="color:#a6e22e">@vars</span> m ω  real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>  positive<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+
+<span style="color:#75715e"># 有质量：m &gt; 0</span>
+[PP,WW] <span style="color:#f92672">.|&gt;</span> (expr<span style="color:#f92672">-&gt;</span>expr(P0<span style="color:#f92672">=&gt;</span>m,P1<span style="color:#f92672">=&gt;</span><span style="color:#ae81ff">0</span>,P2<span style="color:#f92672">=&gt;</span><span style="color:#ae81ff">0</span>,P3<span style="color:#f92672">=&gt;</span><span style="color:#ae81ff">0</span>)) <span style="color:#f92672">.|&gt;</span> simplify
+
+<span style="color:#75715e"># 零质量：m = 0</span>
+[PP,WW] <span style="color:#f92672">.|&gt;</span> (expr<span style="color:#f92672">-&gt;</span>expr(P0<span style="color:#f92672">=&gt;</span>ω,P1<span style="color:#f92672">=&gt;</span><span style="color:#ae81ff">0</span>,P2<span style="color:#f92672">=&gt;</span><span style="color:#ae81ff">0</span>,P3<span style="color:#f92672">=&gt;</span>ω)) <span style="color:#f92672">.|&gt;</span> simplify
+</code></pre></div><p><img src="/notes/images/0150.jpg" alt="0150.jpg"></p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/theophy/0071/">
+    下一页<br>流形视角下的牛顿力学(杀鸡用牛刀)
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0069/">
+      上一页<br>李变换群
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0070.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/diffgeo/0070.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#张量变换">张量变换</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#克氏符">克氏符</a></li>
+        <li><a href="#黎曼曲率张量">黎曼曲率张量</a></li>
+        <li><a href="#killing方程">Killing方程</a></li>
+        <li><a href="#levi-civita记号">Levi-Civita记号</a></li>
+        <li><a href="#关于逆变指标和协变指标">关于逆变指标和协变指标</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

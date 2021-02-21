@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="7.5 岭回归"><meta property="og:title" content="7.5 岭回归" />
+<meta property="og:description" content="返回本章目录
+最大拟然估计(MLE)的一个问题是它可能导致过拟合。 在本节中，我们将讨论一种通过使用高斯先验的最大后验估计(MAP)的方法来改善此问题。 为简单起见，我们假设高斯似然，而不是稳定性拟然。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0064/" />
+<meta property="article:published_time" content="2019-07-22T20:20:35+08:00" />
+<meta property="article:modified_time" content="2019-07-22T20:20:35+08:00" />
+<title>7.5 岭回归 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a>
+<ul>
+<li><a href="/notes/docs/mlapp/01introduction/">第一章 导论</a></li>
+<li><a href="/notes/docs/mlapp/02probability/">第二章 概率</a></li>
+<li><a href="/notes/docs/mlapp/03generative_models_for_discrete_data/">第三章 基于离散数据的生成式模型</a></li>
+<li><a href="/notes/docs/mlapp/04gaussian_models/">第四章 高斯模型</a></li>
+<li><a href="/notes/docs/mlapp/05bayesian_statistics/">第五章 贝叶斯统计</a></li>
+<li><a href="/notes/docs/mlapp/06frequentist_statistics/">第六章 频率派统计</a></li>
+<li><a href="/notes/docs/mlapp/07linear_regression/">第七章 线性回归</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>7.5 岭回归</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#751-基本思路">7.5.1 基本思路</a></li>
+        <li><a href="#752-数值计算稳定性">7.5.2 数值计算稳定性*</a></li>
+        <li><a href="#753-与pca的关系">7.5.3 与PCA的关系*</a></li>
+        <li><a href="#754-大数据的正则化效应">7.5.4 大数据的正则化效应</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0066/">
+    下一页<br>Exercises
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0063/">
+      上一页<br>7.4 稳健线性回归*
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/mlapp/07linear_regression/0064/">7.5 岭回归</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2019-07-22</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">机器学习</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92">线性回归</a>
+      , 
+      <a href="/notes/tags/%E5%B2%AD%E5%9B%9E%E5%BD%92">岭回归</a>
+      , 
+      <a href="/notes/tags/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98">最小二乘</a>
+      , 
+      <a href="/notes/tags/%E6%AD%A3%E5%88%99%E5%8C%96">正则化</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/07linear_regression/0064.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<p><a href="/notes/docs/mlapp/07linear_regression/"><strong>返回本章目录</strong></a></p>
+<p>最大拟然估计(MLE)的一个问题是它可能导致过拟合。 在本节中，我们将讨论一种通过使用高斯先验的最大后验估计(MAP)的方法来改善此问题。 为简单起见，我们假设高斯似然，而不是稳定性拟然。</p>
+<h2 id="751-基本思路">7.5.1 基本思路</h2>
+<p>MLE可能过拟合的原因是它选择了最适合建模训练数据的参数值; 但如果数据有噪声，这些参数通常会导致复杂的函数。 作为一个简单的例子，假设我们使用最小二乘法将14阶多项式拟合到N = 21个数据点。 得到的曲线非常“摇摆”，如图7.7（a）所示。 相应的最小二乘系数（不包括
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(w_0\)
+</span>
+）如下：</p>
+<p>6.560, -36.934, -109.255, 543.452, 1022.561, -3046.224, -3768.013, 8524.540, 6607.897, -12640.058, -5530.188, 9479.730, 1774.639, -2821.526</p>
+<p><img src="" alt="0099.jpg"></p>
+<blockquote>
+<p>图7.7 14阶多项式拟合N = 21个数据点，由于
+
+
+<span class="katex">
+  \(\ell_2\)
+</span>
+正则化量强度不同而又(a)(b)两图。 数据由方差
+
+
+<span class="katex">
+  \(\sigma^2= 4\)
+</span>
+的噪声生成。表示噪声方差
+
+
+<span class="katex">
+  \(\sigma^2\)
+</span>
+的误差条，随着拟拟合的越光滑就越宽，因为我们将更多的数据变化归结为噪声。 由_linregPolyVsRegDemo_生成的图。</p>
+</blockquote>
+<p>我们看到有许多大的正数和负数。 这些完全平衡，使曲线以正确的方式“摆动”，以便几乎完美地插入数据。 但是这种情况是不稳定的：如果我们稍微改变数据，系数会发生很大变化。</p>
+<p>我们可以通过使用零均值高斯先验来促进参数变小，从而产生更平滑的曲线：</p>
+
+
+
+<span class="katex">
+  \[
+p(\boldsymbol{w})=\prod_{j=1}^D{\mathcal{N}(w_j|0,\tau^2)}    \tag{7.30}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(1/\tau^2\)
+</span>
+控制先验的强度。 相应的MAP估计问题变为</p>
+
+
+
+<span class="katex">
+  \[
+\underset{\boldsymbol{w}}{\rm argmax} \ \left[ \sum_{i=1}^N{ \log \mathcal{N}(y_i|w_0+\boldsymbol{w}^T\boldsymbol{x}_i,\sigma^2)} + \sum_{j=1}^D{\log \mathcal{N}(w_j|0,\tau^2)}\right]  \tag{7.31}
+\]
+</span>
+
+<p>这是一个简单的练习，可以证明这个优化问题等价于对下式最小化：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+J(\boldsymbol{w}) = & \sum_{i=1}^N{ (y_i-(w_0+\boldsymbol{w}^T\boldsymbol{x}_i))^2} +\lambda \|\boldsymbol{w}\|_2^2  \\
+\quad = & \left\|\boldsymbol{y}-(\boldsymbol{1}_{N},\boldsymbol{X})\left(\begin{matrix}w_0\\ \boldsymbol{w}\end{matrix}\right)\right\|_2^2 +\lambda \left(w_0,\boldsymbol{w}^T\right) \left(\begin{matrix}0 & \boldsymbol{0}_{1 \times D}\\\boldsymbol{0}_{D \times 1} & \boldsymbol{I}_{D \times D} \end{matrix} \right)\left(\begin{matrix}w_0\\ \boldsymbol{w}\end{matrix}\right)   \\
+\quad \overset{\Delta}{=} &  (\boldsymbol{y}-\boldsymbol{X}\boldsymbol{w})^T(\boldsymbol{y}-\boldsymbol{X}\boldsymbol{w}) + \lambda \boldsymbol{w}^T \boldsymbol{I} \boldsymbol{w}   
+\end{aligned} \tag{7.32,32',32''}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(\lambda \overset{\Delta}{=}\frac{\sigma^2}{\tau^2}\)
+</span>
+ 和
+
+
+<span class="katex">
+  \(\|\boldsymbol{w}\|_2^2=\sum_j{w_j}=\boldsymbol{w}^T\boldsymbol{w}\)
+</span>
+是二范数平方。 这里第一项是通常的MSE / NLL，第二项，
+
+
+<span class="katex">
+  \(\lambda \ge 0\)
+</span>
+是复杂性惩罚。(译者注: 式7.3.2'&lsquo;中的
+
+
+<span class="katex">
+  \(\boldsymbol{X}\)
+</span>
+，
+
+
+<span class="katex">
+  \(\boldsymbol{w}\)
+</span>
+和
+
+
+<span class="katex">
+  \(\boldsymbol{I}\)
+</span>
+ 都是扩展矩阵或向量, 扩展细节见式7.32&rsquo;。原文表述有细节上错误, 所以这部分按译者的理解进行了修改) 相应的最优解由下式给出(基于式7.32'')</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\hat{\boldsymbol{w}}_{\rm ridge}= (\lambda \boldsymbol{I}_{D+1} + \boldsymbol{X}^T\boldsymbol{X})^{-1}\boldsymbol{X}^T\boldsymbol{y}}   \tag{7.33}
+\]
+</span>
+
+<p>这种技术称为<strong>岭回归</strong>或<strong>惩罚最小二乘法</strong>。 通常，通过添加模型参数的高斯先验以减小参数的方法被称为<strong>正则化</strong>或<strong>权重衰减</strong>(<strong>weight decay</strong>)。 请注意，偏移项
+
+
+<span class="katex">
+  \(w_0\)
+</span>
+不是正则化的（译者注: 扩展矩阵
+
+
+<span class="katex">
+  \(\boldsymbol{I}\)
+</span>
+不是单位矩阵，注意对角的第一个元素为0, 右下角的矩阵才是单位矩阵），因为这只会影响函数的高度，而不会影响其复杂性。 通过惩罚权重的大小的总和，我们确保函数是简单的（因为
+
+
+<span class="katex">
+  \(\boldsymbol{w}_D = 0\)
+</span>
+对应于直线是常数，这是最简单的可能函数）。</p>
+<p>我们在图7.7中说明了这个想法，我们看到增加
+
+
+<span class="katex">
+  \(\lambda\)
+</span>
+会导致更平滑的函数。 结果系数也变小。 例如，使用
+
+
+<span class="katex">
+  \(\lambda= 10^{-3}\)
+</span>
+，我们有</p>
+<p>2.128, 0.807, 16.457, 3.704, -24.948, -10.472, -2.625, 4.360, 13.711, 10.063, 8.716, 3.966, -9.349, -9.232</p>
+<p>在图7.8（a）中，我们绘制了训练和测试集MSE与
+
+
+<span class="katex">
+  \(\log(\lambda)\)
+</span>
+的关系。 我们看到，随着我们增加
+
+
+<span class="katex">
+  \(\lambda\)
+</span>
+（因此模型变得更加受约束），训练集上的误差增加。 对于测试集，我们看到U形曲线的特点，其中模型先过拟合然后欠拟合。 通常使用交叉验证来选择λ，如图7.8（b）所示。 在1.4.8节中，我们将讨论一种更具概率性的方法。</p>
+<p>我们将在本书中将考虑各种不同先验。 每一个对应于不同形式的<strong>正则化</strong>。 该技术被广泛用于防止过拟合。</p>
+<p><img src="" alt="0100.jpg"></p>
+<blockquote>
+<p>图7.8 （a）通过岭回归计算的14阶多项式拟合的训练误差（点蓝色）和测试误差（实心红色），绘制与log（λ）的关系。 数据由方差
+
+
+<span class="katex">
+  \(\sigma^2= 4\)
+</span>
+的噪声生成（训练集的大小N = 21）。 注意：模型从左侧的复杂（小正则化器）到右侧的简单（大正则化器）进行排序。 星形对应于用于绘制图7.7中的函数的值。 （b）使用训练集估计效果。 虚线蓝色：未来MSE的5倍交叉验证估计。 纯黑：负对数边际似然
+
+
+<span class="katex">
+  \(- \log p(\mathcal{D}|\lambda)\)
+</span>
+。 两条曲线都已垂直重新缩放为[0,1]，以使它们具有可比性。 由_linregPolyVsRegDemo_生成的图。</p>
+</blockquote>
+<h2 id="752-数值计算稳定性">7.5.2 数值计算稳定性*</h2>
+<p>有趣的是，在统计学上能更好工作的岭回归，也更容易进行数值拟合，因为
+
+
+<span class="katex">
+  \((\lambda \boldsymbol{I}_{D+1} + \boldsymbol{X}^T\boldsymbol{X})\)
+</span>
+ 比
+
+
+<span class="katex">
+  \(\boldsymbol{X}^T\boldsymbol{X}\)
+</span>
+ 有更好的条件（更可能是可逆的），至少对于合适的
+
+
+<span class="katex">
+  \(\lambda\)
+</span>
+来说。</p>
+<p>然而，出于数值稳定性的原因，仍然最好避免使用逆矩阵。 （实际上，如果你在Matlab中写w = inv（X' _X）_X'*y，它会给你一个警告。）我们现在描述一个有用的技巧来拟合在数值上更稳健的岭回归模型（并且通过扩展，计算vanilla普通最小二乘估计 ）。 我们假设先验形如
+
+
+<span class="katex">
+  \(p(\boldsymbol{w})=\mathcal{N}(0,\boldsymbol{\Lambda}^{-1})\)
+</span>
+ ，其中
+
+
+<span class="katex">
+  \(\boldsymbol{\Lambda}\)
+</span>
+是精度矩阵。 在岭回归情形下，
+
+
+<span class="katex">
+  \(\boldsymbol{\Lambda}=(1/\tau^2)\boldsymbol{I}\)
+</span>
+。 为了避免
+
+
+<span class="katex">
+  \(w_0\)
+</span>
+惩罚项，我们应该首先将数据中心化，如练习7.5中所述。(译者注: 如果数据已经中心化, 那么前面的的扩展矩阵或向量都退化成扩展以前的形式，比如 
+
+
+<span class="katex">
+  \(\boldsymbol{X}\)
+</span>
+是
+
+
+<span class="katex">
+  \(N \times D\)
+</span>
+矩阵，
+
+
+<span class="katex">
+  \(\boldsymbol{w}\)
+</span>
+是
+
+
+<span class="katex">
+  \(D\)
+</span>
+维向量和
+
+
+<span class="katex">
+  \(\boldsymbol{I}\)
+</span>
+是
+
+
+<span class="katex">
+  \(D \times D\)
+</span>
+单位矩阵)</p>
+<p>首先让我们用源自先验的一些“虚拟数据”来扩充原始数据：</p>
+
+
+
+<span class="katex">
+  \[
+\tilde{\boldsymbol{X}}=\left(\begin{matrix}\boldsymbol{X}/\sigma\\\sqrt{\Lambda}\end{matrix}\right),\tilde{\boldsymbol{y}}=\left(\begin{matrix}\boldsymbol{y}/\sigma\\\boldsymbol{0}_{D \times 1}\end{matrix}\right)  \tag{7.34}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(\Lambda=\sqrt{\Lambda}\sqrt{\Lambda}^T\)
+</span>
+是
+
+
+<span class="katex">
+  \(\Lambda\)
+</span>
+的<strong>Cholesky分解</strong>。 我们看到
+
+
+<span class="katex">
+  \(\tilde{\boldsymbol{X}}\)
+</span>
+是
+
+
+<span class="katex">
+  \((N + D) \times D\)
+</span>
+维的，其中额外的行表示来自先验的伪数据。</p>
+<p>我们现在证明，这个扩展数据的NLL等同于原始数据上的惩罚NLL：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+f(\boldsymbol{w})= & (\tilde{\boldsymbol{y}}-\tilde{\boldsymbol{X}}\boldsymbol{w})^T(\tilde{\boldsymbol{y}}-\tilde{\boldsymbol{X}}\boldsymbol{w})    \\
+\quad = & (\left(\begin{matrix}\boldsymbol{y}/\sigma\\ \boldsymbol{0}_{D \times 1}\end{matrix}\right)-\left(\begin{matrix}\boldsymbol{X}/\sigma\\\sqrt{\Lambda}\end{matrix}\right)\boldsymbol{w})^T(\left(\begin{matrix}\boldsymbol{y}/\sigma\\ \boldsymbol{0}_{D \times 1}\end{matrix}\right)-\left(\begin{matrix}\boldsymbol{X}/\sigma\\ \sqrt{\Lambda}\end{matrix}\right)\boldsymbol{w})  \\
+\quad = & \left(\begin{matrix}\frac{1}{\sigma}(\boldsymbol{y}-\boldsymbol{X}\boldsymbol{w})\\ -\sqrt{\Lambda}\boldsymbol{w}\end{matrix}\right)^T\left(\begin{matrix}\frac{1}{\sigma}(\boldsymbol{y}-\boldsymbol{X}\boldsymbol{w})\\-\sqrt{\Lambda}\boldsymbol{w}\end{matrix}\right) \\
+\quad = & \dfrac{1}{\sigma^2}(\boldsymbol{y}-\boldsymbol{X}\boldsymbol{w})^T(\boldsymbol{y}-\boldsymbol{X}\boldsymbol{w})+(\sqrt{\Lambda}\boldsymbol{w})^T(\sqrt{\Lambda}\boldsymbol{w})   \\
+\quad = & \dfrac{1}{\sigma^2}(\boldsymbol{y}-\boldsymbol{X}\boldsymbol{w})^T(\boldsymbol{y}-\boldsymbol{X}\boldsymbol{w})+\boldsymbol{w}^T \Lambda\boldsymbol{w} 
+\end{aligned}  \tag{7.35-39}
+\]
+</span>
+
+<p>因此MAP估计可由下式给出</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\boldsymbol{w}}_{\rm ridge}= ( \tilde{\boldsymbol{X}}^T\tilde{\boldsymbol{X}})^{-1}\tilde{\boldsymbol{X}}^T\tilde{\boldsymbol{y}}   \tag{7.40}
+\]
+</span>
+
+<p>现在令</p>
+
+
+
+<span class="katex">
+  \[
+\tilde{\boldsymbol{X}}=\boldsymbol{Q}\boldsymbol{R}  \tag{7.41}
+\]
+</span>
+
+<p>是
+
+
+<span class="katex">
+  \(\tilde{\boldsymbol{X}}\)
+</span>
+的QR分解，其中
+
+
+<span class="katex">
+  \(\boldsymbol{Q}\)
+</span>
+是正交的（意思是
+
+
+<span class="katex">
+  \(\boldsymbol{Q}^T\boldsymbol{Q} = \boldsymbol{Q}\boldsymbol{Q}^T=\boldsymbol{I}\)
+</span>
+），
+
+
+<span class="katex">
+  \(\boldsymbol{R}\)
+</span>
+是上三角形。 于是</p>
+
+
+
+<span class="katex">
+  \[
+(\tilde{\boldsymbol{X}}^T\tilde{\boldsymbol{X}})^{-1}=(\boldsymbol{R}^T\boldsymbol{Q}^T\boldsymbol{Q}\boldsymbol{R})^{-1}=(\boldsymbol{R}^T\boldsymbol{R})^{-1}=\boldsymbol{R}^{-1}\boldsymbol{R}^{-T}   \tag{7.42}
+\]
+</span>
+
+<p>于是</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\boldsymbol{w}}_{\rm ridge}= \boldsymbol{R}^{-1}\boldsymbol{R}^{-T}\boldsymbol{R}^T\boldsymbol{Q}^T\tilde{\boldsymbol{y}}=\boldsymbol{R}^{-1}\boldsymbol{Q}^T\tilde{\boldsymbol{y}}   \tag{7.43}
+\]
+</span>
+
+<p>注意，
+
+
+<span class="katex">
+  \(\boldsymbol{R}\)
+</span>
+是很容易求逆的，因为它是上三角形。 这为我们提供了一种计算岭估计的方法，同时避免求
+
+
+<span class="katex">
+  \(\tilde{\boldsymbol{X}}^T\tilde{\boldsymbol{X}}=\boldsymbol{\Lambda}+\frac{1}{\sigma^2}\boldsymbol{X}^T\boldsymbol{X}=\frac{1}{\sigma^2}(\lambda\boldsymbol{I}+\boldsymbol{X}^T\boldsymbol{X})\)
+</span>
+的逆。</p>
+<p>我们可以使用这种技术通过QR分解利用原始的
+
+
+<span class="katex">
+  \(\boldsymbol{X},\boldsymbol{y}\)
+</span>
+找到MLE。 这是解决最小二乘问题的首选方法。 （事实上，它可以在Matlab的一行中实现，使用<strong>反斜杠运算符</strong>：w = X y。）注意，计算N×D矩阵的QR分解需要
+
+
+<span class="katex">
+  \(O(N D^2)\)
+</span>
+时间， 并且在数值上非常稳定</p>
+<p>如果
+
+
+<span class="katex">
+  \(D \gg N\)
+</span>
+，首选SVD分解。 特别地，令
+
+
+<span class="katex">
+  \(\boldsymbol{X} = \boldsymbol{U} \boldsymbol{S} \boldsymbol{V}^T\)
+</span>
+是
+
+
+<span class="katex">
+  \(\boldsymbol{X}\)
+</span>
+的SVD，其中
+
+
+<span class="katex">
+  \(\boldsymbol{V}^T \boldsymbol{V} = \boldsymbol{I}_N, \boldsymbol{U}\boldsymbol{U}^T = \boldsymbol{U}^T\boldsymbol{U} = \boldsymbol{I}_N\)
+</span>
+，并且
+
+
+<span class="katex">
+  \(\boldsymbol{S}\)
+</span>
+是对角
+
+
+<span class="katex">
+  \(N \times N\)
+</span>
+矩阵。 现令
+
+
+<span class="katex">
+  \(\boldsymbol{Z}= \boldsymbol{U}\boldsymbol{S}\)
+</span>
+为N×N矩阵。 然后我们可以重写岭估计：</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\boldsymbol{w}}_{\rm ridge}= \boldsymbol{V}(\boldsymbol{Z}^T\boldsymbol{Z} +\lambda \boldsymbol{I}_N)^{-1}\boldsymbol{Z}^T \boldsymbol{y} \tag{7.44}
+\]
+</span>
+
+<p>换句话说，我们可以用N维向量
+
+
+<span class="katex">
+  \(z_i\)
+</span>
+替换D维向量
+
+
+<span class="katex">
+  \(x_i\)
+</span>
+，并像以前一样执行我们的惩罚拟合。 然后我们通过乘以
+
+
+<span class="katex">
+  \(\boldsymbol{V}\)
+</span>
+将N维解变换为D维解。几何上，我们旋转到一个新的坐标系，其中除了前N个坐标之外的所有坐标都是零。 这不会影响解，因为球面高斯先验是旋转不变的。 整个时间需要
+
+
+<span class="katex">
+  \(O(D N^2)\)
+</span>
+。</p>
+<h2 id="753-与pca的关系">7.5.3 与PCA的关系*</h2>
+<p>在本节中，我们讨论岭回归和PCA之间的有趣联系（第12.2节），这进一步深入了解了岭回归为什么运作良好。 我们的讨论基于（Hastie等，2009，第66页）。</p>
+<p>设
+
+
+<span class="katex">
+  \(\boldsymbol{X} = \boldsymbol{U} \boldsymbol{S} \boldsymbol{V}^T\)
+</span>
+为
+
+
+<span class="katex">
+  \(\boldsymbol{X}\)
+</span>
+ 的SVD。从公式7.44，我们得到</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\boldsymbol{w}}_{\rm ridge}= \boldsymbol{V}(\boldsymbol{S}^2 +\lambda \boldsymbol{I}_N)^{-1}\boldsymbol{S}\boldsymbol{U}^T \boldsymbol{y}  \tag{7.45}
+\]
+</span>
+
+<p>因此，训练集的岭预测由下式给出</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\hat{\boldsymbol{y}} = &\boldsymbol{X}\hat{\boldsymbol{w}}_{\rm ridge} = \boldsymbol{U} \boldsymbol{S} \boldsymbol{V}^T\boldsymbol{V}(\boldsymbol{S}^2 +\lambda \boldsymbol{I}_N)^{-1}\boldsymbol{S}\boldsymbol{U}^T \boldsymbol{y}  \\
+\quad = & \boldsymbol{U} \tilde{\boldsymbol{S}} \boldsymbol{U}^T \boldsymbol{y} = \sum_{j=1}^D{\boldsymbol{u}_j \tilde{S}_{jj} \boldsymbol{u}_j^T \boldsymbol{y}}  
+\end{aligned} \tag{7.46-47}
+\]
+</span>
+
+<p>其中</p>
+
+
+
+<span class="katex">
+  \[
+\tilde{S}_{jj} \overset{\Delta}{=} \left[\boldsymbol{S} (\boldsymbol{S}^2 +\lambda \boldsymbol{I}_N)^{-1}\boldsymbol{S}\right]_{jj}=\dfrac{s_j^2}{s_j^2+\lambda} \tag{7.48}
+\]
+</span>
+
+<p>并且
+
+
+<span class="katex">
+  \(s_j\)
+</span>
+是
+
+
+<span class="katex">
+  \(\boldsymbol{X}\)
+</span>
+的奇异值(译者注: 原文写成
+
+
+<span class="katex">
+  \(\sigma_j\)
+</span>
+容易产生误解, 于是译者采用和
+
+
+<span class="katex">
+  \(\boldsymbol{S}\)
+</span>
+保持一致的记法)。 于是</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\boldsymbol{y}} = \boldsymbol{X}\hat{\boldsymbol{w}}_{\rm ridge} = \sum_{j=1}^D{\boldsymbol{u}_j \dfrac{s_j^2}{s_j^2+\lambda} \boldsymbol{u}_j^T \boldsymbol{y}} \tag{7.49}
+\]
+</span>
+
+<p>特别地，最小二乘预测(取
+
+
+<span class="katex">
+  \(\lambda=0\)
+</span>
+)是</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\boldsymbol{y}} = \boldsymbol{X}\hat{\boldsymbol{w}}_{\rm ls} = \sum_{j=1}^D{\boldsymbol{u}_j \boldsymbol{u}_j^T \boldsymbol{y}} \tag{7.50}
+\]
+</span>
+
+<p>如果
+
+
+<span class="katex">
+  \(\sigma_j^2\)
+</span>
+与
+
+
+<span class="katex">
+  \(\lambda\)
+</span>
+相比较小，则方向
+
+
+<span class="katex">
+  \(\boldsymbol{u}_j\)
+</span>
+对预测的影响不大。 从这个观点看，我们定义模型的有效<strong>自由度</strong>数：</p>
+
+
+
+<span class="katex">
+  \[
+{\rm dof}(\lambda)=\sum_{j=1}^D{\dfrac{s_j^2}{s_j^2+\lambda}} \tag{7.51}
+\]
+</span>
+
+<p>当
+
+
+<span class="katex">
+  \(\lambda=0\)
+</span>
+时, 
+
+
+<span class="katex">
+  \({\rm dof}(\lambda) = D\)
+</span>
+, 并且当
+
+
+<span class="katex">
+  \(\lambda \to \infty\)
+</span>
+时, 
+
+
+<span class="katex">
+  \({\rm dof}(\lambda) \to 0\)
+</span>
+。</p>
+<p>让我们试着理解为什么这种行为是可取的。如果为
+
+
+<span class="katex">
+  \(\boldsymbol{w}\)
+</span>
+使用均匀先验，那么可证明了
+
+
+<span class="katex">
+  \({\rm cov} [\boldsymbol{w}|\mathcal{D}] =\sigma^2(\boldsymbol{X}^T\boldsymbol{X})^{-1}\)
+</span>
+(参见7.6节)。 因此，对
+
+
+<span class="katex">
+  \(\boldsymbol{w}\)
+</span>
+最不确定的方向是由矩阵最小特征值所对应的特征向量所确定的，如图4.1所示。 此外，在12.2.3节中，我们证明了平方奇异值
+
+
+<span class="katex">
+  \(s_j^2\)
+</span>
+等于
+
+
+<span class="katex">
+  \(\boldsymbol{X}^T\boldsymbol{X}\)
+</span>
+的特征值。因此，较小的奇异值
+
+
+<span class="katex">
+  \(s_j\)
+</span>
+对应于具有较高后验方差的方向。 这是岭收缩最多的方向。</p>
+<p>该过程如图7.9所示。 水平
+
+
+<span class="katex">
+  \(w_1\)
+</span>
+参数不能很好地由数据确定的（具有较高的后验方差），但是垂直
+
+
+<span class="katex">
+  \(w_2\)
+</span>
+参数可以很好确定的。 因此，
+
+
+<span class="katex">
+  \(w_2^{\rm map}\)
+</span>
+接近
+
+
+<span class="katex">
+  \(\hat{w}_2^{\rm mle}\)
+</span>
+，但是
+
+
+<span class="katex">
+  \(w_1^{\rm map}\)
+</span>
+强烈移向先验均值0。（与图4.14（c）相比，它描述不同可靠性的传感器的融合。）这样，病态确定的参数, 会大小减小到0. 这称为<strong>收缩</strong>(<strong>shrinkage</strong>)。</p>
+<p>有一种相关但不同的技术称为<strong>主成分回归</strong>(<strong>principal components regression</strong>)。 这个想法是这样的：首先使用PCA将维度降低到K维度，然后使用这些低维特征作为回归的输入。 然而，这种技术在预测准确性方面不如岭回归（Hastie等，2001，第70页）。 原因是在主成分回归中，仅保留了头K（派生）个维度，并且完全忽略了剩余的D-K维度。 相比之下，岭回归使用了所有维度的“软”加权。</p>
+<p><img src="" alt="0101.jpg"></p>
+<blockquote>
+<p>图7.9 岭回归的几何意义。 似然显示为椭圆，并且先验显示为以原点为中心的圆。 基于（Bishop 2006b）的图3.15。 由geomRidge生成的图</p>
+</blockquote>
+<h2 id="754-大数据的正则化效应">7.5.4 大数据的正则化效应</h2>
+<p>正规化是避免过度拟合的最常用方法。 然而，另一种有效的方法 - 但并不总是可用 - 是使用大量数据。 直观上应该是显而易见的，我们拥有的训练数据越多，我们就能越好地学习。 因此，我们预计随着N的增加，测试集误差会降低到某个稳定水平。</p>
+<p>参见图7.10，其中我们绘制了不同阶多项式回归模型下，测试集上产生的均方误差 v.s 训练样本数N（误差与训练集大小的关系称为<strong>学习曲线</strong>）。 测试误差的稳定水平由两个项组成：由于生成过程的固有可变性（所谓的<strong>本底噪声</strong>），所有模型都会产生不可减少的成分; 和一个依赖于生成过程（“真相”）和模型之间差异的成分：这称为<strong>结构误差</strong>。</p>
+<p>在图7.10中，实际是2次多项式，但我们尝试用1次，2次和25次的多项式拟合到该数据。 称3个模型为
+
+
+<span class="katex">
+  \(\mathcal{M}_1\)
+</span>
+，
+
+
+<span class="katex">
+  \(\mathcal{M}_2\)
+</span>
+和
+
+
+<span class="katex">
+  \(\mathcal{M}_{25}\)
+</span>
+。 我们看到模型
+
+
+<span class="katex">
+  \(\mathcal{M}_2\)
+</span>
+和
+
+
+<span class="katex">
+  \(\mathcal{M}_{25}\)
+</span>
+的结构误差为零，因为两者都能够捕获真正的生成过程。 然而，
+
+
+<span class="katex">
+  \(\mathcal{M}_1\)
+</span>
+的结构误差是很大的，这可以从稳定水平远高于本底噪声的事实中看出。</p>
+<p>对于任何表达足以捕获实际数据的模型（即具有小结构误差的模型），当
+
+
+<span class="katex">
+  \(N \to \infty\)
+</span>
+时测试误差进入本底噪声。 但是，对于更简单的模型，它通常会更快地变为零，因为要估计的参数更少。 特别是，对于有限训练集，我们估计的参数与我们可以根据特定模型类估计的最佳参数之间存在一些差异。 这称为<strong>近似误差</strong>，并且在
+
+
+<span class="katex">
+  \(N \to \infty\)
+</span>
+时变为零，但对于更简单的模型，它会更快地变为零。 如图7.10所示。 另见练习7.1。</p>
+<p>在具有大量数据的领域中，简单的方法可以令人惊讶地工作（Halevy等人，2009）。 然而，仍然有理由研究更复杂的学习方法，因为总会存在我们几乎没有数据的问题。 例如，即使在像网络搜索这样的数据丰富的域中，只要我们想要开始个性化结果，任何给定用户可用的数据量开始再次变小（相对于问题的复杂性）。</p>
+<p>在这种情况下，我们可能希望同时学习多个相关模型，这被称为多任务学习。 这将使我们能够从具有大量数据的任务中“借用统计强度”，并将其与具有少量数据的任务共享。 我们将在本书后面讨论如何做。</p>
+<p><img src="" alt="0102.jpg"></p>
+<blockquote>
+<p>图7.10 训练和测试集的MSE v.s. 训练集的大小，基于由具有方差
+
+
+<span class="katex">
+  \(\sigma^2=4\)
+</span>
+的高斯噪声的2次多项式生成的数据。我们将不同次数多项式模型拟合到该数据。 （a）1次.（b）2次.（c）10次.（d）25次。 注意，对于小训练集大小，25次多项式的测试误差高于2次多项式的测试误差， 由于过度拟合，但一旦我们有足够的数据，这种差异就会消失。 另请注意，1阶多项式过于简单，即使给定大量训练数据也具有较高的测试误差。 由_linregPolyVsN_生成的图。</p>
+</blockquote>
+<p><a href="/notes/docs/mlapp/07linear_regression/"><strong>返回本章目录</strong></a></p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0066/">
+    下一页<br>Exercises
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0063/">
+      上一页<br>7.4 稳健线性回归*
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/07linear_regression/0064.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/mlapp/07linear_regression/0064.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#751-基本思路">7.5.1 基本思路</a></li>
+        <li><a href="#752-数值计算稳定性">7.5.2 数值计算稳定性*</a></li>
+        <li><a href="#753-与pca的关系">7.5.3 与PCA的关系*</a></li>
+        <li><a href="#754-大数据的正则化效应">7.5.4 大数据的正则化效应</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

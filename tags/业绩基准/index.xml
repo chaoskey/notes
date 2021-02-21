@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>业绩基准 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E4%B8%9A%E7%BB%A9%E5%9F%BA%E5%87%86/</link>
+    <description>Recent content in 业绩基准 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Tue, 22 May 2018 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E4%B8%9A%E7%BB%A9%E5%9F%BA%E5%87%86/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>第四章 超常收益率、业绩基准和附加值</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0020/</link>
+      <pubDate>Tue, 22 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0020/</guid>
+      <description>&lt;p&gt;CAPM提供一致预期收益率，多因子模型可以帮助控制风险。本章讨论如何进行预期收益率的预测，并概述如何将预测转化成投资组合。&lt;/p&gt;
+&lt;h2 id=&#34;业绩基准&#34;&gt;业绩基准&lt;/h2&gt;
+&lt;p&gt;业绩基准组合的别称：标杆、规范组合。业绩基准组合是投资管理机构化的产物。&lt;/p&gt;
+&lt;p&gt;弃用&lt;strong&gt;市场组合&lt;/strong&gt;，转而使用&lt;strong&gt;业绩基准组合&lt;/strong&gt;。 在新的分析框架下，贝塔、残差风险都是相对某个业绩基准组合而言。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

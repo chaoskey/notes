@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DOLFIN：C&#43;&#43;/Python有限元库》变分问题/文件/可视化【翻译】"><meta property="og:title" content="DOLFIN：C&#43;&#43;/Python有限元库》变分问题/文件/可视化【翻译】" />
+<meta property="og:description" content="II.实现》10.DOLFIN：C&#43;&#43;/Python有限元库》变分问题/文件/可视化
+【章节目录】
+10·3·10 变分问题
+变分问题（偏微分方程的有限元离散化）可以在DOLFIN中使用solve函数轻松解决。  线性和非线性问题都可以解决。  线性问题必须表示为以下规范形式：寻求
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+  \(u \in V\)
+
+使得
+
+
+
+
+  \[
+a(u, v) = L(v) \qquad \forall  v \in \hat{V} \tag{10.8}
+\]
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/0116/" />
+<meta property="article:published_time" content="2021-01-11T18:33:03+08:00" />
+<meta property="article:modified_time" content="2021-01-11T18:33:03+08:00" />
+<title>DOLFIN：C&#43;&#43;/Python有限元库》变分问题/文件/可视化【翻译】 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a>
+<ul>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E6%96%B9%E6%B3%95">第二章 有限元方法</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%B8%B8%E8%A7%81%E6%9C%89%E9%99%90%E5%85%83">第三章 常见有限元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8%E5%8F%82%E8%80%83%E5%8D%95%E5%85%83">第四章 构造通用参考单元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F">第五章 有限元变分形式</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%BB%84%E8%A3%85">第六章 有限元组装</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%AD%A3%E4%BA%A4%E8%A1%A8%E7%A4%BA">第七章 有限元变分形式的正交表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA">第八章 有限元变分形式的张量表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E7%9A%84%E7%A6%BB%E6%95%A3%E4%BC%98%E5%8C%96">第九章 有限元矩阵计算的离散优化</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E7%AB%A0-dolfincpython%E6%9C%89%E9%99%90%E5%85%83%E5%BA%93">第十章 DOLFIN：C++/Python有限元库</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-ufl%E6%9C%89%E9%99%90%E5%85%83%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80">第十七章 UFL：有限元形式语言</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-unicorn%E7%BB%9F%E4%B8%80%E7%9A%84%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6%E6%B1%82%E8%A7%A3%E5%99%A8">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>DOLFIN：C&#43;&#43;/Python有限元库》变分问题/文件/可视化【翻译】</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ii实现10dolfincpython有限元库变分问题文件可视化">II.实现》10.DOLFIN：C++/Python有限元库》变分问题/文件/可视化</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#10310-变分问题">10·3·10 变分问题</a></li>
+            <li><a href="#10311-文件io和可视化">10·3·11 文件I／O和可视化</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0117/">
+    下一页<br>DOLFIN：C&#43;&#43;/Python有限元库》日志/诊断/参数【翻译】
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0115/">
+      上一页<br>DOLFIN：C&#43;&#43;/Python有限元库》变分形式/组装/边界条件【翻译】
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/fem/0116/">DOLFIN：C&#43;&#43;/Python有限元库》变分问题/文件/可视化【翻译】</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2021-01-11</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/FEniCS">FEniCS</a>
+      , 
+      <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95">有限元法</a>
+      , 
+      <a href="/notes/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">偏微分方程</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0116.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h1 id="ii实现10dolfincpython有限元库变分问题文件可视化">II.实现》10.DOLFIN：C++/Python有限元库》变分问题/文件/可视化</h1>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93">章节目录</a>】</p>
+<h3 id="10310-变分问题">10·3·10 变分问题</h3>
+<p>变分问题（偏微分方程的有限元离散化）可以在DOLFIN中使用<code>solve</code>函数轻松解决。  线性和非线性问题都可以解决。  线性问题必须表示为以下规范形式：寻求
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(u \in V\)
+</span>
+使得</p>
+
+
+
+<span class="katex">
+  \[
+a(u, v) = L(v) \qquad \forall  v \in \hat{V} \tag{10.8}
+\]
+</span>
+
+<p>非线性问题必须表示为以下规范形式：寻求
+
+
+<span class="katex">
+  \(u \in V\)
+</span>
+使得</p>
+
+
+
+<span class="katex">
+  \[
+F(u; v) = 0 \qquad \forall v \in \hat{V} \tag{10.9}
+\]
+</span>
+
+<p>在以双线性形式
+
+
+<span class="katex">
+  \(a\)
+</span>
+和线性形式
+
+
+<span class="katex">
+  \(L\)
+</span>
+表示的线性变分问题的情况下，通过组装相应线性系统的矩阵
+
+
+<span class="katex">
+  \(A\)
+</span>
+和向量
+
+
+<span class="katex">
+  \(b\)
+</span>
+，然后将边界条件应用于该系统，最终求解这个线性系统。  对于以线性形式
+
+
+<span class="katex">
+  \(F\)
+</span>
+和双线性形式
+
+
+<span class="katex">
+  \(J\)
+</span>
+（F的导数或雅可比行列）表示的非线性变分问题，其解是通过牛顿法计算的。</p>
+<p>下面的代码示例演示如何求解根据双线性形式
+
+
+<span class="katex">
+  \(a\)
+</span>
+，线性形式
+
+
+<span class="katex">
+  \(L\)
+</span>
+和以DirichletBC对象给出的Dirichlet边界条件列表指定的线性变分问题：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">const</span> BoundaryCondition<span style="color:#f92672">*&gt;</span> bcs;
+bcs.push_back(<span style="color:#f92672">&amp;</span>bc0);
+bcs.push_back(<span style="color:#f92672">&amp;</span>bc1);
+bcs.push_back(<span style="color:#f92672">&amp;</span>bc2);
+
+Function <span style="color:#a6e22e">u</span>(V);
+solve(a <span style="color:#f92672">==</span> L, u, bcs);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+
+bcs <span style="color:#f92672">=</span> [bc0, bc1, bc2]
+
+u <span style="color:#f92672">=</span> Function(V)
+solve(a <span style="color:#f92672">==</span> L, u, bcs<span style="color:#f92672">=</span>bcs)
+</code></pre></div><p>为了解决非线性变分问题，必须提供线性形式F，对于C++，还必须提供其（双线性形式的）导数J。  在Python中，这个导数是自动计算的，但也可以指定为手动的。  在许多情况下，所使用的函数导数，以.ufl格式文件或Python脚本的一部分，来轻松计算导数。 我们在这里展示了如何使用Python接口解决非线性问题。  非线性变分问题可以类似地用C++解决。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+u <span style="color:#f92672">=</span> Function(V)
+v <span style="color:#f92672">=</span> TestFunction(V)
+F <span style="color:#f92672">=</span> inner((<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> u<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">*</span>grad(u), grad(v))<span style="color:#f92672">*</span>dx <span style="color:#f92672">-</span> f<span style="color:#f92672">*</span>v<span style="color:#f92672">*</span>dx
+
+<span style="color:#75715e"># Let DOLFIN compute Jacobian</span>
+solve(F <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>, u, bcs<span style="color:#f92672">=</span>bcs)
+
+<span style="color:#75715e"># Differentiate to get Jacobian</span>
+J <span style="color:#f92672">=</span> derivative(F, u)
+
+<span style="color:#75715e"># Supply Jacobian manually</span>
+solve(F <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>, u, bcs<span style="color:#f92672">=</span>bcs, J<span style="color:#f92672">=</span>J)
+</code></pre></div><p>通过使用LinearVariational{Problem,Solver}和NonlinearVariational{Problem,Solver}类，可以对求解过程进行更高级的控制。  以下代码示例说明了这些类的用法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+u <span style="color:#f92672">=</span> Function(V)
+problem <span style="color:#f92672">=</span> LinearVariationalProblem(a, L, u, bcs<span style="color:#f92672">=</span>bcs)
+solver <span style="color:#f92672">=</span> LinearVariationalSolver(problem)
+solver<span style="color:#f92672">.</span>parameters[<span style="color:#e6db74">&#34;linear_solver&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;gmres&#34;</span>
+solver<span style="color:#f92672">.</span>parameters[<span style="color:#e6db74">&#34;preconditioner&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ilu&#34;</span>
+solver<span style="color:#f92672">.</span>solve()
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+u <span style="color:#f92672">=</span> Function(V)
+problem <span style="color:#f92672">=</span> NonlinearVariationalProblem(F, u, bcs<span style="color:#f92672">=</span>bcs, J<span style="color:#f92672">=</span>J)
+solver <span style="color:#f92672">=</span> NonlinearVariationalSolver(problem)
+solver<span style="color:#f92672">.</span>parameters[<span style="color:#e6db74">&#34;linear_solver&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;gmres&#34;</span>
+solver<span style="color:#f92672">.</span>parameters[<span style="color:#e6db74">&#34;preconditioner&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ilu&#34;</span>
+solver<span style="color:#f92672">.</span>solve()
+</code></pre></div><p>这些类可以类似地用于C++。</p>
+<p>求解器类提供了可以调整以控制求解过程的一系列参数。  例如，要查看LinearVariationalSolver或 NonlinearVariationalSolver的可用参数列表，请发出以下命令：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>info(solver.parameters, true)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+info(solver<span style="color:#f92672">.</span>parameters, True)
+</code></pre></div><h3 id="10311-文件io和可视化">10·3·11 文件I／O和可视化</h3>
+<p><strong>预处理</strong>。  DOLFIN仅在内置网格，形如UnitSquare，UnitCube等，有网格生成功能。  必须使用外部软件来生成更复杂的网格。  为了简化此过程，DOLFIN提供了一个简单的脚本<code>dolfin-convert</code>来将网格从其他格式转换为DOLFIN XML格式。  表10.4列出了当前支持的文件格式。  以下代码说明了如何将网格从Gmsh格式（suffix .msh或.gmsh）转换为DOLFIN XML格式：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Bash code</span>
+dolfin-convert mesh.msh mesh.xml
+</code></pre></div><p><img src="/notes/images/0244.jpg" alt="0244.jpg"></p>
+<center>表10.4 `dolfin-convert`脚本支持的文件格式列表。</center>
+<p>将网格转换为DOLFIN XML文件格式后，可以将其读取到程序中，如以下代码示例所示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>Mesh <span style="color:#a6e22e">mesh</span>(<span style="color:#e6db74">&#34;mesh.xml&#34;</span>);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+mesh <span style="color:#f92672">=</span> Mesh(<span style="color:#e6db74">&#34;mesh.xml&#34;</span>)
+</code></pre></div><p><strong>后期处理</strong>。  从C++或Python发出<code>plot</code>命令，可以对解（Function），Mesh或MeshFunction 进行可视化：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>plot(u);
+plot(mesh);
+plot(mesh_function);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+plot(u)
+plot(mesh)
+plot(mesh_function)
+</code></pre></div><p>使用plot命令生成示例图10.6和10.7。 在Python中，还可以绘制表达式和有限元：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+plot(grad(u))
+plot(u<span style="color:#f92672">*</span>u)
+
+element <span style="color:#f92672">=</span> FiniteElement(<span style="color:#e6db74">&#34;BDM&#34;</span>, tetrahedron, <span style="color:#ae81ff">3</span>)
+plot(element)
+</code></pre></div><p><img src="/notes/images/0245.jpg" alt="0245.jpg"></p>
+<center>图10.6 使用DOLFIN `plot`命令绘制网格，此处是DOLFIN分发的网格dolfin-1.xml.gz。</center>
+<p><img src="/notes/images/0246.jpg" alt="0246.jpg"></p>
+<center>图10.7 使用DOLFIN `plot`命令绘制标量值和矢量值函数，来自图10.6网格上Stokes方程解的压力（左）和速度（右）。</center>
+<p><del>要通过Python与绘图窗口进行交互（旋转，缩放），请调用函数<code>interactive</code>，或在<code>plot</code>命令中添加可选参数<code>interactive = True</code>。</del> 【译者注：<code>interactive</code>目前已经弃用了】  <code>plot</code>命令提供了基本的绘图功能，高级的后期处理可以通过外部软件（例如ParaView和MayaVi2）更好地处理。  通过将解（Function对象）存储为PVD格式（ParaView Data，一种基于XML的格式）来轻松实现此目的。  可以在C++和Python中通过写入扩展名为.pvd的文件来完成，如以下代码示例所示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>File <span style="color:#a6e22e">file</span>(<span style="color:#e6db74">&#34;solution.pvd&#34;</span>);
+file <span style="color:#f92672">&lt;&lt;</span> u;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+
+file <span style="color:#f92672">=</span> File(<span style="color:#e6db74">&#34;solution.pvd&#34;</span>)
+file <span style="color:#f92672">&lt;&lt;</span> u
+</code></pre></div><p>标准PVD格式基于ASCII的，因此，对于大型数据集，文件可能会变得非常大。  要使用压缩的二进制格式，在创建基于PVD的File对象时可以使用字符串&quot;compressed&quot;：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>File <span style="color:#a6e22e">file</span>(<span style="color:#e6db74">&#34;solution.pvd&#34;</span>, <span style="color:#e6db74">&#34;compressed&#34;</span>);
+</code></pre></div><p>如果将多个函数写入同一文件（通过重复使用&laquo;），则数据将解释为时间序列，然后可以在ParaView或MayaVi2中对其进行动画处理。  时间序列的每个帧都存储为.vtu（VTK非结构化数据）文件，并参考存储在.pvd文件中的文件。  写入时间相关数据时，存储每个快照的时间t可能很有用。 如下所示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>File <span style="color:#a6e22e">file</span>(<span style="color:#e6db74">&#34;solution.pvd&#34;</span>, <span style="color:#e6db74">&#34;compressed&#34;</span>);
+file <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>make_pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">const</span> Function<span style="color:#f92672">*</span>, <span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>(<span style="color:#f92672">&amp;</span>u, t);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+file <span style="color:#f92672">=</span> File(<span style="color:#e6db74">&#34;solution.pvd&#34;</span>, <span style="color:#e6db74">&#34;compressed&#34;</span>);
+file <span style="color:#f92672">&lt;&lt;</span> (u, t)
+</code></pre></div><p>在对使用可变时间步长的仿真进行动画处理时，存储的时间就特别有用。</p>
+<p>PVD格式支持并行后期处理。  并行运行时，将为每个分区上的数据创建一个.pvd文件和一个.vtu文件。  可以使用ParaView无缝查看并行计算的结果。</p>
+<p><strong>DOLFIN XML格式</strong>。</p>
+<p>DOLFIN XML是DOLFIN的本机格式。 XML的优点是它是一种健壮且易于阅读的格式。  如果文件被压缩，则与二进制格式相比，文件大小的开销也很小。</p>
+<p>可以使用标准流运算符&laquo;和&raquo;向DOLFIN XML文件中写入DOLFIN中的许多类，如以下代码示例所示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>File <span style="color:#a6e22e">vector_file</span>(<span style="color:#e6db74">&#34;vector.xml&#34;</span>);
+vector_file <span style="color:#f92672">&lt;&lt;</span> vector;
+vector_file <span style="color:#f92672">&gt;&gt;</span> vector;
+
+File <span style="color:#a6e22e">mesh_file</span>(<span style="color:#e6db74">&#34;mesh.xml&#34;</span>);
+mesh_file <span style="color:#f92672">&lt;&lt;</span> mesh;
+mesh_file <span style="color:#f92672">&gt;&gt;</span> mesh;
+
+File <span style="color:#a6e22e">parameters_file</span>(<span style="color:#e6db74">&#34;parameters.xml&#34;</span>);
+parameters_file <span style="color:#f92672">&lt;&lt;</span> parameters;
+parameters_file <span style="color:#f92672">&gt;&gt;</span> parameters;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+vector_file <span style="color:#f92672">=</span> File(<span style="color:#e6db74">&#34;vector.xml&#34;</span>)
+vector_file <span style="color:#f92672">&lt;&lt;</span> vector
+vector_file <span style="color:#f92672">&gt;&gt;</span> vector
+
+mesh_file <span style="color:#f92672">=</span> File(<span style="color:#e6db74">&#34;mesh.xml&#34;</span>)
+mesh_file <span style="color:#f92672">&lt;&lt;</span> mesh
+mesh_file <span style="color:#f92672">&gt;&gt;</span> mesh
+
+parameters_file <span style="color:#f92672">=</span> File(<span style="color:#e6db74">&#34;parameters.xml&#34;</span>)
+parameters_file <span style="color:#f92672">&lt;&lt;</span> parameters
+parameters_file <span style="color:#f92672">&gt;&gt;</span> parameters
+</code></pre></div><p>由于FunctionSpace的表示（进而Function的表示）依赖于生成的代码，因此无法读取/写入Function和FunctionSpace对象。</p>
+<p>DOLFIN自动处理压缩的XML文件的读写。  因此，可以通过将网格和其他数据存储在压缩的XML文件中（带有sufﬁx .xml.gz）来节省空间。</p>
+<p><strong>时间序列</strong>。  对于时间依赖问题，能以够快速读/写数据的格式，来存储解序列或网格可能很有用。 为此，DOLFIN提供了TimeSeries类。  这使得能够存储（自由度）向量序列和（或）网格。  以下代码说明了如何将矢量序列和网格存储到TimeSeries：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>TimeSeries <span style="color:#a6e22e">time_series</span>(<span style="color:#e6db74">&#34;simulation_data&#34;</span>);
+
+<span style="color:#66d9ef">while</span> (t <span style="color:#f92672">&lt;</span> T)
+{
+    ...
+    time_series.store(u.vector(), t);
+    time_series.store(mesh, t);
+    t <span style="color:#f92672">+=</span> dt;
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+time_series <span style="color:#f92672">=</span> TimeSeries(<span style="color:#e6db74">&#34;simulation_data&#34;</span>)
+
+<span style="color:#66d9ef">while</span> t <span style="color:#f92672">&lt;</span> T:
+    <span style="color:#f92672">...</span>
+    time_series<span style="color:#f92672">.</span>store(u<span style="color:#f92672">.</span>vector(), t)
+    time_series<span style="color:#f92672">.</span>store(mesh, t)
+    t <span style="color:#f92672">+=</span> dt
+</code></pre></div><p>TimeSeries中的数据以二进制格式存储，每个存储的数据集（Vector或Mesh）均具有一个文件，并具有一个公共索引。  如下面的代码示例所示，可以通过调用成员函数retrieve从TimeSeries中检索数据。  如果在请求时刻没有存储的数据集，那么将为Vector做线性插值。  对于网格，将使用最接近的数据点。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>time_series.retrieve(u.vector(), t);
+time_series.retrieve(mesh, t);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+time_series<span style="color:#f92672">.</span>retrieve(u<span style="color:#f92672">.</span>vector(), t)
+time_series<span style="color:#f92672">.</span>retrieve(mesh, t)
+</code></pre></div><p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93">章节目录</a>】</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0117/">
+    下一页<br>DOLFIN：C&#43;&#43;/Python有限元库》日志/诊断/参数【翻译】
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0115/">
+      上一页<br>DOLFIN：C&#43;&#43;/Python有限元库》变分形式/组装/边界条件【翻译】
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0116.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/fem/0116.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ii实现10dolfincpython有限元库变分问题文件可视化">II.实现》10.DOLFIN：C++/Python有限元库》变分问题/文件/可视化</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#10310-变分问题">10·3·10 变分问题</a></li>
+            <li><a href="#10311-文件io和可视化">10·3·11 文件I／O和可视化</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

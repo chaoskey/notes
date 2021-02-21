@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="半单李代数的根系、权系和Dynkin图"><meta property="og:title" content="半单李代数的根系、权系和Dynkin图" />
+<meta property="og:description" content="
+Dynkin图，可以完全确定“单根矢量几何”，所有根矢量都可用单根线性表出。
+根系虽然不唯一，但这种不唯一性不会导致“几何”意义上的变化。
+权，就是零根空间（嘉当子代数）所有基底的共同本征矢对应的本征根组成的矢量。而这个共同本征矢被称作权矢量。
+非零根标准基底对应升降算符。正根对应升算符，负根对应降算符。
+权矢量在升降算符的作用后，依然是权矢量，并且对应的权被提高或降低了。
+如果某个权矢量被升算符作用后得零，那么该权矢量是最高权矢量，对应的权是最高权。
+通过Dynkin图可衍生出不可约表示图，利用相关性质容易计算出不可约表示维度。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/diffgeo/0084/" />
+<meta property="article:published_time" content="2020-05-07T10:23:40+08:00" />
+<meta property="article:modified_time" content="2020-05-07T10:23:40+08:00" />
+<title>半单李代数的根系、权系和Dynkin图 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a>
+<ul>
+<li><a href="/notes/docs/diffgeo/0005/">基于抽象指标的张量分析</a></li>
+<li><a href="/notes/docs/diffgeo/0006/">流形上的导数算符</a></li>
+<li><a href="/notes/docs/diffgeo/0007/">流形上的平移</a></li>
+<li><a href="/notes/docs/diffgeo/0008/">黎曼曲率张量</a></li>
+<li><a href="/notes/docs/diffgeo/0009/">流形间的映射</a></li>
+<li><a href="/notes/docs/diffgeo/0010/">流形上的李导数</a></li>
+<li><a href="/notes/docs/diffgeo/0011/">Killing矢量场</a></li>
+<li><a href="/notes/docs/diffgeo/0012/">子流形和超曲面</a></li>
+<li><a href="/notes/docs/diffgeo/0013/">流形上的微分形式及其对偶</a></li>
+<li><a href="/notes/docs/diffgeo/0014/">流形上的微积分</a></li>
+<li><a href="/notes/docs/diffgeo/0016/">李群李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0068/">常用李群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0069/">李变换群</a></li>
+<li><a href="/notes/docs/diffgeo/0070/">微分几何中的计算（Julia版）</a></li>
+<li><a href="/notes/docs/diffgeo/0073/">辛群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0074/">辛流形</a></li>
+<li><a href="/notes/docs/diffgeo/0076/">流形上的旋量和旋量场（初步）</a></li>
+<li><a href="/notes/docs/diffgeo/0077/">流形上的旋量和旋量场（几何解释）</a></li>
+<li><a href="/notes/docs/diffgeo/0078/">流形上的旋量和旋量场（导数算符和曲率)</a></li>
+<li><a href="/notes/docs/diffgeo/0079/">流形上的旋量和旋量场（自旋系数和克氏符）</a></li>
+<li><a href="/notes/docs/diffgeo/0082/">李群李代数伴随表示和Killing型、Casimir算符</a></li>
+<li><a href="/notes/docs/diffgeo/0083/">半单李代数的标准形式</a></li>
+<li><a href="/notes/docs/diffgeo/0084/"class=active>半单李代数的根系、权系和Dynkin图</a></li>
+<li><a href="/notes/docs/diffgeo/0085/">半单李代数的Casimir不变算符</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>半单李代数的根系、权系和Dynkin图</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#单根系">单根系</a></li>
+        <li><a href="#单根之间的关系">单根之间的关系</a></li>
+        <li><a href="#dynkin图单根角图">Dynkin图（单根角图）</a></li>
+        <li><a href="#以dynkin图分类根系">以Dynkin图分类根系</a></li>
+        <li><a href="#关于根系的不唯一性">关于根系的不唯一性</a></li>
+        <li><a href="#权与权空间">权与权空间</a></li>
+        <li><a href="#权系的一些性质">权系的一些性质</a></li>
+        <li><a href="#最高权首权">最高权(首权)</a></li>
+        <li><a href="#不可约表示的维数">不可约表示的维数</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0085/">
+    下一页<br>半单李代数的Casimir不变算符
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0083/">
+      上一页<br>半单李代数的标准形式
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/diffgeo/0084/">半单李代数的根系、权系和Dynkin图</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-05-07</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95">微分几何</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E6%9D%8E%E4%BB%A3%E6%95%B0">李代数</a>
+      , 
+      <a href="/notes/tags/%E6%A0%B9%E7%B3%BB">根系</a>
+      , 
+      <a href="/notes/tags/%E6%9D%83%E7%B3%BB">权系</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0084.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<blockquote>
+<p><code>Dynkin图</code>，可以完全确定“单根矢量几何”，所有根矢量都可用单根线性表出。</p>
+<p>根系虽然不唯一，但这种不唯一性不会导致“几何”意义上的变化。</p>
+<p><code>权</code>，就是零根空间（嘉当子代数）所有基底的共同本征矢对应的本征根组成的矢量。而这个共同本征矢被称作<code>权矢量</code>。</p>
+<p>非零根标准基底对应升降算符。正根对应升算符，负根对应降算符。</p>
+<p><code>权矢量</code>在升降算符的作用后，依然是<code>权矢量</code>，并且对应的<code>权</code>被提高或降低了。</p>
+<p>如果某个<code>权矢量</code>被升算符作用后得零，那么该<code>权矢量</code>是最高权矢量，对应的权是最高权。</p>
+<p>通过<code>Dynkin图</code>可衍生出不可约表示图，利用相关性质容易计算出不可约表示维度。</p>
+</blockquote>
+<h2 id="单根系">单根系</h2>
+<p>所谓<code>不可约</code>，就是不存在非平凡理想。所谓<code>平凡</code>，就是空集(0)和自身两种情况。</p>
+<p>所谓<code>完全可约</code>，就是指可表示有限个不可约表示的直和。</p>
+<p>所谓<code>正根</code>，就是在
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(l\)
+</span>
+维零根空间中，第一个不为零的坐标为正的根。比如 
+
+
+<span class="katex">
+  \((0,0,\textcolor{red}{1},-1)\)
+</span>
+。根据半单李代数的对称性，必有对应的<code>负根</code>。 所有的正根集记作
+
+
+<span class="katex">
+  \(\Sigma^+\)
+</span>
+。</p>
+<p>一个根比另一个根更大
+
+
+<span class="katex">
+  \(\boldsymbol{\alpha}>\boldsymbol{\beta}\)
+</span>
+，指
+
+
+<span class="katex">
+  \(\boldsymbol{\alpha}-\boldsymbol{\beta}\)
+</span>
+是正的。</p>
+<p>所谓<code>单根</code>（又叫<code>素根</code>），也是一个正根，但无法将其分解成其它正根之和。比如：以
+
+
+<span class="katex">
+  \(B_2\)
+</span>
+代数为例只有两个单根
+
+
+<span class="katex">
+  \(\textcolor{blue}{(0,1)},\textcolor{blue}{(1,-1)}\)
+</span>
+，而
+
+
+<span class="katex">
+  \((1,0)=\textcolor{blue}{(1,-1)}+\textcolor{blue}{(0,1)}\)
+</span>
+和
+
+
+<span class="katex">
+  \((1,1)=\textcolor{blue}{(0,1)}+(1,0)\)
+</span>
+不是单根。</p>
+<p>关于单根有一个定理：</p>
+<blockquote>
+<p>
+
+
+<span class="katex">
+  \(l\)
+</span>
+秩半单李代数，正好有
+
+
+<span class="katex">
+  \(l\)
+</span>
+个单根，记作
+
+
+<span class="katex">
+  \(\Pi=\{\boldsymbol{\alpha}_1,\dots,\boldsymbol{\alpha}_1\}\subset\Sigma^+\)
+</span>
+（约定<strong>从小到大</strong>排序），被称作<code>单根系</code>或
+
+
+<span class="katex">
+  \(\pi\)
+</span>
+系。有如下性质：</p>
+<p>1）任意两个不同单根的内积非正：
+
+
+<span class="katex">
+  \(\boldsymbol{\alpha}\cdot\boldsymbol{\beta}\le 0,\quad\boldsymbol{\alpha}\ne\boldsymbol{\beta}\quad\boldsymbol{\alpha},\boldsymbol{\beta}\in \Pi \)
+</span>
+；</p>
+<p>2）任意根都可写成单根的线性组合：
+
+
+<span class="katex">
+  \(\boldsymbol{\alpha}=\pm\sum^l_{i=1}{m_i\boldsymbol{\alpha}_i},\quad m_i\in \mathbb{Z}^+\cup\{0\},\quad\boldsymbol{\alpha}_i\in \Pi,\quad \forall \boldsymbol{\alpha}\in\Sigma\)
+</span>
+</p>
+</blockquote>
+<h2 id="单根之间的关系">单根之间的关系</h2>
+<p>沿用上一篇的结论</p>
+
+
+
+<span class="katex">
+  \[
+\cos^2\varphi=\frac{1}{4}\frac{2\boldsymbol{\alpha}\cdot\boldsymbol{\beta}}{\boldsymbol{\alpha}\cdot\boldsymbol{\alpha}}\frac{2\boldsymbol{\alpha}\cdot\boldsymbol{\beta}}{\boldsymbol{\beta}\cdot\boldsymbol{\beta}}=0,\frac{1}{4},\frac{1}{2},\frac{3}{4}，1
+\]
+</span>
+
+<p>对两个单根而言有附加条件</p>
+
+
+
+<span class="katex">
+  \[
+\varphi\ne 180^\circ \Longrightarrow \boxed{\cos^2\varphi\ne 1}\\\boldsymbol{\alpha}\cdot\boldsymbol{\beta}\le 0\Longrightarrow \boxed{\cos\varphi=\frac{\boldsymbol{\alpha}\cdot\boldsymbol{\beta}}{|\boldsymbol{\alpha}||\boldsymbol{\beta}|}\le 0}
+\]
+</span>
+
+<p>所以只有四种情况</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\varphi=90^\circ,120^\circ,135^\circ,150^\circ}
+\]
+</span>
+
+<p>这四种情况的单根矢量关系：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\def\arraystretch{1.5} \begin{array}{c:c:c:c} \varphi=90^\circ & \varphi=120^\circ & \varphi=135^\circ & \varphi=150^\circ \\ \hline 垂直 & 等长 & 长\sqrt{2}倍比 & 长\sqrt{3}倍比  \\ \hdashline \boldsymbol{\alpha}\cdot\boldsymbol{\beta}=0 & |\boldsymbol{\alpha}|=|\boldsymbol{\beta}| & \dfrac{|\boldsymbol{\alpha}|}{|\boldsymbol{\beta}|}=\sqrt{2},\dfrac{1}{\sqrt{2}} & \dfrac{|\boldsymbol{\alpha}|}{|\boldsymbol{\beta}|}=\sqrt{3},\dfrac{1}{\sqrt{3}}\end{array}}
+\]
+</span>
+
+<h2 id="dynkin图单根角图">Dynkin图（单根角图）</h2>
+<blockquote>
+<p>根系图只能绘制秩
+
+
+<span class="katex">
+  \(l=1,2\)
+</span>
+的情况； 而单根角图能绘制
+
+
+<span class="katex">
+  \(l>2\)
+</span>
+的任意情况。</p>
+</blockquote>
+<p>绘制约定：</p>
+<ul>
+<li>1）空圆表示长根，实圆表示短根；</li>
+<li>2）相互正交（
+
+
+<span class="katex">
+  \(90^\circ\)
+</span>
+）不连线；
+
+
+<span class="katex">
+  \(120^\circ\)
+</span>
+夹角连一线；
+
+
+<span class="katex">
+  \(135^\circ\)
+</span>
+夹角连两线；
+
+
+<span class="katex">
+  \(150^\circ\)
+</span>
+夹角连三线。</li>
+<li>3）从左到右的单根，按从小到大排列。</li>
+<li>4）任意一点不能有三条以上的线相连；必须是树形，不能包含闭环。</li>
+<li>5）合法角图中，若将简单链缩为一点，依然是合法角图。 所谓“简单链”，就是单重连线的一个链。【通过缩为一点判断角图的合法性】。 比如下面这个角图是不合法的</li>
+</ul>
+<p><img src="/notes/images/0141.svg" alt="0141.svg"></p>
+<p>对于1和2秩的Dynkin图见下图的蓝色部分：</p>
+<p><img src="/notes/images/0140.svg" alt="0140.svg"></p>
+<h2 id="以dynkin图分类根系">以Dynkin图分类根系</h2>
+<p>下图是<code>单李代数</code>的所有分类。</p>
+<p><img src="/notes/images/0142.svg" alt="0142.svg"></p>
+<h2 id="关于根系的不唯一性">关于根系的不唯一性</h2>
+<p>先回顾“半单李代数标准形式”的本征方程【见上一篇笔记】</p>
+
+
+
+<span class="katex">
+  \[
+(\mathrm{ad}_A)^a_{\ \ b}X^b=\lambda X^a
+\]
+</span>
+
+<p>虽然
+
+
+<span class="katex">
+  \(A^a\)
+</span>
+的选取有一定的&quot;自由&quot;，但不完全自由，因为必须要保证本征根的非重根的个数最多。在这种情况下，只有零根可能存在重根。并且所选的
+
+
+<span class="katex">
+  \(A^a\)
+</span>
+只能出现在零根空间（嘉当子代数）中，即</p>
+
+
+
+<span class="katex">
+  \[
+A^a=\chi^i(K_i)^a
+\]
+</span>
+
+<p>进而，以作为
+
+
+<span class="katex">
+  \(\{\chi^i\}\)
+</span>
+作为“基底”，可将本征根表出【加粗的“矢量”就是根矢量】：</p>
+
+
+
+<span class="katex">
+  \[
+\alpha=\chi^i\alpha_i,\quad \boldsymbol{\alpha}\overset{\Delta}{=}(\alpha_1,\dots,\alpha_l)
+\]
+</span>
+
+<p>由此可见</p>
+<ul>
+<li>从<code>实数根</code>的角度看，
+
+
+<span class="katex">
+  \(A^a\)
+</span>
+在嘉当子代数（零根空间）的不同选择，只会导致所有实数根乘上一个比例系数。【总结：
+
+
+<span class="katex">
+  \(A^a\)
+</span>
+的选择可能会导致整个“根矢量几何”等比放大或缩小】</li>
+<li>从<code>根矢量</code>的角度看，对于同一个实数根，
+
+
+<span class="katex">
+  \(A^a\)
+</span>
+的选择虽然会改变<code>根矢量</code>的分量。但是不会改变<code>根矢量</code>和<code>实数根</code>的正负对应性，也不会改变任意两个根矢量的“几何”关系。 【总结：
+
+
+<span class="katex">
+  \(A^a\)
+</span>
+的选择可能会导致整个“根矢量几何”的旋转】</li>
+</ul>
+<p>所以，根系的不唯一性，不会导致“几何”意义上的变化。</p>
+<h2 id="权与权空间">权与权空间</h2>
+<p>考虑
+
+
+<span class="katex">
+  \(l\)
+</span>
+秩李代数
+
+
+<span class="katex">
+  \(\mathscr{L}\)
+</span>
+的伴随表示
+
+
+<span class="katex">
+  \(\hat{L}\)
+</span>
+</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\hat{L}:&\mathscr{L}\to \mathscr{GL}(m,\mathbb{C})\\ &A\mapsto \hat{L}(A)\overset{\Delta}{=}\textcolor{red}{\mathrm{ad}_A}\quad\qquad\qquad \textcolor{blue}{伴随表示习惯写法}\\ &\qquad\qquad =(\mathrm{ad}_A)^a_{\ \ b}=A^c C^a_{\ \ cb}\quad \textcolor{blue}{抽象指标写法} \end{aligned}}
+\]
+</span>
+
+<p>选择标准基
+
+
+<span class="katex">
+  \(\{(K_i)^a,(H_\alpha)^a\}\)
+</span>
+，由于
+
+
+<span class="katex">
+  \(\hat{L}(K_i), i=1,\dots,l\)
+</span>
+是相互对易的，所以有共同的本征矢
+
+
+<span class="katex">
+  \(\textcolor{red}{|u\rangle\overset{\Delta}{=}u^a\in \mathscr{L}}\)
+</span>
+</p>
+
+
+
+<span class="katex">
+  \[
+\hat{L}(K_i)|u\rangle=\Lambda_i |u\rangle,\quad i=1,\dots,l
+\]
+</span>
+
+<p>可以将不妨将
+
+
+<span class="katex">
+  \(\boldsymbol{\Lambda}=(\Lambda_1,\dots,\Lambda_l)\)
+</span>
+看成一个
+
+
+<span class="katex">
+  \(l\)
+</span>
+维矢量，称为<code>权</code>，所以被认为是
+
+
+<span class="katex">
+  \(l\)
+</span>
+维权空间
+
+
+<span class="katex">
+  \(\Delta_{\hat{L}}\)
+</span>
+。</p>
+<p>一般而言，&lsquo;权&rsquo;，是一个&quot;矢量&quot;，但不叫“权矢量”；<code>权矢量</code>，特指权
+
+
+<span class="katex">
+  \(\boldsymbol{\Lambda}\)
+</span>
+对应的本征矢量
+
+
+<span class="katex">
+  \(|u_\boldsymbol{\Lambda}\rangle\)
+</span>
+。</p>
+<p>有时也经常直接用“权”来表示权矢量，比如：权
+
+
+<span class="katex">
+  \(\boldsymbol{\Lambda}=(1,2,3)\)
+</span>
+，对应的权矢量也可记作
+
+
+<span class="katex">
+  \(|u_\boldsymbol{\Lambda}\rangle=|123\rangle\)
+</span>
+。此时，“权”就是“权矢量”。</p>
+<p>对于给定权
+
+
+<span class="katex">
+  \(\boldsymbol{\Lambda}\)
+</span>
+，可能有多个本征矢（简并的），非简并的权，称作<code>单权</code>。</p>
+<p>所谓<code>正权</code>，在
+
+
+<span class="katex">
+  \(l\)
+</span>
+维权空间中，是和“正根”完全对标的类似概念。一个权比另一个权更高
+
+
+<span class="katex">
+  \(\boldsymbol{\Lambda_1}>\boldsymbol{\Lambda_2}\)
+</span>
+，指
+
+
+<span class="katex">
+  \(\boldsymbol{\Lambda_1}-\boldsymbol{\Lambda_2}\)
+</span>
+是正的。</p>
+<p>【<strong>注意区分</strong>】<code>权</code>
+
+
+<span class="katex">
+  \(\boldsymbol{\Lambda}=(\Lambda_1,\dots,\Lambda_l)\in\Delta_{\hat{L}}\)
+</span>
+和根矢量
+
+
+<span class="katex">
+  \(\boldsymbol{\alpha}=(\alpha_1,\dots,\alpha_l)\in\Sigma\)
+</span>
+</p>
+<ul>
+<li><code>根矢量</code>，粗略来说，就是标准形式下非零根在**零根空间（嘉当子代数）**下分量组成“矢量”，由标准分解唯一确定，进而由李代数
+
+
+<span class="katex">
+  \(\mathscr{G}\)
+</span>
+本身唯一确定。所以非零根矢量空间
+
+
+<span class="katex">
+  \(\Sigma\)
+</span>
+没加下标。 根矢量的概念涉及李代数的结构。</li>
+<li><code>权</code>，伴随表示
+
+
+<span class="katex">
+  \(\hat{L}\)
+</span>
+作用于**零根空间（嘉当子代数）**所有标准基后，共同本征矢各自对应的本征根组成“矢量”。所以，权空间
+
+
+<span class="katex">
+  \(\Delta_{\hat{L}}\)
+</span>
+有下标，表示依赖李代数
+
+
+<span class="katex">
+  \(\mathscr{G}\)
+</span>
+的一个伴随表示
+
+
+<span class="katex">
+  \(\hat{L}\)
+</span>
+。权的概念涉及李代数的表示。</li>
+</ul>
+<p>关于李代数的表示论，有一个重要的定理</p>
+<blockquote>
+<p>考虑伴随表示
+
+
+<span class="katex">
+  \(\hat{L}\)
+</span>
+的一个权
+
+
+<span class="katex">
+  \(\boldsymbol{\Lambda}\)
+</span>
+，及其对应的本征矢
+
+
+<span class="katex">
+  \(|u_\boldsymbol{\Lambda}\rangle\)
+</span>
+，并设
+
+
+<span class="katex">
+  \(\Sigma\)
+</span>
+是李代数
+
+
+<span class="katex">
+  \(\mathscr{L}\)
+</span>
+的非零根系。 如果
+
+
+<span class="katex">
+  \(\hat{L}(H_\alpha)|u_\boldsymbol{\Lambda}\rangle\ne 0,\quad \boldsymbol{\alpha}\in\Sigma\)
+</span>
+，那么
+
+
+<span class="katex">
+  \(\boldsymbol{\Lambda}+\boldsymbol{\alpha}\)
+</span>
+也是表示
+
+
+<span class="katex">
+  \(\hat{L}\)
+</span>
+的一个权，并且对应的本征矢就是
+
+
+<span class="katex">
+  \(\hat{L}(H_\alpha)|u_\boldsymbol{\Lambda}\rangle\)
+</span>
+。 如果
+
+
+<span class="katex">
+  \(\boldsymbol{\Lambda}+\boldsymbol{\alpha}\)
+</span>
+不是权，那么
+
+
+<span class="katex">
+  \(\hat{L}(H_\alpha)|u_\boldsymbol{\Lambda}\rangle=0\)
+</span>
+。</p>
+</blockquote>
+<p>因为【提要】</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\quad &\hat{L}(K_i)\hat{L}(H_\alpha)|u_\boldsymbol{\Lambda}\rangle\\ =&[\hat{L}(K_i),\hat{L}(H_\alpha)]|u_\boldsymbol{\Lambda}\rangle+\hat{L}(H_\alpha)\hat{L}(K_i)|u_\boldsymbol{\Lambda}\rangle\\ =&\hat{L}([K_i,H_\alpha])|u_\boldsymbol{\Lambda}\rangle+\Lambda_i\hat{L}(H_\alpha)|u_\boldsymbol{\Lambda}\rangle\quad \textcolor{red}{保李括号}\\ =&\hat{L}(\alpha_i H_\alpha)|u_\boldsymbol{\Lambda}\rangle+\Lambda_i\hat{L}(H_\alpha)|u_\boldsymbol{\Lambda}\rangle\quad \textcolor{red}{因为标准基}\\ =&(\alpha_i+\Lambda_i)\hat{L}(H_\alpha)|u_\boldsymbol{\Lambda}\rangle\\ \Longleftrightarrow \qquad & \boxed{\hat{L}(K_i)\hat{L}(H_\alpha)|u_\boldsymbol{\Lambda}\rangle=(\Lambda_i+\alpha_i)\hat{L}(H_\alpha)|u_\boldsymbol{\Lambda}\rangle} \end{aligned}
+\]
+</span>
+
+<p>由此可见：【假设
+
+
+<span class="katex">
+  \(\alpha\)
+</span>
+是正根】</p>
+<ul>
+<li>
+
+
+<span class="katex">
+  \(\hat{L}(H_\alpha)\)
+</span>
+的作用，使本征矢量
+
+
+<span class="katex">
+  \(|u_\boldsymbol{\Lambda}\rangle\)
+</span>
+（态）的权
+
+
+<span class="katex">
+  \(\boldsymbol{\Lambda}\)
+</span>
+升高一个正根
+
+
+<span class="katex">
+  \(\boldsymbol{\alpha}\)
+</span>
+，所以
+
+
+<span class="katex">
+  \(H_\boldsymbol{\alpha}\)
+</span>
+被称作<code>升算符</code>；</li>
+<li>
+
+
+<span class="katex">
+  \(\hat{L}(H_{-\alpha})\)
+</span>
+的作用，使
+
+
+<span class="katex">
+  \(|u_\boldsymbol{\Lambda}\rangle\)
+</span>
+的权
+
+
+<span class="katex">
+  \(\boldsymbol{\Lambda}\)
+</span>
+降低一个
+
+
+<span class="katex">
+  \(\boldsymbol{\alpha}\)
+</span>
+，所以
+
+
+<span class="katex">
+  \(H_{-\boldsymbol{\alpha}}\)
+</span>
+被称作<code>降算符</code>。</li>
+</ul>
+<h2 id="权系的一些性质">权系的一些性质</h2>
+<p>所谓<code>权系</code>和<code>根系</code>有密切关系。</p>
+<p>考虑
+
+
+<span class="katex">
+  \(\hat{L}\)
+</span>
+是半单李代数
+
+
+<span class="katex">
+  \(\mathscr{L}\)
+</span>
+的一个不可约表示，
+
+
+<span class="katex">
+  \(\boldsymbol{\Lambda}\in \Delta_{\hat{L}},\boldsymbol{\alpha}\in \Sigma\)
+</span>
+，于是有</p>
+<blockquote>
+<p>1）
+
+
+<span class="katex">
+  \(2\dfrac{\boldsymbol{\Lambda}\cdot\boldsymbol{\alpha}}{\boldsymbol{\alpha}\cdot\boldsymbol{\alpha}}\in \mathbb{Z}\)
+</span>
+，而
+
+
+<span class="katex">
+  \(\boldsymbol{\Lambda}-2\dfrac{\boldsymbol{\Lambda}\cdot\boldsymbol{\alpha}}{\boldsymbol{\alpha}\cdot\boldsymbol{\alpha}}\boldsymbol{\alpha}\in \Delta_{\hat{L}}\)
+</span>
+，它与
+
+
+<span class="katex">
+  \(\boldsymbol{\Lambda}\)
+</span>
+被称为<code>等价的权</code>。</p>
+</blockquote>
+<blockquote>
+<p>2）等价的权具有相同的简并度。</p>
+</blockquote>
+<blockquote>
+<p>3）设
+
+
+<span class="katex">
+  \(\boldsymbol{\Lambda}\)
+</span>
+是单权，若
+
+
+<span class="katex">
+  \(\boldsymbol{\Lambda}+k\boldsymbol{\alpha}\in \Delta_{\hat{L}},k\in \mathbb{Z}\)
+</span>
+，则
+
+
+<span class="katex">
+  \(k\)
+</span>
+必有上下限
+
+
+<span class="katex">
+  \(-p\le k\le q,\quad p,q\ge 0\)
+</span>
+，并且
+
+
+<span class="katex">
+  \(2\dfrac{\boldsymbol{\Lambda}\cdot\boldsymbol{\alpha}}{\boldsymbol{\alpha}\cdot\boldsymbol{\alpha}}=p-q\)
+</span>
+。</p>
+</blockquote>
+<h2 id="最高权首权">最高权(首权)</h2>
+<p>在有限维表示中，必有一个最高权
+
+
+<span class="katex">
+  \(\boldsymbol{M}\)
+</span>
+，升算符作用到最高权矢量上得零：</p>
+
+
+
+<span class="katex">
+  \[
+\hat{L}(H_\alpha)|u_\boldsymbol{M}\rangle=0,\quad \alpha>0
+\]
+</span>
+
+<p>这也是计算最高权得主要方法。</p>
+<p>关于最高权有两个重要定理：</p>
+<blockquote>
+<p>单李代数不可约表示的最高权是单权，两个不可约表示等价的充要条件是它们的最高权相等。</p>
+<p>最高权可表示为单根的线性组合。</p>
+</blockquote>
+<p>根据权系性质，一个不可约半单李代数可完全用首权来标记：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{n_i=\frac{2\boldsymbol{M}\cdot\boldsymbol{\alpha}_i}{\boldsymbol{\alpha}_i\cdot\boldsymbol{\alpha}_i}\in \mathbb{N}\cup\{0\}},\quad i = 1,\dots,l,\quad \boldsymbol{\alpha}_i\in \Pi
+\]
+</span>
+
+<p>根据这个定理，对于一个李代数，首先画出对应的单根图（Dynkin图），然后再每个单根上方用非负整数
+
+
+<span class="katex">
+  \(n_i\)
+</span>
+标记，于是这个图就代表这个李代数的一个特定不可约表示图。一般而言，可用
+
+
+<span class="katex">
+  \(l\)
+</span>
+个非负整数
+
+
+<span class="katex">
+  \(\textcolor{red}{(n_1,\dots,n_l)}\)
+</span>
+来标记一个不可约表示。比如：</p>
+<p><img src="/notes/images/0143.svg" alt="0143.svg"></p>
+<p>图中所谓“简单线性方程”，实际就是下面方框中的方程：
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{M} =\sum^l_{i=k}{\textcolor{red}{b_k}\boldsymbol{\alpha}_k}\quad \textcolor{red}{b_k 是待定系数}\\ \frac{2\boldsymbol{M}\cdot\boldsymbol{\alpha}_i}{\boldsymbol{\alpha}_i\cdot\boldsymbol{\alpha}_i}=\boxed{2\sum^l_{k=1}{\left(\frac{\boldsymbol{\alpha}_k\cdot\boldsymbol{\alpha}_i}{\boldsymbol{\alpha}_i\cdot\boldsymbol{\alpha}_i}\right)\textcolor{red}{b_k}}=n_i}
+\]
+</span>
+</p>
+<h2 id="不可约表示的维数">不可约表示的维数</h2>
+<p>前面通过不可约表示图可求出首权（最高权），而不可约表示维数的计算与首权有密切的联系。</p>
+<blockquote>
+<p>考虑半单李代数
+
+
+<span class="katex">
+  \(\mathscr{L}\)
+</span>
+的一个不可约表示
+
+
+<span class="katex">
+  \(\hat{L}\)
+</span>
+，其首权为
+
+
+<span class="katex">
+  \(M\)
+</span>
+，那么不可约表示的维数是
+
+
+<span class="katex">
+  \(\dim \hat{L}=\prod\limits_{\boldsymbol{\alpha}\in\Sigma^+}{\dfrac{(\boldsymbol{M}+\boldsymbol{g})\cdot\boldsymbol{\alpha}}{\boldsymbol{g}\cdot\boldsymbol{\alpha}}},\quad \boldsymbol{g}=\dfrac{1}{2}\sum\limits_{\boldsymbol{\alpha}\in \Sigma^+}{\boldsymbol{\alpha}}\)
+</span>
+</p>
+</blockquote>
+<p>经过简单细致计算不难算出，
+
+
+<span class="katex">
+  \(A_2\)
+</span>
+的不可约表示
+
+
+<span class="katex">
+  \((n,m)\)
+</span>
+维数是
+
+
+<span class="katex">
+  \((3n+1)(3m+1)\)
+</span>
+。【计算过程和下面例子的完全类似】</p>
+<p>最简单代数
+
+
+<span class="katex">
+  \(A_1\)
+</span>
+（对应
+
+
+<span class="katex">
+  \(\mathrm{SU}(2)\)
+</span>
+群）：</p>
+<p><img src="/notes/images/0144.svg" alt="0144.svg"></p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0085/">
+    下一页<br>半单李代数的Casimir不变算符
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0083/">
+      上一页<br>半单李代数的标准形式
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0084.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/diffgeo/0084.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#单根系">单根系</a></li>
+        <li><a href="#单根之间的关系">单根之间的关系</a></li>
+        <li><a href="#dynkin图单根角图">Dynkin图（单根角图）</a></li>
+        <li><a href="#以dynkin图分类根系">以Dynkin图分类根系</a></li>
+        <li><a href="#关于根系的不唯一性">关于根系的不唯一性</a></li>
+        <li><a href="#权与权空间">权与权空间</a></li>
+        <li><a href="#权系的一些性质">权系的一些性质</a></li>
+        <li><a href="#最高权首权">最高权(首权)</a></li>
+        <li><a href="#不可约表示的维数">不可约表示的维数</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

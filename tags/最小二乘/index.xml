@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>最小二乘 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98/</link>
+    <description>Recent content in 最小二乘 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Mon, 22 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>7.5 岭回归</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0064/</link>
+      <pubDate>Mon, 22 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0064/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;最大拟然估计(MLE)的一个问题是它可能导致过拟合。 在本节中，我们将讨论一种通过使用高斯先验的最大后验估计(MAP)的方法来改善此问题。 为简单起见，我们假设高斯似然，而不是稳定性拟然。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

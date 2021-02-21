@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>庞加莱群 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E5%BA%9E%E5%8A%A0%E8%8E%B1%E7%BE%A4/</link>
+    <description>Recent content in 庞加莱群 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Tue, 12 May 2020 15:22:50 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E5%BA%9E%E5%8A%A0%E8%8E%B1%E7%BE%A4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>庞加莱群的单粒子态的表示</title>
+      <link>https://chaoskey.gitee.io/notes/docs/theophy/0086/</link>
+      <pubDate>Tue, 12 May 2020 15:22:50 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0086/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;本篇紧接上一篇笔记《半单李代数的Casimir不变算符》。&lt;/p&gt;
+&lt;p&gt;分两种情况（有质量、无质量）探讨单粒子的物理态表示。&lt;/p&gt;
+&lt;p&gt;本篇及上一篇笔记涉及的代码：https://gitee.com/chaoskey/notes/blob/master/code/0085.ipynb&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

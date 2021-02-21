@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>套利 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E5%A5%97%E5%88%A9/</link>
+    <description>Recent content in 套利 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Sat, 26 May 2018 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E5%A5%97%E5%88%A9/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>第八章 估值理论</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0024/</link>
+      <pubDate>Sat, 26 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0024/</guid>
+      <description>&lt;h2 id=&#34;离散随机模型&#34;&gt;离散随机模型&lt;/h2&gt;
+&lt;p&gt;考虑
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(N+1\)
+&lt;/span&gt;
+个资产，经历
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(T\)
+&lt;/span&gt;
+个时间单位的，关于价格的离散随机过程：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;前续&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;当前&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;后续&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;时刻&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(t-1\)
+&lt;/span&gt;
+&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(t\)
+&lt;/span&gt;
+&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(t+1\)
+&lt;/span&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;状态&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\phi(s,t)\)
+&lt;/span&gt;
+&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(s=\phi(z,t+1)\)
+&lt;/span&gt;
+&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(z\)
+&lt;/span&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;时刻
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(t\)
+&lt;/span&gt;
+的每个&lt;strong&gt;状态&lt;/strong&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(s\)
+&lt;/span&gt;
+代表：在时刻
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(t\)
+&lt;/span&gt;
+的历史价格路径。如果给定时刻
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(t\)
+&lt;/span&gt;
+的状态
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(s\)
+&lt;/span&gt;
+，那么
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(s\)
+&lt;/span&gt;
+有确定的&lt;strong&gt;前续状态&lt;/strong&gt;记为
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\phi(s,t)\)
+&lt;/span&gt;
+，而
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(s\)
+&lt;/span&gt;
+的&lt;strong&gt;后续状态&lt;/strong&gt;是不确定的，将
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(s\)
+&lt;/span&gt;
+所有可能的&lt;strong&gt;后续状态集&lt;/strong&gt;记为
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\Omega(s,t)\)
+&lt;/span&gt;
+；并且将时刻
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(t\)
+&lt;/span&gt;
+的&lt;strong&gt;所有状态集&lt;/strong&gt;记为
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\Phi(t)\)
+&lt;/span&gt;
+。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>第七章 预期收益率和套利定价理论</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0023/</link>
+      <pubDate>Fri, 25 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0023/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;套利定价理论(APT)是资本资产定价模型(CAPM)在预测预期收益率上的一个有趣而强力的替代选择。&lt;/p&gt;
+&lt;p&gt;尽管CAPM抓住了最重要的角色－－市场，但是忽略了其它因素对预期收益率的影响，必然在某些时期会出现系统性缺陷。&lt;/p&gt;
+&lt;p&gt;APT是生成预期收益率的模型。&lt;/p&gt;
+&lt;p&gt;APT的应用是艺术，而非科学。&lt;/p&gt;
+&lt;p&gt;APT关注因子和预期收益率之间的关系。&lt;/p&gt;
+&lt;p&gt;APT的灵活性导致它不适合作为一致预期收益率的模型。&lt;/p&gt;
+&lt;p&gt;APT是主动投资经理的一个信息来源。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

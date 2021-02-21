@@ -1,0 +1,1712 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/</link>
+    <description>Recent content in Tags on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Fri, 19 Feb 2021 11:04:02 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>FEniCS</title>
+      <link>https://chaoskey.gitee.io/notes/tags/FEniCS/</link>
+      <pubDate>Fri, 19 Feb 2021 11:04:02 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/FEniCS/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>偏微分方程</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/</link>
+      <pubDate>Fri, 19 Feb 2021 11:04:02 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>有限元法</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95/</link>
+      <pubDate>Fri, 19 Feb 2021 11:04:02 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>https://chaoskey.gitee.io/notes/tags/hugo/</link>
+      <pubDate>Thu, 18 Feb 2021 11:04:32 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>latex</title>
+      <link>https://chaoskey.gitee.io/notes/tags/latex/</link>
+      <pubDate>Thu, 18 Feb 2021 11:04:32 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/latex/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>markdown</title>
+      <link>https://chaoskey.gitee.io/notes/tags/markdown/</link>
+      <pubDate>Thu, 18 Feb 2021 11:04:32 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/markdown/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>obsidian</title>
+      <link>https://chaoskey.gitee.io/notes/tags/obsidian/</link>
+      <pubDate>Thu, 18 Feb 2021 11:04:32 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/obsidian/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>码云</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E7%A0%81%E4%BA%91/</link>
+      <pubDate>Thu, 18 Feb 2021 11:04:32 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E7%A0%81%E4%BA%91/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>julia</title>
+      <link>https://chaoskey.gitee.io/notes/tags/julia/</link>
+      <pubDate>Wed, 18 Nov 2020 22:17:27 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/julia/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>流体力学</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%B5%81%E4%BD%93%E5%8A%9B%E5%AD%A6/</link>
+      <pubDate>Wed, 18 Nov 2020 22:17:27 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%B5%81%E4%BD%93%E5%8A%9B%E5%AD%A6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>牛顿流体</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E7%89%9B%E9%A1%BF%E6%B5%81%E4%BD%93/</link>
+      <pubDate>Wed, 18 Nov 2020 22:17:27 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E7%89%9B%E9%A1%BF%E6%B5%81%E4%BD%93/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jupyter</title>
+      <link>https://chaoskey.gitee.io/notes/tags/jupyter/</link>
+      <pubDate>Fri, 13 Nov 2020 20:09:40 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/jupyter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://chaoskey.gitee.io/notes/tags/python/</link>
+      <pubDate>Fri, 13 Nov 2020 20:09:40 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scipy</title>
+      <link>https://chaoskey.gitee.io/notes/tags/scipy/</link>
+      <pubDate>Fri, 13 Nov 2020 20:09:40 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/scipy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sympy</title>
+      <link>https://chaoskey.gitee.io/notes/tags/sympy/</link>
+      <pubDate>Fri, 13 Nov 2020 20:09:40 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/sympy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Delaunay</title>
+      <link>https://chaoskey.gitee.io/notes/tags/Delaunay/</link>
+      <pubDate>Fri, 06 Nov 2020 09:55:10 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/Delaunay/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>三角剖分</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E4%B8%89%E8%A7%92%E5%89%96%E5%88%86/</link>
+      <pubDate>Fri, 06 Nov 2020 09:55:10 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E4%B8%89%E8%A7%92%E5%89%96%E5%88%86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>微分方程</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/</link>
+      <pubDate>Mon, 02 Nov 2020 12:25:49 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>数值计算</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/</link>
+      <pubDate>Mon, 02 Nov 2020 12:25:49 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Galerkin</title>
+      <link>https://chaoskey.gitee.io/notes/tags/Galerkin/</link>
+      <pubDate>Sun, 01 Nov 2020 11:11:40 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/Galerkin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>有限差分</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%9C%89%E9%99%90%E5%B7%AE%E5%88%86/</link>
+      <pubDate>Sun, 01 Nov 2020 11:06:14 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%9C%89%E9%99%90%E5%B7%AE%E5%88%86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Casimir算符</title>
+      <link>https://chaoskey.gitee.io/notes/tags/Casimir%E7%AE%97%E7%AC%A6/</link>
+      <pubDate>Wed, 13 May 2020 17:10:52 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/Casimir%E7%AE%97%E7%AC%A6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>自由场</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E8%87%AA%E7%94%B1%E5%9C%BA/</link>
+      <pubDate>Wed, 13 May 2020 17:10:52 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E8%87%AA%E7%94%B1%E5%9C%BA/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>量子场论</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E9%87%8F%E5%AD%90%E5%9C%BA%E8%AE%BA/</link>
+      <pubDate>Wed, 13 May 2020 17:10:52 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E9%87%8F%E5%AD%90%E5%9C%BA%E8%AE%BA/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>庞加莱群</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%BA%9E%E5%8A%A0%E8%8E%B1%E7%BE%A4/</link>
+      <pubDate>Tue, 12 May 2020 15:22:50 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%BA%9E%E5%8A%A0%E8%8E%B1%E7%BE%A4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>李群</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%9D%8E%E7%BE%A4/</link>
+      <pubDate>Tue, 12 May 2020 15:22:50 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%9D%8E%E7%BE%A4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>李代数</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%9D%8E%E4%BB%A3%E6%95%B0/</link>
+      <pubDate>Sat, 09 May 2020 19:32:38 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%9D%8E%E4%BB%A3%E6%95%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>权系</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%9D%83%E7%B3%BB/</link>
+      <pubDate>Thu, 07 May 2020 10:23:40 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%9D%83%E7%B3%BB/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>根系</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%A0%B9%E7%B3%BB/</link>
+      <pubDate>Thu, 07 May 2020 10:23:40 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%A0%B9%E7%B3%BB/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>典型群</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%85%B8%E5%9E%8B%E7%BE%A4/</link>
+      <pubDate>Fri, 01 May 2020 08:32:10 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%85%B8%E5%9E%8B%E7%BE%A4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>对称性</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%AF%B9%E7%A7%B0%E6%80%A7/</link>
+      <pubDate>Tue, 28 Apr 2020 09:42:55 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%AF%B9%E7%A7%B0%E6%80%A7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>场论</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%9C%BA%E8%AE%BA/</link>
+      <pubDate>Fri, 24 Apr 2020 20:13:17 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%9C%BA%E8%AE%BA/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>旋量</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%97%8B%E9%87%8F/</link>
+      <pubDate>Wed, 15 Apr 2020 09:14:20 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%97%8B%E9%87%8F/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>流形</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%B5%81%E5%BD%A2/</link>
+      <pubDate>Wed, 15 Apr 2020 09:14:20 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%B5%81%E5%BD%A2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>导数算符</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%AF%BC%E6%95%B0%E7%AE%97%E7%AC%A6/</link>
+      <pubDate>Fri, 10 Apr 2020 18:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%AF%BC%E6%95%B0%E7%AE%97%E7%AC%A6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>曲率</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%9B%B2%E7%8E%87/</link>
+      <pubDate>Fri, 10 Apr 2020 18:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%9B%B2%E7%8E%87/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>哈密顿</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%93%88%E5%AF%86%E9%A1%BF/</link>
+      <pubDate>Sun, 01 Mar 2020 14:52:58 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%93%88%E5%AF%86%E9%A1%BF/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>辛流形</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E8%BE%9B%E6%B5%81%E5%BD%A2/</link>
+      <pubDate>Sun, 01 Mar 2020 14:52:58 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E8%BE%9B%E6%B5%81%E5%BD%A2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>泊松</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%B3%8A%E6%9D%BE/</link>
+      <pubDate>Fri, 28 Feb 2020 16:55:40 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%B3%8A%E6%9D%BE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>反称度规</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%8F%8D%E7%A7%B0%E5%BA%A6%E8%A7%84/</link>
+      <pubDate>Thu, 27 Feb 2020 17:16:07 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%8F%8D%E7%A7%B0%E5%BA%A6%E8%A7%84/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>微分形式</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%BE%AE%E5%88%86%E5%BD%A2%E5%BC%8F/</link>
+      <pubDate>Thu, 27 Feb 2020 17:16:07 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%BE%AE%E5%88%86%E5%BD%A2%E5%BC%8F/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>正则变换</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%AD%A3%E5%88%99%E5%8F%98%E6%8D%A2/</link>
+      <pubDate>Thu, 27 Feb 2020 17:16:07 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%AD%A3%E5%88%99%E5%8F%98%E6%8D%A2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>辛群</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E8%BE%9B%E7%BE%A4/</link>
+      <pubDate>Thu, 27 Feb 2020 17:16:07 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E8%BE%9B%E7%BE%A4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>noether</title>
+      <link>https://chaoskey.gitee.io/notes/tags/noether/</link>
+      <pubDate>Wed, 26 Feb 2020 20:14:33 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/noether/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>守恒律</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%AE%88%E6%81%92%E5%BE%8B/</link>
+      <pubDate>Wed, 26 Feb 2020 20:14:33 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%AE%88%E6%81%92%E5%BE%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>killing</title>
+      <link>https://chaoskey.gitee.io/notes/tags/killing/</link>
+      <pubDate>Tue, 25 Feb 2020 08:19:37 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/killing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>伽利略</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E4%BC%BD%E5%88%A9%E7%95%A5/</link>
+      <pubDate>Tue, 25 Feb 2020 08:19:37 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E4%BC%BD%E5%88%A9%E7%95%A5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>牛顿力学</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E7%89%9B%E9%A1%BF%E5%8A%9B%E5%AD%A6/</link>
+      <pubDate>Tue, 25 Feb 2020 08:19:37 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E7%89%9B%E9%A1%BF%E5%8A%9B%E5%AD%A6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>克氏符</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%85%8B%E6%B0%8F%E7%AC%A6/</link>
+      <pubDate>Mon, 24 Feb 2020 09:44:05 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%85%8B%E6%B0%8F%E7%AC%A6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>张量</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%BC%A0%E9%87%8F/</link>
+      <pubDate>Mon, 24 Feb 2020 09:44:05 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%BC%A0%E9%87%8F/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>黎曼曲率</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E9%BB%8E%E6%9B%BC%E6%9B%B2%E7%8E%87/</link>
+      <pubDate>Mon, 24 Feb 2020 09:44:05 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E9%BB%8E%E6%9B%BC%E6%9B%B2%E7%8E%87/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>变换群</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%8F%98%E6%8D%A2%E7%BE%A4/</link>
+      <pubDate>Sun, 23 Feb 2020 10:04:08 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%8F%98%E6%8D%A2%E7%BE%A4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>正交群</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%AD%A3%E4%BA%A4%E7%BE%A4/</link>
+      <pubDate>Fri, 21 Feb 2020 11:02:10 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%AD%A3%E4%BA%A4%E7%BE%A4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>洛伦兹群</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%B4%9B%E4%BC%A6%E5%85%B9%E7%BE%A4/</link>
+      <pubDate>Fri, 21 Feb 2020 11:02:10 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%B4%9B%E4%BC%A6%E5%85%B9%E7%BE%A4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>酉群</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E9%85%89%E7%BE%A4/</link>
+      <pubDate>Fri, 21 Feb 2020 11:02:10 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E9%85%89%E7%BE%A4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>指数映射</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%8C%87%E6%95%B0%E6%98%A0%E5%B0%84/</link>
+      <pubDate>Sat, 25 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%8C%87%E6%95%B0%E6%98%A0%E5%B0%84/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>李括号</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%9D%8E%E6%8B%AC%E5%8F%B7/</link>
+      <pubDate>Sat, 25 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%9D%8E%E6%8B%AC%E5%8F%B7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>正则坐标</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%AD%A3%E5%88%99%E5%9D%90%E6%A0%87/</link>
+      <pubDate>Sat, 25 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%AD%A3%E5%88%99%E5%9D%90%E6%A0%87/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>群</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E7%BE%A4/</link>
+      <pubDate>Sat, 25 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E7%BE%A4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>力学</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%8A%9B%E5%AD%A6/</link>
+      <pubDate>Fri, 24 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%8A%9B%E5%AD%A6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>拉格朗日</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5/</link>
+      <pubDate>Fri, 24 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Gauss定理</title>
+      <link>https://chaoskey.gitee.io/notes/tags/Gauss%E5%AE%9A%E7%90%86/</link>
+      <pubDate>Thu, 23 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/Gauss%E5%AE%9A%E7%90%86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Stokes定理</title>
+      <link>https://chaoskey.gitee.io/notes/tags/Stokes%E5%AE%9A%E7%90%86/</link>
+      <pubDate>Thu, 23 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/Stokes%E5%AE%9A%E7%90%86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>体元</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E4%BD%93%E5%85%83/</link>
+      <pubDate>Thu, 23 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E4%BD%93%E5%85%83/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>外微分</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%A4%96%E5%BE%AE%E5%88%86/</link>
+      <pubDate>Thu, 23 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%A4%96%E5%BE%AE%E5%88%86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>微积分</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/</link>
+      <pubDate>Thu, 23 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>定向</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%AE%9A%E5%90%91/</link>
+      <pubDate>Wed, 22 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%AE%9A%E5%90%91/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>楔积</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%A5%94%E7%A7%AF/</link>
+      <pubDate>Wed, 22 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%A5%94%E7%A7%AF/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>子流形</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%AD%90%E6%B5%81%E5%BD%A2/</link>
+      <pubDate>Tue, 21 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%AD%90%E6%B5%81%E5%BD%A2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>嵌入</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%B5%8C%E5%85%A5/</link>
+      <pubDate>Tue, 21 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%B5%8C%E5%85%A5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>投影映射</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%8A%95%E5%BD%B1%E6%98%A0%E5%B0%84/</link>
+      <pubDate>Tue, 21 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%8A%95%E5%BD%B1%E6%98%A0%E5%B0%84/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>法余矢</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%B3%95%E4%BD%99%E7%9F%A2/</link>
+      <pubDate>Tue, 21 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%B3%95%E4%BD%99%E7%9F%A2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>法矢</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%B3%95%E7%9F%A2/</link>
+      <pubDate>Tue, 21 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%B3%95%E7%9F%A2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>诱导度规</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E8%AF%B1%E5%AF%BC%E5%BA%A6%E8%A7%84/</link>
+      <pubDate>Tue, 21 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E8%AF%B1%E5%AF%BC%E5%BA%A6%E8%A7%84/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>超曲面</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E8%B6%85%E6%9B%B2%E9%9D%A2/</link>
+      <pubDate>Tue, 21 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E8%B6%85%E6%9B%B2%E9%9D%A2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>测地线</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%B5%8B%E5%9C%B0%E7%BA%BF/</link>
+      <pubDate>Mon, 20 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%B5%8B%E5%9C%B0%E7%BA%BF/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>矢量场</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E7%9F%A2%E9%87%8F%E5%9C%BA/</link>
+      <pubDate>Mon, 20 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E7%9F%A2%E9%87%8F%E5%9C%BA/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>等度规映射</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E7%AD%89%E5%BA%A6%E8%A7%84%E6%98%A0%E5%B0%84/</link>
+      <pubDate>Mon, 20 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E7%AD%89%E5%BA%A6%E8%A7%84%E6%98%A0%E5%B0%84/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>延拓</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%BB%B6%E6%8B%93/</link>
+      <pubDate>Sun, 19 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%BB%B6%E6%8B%93/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>微分同胚</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%BE%AE%E5%88%86%E5%90%8C%E8%83%9A/</link>
+      <pubDate>Sun, 19 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%BE%AE%E5%88%86%E5%90%8C%E8%83%9A/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>拉回映射</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%8B%89%E5%9B%9E%E6%98%A0%E5%B0%84/</link>
+      <pubDate>Sun, 19 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%8B%89%E5%9B%9E%E6%98%A0%E5%B0%84/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>推前映射</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%8E%A8%E5%89%8D%E6%98%A0%E5%B0%84/</link>
+      <pubDate>Sun, 19 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%8E%A8%E5%89%8D%E6%98%A0%E5%B0%84/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>方向导数</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%96%B9%E5%90%91%E5%AF%BC%E6%95%B0/</link>
+      <pubDate>Sun, 19 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%96%B9%E5%90%91%E5%AF%BC%E6%95%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>李导数</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%9D%8E%E5%AF%BC%E6%95%B0/</link>
+      <pubDate>Sun, 19 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%9D%8E%E5%AF%BC%E6%95%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>适配坐标系</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E9%80%82%E9%85%8D%E5%9D%90%E6%A0%87%E7%B3%BB/</link>
+      <pubDate>Sun, 19 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E9%80%82%E9%85%8D%E5%9D%90%E6%A0%87%E7%B3%BB/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>对易子</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%AF%B9%E6%98%93%E5%AD%90/</link>
+      <pubDate>Sat, 18 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%AF%B9%E6%98%93%E5%AD%90/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>平移</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%B9%B3%E7%A7%BB/</link>
+      <pubDate>Fri, 17 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%B9%B3%E7%A7%BB/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>联络</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E8%81%94%E7%BB%9C/</link>
+      <pubDate>Fri, 17 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E8%81%94%E7%BB%9C/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>坐标变换</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/</link>
+      <pubDate>Tue, 14 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>抽象指标</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%8A%BD%E8%B1%A1%E6%8C%87%E6%A0%87/</link>
+      <pubDate>Tue, 14 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%8A%BD%E8%B1%A1%E6%8C%87%E6%A0%87/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>备忘</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%A4%87%E5%BF%98/</link>
+      <pubDate>Mon, 13 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%A4%87%E5%BF%98/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>技巧</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Mon, 13 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%8A%80%E5%B7%A7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>知乎</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E7%9F%A5%E4%B9%8E/</link>
+      <pubDate>Mon, 13 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E7%9F%A5%E4%B9%8E/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>科学计算</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/</link>
+      <pubDate>Sun, 12 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>符号演算</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E7%AC%A6%E5%8F%B7%E6%BC%94%E7%AE%97/</link>
+      <pubDate>Sat, 11 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E7%AC%A6%E5%8F%B7%E6%BC%94%E7%AE%97/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sed</title>
+      <link>https://chaoskey.gitee.io/notes/tags/sed/</link>
+      <pubDate>Wed, 08 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/sed/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>typora</title>
+      <link>https://chaoskey.gitee.io/notes/tags/typora/</link>
+      <pubDate>Wed, 08 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/typora/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vscode</title>
+      <link>https://chaoskey.gitee.io/notes/tags/vscode/</link>
+      <pubDate>Wed, 08 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/vscode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>后验</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%90%8E%E9%AA%8C/</link>
+      <pubDate>Tue, 23 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%90%8E%E9%AA%8C/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>线性回归</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</link>
+      <pubDate>Tue, 23 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>贝叶斯</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF/</link>
+      <pubDate>Tue, 23 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>岭回归</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%B2%AD%E5%9B%9E%E5%BD%92/</link>
+      <pubDate>Mon, 22 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%B2%AD%E5%9B%9E%E5%BD%92/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>最小二乘</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98/</link>
+      <pubDate>Mon, 22 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>正则化</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%AD%A3%E5%88%99%E5%8C%96/</link>
+      <pubDate>Mon, 22 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%AD%A3%E5%88%99%E5%8C%96/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>厚尾</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%8E%9A%E5%B0%BE/</link>
+      <pubDate>Sun, 21 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%8E%9A%E5%B0%BE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>稳健性</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E7%A8%B3%E5%81%A5%E6%80%A7/</link>
+      <pubDate>Sun, 21 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E7%A8%B3%E5%81%A5%E6%80%A7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>似然</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E4%BC%BC%E7%84%B6/</link>
+      <pubDate>Sat, 20 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E4%BC%BC%E7%84%B6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>凸性</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%87%B8%E6%80%A7/</link>
+      <pubDate>Sat, 20 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%87%B8%E6%80%A7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>基函数</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%9F%BA%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Fri, 19 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%9F%BA%E5%87%BD%E6%95%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>习题</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E4%B9%A0%E9%A2%98/</link>
+      <pubDate>Wed, 17 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E4%B9%A0%E9%A2%98/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>p值</title>
+      <link>https://chaoskey.gitee.io/notes/tags/p%E5%80%BC/</link>
+      <pubDate>Tue, 16 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/p%E5%80%BC/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>交叉验证</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81/</link>
+      <pubDate>Tue, 16 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>拟然</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%8B%9F%E7%84%B6/</link>
+      <pubDate>Tue, 16 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%8B%9F%E7%84%B6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>损失函数</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Tue, 16 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>置信区间</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E7%BD%AE%E4%BF%A1%E5%8C%BA%E9%97%B4/</link>
+      <pubDate>Tue, 16 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E7%BD%AE%E4%BF%A1%E5%8C%BA%E9%97%B4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>频率派</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E9%A2%91%E7%8E%87%E6%B4%BE/</link>
+      <pubDate>Tue, 16 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E9%A2%91%E7%8E%87%E6%B4%BE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>风险</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E9%A3%8E%E9%99%A9/</link>
+      <pubDate>Tue, 16 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E9%A3%8E%E9%99%A9/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>估计器</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E4%BC%B0%E8%AE%A1%E5%99%A8/</link>
+      <pubDate>Mon, 15 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E4%BC%B0%E8%AE%A1%E5%99%A8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>偏差</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%81%8F%E5%B7%AE/</link>
+      <pubDate>Mon, 15 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%81%8F%E5%B7%AE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>均值</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%9D%87%E5%80%BC/</link>
+      <pubDate>Mon, 15 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%9D%87%E5%80%BC/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>方差</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%96%B9%E5%B7%AE/</link>
+      <pubDate>Mon, 15 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%96%B9%E5%B7%AE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>决策规则</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%99/</link>
+      <pubDate>Sun, 14 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%99/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>悖论</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%82%96%E8%AE%BA/</link>
+      <pubDate>Sun, 14 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%82%96%E8%AE%BA/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>大样本</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%A4%A7%E6%A0%B7%E6%9C%AC/</link>
+      <pubDate>Sat, 13 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%A4%A7%E6%A0%B7%E6%9C%AC/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>自举</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E8%87%AA%E4%B8%BE/</link>
+      <pubDate>Sat, 13 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E8%87%AA%E4%B8%BE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>采样分布</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E9%87%87%E6%A0%B7%E5%88%86%E5%B8%83/</link>
+      <pubDate>Sat, 13 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E9%87%87%E6%A0%B7%E5%88%86%E5%B8%83/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>统计</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E7%BB%9F%E8%AE%A1/</link>
+      <pubDate>Fri, 12 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E7%BB%9F%E8%AE%A1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>估计量</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E4%BC%B0%E8%AE%A1%E9%87%8F/</link>
+      <pubDate>Wed, 10 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E4%BC%B0%E8%AE%A1%E9%87%8F/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>效用</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%95%88%E7%94%A8/</link>
+      <pubDate>Wed, 10 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%95%88%E7%94%A8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>理性行为</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E7%90%86%E6%80%A7%E8%A1%8C%E4%B8%BA/</link>
+      <pubDate>Wed, 10 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E7%90%86%E6%80%A7%E8%A1%8C%E4%B8%BA/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>监督学习</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Wed, 10 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>模型</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Tue, 09 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%A8%A1%E5%9E%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>超参数</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E8%B6%85%E5%8F%82%E6%95%B0/</link>
+      <pubDate>Tue, 09 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E8%B6%85%E5%8F%82%E6%95%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>预测</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E9%A2%84%E6%B5%8B/</link>
+      <pubDate>Tue, 09 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E9%A2%84%E6%B5%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>先验</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%85%88%E9%AA%8C/</link>
+      <pubDate>Sun, 07 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%85%88%E9%AA%8C/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>奥卡姆剃刀</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80/</link>
+      <pubDate>Sat, 06 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>模型选择</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9/</link>
+      <pubDate>Sat, 06 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>证据</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E8%AF%81%E6%8D%AE/</link>
+      <pubDate>Sat, 06 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E8%AF%81%E6%8D%AE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>边际拟然</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E8%BE%B9%E9%99%85%E6%8B%9F%E7%84%B6/</link>
+      <pubDate>Sat, 06 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E8%BE%B9%E9%99%85%E6%8B%9F%E7%84%B6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>估计</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E4%BC%B0%E8%AE%A1/</link>
+      <pubDate>Fri, 05 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E4%BC%B0%E8%AE%A1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>可信区间</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%8F%AF%E4%BF%A1%E5%8C%BA%E9%97%B4/</link>
+      <pubDate>Fri, 05 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%8F%AF%E4%BF%A1%E5%8C%BA%E9%97%B4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>推断</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%8E%A8%E6%96%AD/</link>
+      <pubDate>Fri, 05 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%8E%A8%E6%96%AD/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>互信息</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E4%BA%92%E4%BF%A1%E6%81%AF/</link>
+      <pubDate>Mon, 01 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E4%BA%92%E4%BF%A1%E6%81%AF/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>分类器</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%88%86%E7%B1%BB%E5%99%A8/</link>
+      <pubDate>Mon, 01 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%88%86%E7%B1%BB%E5%99%A8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>拟合</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%8B%9F%E5%90%88/</link>
+      <pubDate>Mon, 01 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%8B%9F%E5%90%88/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>特征选择</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9/</link>
+      <pubDate>Mon, 01 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>众数</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E4%BC%97%E6%95%B0/</link>
+      <pubDate>Sat, 29 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E4%BC%97%E6%95%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>分布</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%88%86%E5%B8%83/</link>
+      <pubDate>Sat, 29 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%88%86%E5%B8%83/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>概念学习</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%A6%82%E5%BF%B5%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Fri, 28 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%A6%82%E5%BF%B5%E5%AD%A6%E4%B9%A0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>特征矢量</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E7%89%B9%E5%BE%81%E7%9F%A2%E9%87%8F/</link>
+      <pubDate>Thu, 27 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E7%89%B9%E5%BE%81%E7%9F%A2%E9%87%8F/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>协方差</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%8D%8F%E6%96%B9%E5%B7%AE/</link>
+      <pubDate>Mon, 24 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%8D%8F%E6%96%B9%E5%B7%AE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>相关性</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E7%9B%B8%E5%85%B3%E6%80%A7/</link>
+      <pubDate>Mon, 24 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E7%9B%B8%E5%85%B3%E6%80%A7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>伯努利</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E4%BC%AF%E5%8A%AA%E5%88%A9/</link>
+      <pubDate>Sat, 22 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E4%BC%AF%E5%8A%AA%E5%88%A9/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>分位数</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%88%86%E4%BD%8D%E6%95%B0/</link>
+      <pubDate>Fri, 21 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%88%86%E4%BD%8D%E6%95%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>独立性</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E7%8B%AC%E7%AB%8B%E6%80%A7/</link>
+      <pubDate>Fri, 21 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E7%8B%AC%E7%AB%8B%E6%80%A7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>联合概率</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E8%81%94%E5%90%88%E6%A6%82%E7%8E%87/</link>
+      <pubDate>Fri, 21 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E8%81%94%E5%90%88%E6%A6%82%E7%8E%87/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>随机变量</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/</link>
+      <pubDate>Fri, 21 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>不确定性</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7/</link>
+      <pubDate>Thu, 20 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>概率论</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/</link>
+      <pubDate>Thu, 20 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>分类</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%88%86%E7%B1%BB/</link>
+      <pubDate>Tue, 18 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%88%86%E7%B1%BB/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>参数模型</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%8F%82%E6%95%B0%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Tue, 18 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%8F%82%E6%95%B0%E6%A8%A1%E5%9E%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>回归</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%9B%9E%E5%BD%92/</link>
+      <pubDate>Tue, 18 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%9B%9E%E5%BD%92/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>最近邻</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%9C%80%E8%BF%91%E9%82%BB/</link>
+      <pubDate>Tue, 18 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%9C%80%E8%BF%91%E9%82%BB/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>维度诅咒</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E7%BB%B4%E5%BA%A6%E8%AF%85%E5%92%92/</link>
+      <pubDate>Tue, 18 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E7%BB%B4%E5%BA%A6%E8%AF%85%E5%92%92/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>过拟合</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E8%BF%87%E6%8B%9F%E5%90%88/</link>
+      <pubDate>Tue, 18 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E8%BF%87%E6%8B%9F%E5%90%88/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>无监督学习</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Mon, 17 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>聚类</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E8%81%9A%E7%B1%BB/</link>
+      <pubDate>Mon, 17 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E8%81%9A%E7%B1%BB/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>降维 </title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E9%99%8D%E7%BB%B4/</link>
+      <pubDate>Mon, 17 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E9%99%8D%E7%BB%B4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>强化学习</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Sat, 15 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>中性</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E4%B8%AD%E6%80%A7/</link>
+      <pubDate>Sat, 26 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E4%B8%AD%E6%80%A7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>估值</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E4%BC%B0%E5%80%BC/</link>
+      <pubDate>Sat, 26 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E4%BC%B0%E5%80%BC/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>头寸</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%A4%B4%E5%AF%B8/</link>
+      <pubDate>Sat, 26 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%A4%B4%E5%AF%B8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>套利</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%A5%97%E5%88%A9/</link>
+      <pubDate>Sat, 26 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%A5%97%E5%88%A9/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>投资</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%8A%95%E8%B5%84/</link>
+      <pubDate>Sat, 26 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%8A%95%E8%B5%84/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>定价</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%AE%9A%E4%BB%B7/</link>
+      <pubDate>Fri, 25 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%AE%9A%E4%BB%B7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>主动管理</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E4%B8%BB%E5%8A%A8%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Thu, 24 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E4%B8%BB%E5%8A%A8%E7%AE%A1%E7%90%86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>信息率</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E4%BF%A1%E6%81%AF%E7%8E%87/</link>
+      <pubDate>Thu, 24 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E4%BF%A1%E6%81%AF%E7%8E%87/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>残差</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%AE%8B%E5%B7%AE/</link>
+      <pubDate>Thu, 24 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%AE%8B%E5%B7%AE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>偏好</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%81%8F%E5%A5%BD/</link>
+      <pubDate>Wed, 23 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%81%8F%E5%A5%BD/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>贝塔</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E8%B4%9D%E5%A1%94/</link>
+      <pubDate>Wed, 23 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E8%B4%9D%E5%A1%94/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>阿尔法</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E9%98%BF%E5%B0%94%E6%B3%95/</link>
+      <pubDate>Wed, 23 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E9%98%BF%E5%B0%94%E6%B3%95/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>capm</title>
+      <link>https://chaoskey.gitee.io/notes/tags/capm/</link>
+      <pubDate>Tue, 22 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/capm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>业绩基准</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E4%B8%9A%E7%BB%A9%E5%9F%BA%E5%87%86/</link>
+      <pubDate>Tue, 22 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E4%B8%9A%E7%BB%A9%E5%9F%BA%E5%87%86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>收益</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%94%B6%E7%9B%8A/</link>
+      <pubDate>Tue, 22 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%94%B6%E7%9B%8A/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>多因子</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%A4%9A%E5%9B%A0%E5%AD%90/</link>
+      <pubDate>Mon, 21 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%A4%9A%E5%9B%A0%E5%AD%90/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>标准差</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%A0%87%E5%87%86%E5%B7%AE/</link>
+      <pubDate>Mon, 21 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%A0%87%E5%87%86%E5%B7%AE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>一致预期</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E4%B8%80%E8%87%B4%E9%A2%84%E6%9C%9F/</link>
+      <pubDate>Sun, 20 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E4%B8%80%E8%87%B4%E9%A2%84%E6%9C%9F/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>市场组合</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E5%B8%82%E5%9C%BA%E7%BB%84%E5%90%88/</link>
+      <pubDate>Sun, 20 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E5%B8%82%E5%9C%BA%E7%BB%84%E5%90%88/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>投资组合</title>
+      <link>https://chaoskey.gitee.io/notes/tags/%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88/</link>
+      <pubDate>Sun, 20 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/tags/%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

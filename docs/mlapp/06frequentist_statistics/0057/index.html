@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="6.5 经验风险最小化"><meta property="og:title" content="6.5 经验风险最小化" />
+<meta property="og:description" content="返回本章目录
+频率派决策理论存在一个根本问题，即人们实际上无法计算风险函数，因为它依赖于知道真实的数据分布。 （相比之下，贝叶斯后验预期损失总是可以计算，因为它更取决于数据，而不是
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+  \(\theta^{\\*}\)
+
+。）但是，有一个设置可以避免这个问题，这就是预测可观察性量的任务，而不是估计隐藏变量或参数。 也就是说，不再关注形如
+
+
+
+  \(L(\boldsymbol{\theta},\delta(\mathcal{D}))\)
+
+的损失函数，其中
+
+
+
+  \(\boldsymbol{\theta}\)
+
+是真实但未知的参数，而
+
+
+
+  \(\delta(\mathcal{D})\)
+
+是我们的估计器; 而是让我们关注形如
+
+
+
+  \(L(y,\delta(\boldsymbol{x}))\)
+
+的损失函数，其中
+
+
+
+  \(y\)
+
+是真实但未知的响应，
+
+
+
+  \(\delta(\boldsymbol{x})\)
+
+是给定输入
+
+
+
+  \(\boldsymbol{x}\)
+
+的预测。 在这种情况下，频率派风险变为
+
+
+
+
+  \[
+R(p_{\\*},\delta)\overset{\Delta}{=}\mathbb{E}_{(\boldsymbol{x},y) \sim p_{\\*}}\left[L(y,\delta(\boldsymbol{x}))\right]=\sum_{\boldsymbol{x}}{\sum_y{L(y,\delta(\boldsymbol{x}))p_{\\*}(\boldsymbol{x},y)}}   \tag{6.47}
+\]
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0057/" />
+<meta property="article:published_time" content="2019-07-16T20:20:35+08:00" />
+<meta property="article:modified_time" content="2019-07-16T20:20:35+08:00" />
+<title>6.5 经验风险最小化 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a>
+<ul>
+<li><a href="/notes/docs/mlapp/01introduction/">第一章 导论</a></li>
+<li><a href="/notes/docs/mlapp/02probability/">第二章 概率</a></li>
+<li><a href="/notes/docs/mlapp/03generative_models_for_discrete_data/">第三章 基于离散数据的生成式模型</a></li>
+<li><a href="/notes/docs/mlapp/04gaussian_models/">第四章 高斯模型</a></li>
+<li><a href="/notes/docs/mlapp/05bayesian_statistics/">第五章 贝叶斯统计</a></li>
+<li><a href="/notes/docs/mlapp/06frequentist_statistics/">第六章 频率派统计</a></li>
+<li><a href="/notes/docs/mlapp/07linear_regression/">第七章 线性回归</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>6.5 经验风险最小化</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#651-正则化风险最小化">6.5.1 正则化风险最小化</a></li>
+        <li><a href="#652-结构风险最小化">6.5.2 结构风险最小化</a></li>
+        <li><a href="#653-使用交叉验证估计风险">6.5.3 使用交叉验证估计风险</a>
+          <ul>
+            <li><a href="#6531-示例使用cv为岭回归选择λ">6.5.3.1 示例：使用CV为岭回归选择λ</a></li>
+            <li><a href="#6532-一个标准误差规则one-standard-error-rule">6.5.3.2 一个标准误差规则(one-standard error rule)</a></li>
+            <li><a href="#6533-非概率无监督学习中cv模型选择">6.5.3.3 非概率无监督学习中CV模型选择</a></li>
+          </ul>
+        </li>
+        <li><a href="#654-使用统计学习理论的风险上限">6.5.4 使用统计学习理论的风险上限*</a></li>
+        <li><a href="#655-代理损失函数-surrogate-loss-functions">6.5.5 代理损失函数( Surrogate loss functions)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0059/">
+    下一页<br>习题
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0058/">
+      上一页<br>6.6 频率派统计的病态*
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/mlapp/06frequentist_statistics/0057/">6.5 经验风险最小化</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2019-07-16</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">机器学习</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E9%A3%8E%E9%99%A9">风险</a>
+      , 
+      <a href="/notes/tags/%E6%AD%A3%E5%88%99%E5%8C%96">正则化</a>
+      , 
+      <a href="/notes/tags/%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81">交叉验证</a>
+      , 
+      <a href="/notes/tags/%E5%B2%AD%E5%9B%9E%E5%BD%92">岭回归</a>
+      , 
+      <a href="/notes/tags/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0">损失函数</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/06frequentist_statistics/0057.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<p><a href="/notes/docs/mlapp/06frequentist_statistics/"><strong>返回本章目录</strong></a></p>
+<p>频率派决策理论存在一个根本问题，即人们实际上无法计算风险函数，因为它依赖于知道真实的数据分布。 （相比之下，贝叶斯后验预期损失总是可以计算，因为它更取决于数据，而不是
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(\theta^{\\*}\)
+</span>
+。）但是，有一个设置可以避免这个问题，这就是预测可观察性量的任务，而不是估计隐藏变量或参数。 也就是说，不再关注形如
+
+
+<span class="katex">
+  \(L(\boldsymbol{\theta},\delta(\mathcal{D}))\)
+</span>
+的损失函数，其中
+
+
+<span class="katex">
+  \(\boldsymbol{\theta}\)
+</span>
+是真实但未知的参数，而
+
+
+<span class="katex">
+  \(\delta(\mathcal{D})\)
+</span>
+是我们的估计器; 而是让我们关注形如
+
+
+<span class="katex">
+  \(L(y,\delta(\boldsymbol{x}))\)
+</span>
+的损失函数，其中
+
+
+<span class="katex">
+  \(y\)
+</span>
+是真实但未知的响应，
+
+
+<span class="katex">
+  \(\delta(\boldsymbol{x})\)
+</span>
+是给定输入
+
+
+<span class="katex">
+  \(\boldsymbol{x}\)
+</span>
+的预测。 在这种情况下，频率派风险变为</p>
+
+
+
+<span class="katex">
+  \[
+R(p_{\\*},\delta)\overset{\Delta}{=}\mathbb{E}_{(\boldsymbol{x},y) \sim p_{\\*}}\left[L(y,\delta(\boldsymbol{x}))\right]=\sum_{\boldsymbol{x}}{\sum_y{L(y,\delta(\boldsymbol{x}))p_{\\*}(\boldsymbol{x},y)}}   \tag{6.47}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(p_{\\*}\)
+</span>
+代表“自然的分布”。 当然，这种分布是未知的，但一种简单的方法是使用从一些训练数据导出的经验分布来近似
+
+
+<span class="katex">
+  \(p^{\\*}\)
+</span>
+，即，</p>
+
+
+
+<span class="katex">
+  \[
+p_{\\*}(\boldsymbol{x},y) \approx p_{\rm emp}(\boldsymbol{x},y)\overset{\Delta}{=}\dfrac{1}{N}\sum_{i=1}^N{\delta_{\boldsymbol{x}_i}(\boldsymbol{x})\delta_{y_i}(y)}    \tag{6.48}
+\]
+</span>
+
+<p>然后我们将<strong>经验风险</strong>定义如下：</p>
+
+
+
+<span class="katex">
+  \[
+R_{\rm emp}(\mathcal{D},\mathcal{D})\overset{\Delta}{=}R(p_{\rm emp},\delta)=\dfrac{1}{N}\sum_{i=1}^N{L(y_i,\delta(\boldsymbol{x}_i))}    \tag{6.49}
+\]
+</span>
+
+<p>在0-1损失的情况下，
+
+
+<span class="katex">
+  \(L(y,\delta(\boldsymbol{x}))=\mathbb{I} (y \ne \delta(\boldsymbol{x}))\)
+</span>
+ 变成了<strong>错分率</strong>(<strong>misclassification rate</strong>)。 在平方误差损失的情况下，
+
+
+<span class="katex">
+  \(L(y,\delta(\boldsymbol{x}))=(y - \delta(\boldsymbol{x}))^2\)
+</span>
+，这变为<strong>均方误差</strong>(<strong>mean squared error</strong>)。 我们将<strong>经验风险最小化</strong>或<strong>ERM</strong>的任务定义为寻找决策程序（通常是分类规则）以使最小化经验风险：</p>
+
+
+
+<span class="katex">
+  \[
+\delta_{\rm ERM}(\mathcal{D})=\underset{\delta}{\rm argmin} \ R_{\rm emp}(\mathcal{D},\delta)   \tag{6.50}
+\]
+</span>
+
+<p>在无监督的情况下，我们消除对
+
+
+<span class="katex">
+  \(y\)
+</span>
+的所有引用，并用
+
+
+<span class="katex">
+  \(L(\boldsymbol{x},\delta(\boldsymbol{x}))\)
+</span>
+代替
+
+
+<span class="katex">
+  \(L(y,\delta(\boldsymbol{x}))\)
+</span>
+，比如
+
+
+<span class="katex">
+  \(L(\boldsymbol{x},\delta(\boldsymbol{x}))= \| \boldsymbol{x} - \delta(\boldsymbol{x})\|_2^2\)
+</span>
+被用来度量重建误差。 我们可以使用
+
+
+<span class="katex">
+  \(\delta(\boldsymbol{x})= {\rm decode}({\rm encode}(\boldsymbol{x}))\)
+</span>
+定义决策规则，用作<strong>矢量量化</strong>（第11.4.2.6节）或<strong>PCA</strong>（第12.2节）。 最后，我们将<strong>经验风险</strong>定义为</p>
+
+
+
+<span class="katex">
+  \[
+R_{\rm emp}(\mathcal{D},\delta)=\dfrac{1}{N}\sum_{i=1}^N{L(\boldsymbol{x}_i,\delta(\boldsymbol{x}_i))}  \tag{6.51}
+\]
+</span>
+
+<p>当然，我们总是可以通过设置
+
+
+<span class="katex">
+  \(\delta(\boldsymbol{x})= \boldsymbol{x}\)
+</span>
+来最小化这种风险，因此编码器-解码器通过某种瓶颈是至关重要的。</p>
+<h2 id="651-正则化风险最小化">6.5.1 正则化风险最小化</h2>
+<p>请注意，如果我们的先验相关的“自然分布”与经验分布完全相等（Minka 2001b），则经验风险等于贝叶斯风险：</p>
+
+
+
+<span class="katex">
+  \[
+\mathbb{E}\left[R(p_{\\*},\delta)_{p_{\\*}=p_{\rm emp}}\right]=R_{\rm emp}(\mathcal{D},\delta)    \tag{6.52}
+\]
+</span>
+
+<p>因此，最小化经验风险通常会导致过度拟合。 因此，经常需要为目标函数添加复杂性惩罚：</p>
+
+
+
+<span class="katex">
+  \[
+R'(\mathcal{D},\delta)=R_{\rm emp}(\mathcal{D},\delta)+\lambda C(\delta)   \tag{6.53}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(C(\delta)\)
+</span>
+度量了预测函数
+
+
+<span class="katex">
+  \(\delta{\boldsymbol{x}}\)
+</span>
+的复杂度，
+
+
+<span class="katex">
+  \(\lambda\)
+</span>
+控制了复杂性惩罚的强度。 这种方法称为<strong>正则化风险最小化</strong>（<strong>RRM</strong>）。 注意，如果损失函数是负对数似然，并且正则化项是负对数先验，则这相当于MAP估计。</p>
+<p>RRM中的两个关键问题是：我们如何度量复杂性，以及如何选择
+
+
+<span class="katex">
+  \(\lambda\)
+</span>
+。 对于线性模型，我们可以根据第7.5.3节中讨论的自由度来定义复杂性。 对于更一般的模型，我们可以使用第6.5.4节中讨论的VC维度。 至于
+
+
+<span class="katex">
+  \(\lambda\)
+</span>
+的选择，我们可以使用第6.5.2节中讨论的方法。</p>
+<h2 id="652-结构风险最小化">6.5.2 结构风险最小化</h2>
+<p>正则化风险最小化原则表明，对于给定的复杂性惩罚，我们应该通过使用下式来拟合模型</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\delta}_\lambda = \underset{\delta}{\rm argmin} \left[R_{\rm emp}(\mathcal{D},\delta)+\lambda C(\delta)\right]  \tag{6.54}
+\]
+</span>
+
+<p>但是我们该怎么选择
+
+
+<span class="katex">
+  \(\lambda\)
+</span>
+呢？ 我们不能使用训练集，因为这会低估真正的风险，这个问题被称为<strong>训练误差的乐观</strong>(<strong>optimism of the training error</strong>)。 作为替代方案，我们可以使用以下规则，称为<strong>结构风险最小化</strong>原则：（Vapnik 1998）：</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\lambda}=\underset{\lambda}{\rm argmin} \ \hat{R}(\hat{\delta}_\lambda)    \tag{6.55}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(\hat{R}(\delta)\)
+</span>
+是风险的估计值。 有两种广泛使用的估计：交叉验证和风险的理论上限。 我们将在下面讨论这两个方面。</p>
+<h2 id="653-使用交叉验证估计风险">6.5.3 使用交叉验证估计风险</h2>
+<p>我们可以使用验证集来估计某些估算器的风险。 如果我们没有单独的验证集，我们可以使用<strong>交叉验证</strong>（<strong>CV</strong>），正如我们在1.4.8节中简要讨论的那样。 更确切地说，CV定义如下。 在训练集中令
+
+
+<span class="katex">
+  \(N = |\mathcal{D}|\)
+</span>
+。 用
+
+
+<span class="katex">
+  \(\mathcal{D}_k\)
+</span>
+表示第k折叠的测试数据，用
+
+
+<span class="katex">
+  \(\mathcal{D}_{-k}\)
+</span>
+表示所有其他数据。 （在<strong>分层CV</strong>(<strong>stratified CV</strong>)中，选择的这些折叠使得每个类的占比（如果存在离散标签）在每个折叠中大致相等。）设
+
+
+<span class="katex">
+  \(\mathcal{F}\)
+</span>
+是一个基于数据集和第
+
+
+<span class="katex">
+  \(m\)
+</span>
+模型上的学习算法或拟合函数（这个索引
+
+
+<span class="katex">
+  \(m\)
+</span>
+可能是 离散索引，例如多项式的次数，或连续索引，例如正则化器的强度）并返回参数向量：</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\boldsymbol{\theta}}_m = \mathcal{F}(\mathcal{D},m)   \tag{6.56}
+\]
+</span>
+
+<p>最后，让
+
+
+<span class="katex">
+  \(\mathcal{P}\)
+</span>
+为预测函数，它接受输入和参数向量并返回预测：</p>
+
+
+
+<span class="katex">
+  \[
+\hat{y} =  \mathcal{P}(\boldsymbol{x},\hat{\boldsymbol{\theta}})=f(\boldsymbol{x},\hat{\boldsymbol{\theta}})  \tag{6.57}
+\]
+</span>
+
+<p>因此，组合得到的<strong>拟合-预测循环</strong>表示为</p>
+
+
+
+<span class="katex">
+  \[
+f_m(\boldsymbol{x},\mathcal{D})=\mathcal{P}(\boldsymbol{x},\mathcal{F}(\mathcal{D},m))   \tag{6.58}
+\]
+</span>
+
+<p>
+
+
+<span class="katex">
+  \(f_m\)
+</span>
+风险的K折CV估计定义为</p>
+
+
+
+<span class="katex">
+  \[
+R(m,\mathcal{D},K)\overset{\Delta}{=}\dfrac{1}{N}\sum_{k=1}^K{\sum_{i\in\mathcal{D}_k}{L(y_i,\mathcal{P}(\boldsymbol{x}_i,\mathcal{F}(\mathcal{D}_{-k},m)))}}    \tag{6.59}
+\]
+</span>
+
+<p>请注意，我们可以每折都调用拟合算法一次。 令
+
+
+<span class="katex">
+  \(f_m^k(\boldsymbol{x})=\mathcal{P}(\boldsymbol{x},\mathcal{F}(\mathcal{D}_{-k},m))\)
+</span>
+ 是除了
+
+
+<span class="katex">
+  \(k\)
+</span>
+折测试数据之外的所有数据上训练的函数。 于是我们可以将CV估计重写为</p>
+
+
+
+<span class="katex">
+  \[
+R(m,\mathcal{D},K)=\dfrac{1}{N}\sum_{k=1}^K{\sum_{i\in\mathcal{D}_k}{L(y_i,f_m^k(\boldsymbol{x}_i))}}=\dfrac{1}{N}\sum_{i=1}^N{L(y_i,f_m^{k(i)}(\boldsymbol{x}_i))}    \tag{6.60}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(k(i)\)
+</span>
+是第
+
+
+<span class="katex">
+  \(i\)
+</span>
+个数据被用作测试数据所在的折叠。 换句话说，我们使用在不包含
+
+
+<span class="katex">
+  \(\boldsymbol{x}_i\)
+</span>
+的数据上训练模型来预测
+
+
+<span class="katex">
+  \(y_i\)
+</span>
+。</p>
+<p>在
+
+
+<span class="katex">
+  \(K = N\)
+</span>
+的情况下，该方法被称为<strong>留一交叉验证</strong>或<strong>LOOCV</strong>。 在这种情况下，估计的风险就变成了</p>
+
+
+
+<span class="katex">
+  \[
+R(m,\mathcal{D},K)=\dfrac{1}{N}\sum_{i=1}^N{L(y_i,f_m^{-i}(\boldsymbol{x}_i))}    \tag{6.61}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(f_m^i(\boldsymbol{x})=\mathcal{P}(\boldsymbol{x},\mathcal{F}(\mathcal{D}_{-i},m))\)
+</span>
+。 这需要将模型拟合N次，其中
+
+
+<span class="katex">
+  \(f_m^{-i}\)
+</span>
+我们省略了第
+
+
+<span class="katex">
+  \(i\)
+</span>
+个训练案例。 幸运的是，对于某些模型类和损失函数（即线性模型和二次损失），我们可以将模型拟合一次，并在分析地“消除”第
+
+
+<span class="katex">
+  \(i\)
+</span>
+个训练案例的效果。 这称为<strong>广义交叉验证</strong>或<strong>GCV</strong>。</p>
+<h3 id="6531-示例使用cv为岭回归选择λ">6.5.3.1 示例：使用CV为岭回归选择λ</h3>
+<p>作为一个具体的例子，考虑在惩罚线性回归中选择
+
+
+<span class="katex">
+  \(l_2\)
+</span>
+正则化强度。 我们使用以下规则：</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\lambda}=\underset{\lambda \in [\lambda_{\min},\lambda_{\max}]}{\rm argmin} \ R(\lambda,\mathcal{D}_{\rm train},K)   \tag{6.62}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \([\lambda_{\min},\lambda_{\max}]\)
+</span>
+是我们搜索的
+
+
+<span class="katex">
+  \(\lambda\)
+</span>
+值的有限范围，
+
+
+<span class="katex">
+  \(R(\lambda,\mathcal{D}_{\rm train},K)\)
+</span>
+是使用
+
+
+<span class="katex">
+  \(\lambda\)
+</span>
+的K折CV风险估计值，由下式给出：</p>
+
+
+
+<span class="katex">
+  \[
+R(\lambda,\mathcal{D}_{\rm train},K)=\dfrac{1}{|\mathcal{D}_{\rm train}|}\sum_{k=1}^K{\sum_{i\in\mathcal{D}_k}{L(y_i,f_\lambda^k(\boldsymbol{x}_i))}}   \tag{6.63}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(f_\lambda^k(\boldsymbol{x})=\boldsymbol{x}^T \hat{\boldsymbol{w}}_\lambda(\mathcal{D}_{-k})\)
+</span>
+ 是在不包括
+
+
+<span class="katex">
+  \(k\)
+</span>
+折叠数据上训练的预测函数，并且
+
+
+<span class="katex">
+  \(\hat{\boldsymbol{w}}_\lambda(\mathcal{D})= \underset{\boldsymbol{w}}{\rm argmin}\left[{\rm NLL}(\boldsymbol{w},\mathcal{D})+\lambda \| \boldsymbol{w} \|_2^2\right]\)
+</span>
+ 是MAP估计。 图6.6（b）给出了风险v.s.
+
+
+<span class="katex">
+  \(\log(\lambda)\)
+</span>
+的CV估计的一个例子，其中损失函数是平方误差。</p>
+<p><img src="" alt="0091.jpg"></p>
+<blockquote>
+<p>图6.6 （a）14阶多项式回归的
+
+
+<span class="katex">
+  \(l_2\)
+</span>
+惩罚v.s.对数正则化的均方误差。 与图7.8相同，除了现在我们有N = 50个训练点而不是21个。星形对应于图7.7中用于绘制函数的值。 （b）CV估计。 为清楚起见，垂直刻度被截断。 蓝线对应于基于标准误差规则选择的值。 由_linregPolyVsRegDemo_生成的图。</p>
+</blockquote>
+<p>进行分类时，我们通常使用0-1损失。 在这种情况下，我们通过优化经验风险的凸上界来估计
+
+
+<span class="katex">
+  \(\boldsymbol{w}_\lambda\)
+</span>
+，但我们优化（CV估计）风险本身来估计
+
+
+<span class="katex">
+  \(\lambda\)
+</span>
+。 我们可以在估计
+
+
+<span class="katex">
+  \(\lambda\)
+</span>
+时处理非平滑0-1损失函数，因为我们在整个（一维）空间上使用强力搜索。</p>
+<p>当我们有超过一个或两个调整参数时，这种方法变得不可行。 在这种情况下，可以使用经验贝叶斯，这允许人们使用基于梯度的优化器而不是强力搜索来优化大量超参数。 详细信息请参见第5.6节。</p>
+<h3 id="6532-一个标准误差规则one-standard-error-rule">6.5.3.2 一个标准误差规则(one-standard error rule)</h3>
+<p>上述估计风险程序，没有给出任何不确定性的衡量标准。 关于估计不确定性的标准频率派度量是均值的标准误差，由定义如下</p>
+
+
+
+<span class="katex">
+  \[
+{\rm se} = \dfrac{\hat{\sigma}}{\sqrt{N}}=\sqrt{\dfrac{\hat{\sigma}^2}{N}}   \tag{6.64}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(\hat{\sigma}^2\)
+</span>
+是损失方差的一个估计：</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\sigma}^2 = \dfrac{1}{N}\sum_{i=1}^N{(L_i-\bar{L})^2},L_i=L(y_i,f_m^{k(i)}(\boldsymbol{x}_i)),\bar{L}=\dfrac{1}{N}\sum_{i=1}^N{L_i}  \tag{6.65}
+\]
+</span>
+
+<p>请注意，
+
+
+<span class="katex">
+  \(\sigma\)
+</span>
+度量所有样本损失
+
+
+<span class="katex">
+  \(L_i\)
+</span>
+的内在变化，而
+
+
+<span class="katex">
+  \({\rm se}\)
+</span>
+测量我们关于均值
+
+
+<span class="katex">
+  \(\bar{L}\)
+</span>
+的不确定性。</p>
+<p>假设我们将CV应用于一组模型并计算其风险估计的均值和标准误差。 从这些噪声估计中挑选模型的常用启发式方法是选择对应于最简单模型的值，该模型的风险不超过最佳模型风险的一个标准误差; 这被称为<strong>一个标准误差规则</strong>（Hastie等，2001，第216页）。 例如，在图6.6中，我们看到这种启发式算法并没有选择曲线上的最低点，而是略微偏向右侧，因为这对应于具有基本相同经验性能的更严格的正则化模型。</p>
+<h3 id="6533-非概率无监督学习中cv模型选择">6.5.3.3 非概率无监督学习中CV模型选择</h3>
+<p>如果我们正在进行无监督学习，我们必须使用形如
+
+
+<span class="katex">
+  \(L(\boldsymbol{x},\delta(\boldsymbol{x}))= \| \boldsymbol{x} - \delta(\boldsymbol{x})\|_2^2\)
+</span>
+的损失函数，它度量了重建误差。 这里
+
+
+<span class="katex">
+  \(\delta(\boldsymbol{x})\)
+</span>
+是一些编码-解码方案。 然而，正如我们在第11.5.2节中讨论的那样，我们不能使用CV来确定
+
+
+<span class="katex">
+  \(\delta\)
+</span>
+的复杂性，因为即使在测试集上进行评估，我们也总能通过更复杂的模型获得更低的损失。 这是因为更复杂的模型会减少压缩数据，并减少失真。 因此，我们必须使用概率模型，或发明其他启发式。</p>
+<h2 id="654-使用统计学习理论的风险上限">6.5.4 使用统计学习理论的风险上限*</h2>
+<p>交叉验证的主要问题是它很慢，因为我们不得不多次拟合模型。 这激发了对分析近似或泛化误差界限的计算欲望。 这是在<strong>统计学习理论</strong>（<strong>SLT</strong>）领域中所研究的。 更确切地说，SLT试图根据经验风险
+
+
+<span class="katex">
+  \(R_{\rm emp}(\mathcal{D},h)\)
+</span>
+ ，样本大小
+
+
+<span class="katex">
+  \(N =| \mathcal{D} |\)
+</span>
+，以及假设空间
+
+
+<span class="katex">
+  \(\mathcal{H}\)
+</span>
+的大小， 限制任意一个数据分布
+
+
+<span class="katex">
+  \(p_{\\*}\)
+</span>
+和假设
+
+
+<span class="katex">
+  \(h \in \mathcal{H}\)
+</span>
+ 的风险
+
+
+<span class="katex">
+  \(R(p_{\\*},h)\)
+</span>
+。</p>
+<p>让我们首先考虑假设空间是有限的情况，其大小为
+
+
+<span class="katex">
+  \({\rm dim}(\mathcal{H})= | \mathcal{H} |\)
+</span>
+。 换句话说，我们从有限列表中选择一个模型/假设，而不是优化实值参数。然后我们可以证明以下内容。</p>
+<p><strong>定理6.5.1.</strong> 对于任何数据分布 
+
+
+<span class="katex">
+  \(p_{\\*}\)
+</span>
+ ，以及从 
+
+
+<span class="katex">
+  \(p_{\\*}\)
+</span>
+ 中提取的任何大小为
+
+
+<span class="katex">
+  \(N\)
+</span>
+的数据集
+
+
+<span class="katex">
+  \(\mathcal{D}\)
+</span>
+，对一个有限大小的假设空间
+
+
+<span class="katex">
+  \(\mathcal{H}\)
+</span>
+而言，有如下不等式成立：</p>
+
+
+
+<span class="katex">
+  \[
+P\left(\underset{h\in\mathcal{H}}{\rm max}\left|R_{\rm emp}(\mathcal{D},h)-R(p_{\\*},h)\right|>\epsilon\right)\le 2 \ {\rm dim}(\mathcal{H}) e^{-2N\epsilon^2}    \tag{6.66}
+\]
+</span>
+
+<p>证明: 为了证明这一点，我们需要两个有用的结果。 首先，<strong>Hoeffding不等式</strong>，它表明如果
+
+
+<span class="katex">
+  \(X_1,\dots,X_N \sim {\rm Ber}(\theta)\)
+</span>
+，那么，</p>
+
+
+
+<span class="katex">
+  \[
+P\left(|\bar{x}-\theta|>\epsilon\right) \le 2 \ e^{-2N\epsilon^2}   \tag{6.67}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(\bar{x}=\frac{1}{N} \sum_{i = 1}^N{x_i}\)
+</span>
+。 其次，<strong>联合上界</strong>，即如果
+
+
+<span class="katex">
+  \(A_1,\dots,A_d\)
+</span>
+是一组事件，那么
+
+
+<span class="katex">
+  \(P(\bigcup_{i=1}^d{A_i}) \le \sum_{i= 1}^d{P(A_i)}\)
+</span>
+。</p>
+<p>最后，为了符号简洁性，让
+
+
+<span class="katex">
+  \(R(h)= R(h,p_{\\*})\)
+</span>
+表示真实风险，
+
+
+<span class="katex">
+  \(\hat{R}_N(h)= R_{\rm emp}(\mathcal{D},h)\)
+</span>
+表示经验风险。</p>
+<p>使用这些结果，我们有</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+P\left(\underset{h \in \mathcal{H}}{\rm max}\left|\hat{R}_N(h)-R(h)\right|>\epsilon\right) = & P\left(\bigcup_{h \in \mathcal{H}}\left|\hat{R}_N(h)-R(h)\right|>\epsilon\right)  \\
+\quad \le & \bigcup_{h \in \mathcal{H}}P\left(\left|\hat{R}_N(h)-R(h)\right|>\epsilon\right)    \\
+\quad \le & \bigcup_{h \in \mathcal{H}}{2 \ e^{-2N\epsilon^2}} = 2 \ {\rm dim}(\mathcal{H}) e^{-2N\epsilon^2}    \\
+\end{aligned} \tag{6.68-70}
+\]
+</span>
+
+<p>这个上界告诉我们，训练误差的乐观程度随着
+
+
+<span class="katex">
+  \({\rm dim}(\mathcal{H})\)
+</span>
+而增加，但随着
+
+
+<span class="katex">
+  \(N = | \mathcal{D} |\)
+</span>
+而减小，正如预期的那样。</p>
+<p>如果假设空间
+
+
+<span class="katex">
+  \(\mathcal{H}\)
+</span>
+是无穷大的（比如，实值参数），我们就不能使用
+
+
+<span class="katex">
+  \({\rm dim}(\mathcal{H})= | \mathcal{H} |\)
+</span>
+。 相反，我们可以使用称为<strong>Vapnik-Chervonenkis</strong>的量或假设类的<strong>VC</strong>维度。 有关详细信息，请参阅（Vapnik 1998）。</p>
+<p>统计学习理论背后的关键直觉非常简单。 假设我们找到了一个较低经验风险的模型。 如果相对于数据大小，假设空间
+
+
+<span class="katex">
+  \(\mathcal{H}\)
+</span>
+非常大，那么很可能我们只是“幸运”地用我们选择的函数为给定数据集就很好建模了。 然而，这并不意味着这样的函数具有低泛化误差。 但是，如果假设类的大小受到足够的约束，和/或，训练集足够大，那么我们不太可能以这种方式获得幸运，所以低经验风险是低真实风险的证据。</p>
+<p>请注意，训练误差的乐观性不一定随模型复杂性而增加，但它确实随着搜索的不同模型的数量而增加。</p>
+<p>与CV相比，统计学习理论的优势在于风险界限的计算比使用CV更快。 缺点是很难为许多有趣的模型计算VC维度，并且上限通常非常松散（尽管参见（Kaariainen和Langford 2005））。</p>
+<p>人们可以通过考虑学习者的计算复杂性来扩展统计学习理论。 该领域称为<strong>计算学习理论</strong>或<strong>COLT</strong>。 这项工作大部分集中在
+
+
+<span class="katex">
+  \(h\)
+</span>
+是二元分类器并且损失函数是0-1损失的情况下。 如果我们观察到低经验风险，并且假设空间适当地“小”，那么我们可以说我们的估计函数<strong>可能近似正确</strong>或<strong>PAC</strong>。 如果存在一个多项式时间算法，可以识别一个函数是PAC的，那么假设空间被<strong>有效地PAC学习</strong>。 有关详细信息，请参阅（Kearns和Vazirani 1994）。</p>
+<h2 id="655-代理损失函数-surrogate-loss-functions">6.5.5 代理损失函数( Surrogate loss functions)</h2>
+<p>最小化ERM / RRM框架中的损失并非易事。 例如，我们可能想要优化AUC或F1分数。 或者更简单地说，我们可能只想最小化0-1损失，这在分类中很常见。 不幸的是，0-1风险是一个非常不平滑的目标，因此难以优化。 一种替代方案是使用最大似然估计，因为对数似然是0-1风险的平滑凸上限，如下所示。</p>
+<p>为了看到这一点，考虑二元逻辑斯蒂回归，并令
+
+
+<span class="katex">
+  \(y_i \in \{-1,+1\}\)
+</span>
+。 假设我们的决策函数计算<strong>对数比值比</strong>(<strong>log-odds ratio</strong>)，</p>
+
+
+
+<span class="katex">
+  \[
+f(\boldsymbol{x}_i)=\log \dfrac{p(y=1|\boldsymbol{x}_i,\boldsymbol{w})}{p(y=-1|\boldsymbol{x}_i,\boldsymbol{w})}=\boldsymbol{w}^T\boldsymbol{x}_i=\eta_i   \tag{6.71}
+\]
+</span>
+
+<p>然后输出标签上的相应概率分布是</p>
+
+
+
+<span class="katex">
+  \[
+p(y_i|\boldsymbol{x}_i,\boldsymbol{w})={\rm sigm}(y_i \eta_i)    \tag{6.72}
+\]
+</span>
+
+<p>让我们将<strong>对数损失</strong>(<strong>log-loss</strong>)定义为</p>
+
+
+
+<span class="katex">
+  \[
+L_{\rm nll}(y,\eta) = - \log \ p(y|\boldsymbol{x},\boldsymbol{w})=\log (1+e^{-y \eta})    \tag{6.73}
+\]
+</span>
+
+<p>很明显，最小化对数损失平均等价于最大化拟然。</p>
+<p><img src="" alt="0092.jpg"></p>
+<blockquote>
+<p>图6.7 二进制分类的各种损失函数的描述。 横轴是边缘
+
+
+<span class="katex">
+  \(y \eta\)
+</span>
+，纵轴是损失。 对数损失使用基于2的对数.由_hingeLossPlot_生成的图。</p>
+</blockquote>
+<p>现在考虑计算最可能的标签，这等价于，如果
+
+
+<span class="katex">
+  \(\eta_i<0\)
+</span>
+ 则
+
+
+<span class="katex">
+  \(y = -1\)
+</span>
+;如果
+
+
+<span class="katex">
+  \(\eta_i \ge 0\)
+</span>
+则
+
+
+<span class="katex">
+  \(y = 1\)
+</span>
+。 我们函数的0-1损失变成</p>
+
+
+
+<span class="katex">
+  \[
+L_{01}(y,\eta)=\mathbb{I}(y \ne \hat{y})=\mathbb{I}(y \eta<0)    \tag{6.74}
+\]
+</span>
+
+<p>图6.7绘制了这两个损失函数。 我们看到NLL确实是0-1损失的上限。</p>
+<p>对数损失是<strong>代理损失函数</strong>(<strong>surrogate loss function</strong>)的一个例子。 另一个例子是<strong>合页损失</strong>(<strong>hinge loss</strong>)：</p>
+
+
+
+<span class="katex">
+  \[
+L_{\rm hinge}(y,\eta)=\max(0,1-y\eta)    \tag{6.75}
+\]
+</span>
+
+<p>请参见图6.7的绘图。 我们看到该函数看起来像一个门合页，因此得名。 这种损失函数构成了一种流行的分类方法的基础，称为支持向量机（SVM），我们将在14.5节中讨论。</p>
+<p>代理通常被选择为凸上界，因为凸函数易于最小化。 例如，参见（Bartlett等人，2006）以获得更多信息。</p>
+<p><a href="/notes/docs/mlapp/06frequentist_statistics/"><strong>返回本章目录</strong></a></p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0059/">
+    下一页<br>习题
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0058/">
+      上一页<br>6.6 频率派统计的病态*
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/06frequentist_statistics/0057.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/mlapp/06frequentist_statistics/0057.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#651-正则化风险最小化">6.5.1 正则化风险最小化</a></li>
+        <li><a href="#652-结构风险最小化">6.5.2 结构风险最小化</a></li>
+        <li><a href="#653-使用交叉验证估计风险">6.5.3 使用交叉验证估计风险</a>
+          <ul>
+            <li><a href="#6531-示例使用cv为岭回归选择λ">6.5.3.1 示例：使用CV为岭回归选择λ</a></li>
+            <li><a href="#6532-一个标准误差规则one-standard-error-rule">6.5.3.2 一个标准误差规则(one-standard error rule)</a></li>
+            <li><a href="#6533-非概率无监督学习中cv模型选择">6.5.3.3 非概率无监督学习中CV模型选择</a></li>
+          </ul>
+        </li>
+        <li><a href="#654-使用统计学习理论的风险上限">6.5.4 使用统计学习理论的风险上限*</a></li>
+        <li><a href="#655-代理损失函数-surrogate-loss-functions">6.5.5 代理损失函数( Surrogate loss functions)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

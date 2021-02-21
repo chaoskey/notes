@@ -1,0 +1,2030 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="流形上的旋量和旋量场（初步）"><meta property="og:title" content="流形上的旋量和旋量场（初步）" />
+<meta property="og:description" content="
+带度规流形任意点的切空间和平直空间没有数学上的差别，进而平直空间上发展起来的旋量都是可以移到带度规流形上而无需改变。
+旋量概念是度规依赖的，进而可始终在正交归一基底下讨论。
+旋量概念源自
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+  \(\mathrm{SU}(2)\)
+
+对
+
+
+
+  \(\mathrm{SO}(3)\)
+
+是双重覆盖，将表示空间（或 时空）的旋转“劈”为两半，其中一半就是旋量空间上的逆变旋量，另一半是其共轭空间的共轭逆变旋量。
+一个逆变矢量可以表示成一个逆变旋量与一个共轭逆变旋量的张量积。
+一个协变矢量可以表示成一个协变旋量与一个共轭协变旋量的张量积。
+引入了旋量的抽象指标表示，可以方便无歧义地进行相关的运算。
+关于旋量运算的约定：1）旋量度规按指标左上右下缩并；2）泡利矩阵前加因子
+
+
+
+  \(1/\sqrt{2}\)
+
+。
+本篇的计算草稿：https://gitee.com/chaoskey/notes/blob/master/code/0076.ipynb
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/diffgeo/0076/" />
+<meta property="article:published_time" content="2020-03-22T13:42:42+08:00" />
+<meta property="article:modified_time" content="2020-03-22T13:42:42+08:00" />
+<title>流形上的旋量和旋量场（初步） | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a>
+<ul>
+<li><a href="/notes/docs/diffgeo/0005/">基于抽象指标的张量分析</a></li>
+<li><a href="/notes/docs/diffgeo/0006/">流形上的导数算符</a></li>
+<li><a href="/notes/docs/diffgeo/0007/">流形上的平移</a></li>
+<li><a href="/notes/docs/diffgeo/0008/">黎曼曲率张量</a></li>
+<li><a href="/notes/docs/diffgeo/0009/">流形间的映射</a></li>
+<li><a href="/notes/docs/diffgeo/0010/">流形上的李导数</a></li>
+<li><a href="/notes/docs/diffgeo/0011/">Killing矢量场</a></li>
+<li><a href="/notes/docs/diffgeo/0012/">子流形和超曲面</a></li>
+<li><a href="/notes/docs/diffgeo/0013/">流形上的微分形式及其对偶</a></li>
+<li><a href="/notes/docs/diffgeo/0014/">流形上的微积分</a></li>
+<li><a href="/notes/docs/diffgeo/0016/">李群李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0068/">常用李群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0069/">李变换群</a></li>
+<li><a href="/notes/docs/diffgeo/0070/">微分几何中的计算（Julia版）</a></li>
+<li><a href="/notes/docs/diffgeo/0073/">辛群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0074/">辛流形</a></li>
+<li><a href="/notes/docs/diffgeo/0076/"class=active>流形上的旋量和旋量场（初步）</a></li>
+<li><a href="/notes/docs/diffgeo/0077/">流形上的旋量和旋量场（几何解释）</a></li>
+<li><a href="/notes/docs/diffgeo/0078/">流形上的旋量和旋量场（导数算符和曲率)</a></li>
+<li><a href="/notes/docs/diffgeo/0079/">流形上的旋量和旋量场（自旋系数和克氏符）</a></li>
+<li><a href="/notes/docs/diffgeo/0082/">李群李代数伴随表示和Killing型、Casimir算符</a></li>
+<li><a href="/notes/docs/diffgeo/0083/">半单李代数的标准形式</a></li>
+<li><a href="/notes/docs/diffgeo/0084/">半单李代数的根系、权系和Dynkin图</a></li>
+<li><a href="/notes/docs/diffgeo/0085/">半单李代数的Casimir不变算符</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>流形上的旋量和旋量场（初步）</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#三维欧氏空间的旋转">三维欧氏空间的旋转</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#四维闵氏时空的旋转">四维闵氏时空的旋转</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#伪黎曼流形上对称性">(伪)黎曼流形上对称性</a></li>
+        <li><a href="#基本旋量">基本旋量</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#旋量张量">旋量张量</a></li>
+        <li><a href="#旋量空间">旋量空间</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#基旋量">基旋量</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#矢量张量和旋量的对应关系">矢量(张量)和旋量的对应关系</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#关于指标对的反称或对称分解恒等式">关于指标对的反称或对称分解恒等式</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0077/">
+    下一页<br>流形上的旋量和旋量场（几何解释）
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/theophy/0075/">
+      上一页<br>辛流形上的哈密顿力学
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/diffgeo/0076/">流形上的旋量和旋量场（初步）</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-03-22</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95">微分几何</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E6%B5%81%E5%BD%A2">流形</a>
+      , 
+      <a href="/notes/tags/%E6%97%8B%E9%87%8F">旋量</a>
+      , 
+      <a href="/notes/tags/%E5%AF%B9%E7%A7%B0%E6%80%A7">对称性</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0076.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<blockquote>
+<p>带度规流形任意点的切空间和平直空间没有数学上的差别，进而平直空间上发展起来的旋量都是可以移到带度规流形上而无需改变。</p>
+<p>旋量概念是度规依赖的，进而可始终在正交归一基底下讨论。</p>
+<p>旋量概念源自
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(\mathrm{SU}(2)\)
+</span>
+对
+
+
+<span class="katex">
+  \(\mathrm{SO}(3)\)
+</span>
+是双重覆盖，将表示空间（或 时空）的旋转“劈”为两半，其中一半就是旋量空间上的逆变旋量，另一半是其共轭空间的共轭逆变旋量。</p>
+<p>一个逆变矢量可以表示成一个逆变旋量与一个共轭逆变旋量的张量积。</p>
+<p>一个协变矢量可以表示成一个协变旋量与一个共轭协变旋量的张量积。</p>
+<p>引入了旋量的抽象指标表示，可以方便无歧义地进行相关的运算。</p>
+<p>关于旋量运算的约定：1）旋量度规按指标左上右下缩并；2）泡利矩阵前加因子
+
+
+<span class="katex">
+  \(1/\sqrt{2}\)
+</span>
+。</p>
+<p>本篇的计算草稿：https://gitee.com/chaoskey/notes/blob/master/code/0076.ipynb</p>
+</blockquote>
+<h2 id="三维欧氏空间的旋转">三维欧氏空间的旋转</h2>
+<h4 id="泡利矩阵">泡利矩阵</h4>
+<p>引入<code>泡利矩阵</code>
+
+
+<span class="katex">
+  \(\sigma_\mu\)
+</span>
+(都是厄米矩阵)</p>
+
+
+
+<span class="katex">
+  \[
+\sigma_1=\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix},\quad \sigma_2=\begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix},\quad \sigma_3=\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}\\ \quad \\ \sigma_1^{\ 2}=\sigma_2^{\ 2}=\sigma_3^{\ 2}=I\\ \sigma_1\sigma_2=-\sigma_2\sigma_1=i\sigma_3\quad \text{【按1-2-3-1循环置换后也成立】}
+\]
+</span>
+
+<h4 id="自旋矩阵">自旋矩阵</h4>
+<p>与任意旋转关联的一个量（以前叫哈密顿的<code>四元数</code>），现在称为<code>自旋矩阵</code>，又被称作<code>旋量变换</code>、<code>旋转算符</code>。绕
+
+
+<span class="katex">
+  \(\boldsymbol{n}\)
+</span>
+轴旋转
+
+
+<span class="katex">
+  \(\theta\)
+</span>
+的<code>自旋矩阵</code>表示
+
+
+<span class="katex">
+  \(R(\boldsymbol{\theta})\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}R(\boldsymbol{\theta})&=\exp\left(-\frac{i}{2}\boldsymbol{\theta}\cdot\boldsymbol{\sigma}\right)\\&=I\cos\frac{\theta}{2}-i(\boldsymbol{n}\cdot\boldsymbol{\sigma})\sin\frac{\theta}{2}\end{aligned}\\ \quad\\ \boldsymbol{\theta}=\theta \boldsymbol{n}\quad\boldsymbol{n}\cdot\boldsymbol{\sigma}=\sigma_\mu n^\mu\quad |\boldsymbol{n}|=1
+\]
+</span>
+
+<p>容易验证，自旋矩阵
+
+
+<span class="katex">
+  \(R\)
+</span>
+是特殊酉矩阵
+
+
+<span class="katex">
+  \(R\in\mathrm{SU}(2)\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+RR^\dagger=I,\quad \det R=1
+\]
+</span>
+
+<p>围绕定轴
+
+
+<span class="katex">
+  \(\boldsymbol{n}\)
+</span>
+转过
+
+
+<span class="katex">
+  \(\theta\)
+</span>
+角，相当于两个平面反射的组合（如图）。这就是半角出现的原因。</p>
+<p><img src="/notes/images/0124.svg" alt="0124.svg"></p>
+<h4 id="组合旋转">组合旋转</h4>
+<p>在
+
+
+<span class="katex">
+  \(R_1\)
+</span>
+所描述的旋转之后，续之以
+
+
+<span class="katex">
+  \(R_2\)
+</span>
+所描述的旋转，给出的净变化由单一旋转
+
+
+<span class="katex">
+  \(R_3\)
+</span>
+描绘：</p>
+
+
+
+<span class="katex">
+  \[
+R_3=R_2 R_1
+\]
+</span>
+
+<p>假如
+
+
+<span class="katex">
+  \(R_1=R(\boldsymbol{\theta}),\quad R_2=R(\boldsymbol{\varphi})\)
+</span>
+，那么</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}R_3&=\left(I\cos\frac{\varphi}{2}-i(\boldsymbol{n}_\varphi\cdot\boldsymbol{\sigma})\sin\frac{\varphi}{2}\right)\left(I\cos\frac{\theta}{2}-i(\boldsymbol{n}_\theta\cdot\boldsymbol{\sigma})\sin\frac{\theta}{2}\right)\\ &=I\left(\cos\frac{\varphi}{2}\cos\frac{\theta}{2}-\sin\frac{\varphi}{2}\sin\frac{\theta}{2}(\boldsymbol{n}_\varphi\cdot\boldsymbol{n}_\theta)\right)\\ &\quad -i\left(\boldsymbol{n}_\varphi\sin\frac{\varphi}{2}\cos\frac{\theta}{2}+\boldsymbol{n}_\theta\cos\frac{\varphi}{2}\sin\frac{\theta}{2}+(\boldsymbol{n}_\varphi\times\boldsymbol{n}_\theta)\sin\frac{\varphi}{2}\sin\frac{\theta}{2}\right)\cdot\boldsymbol{\sigma}\end{aligned}
+\]
+</span>
+
+<p>由此可确定
+
+
+<span class="katex">
+  \(R_3(\boldsymbol{\psi})\)
+</span>
+。特别地，若
+
+
+<span class="katex">
+  \(R_1=R(\frac{\pi}{2}(0,0,1)),\quad R_2=R(\frac{\pi}{2}(1,0,0))\)
+</span>
+，那么</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}R_3&=\frac{1}{2}I-i\frac{\sqrt{3}}{2}(\frac{1}{\sqrt{3}},\frac{1}{\sqrt{3}},\frac{1}{\sqrt{3}})\cdot\boldsymbol{\sigma}\\ &=I\cos\frac{\psi}{2}I-i\sin\frac{\psi}{2}(\boldsymbol{n}_\psi\cdot\boldsymbol{\sigma})\end{aligned}\\ \psi=\frac{2\pi}{3},\quad \boldsymbol{n}_\psi=(\frac{1}{\sqrt{3}},\frac{1}{\sqrt{3}},\frac{1}{\sqrt{3}})
+\]
+</span>
+
+<h4 id="自旋矩阵的性质">自旋矩阵的性质</h4>
+<p>自旋矩阵具有如下性质：</p>
+<p>1）
+
+
+<span class="katex">
+  \((\boldsymbol{n}\cdot\boldsymbol{\sigma})^2=I\)
+</span>
+</p>
+<p>2）
+
+
+<span class="katex">
+  \(\mathrm{tr}(\boldsymbol{n}\cdot\boldsymbol{\sigma})=0\)
+</span>
+</p>
+<p>3）
+
+
+<span class="katex">
+  \([R, (\boldsymbol{n}\cdot\boldsymbol{\sigma})]=R (\boldsymbol{n}\cdot\boldsymbol{\sigma})- (\boldsymbol{n}\cdot\boldsymbol{\sigma})R=0\)
+</span>
+</p>
+<p>4）
+
+
+<span class="katex">
+  \(\dfrac{dR}{d\theta}=-i(\boldsymbol{n}\cdot\boldsymbol{\sigma})R\)
+</span>
+</p>
+<h4 id="矢量的关联矩阵">矢量的关联矩阵</h4>
+<p>矢量
+
+
+<span class="katex">
+  \(\boldsymbol{x}\)
+</span>
+的关联矩阵【是厄米矩阵】：</p>
+
+
+
+<span class="katex">
+  \[
+X=\boldsymbol{x}\cdot\boldsymbol{\sigma}=x^\mu\sigma_\mu=\begin{pmatrix} x^3 & x^1-ix^2 \\ x^1+ix^2 & -x^3 \end{pmatrix}\\ \quad \\ \det X=-(x^1)^2-(x^2)^2-(x^3)^2 \\ X^2=(\boldsymbol{x}\cdot\boldsymbol{x})I\quad X^\dagger=X
+\]
+</span>
+
+<p>旋转效应可总结为：</p>
+
+
+
+<span class="katex">
+  \[
+X\mapsto X'=RXR^\dagger,\quad R\in SU(2)
+\]
+</span>
+
+<p>很明显，无论取
+
+
+<span class="katex">
+  \(R\)
+</span>
+还是
+
+
+<span class="katex">
+  \(-R\)
+</span>
+，都不会改变旋转的本质，都对应同一个
+
+
+<span class="katex">
+  \(\mathrm{SO}(3)\)
+</span>
+元素。</p>
+<p>
+
+
+<span class="katex">
+  \(\mathrm{SO}(3)\)
+</span>
+和
+
+
+<span class="katex">
+  \(\mathrm{SU}(2)\)
+</span>
+（特殊酉群）是<code>局域同构</code>的。至于为何强调<code>局域</code>，是因为
+
+
+<span class="katex">
+  \(\mathrm{SU}(2)\)
+</span>
+对
+
+
+<span class="katex">
+  \(\mathrm{SO}(3)\)
+</span>
+是双重覆盖，即任意特殊酉矩阵（幺正矩阵）及其负号矩阵代表同一个旋转。</p>
+<h4 id="无穷小旋转">无穷小旋转</h4>
+<p>对无穷小旋转动
+
+
+<span class="katex">
+  \(\theta\to 0\)
+</span>
+而言，
+
+
+<span class="katex">
+  \(R(\boldsymbol{\theta})\)
+</span>
+可写成（忽略高阶无穷小）</p>
+
+
+
+<span class="katex">
+  \[
+R=I-\frac{i}{2}(\boldsymbol{\theta}\cdot\boldsymbol{\sigma})
+\]
+</span>
+
+<p>进而有矢量
+
+
+<span class="katex">
+  \(\boldsymbol{x}\)
+</span>
+关联矩阵
+
+
+<span class="katex">
+  \(X=\boldsymbol{x}\cdot\boldsymbol{\sigma}\)
+</span>
+的无穷小变换：</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{x}\cdot\boldsymbol{\sigma}\mapsto R(\boldsymbol{x}\cdot\boldsymbol{\sigma})R^\dagger
+\]
+</span>
+
+<p>即（再次忽略高阶无穷小）</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{x}\cdot\boldsymbol{\sigma}\mapsto (\boldsymbol{x}\cdot\boldsymbol{\sigma})+\frac{i}{2}\left[(\boldsymbol{x}\cdot\boldsymbol{\sigma})(\boldsymbol{\theta}\cdot\boldsymbol{\sigma})-(\boldsymbol{\theta}\cdot \boldsymbol{\sigma})(\boldsymbol{x}\cdot\boldsymbol{\sigma})\right]
+\]
+</span>
+
+<p>容易证明【将
+
+
+<span class="katex">
+  \((\boldsymbol{a}\cdot\boldsymbol{\sigma})(\boldsymbol{b}\cdot\boldsymbol{\sigma})=a^\mu b^\upsilon \sigma_\mu \sigma_\upsilon\)
+</span>
+展开，再合并同类项即得】</p>
+
+
+
+<span class="katex">
+  \[
+(\boldsymbol{a}\cdot\boldsymbol{\sigma})(\boldsymbol{b}\cdot\boldsymbol{\sigma})=(\boldsymbol{a}\cdot\boldsymbol{b})I+i(\boldsymbol{a}\times\boldsymbol{b})\cdot\boldsymbol{\sigma}
+\]
+</span>
+
+<p>进而有</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\boldsymbol{x}\cdot\boldsymbol{\sigma}&\mapsto (\boldsymbol{x}\cdot\boldsymbol{\sigma})+(\boldsymbol{\theta}\times\boldsymbol{x})\cdot\boldsymbol{\sigma} \\ &\Longleftrightarrow \\ \boldsymbol{x}&\mapsto [1+\boldsymbol{\theta}\times]\boldsymbol{x}\end{aligned}}
+\]
+</span>
+
+<h2 id="四维闵氏时空的旋转">四维闵氏时空的旋转</h2>
+<h4 id="矢量的关联矩阵-1">矢量的关联矩阵</h4>
+<p>在闵氏时空中，矢量
+
+
+<span class="katex">
+  \(\boldsymbol{x}\)
+</span>
+的关联矩阵【注意
+
+
+<span class="katex">
+  \(\mu=0,1,2,3\quad \sigma_0=I\)
+</span>
+】：</p>
+
+
+
+<span class="katex">
+  \[
+X=tI+\boldsymbol{x}\cdot\boldsymbol{\sigma}=x^\mu\sigma_\mu=\begin{pmatrix} x^0+x^3 & x^1-ix^2 \\ x^1+ix^2 & x^0-x^3 \end{pmatrix}\\ \quad \\ \det X=(x^0)^2-(x^1)^2-(x^2)^2-(x^3)^2,\quad t=x^0
+\]
+</span>
+
+<h4 id="洛伦兹变换">洛伦兹变换</h4>
+<p>四维闵氏时空矢量的关联矩阵和三维欧氏空间矢量的关联矩阵很类似。时空旋转，由空间旋转和洛伦兹旋转组成，一共6个参数：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}L(\boldsymbol{\theta},\boldsymbol{\alpha})&=L(\boldsymbol{\alpha})R(\boldsymbol{\theta})=\exp\left(\frac{1}{2}(\boldsymbol{\alpha}-i\boldsymbol{\theta})\cdot\boldsymbol{\sigma}\right)\\&=\left[I\cosh\frac{\alpha}{2}+(\boldsymbol{n}_\alpha\cdot \boldsymbol{\sigma})\sinh\frac{\alpha}{2}\right]\left[I\cos\frac{\theta}{2}-i(\boldsymbol{n}\cdot\boldsymbol{\sigma})\sin\frac{\theta}{2}\right]\end{aligned}\\\quad\\  \boldsymbol{\theta}=\theta \boldsymbol{n}\quad \boldsymbol{n}\cdot \boldsymbol{\sigma}=\sigma_i n^i\quad |\boldsymbol{n}|=1\\   \boldsymbol{\alpha}=\alpha \boldsymbol{n}_\alpha\quad  \boldsymbol{n}_\alpha\cdot \boldsymbol{\sigma}=\sigma_i n^i_\alpha\quad |\boldsymbol{n}_\alpha|=1\\ i=1,2,3
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(R(\boldsymbol{\theta})\)
+</span>
+仅仅是空间旋转部分，前面研究过了，所以只需要研究洛伦兹旋转部分：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}L(\boldsymbol{\alpha})&=\exp\left(\frac{1}{2}\boldsymbol{\alpha}\cdot\boldsymbol{\sigma}\right)\\&=I\cosh\frac{\alpha}{2}+(\boldsymbol{n}_\alpha\cdot \boldsymbol{\sigma})\sinh\frac{\alpha}{2}\end{aligned}
+\]
+</span>
+
+<p>相应的洛伦兹变换：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}X&\mapsto LXL^\dagger\\ &\text{或} \\ tI+\boldsymbol{x}\cdot\boldsymbol{\sigma}&\mapsto t'I+\boldsymbol{x'}\cdot\boldsymbol{\sigma}=L(tI+\boldsymbol{x}\cdot\boldsymbol{\sigma})L^\dagger\end{aligned}
+\]
+</span>
+
+<p>进而有【将
+
+
+<span class="katex">
+  \(L(\boldsymbol{\alpha})\)
+</span>
+代入，强算后，再比较1和
+
+
+<span class="katex">
+  \(\boldsymbol{\sigma}\)
+</span>
+的系数】</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}t'&=(\cosh\alpha)t+(\sinh\alpha)(\boldsymbol{n}_\alpha\cdot\boldsymbol{x})\\ \boldsymbol{x}'&=\left[(\sinh\alpha)t+(\cosh\alpha)(\boldsymbol{n}_\alpha\cdot\boldsymbol{x})\right]\boldsymbol{n}_\alpha\quad \text{【与}\boldsymbol{n}_\alpha\text{相平行部分发生变换】}\\&\qquad+\left[\boldsymbol{x}-(\boldsymbol{n}_\alpha\cdot\boldsymbol{x})\boldsymbol{n}_\alpha\right]\quad \text{【与}\boldsymbol{n}_\alpha\text{相垂直部分不变】}\end{aligned}
+\]
+</span>
+
+<h4 id="无穷小变换">无穷小变换</h4>
+<p>同时考虑空间无穷小旋转
+
+
+<span class="katex">
+  \(\theta\to 0\)
+</span>
+和洛伦兹无穷小旋转
+
+
+<span class="katex">
+  \(\alpha\to 0\)
+</span>
+，有</p>
+
+
+
+<span class="katex">
+  \[
+L(\boldsymbol{\theta},\boldsymbol{\alpha})=I-i(\boldsymbol{n}\cdot\boldsymbol{\sigma})\frac{\theta}{2}+(\boldsymbol{n}_\alpha\cdot \boldsymbol{\sigma})\frac{\alpha}{2}
+\]
+</span>
+
+<p>进而有</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}t'&=t+\boldsymbol{x}\cdot\boldsymbol{\alpha}\\\boldsymbol{x}'&= \boldsymbol{x}+t\boldsymbol{\alpha}+\boldsymbol{\theta}\times\boldsymbol{x}\end{aligned}
+\]
+</span>
+
+<h2 id="伪黎曼流形上对称性">(伪)黎曼流形上对称性</h2>
+<p>考虑一个给定度规的流形
+
+
+<span class="katex">
+  \((M,g_{ab})\)
+</span>
+，如果要讨论其对称性，首当其冲就是要求保度规，所以可以用其上的等度规李群
+
+
+<span class="katex">
+  \(G\)
+</span>
+来刻画对称性。</p>
+<p>此外，由于有度规，在流形每点
+
+
+<span class="katex">
+  \(p\)
+</span>
+的切空间
+
+
+<span class="katex">
+  \(V_p\)
+</span>
+上都存在正交归一基底
+
+
+<span class="katex">
+  \(\{(e_\mu)^a\}\)
+</span>
+。</p>
+<p>由流形
+
+
+<span class="katex">
+  \((M,g_{ab})\)
+</span>
+及其上等度规李群
+
+
+<span class="katex">
+  \(G\)
+</span>
+生成的李变换群
+
+
+<span class="katex">
+  \(\{\phi:G\times M\to M\}\)
+</span>
+的每个李变换
+
+
+<span class="katex">
+  \(\phi_g:M\to M\)
+</span>
+都是等度规变换。也就是说正交归一基底
+
+
+<span class="katex">
+  \(\{(e_\mu)^a\}\)
+</span>
+，在这个变换下，
+
+
+<span class="katex">
+  \(\{\phi^*_g(e_\mu)^a\}\)
+</span>
+依然保持正交归一。【保度规 =》保内积】</p>
+<p>上述事实表明，带度规流形任意点的切空间和平直空间没有数学上的差别，进而平直空间上发展起来的旋量都是可以移到带度规流形上而无需改变。 如果每点都指定一个旋量，自然就得到旋量场的概念。</p>
+<p>正交归一坐标基底下
+
+
+<span class="katex">
+  \(\{(e_\mu)^a\}\)
+</span>
+，度规可以表示成：</p>
+
+
+
+<span class="katex">
+  \[
+g_{ab}=\delta_{ab}\quad \delta_{\mu\upsilon}=\mathrm{diag}(1,1,1) \quad \text{【三维欧氏空间】} \\ g_{ab}=\eta_{ab}\quad \eta_{\mu\upsilon}=\mathrm{diag}(-1,1,1,1) \quad \text{【四维闵氏时空】}
+\]
+</span>
+
+<p>【注意，我特意保证这两种度规的空间部分一致，方便后面尽可能给出一致的公式】</p>
+<h2 id="基本旋量">基本旋量</h2>
+<h4 id="逆变旋量">逆变旋量</h4>
+<p>无论是三维欧氏空间，还是四维闵氏空间，都有空间旋转
+
+
+<span class="katex">
+  \(R(\boldsymbol{\theta})\)
+</span>
+的部分
+
+
+
+<span class="katex">
+  \[
+R(\boldsymbol{\theta})=I\cos\frac{\theta}{2}-i(\boldsymbol{n}\cdot\boldsymbol{\sigma})\sin\frac{\theta}{2}
+\]
+</span>
+</p>
+<p>很明显</p>
+
+
+
+<span class="katex">
+  \[
+R((\theta+2\pi)\boldsymbol{n})=-R(\theta\boldsymbol{n})
+\]
+</span>
+
+<p>这就是前面提到到的：
+
+
+<span class="katex">
+  \(\mathrm{SU}(2)\)
+</span>
+对
+
+
+<span class="katex">
+  \(\mathrm{SO}(3)\)
+</span>
+是双重覆盖。为了更显式描绘这个特征，我们抽取出空间（或 时空）旋转变换的一半，用一个二分量向量表示之，称为<code>旋量</code>：
+
+
+
+<span class="katex">
+  \[
+\xi=\begin{pmatrix} \xi^1 \\ \xi^2 \end{pmatrix}
+\]
+</span>
+
+旋量的变换规律遵循如下规律：
+
+
+
+<span class="katex">
+  \[
+\xi\mapsto\xi'=R\xi\quad \text{【三维欧氏空间】}\\ \xi\mapsto\xi'=L\xi\quad \text{【四维闵氏时空】}
+\]
+</span>
+</p>
+<p>这个量由于没有抵消因子，当旋转
+
+
+<span class="katex">
+  \(2\pi\)
+</span>
+时，
+
+
+<span class="katex">
+  \(\xi\)
+</span>
+显式出现反向特征。【以后若无特别说明，论述通用于三维欧氏空间和四维闵氏时空】</p>
+<p>类似张量的抽象指标，用大写希腊字母标记旋量的分量：
+
+
+
+<span class="katex">
+  \[
+(\xi^\Sigma)=\begin{pmatrix} \xi^1 \\ \xi^2 \end{pmatrix}\quad \Sigma=1,2
+\]
+</span>
+
+将用大写拉丁字母表示旋量本身，与旋量分量
+
+
+<span class="katex">
+  \(\xi^\Sigma\)
+</span>
+对应的旋量是
+
+
+<span class="katex">
+  \(\xi^A\)
+</span>
+。于是旋量变换可改写成：
+
+
+
+<span class="katex">
+  \[
+\boxed{\xi^A\mapsto\xi'^A=L^A_{\ B}\xi^B}
+\]
+</span>
+
+其中，
+
+
+<span class="katex">
+  \(L^B_{\ A}\)
+</span>
+是自旋矩阵
+
+
+<span class="katex">
+  \(L^\Omega_{\ \Sigma}\in \mathrm{SU}(2)\)
+</span>
+对应的旋量表示。</p>
+<p>很明显，旋量
+
+
+<span class="katex">
+  \(\xi^A\)
+</span>
+属于二维复矢量空间（记作
+
+
+<span class="katex">
+  \(W\)
+</span>
+），称之为<code>逆变旋量</code>。</p>
+<h4 id="协变旋量">协变旋量</h4>
+<p>进而，可考虑
+
+
+<span class="katex">
+  \(W\)
+</span>
+的<code>对偶空间</code>
+
+
+<span class="katex">
+  \(W^*\)
+</span>
+，其元素则对应记作（比如）
+
+
+<span class="katex">
+  \(\eta_A\in W^*\)
+</span>
+，称之为<code>协变旋量</code>，这是
+
+
+<span class="katex">
+  \(W\to \mathbb{C}\)
+</span>
+的<code>线性</code>映射。协变旋量变换是：
+
+
+
+<span class="katex">
+  \[
+\boxed{\eta_A\mapsto\eta'_A=L_A^{\ \ B}\eta_B}\\ \quad \\ L_A^{\ \ B}\overset{\Delta}{=}(L^A_{\ \ B})^{-1} \quad \text{【逆映射：指标上下交换】}
+\]
+</span>
+
+容易验证，旋量间内积不变：
+
+
+
+<span class="katex">
+  \[
+\xi'^A\eta'_A=(L^A_{\ \ B}\xi^B)(L_A^{\ \ C}\xi_C)=\xi^B\eta_B
+\]
+</span>
+</p>
+<h4 id="共轭逆变旋量">共轭逆变旋量</h4>
+<p>然后，可以考虑
+
+
+<span class="katex">
+  \(W\)
+</span>
+的<code>共轭空间</code>
+
+
+<span class="katex">
+  \(\overline{W}\)
+</span>
+，其元素记作（比如）
+
+
+<span class="katex">
+  \(\zeta^{A'}\in \overline{W}\)
+</span>
+，称之为<code>共轭逆变旋量</code>。共轭逆变旋量变换是：
+
+
+
+<span class="katex">
+  \[
+\boxed{\chi^{A'}\mapsto\chi'^{A'}=\chi^{B'}\bar{L}^{\ \ A'}_{B'}}\\ \quad \\ \bar{L}^{\ \ A'}_{B'}\overset{\Delta}{=}\overline{L^A_{\ \ B}} \quad \text{【共轭转置：指标左右交换+共轭】}
+\]
+</span>
+</p>
+<h4 id="共轭协变旋量">共轭协变旋量</h4>
+<p>最后，有
+
+
+<span class="katex">
+  \(W\)
+</span>
+的<code>共轭对偶空间</code>
+
+
+<span class="katex">
+  \(\overline{W}^*\)
+</span>
+，其元素记作（比如）
+
+
+<span class="katex">
+  \(\zeta_{A'}\in \overline{W}^*\)
+</span>
+，称之为<code>共轭协变旋量</code>，这是
+
+
+<span class="katex">
+  \(W\to \mathbb{C}\)
+</span>
+的<code>反线性</code>映射。共轭协变旋量变换是：
+
+
+
+<span class="katex">
+  \[
+\boxed{\zeta_{A'}\mapsto\zeta'_{A'}=\zeta_{B'}\bar{L}_{\ \ A'}^{B'}}\\ \quad \\ \bar{L}_{\ \ A'}^{B'}\overset{\Delta}{=}\left(\overline{L^A_{\ \ B}}\right)^{-1} \quad \text{【逆映射与共轭转置的复合】}
+\]
+</span>
+
+根据上面的符号约定，我们有如下关系：</p>
+
+
+
+<span class="katex">
+  \[
+\overline{\xi^A}=\overline{\xi}^{A'},\quad \overline{\eta_A}=\overline{\eta}_{A'}
+\]
+</span>
+
+<h2 id="旋量张量">旋量张量</h2>
+<p>自然也可以在二维复矢量空间
+
+
+<span class="katex">
+  \(W\)
+</span>
+上将
+
+
+<span class="katex">
+  \((k,l;k',l')\)
+</span>
+型<code>旋量张量</code>
+
+
+<span class="katex">
+  \(T\)
+</span>
+也定义成多重线性映射：
+
+
+
+<span class="katex">
+  \[
+T:\underbrace{W^*\otimes\dots\otimes W^*}_{k}\otimes \underbrace{W\otimes\dots\otimes W}_{l}\otimes \underbrace{\overline{W}^*\otimes\dots\otimes \overline{W}^*}_{k'}\otimes\underbrace{\overline{W}\otimes\dots\otimes \overline{W}}_{l'} \to \mathbb{C}
+\]
+</span>
+</p>
+<p>根据这个定义，
+
+
+<span class="katex">
+  \((2,1;1,0)\)
+</span>
+型张量的标准记法是
+
+
+<span class="katex">
+  \(T^{AB\ \ D'}_{\ \quad C}\)
+</span>
+。</p>
+<p>
+
+
+<span class="katex">
+  \((k,l;k',l')\)
+</span>
+型<code>旋张量</code>
+
+
+<span class="katex">
+  \(T\)
+</span>
+的<code>共轭</code>
+
+
+<span class="katex">
+  \(\overline{T}\)
+</span>
+是
+
+
+<span class="katex">
+  \((k',l';k,l)\)
+</span>
+型<code>旋量张量</code>，比如：</p>
+
+
+
+<span class="katex">
+  \[
+\overline{T^{AB\ \ D'}_{\ \quad C}}=\overline{T}^{DA'B'}_{\qquad C'}
+\]
+</span>
+
+<p>我们可以对不带撇指标进行缩并，也可以对带撇指标进行缩并。但要注意，不能对字母部分相同的带撇和不带撇指标进行缩并。</p>
+<p>最后，<code>旋量张量</code>不妨也可简称为<code>旋量</code>：<code>高阶旋量</code>就是<code>旋量张量</code>的意思。</p>
+<h2 id="旋量空间">旋量空间</h2>
+<h4 id="旋量度规">旋量度规</h4>
+<p>类似空间（时空）
+
+
+<span class="katex">
+  \(M\)
+</span>
+上的度规
+
+
+<span class="katex">
+  \(g_{ab}\)
+</span>
+具有提升和下降张量指标的功能，我们自然期待给二维复矢量空间
+
+
+<span class="katex">
+  \(W\)
+</span>
+适配一个类似的旋量张量，称之为<code>旋量度规</code>
+
+
+<span class="katex">
+  \(\epsilon_{AB}\)
+</span>
+，期待也具有提升和下降旋量指标的功能，即【注意：默认左上右下缩并】：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\xi^A=\epsilon^{AB}\xi_B &\quad \xi_A=\xi^B\epsilon_{BA} \\ \bar{\xi}^{A'}=\bar{\epsilon}^{A'B'}\bar{\xi}_{B'} &\quad \bar{\xi}_{A'}=\bar{\xi}^{B'}\bar{\epsilon}_{B'A'}\end{aligned}}
+\]
+</span>
+
+<p>我们称
+
+
+<span class="katex">
+  \((W,\epsilon_{AB})\)
+</span>
+为<code>旋量空间</code>，其中每个元素成为<code>旋量</code>，其上的张量则是<code>旋量张量</code>（或 <code>高阶旋量</code>）。</p>
+<h4 id="旋量度规反称性">旋量度规反称性</h4>
+<p>如图考虑两条映射路径：</p>
+<p><img src="/notes/images/0125.svg" alt="0125.svg"></p>
+<p>紫色所示映射，有两种表示方式：红色复合映射 和 蓝色复合映射。【这个映射图利用了逆变（协变）旋量变换关系和期待中的旋量度规降指标功能】即：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}&\xi'_A=\epsilon_{BA} L^B_{\ \ C} \xi^C=L_A^{\ \ B} \epsilon_{CB} \xi^C \\ \Rightarrow & \epsilon_{BA} L^B_{\ \ C} =L_A^{\ \ B} \epsilon_{CB}\\ \Rightarrow & \boxed{\epsilon_{AB} L^A_{\ \ C}L^B_{\ \ D}= \epsilon_{CD}}\end{aligned}
+\]
+</span>
+
+<p>这说明<strong>旋量度规
+
+
+<span class="katex">
+  \(\epsilon_{AB}\)
+</span>
+在自旋变换作用下是不变的</strong>。结合
+
+
+<span class="katex">
+  \(L^A_{\ \ B}\in \mathrm{SU}(2)\)
+</span>
+的条件约束，在具体指标下，经过强算可以解出
+
+
+<span class="katex">
+  \(\epsilon_{\Sigma\Omega}\)
+</span>
+所有分量：</p>
+
+
+
+<span class="katex">
+  \[
+\epsilon_{\Sigma\Omega}=\begin{pmatrix} \alpha & \beta \\  \gamma & \delta \end{pmatrix}=\begin{pmatrix} 0 & \beta \\  -\beta & 0 \end{pmatrix}
+\]
+</span>
+
+<p>这说明这是一个反称张量，即【类似也可推出另个公式】：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\epsilon_{AB}&=-\epsilon_{BA}\\ &\quad \\ \bar{\epsilon}_{A'B'}&=-\bar{\epsilon}_{B'A'}\end{aligned}}
+\]
+</span>
+
+<h4 id="旋量度规的负逆性">旋量度规的负逆性</h4>
+<p>根据旋量度规的上升下降指标的约定：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\xi^A&=\epsilon^{AB}\xi_B=\epsilon^{AB}(\xi^C\epsilon_{CB})\\ &=\epsilon^{AB}\epsilon_{CB}\xi^C=\boxed{-\epsilon^{AB}\epsilon_{BC}\xi^C}\end{aligned}
+\]
+</span>
+
+<p>这意味着
+
+
+<span class="katex">
+  \((-\epsilon^{AB}\epsilon_{BC})\)
+</span>
+是恒等映射，即【类似还可推出另外一个等式】</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\epsilon^{AB}\epsilon_{BC}&=-\delta^A_C\\ &\quad \\ \bar{\epsilon}^{A'B'}\bar{\epsilon}_{B'C'}&=-\delta^{A'}_{C'} \end{aligned}}
+\]
+</span>
+
+<p>为了保持上升下降指标功能一致性，引入定义【保证和前面结论协调的前提下】：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\epsilon^{\ \ A}_{B}&=-\epsilon^{A}_{\ \ B}\overset{\Delta}{=}\delta^A_B \quad &\bar{\epsilon}^{\ \ A'}_{C'}=-\bar{\epsilon}^{A'}_{\ \ C'}=\delta^{A'}_{C'} \\ & \quad & \\ \epsilon^{\ \ A}_{A}&=2=-\epsilon^{A}_{\ \ A} &\quad  \bar{\epsilon}^{\ \ A'}_{A'}=2=-\bar{\epsilon}^{A'}_{\ \ A'}\end{aligned}}
+\]
+</span>
+
+<h4 id="旋量内积">旋量内积</h4>
+<p>用旋量度规
+
+
+<span class="katex">
+  \(\epsilon_{AB}\)
+</span>
+提升下降指标的功能，可以定义旋量内积，由反称性还知旋量是零模的：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\xi_A\phi^A=\epsilon_{AB}\xi^A\phi^B&=-\xi^A\phi_A \\ &\quad \\ \xi_A\xi^A=0\end{aligned}}
+\]
+</span>
+
+<h2 id="基旋量">基旋量</h2>
+<p>在二维复矢量空间
+
+
+<span class="katex">
+  \(W\)
+</span>
+中，选择两个线性独立的基底
+
+
+<span class="katex">
+  \(\{\omicron^A，\iota^A\}\)
+</span>
+，称之为<code>基旋量</code>，满足：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\omicron_A\iota^A&=\epsilon_{AB}\omicron^A\iota^B=1\\ \bar{\omicron}_{A'}\bar{\iota}^{A'}&=\bar{\epsilon}_{A'B'}\bar{\omicron}^{A'}\bar{\iota}^{B'}=1\end{aligned}}
+\]
+</span>
+
+<h4 id="旋量度规的基旋量表示">旋量度规的基旋量表示</h4>
+<p>旋量的一般表示（系数待定）</p>
+
+
+
+<span class="katex">
+  \[
+\xi^A = \xi^1\omicron^A+\xi^2\iota^A
+\]
+</span>
+
+<p>在等式两边同乘某个基旋量：</p>
+
+
+
+<span class="katex">
+  \[
+\xi^1=-\iota_A\xi^A \\ \xi^2=\omicron_A\xi^A
+\]
+</span>
+
+<p>进而：</p>
+
+
+
+<span class="katex">
+  \[
+\epsilon^{AB}\xi_B = \xi^A = -\iota_B\xi^B\omicron^A+\omicron_B\xi^B\iota^A\\ = \iota^B\xi_B\omicron^A-\omicron^B\xi_B\iota^A \\ = (\iota^B\omicron^A-\omicron^B\iota^A)\xi_B
+\]
+</span>
+
+<p>所以【类似还可推出另外三个等式】：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\epsilon^{AB}&=\omicron^A\iota^B-\iota^A\omicron^B \\ &\quad \\ \epsilon_{AB} &= \omicron_A\iota_B-\iota_A\omicron_B\\ \bar{\epsilon}^{A'B'} &= \bar{\omicron}^{A'}\bar{\iota}^{B'}-\bar{\iota}^{A'}\bar{\omicron}^{B'}\\ \bar{\epsilon}_{A'B'} &= \bar{\omicron}_{A'}\bar{\iota}_{B'}-\bar{\iota}_{A'}\bar{\omicron}_{B'} \end{aligned}}
+\]
+</span>
+
+<p>根据这四个关系，容易验证：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\bar{\epsilon}_{A'B'}=\overline{\epsilon_{AB}},\quad \bar{\epsilon}^{A'B'}=\overline{\epsilon^{AB}}}
+\]
+</span>
+
+<h4 id="旋量度规的分量">旋量度规的分量</h4>
+<p>有了基旋量，及旋度度规的基底表示，很自然可以写出基底下的旋量度规的分量：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\epsilon_{\Sigma\Omega}=\begin{pmatrix} 0 & 1 \\  -1& 0 \end{pmatrix}\quad\epsilon^{\Sigma\Omega}=\begin{pmatrix} 0 & 1 \\  -1& 0 \end{pmatrix}\\ \bar{\epsilon}_{\Sigma'\Omega'}=\begin{pmatrix} 0 & 1 \\  -1& 0 \end{pmatrix}\quad\bar{\epsilon}^{\Sigma'\Omega'}=\begin{pmatrix} 0 & 1 \\  -1& 0 \end{pmatrix}\end{aligned}}
+\]
+</span>
+
+<h4 id="旋量度规恒等式">旋量度规恒等式</h4>
+<p>对任意三个旋量
+
+
+<span class="katex">
+  \(\xi^A,\eta^A,\zeta^A\)
+</span>
+，其分量按如下构造的行列式等式必然成立：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{vmatrix} \xi^1 & \eta^1 & \zeta^1 \\ \xi^2 & \eta^2 & \zeta^2  \\ \xi^\Sigma & \eta^\Sigma  & \zeta^\Sigma \end{vmatrix}=0,\quad \Sigma=1,2
+\]
+</span>
+
+<p>利用旋量度规，可将上式等价表示为（并由具体指标改为抽象指标）：</p>
+
+
+
+<span class="katex">
+  \[
+(\epsilon_{AB}\eta^A\zeta^B)\xi^C+(\epsilon_{AB}\zeta^A\xi^B)\eta^C+(\epsilon_{AB}\xi^A\eta^B)\zeta^C=0\\ \Longleftrightarrow \\ \epsilon_{AB}\xi^C\eta^A\zeta^B+\epsilon_{AB}\xi^B\eta^C\zeta^A+\epsilon_{AB}\xi^A\eta^B\zeta^C=0\\ \Longleftrightarrow \\ \epsilon_{BC}\epsilon_{A}^{\ \ D}\xi^A\eta^B\zeta^C+\epsilon_{CA}\epsilon_{B}^{\ \ D}\xi^A\eta^B\zeta^C+\epsilon_{AB}\epsilon_{C}^{\ \ D}\xi^A\eta^B\zeta^C=0\\ \Longleftrightarrow \\ \boxed{\begin{aligned}\epsilon_{BC}\epsilon_{A}^{\ \ D}+\epsilon_{CA}\epsilon_{B}^{\ \ D}&+\epsilon_{AB}\epsilon_{C}^{\ \ D}=0\\ &\Longleftrightarrow \\ \epsilon_{BC}\epsilon_{AD}+\epsilon_{CA}\epsilon_{BD}&+\epsilon_{AB}\epsilon_{CD}=0\end{aligned}}
+\]
+</span>
+
+<p>方括号中的两个恒等式，就是我们要的。</p>
+<h4 id="用旋量度规表示行列式">用旋量度规表示行列式</h4>
+<p>有了旋量度规的分量容易验证，
+
+
+<span class="katex">
+  \(W\)
+</span>
+空间上的线性变换的行列式可表示成：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\det(L)=\frac{1}{2}\epsilon_{AB}\epsilon^{CD}L^A_{\ \ C}L^B_{\ \ D}}
+\]
+</span>
+
+<p>特别地，对自旋变换
+
+
+<span class="katex">
+  \(L^A_{\ \ B}\)
+</span>
+而言，
+
+
+<span class="katex">
+  \(\det L=1\)
+</span>
+，即有【第二式完全类似】：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\epsilon_{AB}L^A_{\ \ C}L^B_{\ \ D}&=\epsilon_{CD}\\ &\quad \\ \bar{\epsilon}_{A'B'}\bar{L}^{\ \ A'}_{C'}\bar{L}^{\ \ B'}_{D'}&=\bar{\epsilon}_{C'D'}\end{aligned}}
+\]
+</span>
+
+<p>这和前面&quot;<strong>旋量度规
+
+
+<span class="katex">
+  \(\epsilon_{AB}\)
+</span>
+在自旋变换作用下是不变的</strong>&ldquo;的说法是一致的。</p>
+<h4 id="用基旋量表示泡利矩阵">用基旋量表示泡利矩阵</h4>
+<p>将泡利矩阵写成具体指标形式【添加额外系数
+
+
+<span class="katex">
+  \(1/\sqrt{2}\)
+</span>
+，使后续公式更简洁】：</p>
+
+
+
+<span class="katex">
+  \[
+\sigma_0^{\ \Sigma\Sigma'}=\frac{1}{\sqrt{2}}\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix},\sigma_1^{\ \Sigma\Sigma'}=\frac{1}{\sqrt{2}}\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}\\ \sigma_2^{\ \Sigma\Sigma'}=\frac{1}{\sqrt{2}}\begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix},\quad \sigma_3^{\ \Sigma\Sigma'}=\frac{1}{\sqrt{2}}\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}
+\]
+</span>
+
+<p>然后可写成抽象指标形式（用基旋量表出）：</p>
+
+
+
+<span class="katex">
+  \[
+\sigma_0^{\ AA'}=\frac{1}{\sqrt{2}}(\omicron^A\bar{\omicron}^{A'}+\iota^A\bar{\iota}^{A'})\\ \sigma_1^{\ AA'}=\frac{1}{\sqrt{2}}(\omicron^A\bar{\iota}^{A'}+\iota^A\bar{\omicron}^{A'})\\ \sigma_2^{\ AA'}=-\frac{i}{\sqrt{2}}(\omicron^A\bar{\iota}^{A'}-\iota^A\bar{\omicron}^{A'})\\ \sigma_3^{\ AA'}=\frac{1}{\sqrt{2}}(\omicron^A\bar{\omicron}^{A'}-\iota^A\bar{\iota}^{A'})
+\]
+</span>
+
+<h2 id="矢量张量和旋量的对应关系">矢量(张量)和旋量的对应关系</h2>
+<h4 id="矢量的关联矩阵-2">矢量的关联矩阵</h4>
+<p>我们已经知道矢量
+
+
+<span class="katex">
+  \(x^a\)
+</span>
+关联矩阵
+
+
+<span class="katex">
+  \(X^{AA'}\)
+</span>
+的自旋变换</p>
+
+
+
+<span class="katex">
+  \[
+X'^{AA'}= L^A_{\ \ B}\bar{L}^{\ \ A'}_{B'}X^{BB'}
+\]
+</span>
+
+<p>自旋变换一半就是旋量变换：</p>
+
+
+
+<span class="katex">
+  \[
+\xi^A=L^A_{\ \ B}\xi^B
+\]
+</span>
+
+<p>若希望恢复完整的自旋变换，则需补上另一半：</p>
+
+
+
+<span class="katex">
+  \[
+\eta^{A'}=\eta^{B'}\bar{L}^{\ \ A'}_{B'}
+\]
+</span>
+
+<p>于是有：</p>
+
+
+
+<span class="katex">
+  \[
+\xi^A\eta^{A'}=L^A_{\ \ B}\bar{L}^{\ \ A'}_{B'}\xi^B\eta^{B'}
+\]
+</span>
+
+<p>由此可见，<strong>矢量变换很像二阶旋量变换</strong>。可以更明确地用<code>矢量关联(1,1;0,0)型旋量</code>表示：</p>
+
+
+
+<span class="katex">
+  \[
+x^{AA'}\overset{\Delta}{=}X^{AA'}=x^\mu\sigma_\mu^{\ \ AA'}
+\]
+</span>
+
+<p>对三维欧氏空间
+
+
+<span class="katex">
+  \(\mu=1,2,3\)
+</span>
+；对四维闵氏时空
+
+
+<span class="katex">
+  \(\mu=0,1,2,3\quad x^0=t\quad \sigma_0=I\)
+</span>
+。</p>
+<p>类似，也有也期待有（
+
+
+<span class="katex">
+  \(\sigma^\mu_{\ \ AA'}\)
+</span>
+待定义）：</p>
+
+
+
+<span class="katex">
+  \[
+x_{AA'}\overset{\Delta}{=}X_{AA'}=x_\mu\sigma^\mu_{\ \ AA'}
+\]
+</span>
+
+<h4 id="泡利矩阵的逆">泡利矩阵的逆</h4>
+<p>为了确保上式成立，
+
+
+<span class="katex">
+  \(\sigma^\mu_{\ \ AA'}\)
+</span>
+只能定义成：</p>
+
+
+
+<span class="katex">
+  \[
+\sigma^\mu_{\ \ AA'}=g^{\mu\upsilon}\sigma_\upsilon^{\ \ BB'}\epsilon_{BA}\bar{\epsilon}_{B'A'}
+\]
+</span>
+
+<p>用基旋量表示之：</p>
+
+
+
+<span class="katex">
+  \[
+\sigma^0_{\ AA'}=\frac{1}{\sqrt{2}}g^{00}(\omicron_A\bar{\omicron}_{A'}+\iota_A\bar{\iota}_{A'})\\ \sigma^1_{\ AA'}=\frac{1}{\sqrt{2}}g^{11}(\omicron_A\bar{\iota}_{A'}+\iota_A\bar{\omicron}_{A'})\\ \sigma^2_{\ AA'}=-\frac{i}{\sqrt{2}}g^{22}(\omicron_A\bar{\iota}_{A'}-\iota_A\bar{\omicron}_{A'})\\ \sigma^3_{\ AA'}=\frac{1}{\sqrt{2}}g^{33}(\omicron_A\bar{\omicron}_{A'}-\iota_A\bar{\iota}_{A'})
+\]
+</span>
+
+<p>进而可推导出</p>
+
+
+
+<span class="katex">
+  \[
+\sigma_\mu^{\ \ AA'}\sigma^\upsilon_{\ \ AA'}=-\delta^\upsilon_\mu\\ \sigma_\mu^{\ \ AA'}\sigma^\mu_{\ \ BB'}=-\delta^A_B\delta^{A'}_{B'}
+\]
+</span>
+
+<h4 id="矢量的旋量表示">矢量的旋量表示</h4>
+<p>最后得到矢量的旋量显示表达式：
+
+
+
+<span class="katex">
+  \[
+x^\mu=-\sigma^\mu_{\ \ AA'}x^{AA'}\\ \quad \\ x_\mu=-\sigma_\mu^{\ \ AA'}x_{AA'}
+\]
+</span>
+</p>
+<h4 id="张量的旋量表示">张量的旋量表示</h4>
+<p>对任意张量，也可以用旋量表示之，比如：</p>
+
+
+
+<span class="katex">
+  \[
+T_\alpha^{\ \ \beta\gamma}=(-1)^3\sigma_\alpha^{\ \ AA'}\sigma^\beta_{\ \ BB'}\sigma^\gamma_{\ \ CC'}T_{AA'}^{\quad BB'CC'} \\ T_{AA'}^{\quad BB'CC'}=\sigma^\alpha_{\ \ AA'}\sigma_\beta^{\ \ BB'}\sigma_\gamma^{\ \ CC'} T_\alpha^{\ \ \beta\gamma}
+\]
+</span>
+
+<p>进而可推导出：</p>
+
+
+
+<span class="katex">
+  \[
+g_{AA'BB'}=-\epsilon_{AB}\bar{\epsilon}_{A'B'}\\ \quad \\ g^{AA'BB'}=-\epsilon^{AB}\bar{\epsilon}^{A'B'}
+\]
+</span>
+
+<p>注意：这意味着
+
+
+<span class="katex">
+  \(g_{AA'BB'},g^{AA'BB'}\)
+</span>
+可对指标对进行提升和下降操作，但要注意添加一个负号。比如：
+
+
+
+<span class="katex">
+  \[
+g_{AA'BB'}T^{BB'}=-T_{AA'}
+\]
+</span>
+</p>
+<h2 id="关于指标对的反称或对称分解恒等式">关于指标对的反称或对称分解恒等式</h2>
+<p>考虑任意一个形如
+
+
+<span class="katex">
+  \(T^{\dots}_{\quad \dots AA'\dots BB'\dots }\)
+</span>
+的旋量张量，为简单起见，用
+
+
+<span class="katex">
+  \(T_{AA'BB'}\)
+</span>
+表示之。其中有两组<strong>指标对</strong>
+
+
+<span class="katex">
+  \(AA'\)
+</span>
+和
+
+
+<span class="katex">
+  \(BB'\)
+</span>
+，每一个指标对看成一个整体。本节研究这两组指标对的交换对称性。</p>
+<p>可直接验证一个恒等式【右边展开后合并易得】：
+
+
+
+<span class="katex">
+  \[
+\frac{1}{2}(T_{AA'BB'}-T_{BB'AA'})=T_{(AB)[A'B']}+T_{[AB](A'B')}
+\]
+</span>
+
+反称部分意味着存在旋量度规因子
+
+
+<span class="katex">
+  \(\epsilon_{AB}\)
+</span>
+或
+
+
+<span class="katex">
+  \(\bar{\epsilon}_{A'B'}\)
+</span>
+，对称部分则可分别选择对称旋量张量
+
+
+<span class="katex">
+  \(\phi_{AB}\)
+</span>
+或
+
+
+<span class="katex">
+  \(\psi_{A'B'}\)
+</span>
+代表之：
+
+
+
+<span class="katex">
+  \[
+\boxed{\frac{1}{2}(T_{AA'BB'}-T_{BB'AA'})=\phi_{AB}\bar{\epsilon}_{A'B'}+\epsilon_{AB}\psi_{A'B'}}
+\]
+</span>
+
+通过对等式两边同乘
+
+
+<span class="katex">
+  \(\bar{\epsilon}^{A'B'}\)
+</span>
+或
+
+
+<span class="katex">
+  \(\epsilon^{AB}\)
+</span>
+可完全确定
+
+
+<span class="katex">
+  \(\phi_{AB}\)
+</span>
+或
+
+
+<span class="katex">
+  \(\psi_{A'B'}\)
+</span>
+
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\phi_{AB}=\frac{1}{2}\bar{\epsilon}^{A'B'}T_{(AB)A'B'}=\frac{1}{2}T_{(AB)A'}^{\ \qquad A'} \\ \psi_{A'B'}=\frac{1}{2}\epsilon^{AB}T_{(A'B')AB}=\frac{1}{2}T_{(A'B')A}^{\ \qquad A}\end{aligned}}
+\]
+</span>
+
+【结论】：反称张量
+
+
+<span class="katex">
+  \(T_{ab}=T_{[ab]}\)
+</span>
+对应的旋量张量（局部反对称也行），可以按上面的方式分解。</p>
+<p>特别地，如果
+
+
+<span class="katex">
+  \(T_{AA'BB'}\)
+</span>
+是<strong>实数性</strong>，易知这两个张量并不独立：
+
+
+<span class="katex">
+  \(\bar{\psi}_{AB}=\phi_{AB}\)
+</span>
+。进而：
+
+
+
+<span class="katex">
+  \[
+\boxed{\frac{1}{2}(T_{AA'BB'}-T_{BB'AA'})=\phi_{AB}\bar{\epsilon}_{A'B'}+\epsilon_{AB}\bar{\phi}_{A'B'}}
+\]
+</span>
+
+类似的，也可直接验证另一个恒等式【右边展开后合并易得】：
+
+
+
+<span class="katex">
+  \[
+\frac{1}{2}(T_{AA'BB'}+T_{BB'AA'})=T_{(AB)(A'B')}+T_{[AB][A'B']}
+\]
+</span>
+
+其中，第二项两个反称指标分别对应
+
+
+<span class="katex">
+  \(\epsilon_{AB}\)
+</span>
+和
+
+
+<span class="katex">
+  \(\bar{\epsilon}_{A'B'}\)
+</span>
+两个因子，意味着：
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}T_{[AB][A'B']}&=\frac{1}{4}\epsilon_{AB}\bar{\epsilon}_{A'B'}T\\ T_{[AB]A'}^{\qquad A'}&=\frac{1}{2}\epsilon_{AB}T \\ &\quad \\ T\overset{\Delta}{=}T_{AA'}^{\quad AA'}&=-T_a^{\ a}\end{aligned}}
+\]
+</span>
+
+进而
+
+
+
+<span class="katex">
+  \[
+\boxed{\frac{1}{2}(T_{AA'BB'}+T_{BB'AA'})=T_{(AB)(A'B')}+\frac{1}{4}\epsilon_{AB}\bar{\epsilon}_{A'B'} T}
+\]
+</span>
+
+【结论】：对称张量
+
+
+<span class="katex">
+  \(T_{ab}=T_{(ab)}\)
+</span>
+对应的旋量张量（局部对称也行），可以按上面的方式分解。</p>
+<hr>
+<p>至此，旋量代数的基本工具已经完备了。</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0077/">
+    下一页<br>流形上的旋量和旋量场（几何解释）
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/theophy/0075/">
+      上一页<br>辛流形上的哈密顿力学
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0076.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/diffgeo/0076.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#三维欧氏空间的旋转">三维欧氏空间的旋转</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#四维闵氏时空的旋转">四维闵氏时空的旋转</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#伪黎曼流形上对称性">(伪)黎曼流形上对称性</a></li>
+        <li><a href="#基本旋量">基本旋量</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#旋量张量">旋量张量</a></li>
+        <li><a href="#旋量空间">旋量空间</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#基旋量">基旋量</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#矢量张量和旋量的对应关系">矢量(张量)和旋量的对应关系</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#关于指标对的反称或对称分解恒等式">关于指标对的反称或对称分解恒等式</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

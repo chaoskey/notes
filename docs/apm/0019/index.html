@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="第三章 风险"><meta property="og:title" content="第三章 风险" />
+<meta property="og:description" content="标准差
+书中介绍了风险的各种定义及其优劣，最终还是选择标准差作为本书的风险定义。
+尽管标准差具有某些不足，只要我的假设中依赖或近似依赖正态分布，那么推荐标准差这个风险度量定义。因为它能满足我们普适，对称，灵活和可精确预测的要求。若无特殊要求，我们讨论的风险总是指收益率的年化标准差（以百分之一为单位）。
+投资组合
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+  \(r_P=\sum_i{w_i r_i}\)
+
+的标准差：
+
+
+
+
+  \[
+\begin{aligned}
+   \sigma_P & =\sqrt{\sum_{i,j}{\rho_{i,j}(w_i \sigma_i)(w_j \sigma_j)}} \\
+   & \le \sqrt{(\sum_i{w_i \sigma_i})^2}  \\
+   & = \sum_i{w_i \sigma_i}
+\end{aligned}
+\]
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/apm/0019/" />
+<meta property="article:published_time" content="2018-05-21T20:20:35+08:00" />
+<meta property="article:modified_time" content="2018-05-21T20:20:35+08:00" />
+<title>第三章 风险 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a>
+<ul>
+<li><a href="/notes/docs/apm/0017/">第一章 绪论</a></li>
+<li><a href="/notes/docs/apm/0018/">第二章 一致预期收益率：资本资产定价模型</a></li>
+<li><a href="/notes/docs/apm/0019/"class=active>第三章 风险</a></li>
+<li><a href="/notes/docs/apm/0020/">第四章 超常收益率、业绩基准和附加值</a></li>
+<li><a href="/notes/docs/apm/0021/">第五章 残差风险和残差收益率：信息率</a></li>
+<li><a href="/notes/docs/apm/0022/">第六章 主动管理基本定律</a></li>
+<li><a href="/notes/docs/apm/0023/">第七章 预期收益率和套利定价理论</a></li>
+<li><a href="/notes/docs/apm/0024/">第八章 估值理论</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>第三章 风险</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#标准差">标准差</a></li>
+        <li><a href="#基本的风险模型">基本的风险模型</a></li>
+        <li><a href="#结构化风险模型多因子风险模型">结构化风险模型－－多因子风险模型</a></li>
+        <li><a href="#挑选因子">挑选因子</a></li>
+        <li><a href="#行业因子">行业因子</a></li>
+        <li><a href="#风险指数">风险指数</a></li>
+        <li><a href="#风险模型的应用">风险模型的应用</a></li>
+        <li><a href="#风险模型效果如何">风险模型效果如何</a></li>
+        <li><a href="#风险模型的估计">风险模型的估计</a></li>
+        <li><a href="#因子组合">因子组合</a></li>
+        <li><a href="#因子协方差矩阵">因子协方差矩阵</a></li>
+        <li><a href="#特异风险">特异风险</a></li>
+        <li><a href="#风险分析">风险分析</a></li>
+        <li><a href="#风险归因">风险归因</a>
+          <ul>
+            <li><a href="#资产的风险边际贡献">资产的风险边际贡献</a></li>
+            <li><a href="#因子的风险边际贡献">因子的风险边际贡献</a></li>
+            <li><a href="#板块的风险边际贡献">板块的风险边际贡献</a></li>
+            <li><a href="#资产的风险贡献">资产的风险贡献</a></li>
+            <li><a href="#因子的风险贡献">因子的风险贡献</a></li>
+          </ul>
+        </li>
+        <li><a href="#相关性和市场波动率">相关性和市场波动率</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0020/">
+    下一页<br>第四章 超常收益率、业绩基准和附加值
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0018/">
+      上一页<br>第二章 一致预期收益率：资本资产定价模型
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/apm/0019/">第三章 风险</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2018-05-21</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84">量化投资</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E6%8A%95%E8%B5%84">投资</a>
+      , 
+      <a href="/notes/tags/%E9%A3%8E%E9%99%A9">风险</a>
+      , 
+      <a href="/notes/tags/%E6%A0%87%E5%87%86%E5%B7%AE">标准差</a>
+      , 
+      <a href="/notes/tags/%E5%A4%9A%E5%9B%A0%E5%AD%90">多因子</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/apm/0019.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h2 id="标准差">标准差</h2>
+<p>书中介绍了风险的各种定义及其优劣，最终还是选择标准差作为本书的风险定义。</p>
+<p>尽管<strong>标准差</strong>具有某些不足，只要我的假设中依赖或近似依赖正态分布，那么推荐标准差这个风险度量定义。因为它能满足我们普适，对称，灵活和可精确预测的要求。若无特殊要求，我们讨论的风险总是指收益率的年化标准差（以百分之一为单位）。</p>
+<p>投资组合
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(r_P=\sum_i{w_i r_i}\)
+</span>
+的标准差：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+   \sigma_P & =\sqrt{\sum_{i,j}{\rho_{i,j}(w_i \sigma_i)(w_j \sigma_j)}} \\
+   & \le \sqrt{(\sum_i{w_i \sigma_i})^2}  \\
+   & = \sum_i{w_i \sigma_i}
+\end{aligned}
+\]
+</span>
+
+<p>这意味着：整体风险小于部分风险之和－－这是投资组合分散化的关键。</p>
+<p>特例1，考虑等权重股票组合(
+
+
+<span class="katex">
+  \(w_i=\frac{1}{N}\)
+</span>
+)，股票之间互不相关(
+
+
+<span class="katex">
+  \(\rho_{i,j}=\delta_{i,j}\)
+</span>
+)，每只股票的风险都是
+
+
+<span class="katex">
+  \(\sigma_i=\sigma\)
+</span>
+，那么：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+   \sigma_P & = \sqrt{\sum_{i,j}{\delta_{i,j}(\frac{1}{N} \sigma)(\frac{1}{N} \sigma)}} = \sqrt{\sum_{i}{(\frac{1}{N} \sigma)(\frac{1}{N} \sigma)}} \\
+   & = \sqrt{N(\frac{1}{N} \sigma)(\frac{1}{N} \sigma)} \\
+   & = \dfrac{\sigma}{\sqrt{N}}
+\end{aligned}
+\]
+</span>
+
+<p>从这个结果也能看出分散化的威力。</p>
+<p>特例2，考虑等权重股票组合(
+
+
+<span class="katex">
+  \(w_i=\frac{1}{N}\)
+</span>
+)，任意两个不同股票的相关系数相同(
+
+
+<span class="katex">
+  \(\rho_{i,j}=\rho, i \ne j\)
+</span>
+)，每只股票的风险都是
+
+
+<span class="katex">
+  \(\sigma_i=\sigma\)
+</span>
+，那么：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+   \sigma_P & = \sqrt{\sum_{i,j}{\rho_{i,j}(\frac{1}{N} \sigma)(\frac{1}{N} \sigma)}}  =  \sqrt{\sum_{i}{(\frac{1}{N} \sigma)(\frac{1}{N} \sigma)} + \sum_{i \ne j}{\rho(\frac{1}{N} \sigma)(\frac{1}{N} \sigma)}} \\
+   & =  \sqrt{N(\frac{1}{N} \sigma)(\frac{1}{N} \sigma) +(N^2-N) \rho(\frac{1}{N} \sigma)(\frac{1}{N} \sigma)} \\
+   & =  \sigma \sqrt{ \frac{1 + \rho (N-1)}{N}} \quad \overset{N \rightarrow \infty}{\longrightarrow} \quad \sigma \sqrt{\rho}
+\end{aligned}
+\]
+</span>
+
+<p>利用这个公式可以反算出，股票之间的平均相关系数。</p>
+<p>风险既不能沿横截面也不能沿时间相加。然而，如果任何不重叠的两个时间段上的收益率不相关（自相关性等于0），那么方差可以沿时间相加。 这意味着方差随预测期的长度而增加，风险则随预期长度的平方根增加。于是，年化风险和月度风险有如下关系：</p>
+
+
+
+<span class="katex">
+  \[
+\sigma_{年度} =\sqrt{12} \sigma_{月度}=\sqrt{\frac{1}{\Delta t}} \ \sigma_{\Delta t}, \quad \Delta t以年为单位
+\]
+</span>
+
+<p><strong>主动收益率</strong>就是投资组合超额收益率
+
+
+<span class="katex">
+  \(r_P\)
+</span>
+与业绩基准超额收益率
+
+
+<span class="katex">
+  \(r_B\)
+</span>
+的差，记作
+
+
+<span class="katex">
+  \(r_{PB}\)
+</span>
+。相应的<strong>主动风险</strong>为主动收益率的标准差，记作
+
+
+<span class="katex">
+  \(\psi_P\)
+</span>
+。有时也称主动风险为<strong>跟踪误差</strong>。</p>
+<p>很多投资者认为：资产的主动风险与其市值成比例**【不妨作为一个经验定律】**。</p>
+<p><strong>残差风险</strong>就是收益率中与系统收益率正交的那部分的风险。组合P关于组合B的残差风险用表示
+
+
+<span class="katex">
+  \(\omega_P\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\omega_P & = \sqrt{\sigma_P^2-\beta_P^2 \sigma_B^2} \\
+\beta_P & =  \dfrac{\mathrm{Cov}\{r_P,r_B\}}{\mathrm{Var}\{r_B\}}
+\end{aligned}
+\]
+</span>
+
+<h2 id="基本的风险模型">基本的风险模型</h2>
+<p>为了确定投资组合的风险，必须知道组合中任意两个资产超额收益率协方差组成的协方差矩阵。风险模型的目标就是要精确并高效地预测这个协方差矩阵。</p>
+<ul>
+<li>单因子模型</li>
+</ul>
+<p>单因子风险模型将收益率分解成：</p>
+
+
+
+<span class="katex">
+  \[
+r_i = \beta_i r_M + \theta_i
+\]
+</span>
+
+<p>并且假设残差收益率
+
+
+<span class="katex">
+  \(\theta_i\)
+</span>
+是互不相关的，因此有：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\mathrm{Cov}\{r_i,r_j\} = \beta_i \beta_j \sigma_M \\
+\sigma_i^2 = \beta_i^2 \sigma_M^2 + \omega_i^2
+\end{aligned}
+\]
+</span>
+
+<p>当然这个假设肯定是不对的，至少市场上所有股票的残差收益率的市值加权平均值应该精确等于0：</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{\theta}^T \boldsymbol{h}_M = \sum_i{h_{M,i} \theta_i}=0
+\]
+</span>
+
+<p>尽管单因子模型的假设有瑕疵，但依旧很有吸引力，因为它分离的市场风险和残差风险，并将股票之间的残差协方差保守估计为0。</p>
+<ul>
+<li>等相关系数模型</li>
+</ul>
+<p>根据<strong>等相关系数</strong>这个简单假设可以直接写出协方差表达式：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{Cov}\{r_i,r_j\} = \sigma_i \sigma_j \rho
+\]
+</span>
+
+<ul>
+<li>历史样本模型</li>
+</ul>
+<p>用这个模型估计既不稳健也不合理。在该模型下，要用
+
+
+<span class="katex">
+  \(T\)
+</span>
+个时期的样本来估计一个
+
+
+<span class="katex">
+  \(N\times N\)
+</span>
+协方差矩阵，并且要求
+
+
+<span class="katex">
+  \(T \gt N\)
+</span>
+。这个模型存在的问题：</p>
+<ol>
+<li>只能考虑较短时间尺度上的收益率；</li>
+<li>历史风险不能快速反应公司不断变化的基本面；</li>
+<li>有选择偏差；</li>
+<li>样本偏差将导致协方差估计上的某些整体偏差。</li>
+</ol>
+<h2 id="结构化风险模型多因子风险模型">结构化风险模型－－多因子风险模型</h2>
+<ul>
+<li>基本想法</li>
+</ul>
+<p>股票的收益率可以被一组共同因子和一个仅与该股票的特异因子解释。通过识别出重要因子，可以降低问题的规模。</p>
+<ul>
+<li>对收益率进行简单的线性分解</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{r}(t) = \boldsymbol{X}(t) \boldsymbol{b}(t) + \boldsymbol{u}(t)
+\]
+</span>
+
+<p>式中：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+ \boldsymbol{r} = (r_1,\dots,r_N)^T \quad r_i(t)表示资产i从时刻t \rightarrow t+1的\mathbf{超额收益率} \\
+ \boldsymbol{X} = (X_{i,j})_{N \times K} \quad X_{i,j}(t)表示时刻t资产i对因子k的\mathbf{暴露度}(\mathbf{因子载荷}) \\
+ d \boldsymbol{b} = (b_1,\dots,b_K)^T \quad b_j(t)表示因子j从时刻t \rightarrow t+1的\mathbf{因子收益率} \\
+ \boldsymbol{u} = (u_1,\dots,u_N)^T \quad u_i(t)表示资产i从时刻t \rightarrow t+1的\mathbf{特异收益率}
+\end{aligned}
+\]
+</span>
+
+<ul>
+<li>假设特异收益率和因子收益率不相关，不同股票的特异收益率也不相关，于是整个市场的风险结构可表示为：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{V} = \boldsymbol{X} \boldsymbol{F} \boldsymbol{X}^T + \Delta
+\]
+</span>
+
+<p>式中：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\boldsymbol{V} = (V_{i,j})_{N \times N} \quad V_{i,j}表示资产i和资产j的超额收益率协方差 \\
+\boldsymbol{F} = (F_{i,j})_{K \times K} \quad F_{i,k}表示因子i和因子j的因子收益率协方差 \\
+\boldsymbol{\Delta} = (\Delta_{i,j})_{N \times N} \quad \Delta_{i,i}表示资产i特异收益率方差，\Delta_{i,j}=0,i\ne j
+\end{aligned}
+\]
+</span>
+
+<h2 id="挑选因子">挑选因子</h2>
+<p>建立多因子模型的艺术在于挑选何时的一组因子，所有的因子必须是<strong>先验因子</strong>（即因子暴露必须在考察期初确定）。</p>
+<ul>
+<li>宏观因子</li>
+</ul>
+<p>比如：债券贝塔（债券市场收益率），通胀异动，油价变动，汇率变动，工业产量变动等。</p>
+<p>宏观因子解释能力强，但有三个严重缺陷：</p>
+<ol>
+<li>有严重的估计误差；</li>
+<li>估计的结果仅仅是历史行为，不能反应现在的情况；</li>
+<li>数据源自政府采集，不能从市场中观察到，并且质量不佳。</li>
+<li>横截面比较因子</li>
+</ol>
+<p>一般由分为两类：<strong>基本面类</strong>和<strong>市场类</strong>。</p>
+<p>基本面类包括各种比率例如分红率，盈利率以及分析师对未来每股盈利的预测。市场类包括过去某段时间的上的波动率，收益率，期权的隐含波动率，换手率等等。</p>
+<p>注意，市场类因子也有宏观因子类似的缺陷，尽管如此，根据经验，这些横截面比较因子还是非常有效的。</p>
+<ul>
+<li>统计因子</li>
+</ul>
+<p>&ldquo;统计绞肉机&rdquo;</p>
+<ul>
+<li>因子选用的原则</li>
+</ul>
+<ol>
+<li>有区分能力；</li>
+<li>直观；</li>
+<li>有意义。</li>
+</ol>
+<p>我们通过研究来挑选合适的因子，合格过程依赖于统计技术和投资直觉。统计技术帮助我们选出具有区分能力和解释力的因子；投资直觉帮助我们选出具有直观含义的因子。因子必须具有统计显著性和投资显著性中至少一种。</p>
+<p>我们选用的因子主要包括两类：<strong>行业因子</strong>和<strong>风险指数</strong>。其中，风险指数衡量行业之外的维度上不同股票群之间的行为差异。</p>
+<h2 id="行业因子">行业因子</h2>
+<p>行业分类应该满足以下几个原则：</p>
+<ol>
+<li>每个行业都应该包括合理数目的公司；</li>
+<li>每个行业在全市场中都应该占用合理的市值比例；</li>
+<li>行业划分应该符合市场共识及投资者心理习惯。</li>
+</ol>
+<p>美国股市行业划分书中有列表；中国股市行业列表见我的聚宽投资研究中的“行业因子”。</p>
+<p>行业暴露通常是0/1变量。市场组合对全部行业因子的暴露度之和为1。由于大型公司可能在多个行业运作，所以有时需要对行业因子进行扩展。</p>
+<h2 id="风险指数">风险指数</h2>
+<p>股市中可识别的风险指数可归为以下几个类别：</p>
+<ol>
+<li><strong>波动率</strong>　历史上具有较高的波动率，我们也预期其未来也具有较高波动率；</li>
+<li><strong>动能</strong>　近期表现；</li>
+<li><strong>规模</strong>　市值；</li>
+<li><strong>流动性</strong>　交易量；</li>
+<li><strong>价值</strong>　基本面：市盈率、分红率、市现率、市净率、市销率，等等；</li>
+<li><strong>盈利波动率</strong>　盈利的波动性；</li>
+<li><strong>财务杠杆</strong>　债务股本比率、对利率风险的暴露度。</li>
+</ol>
+<p>每个风险指数都包含若干度量变量，称之为<strong>描述变量</strong>。同一风险指数下的描述变量之间通常的高度相关，但又有所不同，各自代表该风险指数的某个方面。股票对<strong>风险指数的暴露度</strong>是股票对构成该风险指数的若干描述变量的暴露度的加权平均值，其中，我们选择使风险指数解释力和预测力达到最高的权重。</p>
+<p><strong>暴露度的标准化</strong>：</p>
+
+
+
+<span class="katex">
+  \[
+x_{标准化}=\frac{x_{原始} - \bar{x}_{原始}}{\mathrm{Std}[x_{原始}]}
+\]
+</span>
+
+<p>经过标准化，每个风险指数的暴露度都具有零均值和单位标准差。标准化过程还应该加入离群值的处理。</p>
+<h2 id="风险模型的应用">风险模型的应用</h2>
+<p>假设结构化风险模型中的因子协方差矩阵
+
+
+<span class="katex">
+  \(\boldsymbol{V}\)
+</span>
+和特异协方差矩阵
+
+
+<span class="katex">
+  \(\boldsymbol{\Delta}\)
+</span>
+是已知的。</p>
+<ul>
+<li>现在：当前组合风险分析</li>
+</ul>
+<p>分析当前组合风险时，不但可以衡量组合总体风险水平，而且可以将组合风险分解到各个来源，进而使我们可以检查该来源是否也是主动收益率的来源。</p>
+<p>分解风险的方式：</p>
+<ol>
+<li>将收益率分解成市场部分和残差部分；</li>
+<li>考察组合相对某个业绩基准的风险，即分解出主动风险；</li>
+<li>将组合按多因子模型分解成模型风险和特异风险。</li>
+</ol>
+<p>风险模型还允许我们对风险进行边际分析：在头寸的边际变动下，各资产对组合分散化的效力。</p>
+<p>风险分析的重要性：被动投资经理通过风险分析试图最小化跟踪误差（主动风险）；而主动投资经理则通过风险分析了解承担了多少主动风险，知道为什么以及如何改变主动风险，并且可将承担的风险划分为固有风险、意向的和意外的风险。</p>
+<ul>
+<li>未来</li>
+</ul>
+<p>风险模型有助于我们设计未来的投资组合。第１４章“组合构建”中将详细讨论这个作用。</p>
+<ul>
+<li>过去</li>
+</ul>
+<p>风险模型有助于我们评价投资组合过去的表现。第１７章“业绩分析”中将详细讨论这个主题。</p>
+<h2 id="风险模型效果如何">风险模型效果如何</h2>
+<p>前面，我们已经选择了标准差作为风险的定义；选择了结构化风险模型以精确并高效地预测协方差矩阵。下面就要给出一些实证依据。</p>
+<ul>
+<li>比较预测标准差的两种方法：基于投资组合 V.S. 基于历史表现</li>
+</ul>
+<p>前者方法是：先建立结构化风险模型，得到协方差矩阵的预测值，然后带入投资组合头寸，计算出组合风险的预测值。</p>
+<p>研究结果显示：基于前者的预测由于基于后者的预测。</p>
+<ul>
+<li>研究不同风险度量的可预测性：标准差　V.S.　备选度量</li>
+</ul>
+<p>备选度量必须完全基于历史数据。</p>
+<p>研究结果显示：根据历史数据进行预测的情况下，我们只能预测标准差。</p>
+<h2 id="风险模型的估计">风险模型的估计</h2>
+<p>首先给定行业因子和风险因子的暴露度
+
+
+<span class="katex">
+  \(\boldsymbol{X}\)
+</span>
+，收集资产超额收益率数据
+
+
+<span class="katex">
+  \(\boldsymbol{r}\)
+</span>
+，可以通过多元回归估计因子收益率
+
+
+<span class="katex">
+  \(\boldsymbol{b}\)
+</span>
+，目标是选择使特异收益率的平方和（可能是加权的）最小的因子收益率。数学形式表达式：</p>
+
+
+
+<span class="katex">
+  \[
+\underset{\boldsymbol{b}}{\min} \quad  \| \boldsymbol{r} - \boldsymbol{X} \boldsymbol{b} \|
+\]
+</span>
+
+<p>为了有效地估计因子的收益率，我们选择合适加权权重，采用<strong>广义最小二乘法（GLS）</strong>。我们试图每个资产收益率样本选择与其特异方差的倒数成正比的权重（实践中，我们可用市值平方根代替特异方差的倒数来对每个观测值进行加权）。这意味着，<strong>特异协方差矩阵</strong>的逆矩阵
+
+
+<span class="katex">
+  \(\boldsymbol{\Delta}^{-1}\)
+</span>
+就是用于_GLS_的<strong>加权权重矩阵</strong>。这是一个对角矩阵，对角向量就是这样<strong>加权权重向量</strong>。</p>
+<p>进而写出的
+
+
+<span class="katex">
+  \(\|*\|\)
+</span>
+的表达式：</p>
+
+
+
+<span class="katex">
+  \[
+\| \boldsymbol{u} \| = \sqrt{\sum_i{\frac{1}{\delta_i} u_i^2}}=\sqrt{\boldsymbol{u}^T \boldsymbol{\Delta}^{-1} \boldsymbol{u}}
+\]
+</span>
+
+<p>于是目标问题的数学表达式可以改写成：</p>
+
+
+
+<span class="katex">
+  \[
+\underset{\boldsymbol{b}}{\min} \quad (\boldsymbol{r} - \boldsymbol{X} \boldsymbol{b})^T \boldsymbol{\Delta}^{-1} (\boldsymbol{r} - \boldsymbol{X} \boldsymbol{b})
+\]
+</span>
+
+<h2 id="因子组合">因子组合</h2>
+<p>因子收益率估计值的数学表达式（前述极值问题的数学解）为：</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{b} = (\boldsymbol{X}^T \boldsymbol{\Delta}^{-1} \boldsymbol{X})^{-1} \boldsymbol{X}^T \boldsymbol{\Delta}^{-1} \boldsymbol{r}  \overset{\Delta}{=} \boldsymbol{C}_{K \times N}  \boldsymbol{r}
+\]
+</span>
+
+<p>就具体因子而言，因子收益率就是资产超额收益的加权和：因子
+
+
+<span class="katex">
+  \(k​\)
+</span>
+的收益率
+
+
+<span class="katex">
+  \(b_k​\)
+</span>
+可以看作一个投资组合的收益率，其权重为
+
+
+<span class="katex">
+  \((C_{k,1},\dots,C_{k,N})​\)
+</span>
+。因此，上述组合被称作因子
+
+
+<span class="katex">
+  \(k​\)
+</span>
+的<strong>因子组合</strong>。</p>
+<p>因子组合是先验可知的。因子组合具有如下特性（因子组合的另一种定义）：对相应因子具有单位暴露度，而对其他因子零暴露度，并且符合这两个约束条件的最小风险组合。</p>
+<p>注意区分：<strong>特征组合</strong>和<strong>因子组合</strong>这两个概念。</p>
+<p>关于因子组合有两种不同解释：有时被解释为因子模拟组合，表示它模拟了一些潜在基础因子的行为。本书解释成：捕获通过因子暴露定义出的各种特异效应的投资组合。</p>
+<h2 id="因子协方差矩阵">因子协方差矩阵</h2>
+<p>一旦估计出每段时期的因子收益率，就可以进一步估计因子的协方差矩阵。因子协方差矩阵是建立有效的风险模型的关键，应该根据投资者的时间尺度选择对未来因子协方差矩阵的最佳预测。</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{F} = \mathbf{E}[(\boldsymbol{b}-\mathbf{E}{\boldsymbol{b}})(\boldsymbol{b}-\mathbf{E}{\boldsymbol{b}})^T]
+\]
+</span>
+
+<p>具体技巧阅读原书及参考文献。</p>
+<h2 id="特异风险">特异风险</h2>
+<p>多因子模型不能对股票的特异收益率提供任何深刻见解，但对特异方差，情况不一样。可以对特异收益率的方差
+
+
+<span class="katex">
+  \(u_i^2\)
+</span>
+建模（假设特异收益率的均值为0）：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+u_i^2(t) &= S(t)[1+v_i(t)] \\
+s.t. & (\dfrac{1}{N})\sum_{i=1}^N{u_i^2(t)}=S(t) \\
+& (\dfrac{1}{N})\sum_{i=1}^N{v_i(t)}=0
+\end{aligned}
+\]
+</span>
+
+<p>
+
+
+<span class="katex">
+  \(S(t)\)
+</span>
+衡量了股票空间上特异方差的平均水平，而
+
+
+<span class="katex">
+  \(v_i\)
+</span>
+则捕捉了特异方差在横截面上的起伏。</p>
+<p>为了预测特异风险，需要
+
+
+<span class="katex">
+  \(S(t)\)
+</span>
+对建立时间序列模型，并
+
+
+<span class="katex">
+  \(v_i(t)\)
+</span>
+对建立多因子模型。的模型通常包含风险指数因子，以及衡量近期特异收益率平方的因子。然后通过剔除离群值的混合回归来估计模型系数。最后就可以预测出特异收益率方差：</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{\Delta} = \left[
+\begin{matrix}
+u_1^2 & & & \\
+ & u_2^2 & &\Huge0 \\
+ \Huge0& & \ddots &\\
+ & & & u_N^2
+\end{matrix}
+\right]
+\]
+</span>
+
+<h2 id="风险分析">风险分析</h2>
+<p>考虑一个权重为
+
+
+<span class="katex">
+  \(\boldsymbol{h}_P\)
+</span>
+的投资组合P, 其<strong>因子暴露度</strong>和<strong>方差</strong>分别为：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\boldsymbol{x}_P &= \boldsymbol{X}^T \boldsymbol{h}_P \\
+\sigma_P^2&=\boldsymbol{x}_P^T \boldsymbol{F} \boldsymbol{x}_P + \boldsymbol{h}_P^T \boldsymbol{\Delta} \boldsymbol{h}_P = \boldsymbol{h}_P^T \boldsymbol{V} \boldsymbol{h}_P
+\end{aligned}
+\]
+</span>
+
+<p>进而可以写出主动风险（跟踪误差）的表达式：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\psi_P^2 &= \boldsymbol{h}_{P\!B}^T \boldsymbol{V} \boldsymbol{h}_{P\!B} \\
+s.t. &  \boldsymbol{h}_{P\!B} = \boldsymbol{h}_P - \boldsymbol{h}_B \\
+& \boldsymbol{h}_B 是业绩基准的持仓权重
+\end{aligned}
+\]
+</span>
+
+<p>注意到，可以将投资组合Ｐ的总风险及主动风险各自分解成共同因子部分和特异部分，能够这样作的原因是假设因子风险和特异风险是不相关的。</p>
+<p>将风险分解成市场部分和残差部分要困难些。首先，资产关于业绩基准B的贝塔列向量：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\boldsymbol{\beta} &= \dfrac{\boldsymbol{V} \boldsymbol{h}_B}{\sigma_B^2} = \dfrac{X \boldsymbol{F} \boldsymbol{x}_B + \boldsymbol{\Delta} \boldsymbol{h}_B}{\sigma_B^2} \\
+& \overset{\Delta}{=} \boldsymbol{X} \boldsymbol{b} + \boldsymbol{d} \\
+s.t. &\boldsymbol{b} = \dfrac{\boldsymbol{F} \boldsymbol{x}_B}{\sigma_B^2} ,  \boldsymbol{d} = \dfrac{\boldsymbol{\Delta} \boldsymbol{h}_B}{\sigma_B^2}
+\end{aligned}
+\]
+</span>
+
+<p>因此，每个资产的贝塔都包括因子部分的贡献和特异部分的贡献。基准权重为0的资产，对应的贝塔特异部分的贡献为零，大部分情况行业因子的贡献主导了资产的贝塔值。</p>
+<p>投资组合Ｐ的贝塔：</p>
+
+
+
+<span class="katex">
+  \[
+\beta_P = \boldsymbol{h}_P^T \boldsymbol{\beta} = \boldsymbol{x}_P^T \boldsymbol{b} + \boldsymbol{h}_P^T \boldsymbol{d}
+\]
+</span>
+
+<p>一旦获得组合的贝塔，很自然就可将<strong>组合收益率</strong>/<strong>组合风险</strong>分解成系统性部分和残差部分：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+r_P = \beta_P r_B + \theta_P \\
+\sigma_P^2 = \beta_P^2 \sigma_B^2 + \omega_P^2
+\end{aligned}
+\]
+</span>
+
+<p>另方面，有了资产贝塔向量，那么<strong>资产收益率向量</strong>，及其<strong>协方差矩阵</strong>也可以分解成系统部分和残差部分：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\boldsymbol{r} = \boldsymbol{\beta} \  r_B + \boldsymbol{\theta} \\
+ \boldsymbol{V} = \sigma_B^2 \ \boldsymbol{\beta} \ \boldsymbol{\beta}^T + \boldsymbol{V\!R}
+\end{aligned}
+\]
+</span>
+
+<h2 id="风险归因">风险归因</h2>
+<p>无论是将市场风险和残差风险分离，还是将共同因子风险和特异风险分离，分离的两部分都是互不相关的。但当不同风险来源具有相关性时，为了讨论这种情况，需要引入<strong>风险边际贡献</strong>概念。</p>
+<h3 id="资产的风险边际贡献">资产的风险边际贡献</h3>
+<ul>
+<li>资产的<strong>总风险边际贡献</strong>：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{M\!C\!T\!R}=\frac{\partial \sigma_P}{\partial \boldsymbol{h}_P^T} = \frac{\boldsymbol{V}  \boldsymbol{h}_P}{\sigma_P}
+\]
+</span>
+
+<p>在一阶近似下有：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{\Delta} \sigma_P \approx \boldsymbol{M\!C\!T\!R}^T \mathrm{\Delta} \boldsymbol{h}_P
+\]
+</span>
+
+<ul>
+<li>资产的<strong>残差风险边际贡献</strong>：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\boldsymbol{M\!C\!R\!R} = \dfrac{\partial \omega_P}{\partial \boldsymbol{h}_P^T} = \dfrac{\boldsymbol{V\!R} \ \boldsymbol{h}_P}{\omega_P} = \dfrac{\boldsymbol{V}   \boldsymbol{h}_{P\!R}}{\omega_P} \\
+式中 \  \boldsymbol{h}_{P\!R} = \boldsymbol{h}_P - \beta_P \ \boldsymbol{h}_B \ 是组合P的\mathbf{残差头寸}
+\end{aligned}
+\]
+</span>
+
+<ul>
+<li>资产的<strong>主动风险边际贡献</strong>：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{M\!C\!A\!R} = \frac{\partial \psi_P}{\partial \boldsymbol{h}_{P\!B}^T} = \frac{\boldsymbol{V}  \boldsymbol{h}_{P\!B}}{\psi_P}
+\]
+</span>
+
+<p>进而，主动风险边际贡献可分成<strong>市场部分</strong>和<strong>残差</strong>部分：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\boldsymbol{M\!C\!A\!R} = k_1  \boldsymbol{\beta}  + k_2  \boldsymbol{M\!C\!R\!R} \\
+式中 \ k_1 = \dfrac{\beta_{P\!B} \ \sigma_B^2 }{\psi_P} \quad k_2 = \dfrac{\omega_P}{\psi_P}
+\end{aligned}
+\]
+</span>
+
+<p>可以看出
+
+
+<span class="katex">
+  \(0\le k_2 \le 1\)
+</span>
+，并且当
+
+
+<span class="katex">
+  \(\beta_{P\!A}=0\)
+</span>
+时有
+
+
+<span class="katex">
+  \(k_1=0\)
+</span>
+和
+
+
+<span class="katex">
+  \(k_2=1\)
+</span>
+。</p>
+<h3 id="因子的风险边际贡献">因子的风险边际贡献</h3>
+<p>所谓<strong>因子的风险边际贡献</strong>，是指每个因子对应的<strong>因子组合</strong>对风险的边际贡献。以<strong>主动风险</strong>为例：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\mathrm{\Delta} \boldsymbol{h}_{P\!B} &= ( (\boldsymbol{X}^T \boldsymbol{\Delta}^{-1} \boldsymbol{X})^{-1} \boldsymbol{X}^T \boldsymbol{\Delta}^{-1})^T \ \boldsymbol{\delta} \\
+\mathrm{\Delta} \psi_P &= \mathrm{\Delta} \boldsymbol{h}_{P\!B}^T \boldsymbol{M\!C\!A\!R} \\
+&=  \boldsymbol{\delta}^T (\boldsymbol{X}^T \boldsymbol{\Delta}^{-1} \boldsymbol{X})^{-1} \boldsymbol{X}^T \boldsymbol{\Delta}^{-1}  \boldsymbol{M\!C\!A\!R} \\
+\Longrightarrow \\
+\dfrac{\mathrm{\Delta} \psi_P}{\boldsymbol{\delta}^T} &=  (\boldsymbol{X}^T \boldsymbol{\Delta}^{-1} \boldsymbol{X})^{-1} \boldsymbol{X}^T \boldsymbol{\Delta}^{-1} \dfrac{\boldsymbol{V}  \boldsymbol{h}_{P\!B}}{\psi_P} \\
+&= \dfrac{\boldsymbol{F} \ \boldsymbol{x}_{P\!B}}{\psi_P} + \dfrac{(\boldsymbol{X}^T \boldsymbol{\Delta}^{-1} \boldsymbol{X})^{-1} \boldsymbol{x}_{P\!B}}{\psi_P} \\
+& \approx  \dfrac{\boldsymbol{F} \ \boldsymbol{x}_{P\!B}}{\psi_P}
+\end{aligned}
+\]
+</span>
+
+<p>说明：</p>
+<ol>
+<li>
+
+
+<span class="katex">
+  \(\dfrac{\Delta \psi_P}{\boldsymbol{\delta}^T}\)
+</span>
+就是因子的主动风险边际贡献；</li>
+<li>因子的主动风险边际贡献分解式的第一项反映了由因子暴露度改变导致的因子风险变化；第二项则反映了使用因子来改变因子暴露度所产生的特异风险的变化；</li>
+<li>因子组合定义本身就意味着其特异风险应该相对较小，实证测试也发现第二项远小于第一项，于是就有上述的近似表达式。</li>
+</ol>
+<h3 id="板块的风险边际贡献">板块的风险边际贡献</h3>
+<p>不幸的是，板块风险边际贡献问题的答案不是很清晰，需要额外研究。</p>
+<h3 id="资产的风险贡献">资产的风险贡献</h3>
+<blockquote>
+<p>边际贡献：和数学上的导数或偏导数概念有关；</p>
+<p>贡献/相对贡献：和数学上的微分或全微分概念有关。</p>
+</blockquote>
+<p>我们可以用风险的边际贡献来定义风险的分解（依然以主动风险的分解为例）：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\mathrm{d} \psi_P &= \mathrm{d} \boldsymbol{h}_{PB}^T \ \boldsymbol{M\!C\!A\!R} = \sum_i{\mathrm{d} h_{PB,i} \ M\!C\!A\!R_i} \\
+\psi_P &= \boldsymbol{h}_{PB}^T \ \boldsymbol{M\!C\!A\!R}
+\end{aligned}
+\]
+</span>
+
+<p>为了引入<strong>相对风险边际贡献</strong>的概念，不妨将上式改写成（注意是精确相等而非近似）：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\mathrm{\Delta} \psi_P &= \sum_i{\mathrm{\Delta} h_{PB,i} \ M\!C\!A\!R_i} \\
+&=  \sum_i{\dfrac{\mathrm{\Delta} h_{PB,i}}{h_{PB,i}} \ h_{PB,i} \ M\!C\!A\!R_i} \\
+& \overset{\Delta}{=}   \sum_i{\dfrac{\mathrm{\Delta} h_{PB,i}}{h_{PB,i}}  R\!M\!C\!A\!R_i}
+\end{aligned}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(\boldsymbol{R\!M\!C\!A\!R}\)
+</span>
+就是主动风险的相对风险边际贡献，注意，这里的相对风险边际贡献甚至就是直接贡献。</p>
+<h3 id="因子的风险贡献">因子的风险贡献</h3>
+<p>利用因子风险模型，我们有：</p>
+
+
+
+<span class="katex">
+  \[
+\psi_P^2 = \boldsymbol{x}_{P\!B}^T F \ \boldsymbol{x}_{P\!B} + \boldsymbol{h}_{P\!B}^T \boldsymbol{\Delta} \ \boldsymbol{h}_{P\!B}
+\]
+</span>
+
+<p>进而有：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\mathrm{d} \psi_P &= \mathrm{d} \boldsymbol{x}_{P\!B}^T \dfrac{F \ \boldsymbol{x}_{P\!B}}{\psi_P} + \mathrm{d} \boldsymbol{h}_{P\!B}^T  \dfrac{\boldsymbol{\Delta} \ \boldsymbol{h}_{P\!B}}{\psi_P} \\
+&= \mathrm{d} \boldsymbol{x}_{P\!B}^T \ \boldsymbol{F\!M\!C\!A\!R} + \mathrm{d} \boldsymbol{h}_{P\!B}^T  \dfrac{\partial \psi_P}{\partial \boldsymbol{h}_{P\!B}^T} \\
+\psi_P &= \boldsymbol{x}_{P\!B}^T \boldsymbol{F\!M\!C\!A\!R} + \dfrac{\boldsymbol{h}_{P\!B}^T \boldsymbol{\Delta} \ \boldsymbol{h}_{P\!B}}{\psi_P}
+\end{aligned}
+\]
+</span>
+
+<p>说明：</p>
+<ol>
+<li>
+
+
+<span class="katex">
+  \(\boldsymbol{F\!M\!C\!A\!R}\)
+</span>
+就是因子对主动风险的边际贡献;</li>
+<li>
+
+
+<span class="katex">
+  \(\boldsymbol{x}_{P\!B}^T \boldsymbol{F\!M\!C\!A\!R}\)
+</span>
+就是<strong>因子来源</strong>对主动风险的相对边际贡献，在这里甚至就是直接贡献；</li>
+<li>
+
+
+<span class="katex">
+  \(\dfrac{\boldsymbol{h}_{P\!B}^T \boldsymbol{\Delta} \ \boldsymbol{h}_{P\!B}}{\psi_P}\)
+</span>
+就是<strong>特异来源</strong>对主动风险的相对边际贡献，在这里甚至就是直接贡献。</li>
+</ol>
+<h2 id="相关性和市场波动率">相关性和市场波动率</h2>
+<p>单因子模型可解释一个实证现象：资产之间的相关性通常随着市场的波动率增加而增加。</p>
+
+
+
+<span class="katex">
+  \[
+\rho_{i,j} = \frac{\beta_i \ \beta_j \ \sigma_M^2}{\sqrt{(\beta_i^2 \ \sigma_M^2 + \omega_i^2)(\beta_j^2 \ \sigma_M^2 + \omega_j^2)}}
+\]
+</span></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0020/">
+    下一页<br>第四章 超常收益率、业绩基准和附加值
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0018/">
+      上一页<br>第二章 一致预期收益率：资本资产定价模型
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/apm/0019.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/apm/0019.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#标准差">标准差</a></li>
+        <li><a href="#基本的风险模型">基本的风险模型</a></li>
+        <li><a href="#结构化风险模型多因子风险模型">结构化风险模型－－多因子风险模型</a></li>
+        <li><a href="#挑选因子">挑选因子</a></li>
+        <li><a href="#行业因子">行业因子</a></li>
+        <li><a href="#风险指数">风险指数</a></li>
+        <li><a href="#风险模型的应用">风险模型的应用</a></li>
+        <li><a href="#风险模型效果如何">风险模型效果如何</a></li>
+        <li><a href="#风险模型的估计">风险模型的估计</a></li>
+        <li><a href="#因子组合">因子组合</a></li>
+        <li><a href="#因子协方差矩阵">因子协方差矩阵</a></li>
+        <li><a href="#特异风险">特异风险</a></li>
+        <li><a href="#风险分析">风险分析</a></li>
+        <li><a href="#风险归因">风险归因</a>
+          <ul>
+            <li><a href="#资产的风险边际贡献">资产的风险边际贡献</a></li>
+            <li><a href="#因子的风险边际贡献">因子的风险边际贡献</a></li>
+            <li><a href="#板块的风险边际贡献">板块的风险边际贡献</a></li>
+            <li><a href="#资产的风险贡献">资产的风险贡献</a></li>
+            <li><a href="#因子的风险贡献">因子的风险贡献</a></li>
+          </ul>
+        </li>
+        <li><a href="#相关性和市场波动率">相关性和市场波动率</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

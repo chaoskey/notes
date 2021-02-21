@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="2.1 导论"><meta property="og:title" content="2.1 导论" />
+<meta property="og:description" content="返回本章目录
+
+概率论只不过是把常识归纳为计算问题。 - 皮埃尔·拉普拉斯，1812年
+
+在前一章中，我们看到了概率如何在机器学习中发挥有用的作用。 在本章中，我们将更详细地讨论概率论。 我们没有足够的空间来详细说明 - 为此，你最好查阅一些关于这个主题的优秀教科书，例如（Jaynes 2003; Bertsekas和Tsitsiklis 2008; Wasserman 2004）。 但我们将简要回顾一下您在后面章节中需要的许多关键想法。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0030/" />
+<meta property="article:published_time" content="2019-06-20T20:20:35+08:00" />
+<meta property="article:modified_time" content="2019-06-20T20:20:35+08:00" />
+<title>2.1 导论 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a>
+<ul>
+<li><a href="/notes/docs/mlapp/01introduction/">第一章 导论</a></li>
+<li><a href="/notes/docs/mlapp/02probability/">第二章 概率</a></li>
+<li><a href="/notes/docs/mlapp/03generative_models_for_discrete_data/">第三章 基于离散数据的生成式模型</a></li>
+<li><a href="/notes/docs/mlapp/04gaussian_models/">第四章 高斯模型</a></li>
+<li><a href="/notes/docs/mlapp/05bayesian_statistics/">第五章 贝叶斯统计</a></li>
+<li><a href="/notes/docs/mlapp/06frequentist_statistics/">第六章 频率派统计</a></li>
+<li><a href="/notes/docs/mlapp/07linear_regression/">第七章 线性回归</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>2.1 导论</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents"></nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0031/">
+    下一页<br>2.2 概率论的简要回顾
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0029/">
+      上一页<br>Exercises
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/mlapp/02probability/0030/">2.1 导论</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2019-06-20</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">机器学习</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E6%A6%82%E7%8E%87%E8%AE%BA">概率论</a>
+      , 
+      <a href="/notes/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF">贝叶斯</a>
+      , 
+      <a href="/notes/tags/%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7">不确定性</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/02probability/0030.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<p><a href="/notes/docs/mlapp/02probability/"><strong>返回本章目录</strong></a></p>
+<blockquote>
+<p>概率论只不过是把常识归纳为计算问题。 - 皮埃尔·拉普拉斯，1812年</p>
+</blockquote>
+<p>在前一章中，我们看到了概率如何在机器学习中发挥有用的作用。 在本章中，我们将更详细地讨论概率论。 我们没有足够的空间来详细说明 - 为此，你最好查阅一些关于这个主题的优秀教科书，例如（Jaynes 2003; Bertsekas和Tsitsiklis 2008; Wasserman 2004）。 但我们将简要回顾一下您在后面章节中需要的许多关键想法。</p>
+<p>在我们开始使用更多技术材料之前，让我们暂停并问：概率是什么？ 我们都熟悉“硬币落地出现头部概率为0.5”这一短语。 但是，这是什么意思？ 实际上至少有两种不同的概率解释。 一种被称为<strong>频率派</strong>解释。 在这种观点中，概率表示长时间事件出现的频率。 例如，上面的陈述意味着，如果我们多次翻转硬币，我们预计它大约一半的时间出现正面。</p>
+<p>另一种解释称为<strong>贝叶斯</strong>概率解释。 在这种观点中，概率用于量化我们对某事物的<strong>不确定性</strong>; 因此，它与信息基本相关，而不是重复试验（Jaynes，2003）。 在贝叶斯观点中，上述陈述意味着我们相信硬币在下一次投掷时同样可能在落地出现头部或尾部。</p>
+<p>贝叶斯解释的一个重要优点是它可以用来模拟我们对没有长期频率的事件的不确定性。例如，我们可能想要计算极地冰盖在2020年之前融化的概率。此事件将发生零次或一次，但不能重复发生。然而，我们应该能够量化我们对这一事件的不确定性;根据我们认为这个事件的可能性，我们（希望！）采取适当的行动（参见第5.7节讨论不确定性下的最优决策）。为了提供更多面向机器学习的示例，我们可能已收到特定的电子邮件消息，并希望计算它是垃圾邮件的概率。或者我们可能在我们的雷达屏幕上观察到“昙花一现”，并且想要计算相应目标位置（无论是鸟类，飞机还是导弹）的概率分布。在所有这些情况下，重复试验的想法没有意义，但贝叶斯解释是有效的，而且确实非常自然。因此，我们将在本书中采用贝叶斯解释。幸运的是，无论采用何种解释，概率论的基本规则都是相同的。</p>
+<p><a href="/notes/docs/mlapp/02probability/"><strong>返回本章目录</strong></a></p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0031/">
+    下一页<br>2.2 概率论的简要回顾
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0029/">
+      上一页<br>Exercises
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/02probability/0030.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/mlapp/02probability/0030.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents"></nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

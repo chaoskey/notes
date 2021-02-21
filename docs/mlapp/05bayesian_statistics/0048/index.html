@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="5.4 先验"><meta property="og:title" content="5.4 先验" />
+<meta property="og:description" content="返回本章目录
+贝叶斯统计数据中最具争议的方面是它依赖于先验。 贝叶斯认为这是不可避免的，因为没有人是白板(tabula rasa或blank slate)：所有的推论都必须以某些关于世界的假设为条件。 然而，人们可能有兴趣尽量减少先验假设的影响。 我们将在下面简要讨论一些方法。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0048/" />
+<meta property="article:published_time" content="2019-07-07T20:20:35+08:00" />
+<meta property="article:modified_time" content="2019-07-07T20:20:35+08:00" />
+<title>5.4 先验 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a>
+<ul>
+<li><a href="/notes/docs/mlapp/01introduction/">第一章 导论</a></li>
+<li><a href="/notes/docs/mlapp/02probability/">第二章 概率</a></li>
+<li><a href="/notes/docs/mlapp/03generative_models_for_discrete_data/">第三章 基于离散数据的生成式模型</a></li>
+<li><a href="/notes/docs/mlapp/04gaussian_models/">第四章 高斯模型</a></li>
+<li><a href="/notes/docs/mlapp/05bayesian_statistics/">第五章 贝叶斯统计</a></li>
+<li><a href="/notes/docs/mlapp/06frequentist_statistics/">第六章 频率派统计</a></li>
+<li><a href="/notes/docs/mlapp/07linear_regression/">第七章 线性回归</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>5.4 先验</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#541-无信息先验">5.4.1 无信息先验</a></li>
+        <li><a href="#542-jeffreys先验">5.4.2 Jeffreys先验*</a>
+          <ul>
+            <li><a href="#5421示例伯努利和多项分布的jeffreys先验">5.4.2.1示例：伯努利和多项分布的Jeffreys先验</a></li>
+            <li><a href="#5422示例位置和尺度参数的jeffreys先验">5.4.2.2示例：位置和尺度参数的Jeffreys先验</a></li>
+          </ul>
+        </li>
+        <li><a href="#543-鲁棒先验">5.4.3 鲁棒先验</a></li>
+        <li><a href="#544-混合共轭先验">5.4.4 混合共轭先验</a>
+          <ul>
+            <li><a href="#5441-示例">5.4.4.1 示例</a></li>
+            <li><a href="#5442-应用寻找dna和蛋白质序列中的保守区域">5.4.4.2 应用：寻找DNA和蛋白质序列中的保守区域</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0049/">
+    下一页<br>5.5 分层贝叶斯
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0047/">
+      上一页<br>5.3贝叶斯模型选择
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/mlapp/05bayesian_statistics/0048/">5.4 先验</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2019-07-07</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">机器学习</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E5%85%88%E9%AA%8C">先验</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/05bayesian_statistics/0048.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<p><a href="/notes/docs/mlapp/05bayesian_statistics/"><strong>返回本章目录</strong></a></p>
+<p>贝叶斯统计数据中最具争议的方面是它依赖于先验。 贝叶斯认为这是不可避免的，因为没有人是<strong>白板</strong>(<strong>tabula rasa</strong>或<strong>blank slate</strong>)：所有的推论都必须以某些关于世界的假设为条件。 然而，人们可能有兴趣尽量减少先验假设的影响。 我们将在下面简要讨论一些方法。</p>
+<h2 id="541-无信息先验">5.4.1 无信息先验</h2>
+<p>如果我们对
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(\theta\)
+</span>
+没有强烈的信念，那么通常使用<strong>无信息</strong>(<strong>uninformative</strong>或<strong>non-informative</strong>)先验，并“让数据说明一切”。</p>
+<p>设计无信息先验的问题实际有点棘手。 用一个例子来说明其难度，考虑伯努利参数，
+
+
+<span class="katex">
+  \(\theta \in [0,1]\)
+</span>
+。 一个可能想法，信息最少的先验就是均匀分布，
+
+
+<span class="katex">
+  \({\rm Beta}(1,1)\)
+</span>
+。 但在这种情况下的后验均值是
+
+
+<span class="katex">
+  \(\mathbb{E} [\theta| \mathcal{D}] = \frac{N_1 + 1} {N_1 + N_0 + 2}\)
+</span>
+，而MLE是
+
+
+<span class="katex">
+  \(\frac{N_1} {N_1 + N_0}\)
+</span>
+。 因此，有人可能会争辩说，先验并不是完全没有信息。</p>
+<p>显然，通过减少伪计数的大小，我们可以减轻先验的影响。 通过上述论证，最无信息的先验是</p>
+
+
+
+<span class="katex">
+  \[
+\lim_{c \to 0} {\rm Beta}(c,c)={\rm Beta}(0,0) \tag{5.49}
+\]
+</span>
+
+<p>它是0和1处两个等质量点的混合（见（Zhu和Lu 2004））。 这也称为<strong>Haldane先验</strong>。 请注意，Haldane先验是一个不恰当的先验，意味着它不是积分到1的.但是，只要我们看到至少一个&quot;正面&quot;和至少一个&quot;反面&quot;，后验都将是正确的。</p>
+<p>在5.4.2.1节中，我们将论证“正确的”无信息先验实际上是
+
+
+<span class="katex">
+  \({\rm Beta}(\frac{1}{2},\frac{1}{2})\)
+</span>
+。 显然，这三个先验之间的实践差异很可能是微不足道的。 一般来说，建议进行某种<strong>敏感性</strong>分析，以检查一个人的结论或预测随着建模假设的变化而变化多少，其中包括先验的选择，以及拟然的选择及任何种类的数据预处理。 如果结论对建模假设相对不敏感，那么人们可以对结果更有信心。</p>
+<h2 id="542-jeffreys先验">5.4.2 Jeffreys先验*</h2>
+<p>Harold Jeffreys 设计了一种用于创建无信息先验的通用技术。 结果被称为<strong>Jeffreys先验</strong>( Jeffreys priors)。 关键的观察是，如果
+
+
+<span class="katex">
+  \(p(\phi)\)
+</span>
+是无信息的，那么先验的任何重新参数化，诸如
+
+
+<span class="katex">
+  \(\theta= h(\phi)\)
+</span>
+的某些函数
+
+
+<span class="katex">
+  \(h\)
+</span>
+，也应该是无信息的。 现在，通过变量替换公式，</p>
+
+
+
+<span class="katex">
+  \[
+p_{\theta}(\theta)=p_{\phi}(\phi)\left|\dfrac{d\phi}{d\theta}\right| \tag{5.50}
+\]
+</span>
+
+<p>所以先验一般也会改变的。 但是，让我们选择</p>
+
+
+
+<span class="katex">
+  \[
+p_{\phi}(\phi) \propto \left(I(\phi)\right)^{\frac{1}{2}} \tag{5.51}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(I(\phi)\)
+</span>
+是<strong>费雪信息</strong>(Fisher information)：</p>
+
+
+
+<span class="katex">
+  \[
+I(\phi)  \overset{\Delta}{=} - \mathbb{E} \left[\left(\dfrac{d \log p(\boldsymbol{X}|\phi)}{d\phi} \right)^2\right] \tag{5.52}
+\]
+</span>
+
+<p>这是负对数似然曲率期望的度量，因此是MLE稳定性的度量（参见第6.2.2节）。 现在</p>
+
+
+
+<span class="katex">
+  \[
+\dfrac{d \log p(x|\theta)}{d\theta}=\dfrac{d \log p(x|\phi)}{d\phi}\left|\dfrac{d\phi}{d\theta}\right| \tag{5.53}
+\]
+</span>
+
+<p>进而我们有</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+I(\theta) =& - \mathbb{E} \left[\left(\dfrac{d \log p(\boldsymbol{X}|\theta)}{d\theta} \right)^2\right] =   I(\phi) \left(\dfrac{d\phi}{d\theta}\right)^2 \\
+I(\theta)^{\frac{1}{2}} =&  I(\phi)^{\frac{1}{2}} \left|\dfrac{d\phi}{d\theta}\right| 
+\end{aligned} \tag{5.54-55}
+\]
+</span>
+
+<p>所以我们找到转换后的先验</p>
+
+
+
+<span class="katex">
+  \[
+p_{\theta}(\theta)=p_{\phi}(\phi)\left|\dfrac{d\phi}{d\theta}\right| \propto \left(I(\phi)\right)^{\frac{1}{2}}\left|\dfrac{d\phi}{d\theta}\right|=I(\theta)^{\frac{1}{2}} \tag{5.56}
+\]
+</span>
+
+<p>所以
+
+
+<span class="katex">
+  \(p_{\theta}(\theta)\)
+</span>
+和
+
+
+<span class="katex">
+  \(p_{\phi}(\phi)\)
+</span>
+是相同的。</p>
+<p>一些例子将使这更清楚</p>
+<h3 id="5421示例伯努利和多项分布的jeffreys先验">5.4.2.1示例：伯努利和多项分布的Jeffreys先验</h3>
+<p>假设
+
+
+<span class="katex">
+  \(X \sim {\rm Ber}(\theta)\)
+</span>
+。 单个样本的对数似然性是</p>
+
+
+
+<span class="katex">
+  \[
+\log p(X|\theta) = X \log \theta + (1-X) \log (1-\theta) \tag{5.57}
+\]
+</span>
+
+<p><strong>得分函数</strong>只是对数似然的梯度：</p>
+
+
+
+<span class="katex">
+  \[
+s(\theta) \overset{\Delta}{=} \dfrac{d}{d\theta} \log p(X|\theta)=\dfrac{X}{\theta}-\dfrac{1-X}{1-\theta} \tag{5.58}
+\]
+</span>
+
+<p><strong>已观测信息</strong>(observed information)是对数似然的二阶导数：</p>
+
+
+
+<span class="katex">
+  \[
+J(\theta)=-\dfrac{d^2}{d\theta^2} \log p(X|\theta)=-s^{'}(\theta|X)= \dfrac{X}{\theta^2}+\dfrac{1-X}{(1-\theta)^2} \tag{5.59}
+\]
+</span>
+
+<p><strong>费雪信息</strong>(Fisher information)是已观测信息的期望：</p>
+
+
+
+<span class="katex">
+  \[
+I(\theta) = \mathbb{E} [J(\theta|X)|X \sim \theta]=\dfrac{\theta}{\theta^2}+\dfrac{1-\theta}{(1-\theta)^2}=\dfrac{1}{\theta (1-\theta)} \tag{5.60}
+\]
+</span>
+
+<p>于是Jeffreys先验就是</p>
+
+
+
+<span class="katex">
+  \[
+p(\theta) \propto \theta^{-\frac{1}{2}}(1-\theta)^{-\frac{1}{2}} = \dfrac{1}{\sqrt{\theta(1-\theta)}} \propto {\rm Beta}(\dfrac{1}{2},\dfrac{1}{2}) \tag{5.61}
+\]
+</span>
+
+<p>现在考虑具有K个状态的多项分布随机变量。 可证明对应的Jeffreys先验是</p>
+
+
+
+<span class="katex">
+  \[
+p(\theta) \propto {\rm Dir}(\dfrac{1}{2},\dots,\dfrac{1}{2}) \tag{5.62}
+\]
+</span>
+
+<p>请注意，这与更明显的选择
+
+
+<span class="katex">
+  \({\rm Dir}(\frac{1}{K},\dots,\frac{1}{K})\)
+</span>
+或
+
+
+<span class="katex">
+  \({\rm Dir}(1,\dots,1)\)
+</span>
+有所不同。</p>
+<h3 id="5422示例位置和尺度参数的jeffreys先验">5.4.2.2示例：位置和尺度参数的Jeffreys先验</h3>
+<p>一方面，考虑位置参数的Jeffreys先验，比如高斯均值，
+
+
+<span class="katex">
+  \(p(\mu) \propto 1\)
+</span>
+。因此这是<strong>平移不变先验</strong>(translation invariant prior)的例子，满足任意指定区间
+
+
+<span class="katex">
+  \([A,B]\)
+</span>
+的概率质量与平移后区间
+
+
+<span class="katex">
+  \([A-c,B-c]\)
+</span>
+的概率质量相同。</p>
+
+
+
+<span class="katex">
+  \[
+\int_{A-c}^{B-c}{p(\mu)d\mu}=(A-c)-(B-c) = (A-B)=\int_{A}^{B}{p(\mu)d\mu} \tag{5.63}
+\]
+</span>
+
+<p>这可由
+
+
+<span class="katex">
+  \(p(\mu) \propto 1\)
+</span>
+来实现，我们可以通过使用具有无穷方差的高斯
+
+
+<span class="katex">
+  \(p(\mu)= \mathcal{N}(\mu | 0, \infty)\)
+</span>
+来近似。 注意，这是一个<strong>不恰当先验</strong>(improper prior)，因为它不能积分到1。 只要后验是恰当的，使用不恰当先验也不错，我们看到
+
+
+<span class="katex">
+  \(N \ge 1\)
+</span>
+个数据点就是这种情况，因为我们可以在看到单个数据点后立即“确定”该位置。</p>
+<p>类似地，可以展示Jeffreys先验的尺度参数，比如高斯方差
+
+
+<span class="katex">
+  \(p(\sigma^2) \propto 1/\sigma^2\)
+</span>
+。 这是<strong>缩放不变先验</strong>(scale invariant prior)的例子，满足任意指定区间
+
+
+<span class="katex">
+  \([A,B]\)
+</span>
+的概率质量与缩放后区间
+
+
+<span class="katex">
+  \([A/c,B/c]\)
+</span>
+的概率质量相同，其中缩放常数因子
+
+
+<span class="katex">
+  \(c> 0\)
+</span>
+.（例如，如果我们将单位从米改为英尺，我们不希望这会影响我们的推论。）这可以通过下式来实现</p>
+
+
+
+<span class="katex">
+  \[
+p(s) \propto 1/s \tag{5.64}
+\]
+</span>
+
+<p>为了看到这点，只需注意</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\int_{A/c}^{B/c}{p(s)ds}=& \left[\ln s\right]_{A/c}^{B/c}=\ln(B/c)-\ln(A/c) \\
+\quad =& \ln(B)-\ln(A)=\int_{A}^{B}{p(s)ds} 
+\end{aligned} \tag{5.65-66}
+\]
+</span>
+
+<p>我们可以使用退化Gamma分布（第2.4.4节）
+
+
+<span class="katex">
+  \(p(s)= {\rm Ga}(s|0,0)\)
+</span>
+来近似。 这个先验
+
+
+<span class="katex">
+  \(p(s) \propto 1/ s\)
+</span>
+也是不恰当的，但只要我们看到N≥2个数据点（因为我们需要至少两个数据点来估计方差），后验就是恰当的。</p>
+<h2 id="543-鲁棒先验">5.4.3 鲁棒先验</h2>
+<p>在许多情况下，我们并不确信我们的先验，因此我们希望确保它不会对结果产生不恰当的影响。 这可以通过使用<strong>鲁棒先验</strong>（<strong>robust priors</strong>, Insua和Ruggeri 2000）来完成，它通常具有厚重的尾部，这避免了迫使事件过于接近先验均值。</p>
+<p>让我们考虑一个例子（Berger 1985，p7）。 假设
+
+
+<span class="katex">
+  \(x \sim \mathcal{N}(\theta,1)\)
+</span>
+。 我们观察到
+
+
+<span class="katex">
+  \(x = 5\)
+</span>
+并且我们想要估计
+
+
+<span class="katex">
+  \(\theta\)
+</span>
+。 MLE当然是
+
+
+<span class="katex">
+  \(\hat{\theta}= 5\)
+</span>
+，这似乎是合理的。 均匀先验下的后验均值也是
+
+
+<span class="katex">
+  \(\bar{\theta}= 5\)
+</span>
+。但是现在假设我们知道先验中位数是0，而先验4分位数是-1和1，所以
+
+
+<span class="katex">
+  \(p(\theta \le -1)= p(-1 < \theta \le 0)= p(0 < \theta \le 1)= p(1 < \theta)= 0.25\)
+</span>
+。 让我们假设先验是平滑且单峰的。</p>
+<p>很容易证明形式为
+
+
+<span class="katex">
+  \(\mathcal{N}(\theta|0, 2.19^2)\)
+</span>
+的高斯先验满足这些先验约束。 但在这种情况下，后验均值为3.43，这似乎不太令人满意。</p>
+<p>现在假设我们使用Cauchy先验
+
+
+<span class="katex">
+  \(\mathcal{T}(\theta| 0,1,1)\)
+</span>
+。 这也满足了我们示例的先验约束。 但是这一次我们发现（使用数值积分：参见代码_robustPriorDemo_），后验均值约为4.6，这似乎更合理。</p>
+<h2 id="544-混合共轭先验">5.4.4 混合共轭先验</h2>
+<p>鲁棒先验是有用的，但使用起来计算成本很高。 共轭先验简化了计算，但通常不够稳健，并且不够灵活，无法编码我们的先验知识。 然而，事实证明，<strong>混合共轭先验</strong>(<strong>mixture of conjugate priors</strong>)也是共轭的（练习5.1），并且可以近似任何类型的先验（Dallal和Hall 1983; Diaconis和Ylvisaker 1985）。 因此，这些先验提供了计算方便性和灵活性之间的良好折衷。</p>
+<p>例如，假设我们正在建模投掷硬币，我们认为硬币要么公平，要么偏向于&quot;正面&quot;。 这不能用beta分布表示。 但是，我们可以使用两个beta分布的混合来对其进行建模。 例如，我们可能会使用</p>
+
+
+
+<span class="katex">
+  \[
+p(\theta) = 0.5 \ {\rm Beta}(\theta|20,20) + 0.5 \ {\rm Beta}(\theta|30,10) \tag{5.67}
+\]
+</span>
+
+<p>如果
+
+
+<span class="katex">
+  \(\theta\)
+</span>
+来自第一个分布，硬币是公平的，但如果它来自第二个，它偏向于&quot;正面&quot;。</p>
+<p>我们可以通过引入隐变量
+
+
+<span class="katex">
+  \(z\)
+</span>
+来表示混合，其中
+
+
+<span class="katex">
+  \(z = k\)
+</span>
+意味着
+
+
+<span class="katex">
+  \(\theta\)
+</span>
+来自第
+
+
+<span class="katex">
+  \(k\)
+</span>
+个混合分分。 先验可表示如下:</p>
+
+
+
+<span class="katex">
+  \[
+p(\theta) = \sum_k{p(z=k) p(\theta|z=k)} \tag{5.68}
+\]
+</span>
+
+<p>其中每个
+
+
+<span class="katex">
+  \(p(\theta|z=k)\)
+</span>
+是共轭的，并且
+
+
+<span class="katex">
+  \(p(z = k)\)
+</span>
+被称为（先验的）混合权重。 可以证明（练习5.1）后验也可以写成共轭分布的混合，如下所示：</p>
+
+
+
+<span class="katex">
+  \[
+p(\theta | \mathcal{D}) =  \sum_k{p(z=k | \mathcal{D}) p(\theta|\mathcal{D},z=k)} \tag{5.69}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(p(Z=k | \mathcal{D})\)
+</span>
+是后验混合权重</p>
+
+
+
+<span class="katex">
+  \[
+p(Z=k | \mathcal{D}) = \dfrac{p(Z=k) p(\mathcal{D} | Z=k )}{\sum_{k^{'}}{p(Z=k^{'}) p(\mathcal{D} | Z=k^{'} )}} \tag{5.70}
+\]
+</span>
+
+<p>这里量
+
+
+<span class="katex">
+  \(p(\mathcal{D} | Z=k )\)
+</span>
+是第
+
+
+<span class="katex">
+  \(k\)
+</span>
+个混合成分边际拟然（见5.3.2.1节）。</p>
+<h3 id="5441-示例">5.4.4.1 示例</h3>
+<p>假设我们使用混合先验</p>
+
+
+
+<span class="katex">
+  \[
+p(\theta) = 0.5 \ {\rm Beta}(\theta|a_1,b_1) + 0.5 \ {\rm Beta}(\theta|a_2,b_2) \tag{5.71}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(a_1= b_1 = 20\)
+</span>
+且
+
+
+<span class="katex">
+  \(a_2 = b_2 = 10\)
+</span>
+.我们观察到
+
+
+<span class="katex">
+  \(N_1\)
+</span>
+个&quot;正面&quot;和
+
+
+<span class="katex">
+  \(N_0\)
+</span>
+个&quot;反面&quot;。 后验变成了</p>
+
+
+
+<span class="katex">
+  \[
+p(\theta | \mathcal{D}) =  p(Z=1 | \mathcal{D}) {\rm Beta}(\theta|a_1+N_1,b_1+N_0) +p(Z=2 | \mathcal{D}) {\rm Beta} (\theta|a_2+N_1,b_2+N_0)  \tag{5.72}
+\]
+</span>
+
+<p>如果
+
+
+<span class="katex">
+  \(N_1 = 20\)
+</span>
+个&quot;正面&quot;
+
+
+<span class="katex">
+  \(N_0 = 10\)
+</span>
+个&quot;反面&quot;，则使用公式5.23，后验变为</p>
+
+
+
+<span class="katex">
+  \[
+p(\theta | \mathcal{D}) =  0.346 \ {\rm Beta}(\theta|40,30) +0.654 \ {\rm Beta} (\theta|30,20)  \tag{5.73}
+\]
+</span>
+
+<p>参考图5.10所示。</p>
+<p><img src="" alt="0079.jpg"></p>
+<blockquote>
+<p>图5.10 两种Beta分布的混合。 _mixBetaDemo_生成的图。</p>
+</blockquote>
+<h3 id="5442-应用寻找dna和蛋白质序列中的保守区域">5.4.4.2 应用：寻找DNA和蛋白质序列中的保守区域</h3>
+<p>我们提到狄利克雷-多项模型广泛用于生物序列分析。 让我们举一个简单的例子来说明已经发展起来的一些机制。 具体来说，请考虑第2.3.2.1节中讨论的序列标识。 现在假设我们想要找到代表基因组编码区的位置。 由于进化压力，这些位置通常在所有序列上具有相同的字母。 所以我们需要找到“纯粹”(或接近纯粹)的列，在这种意义下, 要么大部分都是As，要么大部分都是Ts，要么大部分都是Cs，或者要么大部分都是Gs。 一种方法是寻找低熵列; 这些将是几乎确定性（纯粹）的分布。</p>
+<p>但是假设我们想要将置信度量与我们的纯度估计值联系起来。 如果我们认为相邻位置是一起保存的，这可能很有用。 在这种情况下，如果位置
+
+
+<span class="katex">
+  \(t\)
+</span>
+是保守的，则令
+
+
+<span class="katex">
+  \(Z_t = 1\)
+</span>
+，否则
+
+
+<span class="katex">
+  \(Z_t = 0\)
+</span>
+。 然后我们可以使用马尔可夫链在相邻的
+
+
+<span class="katex">
+  \(Z_t\)
+</span>
+变量之间添加依赖关系; 详见第17章。</p>
+<p>在任何情况下，我们都需要定义似然模型
+
+
+<span class="katex">
+  \(p(\boldsymbol{N}_t | Z_t)\)
+</span>
+，其中
+
+
+<span class="katex">
+  \(\boldsymbol{N}_t\)
+</span>
+是列
+
+
+<span class="katex">
+  \(t\)
+</span>
+的
+
+
+<span class="katex">
+  \((A，C，G，T)\)
+</span>
+计数向量。 将其作为具有参数
+
+
+<span class="katex">
+  \(\boldsymbol{\theta}_t\)
+</span>
+的多项分布是很自然的。 由于每列具有不同的分布，我们将希望对
+
+
+<span class="katex">
+  \(\boldsymbol{\theta}_t\)
+</span>
+积分，从而计算边际拟然</p>
+
+
+
+<span class="katex">
+  \[
+p(\boldsymbol{N}_t | Z_t) = \int {p(\boldsymbol{N}_t | \boldsymbol{\theta}_t) p(\boldsymbol{\theta}_t | Z_t) d\boldsymbol{\theta}_t} \tag{5.74}
+\]
+</span>
+
+<p>但是我们对
+
+
+<span class="katex">
+  \(\boldsymbol{\theta}_t\)
+</span>
+应该使用什么先验？ 当
+
+
+<span class="katex">
+  \(Z_t = 0\)
+</span>
+时，我们可以使用均匀先验
+
+
+<span class="katex">
+  \(p(\theta| Z_t = 0)= {\rm Dir}(1,1,1,1)\)
+</span>
+，但是如果
+
+
+<span class="katex">
+  \(Z_t = 1\)
+</span>
+，我们应该使用什么？ 毕竟，如果该列是保守的，它可以是（几乎）纯的As，Cs，Gs或Ts列。 一种自然的方法是使用狄利克雷先验的混合，其中每个都“倾”向4维单纯形的一个适当的角落，例如，</p>
+
+
+
+<span class="katex">
+  \[
+p(\boldsymbol{\theta} | Z_t=1) = \dfrac{1}{4} {\rm Dir}(\boldsymbol{\theta} | (10,1,1,1)) + \dots +  \dfrac{1}{4} {\rm Dir}(\boldsymbol{\theta} | (1,1,1,10)) \tag{5.75}
+\]
+</span>
+
+<p>由于这是共轭的，我们可以很容易地计算
+
+
+<span class="katex">
+  \(p(\boldsymbol{N}_t | Z_t)\)
+</span>
+。 参见（Brown等人，1993）将这些想法应用于真实的生物序列问题。</p>
+<p><a href="/notes/docs/mlapp/05bayesian_statistics/"><strong>返回本章目录</strong></a></p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0049/">
+    下一页<br>5.5 分层贝叶斯
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0047/">
+      上一页<br>5.3贝叶斯模型选择
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/05bayesian_statistics/0048.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/mlapp/05bayesian_statistics/0048.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#541-无信息先验">5.4.1 无信息先验</a></li>
+        <li><a href="#542-jeffreys先验">5.4.2 Jeffreys先验*</a>
+          <ul>
+            <li><a href="#5421示例伯努利和多项分布的jeffreys先验">5.4.2.1示例：伯努利和多项分布的Jeffreys先验</a></li>
+            <li><a href="#5422示例位置和尺度参数的jeffreys先验">5.4.2.2示例：位置和尺度参数的Jeffreys先验</a></li>
+          </ul>
+        </li>
+        <li><a href="#543-鲁棒先验">5.4.3 鲁棒先验</a></li>
+        <li><a href="#544-混合共轭先验">5.4.4 混合共轭先验</a>
+          <ul>
+            <li><a href="#5441-示例">5.4.4.1 示例</a></li>
+            <li><a href="#5442-应用寻找dna和蛋白质序列中的保守区域">5.4.4.2 应用：寻找DNA和蛋白质序列中的保守区域</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="5.2 后验分布总结"><meta property="og:title" content="5.2 后验分布总结" />
+<meta property="og:description" content="返回本章目录
+后验
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+  \(p(\boldsymbol{\theta} | \mathcal{D})\)
+
+总结了我们所知道的关于未知量
+
+
+
+  \(\boldsymbol{\theta}\)
+
+的一切。 在本节中，我们将讨论一些可以从概率分布中导出的简单量，例如后验。这些摘要统计数据通常比完整联合更容易理解和可视化。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0046/" />
+<meta property="article:published_time" content="2019-07-05T20:20:35+08:00" />
+<meta property="article:modified_time" content="2019-07-05T20:20:35+08:00" />
+<title>5.2 后验分布总结 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a>
+<ul>
+<li><a href="/notes/docs/mlapp/01introduction/">第一章 导论</a></li>
+<li><a href="/notes/docs/mlapp/02probability/">第二章 概率</a></li>
+<li><a href="/notes/docs/mlapp/03generative_models_for_discrete_data/">第三章 基于离散数据的生成式模型</a></li>
+<li><a href="/notes/docs/mlapp/04gaussian_models/">第四章 高斯模型</a></li>
+<li><a href="/notes/docs/mlapp/05bayesian_statistics/">第五章 贝叶斯统计</a></li>
+<li><a href="/notes/docs/mlapp/06frequentist_statistics/">第六章 频率派统计</a></li>
+<li><a href="/notes/docs/mlapp/07linear_regression/">第七章 线性回归</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>5.2 后验分布总结</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#521-最大后验估计map">5.2.1 最大后验估计(MAP)</a>
+          <ul>
+            <li><a href="#5211-无法度量不确定性">5.2.1.1 无法度量不确定性</a></li>
+            <li><a href="#5212-map估计插入可能导致过拟合">5.2.1.2 MAP估计插入可能导致过拟合</a></li>
+            <li><a href="#5213-众数是一个非典型点">5.2.1.3 众数是一个非典型点</a></li>
+            <li><a href="#5214-map估计对重新参数化是不变的">5.2.1.4 MAP估计对重新参数化是不变的*</a></li>
+          </ul>
+        </li>
+        <li><a href="#522-可信区间credible-intervals">5.2.2 可信区间(Credible intervals)</a>
+          <ul>
+            <li><a href="#5221-最高后验密度区域-">5.2.2.1 最高后验密度区域 *</a></li>
+          </ul>
+        </li>
+        <li><a href="#523-比例差异推断inference-for-a-difference-in-proportions">5.2.3 比例差异推断(Inference for a difference in proportions)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0047/">
+    下一页<br>5.3贝叶斯模型选择
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0045/">
+      上一页<br>5.1 导言
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/mlapp/05bayesian_statistics/0046/">5.2 后验分布总结</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2019-07-05</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">机器学习</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E5%90%8E%E9%AA%8C">后验</a>
+      , 
+      <a href="/notes/tags/%E4%BC%B0%E8%AE%A1">估计</a>
+      , 
+      <a href="/notes/tags/%E5%8F%AF%E4%BF%A1%E5%8C%BA%E9%97%B4">可信区间</a>
+      , 
+      <a href="/notes/tags/%E7%BD%AE%E4%BF%A1%E5%8C%BA%E9%97%B4">置信区间</a>
+      , 
+      <a href="/notes/tags/%E6%8E%A8%E6%96%AD">推断</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/05bayesian_statistics/0046.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<p><a href="/notes/docs/mlapp/05bayesian_statistics/"><strong>返回本章目录</strong></a></p>
+<p>后验
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(p(\boldsymbol{\theta} | \mathcal{D})\)
+</span>
+总结了我们所知道的关于未知量
+
+
+<span class="katex">
+  \(\boldsymbol{\theta}\)
+</span>
+的一切。 在本节中，我们将讨论一些可以从概率分布中导出的简单量，例如后验。这些摘要统计数据通常比完整联合更容易理解和可视化。</p>
+<h2 id="521-最大后验估计map">5.2.1 最大后验估计(MAP)</h2>
+<p>我们可以通过计算后验均值，中位数或众数来轻松计算未知量的<strong>点估计</strong>。在5.7节中，我们讨论了如何使用决策理论在这些方法之间进行选择。通常，后验均值或中位数是实际评估数量的最合适选择，后验边缘向量是离散量的最佳选择。然而，后验众数，即MAP估计，是最受欢迎的选择，因为它归结到优化问题，对于该优化问题，通常存在有效算法。此外，通过将对数先验视为正则化器，可以用非贝叶斯项来解释MAP估计（更多细节见6.5节）。</p>
+<p>虽然这种方法具有计算吸引力，但重要的是要指出MAP估计存在各种缺点，我们将在下面简要讨论。这将为我们在本章后面（以及本书的其他部分）更彻底研究贝叶斯方法提供动力。</p>
+<h3 id="5211-无法度量不确定性">5.2.1.1 无法度量不确定性</h3>
+<p>MAP估计的最明显的缺点，实际上是任何其他<strong>点估计</strong>(例如后验均值或中位数)的缺点，就是它不提供不确定性的任何度量。在许多应用中，重要的是要知道可以多大程度上信任给定估计的。正如我们在5.2.2节中讨论的那样，我们可以从后验推导出这种置信度量。</p>
+<h3 id="5212-map估计插入可能导致过拟合">5.2.1.2 MAP估计插入可能导致过拟合</h3>
+<p>在机器学习中，我们通常更关心预测准确性，而不是解释模型的参数。但是，如果我们不对参数中的不确定性进行建模，那么我们的预测分布就会过于自信。我们在第3章中看到了几个这样的例子，我们稍后会看到更多的例子。在我们可能厌恶风险的情况下，过度自信的预测尤其成问题; 详见5.7节。</p>
+<h3 id="5213-众数是一个非典型点">5.2.1.3 众数是一个非典型点</h3>
+<p>选择众数作为后验分布的摘要通常是一个非常糟糕的选择，因为众数通常是非常不典型的分布，不像平均值或中位数。 对于1d连续空间，如图5.1（a）所示。基本问题是众数是零测度点，而平均值和中值考虑空间体积。 另一个例子如图5.1（b）所示：这里众数为0，但均值为非零。 在推断方差参数时，尤其是在分层模型中，通常会出现这种偏差分布。在这种情况下，MAP估计（以及因此MLE）显然是非常糟糕的估计。</p>
+<p><img src="" alt="0069.jpg"></p>
+<blockquote>
+<p>图5.1 （a）双峰分布，其中众数非常不典型。细蓝色垂直线是均值，可以说是分布的更好总结，因为它接近概率质量的大部分。由_bimodalDemo_生成的图。（b）偏差分布，其中众数与均值完全不同。由_gammaPlotDemo_生成的图。</p>
+</blockquote>
+<p>如果众数不是一个好的选择，我们应该如何摘要后验？ 答案是使用决策理论，我们将在5.7节中讨论。基本思想是指定一个损失函数，其中
+
+
+<span class="katex">
+  \(L(\theta,\hat{\theta})\)
+</span>
+是你发生的损失，如果事实是
+
+
+<span class="katex">
+  \(\theta\)
+</span>
+而你的估计是
+
+
+<span class="katex">
+  \(\hat{\theta})\)
+</span>
+。如果我们使用0-1损失，
+
+
+<span class="katex">
+  \(L(\theta,\hat{\theta})=\mathbb{I}(\theta \ne \hat{\theta})\)
+</span>
+，则最优估计是后验众数。0-1损失意味着如果你没有错误，你只能获得“积分”，否则你什么也得不到：在这个损失函数下没有“部分信用”！对于连续值，我们通常更喜欢使用平方误差损失，
+
+
+<span class="katex">
+  \(L(\theta,\hat{\theta})=(\theta-\hat{\theta})^2\)
+</span>
+; 然后，相应的最优估计是后验均值，如5.7节所示。或者我们可以使用更鲁棒的损失函数，
+
+
+<span class="katex">
+  \(L(\theta,\hat{\theta})=\left|\theta-\hat{\theta}\right |\)
+</span>
+，这会产生后验中位数。</p>
+<h3 id="5214-map估计对重新参数化是不变的">5.2.1.4 MAP估计对重新参数化是不变的*</h3>
+<p><img src="" alt="0070.jpg"></p>
+<blockquote>
+<p>图5.2 非线性变换下密度变换的例子。注意变换分布的众数不是原始众数的变换。 基于（Bishop 2006b）的练习1.4。由_bayesChangeOfVar_生成的图。</p>
+</blockquote>
+<p>MAP估计的一个更微妙的问题是我们得到的结果取决于我们如何参数化概率分布。从一个表示变换到另一个等效表示结果变了，这是不太理想的，因为测量单位是任意的（例如，当测量距离时，我们可以使用厘米或英寸）。</p>
+<p>要理解这个问题，假设我们计算
+
+
+<span class="katex">
+  \(x\)
+</span>
+的后验。如果我们定义
+
+
+<span class="katex">
+  \(y = f(x)\)
+</span>
+，则
+
+
+<span class="katex">
+  \(y\)
+</span>
+的分布由公式2.87给出，为方便起见，我们在此再写一遍：</p>
+
+
+
+<span class="katex">
+  \[
+p_y(y)=p_x(x)\left|\dfrac{dx}{dy}\right| \tag{5.1}
+\]
+</span>
+
+<p>
+
+
+<span class="katex">
+  \(\left|\dfrac{dy}{dx}\right|\)
+</span>
+项称为雅可比式(其推广便是雅可比行列式)，它度量单位量经过
+
+
+<span class="katex">
+  \(f\)
+</span>
+所引起的变化的大小。设
+
+
+<span class="katex">
+  \(\hat{x}=\underset{x}{\rm argmax} \ p_x(x)\)
+</span>
+为
+
+
+<span class="katex">
+  \(x\)
+</span>
+的MAP估计。一般来说，
+
+
+<span class="katex">
+  \(\hat{y}=\underset{y}{\rm argmax} \ p_y(y)\)
+</span>
+不是由
+
+
+<span class="katex">
+  \(\hat{x}\)
+</span>
+给出。 比如：设
+
+
+<span class="katex">
+  \(x \sim \mathcal{N}(6,1)\)
+</span>
+和
+
+
+<span class="katex">
+  \(y=f(x)\)
+</span>
+，这里</p>
+
+
+
+<span class="katex">
+  \[
+f(x)=\dfrac{1}{1+\exp (-x+5)} \tag{5.2}
+\]
+</span>
+
+<p>我们可以使用蒙特卡罗模拟得出
+
+
+<span class="katex">
+  \(y\)
+</span>
+的分布（参见第2.7.1节）。 结果如图5.2所示。我们看到原始高斯已经被非线性的S函数(sigmoid)“压扁”。特别地，我们看到变换分布的众数不等于原始众数的变换。</p>
+<p>要了解在MAP估计的背景下如何出现此问题，请考虑以下由于Michael Jordan提供的示例。伯努利分布通常由其均值
+
+
+<span class="katex">
+  \(\mu\)
+</span>
+参数化，因此
+
+
+<span class="katex">
+  \(p(y=1 | \mu)=\mu\)
+</span>
+，其中
+
+
+<span class="katex">
+  \(y \in \{0,1\}\)
+</span>
+。假设我们在单位区间上有一个均匀的先验：
+
+
+<span class="katex">
+  \(p_{\mu}(\mu)=\mathbb{I}(0 \le \mu \le 1)\)
+</span>
+。如果没有数据，MAP估计只是先验的众数，可以是0到1之间的任何值。我们现在将展示不同的参数化可以任意选择该区间中的不同点。</p>
+<p>首先设
+
+
+<span class="katex">
+  \(\theta=\sqrt{\mu}\)
+</span>
+，于是
+
+
+<span class="katex">
+  \(\mu = \theta^2\)
+</span>
+。那么新的先验是</p>
+
+
+
+<span class="katex">
+  \[
+p_{\theta}(\theta)=p_{\mu}(\mu)\left|\dfrac{d\mu}{d\theta}\right|=2 \theta \tag{5.3}
+\]
+</span>
+
+<p>对
+
+
+<span class="katex">
+  \(\theta \in [0,1]\)
+</span>
+，于是新的众数是</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\theta}_{\rm MAP} = \underset{\theta \in [0,1]}{\rm argmax} \ 2\theta=1 \tag{5.4}
+\]
+</span>
+
+<p>现在设
+
+
+<span class="katex">
+  \(\phi=1-\sqrt{1-\mu}\)
+</span>
+。那么新的先验是</p>
+
+
+
+<span class="katex">
+  \[
+p_{\phi}(\phi)=p_{\mu}(\mu)\left|\dfrac{d\mu}{d\phi}\right|=2 (\phi - 1) \tag{5.5}
+\]
+</span>
+
+<p>对
+
+
+<span class="katex">
+  \(\phi \in [0,1]\)
+</span>
+，新的众数是</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\phi}_{\rm MAP} = \underset{\phi \in [0,1]}{\rm argmax} \ 2 (\phi - 1)=0 \tag{5.6}
+\]
+</span>
+
+<p>因此，MAP估计取决于参数化。MLE不会受此影响，因为拟然是函数，而不是概率密度。贝叶斯推断也不会遇到这个问题，因为在参数空间上积分时会考虑度量的变换。该问题的一个解决方案是优化以下目标函数：</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\boldsymbol{\theta}}=\underset{\theta}{\rm argmax} \ p(\mathcal{D} | \boldsymbol{\theta}) p(\boldsymbol{\theta})\left|\boldsymbol{I}(\boldsymbol{\theta})\right|^{-\frac{1}{2}} \tag{5.7}
+\]
+</span>
+
+<p>这里
+
+
+<span class="katex">
+  \(\boldsymbol{I}(\boldsymbol{\theta})\)
+</span>
+是与
+
+
+<span class="katex">
+  \(p(\boldsymbol{x} | \boldsymbol{\theta})\)
+</span>
+相关的Fisher信息矩阵(the Fisher information matrix)（见6.2.2节）。由于（Jermyn 2005; Druilhet and Marin 2007）中解释的原因，该估计是参数化独立的。不幸的是，公式5.7的优化通常很困难，这最大程度上减少了整个方法的吸引力。</p>
+<h2 id="522-可信区间credible-intervals">5.2.2 可信区间(Credible intervals)</h2>
+<blockquote>
+<p>译者注: 本节稍后会区分: 频率派的<strong>置信区间</strong>(confidence intervals) 和 贝叶斯的<strong>可信区间</strong>(Credible intervals)。</p>
+</blockquote>
+<p>除了点估计，我们常需要一定可信度。 某些（标量）量
+
+
+<span class="katex">
+  \(\theta\)
+</span>
+的标准置信度是其后验分布的“宽度”。这可以使用
+
+
+<span class="katex">
+  \(100 (1-\alpha)\%\)
+</span>
+<strong>可信区间</strong>来度量，该区间是（连续的）区域
+
+
+<span class="katex">
+  \(C=(l,u)\)
+</span>
+（代表下上界），其包含后验概率质量的
+
+
+<span class="katex">
+  \(1-\alpha\)
+</span>
+，即，</p>
+
+
+
+<span class="katex">
+  \[
+C_{\alpha}(\mathcal{D})=(l,u):P(l \le \theta \le u | \mathcal{D})=1-\alpha \tag{5.8}
+\]
+</span>
+
+<p>可能这样的区间有很多(不唯一)，所以我们选择一个这样的区间，两边尾部有
+
+
+<span class="katex">
+  \((1-\alpha)/2\)
+</span>
+质量; 这被称为<strong>中央区间</strong>(置信区间的一个特例)。</p>
+<p>如果后验具有已知的函数形式，我们可以使用
+
+
+<span class="katex">
+  \(l=F^{-1}(\alpha/2)\)
+</span>
+和
+
+
+<span class="katex">
+  \(u=F^{-1}(1-\alpha/2)\)
+</span>
+计算后验中心区间，其中F是后验的cdf。例如，如果后验是高斯的，
+
+
+<span class="katex">
+  \(p(\theta | \mathcal{D})=\mathcal{N}(0,1)\)
+</span>
+和
+
+
+<span class="katex">
+  \(\alpha=0.05\)
+</span>
+，那么我们有
+
+
+<span class="katex">
+  \(l=\Phi(\alpha/2)=-1.96\)
+</span>
+和
+
+
+<span class="katex">
+  \(l=\Phi(1-\alpha/2)=1.96\)
+</span>
+，其中
+
+
+<span class="katex">
+  \(\Phi\)
+</span>
+表示高斯的cdf。如图2.3（c）所示。这证明了以
+
+
+<span class="katex">
+  \(\mu \pm 2 \sigma\)
+</span>
+形式表示可信区间这种通常做法，其中
+
+
+<span class="katex">
+  \(\mu\)
+</span>
+表示后验均值，
+
+
+<span class="katex">
+  \(\sigma\)
+</span>
+表示后验标准差，2是对1.96的良好近似。</p>
+<p>当然后验不总是高斯的。例如，在我们的硬币示例中，如果我们使用均匀先验并且我们观察
+
+
+<span class="katex">
+  \(N=100\)
+</span>
+个试验中的
+
+
+<span class="katex">
+  \(N_1=47\)
+</span>
+个&quot;正面&quot;，那么后验是β分布，
+
+
+<span class="katex">
+  \(p(\theta | \mathcal{D})={\rm Beta}(48,54)\)
+</span>
+。 我们发现95％后验可信区间是
+
+
+<span class="katex">
+  \((0.3749,0.5673)\)
+</span>
+（参见我们用来计算本行的Matlab代码的betaCredibleInt中的一行）。</p>
+<p>如果我们不知道函数形式，但我们可以从后验绘制样本，那么我们可以使用蒙特卡罗逼近后验分位数：我们简单地对
+
+
+<span class="katex">
+  \(S\)
+</span>
+个样本进行排序，并沿着排序列表找到在
+
+
+<span class="katex">
+  \(\alpha/S\)
+</span>
+位置发生的样本 。当
+
+
+<span class="katex">
+  \(S \to \infty\)
+</span>
+时，这会收敛到真正的分位数。 有关演示，请参阅_mcQuantileDemo_。</p>
+<p>人们经常混淆贝叶斯<strong>可信区间</strong>(Credible intervals)与频率派的<strong>置信区间</strong>(confidence intervals)。但是，它们并不是一样的，正如我们在6.6.1节中讨论的那样。一般来说，可信区间通常是人们想要计算的区间，但置信区间通常是他们实际计算的区间，因为大多数人都是被频率派统计教导而不是贝叶斯统计。幸运的是，计算可信区间的机制与计算置信区间一样简单（例如，如何在Matlab中计算, 参见betaCredibleInt）。</p>
+<h3 id="5221-最高后验密度区域-">5.2.2.1 最高后验密度区域 *</h3>
+<p>中心区间的问题是在CI之外可能存在具有较高概率密度的点。如图5.3（a）所示，我们看到最左侧CI边界外的点的密度高于最右侧CI边界内的点。</p>
+<p><img src="" alt="0071.jpg"></p>
+<blockquote>
+<p>如图5.3 (a) 中心区间和 (b) Beta(3,9)先验的HPD区域。 CI (0.06, 0.52) 和 HPD (0.04, 0.48)。基于（Hoff 2009）的图3.6。 由_betaHPD_生成的图。</p>
+</blockquote>
+<p>这引入了被称作<strong>最高后验密度</strong>或<strong>HPD</strong>区域的替代量。这被定义为总共构成概率质量
+
+
+<span class="katex">
+  \(100 (1-\alpha)\%\)
+</span>
+的最可能（的一组）点。更正式地，我们在pdf上找到阈值
+
+
+<span class="katex">
+  \(p^{*}\)
+</span>
+，使得</p>
+
+
+
+<span class="katex">
+  \[
+1-\alpha = \int_{\theta:p(\theta|\mathcal{D})>p^{*}}{p(\theta|\mathcal{D})d\theta} \tag{5.9}
+\]
+</span>
+
+<p>然后将HPD定义为</p>
+
+
+
+<span class="katex">
+  \[
+C_{\alpha}=\{\theta:p(\theta|\mathcal{D})\ge p^{*}\} \tag{5.10}
+\]
+</span>
+
+<p>在1维中，HPD区域有时被称为<strong>最高密度区间</strong>或<strong>HDI</strong>。例如，图5.3（b）显示了Beta（3,9）分布的95％HDI，即（0.04,0.48）。我们看到它比CI更窄，尽管它仍然包含95％的质量; 此外，它内部的每个点都具有比其外部的每个点更高的密度。</p>
+<p>对于单峰分布，HDI将是围绕众数且包含95％质量的的最窄区间。为了看到这一点，想象一下“注水”的反向(译者注: &ldquo;抽水&quot;可以使得水平面降低)，我们降低水平面直到95％的质量被揭示，只有5％被淹没。这给出了在1维情况下计算HDI的简单算法：简单地搜索点，使得区间包含95％的质量并且具有最小宽度。如果我们知道分布的逆CDF，或者通过搜索已排序数据点（如果我们有一袋样本），那么可以通过1维数值优化来完成（参见演示的_betaHPD_）。</p>
+<p>如果后验是多峰的，则HDI甚至可能不是连通区域：例如，见图5.4（b）。 然而，总结多峰后验总是很困难。</p>
+<p><img src="" alt="0072.jpg"></p>
+<blockquote>
+<p>图5.4 (a) 中心区间和 (b) 基于多峰后验假设的HPD区域。 基于图2.2（Gelman等人，2004）。_postDensityIntervals_生成的图。</p>
+</blockquote>
+<h2 id="523-比例差异推断inference-for-a-difference-in-proportions">5.2.3 比例差异推断(Inference for a difference in proportions)</h2>
+<p>有时我们有多个参数，我们有兴趣计算这些参数的某些函数的后验分布。例如，假设您即将从Amazon.com购买东西，并且有两个卖家以相同的价格提供它。卖家1有90条正面评价和10条负面评价。卖家2有2条正面评价和0条负面评价。 你应该买谁？</p>
+<p>从表面上看，你应该选择卖家2，但我们不能非常确信卖家2更好，因为它的评论很少。在本节中，我们勾画这个问题的贝叶斯分析。对各种其他设置的组, 可用类似的方法比较其比率或比例。</p>
+<p>设
+
+
+<span class="katex">
+  \(\theta_1\)
+</span>
+和
+
+
+<span class="katex">
+  \(\theta_2\)
+</span>
+是两个卖家的未知可靠性。由于我们对它们知之甚少，我们将赋予它们均匀的先验，
+
+
+<span class="katex">
+  \(\theta_i \sim {\rm Beta}(1,1)\)
+</span>
+。后验就是
+
+
+<span class="katex">
+  \(p(\theta_1 | \mathcal{D}_1)={\rm Beta}(91,11)\)
+</span>
+和
+
+
+<span class="katex">
+  \(p(\theta_2 | \mathcal{D}_2)={\rm Beta}(3,1)\)
+</span>
+。</p>
+<p>我们希望计算
+
+
+<span class="katex">
+  \(p(\theta_1>\theta_2)\)
+</span>
+。为方便起见，我们将
+
+
+<span class="katex">
+  \(\delta=\theta_1-\theta_2\)
+</span>
+定义为比率的差异。（或者我们可能希望工作在对数优势比项上。）我们可以使用数值积分计算所需要的量：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+p(\delta>0|\mathcal{D})=&\int_0^1{\int_0^1{\mathbb{I}(\theta_1>\theta_2){\rm Beta}(\theta_1|y_1+1,N_1-y_1+1)}}\\
+\quad & {\rm Beta}(\theta_2|y_2+1,N_2-y_2+1)d\theta_1 d\theta_2 
+\end{aligned} \tag{5.11}
+\]
+</span>
+
+<p>我们发现
+
+
+<span class="katex">
+  \(p(\delta>0|\mathcal{D})=0.710\)
+</span>
+，这意味着你最好从卖家1购买！有关代码，请参阅_amazonSellerDemo_。 （也可以通过解这个积分分析问题（Cook2005）。）</p>
+<p>解决这个问题的一种更简单的方法是通过蒙特卡罗采样来近似后验
+
+
+<span class="katex">
+  \(p(\delta|\mathcal{D})\)
+</span>
+。这很容易，因为
+
+
+<span class="katex">
+  \(\theta_1\)
+</span>
+和
+
+
+<span class="katex">
+  \(\theta_2\)
+</span>
+是后验独立的，并且都具有β分布，可以使用标准方法对其进行采样。分布
+
+
+<span class="katex">
+  \(p(\theta_i|\mathcal{D})\)
+</span>
+如图5.5（a）所示，对
+
+
+<span class="katex">
+  \(p(\delta|\mathcal{D})\)
+</span>
+的MC近似，以及95％HPD，如图5.5（b）所示。 通计数
+
+
+<span class="katex">
+  \(\theta_1>\theta_2\)
+</span>
+的样本占比，得到对
+
+
+<span class="katex">
+  \(p(\delta>0|\mathcal{D})\)
+</span>
+的MC近似。 结果是0.718，非常接近确切的值。 （有关代码，请参阅amazonSellerDemo。）</p>
+<p><img src="" alt="0073.jpg"></p>
+<blockquote>
+<p>如图5.5 (a) 精确后验
+
+
+<span class="katex">
+  \(p(\theta_i|\mathcal{D})\)
+</span>
+。 (b) 蒙特卡罗近似到
+
+
+<span class="katex">
+  \(p(\delta|\mathcal{D})\)
+</span>
+。 我们使用核密度估计来获得平滑的图。 垂直线包围95％的中心间隔。 由_amazonSellerDemo_生成的图。</p>
+</blockquote>
+<p><a href="/notes/docs/mlapp/05bayesian_statistics/"><strong>返回本章目录</strong></a></p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0047/">
+    下一页<br>5.3贝叶斯模型选择
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0045/">
+      上一页<br>5.1 导言
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/05bayesian_statistics/0046.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/mlapp/05bayesian_statistics/0046.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#521-最大后验估计map">5.2.1 最大后验估计(MAP)</a>
+          <ul>
+            <li><a href="#5211-无法度量不确定性">5.2.1.1 无法度量不确定性</a></li>
+            <li><a href="#5212-map估计插入可能导致过拟合">5.2.1.2 MAP估计插入可能导致过拟合</a></li>
+            <li><a href="#5213-众数是一个非典型点">5.2.1.3 众数是一个非典型点</a></li>
+            <li><a href="#5214-map估计对重新参数化是不变的">5.2.1.4 MAP估计对重新参数化是不变的*</a></li>
+          </ul>
+        </li>
+        <li><a href="#522-可信区间credible-intervals">5.2.2 可信区间(Credible intervals)</a>
+          <ul>
+            <li><a href="#5221-最高后验密度区域-">5.2.2.1 最高后验密度区域 *</a></li>
+          </ul>
+        </li>
+        <li><a href="#523-比例差异推断inference-for-a-difference-in-proportions">5.2.3 比例差异推断(Inference for a difference in proportions)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

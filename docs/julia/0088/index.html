@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="平面三体问题（Julia版）"><meta property="og:title" content="平面三体问题（Julia版）" />
+<meta property="og:description" content="# 奇怪：这个库必须放在最前面才能一次加载成功
+using Plots
+# gr()
+pyplot()
+
+using SciPy
+using LinearAlgebra
+Plots.GRBackend()
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/julia/0088/" />
+<meta property="article:published_time" content="2020-11-01T10:15:47+08:00" />
+<meta property="article:modified_time" content="2020-11-01T10:15:47+08:00" />
+<title>平面三体问题（Julia版） | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a>
+<ul>
+<li><a href="/notes/docs/julia/0001/">整合Julia和Python的集成环境（Win10）</a></li>
+<li><a href="/notes/docs/julia/0095/">科学计算环境搭建（Win10+WSL2+Ubuntu）</a></li>
+<li><a href="/notes/docs/julia/0002/">Julia中的数学符号演算</a></li>
+<li><a href="/notes/docs/julia/0003/">基于Julia的科学计算功能库整理</a></li>
+<li><a href="/notes/docs/diffgeo/0070/">微分几何中的计算</a></li>
+<li><a href="/notes/docs/julia/0088/"class=active>平面三体问题</a></li>
+<li><a href="/notes/docs/julia/0089/">有限差分法求解一维热传导方程</a></li>
+<li><a href="/notes/docs/julia/0090/">Galerkin法解常微分方程边值问题</a></li>
+<li><a href="/notes/docs/julia/0091/">有限元法解常微分方程边值问题</a></li>
+<li><a href="/notes/docs/julia/0092/">有限元之平面三角单元</a></li>
+<li><a href="/notes/docs/julia/0093/">有限元之Delaunay三角剖分</a></li>
+<li><a href="/notes/docs/julia/0094/">有限元法解偏微分方程（FEniCS）</a></li>
+<li><a href="/notes/docs/julia/0096/">有限元法求解牛顿流体（FEniCS）</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>平面三体问题（Julia版）</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents"></nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/julia/0089/">
+    下一页<br>有限差分法求解一维热传导方程
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/theophy/0087/">
+      上一页<br>自由场--现代物理的基础
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/julia/0088/">平面三体问题（Julia版）</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-11-01</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/julia">julia</a>
+      , 
+      <a href="/notes/tags/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">微分方程</a>
+      , 
+      <a href="/notes/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97">数值计算</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/julia/0088.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 奇怪：这个库必须放在最前面才能一次加载成功</span>
+<span style="color:#66d9ef">using</span> Plots
+<span style="color:#75715e"># gr()</span>
+pyplot()
+
+<span style="color:#66d9ef">using</span> SciPy
+<span style="color:#66d9ef">using</span> LinearAlgebra
+</code></pre></div><pre><code>Plots.GRBackend()
+</code></pre>
+<p>在平面上引入直角坐标系，每个星体的坐标和速度分别为：</p>
+
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \[
+x_i \in \mathbb{R}^{2} \ \ \dot{x}_i \in \mathbb{R}^{2} \ \ i=1,2,3
+\]
+</span>
+
+<p>直接根据万有引力定律和牛顿第二定律，可写出下面的三体动力学方程组（其中，引力常数可通过选择适当的单位制使得
+
+
+<span class="katex">
+  \(G=1\)
+</span>
+）：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\frac{d x_1}{dt} &=\dot{x}_1 \\ \frac{d x_2}{dt} &=\dot{x}_2 \\ \frac{d x_3}{dt} &=\dot{x}_3 \\ \frac{d \dot{x}_1}{dt} &=m_2 \frac{x_2-x_1}{r_3^{\ \ 3}} + m_3 \frac{x_3-x_1}{r_2^{\ \ 3}} \\ \frac{d \dot{x}_2}{dt} &=m_3 \frac{x_3-x_2}{r_2^{\ \ 3}} + m_1 \frac{x_1-x_2}{r_3^{\ \ 3}} \\ \frac{d \dot{x}_3}{dt} &=m_1 \frac{x_1-x_3}{r_2^{\ \ 3}} + m_2 \frac{x_2-x_3}{r_1^{\ \ 3}} \end{aligned}
+\]
+</span>
+
+<p>下面的程序中按如下次序装配成12个元素的数组u：</p>
+
+
+
+<span class="katex">
+  \[
+u=[x_1,\dot{x}_1,x_2,\dot{x}_2,x_3,\dot{x}_3] \in \mathbb{R}^{12}
+\]
+</span>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#66d9ef">function</span> threebody(t, u, m1,m2,m3)
+
+ <span style="color:#75715e"># 3个星体各自的坐标</span>
+ x1 <span style="color:#f92672">=</span> u[<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>]
+ x2 <span style="color:#f92672">=</span> u[<span style="color:#ae81ff">5</span><span style="color:#f92672">:</span><span style="color:#ae81ff">6</span>]
+ x3 <span style="color:#f92672">=</span> u[<span style="color:#ae81ff">9</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>]
+
+ <span style="color:#75715e"># \vec{r}/r^3</span>
+ d1 <span style="color:#f92672">=</span> (x3<span style="color:#f92672">-</span>x2)<span style="color:#f92672">/</span>norm(x3<span style="color:#f92672">-</span>x2)<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span>
+ d2 <span style="color:#f92672">=</span> (x1<span style="color:#f92672">-</span>x3)<span style="color:#f92672">/</span>norm(x1<span style="color:#f92672">-</span>x3)<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span>
+ d3 <span style="color:#f92672">=</span> (x2<span style="color:#f92672">-</span>x1)<span style="color:#f92672">/</span>norm(x2<span style="color:#f92672">-</span>x1)<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span>
+
+ <span style="color:#75715e"># du</span>
+ du <span style="color:#f92672">=</span> zeros(<span style="color:#ae81ff">12</span>)
+ du[<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> u[<span style="color:#ae81ff">3</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>]
+ du[<span style="color:#ae81ff">5</span><span style="color:#f92672">:</span><span style="color:#ae81ff">6</span>] <span style="color:#f92672">=</span> u[<span style="color:#ae81ff">7</span><span style="color:#f92672">:</span><span style="color:#ae81ff">8</span>]
+ du[<span style="color:#ae81ff">9</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>] <span style="color:#f92672">=</span> u[<span style="color:#ae81ff">11</span><span style="color:#f92672">:</span><span style="color:#ae81ff">12</span>]
+ du[<span style="color:#ae81ff">3</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>] <span style="color:#f92672">=</span> m2<span style="color:#f92672">*</span>d3 <span style="color:#f92672">-</span> m3<span style="color:#f92672">*</span>d2;
+ du[<span style="color:#ae81ff">7</span><span style="color:#f92672">:</span><span style="color:#ae81ff">8</span>] <span style="color:#f92672">=</span> m3<span style="color:#f92672">*</span>d1 <span style="color:#f92672">-</span> m1<span style="color:#f92672">*</span>d3;
+ du[<span style="color:#ae81ff">11</span><span style="color:#f92672">:</span><span style="color:#ae81ff">12</span>] <span style="color:#f92672">=</span> m1<span style="color:#f92672">*</span>d2 <span style="color:#f92672">-</span> m2<span style="color:#f92672">*</span>d1
+ du
+<span style="color:#66d9ef">end</span>;
+</code></pre></div><p>初始静止的平面三体，其位置分别在(1,-1) (1,3) (-2,-1)。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">u0 <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1.0</span>;<span style="color:#f92672">-</span><span style="color:#ae81ff">1.0</span>;<span style="color:#ae81ff">0.0</span>;<span style="color:#ae81ff">0.0</span>;<span style="color:#ae81ff">1.0</span>;<span style="color:#ae81ff">3.0</span>;<span style="color:#ae81ff">0.0</span>;<span style="color:#ae81ff">0.0</span>;<span style="color:#f92672">-</span><span style="color:#ae81ff">2.0</span>;<span style="color:#f92672">-</span><span style="color:#ae81ff">1.0</span>;<span style="color:#ae81ff">0.0</span>;<span style="color:#ae81ff">0.0</span>]
+tspan <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">40</span>]
+
+<span style="color:#75715e"># 调用ode进行求解 odeint</span>
+sol <span style="color:#f92672">=</span> SciPy<span style="color:#f92672">.</span>integrate<span style="color:#f92672">.</span>solve_ivp(threebody, tspan, u0, args<span style="color:#f92672">=</span>(<span style="color:#ae81ff">5.0</span>, <span style="color:#ae81ff">3.0</span>, <span style="color:#ae81ff">4.0</span>))
+
+t <span style="color:#f92672">=</span> sol[<span style="color:#e6db74">&#34;t&#34;</span>]
+u <span style="color:#f92672">=</span> sol[<span style="color:#e6db74">&#34;y&#34;</span>];
+</code></pre></div><p>绘制运动过程</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@gif</span> <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> eachindex(t)
+    plot(u[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>i], u[<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>i], color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>, label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>)
+    plot!(u[<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>i], u[<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>i], color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;green&#34;</span>, label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>)
+    plot!(u[<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>i], u[<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>i], color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>, label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>)
+    scatter!((u[<span style="color:#ae81ff">1</span>,i], u[<span style="color:#ae81ff">2</span>,i]), color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>, label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>)
+    scatter!((u[<span style="color:#ae81ff">5</span>,i], u[<span style="color:#ae81ff">6</span>,i]), color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;green&#34;</span>, label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>)
+    scatter!((u[<span style="color:#ae81ff">9</span>,i], u[<span style="color:#ae81ff">10</span>,i]), color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>, label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>)
+<span style="color:#66d9ef">end</span> every <span style="color:#ae81ff">5</span>
+</code></pre></div><pre><code>┌ Info: Saved animation to 
+│   fn = F:\谷歌云端硬盘\Colab Notebooks\tmp.gif
+└ @ Plots C:\Users\DELL\.julia\packages\Plots\5ItHH\src\animation.jl:104
+</code></pre>
+<p><img src="" alt="0164.gif)    "></p>
+<p>如果选择三体的质心为坐标原点，那么在此坐标系下，知道三体任意两体的坐标，就知道第三个的坐标：</p>
+
+
+
+<span class="katex">
+  \[
+x_3 = -\frac{1}{m_3}(m_1 x_1+m_2 x_2)
+\]
+</span>
+
+<p>进而只需要求解关于
+
+
+<span class="katex">
+  \(x_1,x_2\)
+</span>
+的方程组，此时可重新装配待求变量的数组：</p>
+
+
+
+<span class="katex">
+  \[
+u=[x_1,\dot{x}_1,x_2,\dot{x}_2] \in \mathbb{R}^{8}
+\]
+</span>
+
+<p>于是有：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">(m1,m2,m3) <span style="color:#f92672">=</span> (<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>);
+
+<span style="color:#66d9ef">function</span> threebody2(t, u, m1,m2,m3)
+
+ <span style="color:#75715e"># 3个星体各自的坐标</span>
+ x1 <span style="color:#f92672">=</span> u[<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>]
+ x2 <span style="color:#f92672">=</span> u[<span style="color:#ae81ff">5</span><span style="color:#f92672">:</span><span style="color:#ae81ff">6</span>]
+ x3 <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>(m1<span style="color:#f92672">*</span>x1<span style="color:#f92672">+</span>m2<span style="color:#f92672">*</span>x2)<span style="color:#f92672">/</span>m3
+
+ <span style="color:#75715e"># \vec{r}/r^3</span>
+ d1 <span style="color:#f92672">=</span> (x3<span style="color:#f92672">-</span>x2)<span style="color:#f92672">/</span>norm(x3<span style="color:#f92672">-</span>x2)<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span>
+ d2 <span style="color:#f92672">=</span> (x1<span style="color:#f92672">-</span>x3)<span style="color:#f92672">/</span>norm(x1<span style="color:#f92672">-</span>x3)<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span>
+ d3 <span style="color:#f92672">=</span> (x2<span style="color:#f92672">-</span>x1)<span style="color:#f92672">/</span>norm(x2<span style="color:#f92672">-</span>x1)<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span>
+
+ <span style="color:#75715e"># du (只需要其中两体的动力学方程)</span>
+ du <span style="color:#f92672">=</span> zeros(<span style="color:#ae81ff">8</span>)
+ du[<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> u[<span style="color:#ae81ff">3</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>]
+ du[<span style="color:#ae81ff">5</span><span style="color:#f92672">:</span><span style="color:#ae81ff">6</span>] <span style="color:#f92672">=</span> u[<span style="color:#ae81ff">7</span><span style="color:#f92672">:</span><span style="color:#ae81ff">8</span>]
+ du[<span style="color:#ae81ff">3</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>] <span style="color:#f92672">=</span> m2<span style="color:#f92672">*</span>d3 <span style="color:#f92672">-</span> m3<span style="color:#f92672">*</span>d2;
+ du[<span style="color:#ae81ff">7</span><span style="color:#f92672">:</span><span style="color:#ae81ff">8</span>] <span style="color:#f92672">=</span> m3<span style="color:#f92672">*</span>d1 <span style="color:#f92672">-</span> m1<span style="color:#f92672">*</span>d3;
+ du
+<span style="color:#66d9ef">end</span>;
+
+<span style="color:#75715e"># 为了方便比较，确保初值条件和前面完全一致</span>
+u0 <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1.0</span>;<span style="color:#f92672">-</span><span style="color:#ae81ff">1.0</span>;<span style="color:#ae81ff">0.0</span>;<span style="color:#ae81ff">0.0</span>;<span style="color:#ae81ff">1.0</span>;<span style="color:#ae81ff">3.0</span>;<span style="color:#ae81ff">0.0</span>;<span style="color:#ae81ff">0.0</span>;<span style="color:#f92672">-</span><span style="color:#ae81ff">2.0</span>;<span style="color:#f92672">-</span><span style="color:#ae81ff">1.0</span>;<span style="color:#ae81ff">0.0</span>;<span style="color:#ae81ff">0.0</span>]
+o <span style="color:#f92672">=</span> (m1<span style="color:#f92672">*</span>u0[<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>]<span style="color:#f92672">+</span>m2<span style="color:#f92672">*</span>u0[<span style="color:#ae81ff">5</span><span style="color:#f92672">:</span><span style="color:#ae81ff">6</span>]<span style="color:#f92672">+</span>m3<span style="color:#f92672">*</span>u0[<span style="color:#ae81ff">9</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>])<span style="color:#f92672">/</span>(m1<span style="color:#f92672">+</span>m2<span style="color:#f92672">+</span>m3)
+u0 <span style="color:#f92672">=</span> u0[<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">8</span>]
+u0[<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>] <span style="color:#f92672">-=</span> o
+u0[<span style="color:#ae81ff">5</span><span style="color:#f92672">:</span><span style="color:#ae81ff">6</span>] <span style="color:#f92672">-=</span> o
+
+tspan <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">40</span>]
+
+<span style="color:#75715e"># 调用ode进行求解 odeint</span>
+sol <span style="color:#f92672">=</span> SciPy<span style="color:#f92672">.</span>integrate<span style="color:#f92672">.</span>solve_ivp(threebody2, tspan, u0, args<span style="color:#f92672">=</span>(m1,m2,m3))
+
+t <span style="color:#f92672">=</span> sol[<span style="color:#e6db74">&#34;t&#34;</span>]
+u <span style="color:#f92672">=</span> sol[<span style="color:#e6db74">&#34;y&#34;</span>];
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">x1 <span style="color:#f92672">=</span> u[[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>],<span style="color:#f92672">:</span>];
+x2 <span style="color:#f92672">=</span> u[[<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>],<span style="color:#f92672">:</span>];
+x3 <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>(m1<span style="color:#f92672">*</span>x1<span style="color:#f92672">+</span>m2<span style="color:#f92672">*</span>x2)<span style="color:#f92672">/</span>m3
+
+<span style="color:#a6e22e">@gif</span> <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> eachindex(t) 
+    plot(x1[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>i], x1[<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>i], color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>, label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>)
+    plot!(x2[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>i], x2[<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>i], color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;green&#34;</span>, label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>)
+    plot!(x3[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>i], x3[<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>i], color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>, label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>)
+    scatter!((x1[<span style="color:#ae81ff">1</span>,i], x1[<span style="color:#ae81ff">2</span>,i]), color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;red&#34;</span>, label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>)
+    scatter!((x2[<span style="color:#ae81ff">1</span>,i], x2[<span style="color:#ae81ff">2</span>,i]), color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;green&#34;</span>, label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>)
+    scatter!((x3[<span style="color:#ae81ff">1</span>,i], x3[<span style="color:#ae81ff">2</span>,i]), color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;blue&#34;</span>, label <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>)
+<span style="color:#66d9ef">end</span> every <span style="color:#ae81ff">5</span>
+</code></pre></div><pre><code>┌ Info: Saved animation to 
+│   fn = F:\谷歌云端硬盘\Colab Notebooks\tmp.gif
+└ @ Plots C:\Users\DELL\.julia\packages\Plots\5ItHH\src\animation.jl:104
+</code></pre>
+<p><img src="" alt="0165.gif)    "></p>
+<p>我们注意到，原本给出的初值条件的质心本来就在原点：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">o
+</code></pre></div><pre><code>2-element Array{Float64,1}:
+ 0.0
+ 0.0
+</code></pre>
+<p>所以按理说，前后两次的绘图应该完全一样才对，但事实上不一样。其实，这暗含三体运动的不可预测性（数值计算的微小舍入误差可能会被无限放大）。</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/julia/0089/">
+    下一页<br>有限差分法求解一维热传导方程
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/theophy/0087/">
+      上一页<br>自由场--现代物理的基础
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/julia/0088.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/julia/0088.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents"></nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="流形上的旋量和旋量场（导数算符和曲率）"><meta property="og:title" content="流形上的旋量和旋量场（导数算符和曲率）" />
+<meta property="og:description" content="
+上两篇，引入旋量概念以及旋量代数，以及旋量的一个直观的几何解释。
+本篇，引入旋量场导数算符和曲率旋量两个概念。
+本篇限定讨论时空流形上的旋量分析，始终选择正交归一标架场（约定
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+  \((-1,1,1,1)\)
+
+度规）。特殊情况下，就是闵氏时空。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/diffgeo/0078/" />
+<meta property="article:published_time" content="2020-04-02T10:39:12+08:00" />
+<meta property="article:modified_time" content="2020-04-02T10:39:12+08:00" />
+<title>流形上的旋量和旋量场（导数算符和曲率） | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a>
+<ul>
+<li><a href="/notes/docs/diffgeo/0005/">基于抽象指标的张量分析</a></li>
+<li><a href="/notes/docs/diffgeo/0006/">流形上的导数算符</a></li>
+<li><a href="/notes/docs/diffgeo/0007/">流形上的平移</a></li>
+<li><a href="/notes/docs/diffgeo/0008/">黎曼曲率张量</a></li>
+<li><a href="/notes/docs/diffgeo/0009/">流形间的映射</a></li>
+<li><a href="/notes/docs/diffgeo/0010/">流形上的李导数</a></li>
+<li><a href="/notes/docs/diffgeo/0011/">Killing矢量场</a></li>
+<li><a href="/notes/docs/diffgeo/0012/">子流形和超曲面</a></li>
+<li><a href="/notes/docs/diffgeo/0013/">流形上的微分形式及其对偶</a></li>
+<li><a href="/notes/docs/diffgeo/0014/">流形上的微积分</a></li>
+<li><a href="/notes/docs/diffgeo/0016/">李群李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0068/">常用李群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0069/">李变换群</a></li>
+<li><a href="/notes/docs/diffgeo/0070/">微分几何中的计算（Julia版）</a></li>
+<li><a href="/notes/docs/diffgeo/0073/">辛群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0074/">辛流形</a></li>
+<li><a href="/notes/docs/diffgeo/0076/">流形上的旋量和旋量场（初步）</a></li>
+<li><a href="/notes/docs/diffgeo/0077/">流形上的旋量和旋量场（几何解释）</a></li>
+<li><a href="/notes/docs/diffgeo/0078/"class=active>流形上的旋量和旋量场（导数算符和曲率)</a></li>
+<li><a href="/notes/docs/diffgeo/0079/">流形上的旋量和旋量场（自旋系数和克氏符）</a></li>
+<li><a href="/notes/docs/diffgeo/0082/">李群李代数伴随表示和Killing型、Casimir算符</a></li>
+<li><a href="/notes/docs/diffgeo/0083/">半单李代数的标准形式</a></li>
+<li><a href="/notes/docs/diffgeo/0084/">半单李代数的根系、权系和Dynkin图</a></li>
+<li><a href="/notes/docs/diffgeo/0085/">半单李代数的Casimir不变算符</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>流形上的旋量和旋量场（导数算符和曲率）</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#旋量场">旋量场</a></li>
+        <li><a href="#旋量场的导数算符">旋量场的导数算符</a></li>
+        <li><a href="#曲率旋量">曲率旋量</a></li>
+        <li><a href="#曲率旋量---黎曼曲率张量">曲率旋量  =》 黎曼曲率张量</a></li>
+        <li><a href="#黎曼曲率张量--曲率旋量">黎曼曲率张量  =》曲率旋量</a></li>
+        <li><a href="#曲率旋量的分解">曲率旋量的分解</a></li>
+        <li><a href="#weyl旋量的构造">Weyl旋量的构造</a></li>
+        <li><a href="#weyl张量和weyl旋量">Weyl张量和Weyl旋量</a></li>
+        <li><a href="#旋量导数算符对易子的作用">旋量导数算符对易子的作用</a></li>
+        <li><a href="#导数算符对易子的分解">导数算符对易子的分解</a></li>
+        <li><a href="#导数算符对易子的相关算符">导数算符对易子的相关算符</a></li>
+        <li><a href="#这些算符的作用">这些算符的作用</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0079/">
+    下一页<br>流形上的旋量和旋量场（自旋系数和克氏符）
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0077/">
+      上一页<br>流形上的旋量和旋量场（几何解释）
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/diffgeo/0078/">流形上的旋量和旋量场（导数算符和曲率）</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-04-02</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95">微分几何</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E6%B5%81%E5%BD%A2">流形</a>
+      , 
+      <a href="/notes/tags/%E6%97%8B%E9%87%8F">旋量</a>
+      , 
+      <a href="/notes/tags/%E5%AF%B9%E7%A7%B0%E6%80%A7">对称性</a>
+      , 
+      <a href="/notes/tags/%E6%9B%B2%E7%8E%87">曲率</a>
+      , 
+      <a href="/notes/tags/%E5%AF%BC%E6%95%B0%E7%AE%97%E7%AC%A6">导数算符</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0078.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<blockquote>
+<p>上两篇，引入旋量概念以及旋量代数，以及旋量的一个直观的几何解释。</p>
+<p>本篇，引入<code>旋量场导数算符</code>和<code>曲率旋量</code>两个概念。</p>
+<p>本篇限定讨论时空流形上的旋量分析，始终选择正交归一标架场（约定
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \((-1,1,1,1)\)
+</span>
+度规）。特殊情况下，就是闵氏时空。</p>
+</blockquote>
+<h2 id="旋量场">旋量场</h2>
+<p>考虑一个时空流形
+
+
+<span class="katex">
+  \((M,g_{ab})\)
+</span>
+。矢量、张量、旋量，都是某点
+
+
+<span class="katex">
+  \(p\in M\)
+</span>
+切空间
+
+
+<span class="katex">
+  \(V_p\)
+</span>
+上的概念。</p>
+<p>对有度规的时空流形而言，我们总能在切空间
+
+
+<span class="katex">
+  \(V_p\)
+</span>
+找到一组正交归一的基底，这意味着切空间和平直闵氏时空无数学上的差异【见第一篇】。  所以，当我们谈及闵氏时空时，可以理解成全局平直的闵氏时空， 也可理解成时弯曲时空上某点的局域闵氏时空。</p>
+<p>矢量和张量的概念是不依赖度规的，但旋量是度规依赖的。在前两篇中，我们约定依赖的闵氏度规是
+
+
+<span class="katex">
+  \((-1,1,1,1)\)
+</span>
+的。  所以，必须选择正交归一的基底场。</p>
+<p>此外，旋量的分量的表示依赖于一个旋量空间
+
+
+<span class="katex">
+  \((W,\epsilon_{AA'})\)
+</span>
+中选择一组基底
+
+
+<span class="katex">
+  \((\omicron^A,\iota^A)\)
+</span>
+。</p>
+<p>我们在每一点
+
+
+<span class="katex">
+  \(p\in M\)
+</span>
+都选择一个旋量，要求选择保持光滑连续性，那么就得到一个旋量场。事实上，<strong>旋量场就是时空流形
+
+
+<span class="katex">
+  \(M\)
+</span>
+到旋量空间
+
+
+<span class="katex">
+  \(W\)
+</span>
+的光滑映射</strong>。</p>
+<h2 id="旋量场的导数算符">旋量场的导数算符</h2>
+<p>在前面的约定下，存在与度规
+
+
+<span class="katex">
+  \(g_{ab}\)
+</span>
+唯一适配的的导数算符
+
+
+<span class="katex">
+  \(\nabla_a\)
+</span>
+。 而
+
+
+<span class="katex">
+  \(\nabla_a\)
+</span>
+很像“协变矢量”，于是可将这个“协变矢量”所关联的“旋量张量”
+
+
+<span class="katex">
+  \(\nabla_{AA'}\)
+</span>
+定义为<code>旋量场的导数算符</code>：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\nabla_{AA'}\overset{\Delta}{=}\sigma^a_{\ \ AA'}\nabla_a}
+\]
+</span>
+
+<p>具体而言，比如，当作用于协变矢量
+
+
+<span class="katex">
+  \(\omega_b\)
+</span>
+所关联旋量张量
+
+
+<span class="katex">
+  \(\omega_{BB'}\)
+</span>
+上时</p>
+
+
+
+<span class="katex">
+  \[
+\nabla_{AA'}\omega_{BB'}=\sigma^a_{\ \ AA'}\sigma^b_{\ \ BB'}\nabla_a \omega_{b}
+\]
+</span>
+
+<p>根据这个定义，旋量导数算符
+
+
+<span class="katex">
+  \(\nabla_{AA'}\)
+</span>
+也满足：</p>
+<ul>
+<li>1）线性的；</li>
+<li>2）莱布尼兹律；</li>
+<li>3）与缩并可交换；</li>
+<li>4）可退化性：
+
+
+<span class="katex">
+  \(v(f)=-v^{AA'}\nabla_{AA'}f \)
+</span>
+；</li>
+<li>5）无挠性：
+
+
+<span class="katex">
+  \(\nabla_{AA'}\nabla_{BB'}f=\nabla_{BB'}\nabla_{AA'}f\)
+</span>
+。</li>
+</ul>
+<p>此外，
+
+
+<span class="katex">
+  \(\nabla_{AA'}\)
+</span>
+还满足：</p>
+<ul>
+<li>i）“实数性”：
+
+
+<span class="katex">
+  \(\overline{\nabla_{AA'}\psi^{\dots}_{\quad \dots}}=\nabla_{AA'}\bar{\psi}^{\dots}_{\quad \dots}\)
+</span>
+；</li>
+<li>ii）“自动适配旋量度规”：
+
+
+<span class="katex">
+  \(\nabla_{AA'}\epsilon_{BC}=0=\nabla_{AA'}\epsilon^{BC}\)
+</span>
+。</li>
+</ul>
+<h2 id="曲率旋量">曲率旋量</h2>
+<p>已知算符
+
+
+<span class="katex">
+  \([\nabla_a,\nabla_b]\)
+</span>
+是一个线性映射
+
+
+<span class="katex">
+  \(\mathscr{T}_p(0,1)\to\mathscr{T}_p(0,3)\)
+</span>
+，即代表一个张量
+
+
+<span class="katex">
+  \(R_{abc}^{\quad d}\)
+</span>
+，这就是<code>黎曼曲率张量</code>，改写成其关联的旋量形式</p>
+
+
+
+<span class="katex">
+  \[
+(\nabla_{AA'}\nabla_{BB'}-\nabla_{BB'}\nabla_{AA'})\omega_{CC'}=R_{AA'BB'CC'}^{\qquad \qquad DD'}\omega_{DD'}
+\]
+</span>
+
+<p>此外，根据<code>旋量导数算符</code>的定义，对易算符
+
+
+<span class="katex">
+  \([\nabla_a,\nabla_b]\)
+</span>
+所关联的旋量算符是</p>
+
+
+
+<span class="katex">
+  \[
+\nabla_{AA'}\nabla_{BB'}-\nabla_{BB'}\nabla_{AA'}=\sigma^a_{\ \ AA'}\sigma^b_{\ \ BB'}[\nabla_a,\nabla_b]
+\]
+</span>
+
+<p>据此可见，由
+
+
+<span class="katex">
+  \([\nabla_a,\nabla_b]\)
+</span>
+的线性性可诱导出
+
+
+<span class="katex">
+  \(\nabla_{AA'}\nabla_{BB'}-\nabla_{BB'}\nabla_{AA'}\)
+</span>
+的线性性，即是线性映射
+
+
+<span class="katex">
+  \(\mathscr{T}_p(0,1;0,0)\to \mathscr{T}_p(0,3;0,2)\)
+</span>
+，可用旋量张量
+
+
+<span class="katex">
+  \(\chi_{AA'BB'C}^{\quad \qquad D}\)
+</span>
+表示之，称为<code>曲率旋量</code></p>
+
+
+
+<span class="katex">
+  \[
+\boxed{(\nabla_{AA'}\nabla_{BB'}-\nabla_{BB'}\nabla_{AA'})\omega_C=\chi_{AA'BB'C}^{\quad \qquad D}\omega_D}
+\]
+</span>
+
+<h2 id="曲率旋量---黎曼曲率张量">曲率旋量  =》 黎曼曲率张量</h2>
+<p>将旋量导数算符对易子作用在
+
+
+<span class="katex">
+  \(\omega_A\bar{\omega}_{A'}\)
+</span>
+上，利用旋量导数算符的莱布尼茨律及其“实数性”，不难推导出：</p>
+
+
+
+<span class="katex">
+  \[
+(\nabla_{AA'}\nabla_{BB'}-\nabla_{BB'}\nabla_{AA'})\ \omega_C\bar{\omega}_{C'}=\chi_{AA'BB'C}^{\quad \qquad D}\omega_D\bar{\omega}_{C'}+ \bar{\chi}_{AA'BB'C'}^{\quad \qquad D'}\omega_C\bar{\omega}_{D'}
+\]
+</span>
+
+<p>将这个结果和黎曼曲率张量定义进行比较得知：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{R_{AA'BB'CC'}^{\qquad \qquad DD'}= \chi_{AA'BB'C}^{\quad \qquad D}\bar{\epsilon}_{C'}^{\ \ D'}+ \bar{\chi}_{AA'BB'C'}^{\quad \qquad D'}\epsilon_C^{\ D}}
+\]
+</span>
+
+<h2 id="黎曼曲率张量--曲率旋量">黎曼曲率张量  =》曲率旋量</h2>
+<p>由于
+
+
+<span class="katex">
+  \(R_{abcd}\)
+</span>
+关于最后两个指标是反称的，依据指标对的反称分解恒等式，有</p>
+
+
+
+<span class="katex">
+  \[
+R_{AA'BB'CC'DD'}=\frac{1}{2}R_{AA'BB'(CD)X'}^{\quad \qquad \qquad X'}\bar{\epsilon}_{C'D'}+\frac{1}{2}R_{AA'BB'(C'D')X}^{\quad \qquad \qquad X}\epsilon_{CD}
+\]
+</span>
+
+<p>通过比较得知【同时还利用了
+
+
+<span class="katex">
+  \(R_{abcd}\)
+</span>
+的&quot;实数性&quot;】：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\chi_{AA'BB'CD}=\chi_{AA'BB'(CD)}=\frac{1}{2}R_{AA'BB'(CD)C'}^{\quad \qquad \qquad C'}}
+\]
+</span>
+
+<h2 id="曲率旋量的分解">曲率旋量的分解</h2>
+<p>
+
+
+<span class="katex">
+  \(R_{abcd}\)
+</span>
+关于头两指标也是反称的，进而
+
+
+<span class="katex">
+  \(\chi_{AA'BB'CD}\)
+</span>
+关于头两组指标也是反称的，再次依据指标对的反称分解恒等式，有：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\chi_{AA'BB'CD}=\Lambda_{ABCD}\bar{\epsilon}_{A'B'}+\Phi_{A'B'CD}\epsilon_{AB}}\\ \Lambda_{ABCD}=\frac{1}{2}\chi^{\ \qquad A'}_{(AB)A'\ \ CD}\\ \Phi_{A'B'CD}=\frac{1}{2}\chi^{\ \ \qquad A}_{(A'B')A\ \ CD}
+\]
+</span>
+
+<p>有性质如下：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\Lambda_{ABCD}=\Lambda_{(AB)(CD)}\quad \Phi_{A'B'CD}=\Phi_{(A'B')(CD)}}
+\]
+</span>
+
+<p>将前面的结果全部带入，有</p>
+
+
+
+<span class="katex">
+  \[
+\Phi_{A'B'CD}=\frac{1}{4}\epsilon^{AB}\bar{\epsilon}^{C'D'}R_{(A'B')AB(CD)C'D'} \\ \Lambda_{ABCD}=\frac{1}{4}\bar{\epsilon}^{A'B'}\bar{\epsilon}^{C'D'}R_{(AB)A'B'(CD)C'D'}
+\]
+</span>
+
+<p>进而，再根据
+
+
+<span class="katex">
+  \(R_{abcd}=R_{cdab}\)
+</span>
+，有性质如下：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\bar{\Phi}_{ABC'D'}&=\Phi_{ABC'D'} \quad \text{实数性}\\ \quad \\ \Lambda_{ABCD}&=\Lambda_{CDAB}\end{aligned}}
+\]
+</span>
+
+<h2 id="weyl旋量的构造">Weyl旋量的构造</h2>
+<p>易证
+
+
+<span class="katex">
+  \(\epsilon^{AC}\Lambda_{ABCD}\)
+</span>
+是反称的，必定有一个乘子
+
+
+<span class="katex">
+  \(\epsilon_{BD}\)
+</span>
+。 于是可以定义
+
+
+<span class="katex">
+  \(\Psi_{ABCD}\)
+</span>
+，我们将会看见，这就是<code>Weyl旋量</code>：
+
+
+
+<span class="katex">
+  \[
+\boxed{\Psi_{ABCD}\overset{\Delta}{=}\Lambda_{ABCD}-\Lambda(\epsilon_{AC}\epsilon_{BD}+\epsilon_{BC}\epsilon_{AD})}\\ \quad \Lambda\overset{\Delta}{=}\frac{1}{6}\epsilon^{AC}\epsilon^{BD}\Lambda_{ABCD}
+\]
+</span>
+</p>
+<p>如此构造的
+
+
+<span class="katex">
+  \(\Psi_{ABCD}\)
+</span>
+，必定满足：【依赖
+
+
+<span class="katex">
+  \(\epsilon^{AC}\Lambda_{ABCD}\)
+</span>
+的反称性】</p>
+
+
+
+<span class="katex">
+  \[
+\epsilon^{AC}\Psi_{ABCD}=0
+\]
+</span>
+
+<p>再与
+
+
+<span class="katex">
+  \(\Lambda_{ABCD}\)
+</span>
+的对称性一起，蕴含着，
+
+
+<span class="katex">
+  \(\Psi_{ABCD}\)
+</span>
+是全对称的：【暂时没证出来】</p>
+
+
+
+<span class="katex">
+  \[
+\Psi_{ABCD}=\Psi_{(ABCD)}
+\]
+</span>
+
+<p>最后，根据
+
+
+<span class="katex">
+  \(R_{a[bcd]}=0\)
+</span>
+，及第一篇末尾的恒等式，可知：【暂时没证出来】</p>
+
+
+
+<span class="katex">
+  \[
+\bar{\Lambda}=\Lambda\quad \text{实数性}
+\]
+</span>
+
+<p>因此，曲率旋量可以分解成：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\chi_{AA'BB'CD}=\Psi_{ABCD}\bar{\epsilon}_{A'B'}+\Phi_{A'B'CD}\epsilon_{AB}+\Lambda(\epsilon_{AC}\epsilon_{BD}+\epsilon_{BC}\epsilon_{AD})\bar{\epsilon}_{A'B'}}
+\]
+</span>
+
+<h2 id="weyl张量和weyl旋量">Weyl张量和Weyl旋量</h2>
+<p>进而，黎曼曲率张量可分解成：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}R_{AA'BB'CC'}^{\qquad \qquad DD'}=\Psi_{ABC}^{\ \ \quad D}\bar{\epsilon}_{A'B'}\bar{\epsilon}_{C'}^{\ \ D'}+\Phi_{A'B'C}^{\qquad D}\epsilon_{AB}\bar{\epsilon}_{C'}^{\ \ D'}\\ +\Lambda(\epsilon_{AC}\epsilon_{B}^{\ \ D}+\epsilon_{BC}\epsilon_{A}^{\ \ D})\bar{\epsilon}_{A'B'}\bar{\epsilon}_{C'}^{\ \ D'} + C.C\end{aligned}}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(C.C.\)
+</span>
+代表前面部分的复共轭。</p>
+<p>里奇张量
+
+
+<span class="katex">
+  \(R_{ac}\)
+</span>
+对应的分解：
+
+
+
+<span class="katex">
+  \[
+\boxed{R_{AA'CC'}=-2\Phi_{A'C'AC}+6\Lambda\epsilon_{AC}\bar{\epsilon}_{A'C'}}
+\]
+</span>
+</p>
+<p>进一步缩并有：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}R&=g^{AA'CC'}R_{AA'CC'}\\&=-\epsilon^{AC}\bar{\epsilon}^{AC}(-2\Phi_{A'C'AC}+6\Lambda\epsilon_{AC}\bar{\epsilon}_{A'C'})\\&=-24\Lambda\end{aligned}
+\]
+</span>
+
+<p>所以，
+
+
+<span class="katex">
+  \(\boxed{R=-24\Lambda}\)
+</span>
+；而 
+
+
+<span class="katex">
+  \(-2\Phi_{A'C'AC}\)
+</span>
+对应
+
+
+<span class="katex">
+  \(R_{ac}-\dfrac{1}{4}Rg_{ac}\)
+</span>
+。</p>
+<p>事实上，黎曼曲率张量分解中有一部分，对应<code>Weyl张量</code>
+
+
+<span class="katex">
+  \(C_{abcd}\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{C_{AA'BB'CC'DD'}=\Psi_{ABCD}\bar{\epsilon}_{A'B'}\bar{\epsilon}_{C'D'}+\bar{\Psi}_{A'B'C'D'}\epsilon_{AB}\epsilon_{CD}}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(\Psi_{ABCD}\)
+</span>
+称之为<code>Weyl旋量</code>。这就是如此命名的原因。</p>
+<h2 id="旋量导数算符对易子的作用">旋量导数算符对易子的作用</h2>
+<p>旋量导数算符对易子对应于曲率旋量。</p>
+<p>我们已知</p>
+
+
+
+<span class="katex">
+  \[
+(\nabla_{AA'}\nabla_{BB'}-\nabla_{BB'}\nabla_{AA'})\ T_{CC'}=\chi_{AA'BB'C}^{\quad \qquad D}T_{DC'}+ \bar{\chi}_{AA'BB'C'}^{\quad \qquad D'}T_{CD'}
+\]
+</span>
+
+<p>利用旋量度规
+
+
+<span class="katex">
+  \(\epsilon^{AB}\)
+</span>
+，很容易将指标提升【注意有负号】</p>
+
+
+
+<span class="katex">
+  \[
+(\nabla_{AA'}\nabla_{BB'}-\nabla_{BB'}\nabla_{AA'})\ T^{CC'}=-\chi_{AA'BB'D}^{\quad \qquad C}T^{DC'}- \bar{\chi}_{AA'BB'D'}^{\quad \qquad C'}T^{CD'}
+\]
+</span>
+
+<p>更复杂点</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}&(\nabla_{AA'}\nabla_{BB'}-\nabla_{BB'}\nabla_{AA'})\ T^{CC'}_{\ \quad DD'}\\ =&-\chi_{AA'BB'E}^{\ \quad \qquad C}\ T^{EC'}_{\ \quad DD'}-\bar{\chi}_{AA'BB'E'}^{\ \quad \qquad C'}\ T^{CE'}_{\ \quad DD'}\\  & \quad +\chi_{AA'BB'D}^{\ \quad \qquad E}T^{CC'}_{\ \quad ED'}+\bar{\chi}_{AA'BB'D'}^{\ \quad \qquad E'}\ T^{CC'}_{\ \quad DE'}\end{aligned}}
+\]
+</span>
+
+<p>更一般地【作用于
+
+
+<span class="katex">
+  \((k,l;k',l')\)
+</span>
+型旋量张量上】</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}&(\nabla_{AA'}\nabla_{BB'}-\nabla_{BB'}\nabla_{AA'})\ T^{C_1\dots C'_{k'}}_{\ \ \qquad D_1\dots D'_{l'}}\\ =&-\sum_{i=1}^k{\chi_{AA'BB'E}^{\ \quad \qquad C_i}T^{C_1\dots E \dots C'_{k'}}_{\ \qquad \qquad D_1\dots D'_{l'}}}-\sum_{i=1}^{k'}{\bar{\chi}_{AA'BB'E'}^{\ \quad \qquad C'_i}T^{C_1\dots E' \dots C'_{k'}}_{\ \qquad \qquad D_1\dots D'_{l'}}}\\ & +\sum_{i=1}^l{\chi_{AA'BB'D_i}^{\ \quad \qquad E}T_{\quad \qquad D_1\dots E \dots D'_{l'}}^{C_1\dots C'_{k'}}}+\sum_{i=1}^{l'}{\bar{\chi}_{AA'BB'D'_i}^{\ \quad \qquad E'}T_{\quad \qquad D_1\dots E' \dots D'_{l'}}^{C_1\dots C'_{k'}}}\end{aligned}}
+\]
+</span>
+
+<h2 id="导数算符对易子的分解">导数算符对易子的分解</h2>
+<p>依据指标对的反称分解恒等式，还可直接对旋量场导数算符对易子进行分解：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\nabla_{AA'}\nabla_{BB'}-\nabla_{BB'}\nabla_{AA'}=\bar{\epsilon}_{A'B'}\Delta_{AB}+\epsilon_{AB}\Delta_{A'B'}}\\  \Delta_{AB}\overset{\Delta}{=}\nabla_{X'(A}\nabla_{B)}^{\quad X'}
+\]
+</span>
+
+<h2 id="导数算符对易子的相关算符">导数算符对易子的相关算符</h2>
+<p>将导数算符对易子分解式，曲率旋量分解式，带入曲率旋量的定义式</p>
+
+
+
+<span class="katex">
+  \[
+(\bar{\epsilon}_{A'B'}\Delta_{AB}+\epsilon_{AB}\Delta_{A'B'})\omega_C=(\Lambda_{ABC}^{\ \ \quad D}\bar{\epsilon}_{A'B'}+\Phi_{A'B'C}^{\qquad D}\epsilon_{AB})\omega_D
+\]
+</span>
+
+<p>上式两边同乘上
+
+
+<span class="katex">
+  \(\epsilon^{AB}\)
+</span>
+或
+
+
+<span class="katex">
+  \(\bar{\epsilon}^{A'B'}\)
+</span>
+进行缩并得</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\nabla_{A(A'}\nabla_{B')}^{\quad A}\omega_C&=\Phi_{A'B'C}^{\qquad D}\omega_D \\ &\quad \\ \nabla_{A'(A}\nabla_{B)}^{\quad A'}\omega_C&=\Lambda_{ABC}^{\ \ \quad D}\omega_D\\ &=\Psi_{ABC}^{\ \ \quad D}\omega_D-2\Lambda\epsilon_{C(A}\omega_{B)}\end{aligned}}
+\]
+</span>
+
+<p>此外还有【两边同乘
+
+
+<span class="katex">
+  \(\epsilon^{AB}\)
+</span>
+再缩并易证】</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\nabla_{A'[A}\nabla_{B]}^{\ \ A'}=\frac{1}{2}\epsilon_{AB}\Box} \\ \Box \overset{\Delta}{=}\nabla_{AA'}\nabla^{AA'}=-\nabla_a\nabla^a
+\]
+</span>
+
+<h2 id="这些算符的作用">这些算符的作用</h2>
+<p>作用于
+
+
+<span class="katex">
+  \((0,n;0,0)\)
+</span>
+型旋量张量上</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}&\nabla_{A'(A}\nabla_{B)}^{\ \ A'}\ \omega_{C_1\dots C_n}=\sum_{i=1}^n{\Lambda_{ABC_i}^{\ \ \quad D}\omega_{C_1\dots D \dots C_n}}\\ = & \sum_{i=1}^n\left\{\Psi_{ABC_i}^{\ \ \quad D}\omega_{C_1\dots D \dots C_n}-2\Lambda\epsilon_{C_i(A}\omega_{|C_1\dots C_{i-1}|B)C_{i+1} \dots C_n}\right\}\end{aligned}}
+\]
+</span>
+
+<p>作用于
+
+
+<span class="katex">
+  \((1,1;1,1)\)
+</span>
+型旋量张量上</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}&\nabla_{A(A'}\nabla_{B')}^{\ \ A}\ T^{CC'}_{\ \quad DD'}\\ =&-\Phi_{A'B'E}^{\qquad C}\ T^{EC'}_{\ \quad DD'}-\bar{\Lambda}_{A'B'E'}^{\qquad C'}\ T^{CE'}_{\ \quad DD'}\\  & \quad  +\Phi_{A'B'D}^{\qquad E}T^{CC'}_{\ \quad ED'}+ \bar{\Lambda}_{A'B'D'}^{\  \qquad E'}\ T^{CC'}_{\ \quad DE'}\end{aligned}}
+\]
+</span>
+
+<p>和</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}&\nabla_{A'(A}\nabla_{B)}^{\ \ A'}\ T^{CC'}_{\ \quad DD'}\\ =&-\Lambda_{ABE}^{\ \ \quad C}\ T^{EC'}_{\ \quad DD'}-\Phi_{ABE'}^{\qquad C'}\ T^{CE'}_{\ \quad DD'}\\  &  +\Lambda_{ABD}^{\ \ \quad E}T^{CC'}_{\ \quad ED'}+ \Phi_{ABD'}^{\qquad E'}\ T^{CC'}_{\ \quad DE'}\end{aligned}}
+\]
+</span></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0079/">
+    下一页<br>流形上的旋量和旋量场（自旋系数和克氏符）
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0077/">
+      上一页<br>流形上的旋量和旋量场（几何解释）
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0078.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/diffgeo/0078.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#旋量场">旋量场</a></li>
+        <li><a href="#旋量场的导数算符">旋量场的导数算符</a></li>
+        <li><a href="#曲率旋量">曲率旋量</a></li>
+        <li><a href="#曲率旋量---黎曼曲率张量">曲率旋量  =》 黎曼曲率张量</a></li>
+        <li><a href="#黎曼曲率张量--曲率旋量">黎曼曲率张量  =》曲率旋量</a></li>
+        <li><a href="#曲率旋量的分解">曲率旋量的分解</a></li>
+        <li><a href="#weyl旋量的构造">Weyl旋量的构造</a></li>
+        <li><a href="#weyl张量和weyl旋量">Weyl张量和Weyl旋量</a></li>
+        <li><a href="#旋量导数算符对易子的作用">旋量导数算符对易子的作用</a></li>
+        <li><a href="#导数算符对易子的分解">导数算符对易子的分解</a></li>
+        <li><a href="#导数算符对易子的相关算符">导数算符对易子的相关算符</a></li>
+        <li><a href="#这些算符的作用">这些算符的作用</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>监督学习 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/</link>
+    <description>Recent content in 监督学习 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Wed, 10 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>5.7 贝叶斯决策理论</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0051/</link>
+      <pubDate>Wed, 10 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0051/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我们已经看到概率论如何用来表示和更新我们对世界状况的信念( beliefs)。 然而，最终我们的目标是将我们的信念转化为行动。 在本节中，我们将讨论实现此目的的最佳方法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>1.2 监督学习</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0026/</link>
+      <pubDate>Sun, 16 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0026/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/01introduction/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我们通过讨论监督学习来开始我们对机器学习的研究，监督学习是在实践中最广泛使用的ML的形式。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>1.1 机器学习：什么和为什么？</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0025/</link>
+      <pubDate>Sat, 15 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0025/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/01introduction/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我们淹没在信息中，渴望知识。 — John Naisbitt。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我们正在进入&lt;strong&gt;大数据&lt;/strong&gt;时代。 例如，有大约1万亿个网页; YouTube一个小时的视频上传，每天相当于10年的内容;1000多人的基因组，每个人的长度为3.8×109个碱基对，已被各种实验室测序; 沃尔玛每小时处理超过1M笔交易，数据库包含超过2.5千兆字节（2.5×1015）的信息（Cukier 2010）; 等等。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

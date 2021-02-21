@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="有限元变分形式的正交表示（一）【翻译】"><meta property="og:title" content="有限元变分形式的正交表示（一）【翻译】" />
+<meta property="og:description" content="I.方法论》7.有限元变分形式的正交表示（一）
+【章节目录】
+本章介绍了与有限元变分形式相关的局部单元张量数值积分的常规运行时正交方法，尤其是可以减少浮点运算次数的自动优化。  运行时正交方法的替代方法是第8章中介绍的张量表示。  正交和张量方法都在FFC中实现了（参见第11章）。  在本章中，我们讨论了四种用于优化所生成代码的运行时性能的正交表示策略，并表明优化策略比单纯的实现带来了运行时性能的显着提高。  我们还研究了针对不同方程的正交和张量方法的性能，这将导致人们希望能够在两种表示形式之间进行选择。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/0107/" />
+<meta property="article:published_time" content="2021-01-04T16:43:35+08:00" />
+<meta property="article:modified_time" content="2021-01-04T16:43:35+08:00" />
+<title>有限元变分形式的正交表示（一）【翻译】 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a>
+<ul>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E6%96%B9%E6%B3%95">第二章 有限元方法</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%B8%B8%E8%A7%81%E6%9C%89%E9%99%90%E5%85%83">第三章 常见有限元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8%E5%8F%82%E8%80%83%E5%8D%95%E5%85%83">第四章 构造通用参考单元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F">第五章 有限元变分形式</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%BB%84%E8%A3%85">第六章 有限元组装</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%AD%A3%E4%BA%A4%E8%A1%A8%E7%A4%BA">第七章 有限元变分形式的正交表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA">第八章 有限元变分形式的张量表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E7%9A%84%E7%A6%BB%E6%95%A3%E4%BC%98%E5%8C%96">第九章 有限元矩阵计算的离散优化</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E7%AB%A0-dolfincpython%E6%9C%89%E9%99%90%E5%85%83%E5%BA%93">第十章 DOLFIN：C++/Python有限元库</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-ufl%E6%9C%89%E9%99%90%E5%85%83%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80">第十七章 UFL：有限元形式语言</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-unicorn%E7%BB%9F%E4%B8%80%E7%9A%84%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6%E6%B1%82%E8%A7%A3%E5%99%A8">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>有限元变分形式的正交表示（一）【翻译】</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#i方法论7有限元变分形式的正交表示一">I.方法论》7.有限元变分形式的正交表示（一）</a>
+      <ul>
+        <li><a href="#71-标准正交表示">7·1 标准正交表示</a></li>
+        <li><a href="#72-正交优化">7·2 正交优化</a>
+          <ul>
+            <li><a href="#721-零消除操作">7·2·1 零消除操作</a></li>
+            <li><a href="#722-化简表达式">7·2·2 化简表达式</a></li>
+            <li><a href="#723-积分点常量预计算">7·2·3 积分点常量预计算</a></li>
+            <li><a href="#724-基常量预计算">7·2·4 基常量预计算</a></li>
+            <li><a href="#725-进一步优化">7·2·5 进一步优化</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0108/">
+    下一页<br>有限元变分形式的正交表示（二）【翻译】
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0106/">
+      上一页<br>有限元组装【翻译】
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/fem/0107/">有限元变分形式的正交表示（一）【翻译】</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2021-01-04</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/FEniCS">FEniCS</a>
+      , 
+      <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95">有限元法</a>
+      , 
+      <a href="/notes/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">偏微分方程</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0107.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h1 id="i方法论7有限元变分形式的正交表示一">I.方法论》7.有限元变分形式的正交表示（一）</h1>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e4%b8%83%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e5%8f%98%e5%88%86%e5%bd%a2%e5%bc%8f%e7%9a%84%e6%ad%a3%e4%ba%a4%e8%a1%a8%e7%a4%ba">章节目录</a>】</p>
+<p>本章介绍了与有限元变分形式相关的局部单元张量数值积分的常规运行时正交方法，尤其是可以减少浮点运算次数的自动优化。  运行时正交方法的替代方法是第8章中介绍的张量表示。  正交和张量方法都在FFC中实现了（参见第11章）。  在本章中，我们讨论了四种用于优化所生成代码的运行时性能的正交表示策略，并表明优化策略比单纯的实现带来了运行时性能的显着提高。  我们还研究了针对不同方程的正交和张量方法的性能，这将导致人们希望能够在两种表示形式之间进行选择。</p>
+<h2 id="71-标准正交表示">7·1 标准正交表示</h2>
+<p>为了说明在FFC中实现的标准正交表示和优化，我们考虑加权拉普拉斯算子
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(-\nabla\cdot(w\nabla u)\)
+</span>
+的双线性形式，其中
+
+
+<span class="katex">
+  \(u\)
+</span>
+是未知的，
+
+
+<span class="katex">
+  \(w\)
+</span>
+是给定的系数。 此方程变分问题的双线性形式为</p>
+
+
+
+<span class="katex">
+  \[
+a(u, v) = \int_\Omega{ w\nabla u \cdot \nabla v dx} \tag{7.1}
+\]
+</span>
+
+<p>通过使用可直接在正交点求值的“正交函数”，正交方法可以处理的情况，所涉及的所有函数并非都来自有限元空间。 而张量表示法仅支持所有函数都来自有限元空间的情况（必要时使用插值法）。  因此，为了确保在表示之间进行适当的性能比较，我们假设形式中的所有函数（包括系数函数）都来自有限元函数空间。  对于（7.1），所有函数都将来自</p>
+
+
+
+<span class="katex">
+  \[
+V_h=\left\{v\in H^1(\Omega) : v|_T \in P_q(T) \ \forall T \in \mathcal{T} \right\} \tag{7.2}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(P_q(T)\)
+</span>
+表示
+
+
+<span class="katex">
+  \(\Omega\)
+</span>
+的标准三角剖分
+
+
+<span class="katex">
+  \(\mathcal{T}\)
+</span>
+的单元
+
+
+<span class="katex">
+  \(T\)
+</span>
+上
+
+
+<span class="katex">
+  \(q\)
+</span>
+次拉格朗日多项式空间。  如果令
+
+
+<span class="katex">
+  \(\{\phi_i^T\}\)
+</span>
+表示能够张成
+
+
+<span class="katex">
+  \(T\)
+</span>
+上离散函数空间
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+的局部有限元基底，那么单元
+
+
+<span class="katex">
+  \(T\)
+</span>
+的局部单元张量可以计算为：</p>
+
+
+
+<span class="katex">
+  \[
+A_{T,i} = \int_T{ w\nabla\phi_{i_1}^T \cdot \nabla\phi_{i_2}^T dx} \tag{7.3}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(i = (i_1, i_2)\)
+</span>
+。</p>
+<p>（7.3）中局部单元张量的表达式可以用UFL表示（请参阅第17章），FFC会从中生成形式的中间表示形式（请参阅第11章）。  假设从参考单元
+
+
+<span class="katex">
+  \(T_0\)
+</span>
+到给定单元
+
+
+<span class="katex">
+  \(T\in \mathcal{T}\)
+</span>
+的标准仿射映射
+
+
+<span class="katex">
+  \(F_T:T_0\to \mathcal{T}\)
+</span>
+，那么此中间表示为</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}A_{T,i} = \sum^N_{q=1}\sum^n_{\alpha_3=1}\Phi_{\alpha_3}(X^q) w_{\alpha_3}&\sum^d_{\beta=1}\sum^d_{\alpha_1=1}\frac{\partial X_{\alpha_1}}{\partial x_\beta}\frac{\partial \Phi_{i_1}(X^q)}{\partial X_{\alpha_1}}\\ & \qquad \sum^d_{\alpha_2=1}\frac{\partial X_{\alpha_2}}{\partial x_\beta}\frac{\partial \Phi_{i_2}(X^q)}{\partial X_{\alpha_2}} \mathrm{det} \ F_T' W^q \end{aligned}\tag{7.4}
+\]
+</span>
+
+<p>其中，使用了从参考坐标
+
+
+<span class="katex">
+  \(X\)
+</span>
+到实际坐标
+
+
+<span class="katex">
+  \(x = F_T(X)\)
+</span>
+的变量变化。  在上面的等式中，
+
+
+<span class="katex">
+  \(N\)
+</span>
+表示积分点数，
+
+
+<span class="katex">
+  \(d\)
+</span>
+是
+
+
+<span class="katex">
+  \(\Omega\)
+</span>
+的维数，
+
+
+<span class="katex">
+  \(n\)
+</span>
+是
+
+
+<span class="katex">
+  \(w\)
+</span>
+的局部基底的自由度个数，
+
+
+<span class="katex">
+  \(\Phi_i\)
+</span>
+表示参考单元上的基函数，
+
+
+<span class="katex">
+  \(\mathrm{det} \ F_T'\)
+</span>
+是雅可比行列式，
+
+
+<span class="katex">
+  \(W^q\)
+</span>
+是积分点
+
+
+<span class="katex">
+  \(X^q\)
+</span>
+的正交权重。  默认情况下，FFC应用可精确积分变分形式的正交方案。</p>
+<p>根据（7.4）中的表示，由FFC生成用于计算局部单元张量各项的代码。  代码如图7.1所示。  为正交表示所生成代码，按如下方式构造。  首先，取决于当前单元
+
+
+<span class="katex">
+  \(T\)
+</span>
+几何量的值，例如雅可比矩阵
+
+
+<span class="katex">
+  \(\partial X_{\alpha_1}/\partial x_\beta\)
+</span>
+和
+
+
+<span class="katex">
+  \(\partial X_{\alpha_2}/\partial x_\beta\)
+</span>
+的逆分量的计算，在代码中分配的变量<code>K_01</code>（此代码未显示，因为它对于理解正交表示的性质并不重要）。  接下来，在参考单元的积分点上的基函数及其导数值，如
+
+
+<span class="katex">
+  \(\Phi_{\alpha_3}(X^q)\)
+</span>
+和
+
+
+<span class="katex">
+  \(\partial\Phi_{i_1}(X^q)/\partial X_{\alpha_1}\)
+</span>
+。  有限元基函数由FIAT计算。  参考单元上的基函数及其导数独立于当前单元
+
+
+<span class="katex">
+  \(T\)
+</span>
+，因此编译成表并存储在图7.1中的表Psi_w，Psi_vu_D01和Psi_vu_D10中。  将基函数值制成表后，开始循环积分点。  在该示例中，我们考虑了线性单元，并且仅需要一个积分点就可进行精确积分。  因此，省略了积分点上的循环。  积分点循环中的首个任务是计算当前积分点的系数值。  对于所考虑的问题，这涉及计算系数
+
+
+<span class="katex">
+  \(w\)
+</span>
+的值。  图7.1中用于计算F0的代码是表示
+
+
+<span class="katex">
+  \(\sum^n_{\alpha_3=1}\Phi_{\alpha_3}(X^q)w_{\alpha_3}\)
+</span>
+的精确变换。  图7.1中代码的最后一部分是基函数索引
+
+
+<span class="katex">
+  \(i_1\)
+</span>
+和
+
+
+<span class="katex">
+  \(i_2\)
+</span>
+上的循环，其中添加了从当前积分点到局部单元张量
+
+
+<span class="katex">
+  \(A_T\)
+</span>
+中每项的贡献。  要生成正交表示的代码，应使用FFC命令行选项<code>-r quadrature</code>。</p>
+<p><img src="/notes/images/0217.jpg" alt="0217.jpg"></p>
+<center>图7.1 与使用二维线性单元的加权拉普拉斯算子相关的，双线性形式的部分生成代码。  像K_00这样的变量是雅可比矩阵逆矩阵的分量，而
+
+
+<span class="katex">
+  \(\mathrm{det}\)
+</span>
+是雅可比矩阵的行列式。  没有显示计算这些变量的代码。  A包含局部单元张量的值，w包含加权函数
+
+
+<span class="katex">
+  \(w\)
+</span>
+的节点值。</center>
+<h2 id="72-正交优化">7·2 正交优化</h2>
+<p>现在，我们讨论用于提高所生成代码的运行时性能的优化。  在FFC中实现的优化策略的基本原理：以减少计算局部单元张量次数的方式来操作表达式。  以下各节所描述的策略，除了零消除操作外，都具有一些共同的特征，可以归类为：</p>
+<p><strong>移动不变的循环代码</strong>   简而言之，该过程力图确定与一个或多个求和索引无关的项，并将它们移到这些特定索引的循环之外。  例如，在（7.4）中，关于系数
+
+
+<span class="katex">
+  \(w\)
+</span>
+，正交权重
+
+
+<span class="katex">
+  \(W_q\)
+</span>
+和行列式
+
+
+<span class="katex">
+  \(\mathrm{det}\ F'_T\)
+</span>
+的项均与基函数索引
+
+
+<span class="katex">
+  \(i_1\)
+</span>
+和
+
+
+<span class="katex">
+  \(i_2\)
+</span>
+无关，因此对于每个积分点只需要计算一次。  可以在Alfred等人（1986）的文章中找到对此技术的一般性讨论，也称为“循环外提（loop hoisting）”。</p>
+<p><strong>重用通用项</strong>   表达式中，可识别的多次出现的项，只计算一次，存储为临时值，然后在表达式中所有出现的地方重复使用。  这可能对运算次数有很大影响，因为用于计算AT中各项的表达式位于基函数索引上的循环内，如图7.1中用于标准正交表示的代码所示。</p>
+<p>要打开优化，除了以下各节中提供的任何FFC优化选项外，还应附加使用命令行选项<code>-O</code>。</p>
+<h3 id="721-零消除操作">7·2·1 零消除操作</h3>
+<p>对于特定问题，某些基函数及其导数可能在所有积分点均为零值。  由于这些值是在编译时列出的，因此可以识别包含非零值的列。  这样可以减少与这些表有关索引的维循环。  但是，减少表的结果是必须创建索引映射才能正确访问值。  映射导致内存在运行时无法连续访问，并且可能导致运行时性能下降。</p>
+<p>可以通过使用命令行选项<code>-f eliminate_zeros</code>打开此优化。  用此选项生成的加权拉普拉斯方程的代码如图7.2所示。  为简洁起见，仅包含与图7.1不同的代码。</p>
+<p><img src="/notes/images/0218.jpg" alt="0218.jpg"></p>
+<center>图7.2 使用带优化选项`-f eliminate_zeros`的二维线性单元，为加权拉普拉斯算子生成部分代码。  数组nzc0和nzc1包含用于值映射的非零列索引。  注意是如何零消除的，这里使用表（Psi_vu）来替换图7.1中基函数导数的两张表Psi_vu_D01和Psi_vu_D10。 </center>
+<p>尽管零消除导致涉及索引
+
+
+<span class="katex">
+  \(j\)
+</span>
+和
+
+
+<span class="katex">
+  \(k\)
+</span>
+的维循环数从3减小到2，但是操作数量却增加了。  原因是映射导致在循环内同时计算四个项，并与图7.1中的代码相比，用于计算每个项的代码并未显著减少。  实际上，通常不建议单独使用这种优化策略，但结合以下各节中概述的策略，可以显著提高运行时性能。  当形式包含混合单元时，此效果尤其明显，其中基函数表中的许多值均为零。  应用此策略时要小心的另一个原因是，由于项数的增加可能由于硬件限制而阻止FFC编译。</p>
+<h3 id="722-化简表达式">7·2·2 化简表达式</h3>
+<p>用于计算局部单元张量各项的表达式可能会变得非常复杂。  由于此类表达式通常位于循环内部，因此降低复杂度可以显着减少总操作数。  可用表达式
+
+
+<span class="katex">
+  \(x(y + z)+ 2xy\)
+</span>
+来说明此方法，在将第1项展开后，通过同类项分组和可以简化为
+
+
+<span class="katex">
+  \(x(3y + z)\)
+</span>
+，这样就从五个操作减少到三个操作 。  这种策略的另一个好处是，在简化之前进行表达式的展开通常会允许对更多的项进行预先计算并提到循环外部，如本节开头所述。 对于加权拉普拉斯方程，项</p>
+
+
+
+<span class="katex">
+  \[
+\sum^d_{\beta=1}\sum^d_{\alpha_1=1}\frac{\partial X_{\alpha_1}}{\partial x_\beta}\frac{\partial \Phi_{i_1}(X^q)}{\partial X_{\alpha_1}}\sum^d_{\alpha_2=1}\frac{\partial X_{\alpha_2}}{\partial x_\beta}\frac{\partial \Phi_{i_2}(X^q)}{\partial X_{\alpha_2}} \tag{7.5}
+\]
+</span>
+
+<p>将被展开为</p>
+
+
+
+<span class="katex">
+  \[
+\sum^d_{\beta=1}\sum^d_{\alpha_1=1}\sum^d_{\alpha_2=1}\frac{\partial X_{\alpha_1}}{\partial x_\beta}\frac{\partial X_{\alpha_2}}{\partial x_\beta}\frac{\partial \Phi_{i_1}(X^q)}{\partial X_{\alpha_1}}\frac{\partial \Phi_{i_2}(X^q)}{\partial X_{\alpha_2}} \tag{7.6}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \((\partial X_{\alpha_1}/\partial x_\beta)(\partial X_{\alpha_2}/\partial x_\beta)\)
+</span>
+独立于索引
+
+
+<span class="katex">
+  \(i_1\)
+</span>
+和
+
+
+<span class="katex">
+  \(i_2\)
+</span>
+，因此可以移出这些循环。</p>
+<p>应使用FFC命令行选项<code>-f simplify_expressions</code>来生成启用了此优化的代码。  由此选项为（7.4）中表示生成的代码，如图7.3所示，其中再次仅包含与图7.1不同的代码。</p>
+<p><img src="/notes/images/0219.jpg" alt="0219.jpg"></p>
+<center>图7.3  使用带优化选项`-f simplify_expressions`的二维线性单元，为加权拉普拉斯算子生成代码部分。 </center>
+<p>由于表达式的展开，许多与几何相关的项以及移到基函数索引j和k循环之外，并存储在数组G中。  另外，请注意如何通过将变量det和W1移到括号之外来简化用于计算G中值的表达式。  类似地，仅依赖于积分点的项被外提并存储在数组I中。  与图7.1中标准正交表示的代码相比，操作数量有所减少。  因此可以期待运行时性能的提高。</p>
+<p>就FFC代码生成时间和内存消耗而言，上述优化是执行正交优化中最昂贵的，因为它涉及在展开表达式时创建新项。 该过程不适用于复杂的表达式，但是就减少操作数而言，在许多情况下它是最有效的方法。  这种特殊的优化策略，加上一节中概述的零消除，是FFC中首先实现的策略。  有关更多详细信息，请读者参考Ølgaard和Wells（2010）的研究， 以及与张量表示的比较。</p>
+<h3 id="723-积分点常量预计算">7·2·3 积分点常量预计算</h3>
+<p>上一节中描述的优化是以增加代码生成时间为代价的。  为了在减少操作次数的同时减少生成时间，可以采取另一种方法，包括在不首展开表达式的情况下外提相对于积分点为常量的表达式。</p>
+<p>要通过这种优化生成代码，应使用FFC命令行选项<code>-f precompute_ip_const</code>。  用这种方法生成的用于（7.4）中表示的代码如图7.4所示。</p>
+<p><img src="/notes/images/0220.jpg" alt="0220.jpg"></p>
+<center>图7.4   使用带有优化选项`-f precompute_ip_const`的二维线性单元，为加权拉普拉斯算子生成代码部分。</center>
+<p>从生成的代码中可以明显看出，这种策略不会导致这种特定形式的操作数显著减少。  但是，对于具有许多系数的更复杂的形式，可以外提项数将显着增加，从而改善运行时性能。</p>
+<h3 id="724-基常量预计算">7·2·4 基常量预计算</h3>
+<p>此优化策略是上节所描述策略的扩展。  除了与几何和积分点相关的外提项外，还会在循环内部预先计算依赖于基底索引的值。  对于某些在循环内频繁出现的项，这将导致操作减少，从而一旦计算出给定值就可以重新使用。</p>
+<p>要通过这种优化生成代码，应使用FFC命令行选项<code>-f precompute_basis_ const</code>。  图7.5所示，用这种方法为（7.4）中表达式生成的代码，其中仅包括与图7.4不同的代码。  在这种特殊情况下，如果与先前的方法相比，则不会实现额外的操作减少，因为在索引j和k循环内没有可重用的项。</p>
+<p><img src="/notes/images/0221.jpg" alt="0221.jpg"></p>
+<center>图7.5  使用带有优化选项`-f precompute_basis_const`的二维线性单元，为加权拉普拉斯算子生成代部分。  数组B包含依赖于索引j和k的预计算的值。</center>
+<h3 id="725-进一步优化">7·2·5 进一步优化</h3>
+<p>初步研究表明，可以通过应用两个附加优化来提高正交表示的性能。  查看图7.5中的代码，我们看到数组B中大约一半的临时值仅取决于循环索引j，因此可以将其外提，就像我们在上一节中对其项所做的那样。  另一种方法是针对生成的代码中的j和k展开循环。  这将导致可重用值数量急剧增加，并且该方法可以很容易地与所有其他优化策略结合使用。  但是，临时值的总数也会增加。  因此，这种优化策略可能不适用于所有形式。</p>
+<p>对单纯形上不高于6次的多项式的积分，FFC实施了一些有效的正交方案。  对于高于6次的多项式，它调用FIAT（请参阅第13章）以计算正交方案。  FIAT提供的方案基于映射到单纯形的Gauss–Legendre–Jacobi规则（有关此类方案的详细信息，请参阅Karniadakis和Sherwin（2005））。  这意味着，为了积分七阶多项式，FFC将在每个空间方向上使用四个正交点，即在三维中每个胞元有
+
+
+<span class="katex">
+  \(4^3 = 64\)
+</span>
+个点。  正交表示的进一步优化可通过对单纯形上更高阶多项式实施更有效的正交方案来实现，因为积分点数量的减少将带来运行时性能的提高。  但是，FFC确实为用户提供了一个选项，可以指定变分形式的正交度，从而允许不精确的正交。  要将正交度设置为1，应使用命令行选项<code>-f quadrature_degree=1</code>。</p>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e4%b8%83%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e5%8f%98%e5%88%86%e5%bd%a2%e5%bc%8f%e7%9a%84%e6%ad%a3%e4%ba%a4%e8%a1%a8%e7%a4%ba">章节目录</a>】</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0108/">
+    下一页<br>有限元变分形式的正交表示（二）【翻译】
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0106/">
+      上一页<br>有限元组装【翻译】
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0107.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/fem/0107.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#i方法论7有限元变分形式的正交表示一">I.方法论》7.有限元变分形式的正交表示（一）</a>
+      <ul>
+        <li><a href="#71-标准正交表示">7·1 标准正交表示</a></li>
+        <li><a href="#72-正交优化">7·2 正交优化</a>
+          <ul>
+            <li><a href="#721-零消除操作">7·2·1 零消除操作</a></li>
+            <li><a href="#722-化简表达式">7·2·2 化简表达式</a></li>
+            <li><a href="#723-积分点常量预计算">7·2·3 积分点常量预计算</a></li>
+            <li><a href="#724-基常量预计算">7·2·4 基常量预计算</a></li>
+            <li><a href="#725-进一步优化">7·2·5 进一步优化</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

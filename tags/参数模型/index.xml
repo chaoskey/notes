@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>参数模型 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E5%8F%82%E6%95%B0%E6%A8%A1%E5%9E%8B/</link>
+    <description>Recent content in 参数模型 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Tue, 18 Jun 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E5%8F%82%E6%95%B0%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>1.4 机器学习的一些基本概念</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0028/</link>
+      <pubDate>Tue, 18 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0028/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/01introduction/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在本节中，我们将介绍机器学习中的一些关键思想。 我们将在本书后面对这些概念进行扩展，但我们将在此简要介绍它们，以便给引起大家兴趣。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="李群李代数伴随表示和Killing型、Casimir算符"><meta property="og:title" content="李群李代数伴随表示和Killing型、Casimir算符" />
+<meta property="og:description" content="
+同一李群（李代数）有无数表示，本篇侧重伴随表示。
+对半单李代数而言，Killing型就是李代数上的度规，称作嘉当度规。
+Casimir算符，就是和李代数任意元素对易的算符。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/diffgeo/0082/" />
+<meta property="article:published_time" content="2020-04-28T09:42:55+08:00" />
+<meta property="article:modified_time" content="2020-04-28T09:42:55+08:00" />
+<title>李群李代数伴随表示和Killing型、Casimir算符 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a>
+<ul>
+<li><a href="/notes/docs/diffgeo/0005/">基于抽象指标的张量分析</a></li>
+<li><a href="/notes/docs/diffgeo/0006/">流形上的导数算符</a></li>
+<li><a href="/notes/docs/diffgeo/0007/">流形上的平移</a></li>
+<li><a href="/notes/docs/diffgeo/0008/">黎曼曲率张量</a></li>
+<li><a href="/notes/docs/diffgeo/0009/">流形间的映射</a></li>
+<li><a href="/notes/docs/diffgeo/0010/">流形上的李导数</a></li>
+<li><a href="/notes/docs/diffgeo/0011/">Killing矢量场</a></li>
+<li><a href="/notes/docs/diffgeo/0012/">子流形和超曲面</a></li>
+<li><a href="/notes/docs/diffgeo/0013/">流形上的微分形式及其对偶</a></li>
+<li><a href="/notes/docs/diffgeo/0014/">流形上的微积分</a></li>
+<li><a href="/notes/docs/diffgeo/0016/">李群李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0068/">常用李群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0069/">李变换群</a></li>
+<li><a href="/notes/docs/diffgeo/0070/">微分几何中的计算（Julia版）</a></li>
+<li><a href="/notes/docs/diffgeo/0073/">辛群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0074/">辛流形</a></li>
+<li><a href="/notes/docs/diffgeo/0076/">流形上的旋量和旋量场（初步）</a></li>
+<li><a href="/notes/docs/diffgeo/0077/">流形上的旋量和旋量场（几何解释）</a></li>
+<li><a href="/notes/docs/diffgeo/0078/">流形上的旋量和旋量场（导数算符和曲率)</a></li>
+<li><a href="/notes/docs/diffgeo/0079/">流形上的旋量和旋量场（自旋系数和克氏符）</a></li>
+<li><a href="/notes/docs/diffgeo/0082/"class=active>李群李代数伴随表示和Killing型、Casimir算符</a></li>
+<li><a href="/notes/docs/diffgeo/0083/">半单李代数的标准形式</a></li>
+<li><a href="/notes/docs/diffgeo/0084/">半单李代数的根系、权系和Dynkin图</a></li>
+<li><a href="/notes/docs/diffgeo/0085/">半单李代数的Casimir不变算符</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>李群李代数伴随表示和Killing型、Casimir算符</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#群的伴随同构">群的伴随同构</a></li>
+        <li><a href="#李群的伴随可逆线性变换">李群的伴随可逆线性变换</a></li>
+        <li><a href="#李群的伴随表示">李群的伴随表示</a></li>
+        <li><a href="#李代数的伴随线性变换">李代数的伴随线性变换</a></li>
+        <li><a href="#李代数的伴随表示">李代数的伴随表示</a></li>
+        <li><a href="#各种伴随映射的关系">各种伴随映射的关系</a></li>
+        <li><a href="#killing型">Killing型</a></li>
+        <li><a href="#casimir算符">Casimir算符</a></li>
+        <li><a href="#求so3的李代数的casimir算符">求SO(3)的李代数的Casimir算符</a></li>
+        <li><a href="#广义casimir算符">广义Casimir算符</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0083/">
+    下一页<br>半单李代数的标准形式
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/theophy/0081/">
+      上一页<br>场及其对称性
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/diffgeo/0082/">李群李代数伴随表示和Killing型、Casimir算符</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-04-28</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95">微分几何</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E6%9D%8E%E7%BE%A4">李群</a>
+      , 
+      <a href="/notes/tags/%E5%AF%B9%E7%A7%B0%E6%80%A7">对称性</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0082.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<blockquote>
+<p>同一李群（李代数）有无数表示，本篇侧重<code>伴随表示</code>。</p>
+<p>对半单李代数而言，Killing型就是李代数上的度规，称作嘉当度规。</p>
+<p>Casimir算符，就是和李代数任意元素对易的算符。</p>
+</blockquote>
+<h2 id="群的伴随同构">群的伴随同构</h2>
+<p>群
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(G\)
+</span>
+关于群元
+
+
+<span class="katex">
+  \(g\in G\)
+</span>
+<code>群伴随同构</code>
+
+
+<span class="katex">
+  \(I_g\)
+</span>
+</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\textcolor{blue}{I_g}:&G\overset{\textcolor{red}{同构}}{\to} G \\ &h \mapsto \textcolor{blue}{I_g(h)}\overset{\Delta}{=}\textcolor{red}{ghg^{-1}} \qquad I_g(e)=e \end{aligned}}
+\]
+</span>
+
+<p>所以，这是一个单位元不变的群自同构。</p>
+<h2 id="李群的伴随可逆线性变换">李群的伴随可逆线性变换</h2>
+<p>特别对李群而言，可在单位元
+
+
+<span class="katex">
+  \(e\)
+</span>
+处，通过
+
+
+<span class="katex">
+  \(I_g\)
+</span>
+诱导出一个推前映射
+
+
+<span class="katex">
+  \(\mathscr{A\!d}_g\overset{\Delta}{=}I_{g*}\)
+</span>
+</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\textcolor{blue}{\mathscr{A\!d}_g}:&\mathscr{G}\overset{\textcolor{red}{线性可逆}}{\to} \mathscr{G} \\ &A \mapsto \textcolor{blue}{\mathscr{A\!d}_g(A)}=\textcolor{red}{\left.\frac{d}{dt}\right|_{t=0}\left[g\exp(tA)g^{-1}\right]}\end{aligned}}
+\]
+</span>
+
+<p>因为</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}&\left.\frac{d}{dt}\right|_{t=0}\left[g\exp(tA)g^{-1}\right]\\ =&\left.\frac{d}{dt}\right|_{t=0}I_g(\exp(tA))\qquad \textcolor{red}{群G的伴随同构}\\ =&I_{g*}\left(\left.\frac{d}{dt}\right|_{t=0}\exp(tA)\right)\qquad \textcolor{red}{推前映射的性质}\\ =&\mathscr{A\!d}_g(A)\qquad \textcolor{red}{定义及切矢}\end{aligned}
+\]
+</span>
+
+<p>或者说</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\exp(t \mathscr{A\!d}_g(A))=g\exp(t A)g^{-1}}
+\]
+</span>
+
+<p>上面这些关系可图解为</p>
+<p><img src="/notes/images/0133.svg" alt="0133.svg"></p>
+<p>容易看出：</p>
+<p>1）
+
+
+<span class="katex">
+  \(\mathscr{A\!d}_g\)
+</span>
+是一个线性变换；【因为
+
+
+<span class="katex">
+  \(I_{g*}\)
+</span>
+作为推前映射是线性的】</p>
+<p>2）
+
+
+<span class="katex">
+  \(\mathscr{A\!d}_g\)
+</span>
+是一个可逆变换。【因为
+
+
+<span class="katex">
+  \(I_g\)
+</span>
+是同构映射，进而
+
+
+<span class="katex">
+  \(I_{g*}\)
+</span>
+是可逆的】</p>
+<h2 id="李群的伴随表示">李群的伴随表示</h2>
+<p>因为
+
+
+<span class="katex">
+  \(\mathscr{A\!d}_g\)
+</span>
+是可逆线性变换，即
+
+
+<span class="katex">
+  \(\mathscr{A\!d}_g\in \mathscr{T}_\mathscr{G}(1,1)\)
+</span>
+，所以
+
+
+<span class="katex">
+  \(\mathscr{A\!d}\)
+</span>
+也可以看成一个映射</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\textcolor{blue}{\mathscr{A\!d}}:&G\overset{\textcolor{red}{同态}}{\to} \mathscr{T}_\mathscr{G}(1,1)\cong \mathrm{GL}(m,\mathbb{R}) \\ &g \mapsto \textcolor{blue}{\mathscr{A\!d}(g)}\overset{\Delta}{=}\textcolor{red}{\mathscr{A\!d}_g}\end{aligned}}
+\]
+</span>
+
+<p>容易看出：</p>
+<p>1）
+
+
+<span class="katex">
+  \(\mathscr{A\!d}\)
+</span>
+是一个同态映射；【因为推前映射有性质：
+
+
+<span class="katex">
+  \((\psi\circ\phi)_*=\psi_*\circ\phi_*\)
+</span>
+】</p>
+<p>2）任选可逆
+
+
+<span class="katex">
+  \(\mathscr{T}_\mathscr{G}(1,1)\)
+</span>
+的一组基底后，同构于
+
+
+<span class="katex">
+  \(\mathrm{GL}(m,\mathbb{R})\)
+</span>
+。</p>
+<p>所以，
+
+
+<span class="katex">
+  \(\mathscr{A\!d}\)
+</span>
+称为李群
+
+
+<span class="katex">
+  \(G\)
+</span>
+的<code>伴随表示</code>。</p>
+<h2 id="李代数的伴随线性变换">李代数的伴随线性变换</h2>
+<p>利用李代数上的李括号定义一个类似
+
+
+<span class="katex">
+  \(\mathscr{A\!d}_a\)
+</span>
+的变换
+
+
+<span class="katex">
+  \(\mathscr{ad}_A\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\textcolor{blue}{\mathrm{ad}_A}:&\mathscr{G}\overset{\textcolor{red}{线性}}{\to} \mathscr{G} \\ &B \mapsto \textcolor{blue}{\mathrm{ad}_A(B)}\overset{\Delta}{=}\textcolor{red}{[A,B]}\end{aligned}}
+\]
+</span>
+
+<p>由李括号的双线性性，容易看出
+
+
+<span class="katex">
+  \(\mathrm{ad}_A\)
+</span>
+是切空间（李代数）上的线性变换，因此可用
+
+
+<span class="katex">
+  \((1,1)\)
+</span>
+型张量表示，此外，李代数上的元素自然也是矢量。进而，可用抽象指标重写上面这个映射：</p>
+
+
+
+<span class="katex">
+  \[
+(\mathrm{ad}_A)^c_{\ \ b}B^b=[A,B]^c=C^c_{\ \ ab}A^a B^b
+\]
+</span>
+
+<p>进而可抛掉被作用对象【其中
+
+
+<span class="katex">
+  \(\textcolor{red}{C^c_{\ \ ab}}\)
+</span>
+是李代数
+
+
+<span class="katex">
+  \(\mathscr{G}\)
+</span>
+的结构常数】：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{(\textcolor{blue}{\mathrm{ad}_A})^c_{\ \ b}=A^a\textcolor{red}{C^c_{\ \ ab}}}
+\]
+</span>
+
+<p>
+
+
+<span class="katex">
+  \(\mathscr{A\!d}_g\)
+</span>
+和
+
+
+<span class="katex">
+  \(\mathrm{ad}_A\)
+</span>
+有一个重要的关系：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\mathscr{A\!d}_{\exp(A)}=\delta+\mathrm{ad}_A+\frac{1}{2!}(\mathrm{ad}_A)^2+\frac{1}{3!}(\mathrm{ad}_A)^3+\dots}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(\delta\)
+</span>
+代表恒等映射（
+
+
+<span class="katex">
+  \(\delta^a_{\ \ b}\)
+</span>
+），
+
+
+<span class="katex">
+  \((\mathrm{ad}_A)^2\)
+</span>
+代表恒等映射（
+
+
+<span class="katex">
+  \((\mathrm{ad}_A)^a_{\ \ c}(\mathrm{ad}_A)^c_{\ \ b}\)
+</span>
+），等等。</p>
+<p>因为有这重关系，所以线性变换
+
+
+<span class="katex">
+  \(\mathrm{ad}_A\)
+</span>
+被称作<code>李代数的伴随线性变换</code>。注意，这个线性变换没有可逆的要求。</p>
+<h2 id="李代数的伴随表示">李代数的伴随表示</h2>
+<p>仿照群额伴随表示的分析套路，因为
+
+
+<span class="katex">
+  \(\mathrm{Ad}_A\)
+</span>
+是线性变换（不要求可逆），即
+
+
+<span class="katex">
+  \(\mathrm{ad}_A\in \mathscr{T}_\mathscr{G}(1,1)\)
+</span>
+，所以
+
+
+<span class="katex">
+  \(\mathrm{ad}\)
+</span>
+也可以看成一个映射</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\textcolor{blue}{\mathrm{ad}}:&\mathscr{G}\overset{\textcolor{red}{线性同态}}{\to} \mathscr{T}_\mathscr{G}(1,1)\cong \mathscr{G\!L}(m,\mathbb{R}) \\ &A \mapsto \textcolor{blue}{\mathrm{ad}(A)}\overset{\Delta}{=}\textcolor{red}{\mathrm{ad}_A}\end{aligned}}
+\]
+</span>
+
+<p>注意，这里的
+
+
+<span class="katex">
+  \(\mathscr{T}_\mathscr{G}(1,1)\)
+</span>
+不要求可逆，所以同构于
+
+
+<span class="katex">
+  \(\mathscr{G\!L}(m,\mathbb{R}) \)
+</span>
+。此外还容易看出：</p>
+<p>1）
+
+
+<span class="katex">
+  \(\mathrm{ad}\)
+</span>
+是线性映射；【利用李括号的双线性易证】</p>
+<p>2）
+
+
+<span class="katex">
+  \(\mathrm{ad}\)
+</span>
+是同态映射。【利用李括号雅可比恒等式易证保李括号】</p>
+<p>所以，
+
+
+<span class="katex">
+  \(\mathrm{ad}\)
+</span>
+称为李代数
+
+
+<span class="katex">
+  \(\mathscr{G}\)
+</span>
+的<code>伴随表示</code>。</p>
+<p>至此，我们可发现一个重要而自然的关系：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\mathscr{A\!d}_*=\mathrm{ad}}
+\]
+</span>
+
+<p>意思是：<strong>李群伴随表示的推前映射就是对应李代数伴随表示</strong>。</p>
+<h2 id="各种伴随映射的关系">各种伴随映射的关系</h2>
+<p><img src="/notes/images/0134.svg" alt="0134.svg"></p>
+<h2 id="killing型">Killing型</h2>
+<p>利用李代数的伴随变
+
+
+<span class="katex">
+  \(\mathrm{ad}_A\)
+</span>
+换可以定义<code>Killing型</code></p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\kappa:&\mathscr{G}\times \mathscr{G}\to \mathbb{R} \\ &(A,B)\mapsto \kappa(A,B)\overset{\Delta}{=}\mathrm{tr}(\mathrm{ad}_A\mathrm{ad}_B)\\ &\qquad \qquad =(\mathrm{ad}_A)^a_{\ \ b}(\mathrm{ad}_B)^b_{\ \ a}\end{aligned}
+\]
+</span>
+
+<p>如果如下性质：</p>
+<p>1）
+
+
+<span class="katex">
+  \(\kappa(A,B)=\kappa(B,A)\)
+</span>
+；【利用两个方阵积的“迹”的可交换性易得】</p>
+<p>2）
+
+
+<span class="katex">
+  \(\kappa([A,B],C)=\kappa(A,[B,C])\)
+</span>
+；【利用多个方阵乘积的“迹”的可轮换性易证】</p>
+<p>3）
+
+
+<span class="katex">
+  \(\kappa(A,B)\)
+</span>
+满足双线性性。【易验证】</p>
+<p>利用李代数结构常数的定义，并在抽象指标表示下，容易推导出：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\kappa_{cd}=C^a_{\ \ cb} C^b_{\ \ da}}
+\]
+</span>
+
+<p>关于
+
+
+<span class="katex">
+  \(\kappa\)
+</span>
+的非退化性，我们有一个结论【这里我只关心结论不关心证明】：</p>
+<blockquote>
+<p>
+
+
+<span class="katex">
+  \(\kappa\)
+</span>
+非退化的充要条件
+
+
+<span class="katex">
+  \(\mathscr{G}\)
+</span>
+是为半单李代数。</p>
+</blockquote>
+<p>所以，半单李代数
+
+
+<span class="katex">
+  \(\mathscr{G}\)
+</span>
+的Killing型
+
+
+<span class="katex">
+  \(\kappa_{ab}\)
+</span>
+可充当
+
+
+<span class="katex">
+  \(\mathscr{G}\)
+</span>
+的度规，称为<code>嘉当度规</code>。</p>
+<p>需要注意的是，
+
+
+<span class="katex">
+  \(\kappa_{ab}\)
+</span>
+的号差因
+
+
+<span class="katex">
+  \(\mathscr{G}\)
+</span>
+而异，但我们关心的物理中遇到的李代数的
+
+
+<span class="katex">
+  \(\kappa_{ab}\)
+</span>
+多半是负定的，因而存在正交归一基底
+
+
+<span class="katex">
+  \(\{(E_\mu)^a\}\)
+</span>
+，使得</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\kappa_{\mu\upsilon}=\kappa_{ab}(E_\mu)^a(E_\upsilon)^b=-\delta_{\mu\upsilon}}
+\]
+</span>
+
+<p>正如普通的度规，在李代数空间上，嘉当度规
+
+
+<span class="katex">
+  \(\kappa_{ab}\)
+</span>
+也可用来升降指标，比如：</p>
+
+
+
+<span class="katex">
+  \[
+C_{\rho\mu\upsilon}=\kappa_{\rho\sigma}C^\sigma_{\ \ \mu\upsilon}
+\]
+</span>
+
+<p>进而，关于结构常数，降指标后是全反称额：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{C_{\rho\mu\upsilon}=C_{[\rho\mu\upsilon]}}
+\]
+</span>
+
+<h2 id="casimir算符">Casimir算符</h2>
+<p>如果只关心半单李代数（因为存在嘉当度规），可以定义<code>Casimir算符</code>。</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{C=\kappa^{\mu\upsilon}E_\mu E_\upsilon}
+\]
+</span>
+
+<p>从矢量角度看，基底可如前面记作
+
+
+<span class="katex">
+  \((E_\mu)^a\)
+</span>
+，而矢量也可以看成线性映射或算符，所以这里去掉了抽象指标。比如：
+
+
+<span class="katex">
+  \(\left(\frac{\partial}{\partial t}\right)^a\)
+</span>
+实际对应算符
+
+
+<span class="katex">
+  \(\frac{\partial}{\partial t}\)
+</span>
+。</p>
+<p>进而，可计算Casimir算符和任意基底
+
+
+<span class="katex">
+  \(E_\rho\)
+</span>
+对易子：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\ [C,E_\rho]&=\kappa^{\mu\upsilon}[E_\mu E_\upsilon,E_\rho]\\ &=\kappa^{\mu\upsilon}E_\mu [E_\upsilon , E_\rho]+\kappa^{\mu\upsilon}[E_\mu,E_\rho]E_\upsilon\\ &=\kappa^{\mu\upsilon}C^\tau_{\ \ \upsilon\rho}E_\mu E_\tau+\kappa^{\mu\upsilon}C^\tau_{\ \ \mu\rho}E_\tau E_\upsilon \qquad \textcolor{red}{结构常数的定义}\\ &=\kappa^{\mu\upsilon}C^\tau_{\ \ \upsilon\rho}E_\mu E_\tau+\kappa^{\upsilon\mu}C^\tau_{\ \ \upsilon\rho}E_\tau E_\mu\\ &=\kappa^{\mu\upsilon}C^\tau_{\ \ \upsilon\rho}(E_\mu E_\tau+E_\tau E_\mu)\\ &=2\kappa^{\mu\upsilon}\kappa^{\lambda\tau} C_{\lambda\upsilon\rho}E_{(\mu} E_{\tau)} \qquad \textcolor{red}{上行括号内是对称的}\\ &=2\kappa^{\mu\upsilon}\kappa^{\lambda\tau}E_{(\mu} E_{\tau)}C_{[\lambda\upsilon\rho]} \qquad \textcolor{red}{下指标结构常数全反称性}\\ &=2\kappa^{(\mu|\upsilon}\kappa^{\lambda|\tau)}E_{\mu} E_{\tau}C_{[\lambda\upsilon\rho]} \qquad \textcolor{red}{括号全缩并时可传染}\\ &=2\kappa^{\mu(\upsilon}\kappa^{\lambda)\tau}E_{\mu} E_{\tau}C_{[\lambda\upsilon\rho]}=0 \qquad \textcolor{red}{异种括号缩并为零}   \end{aligned}
+\]
+</span>
+
+<p>即：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{[C,E_\rho]=0}
+\]
+</span>
+
+<p>这说明：</p>
+<blockquote>
+<p>半单李代数
+
+
+<span class="katex">
+  \(\mathscr{G}\)
+</span>
+上的Casimir算符与
+
+
+<span class="katex">
+  \(\mathscr{G}\)
+</span>
+的一切基底对易，进而与
+
+
+<span class="katex">
+  \(\mathscr{G}\)
+</span>
+的一切元素对易。</p>
+</blockquote>
+
+
+
+<span class="katex">
+  \[
+\boxed{[C,\mathscr{G}]=0}
+\]
+</span>
+
+<h2 id="求so3的李代数的casimir算符">求SO(3)的李代数的Casimir算符</h2>
+<p>我们知道李代数
+
+
+<span class="katex">
+  \(\mathscr{SO}(3)\)
+</span>
+的三个基底算符（以前的笔记计算过）：</p>
+
+
+
+<span class="katex">
+  \[
+E_1=z\partial_y-y\partial_z\\ E_2=x\partial_z-z\partial_x \\ E_3=y\partial_x-x\partial_y
+\]
+</span>
+
+<p>对应的结构常数（以前的笔记计算过）：</p>
+
+
+
+<span class="katex">
+  \[
+[E_i,E_j]=\varepsilon^k_{\ \ ij}E_k\\ C^k_{\ \ ij}=\varepsilon^k_{\ \ ij}
+\]
+</span>
+
+<p>进而容易算出嘉当度规：</p>
+
+
+
+<span class="katex">
+  \[
+\kappa_{ij}=-2\delta_{ij}\quad \kappa^{ij}=-\frac{1}{2}\delta^{ij}
+\]
+</span>
+
+<p>因为（我直接用julia计算）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#66d9ef">using</span> SymPy
+<span style="color:#66d9ef">using</span> LinearAlgebra
+
+<span style="color:#75715e">#  Levi-Civita记号</span>
+ε<span style="color:#f92672">=</span> [ Sym((i≠j <span style="color:#f92672">&amp;&amp;</span> i≠k <span style="color:#f92672">&amp;&amp;</span> j≠k )<span style="color:#f92672">*</span>       <span style="color:#75715e">#  存在重复指标，取0</span>
+    (<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">^</span>(sum([i,j,k][σ]<span style="color:#f92672">&gt;</span>[i,j,k][ρ]   
+            <span style="color:#66d9ef">for</span> σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>,ρ <span style="color:#66d9ef">in</span>  <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>  <span style="color:#66d9ef">if</span> σ<span style="color:#f92672">&lt;</span>ρ) <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>)) <span style="color:#75715e"># 计算逆序数。偶数取1，奇数取-1</span>
+    <span style="color:#66d9ef">for</span>  i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>, j <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>, k <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span> ] ;
+
+<span style="color:#75715e"># 计算嘉当度规</span>
+κ<span style="color:#f92672">=</span>[sum(ε[l,i,k]<span style="color:#f92672">*</span>ε[k,j,l] <span style="color:#66d9ef">for</span> k <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>, l <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>, j <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]
+</code></pre></div><p><img src="/notes/images/0135.jpg" alt="0135.jpg"></p>
+<p>进而容易算出Casimir算符</p>
+
+
+
+<span class="katex">
+  \[
+C=\kappa^{ij}E_iE_j=-\frac{1}{2}\delta^{ij}E_iE_j=-\frac{1}{2}((E_1)^2+(E_2)^2+(E_3)^2)
+\]
+</span>
+
+<h2 id="广义casimir算符">广义Casimir算符</h2>
+<p>可以定义n阶的广义Casimir算符</p>
+
+
+
+<span class="katex">
+  \[
+I_n=C^{\beta_1}_{\ \ \alpha_1\beta_2}C^{\beta_2}_{\ \ \alpha_2\beta_3}\dots C^{\beta_n}_{\ \ \alpha_n\beta_1}E^{\alpha_1}E^{\alpha_2}\dots E^{\alpha_n},\quad n\ge2 \\ E^\alpha=\kappa^{\alpha\beta}E_\beta
+\]
+</span>
+
+<p>可以证明与半单李代数中的一切元素对易，但它们并不是独立的。</p>
+<p>首先，二阶Casimir算符，就是普通的Casimir算符</p>
+
+
+
+<span class="katex">
+  \[
+I_2=C
+\]
+</span>
+
+<p>更特别地，对
+
+
+<span class="katex">
+  \(\mathscr{SO}(3)\)
+</span>
+李代数而言</p>
+
+
+
+<span class="katex">
+  \[
+I_3=-2I_2=-2C
+\]
+</span>
+
+<blockquote>
+<p>后面这三段我没细研究，先把结论写出来，回头研究。</p>
+</blockquote>
+<p>事实上，
+
+
+<span class="katex">
+  \(\mathscr{SO}(3)\)
+</span>
+上所有的广义Casimir算符
+
+
+<span class="katex">
+  \(I_n(n\ge2)\)
+</span>
+都正比于
+
+
+<span class="katex">
+  \(C\)
+</span>
+，因此
+
+
+<span class="katex">
+  \(\mathscr{SO}(3)\)
+</span>
+的独立Casimir算符只有一个
+
+
+<span class="katex">
+  \(C\)
+</span>
+。</p>
+<p>一般而言，秩为
+
+
+<span class="katex">
+  \(l\)
+</span>
+的半单李代数有
+
+
+<span class="katex">
+  \(l\)
+</span>
+个独立Casimir算符。</p>
+<p>正如
+
+
+<span class="katex">
+  \(\mathscr{SO}(3)\)
+</span>
+代数中Casimir算符
+
+
+<span class="katex">
+  \(C(\sim J^2)\)
+</span>
+的本征值
+
+
+<span class="katex">
+  \(j(j+1)\)
+</span>
+可用来对
+
+
+<span class="katex">
+  \(\mathrm{SO}(3)\)
+</span>
+群的不可约表示进行编号，广义Casimir算符的本征值全体可以用来对不可约表示进行完全编号。因此，Casimir算符的寻找是重要的。</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0083/">
+    下一页<br>半单李代数的标准形式
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/theophy/0081/">
+      上一页<br>场及其对称性
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0082.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/diffgeo/0082.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#群的伴随同构">群的伴随同构</a></li>
+        <li><a href="#李群的伴随可逆线性变换">李群的伴随可逆线性变换</a></li>
+        <li><a href="#李群的伴随表示">李群的伴随表示</a></li>
+        <li><a href="#李代数的伴随线性变换">李代数的伴随线性变换</a></li>
+        <li><a href="#李代数的伴随表示">李代数的伴随表示</a></li>
+        <li><a href="#各种伴随映射的关系">各种伴随映射的关系</a></li>
+        <li><a href="#killing型">Killing型</a></li>
+        <li><a href="#casimir算符">Casimir算符</a></li>
+        <li><a href="#求so3的李代数的casimir算符">求SO(3)的李代数的Casimir算符</a></li>
+        <li><a href="#广义casimir算符">广义Casimir算符</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

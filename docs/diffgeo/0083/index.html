@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="半单李代数的标准形式"><meta property="og:title" content="半单李代数的标准形式" />
+<meta property="og:description" content="
+用图示方法梳理典型群。
+一个半单李代数的结构由一组根向量决定。
+所谓根矢量，就是在标准形式下，非零本征根在零根空间中的分量。
+所谓标准形式，选择某个特定基底的李代数表示，这组特定基底满足：具有最多非重根数（实数根）。
+所谓零根空间，就是零本征根（可能有重根）的所有本征矢量张成的空间。
+所谓根系，就是半单李代数标准形式下的所有本征根，有时简称“根”。如果没有加粗，表示实数根
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+  \(\alpha\)
+
+；如果加粗了，表示根矢量
+
+
+
+  \(\boldsymbol{\alpha}\)
+
+。
+嗅到一股量子力学的味道。
+最后是根矢量图示法。
+本篇草稿： https://gitee.com/chaoskey/notes/blob/master/code/0083.ipynb
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/diffgeo/0083/" />
+<meta property="article:published_time" content="2020-05-01T08:32:10+08:00" />
+<meta property="article:modified_time" content="2020-05-01T08:32:10+08:00" />
+<title>半单李代数的标准形式 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a>
+<ul>
+<li><a href="/notes/docs/diffgeo/0005/">基于抽象指标的张量分析</a></li>
+<li><a href="/notes/docs/diffgeo/0006/">流形上的导数算符</a></li>
+<li><a href="/notes/docs/diffgeo/0007/">流形上的平移</a></li>
+<li><a href="/notes/docs/diffgeo/0008/">黎曼曲率张量</a></li>
+<li><a href="/notes/docs/diffgeo/0009/">流形间的映射</a></li>
+<li><a href="/notes/docs/diffgeo/0010/">流形上的李导数</a></li>
+<li><a href="/notes/docs/diffgeo/0011/">Killing矢量场</a></li>
+<li><a href="/notes/docs/diffgeo/0012/">子流形和超曲面</a></li>
+<li><a href="/notes/docs/diffgeo/0013/">流形上的微分形式及其对偶</a></li>
+<li><a href="/notes/docs/diffgeo/0014/">流形上的微积分</a></li>
+<li><a href="/notes/docs/diffgeo/0016/">李群李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0068/">常用李群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0069/">李变换群</a></li>
+<li><a href="/notes/docs/diffgeo/0070/">微分几何中的计算（Julia版）</a></li>
+<li><a href="/notes/docs/diffgeo/0073/">辛群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0074/">辛流形</a></li>
+<li><a href="/notes/docs/diffgeo/0076/">流形上的旋量和旋量场（初步）</a></li>
+<li><a href="/notes/docs/diffgeo/0077/">流形上的旋量和旋量场（几何解释）</a></li>
+<li><a href="/notes/docs/diffgeo/0078/">流形上的旋量和旋量场（导数算符和曲率)</a></li>
+<li><a href="/notes/docs/diffgeo/0079/">流形上的旋量和旋量场（自旋系数和克氏符）</a></li>
+<li><a href="/notes/docs/diffgeo/0082/">李群李代数伴随表示和Killing型、Casimir算符</a></li>
+<li><a href="/notes/docs/diffgeo/0083/"class=active>半单李代数的标准形式</a></li>
+<li><a href="/notes/docs/diffgeo/0084/">半单李代数的根系、权系和Dynkin图</a></li>
+<li><a href="/notes/docs/diffgeo/0085/">半单李代数的Casimir不变算符</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>半单李代数的标准形式</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#典型群">典型群</a></li>
+        <li><a href="#一些概念的补缺">一些概念的补缺</a></li>
+        <li><a href="#各种李代数的相互关系">各种李代数的相互关系</a></li>
+        <li><a href="#量子力学与李代数">量子力学与李代数</a></li>
+        <li><a href="#半单李代数的标准形式">半单李代数的标准形式</a></li>
+        <li><a href="#求标准形式的一个例子">求标准形式的一个例子</a></li>
+        <li><a href="#嘉当李子代数零根空间">嘉当李子代数（零根空间）</a></li>
+        <li><a href="#标准形式下的结构常数">标准形式下的结构常数</a></li>
+        <li><a href="#标准形式下本征根的对称性">标准形式下本征根的对称性</a></li>
+        <li><a href="#标准形式的归一化">标准形式的归一化</a></li>
+        <li><a href="#小结">小结</a></li>
+        <li><a href="#根系的一些性质">根系的一些性质</a></li>
+        <li><a href="#根矢量图示法">根矢量图示法</a></li>
+        <li><a href="#1秩和2秩李代数图示">1秩和2秩李代数图示</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0084/">
+    下一页<br>半单李代数的根系、权系和Dynkin图
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0082/">
+      上一页<br>李群李代数伴随表示和Killing型、Casimir算符
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/diffgeo/0083/">半单李代数的标准形式</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-05-01</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95">微分几何</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E6%9D%8E%E4%BB%A3%E6%95%B0">李代数</a>
+      , 
+      <a href="/notes/tags/%E5%85%B8%E5%9E%8B%E7%BE%A4">典型群</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0083.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<blockquote>
+<p>用图示方法梳理典型群。</p>
+<p>一个半单李代数的结构由一组<code>根向量</code>决定。</p>
+<p>所谓<code>根矢量</code>，就是在<code>标准形式</code>下，非零本征根在<code>零根空间</code>中的分量。</p>
+<p>所谓<code>标准形式</code>，选择某个特定基底的李代数表示，这组特定基底满足：具有最多非重根数（实数根）。</p>
+<p>所谓<code>零根空间</code>，就是零本征根（可能有重根）的所有本征矢量张成的空间。</p>
+<p>所谓<code>根系</code>，就是半单李代数标准形式下的所有本征根，有时简称“根”。如果没有加粗，表示实数根
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(\alpha\)
+</span>
+；如果加粗了，表示根矢量
+
+
+<span class="katex">
+  \(\boldsymbol{\alpha}\)
+</span>
+。</p>
+<p>嗅到一股量子力学的味道。</p>
+<p>最后是根矢量图示法。</p>
+<p>本篇草稿： <a href="https://gitee.com/chaoskey/notes/blob/master/code/0083.ipynb">https://gitee.com/chaoskey/notes/blob/master/code/0083.ipynb</a></p>
+</blockquote>
+<h2 id="典型群">典型群</h2>
+<p><img src="/notes/images/0137.svg" alt="0137.svg"></p>
+<h2 id="一些概念的补缺">一些概念的补缺</h2>
+<blockquote>
+<p>只补充我以前笔记尚未涉及的、我认为必要的。 用纯语言进行提要。</p>
+</blockquote>
+<p>所谓李代数的<code>理想</code>,，就是一个“好的”李子代数。所谓“好的”，这个子代数和整个李代数的李括号封闭到这个子代数自身。所以，这个<code>理想</code>又被称作<code>不变李子代数</code>。</p>
+<p>所谓李代数的<code>中心</code>，就是一个极大可交换理想，即所有的两个元素的李括号等于0.</p>
+<p>关于李代数的<code>伴随表示</code>，上一篇笔记有详细的介绍。</p>
+<p>所谓<code>单李代数</code>，就是指“单纯的”李代数。所谓“单纯的”，就是指不含真理想。</p>
+<p>所谓<code>半单李代数</code>，就是指“半单纯的”李代数。所谓“半单纯的”，就是除
+
+
+<span class="katex">
+  \(\{0\}\)
+</span>
+外，不含可交换理想（即，阿贝尔理想）。</p>
+<p><code>单纯李代数</code>必定是<code>半单李代数</code>，反过来不一定正确。 有一个定理如下：</p>
+<blockquote>
+<p>
+
+
+<span class="katex">
+  \(\mathscr{G}\)
+</span>
+是半单李代数，当且仅当，
+
+
+<span class="katex">
+  \(\mathscr{G}\)
+</span>
+可表示为一些理想的直和，并且这些理想都是单李代数。</p>
+</blockquote>
+<p>还有一个定理，可更方便判断李代数是否是半单的，上一篇笔记也有涉及。</p>
+<blockquote>
+<p>李代数是半单的，当且仅当，对应的Killing型式非退化的，即存在嘉当度规。</p>
+</blockquote>
+<h2 id="各种李代数的相互关系">各种李代数的相互关系</h2>
+<blockquote>
+<p>由于我只关心半单李代数，这里只列各种李代数的关系，方便有个整体印象。其它我不关心的李代数，请自行翻书。</p>
+</blockquote>
+<p><img src="/notes/images/0136.svg" alt="0136.svg"></p>
+<h2 id="量子力学与李代数">量子力学与李代数</h2>
+<blockquote>
+<p>以量子力学为例，来概要说明李代数的重要性。</p>
+</blockquote>
+<p>量子力学的数学结构与泛函分析和李代数理论密切相关，其中所涉及的幺正变换（酉变换）还会涉及李群的表示论&mdash;- 更有趣的式，量子力学中的很多方法和结果都可以在半单李代数理论中找到对应，比如：</p>
+<ul>
+<li>力学量完全集 
+
+
+<span class="katex">
+  \(\longleftrightarrow\)
+</span>
+嘉当子代数的基；</li>
+<li>&ldquo;好&quot;量子数 
+
+
+<span class="katex">
+  \(\longleftrightarrow\)
+</span>
+权和最高权</li>
+<li>力学量完全集的共同本征矢量 
+
+
+<span class="katex">
+  \(\longleftrightarrow\)
+</span>
+权空间中的元素；</li>
+<li>升、降算符 
+
+
+<span class="katex">
+  \(\longleftrightarrow\)
+</span>
+根向量；</li>
+</ul>
+<h2 id="半单李代数的标准形式">半单李代数的标准形式</h2>
+<p>考虑半单李代数
+
+
+<span class="katex">
+  \(\mathscr{G}\)
+</span>
+的一组基底
+
+
+<span class="katex">
+  \(\{(E_\mu)^a\}\)
+</span>
+，
+
+
+<span class="katex">
+  \(\mathscr{G}\)
+</span>
+中的任意一个元素
+
+
+<span class="katex">
+  \(A^a\)
+</span>
+可表示成</p>
+
+
+
+<span class="katex">
+  \[
+A^a=A^\mu (E_\mu)^a
+\]
+</span>
+
+<p>考虑另一个元素</p>
+
+
+
+<span class="katex">
+  \[
+X^a=X^\mu (E_\mu)^a
+\]
+</span>
+
+<p>满足：</p>
+
+
+
+<span class="katex">
+  \[
+[A,X]^a=\lambda X^a
+\]
+</span>
+
+<p>可改写伴随变换(<code>算符</code>)
+
+
+<span class="katex">
+  \(\mathrm{ad}_A\)
+</span>
+本征方程的形式</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{(\mathrm{ad}_A)^a_{\ \ b} X^b=\lambda X^a},\quad (\mathrm{ad}_A)^a_{\ \ b}=A^c C^a_{\ \ cb}
+\]
+</span>
+
+<p>对应的分量形式：【方便具体计算】</p>
+
+
+
+<span class="katex">
+  \[
+A^\mu C^\rho_{\ \ \mu\upsilon} X^\upsilon=\lambda X^\rho
+\]
+</span>
+
+<p>注意到：虽然本征方程的本征根和本征矢取决于的
+
+
+<span class="katex">
+  \(A^a\)
+</span>
+选择，但如果我们附加一个要求：<strong>这个特征方程有最大可能的非重根数（实数根）</strong>，那么不难想到：可以在某种程度上确定
+
+
+<span class="katex">
+  \(A^a\)
+</span>
+及其对应的本征根和本征矢。</p>
+<p>实际上，有一个重要的基本定理&ndash;<strong>嘉当定理</strong>，描述了这种情况下本征根的性质：</p>
+<blockquote>
+<p>设选择一个
+
+
+<span class="katex">
+  \(A^a\in \mathscr{G}\)
+</span>
+，使得上面这个本征方程有最大的非重根数(实数根)，那么对半单李代数而言，只有0根可能是重根，其它非零根不可能是重根。</p>
+</blockquote>
+<h2 id="求标准形式的一个例子">求标准形式的一个例子</h2>
+<p>现在以
+
+
+<span class="katex">
+  \(\mathscr{G}=\mathscr{SO}(3)\)
+</span>
+为例，求这种情况下的
+
+
+<span class="katex">
+  \(A^a\)
+</span>
+及其对应的本征根和本征矢量。【用<code>Julia</code>求解，具体看我的草稿】</p>
+<p>首先，求解一般情况下的本征根（复数域）</p>
+<p><img src="/notes/images/0138.jpg" alt="0138.jpg"></p>
+<p>然后，为了确保出现最大可能非重根数（实数根），根号内必取正，于是可选择特定
+
+
+<span class="katex">
+  \(A^\mu\)
+</span>
+：
+
+
+<span class="katex">
+  \(a_1=0,a_2=0,a_3=i\  a,\quad a>0\)
+</span>
+，进而可算出对应的本征根和本征矢量</p>
+<p><img src="/notes/images/0139.jpg" alt="0139.jpg"></p>
+<p>最后，可写出三个本征根及其本征矢量</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}A^a&=i\ \alpha (E_3)^a\\ \quad \\ (K_1)^a&=(E_3)^a\qquad \qquad \quad [A,K_1]^a=0 \\ (H_{\pm \alpha})^a&=(E_1)^a\pm i\ (E_2)^a\quad [A,H_{\pm \alpha}]^a=\pm \alpha (H_{\pm \alpha})^a\end{aligned}
+\]
+</span>
+
+<p>所以，
+
+
+<span class="katex">
+  \(\mathscr{SO}(3)\)
+</span>
+标准形式基底为：【随后的段落将解释标准形式的本征矢量为何要用
+
+
+<span class="katex">
+  \(K,H\)
+</span>
+两个符号区分】</p>
+
+
+
+<span class="katex">
+  \[
+\{(K_1)^a,(H_{\pm\alpha})^a\}
+\]
+</span>
+
+<h2 id="嘉当李子代数零根空间">嘉当李子代数（零根空间）</h2>
+<blockquote>
+<p>有了上面这个具体例子提供的感性认识下，我们可以继续讨论。</p>
+</blockquote>
+<p>在这个标准形式下，如果0的重根数（简并度）为
+
+
+<span class="katex">
+  \(l\)
+</span>
+，那么称
+
+
+<span class="katex">
+  \(l\)
+</span>
+为<code>半单李代数的秩</code>。对应
+
+
+<span class="katex">
+  \(l\)
+</span>
+个线性无关的本征矢
+
+
+<span class="katex">
+  \(\{(K_i)^a\}\)
+</span>
+，并且可张成李代数
+
+
+<span class="katex">
+  \(\mathscr{G}\)
+</span>
+的一个
+
+
+<span class="katex">
+  \(l\)
+</span>
+维<code>零根空间</code></p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\mathscr{K}=\mathrm{span}(\{(K_i)^a\})}\\ \quad \\ [A,\mathscr{K}]^a=0\quad \boxed{[A,K_i]^a=(\mathrm{ad}_A)^a_{\ \ b}(K_i)^b=0},\quad i=1,\dots,l
+\]
+</span>
+
+<p>此外，不难验证，这个零根空间
+
+
+<span class="katex">
+  \(\mathscr{K}\)
+</span>
+满足李括号的雅可比恒等式，进而
+
+
+<span class="katex">
+  \(\mathscr{K}\)
+</span>
+是
+
+
+<span class="katex">
+  \(\mathscr{G}\)
+</span>
+的李子代数，称之为<code>嘉当子代数</code>，这是一个阿贝尔李子代数。</p>
+<p>根据嘉当定理，标准形式下，非0根不可能出现重根，所以
+
+
+<span class="katex">
+  \(\alpha\)
+</span>
+根对应的本征矢不妨记作
+
+
+<span class="katex">
+  \((H_\alpha)^a\)
+</span>
+</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{[A,H_\alpha]^a=(\mathrm{ad}_A)^a_{\ \ b}(H_\alpha)^b=\alpha (H_\alpha)^a}
+\]
+</span>
+
+<h2 id="标准形式下的结构常数">标准形式下的结构常数</h2>
+<p>因为
+
+
+<span class="katex">
+  \([A,K_i]^a=0,\quad i=1,\dots,l\)
+</span>
+，所以在标准形式下，我们选择的特定
+
+
+<span class="katex">
+  \(A^a\)
+</span>
+可用零根空间的基底展开</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{A^a=\chi^i(K_i)^a}
+\]
+</span>
+
+<p>容易推导出：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}(\mathrm{ad}_A)^a_{\ \ b} [K_i,K_i]^b&=0\\(\mathrm{ad}_A)^a_{\ \ b} [K_i,H_\alpha]^b&= \alpha [K_i,H_\alpha]^a\\(\mathrm{ad}_A)^a_{\ \ b} [H_\alpha,H_\beta]^b&= (\alpha+\beta) [H_\alpha,H_\beta]^a\end{aligned}}
+\]
+</span>
+
+<p>这意味着，
+
+
+<span class="katex">
+  \([K_i,K_i]^a,[K_i,H_\alpha]^a,[H_\alpha,H_\beta]^b\)
+</span>
+，这三个李括号也都算符
+
+
+<span class="katex">
+  \(\mathrm{ad}_A\)
+</span>
+的本征矢。根据嘉当定理，非零本征根是非简并的，进而</p>
+
+
+
+<span class="katex">
+  \[
+[K_i,H_\alpha]^a\propto (H_\alpha)^a\\ [H_\alpha,H_\beta]^a\propto (H_{\alpha+\beta})^a,\quad \alpha+\beta\ne0
+\]
+</span>
+
+<p>于是有（分别选取比例系数
+
+
+<span class="katex">
+  \(\alpha_i,h_{\alpha\beta}\)
+</span>
+后）</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\ [K_i,K_j]^a&=0\\ \ [K_i,H_\alpha]^a&= \alpha_i (H_\alpha)^a\\ \ [H_\alpha,H_\beta]^a&=\begin{cases} h_{\alpha\beta}(H_{\alpha+\beta})^a &\text{if } \alpha+\beta \in \textcolor{red}{\Sigma}\verb|\| \{0\} \\ 0 &\text{if } \alpha+\beta \notin \textcolor{red}{\Sigma} \end{cases} \\ \ [H_\alpha,H_{-\alpha}]^a&= C^i_{\ \ \alpha,-\alpha}(K_i)^a\end{aligned}\\  \boxed{\alpha=\chi^i\alpha_i}
+\]
+</span>
+
+<p>这样，我们就可以把
+
+
+<span class="katex">
+  \(\alpha_i,\quad i=1,\dots,l\)
+</span>
+看作是
+
+
+<span class="katex">
+  \(l\)
+</span>
+维零根空间的一个矢量的分量，
+
+
+<span class="katex">
+  \(\chi^i\)
+</span>
+则可以看成这个矢量空间的基，这样就把一个作为实数的根看成是一个矢量，称为<code>根矢量</code>。不妨用
+
+
+<span class="katex">
+  \(\textcolor{red}{\Sigma}\)
+</span>
+表示所有根矢量的集合。</p>
+<p>可完整写出这个标准形式下的李代数结构常数</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}C^\tau_{\ \ ij}&=0\\ C^\tau_{\ \ i\alpha}&=\alpha_i\delta^\tau_{\ \ \alpha}\\ \ C^\tau_{\ \ \alpha\beta}&=\begin{cases} h_{\alpha\beta}\delta^\tau_{\ \ \alpha+\beta} &\text{if } \alpha+\beta \in \Sigma\verb|\| \{0\} \\ 0 &\text{if } \alpha+\beta \notin \Sigma \end{cases} \\ \ C^\tau_{\ \ \alpha,-\alpha}&=待定 \end{aligned}}
+\]
+</span>
+
+<h2 id="标准形式下本征根的对称性">标准形式下本征根的对称性</h2>
+<p>通过反证法，并利用上面的关系取
+
+
+<span class="katex">
+  \(\beta=-\alpha\)
+</span>
+，不难证明下面这个定理</p>
+<blockquote>
+<p>一个半单李代数，若
+
+
+<span class="katex">
+  \(\alpha\)
+</span>
+是非零实根，那么
+
+
+<span class="katex">
+  \((-\alpha)\)
+</span>
+也一定是它的根。</p>
+</blockquote>
+<h2 id="标准形式的归一化">标准形式的归一化</h2>
+<p>标准型的所有独立本征基底可记作
+
+
+<span class="katex">
+  \(\left\{(K_i)^a,(H_{\alpha})^a\right\}\)
+</span>
+，根据这一基底下的结构常数，可算出半单李代数的嘉当度规分量
+
+
+<span class="katex">
+  \(\kappa_{\mu\upsilon}\)
+</span>
+</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\kappa_{\mu\upsilon}&=C^\rho_{\ \ \mu\sigma}C^\sigma_{\ \ \upsilon\rho}\\ &= C^i_{\ \ \mu j}C^j_{\ \ \upsilon i}+C^\alpha_{\ \ \mu j}C^j_{\ \ \upsilon\alpha}+C^i_{\ \ \mu\beta}C^\beta_{\ \ \upsilon i}+C^\alpha_{\ \ \mu\beta}C^\beta_{\ \ \upsilon\alpha} \end{aligned}
+\]
+</span>
+
+<p>这里对指标作个约定（前面事实上已经用了这个约定）：用
+
+
+<span class="katex">
+  \(i,j,k\)
+</span>
+表示0根基底对应的指标，
+
+
+<span class="katex">
+  \(\alpha,\beta,\gamma\)
+</span>
+表示非0根，并且用根本身作为基底对应的指标。</p>
+<p>零根空间上的嘉当度规分量</p>
+
+
+
+<span class="katex">
+  \[
+\kappa_{ij}=C^\alpha_{\ \ i\beta}C^\beta_{\ \ j\alpha}=\sum_\alpha {C^\alpha_{\ \ i\textcolor{blue}{\alpha}}C^\textcolor{blue}{\alpha}_{\ \ j\alpha}}=\sum_\alpha {\alpha_i\alpha_j}\\ \textcolor{red}{注意：\beta改成\alpha是因为其它可能为0\quad 改用求和号避免混淆}
+\]
+</span>
+
+<p>零根基底和非零根基底对应的嘉当度规分量</p>
+
+
+
+<span class="katex">
+  \[
+\kappa_{k\gamma}= C^i_{\ \ k\beta}C^\beta_{\ \ \gamma i}+C^\alpha_{\ \ k\beta}C^\beta_{\ \ \gamma\alpha}= -\alpha_i\alpha_k\delta^i_{\ \ \gamma}+\alpha_k h_{\gamma\alpha}\delta^\alpha_{\ \ \alpha+\gamma}=0
+\]
+</span>
+
+<p>非零根基底间的嘉当度规分量</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\kappa_{\gamma\zeta}&= C^i_{\ \ \gamma j}C^j_{\ \ \zeta i}+C^\alpha_{\ \ \gamma j}C^j_{\ \ \zeta\alpha}+C^i_{\ \ \gamma\beta}C^\beta_{\ \ \zeta i}+C^\alpha_{\ \ \gamma\beta}C^\beta_{\ \ \zeta\alpha}\\ &= C^i_{\ \ j\gamma}C^j_{\ \ i\zeta}-C^\alpha_{\ \ j\gamma}C^j_{\ \ \zeta\alpha}-C^i_{\ \ \gamma\beta}C^\beta_{\ \ i\zeta}+C^\alpha_{\ \ \gamma\beta}C^\beta_{\ \ \zeta\alpha}\\ &= \alpha_i\alpha_j\delta^i_{\ \gamma}\delta^j_{\ \zeta}-\alpha_j h_{\zeta\alpha}\delta^\alpha_{\ \ \gamma}\delta^j_{\ \ \alpha+\zeta}-\alpha_i h_{\gamma\beta}\delta^\beta_{\ \ \zeta}\delta^i_{\ \ \gamma+\beta}+C^\alpha_{\ \ \gamma\beta}C^\beta_{\ \ \zeta\alpha}\\ &= C^\alpha_{\ \ \gamma\beta}C^\beta_{\ \ \zeta\alpha}=h_{\gamma\beta}h_{\zeta\alpha}\delta^\alpha_{\ \ \gamma+\beta}\delta^\beta_{\ \ \zeta+\alpha}\\ &=\sum_{\alpha=\gamma+\beta,\quad \beta=\zeta+\alpha}{h_{\gamma\beta}h_{\zeta\alpha}}=\sum_{\alpha=\gamma+\beta,\quad \zeta=-\gamma}{ h_{\gamma\beta}h_{\zeta\alpha}}\\ &= \boxed{\begin{cases} \sum\limits_{\beta}{ h_{\gamma\beta}h_{-\gamma,(\gamma+\beta)}} &\text{if } \zeta= -\gamma \\ 0 &\text{if } \zeta\ne -\gamma \end{cases}}\end{aligned}
+\]
+</span>
+
+<p>由此可见，在标准形式下的嘉当度规分量，大部分为0。当然嘉度规分量的大小取决于本征基底
+
+
+<span class="katex">
+  \(\left\{(K_i)^a,(H_{\alpha})^a\right\}\)
+</span>
+的选择。因此，通过适当选取本征基底的大小，一定可以使嘉当度规所有的非0分量归一。在这种归一化基底下，嘉当度规必定有如下形式。</p>
+
+
+
+<span class="katex">
+  \[
+\kappa_{\mu\upsilon}=\begin{array}{cc} & \begin{array}{cc} & &  & \alpha & -\alpha & & \dots & & &\beta & -\beta \\ & &  & \downarrow & \downarrow & & \dots & & & \downarrow & \downarrow \end{array} \\ \begin{array}{cc} \\ \alpha & \rightarrow \\ -\alpha  & \rightarrow \\ \vdots \\ \beta  & \rightarrow \\ -\beta  & \rightarrow \end{array} & \left(\def\arraystretch{1.5}\begin{array}{c|c}  \{\kappa_{ij}\} & \boldsymbol{0}  \\ \hline \boldsymbol{0} & \begin{array}{cc}0 & \ 1 \ & 0 & \dots & 0 & 0 & \ 0 \ \\ 1 & 0 & 0 & \dots & 0 & 0 & 0 \\  & \vdots & & \vdots & & \vdots \\ 0 & 0 & 0 & \dots & 0 & 0 & 1 \\ 0 & 0 & 0 & \dots & 0 & 1 & 0  \end{array}\end{array}\right) \end{array}
+\]
+</span>
+
+<p>现在关注零根空间的度规，由于</p>
+
+
+
+<span class="katex">
+  \[
+\det\{\kappa_{\mu\upsilon}\}\ne0 \Longrightarrow \det\{\kappa_{ij}\}\ne0
+\]
+</span>
+
+<p>所以可以引入零根空间的逆度规
+
+
+<span class="katex">
+  \(\{\kappa^{ij}\}\)
+</span>
+，进而</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}h^i_{\ \alpha,-\alpha}&=C^i_{\ \alpha,-\alpha}=\kappa^{ik}C_{k,\alpha,-\alpha}\\&=\kappa^{ik}C_{-\alpha,k,\alpha}=\kappa^{ik}\kappa_{\alpha,-\beta}C^{\beta}_{\ \ k,\alpha}\\&=\kappa^{ik}\kappa_{\alpha,-\alpha}C^{\alpha}_{\ \ k,\alpha}=\kappa^{ik}C^{\alpha}_{\ \ k,\alpha}\quad \textcolor{red}{因为标准化}\\ &= \kappa^{ik}\alpha_k= \alpha^i \quad \textcolor{red}{上行两重复指标\alpha不是求和}\end{aligned}
+\]
+</span>
+
+<p>这说明</p>
+
+
+
+<span class="katex">
+  \[
+[H_\alpha,H_{-\alpha}]^a=\alpha^i(K_i)^a
+\]
+</span>
+
+<h2 id="小结">小结</h2>
+<p>李代数标准形式的可总结如下：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\ [K_i,K_j]^a&=0\\ \ [K_i,H_\alpha]^a&= \alpha_i (H_\alpha)^a\\ \ [H_\alpha,H_\beta]^a&=\begin{cases} h_{\alpha\beta}(H_{\alpha+\beta})^a &\text{if } \alpha+\beta \in \Sigma\verb|\| \{0\} \\ 0 &\text{if } \alpha+\beta \notin \Sigma \end{cases}\\ \ [H_\alpha,H_{-\alpha}]^a&= \alpha^i(K_i)^a\end{aligned}}
+\]
+</span>
+
+<p>今后，称这组基为李代数
+
+
+<span class="katex">
+  \(\mathscr{G}\)
+</span>
+的<code>标准基</code>，有时也称为<code>嘉当-外尔基</code>。</p>
+<p>常数
+
+
+<span class="katex">
+  \(h_{\alpha\beta}\)
+</span>
+可以有一定的选择自由度，一种选择是使基反称</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{h_{\alpha\beta}=-h_{\beta\alpha}=h_{-\alpha,-\beta}=-h_{-\beta,-\alpha}}
+\]
+</span>
+
+<p>
+
+
+<span class="katex">
+  \(\mathrm{span}\{(K_i)^a\}\)
+</span>
+构成了李代数
+
+
+<span class="katex">
+  \(\mathscr{G}\)
+</span>
+的最大阿贝尔子代数。</p>
+<p>一个半单李代数的结构由一组根向量决定。</p>
+<h2 id="根系的一些性质">根系的一些性质</h2>
+<p>所谓<code>根系</code>，就是半单李代数标准形式下的所有本征根，有时简称“根”。如果没有加粗，表示实数根
+
+
+<span class="katex">
+  \(\alpha\)
+</span>
+；如果加粗了，表示根矢量
+
+
+<span class="katex">
+  \(\boldsymbol{\alpha}\)
+</span>
+。</p>
+<blockquote>
+<p>如果
+
+
+<span class="katex">
+  \(\boldsymbol{\alpha}\)
+</span>
+和
+
+
+<span class="katex">
+  \(\boldsymbol{\beta}\)
+</span>
+是根，那么
+
+
+<span class="katex">
+  \(2\dfrac{\boldsymbol{\alpha}\cdot\boldsymbol{\beta}}{\boldsymbol{\alpha}\cdot\boldsymbol{\alpha}}\)
+</span>
+必然是<strong>一个整数</strong>，并且
+
+
+<span class="katex">
+  \(\boldsymbol{\beta}-2\dfrac{\boldsymbol{\alpha}\cdot\boldsymbol{\beta}}{\boldsymbol{\alpha}\cdot\boldsymbol{\alpha}}\boldsymbol{\alpha}\)
+</span>
+也是一个根。</p>
+</blockquote>
+<blockquote>
+<p>如果
+
+
+<span class="katex">
+  \(\boldsymbol{\alpha}\)
+</span>
+是根，那么，
+
+
+<span class="katex">
+  \(\boldsymbol{\beta}=k \boldsymbol{\alpha}\)
+</span>
+也是根，仅当
+
+
+<span class="katex">
+  \(k=0,\pm 1\)
+</span>
+时。</p>
+</blockquote>
+<blockquote>
+<p>包含
+
+
+<span class="katex">
+  \(\boldsymbol{\beta}\)
+</span>
+的
+
+
+<span class="katex">
+  \(\boldsymbol{\alpha}\)
+</span>
+根链：
+
+
+<span class="katex">
+  \(\dots,\boldsymbol{\beta}+2\boldsymbol{\alpha},\boldsymbol{\beta}+\boldsymbol{\alpha},\boldsymbol{\beta},\boldsymbol{\beta}-\boldsymbol{\alpha},\boldsymbol{\beta}-2\boldsymbol{\alpha},\dots\)
+</span>
+，最多只可能有四个根，即：
+
+
+<span class="katex">
+  \(2\dfrac{\boldsymbol{\alpha}\cdot\boldsymbol{\beta}}{\boldsymbol{\alpha}\cdot\boldsymbol{\alpha}}=0,\pm 1,\pm 2,\pm 3\)
+</span>
+。</p>
+</blockquote>
+<h2 id="根矢量图示法">根矢量图示法</h2>
+<p>根系的性质中，其中最让人侧目的是</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{2\frac{\boldsymbol{\alpha}\cdot\boldsymbol{\beta}}{\boldsymbol{\alpha}\cdot\boldsymbol{\alpha}}\in \mathbb{Z}}
+\]
+</span>
+
+<p>若令</p>
+
+
+
+<span class="katex">
+  \[
+\cos\varphi=\frac{\boldsymbol{\alpha}\cdot\boldsymbol{\beta}}{|\boldsymbol{\alpha}||\boldsymbol{\beta}|}
+\]
+</span>
+
+<p>则</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\cos^2\varphi&=\frac{1}{4}\left(2\frac{\boldsymbol{\alpha}\cdot\boldsymbol{\beta}}{\boldsymbol{\alpha}\cdot\boldsymbol{\alpha}}\right)\left(2\frac{\boldsymbol{\alpha}\cdot\boldsymbol{\beta}}{\boldsymbol{\beta}\cdot\boldsymbol{\beta}}\right)\\ &=\boxed{0,\frac{1}{4},\frac{1}{2},\frac{3}{4},1}\end{aligned}
+\]
+</span>
+
+<p>由于“若
+
+
+<span class="katex">
+  \(\boldsymbol{\alpha}\)
+</span>
+是根矢量，那么
+
+
+<span class="katex">
+  \(-\boldsymbol{\alpha}\)
+</span>
+也是根矢量”，那么只需考虑5种情况。</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\varphi=0^\circ,30^\circ,45^\circ,60^\circ,90^\circ}
+\]
+</span>
+
+<p>这5种情况的根矢量关系：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\def\arraystretch{1.5} \begin{array}{c:c:c:c:c} \varphi=0^\circ & \varphi=30^\circ & \varphi=45^\circ & \varphi=60^\circ & \varphi=90^\circ \\ \hline 全同 & 长\sqrt{3}倍比 & 长\sqrt{2}倍比 & 等长 & 垂直  \\ \hdashline \boldsymbol{\alpha}=\boldsymbol{\beta} & \dfrac{|\boldsymbol{\alpha}|}{|\boldsymbol{\beta}|}=\sqrt{3},\dfrac{1}{\sqrt{3}} & \dfrac{|\boldsymbol{\alpha}|}{|\boldsymbol{\beta}|}=\sqrt{2},\dfrac{1}{\sqrt{2}} & |\boldsymbol{\alpha}|=|\boldsymbol{\beta}| & \boldsymbol{\alpha}\cdot\boldsymbol{\beta}=0\end{array}}
+\]
+</span>
+
+<h2 id="1秩和2秩李代数图示">1秩和2秩李代数图示</h2>
+<p>根据根矢量关系，下面这个根矢量图是很明显的。【Dynkin图见下一篇笔记】</p>
+<p><img src="/notes/images/0140.svg" alt="0140.svg"></p>
+<p>本篇的主题是半单李代数的标准形式，关于根系的性质点到为止。</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0084/">
+    下一页<br>半单李代数的根系、权系和Dynkin图
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0082/">
+      上一页<br>李群李代数伴随表示和Killing型、Casimir算符
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0083.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/diffgeo/0083.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#典型群">典型群</a></li>
+        <li><a href="#一些概念的补缺">一些概念的补缺</a></li>
+        <li><a href="#各种李代数的相互关系">各种李代数的相互关系</a></li>
+        <li><a href="#量子力学与李代数">量子力学与李代数</a></li>
+        <li><a href="#半单李代数的标准形式">半单李代数的标准形式</a></li>
+        <li><a href="#求标准形式的一个例子">求标准形式的一个例子</a></li>
+        <li><a href="#嘉当李子代数零根空间">嘉当李子代数（零根空间）</a></li>
+        <li><a href="#标准形式下的结构常数">标准形式下的结构常数</a></li>
+        <li><a href="#标准形式下本征根的对称性">标准形式下本征根的对称性</a></li>
+        <li><a href="#标准形式的归一化">标准形式的归一化</a></li>
+        <li><a href="#小结">小结</a></li>
+        <li><a href="#根系的一些性质">根系的一些性质</a></li>
+        <li><a href="#根矢量图示法">根矢量图示法</a></li>
+        <li><a href="#1秩和2秩李代数图示">1秩和2秩李代数图示</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

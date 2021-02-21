@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="习题"><meta property="og:title" content="习题" />
+<meta property="og:description" content="返回本章目录
+练习6.1 LOOCV的最坏情况
+（来源：Witten05，p152。）。 假设我们有一个完全随机标记的数据集（即，特征
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+  \(\boldsymbol{x}\)
+
+没有告诉我们关于类标签
+
+
+
+  \(y\)
+
+的任何内容），其中类1有
+
+
+
+  \(N_1\)
+
+个样本，类2有
+
+
+
+  \(N_2\)
+
+个样本，并且
+
+
+
+  \(N_1 = N_2\)
+
+。 任何方法可以实现的最佳错分率是多少？ 使用LOOCV对同一方法的估计的错分类率是多少？" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0059/" />
+<meta property="article:published_time" content="2019-07-17T20:20:35+08:00" />
+<meta property="article:modified_time" content="2019-07-17T20:20:35+08:00" />
+<title>习题 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a>
+<ul>
+<li><a href="/notes/docs/mlapp/01introduction/">第一章 导论</a></li>
+<li><a href="/notes/docs/mlapp/02probability/">第二章 概率</a></li>
+<li><a href="/notes/docs/mlapp/03generative_models_for_discrete_data/">第三章 基于离散数据的生成式模型</a></li>
+<li><a href="/notes/docs/mlapp/04gaussian_models/">第四章 高斯模型</a></li>
+<li><a href="/notes/docs/mlapp/05bayesian_statistics/">第五章 贝叶斯统计</a></li>
+<li><a href="/notes/docs/mlapp/06frequentist_statistics/">第六章 频率派统计</a></li>
+<li><a href="/notes/docs/mlapp/07linear_regression/">第七章 线性回归</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>习题</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents"></nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0060/">
+    下一页<br>7.1 导论
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0057/">
+      上一页<br>6.5 经验风险最小化
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/mlapp/06frequentist_statistics/0059/">习题</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2019-07-17</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">机器学习</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E4%B9%A0%E9%A2%98">习题</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/06frequentist_statistics/0059.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<p><a href="/notes/docs/mlapp/06frequentist_statistics/"><strong>返回本章目录</strong></a></p>
+<p><strong>练习6.1</strong> LOOCV的最坏情况</p>
+<p>（来源：Witten05，p152。）。 假设我们有一个完全随机标记的数据集（即，特征
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(\boldsymbol{x}\)
+</span>
+没有告诉我们关于类标签
+
+
+<span class="katex">
+  \(y\)
+</span>
+的任何内容），其中类1有
+
+
+<span class="katex">
+  \(N_1\)
+</span>
+个样本，类2有
+
+
+<span class="katex">
+  \(N_2\)
+</span>
+个样本，并且
+
+
+<span class="katex">
+  \(N_1 = N_2\)
+</span>
+。 任何方法可以实现的最佳错分率是多少？ 使用LOOCV对同一方法的估计的错分类率是多少？</p>
+<p><strong>练习6.2</strong> 高斯均值的James Stein估计器</p>
+<p>考虑2阶段模型
+
+
+<span class="katex">
+  \(Y_i |\theta_i \sim \mathcal{N}(\theta_i,\sigma^2)\)
+</span>
+和
+
+
+<span class="katex">
+  \(\theta_i|\mu \sim \mathcal{N}(m_0，\tau_0^2)\)
+</span>
+。 假设
+
+
+<span class="katex">
+  \(\sigma^2= 500\)
+</span>
+是已知的，我们观察了以下6个数据点，
+
+
+<span class="katex">
+  \(i = 1:6\)
+</span>
+：</p>
+<p>1505, 1528, 1564, 1498, 1600, 1470</p>
+<ul>
+<li>a. 求出
+
+
+<span class="katex">
+  \(m_0\)
+</span>
+和
+
+
+<span class="katex">
+  \(\tau_0^2\)
+</span>
+的ML-II估计。</li>
+<li>b. 对于
+
+
+<span class="katex">
+  \(i = 1\)
+</span>
+, 求出后验估计
+
+
+<span class="katex">
+  \(\mathbb{E} [\theta_i | y_i, m_0, \tau_0]\)
+</span>
+和
+
+
+<span class="katex">
+  \({\rm var} [\theta_i | y_i, m_0, \tau_0]\)
+</span>
+。（其他项
+
+
+<span class="katex">
+  \(i = 2:6\)
+</span>
+，也类似地计算。）</li>
+<li>c. 对于
+
+
+<span class="katex">
+  \(i = 1\)
+</span>
+，给出
+
+
+<span class="katex">
+  \(p(\theta_i | y_i, m_0, \tau_0)\)
+</span>
+的95％可信区间。你确信这个区间（假设高斯假设是合理的）吗？ 即它可能太大或太小，或者恰到好处？</li>
+<li>d. 如果
+
+
+<span class="katex">
+  \(\sigma^2\)
+</span>
+小得多（比如说
+
+
+<span class="katex">
+  \(\sigma^2= 1\)
+</span>
+），你对你的估计会有什么期望？ 您不需要计算数字答案; 只是简单地定性解释一下会发生什么，以及为什么。</li>
+</ul>
+<p><strong>练习6.3</strong> 
+
+
+<span class="katex">
+  \(\hat{\sigma}_{\rm MLE}^2\)
+</span>
+是有偏的</p>
+<p>证明
+
+
+<span class="katex">
+  \(\hat{\sigma}_{\rm MLE}^2= \frac{1} {N} \sum_{n = 1}^N{(x_n-\hat{\mu})^2}\)
+</span>
+ 是
+
+
+<span class="katex">
+  \(\sigma^2\)
+</span>
+的有偏估计器，即证明</p>
+
+
+
+<span class="katex">
+  \[
+\mathbb{E}_{X_1,\dots,X_n \sim \mathcal{N}(\mu,\sigma)}[\hat{\sigma}^2(X_1,\dots,X_n)]\ne \sigma^2
+\]
+</span>
+
+<p>提示：请注意，
+
+
+<span class="katex">
+  \(X_1,\dots,X_N\)
+</span>
+是独立的，并且使用独立随机变量乘积的期望是期望的乘积这一事实。</p>
+<p><strong>练习6.4</strong> 当
+
+
+<span class="katex">
+  \(\mu\)
+</span>
+已知时, 估计
+
+
+<span class="katex">
+  \(\sigma^2\)
+</span>
+</p>
+<p>假设我们采样
+
+
+<span class="katex">
+  \(x_1,\dots,x_N \sim \mathcal{N}(\mu, \sigma^2)\)
+</span>
+ ，其中
+
+
+<span class="katex">
+  \(\mu\)
+</span>
+ 是已知常数。 在这种情况下，为
+
+
+<span class="katex">
+  \(\sigma^2\)
+</span>
+导出MLE的表达式。 它是无偏的吗？</p>
+<p><a href="/notes/docs/mlapp/06frequentist_statistics/"><strong>返回本章目录</strong></a></p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0060/">
+    下一页<br>7.1 导论
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0057/">
+      上一页<br>6.5 经验风险最小化
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/06frequentist_statistics/0059.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/mlapp/06frequentist_statistics/0059.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents"></nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

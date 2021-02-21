@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="有限元变分形式【翻译】"><meta property="og:title" content="有限元变分形式【翻译】" />
+<meta property="og:description" content="I.方法论》5.有限元变分形式
+【章节目录】
+FEniCS软件的大部分都致力于变分形式的公式（UFL），变分形式的离散化（FIAT，FFC，SyFi）以及相应离散运算（UFC，DOLFIN）的组装。  本章总结了FEniCS所使用变分形式的表示。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/0105/" />
+<meta property="article:published_time" content="2021-01-02T22:00:53+08:00" />
+<meta property="article:modified_time" content="2021-01-02T22:00:53+08:00" />
+<title>有限元变分形式【翻译】 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a>
+<ul>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E6%96%B9%E6%B3%95">第二章 有限元方法</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%B8%B8%E8%A7%81%E6%9C%89%E9%99%90%E5%85%83">第三章 常见有限元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8%E5%8F%82%E8%80%83%E5%8D%95%E5%85%83">第四章 构造通用参考单元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F">第五章 有限元变分形式</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%BB%84%E8%A3%85">第六章 有限元组装</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%AD%A3%E4%BA%A4%E8%A1%A8%E7%A4%BA">第七章 有限元变分形式的正交表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA">第八章 有限元变分形式的张量表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E7%9A%84%E7%A6%BB%E6%95%A3%E4%BC%98%E5%8C%96">第九章 有限元矩阵计算的离散优化</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E7%AB%A0-dolfincpython%E6%9C%89%E9%99%90%E5%85%83%E5%BA%93">第十章 DOLFIN：C++/Python有限元库</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-ufl%E6%9C%89%E9%99%90%E5%85%83%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80">第十七章 UFL：有限元形式语言</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-unicorn%E7%BB%9F%E4%B8%80%E7%9A%84%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6%E6%B1%82%E8%A7%A3%E5%99%A8">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>有限元变分形式【翻译】</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#i方法论5有限元变分形式">I.方法论》5.有限元变分形式</a>
+      <ul>
+        <li><a href="#51-背景">5·1 背景</a></li>
+        <li><a href="#52-多重线性形式">5·2 多重线性形式</a>
+          <ul>
+            <li><a href="#521-例子">5·2·1 例子</a></li>
+            <li><a href="#522-正则形式">5·2·2 正则形式</a></li>
+          </ul>
+        </li>
+        <li><a href="#53-离散多重线性形式">5·3 离散多重线性形式</a></li>
+        <li><a href="#54-多重线性形式的作用">5·4 多重线性形式的作用</a></li>
+        <li><a href="#55-多重线性形式的导数">5·5 多重线性形式的导数</a></li>
+        <li><a href="#56-双线性形式的伴随">5·6 双线性形式的伴随</a></li>
+        <li><a href="#57-关于试探函数和测试函数的说明">5·7 关于试探函数和测试函数的说明</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0106/">
+    下一页<br>有限元组装【翻译】
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0104/">
+      上一页<br>构造通用参考单元（二）【翻译】
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/fem/0105/">有限元变分形式【翻译】</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2021-01-02</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/FEniCS">FEniCS</a>
+      , 
+      <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95">有限元法</a>
+      , 
+      <a href="/notes/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">偏微分方程</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0105.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h1 id="i方法论5有限元变分形式">I.方法论》5.有限元变分形式</h1>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%85%ad%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e7%bb%84%e8%a3%85">章节目录</a>】</p>
+<p>FEniCS软件的大部分都致力于变分形式的公式（UFL），变分形式的离散化（FIAT，FFC，SyFi）以及相应离散运算（UFC，DOLFIN）的组装。  本章总结了FEniCS所使用变分形式的表示。</p>
+<h2 id="51-背景">5·1 背景</h2>
+<p>在第二章中，我们介绍了以下典型的变分问题：需求
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(u \in V\)
+</span>
+, 满足</p>
+
+
+
+<span class="katex">
+  \[
+a(u, v) = L(v) \quad \forall v \in  \hat{V} \tag{5.1}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(V\)
+</span>
+给出试探空间， 
+
+
+<span class="katex">
+  \(\hat{V}\)
+</span>
+给出测试空间。双线性形式</p>
+
+
+
+<span class="katex">
+  \[
+a : V \times \hat{V} \to \mathbb{R} \tag{5.2}
+\]
+</span>
+
+<p>将一对试探和测试函数映射到一个实数，并且对两个参数都是线性的。  类似地，线性形式
+
+
+<span class="katex">
+  \(L:\hat{V} \to \mathbb{R}\)
+</span>
+将给定测试函数映射到实数。  我们也能构造出非线性变分问题的离散化：需求
+
+
+<span class="katex">
+  \(u \in V\)
+</span>
+，以满足</p>
+
+
+
+<span class="katex">
+  \[
+F(u; v) = 0 \quad \forall v \in \hat{V} \tag{5.3}
+\]
+</span>
+
+<p>在里，
+
+
+<span class="katex">
+  \(F:V \times \hat{V} \to \mathbb{R}\)
+</span>
+也是将一对函数映射到实数。  这个半线性形式
+
+
+<span class="katex">
+  \(F\)
+</span>
+对函数
+
+
+<span class="katex">
+  \(u\)
+</span>
+是非线性的，而对测试函数
+
+
+<span class="katex">
+  \(v\)
+</span>
+是线性的。  或者，我们可以考虑映射</p>
+
+
+
+<span class="katex">
+  \[
+L_u \equiv F(u; \cdot) : \hat{V} \to \mathbb{R} \tag{5.4}
+\]
+</span>
+
+<p>并注意到，对于任何固定的
+
+
+<span class="katex">
+  \(u\)
+</span>
+，
+
+
+<span class="katex">
+  \(L_u\)
+</span>
+都是
+
+
+<span class="katex">
+  \(\hat{V}\)
+</span>
+上的线性形式。  在第2章中，我们还考虑了在给定函数
+
+
+<span class="katex">
+  \(M:V \to \mathbb{R}\)
+</span>
+下的误差估计。  在这里，可能的非线性函数
+
+
+<span class="katex">
+  \(M\)
+</span>
+将给定的函数
+
+
+<span class="katex">
+  \(u\)
+</span>
+映射到实数
+
+
+<span class="katex">
+  \(M(u)\)
+</span>
+。</p>
+<p>在所有这些例子中，核心概念是将给定的函数元组映射为实数的形式。  我们将这些称为多重线性形式。  下面，我们将多重线性形式的概念形式化，讨论多重线性形式的离散化，以及相关概念，例如多重线性形式的作用，导数和伴随。</p>
+<h2 id="52-多重线性形式">5·2 多重线性形式</h2>
+<p>一个形式，是从给定的函数空间序列
+
+
+<span class="katex">
+  \(\{V_j\}^\rho_{j=1}\)
+</span>
+的乘积到实数的映射：</p>
+
+
+
+<span class="katex">
+  \[
+a : V_\rho \times \dots \times V_2 \times V_1 \to \mathbb{R} \tag{5.5}
+\]
+</span>
+
+<p>如果形式
+
+
+<span class="katex">
+  \(a\)
+</span>
+对其每个参数都是线性的，那么我们说此形式是多重线性的。  形式的参数个数
+
+
+<span class="katex">
+  \(\rho\)
+</span>
+是形式的元数（arity）。  请注意，空间是从右到左编号的。  正如我们将在下面的5.3节中看到的那样，这是考虑多重线性形式的离散化时的惯例。</p>
+<p>形式通常可以用一个或更多系数参数化。  一个典型的例子是正则变分问题（5.1）的右手边的
+
+
+<span class="katex">
+  \(L\)
+</span>
+，它是在给定系数
+
+
+<span class="katex">
+  \(f\)
+</span>
+上参数化的线性形式。  我们将使用符号
+
+
+<span class="katex">
+  \(a(f; v) \equiv L_f(v) \equiv L(v)\)
+</span>
+，并将测试函数
+
+
+<span class="katex">
+  \(v\)
+</span>
+称为自变量，将函数
+
+
+<span class="katex">
+  \(f\)
+</span>
+称为系数。 通常，我们将对每个参数都是线性的（但对系数上可能是非线性的）形式称为多重线性形式。  这种多重线性形式是参数空间和系数空间序列乘积的映射：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}a : W_1 \times W_2 \times \dots \times W_n \times V_\rho \times \dots \times V_2 \times V_1 \to  \mathbb{R} \\ a \mapsto a(w_1, w_2, \dots , w_n; v_\rho, \dots , v_2, v_1)\end{aligned} \tag{5.6}
+\]
+</span>
+
+<p>参数空间
+
+
+<span class="katex">
+  \(\{V_j\}^\rho_{j=1}\)
+</span>
+和系数空间
+
+
+<span class="katex">
+  \(\{W_j\}^n_{j=1}\)
+</span>
+可能都是相同的空间，但是它们通常是不同的，例如当Dirichlet边界条件施加于一个或多个空间时，或者当多重线性形式时 产生于混合问题的离散化时，例如第2.2.2节。</p>
+<p>在有限元应用中，形式的元数通常为
+
+
+<span class="katex">
+  \(\rho=2\)
+</span>
+，在这种情况下，形式被称为是双线性的，或者在
+
+
+<span class="katex">
+  \(\rho=1\)
+</span>
+的情况下，形式被称为是线性的。  在
+
+
+<span class="katex">
+  \(\rho=0\)
+</span>
+的特殊情况下，我们将多重线性形式称为函数。  有时还可能考虑使用较高元数的形式（
+
+
+<span class="katex">
+  \(\rho>2\)
+</span>
+）。  下面，我们举例说明一些不同元数的多重线性形式。</p>
+<h3 id="521-例子">5·2·1 例子</h3>
+<p><code>泊松方程</code>。 考虑电导率为
+
+
+<span class="katex">
+  \(\kappa=\kappa(x)\)
+</span>
+的泊松方程，</p>
+
+
+
+<span class="katex">
+  \[
+−\mathrm{div}(\kappa \mathrm{grad} u) = f \tag{5.7}
+\]
+</span>
+
+<p>假设边界
+
+
+<span class="katex">
+  \(\partial \Omega\)
+</span>
+上的Dirichlet边界条件，相应的正则变分问题被定义在一对多重线性形式中：
+
+
+<span class="katex">
+  \(a(\kappa; u，v)= \int_\Omega{\kappa \mathrm{grad} \ u \cdot \mathrm{grad} \ v dx}\)
+</span>
+和
+
+
+<span class="katex">
+  \(L(v)=\int_\Omega{f v dx}\)
+</span>
+。   在此，
+
+
+<span class="katex">
+  \(a\)
+</span>
+是双线性形式（
+
+
+<span class="katex">
+  \(\rho=2\)
+</span>
+），
+
+
+<span class="katex">
+  \(L\)
+</span>
+是线性形式（
+
+
+<span class="katex">
+  \(\rho=1\)
+</span>
+）。  这两种形式都有一个系数（
+
+
+<span class="katex">
+  \(n=1\)
+</span>
+），分别为
+
+
+<span class="katex">
+  \(\kappa\)
+</span>
+和
+
+
+<span class="katex">
+  \(f\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}a &= a(\kappa; u, v) \\ L &= L(f ; v)\end{aligned} \tag{5.8}
+\]
+</span>
+
+<p>我们通常从表示中删除系数，并使用简写表示
+
+
+<span class="katex">
+  \(a = a(u, v)\)
+</span>
+和
+
+
+<span class="katex">
+  \(L = L(v)\)
+</span>
+。</p>
+<p><code>不可压缩Navier-Stokes方程</code>。 不可压缩流的速度
+
+
+<span class="katex">
+  \(u\)
+</span>
+和压强
+
+
+<span class="katex">
+  \(p\)
+</span>
+满足不可压缩Navier-Stokes方程：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\rho(\dot{u} + \mathrm{grad} \ u \cdot u) − \mathrm{div} \ \sigma(u, p) &= f  \\ \mathrm{div} \ u &= 0\end{aligned} \tag{5.9}
+\]
+</span>
+
+<p>其中，应力张量
+
+
+<span class="katex">
+  \(\sigma\)
+</span>
+由
+
+
+<span class="katex">
+  \(\sigma(u, p)=2\mu \epsilon(u)− pI\)
+</span>
+给出，
+
+
+<span class="katex">
+  \(\epsilon\)
+</span>
+为对称梯度; 即
+
+
+<span class="katex">
+  \(\epsilon(u)= \frac{1}{2}(\mathrm{grad} \ u +(\mathrm{grad} \ u)^T)\)
+</span>
+，
+
+
+<span class="katex">
+  \(\rho\)
+</span>
+是流密度，
+
+
+<span class="katex">
+  \(f\)
+</span>
+是力密度(body force)。  这里考虑通过将非线性项
+
+
+<span class="katex">
+  \(\mathrm{grad} \ u \cdot u\)
+</span>
+与测试函数
+
+
+<span class="katex">
+  \(v\)
+</span>
+积分而获得的形式：</p>
+
+
+
+<span class="katex">
+  \[
+a(u; v) = \int_\Omega{(\mathrm{grad} \ u \cdot u) \cdot v dx} \tag{5.10}
+\]
+</span>
+
+<p>这是一个线性形式（
+
+
+<span class="katex">
+  \(\rho=1\)
+</span>
+），有一个系数（
+
+
+<span class="katex">
+  \(n=1\)
+</span>
+）。  我们可以通过在固定速度
+
+
+<span class="katex">
+  \(\bar{u}\)
+</span>
+附近线性化来获得：</p>
+
+
+
+<span class="katex">
+  \[
+a(u; v) = a(\bar{u}; v) + a'(\bar{u}; v)\delta u + \mathcal{O}(\delta u^2) \tag{5.11}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(u = \bar{u} + \delta u\)
+</span>
+。 线性算子
+
+
+<span class="katex">
+  \(a'\)
+</span>
+由下式给出:</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}a'(\bar{u}; \delta u, v) &\equiv a'(v; \bar{u})\delta u \\ &= \int_\Omega{[(\mathrm{grad} \ \delta u \cdot \bar{u}) \cdot v + (\mathrm{grad} \ \bar{u} \cdot \delta u) \cdot v] dx}\end{aligned} \tag{5.12}
+\]
+</span>
+
+<p>这是一个双线性形式（
+
+
+<span class="katex">
+  \(\rho=2\)
+</span>
+），系数为（
+
+
+<span class="katex">
+  \(n=1\)
+</span>
+）。 我们也可以考虑三重线性形式：</p>
+
+
+
+<span class="katex">
+  \[
+a(w, u, v) = \int_\Omega{(\mathrm{grad} \ u \cdot w) \cdot v dx} \tag{5.13}
+\]
+</span>
+
+<p>可以将此三重线性形式组装成三阶张量，并将其应用于
+
+
+<span class="katex">
+  \(w\)
+</span>
+的给定展开系数向量，以获得与双线性形式
+
+
+<span class="katex">
+  \(a(w; u, v)\)
+</span>
+对应的二阶张量（矩阵）。  这对于用不动点迭代方法求解Navier-Stokes方程可能很有用，在这种情况下，
+
+
+<span class="katex">
+  \(w\)
+</span>
+是从先前迭代获得的对流速度的给定（冻结）值。  由于组装全局三张量的成本，在实践中很少这样做。  但是，在每个局部胞元上，对应的局部三阶张量可能会与局部展开系数
+
+
+<span class="katex">
+  \(w\)
+</span>
+缩并以计算与
+
+
+<span class="katex">
+  \(a(w;  u, v)\)
+</span>
+对应的矩阵。</p>
+<p><code>升力和阻力（Lift and drag）</code>。 在求解Navier-Stokes方程时，可能需要计算浸入流体中某些物体的升力和阻力。  升力和阻力由作用在对象的力的z分量和x分量给出（相对x方向的流）：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}L_{\mathrm{lift}}(u, p; ) &= \int_\Gamma(\sigma(u, p)\cdot n) \cdot e_z ds \\  L_{\mathrm{drag}}(u, p; ) &= \int_\Gamma(\sigma(u, p) \cdot  n) \cdot e_x ds \end{aligned} \tag{5.14}
+\]
+</span>
+
+<p>此处，
+
+
+<span class="katex">
+  \(\Gamma\)
+</span>
+是物体的边界，
+
+
+<span class="katex">
+  \(n\)
+</span>
+是
+
+
+<span class="katex">
+  \(\Gamma\)
+</span>
+的向外单位法线，而
+
+
+<span class="katex">
+  \(e_x, e_z\)
+</span>
+分别是
+
+
+<span class="katex">
+  \(x\)
+</span>
+方向和
+
+
+<span class="katex">
+  \(z\)
+</span>
+方向上的单位矢量。  如图5.1所示。  这两种形式的元数都是
+
+
+<span class="katex">
+  \(\rho=0\)
+</span>
+，并且这两种形式都有两个系数。</p>
+<p><img src="/notes/images/0211.jpg" alt="0211.jpg"></p>
+<center>图5.1 物体（此处为NACA 63A409机翼）的升力和阻力分别是物体表面
+
+
+<span class="katex">
+  \(\Gamma\)
+</span>
+上应力
+
+
+<span class="katex">
+  \(\sigma\cdot n\)
+</span>
+的垂直分量和水平分量的积分。 在每个点，应力张量
+
+
+<span class="katex">
+  \(\sigma\)
+</span>
+与向外单位法向矢量
+
+
+<span class="katex">
+  \(n\)
+</span>
+的乘积给出作用在表面上的每单位面积的力。</center>
+<h3 id="522-正则形式">5·2·2 正则形式</h3>
+<p>FEniCS可自动处理一大类多重线性形式的表示和求值，但不是全部。  FEniCS当前仅限于可以表示为给定网格的胞元（域），外部维面（边界）和内部维面上的积分之和的形式。  特别是，FEniCS可处理表示如下的正则形式：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}&a(w_1, w_2,\dots , w_n; v_\rho, \dots , v_2, v_1) \\ = &\sum^{n_c}_{k=1}\int_{\Omega_k}{I_k^c dx} + \sum^{n_f}_{k=1} \int_{\Gamma_k}{I_k^f ds} + \sum^{n^0_f}_{k=1} \int_{\Gamma^0_k}{I_k^{f,0} dS} \end{aligned} \tag{5.15}
+\]
+</span>
+
+<p>在此，每个
+
+
+<span class="katex">
+  \(\Omega_k\)
+</span>
+表示覆盖计算域
+
+
+<span class="katex">
+  \(\Omega\)
+</span>
+某子集的网格胞元并集。  同样，每个
+
+
+<span class="katex">
+  \(\Gamma_k\)
+</span>
+表示网格边界上维面的某个子集，而
+
+
+<span class="katex">
+  \(\Gamma^0_k\)
+</span>
+表示网格内部维面的某个子集。  后者对于不连续Galerkin方法的公式化特别有意义，该方法通常涉及跨胞元边界（内部维面）的积分。  每个子集的贡献是一些被积子集的积分。  因此，第
+
+
+<span class="katex">
+  \(k\)
+</span>
+个胞元子集的贡献是被积量
+
+
+<span class="katex">
+  \(I_k^c\)
+</span>
+等在
+
+
+<span class="katex">
+  \(\Omega_k\)
+</span>
+上的积分。</p>
+<p>可以考虑（5.15）的扩展，其中涉及单个胞元（切割胞元）或维面的子集上的点值或积分。  FEniCS当前不支持此类扩展，但将来可能会添加。</p>
+<h2 id="53-离散多重线性形式">5·3 离散多重线性形式</h2>
+<p>正如我们在第2章中看到的那样，可以通过求解线性方程组
+
+
+<span class="katex">
+  \(A U = b\)
+</span>
+来获得正则变分问题（5.1）的有限元逼近
+
+
+<span class="katex">
+  \(u_h = \sum^N_{j=1}{U_j \phi_j} \approx  u\)
+</span>
+，其中</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}A_{ij} &= a(\phi_j, \hat{\phi}_i), \quad i,j = 1, 2, \dots , N \\ b_i &= L(\hat{\phi}_i),\quad  i = 1, 2, \dots , N \end{aligned} \tag{5.16}
+\]
+</span>
+
+<p>这里，在给定试探空间和测试空间的基底下，
+
+
+<span class="katex">
+  \(A\)
+</span>
+和
+
+
+<span class="katex">
+  \(b\)
+</span>
+是离散算符，分别对应于双线性形式
+
+
+<span class="katex">
+  \(a\)
+</span>
+和线性形式
+
+
+<span class="katex">
+  \(L\)
+</span>
+。  请注意，离散算符被定义为作用于基函数的多重线性形式的转置，可由以下事实解释：在双线性形式
+
+
+<span class="katex">
+  \(a(u, v)\)
+</span>
+中，试探函数
+
+
+<span class="katex">
+  \(u\)
+</span>
+与矩阵
+
+
+<span class="katex">
+  \(A\)
+</span>
+的列相关联， 而测试函数
+
+
+<span class="katex">
+  \(v\)
+</span>
+与矩阵
+
+
+<span class="katex">
+  \(A\)
+</span>
+的行（方程式）相关联。</p>
+<p>通常，我们可以离散化一个
+
+
+<span class="katex">
+  \(\rho\)
+</span>
+重线性形式
+
+
+<span class="katex">
+  \(a\)
+</span>
+以获得秩为
+
+
+<span class="katex">
+  \(\rho\)
+</span>
+的张量
+
+
+<span class="katex">
+  \(A\)
+</span>
+。  离散算符
+
+
+<span class="katex">
+  \(A\)
+</span>
+定义如下：</p>
+
+
+
+<span class="katex">
+  \[
+A_i = a(w_1, w_2, \dots , w_n; \phi_{i_\rho}^\rho,\dots , \phi_{i_2}^2, \phi_{i_1}^1) \tag{5.17}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(i =(i_1, i_2, \dots, i_\rho)\)
+</span>
+是长度为
+
+
+<span class="katex">
+  \(\rho\)
+</span>
+的多重索引，而
+
+
+<span class="katex">
+  \(\{\phi_k^j\}^N_{k=1}\)
+</span>
+是
+
+
+<span class="katex">
+  \(V_{j,h}\subset V_j, j = 1,2,\dots,\rho\)
+</span>
+的基底。  这个离散算符是秩为
+
+
+<span class="katex">
+  \(\rho\)
+</span>
+且维数为
+
+
+<span class="katex">
+  \(N_1 \times N_2\times\dots\times N_\rho\)
+</span>
+的典型稀疏张量。</p>
+<p>可以使用称为组装（assembly）的算法高效地计算离散算符
+
+
+<span class="katex">
+  \(A\)
+</span>
+，这是下一章的主题。  正如我们将看到的那样，一个重要的工具是胞元张量（<code>the cell tensor</code>），它是由网格的局部胞元上双线性形式的离散化而得到的。  特别地，考虑可以表示为网格
+
+
+<span class="katex">
+  \(\mathcal{T}_h=\{T\}\)
+</span>
+的每个胞元
+
+
+<span class="katex">
+  \(T\)
+</span>
+的局部贡献之和的多重线性形式的离散化。</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}&a(w_1, w_2, \dots, w_n; v_\rho, \dots , v_2, v_1) \\ = &\sum_{T\in \mathcal{T}_h} a_T(w_1, w_2, \dots , w_n; v_\rho, \dots , v_2, v_1)\end{aligned} \tag{5.18}
+\]
+</span>
+
+<p>对于
+
+
+<span class="katex">
+  \(j = 1,2,\dots,\rho\)
+</span>
+，在
+
+
+<span class="katex">
+  \(T\)
+</span>
+上使用局部有限元基底
+
+
+<span class="katex">
+  \(\{\phi_k^{T,j}\}^{n_j}_{k=1}\)
+</span>
+来离散化
+
+
+<span class="katex">
+  \(a_T\)
+</span>
+，得到胞元张量</p>
+
+
+
+<span class="katex">
+  \[
+A_{T,i} = a_T(w_1, w_2, \dots , w_n; \phi^{T,\rho}_{i_\rho}, \dots , \phi^{T,2}_{i_2}, \phi^{T,1}_{i_1}) \tag{5.19}
+\]
+</span>
+
+<p>胞元张量
+
+
+<span class="katex">
+  \(A_T\)
+</span>
+是典型的稠密张量，其秩为
+
+
+<span class="katex">
+  \(\rho\)
+</span>
+和维度为
+
+
+<span class="katex">
+  \(n_1 \times n_2\times\dots\times n_\rho\)
+</span>
+。  离散算符A可以通过对每个胞元张量
+
+
+<span class="katex">
+  \(A_T\)
+</span>
+贡献适当求和来获得。  我们将在后面的第6章中进行详细介绍。</p>
+<p>类似地，可以将外部和内部维面张量
+
+
+<span class="katex">
+  \(A_S\)
+</span>
+和
+
+
+<span class="katex">
+  \(A_{S, 0}\)
+</span>
+定义为网格边界上或内部的维面的贡献。  如（5.19）所述，可用维面
+
+
+<span class="katex">
+  \(S\)
+</span>
+代替积分域
+
+
+<span class="katex">
+  \(T\)
+</span>
+来定义外部维面张量
+
+
+<span class="katex">
+  \(A_S\)
+</span>
+。  
+
+
+<span class="katex">
+  \(A_S\)
+</span>
+的维度通常与
+
+
+<span class="katex">
+  \(A_T\)
+</span>
+的维度相同。  内部维面张量
+
+
+<span class="katex">
+  \(A_{S, 0}\)
+</span>
+的定义则略有不同，通过考虑由包含共享公共维面
+
+
+<span class="katex">
+  \(S\)
+</span>
+的两个单元组成的宏单元（如图5.2所示）来定义。  有关详细信息，请参见Ølgaard等（2008）。</p>
+<p><img src="/notes/images/0212.jpg" alt="0212.jpg"></p>
+<center>图5.2 网格上的胞元张量
+
+
+<span class="katex">
+  \(A_T\)
+</span>
+，外部维面张量
+
+
+<span class="katex">
+  \(A_S\)
+</span>
+和内部维面张量
+
+
+<span class="katex">
+  \(A_{S, 0}\)
+</span>
+，分别通过胞元，外部维面或内部维面对多重线性形式的局部贡献的离散化获得的。  通过组装来自所有胞元和维面张量的局部贡献，可以通过多重线性形式离散化来获得全局离散算符
+
+
+<span class="katex">
+  \(A\)
+</span>
+。</center>
+<h2 id="54-多重线性形式的作用">5·4 多重线性形式的作用</h2>
+<p>考虑双线性形式</p>
+
+
+
+<span class="katex">
+  \[
+a(u, v) = \int_\Omega{ \mathrm{grad}\ u \cdot \mathrm{grad}\ v dx} \tag{5.20}
+\]
+</span>
+
+<p>来自从泊松方程左侧的离散化。  这里，
+
+
+<span class="katex">
+  \(u\)
+</span>
+和
+
+
+<span class="katex">
+  \(v\)
+</span>
+是一对试探和测试函数。  另外，我们可以将
+
+
+<span class="katex">
+  \(v\)
+</span>
+视为一个测试函数，并将
+
+
+<span class="katex">
+  \(u\)
+</span>
+视为一个给定的解，以获得系数
+
+
+<span class="katex">
+  \(u\)
+</span>
+上参数化的线性形式：</p>
+
+
+
+<span class="katex">
+  \[
+(\mathcal{A}a)(u; v) = \int_\Omega{ \mathrm{grad} \ u \cdot \mathrm{grad} \ v dx} \tag{5.21}
+\]
+</span>
+
+<p>我们将线性形式
+
+
+<span class="katex">
+  \(\mathcal{A}a\)
+</span>
+称为双线性形式
+
+
+<span class="katex">
+  \(a\)
+</span>
+的作用。  通常，具有
+
+
+<span class="katex">
+  \(n\)
+</span>
+个系数的
+
+
+<span class="katex">
+  \(\rho\)
+</span>
+重线性形式的作用是具有
+
+
+<span class="katex">
+  \(n+1\)
+</span>
+个系数的
+
+
+<span class="katex">
+  \((\rho−1)\)
+</span>
+线性形式。  特别地，双线性形式的作用是线性形式，而线性形式的作用是函数。</p>
+<p>双线性形式的作用在求解微分方程的无矩阵法的定义中起着重要作用。  考虑通过Krylov子空间方法（例如GMRES（广义最小残差方法）（Saad和Schultz，1986）或CG（共轭梯度方法）（Hestenes和Stiefel，1952））求解正则形式（5.1）的变分问题。  Krylov方法，通过由向量
+
+
+<span class="katex">
+  \(b, A b, A^2 b, \dots, A^k b\quad k \ll N\)
+</span>
+张成的
+
+
+<span class="katex">
+  \(\mathbb{R}^N\)
+</span>
+子空间寻求
+
+
+<span class="katex">
+  \(U\)
+</span>
+的近似，来获得线性方程组
+
+
+<span class="katex">
+  \(A U = b\)
+</span>
+的近似解
+
+
+<span class="katex">
+  \(U \in \mathbb{R}^N\)
+</span>
+。  这些向量可以通过重复应用前面定义的离散算符
+
+
+<span class="katex">
+  \(A\)
+</span>
+来计算：</p>
+
+
+
+<span class="katex">
+  \[
+A_{ij} = a(\phi^2_j, \phi^1_i) \tag{5.22}
+\]
+</span>
+
+<p>对任何给定的矢量
+
+
+<span class="katex">
+  \(U \in \mathbb{R}^N\)
+</span>
+，有</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}(AU)_i =&\sum^N_{j=1}A_{ij}U_j =\sum^N_{j=1}a(\phi^2_j, \phi^1_i)U_j \\ = &a \left(\sum^N_{j=1}U_j\phi^2_j, \phi^1_i\right) = a(u_h, \phi^1_i) = (\mathcal{A}a)(u_h; \phi^1_i)\end{aligned} \tag{5.23}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(u_h = \sum^N_{j=1}U_j\phi^2_j\)
+</span>
+是对应于系数向量
+
+
+<span class="katex">
+  \(U\)
+</span>
+的有限元近似。  换句话说，矩阵
+
+
+<span class="katex">
+  \(A\)
+</span>
+在给定向量
+
+
+<span class="katex">
+  \(U\)
+</span>
+上的应用，是由相应的有限元近似下双线性形式取值的作用给出：</p>
+
+
+
+<span class="katex">
+  \[
+(AU)_i = (\mathcal{A}a)(u_h; \phi^1_i) \tag{5.24}
+\]
+</span>
+
+<p>因此，可以通过对线性形式（双线性形式
+
+
+<span class="katex">
+  \(a\)
+</span>
+的作用
+
+
+<span class="katex">
+  \(\mathcal{A}a\)
+</span>
+）的计算（组装）来求解变分问题（5.1），以代替先计算（组装）矩阵
+
+
+<span class="katex">
+  \(A\)
+</span>
+，后重复计算与
+
+
+<span class="katex">
+  \(A\)
+</span>
+的矩阵-矢量积。  哪种方法更有效取决于与矩阵组装相比作用的计算效率，以及可用的预处理器。  对于多重线性形式作用的进一步讨论，参考Bagheri和Scott（2004）。</p>
+<p>UFL形式语言通过调用<code>action</code>函数来支持计算多重线性形式的作用：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+a <span style="color:#f92672">=</span> inner(grad(u), grad(v))<span style="color:#f92672">*</span>dx
+Aa <span style="color:#f92672">=</span> action(a)
+</code></pre></div><h2 id="55-多重线性形式的导数">5·5 多重线性形式的导数</h2>
+<p>当离散化非线性变分问题时，可能需要计算一个或多个系数的多重线性形式的导数。  考虑这个非线性变分问题：需求
+
+
+<span class="katex">
+  \(u \in V\)
+</span>
+，满足</p>
+
+
+
+<span class="katex">
+  \[
+a(u; v) = 0 \quad \forall v \in \hat{V} \tag{5.25}
+\]
+</span>
+
+<p>为了用牛顿方法解决这个问题，我们在固定值
+
+
+<span class="katex">
+  \(\bar{u}\)
+</span>
+附近进行线性化处理，以获得</p>
+
+
+
+<span class="katex">
+  \[
+0 = a(u; v) \approx a(\bar{u}; v) + a'(\bar{u}; v)\delta u \tag{5.26}
+\]
+</span>
+
+<p>对于给定的非线性变分问题（5.25）的近似解
+
+
+<span class="katex">
+  \(\bar{u}\)
+</span>
+，我们可能希望通过求解以下线性变分问题来改善近似解：需求
+
+
+<span class="katex">
+  \(\delta u \in V\)
+</span>
+，满足</p>
+
+
+
+<span class="katex">
+  \[
+a'(\bar{u}; \delta u, v) \equiv a'(\bar{u}; v)\delta u = −a(\bar{u}; v) \quad \forall v  \in  \hat{V} \tag{5.27}
+\]
+</span>
+
+<p>在这里，
+
+
+<span class="katex">
+  \(a'\)
+</span>
+是一个双线性形式，具有两个参数
+
+
+<span class="katex">
+  \(\delta u\)
+</span>
+和
+
+
+<span class="katex">
+  \(v\)
+</span>
+，以及一个系数
+
+
+<span class="katex">
+  \(\bar{u}\)
+</span>
+。  此外，
+
+
+<span class="katex">
+  \(−a\)
+</span>
+是具有一个参数
+
+
+<span class="katex">
+  \(v\)
+</span>
+和一个系数
+
+
+<span class="katex">
+  \(\bar{u}\)
+</span>
+的线性形式。</p>
+<p>当系数不止一个时，我们使用符号
+
+
+<span class="katex">
+  \(\mathrm{D}_w\)
+</span>
+表示相对于特定系数
+
+
+<span class="katex">
+  \(w\)
+</span>
+的导数。  通常，具有
+
+
+<span class="katex">
+  \(n>0\)
+</span>
+个系数的
+
+
+<span class="katex">
+  \(\rho\)
+</span>
+重线性形式的导数
+
+
+<span class="katex">
+  \(\mathcal{D}\)
+</span>
+是具有
+
+
+<span class="katex">
+  \(n\)
+</span>
+个系数的
+
+
+<span class="katex">
+  \((\rho+1)\)
+</span>
+重线性形式。  要使用无矩阵牛顿法求解变分问题（5.25），我们将需要针对给定的有限元近似
+
+
+<span class="katex">
+  \(u_h\)
+</span>
+和增量
+
+
+<span class="katex">
+  \(\delta u_h\)
+</span>
+重复计算线性形式
+
+
+<span class="katex">
+  \((\mathcal{A}\mathcal{D}_u a)(\bar{u}_h, \delta u_h; v)\)
+</span>
+ 。</p>
+<p>注意，可以等效地考虑将牛顿法应用于非线性离散系统方程组，该方程组是通过将有限元方法直接应用于变分问题（5.25）而获得的，如第二章所述。</p>
+<p>UFL形式语言通过调用<code>derivative</code>函数来支持计算多重线性形式的导数：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+a <span style="color:#f92672">=</span> inner((<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> u)<span style="color:#f92672">*</span>grad(u), grad(v))<span style="color:#f92672">*</span>dx
+Da <span style="color:#f92672">=</span> derivative(a, u)
+</code></pre></div><h2 id="56-双线性形式的伴随">5·6 双线性形式的伴随</h2>
+<p>双线性形式
+
+
+<span class="katex">
+  \(a\)
+</span>
+的伴随
+
+
+<span class="katex">
+  \(a^*\)
+</span>
+是通过交换两个参数而获得的形式：</p>
+
+
+
+<span class="katex">
+  \[
+a^*(v, w) = a(w, v) \quad \forall v \in V^1 \ \forall w \in V^2 \tag{5.28}
+\]
+</span>
+
+<p>双线性形式的伴随在有限元方法的误差分析中起着重要的作用，正如我们在第2章中看到的，以及将在第29章中进一步讨论的那样，其中我们考虑了一般非线性变分的线性伴随问题（对偶问题） 问题（5.25）。  对偶问题采取形式</p>
+
+
+
+<span class="katex">
+  \[
+(\mathcal{D}_u a)^*(u; z, v) = \mathcal{D}_u \mathcal{M}(u; v) \quad \forall v \in V \tag{5.29}
+\]
+</span>
+
+<p>或简写成</p>
+
+
+
+<span class="katex">
+  \[
+a'*(z, v) = \mathcal{M}'(v) \quad \forall v \in V \tag{5.30}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \((\mathcal{D}_u a)^*\)
+</span>
+是双线性形式，
+
+
+<span class="katex">
+  \(\mathcal{D}_u M\)
+</span>
+是线性形式（泛函
+
+
+<span class="katex">
+  \(\mathcal{M}\)
+</span>
+的导数），
+
+
+<span class="katex">
+  \(z\)
+</span>
+是对偶问题的解。  UFL形式语言通过调用<code>adjoint</code>函数来支持计算多重线性形式的伴随函数：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+a <span style="color:#f92672">=</span> div(u)<span style="color:#f92672">*</span>q<span style="color:#f92672">*</span>dx
+a_star <span style="color:#f92672">=</span> adjoint(a)
+</code></pre></div><h2 id="57-关于试探函数和测试函数的说明">5·7 关于试探函数和测试函数的说明</h2>
+<p>在文献中通常考虑双线性形式，其中试探函数
+
+
+<span class="katex">
+  \(u\)
+</span>
+是第一个参数，而测试函数
+
+
+<span class="katex">
+  \(v\)
+</span>
+是第二个参数：</p>
+
+
+
+<span class="katex">
+  \[
+a = a(u, v) \tag{5.31}
+\]
+</span>
+
+<p>通过这种表示法，可以将离散算符
+
+
+<span class="katex">
+  \(A\)
+</span>
+定义为</p>
+
+
+
+<span class="katex">
+  \[
+A_{ij} = a(\phi_j, \phi_i) \tag{5.32}
+\]
+</span>
+
+<p>也就是说，必须引入转置以解决以下事实：试探和测试函数的次序与矩阵中行和列的次序不匹配。  或者，可以更改试探和测试函数的次序，并写成
+
+
+<span class="katex">
+  \(a = a(v，u)\)
+</span>
+，并避免在离散算符
+
+
+<span class="katex">
+  \(A_{ij} = a(\phi_i, \phi_j)\)
+</span>
+的定义中进行转置。  这在定义和实现变分形式的通用软件，诸如FEniCS之类的软件系统中很实用。</p>
+<p>在本书以及FEniCS项目的所有代码和文档中，我们采用了以下折衷方案。  变分形式使用常规的试探和测试函数次序表示； 那就是，</p>
+
+
+
+<span class="katex">
+  \[
+a = a(u, v) \tag{5.33}
+\]
+</span>
+
+<p>但对使用非常规编号的试探和测试函数。  此时，
+
+
+<span class="katex">
+  \(v\)
+</span>
+是双线性形式的第一个参数，
+
+
+<span class="katex">
+  \(u\)
+</span>
+是第二个参数。  这样可以确保人们可以用常规符号表示有限元的变分问题，但同时又允许实现使用一种更实际的编号方案。</p>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%85%ad%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e7%bb%84%e8%a3%85">章节目录</a>】</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0106/">
+    下一页<br>有限元组装【翻译】
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0104/">
+      上一页<br>构造通用参考单元（二）【翻译】
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0105.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/fem/0105.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#i方法论5有限元变分形式">I.方法论》5.有限元变分形式</a>
+      <ul>
+        <li><a href="#51-背景">5·1 背景</a></li>
+        <li><a href="#52-多重线性形式">5·2 多重线性形式</a>
+          <ul>
+            <li><a href="#521-例子">5·2·1 例子</a></li>
+            <li><a href="#522-正则形式">5·2·2 正则形式</a></li>
+          </ul>
+        </li>
+        <li><a href="#53-离散多重线性形式">5·3 离散多重线性形式</a></li>
+        <li><a href="#54-多重线性形式的作用">5·4 多重线性形式的作用</a></li>
+        <li><a href="#55-多重线性形式的导数">5·5 多重线性形式的导数</a></li>
+        <li><a href="#56-双线性形式的伴随">5·6 双线性形式的伴随</a></li>
+        <li><a href="#57-关于试探函数和测试函数的说明">5·7 关于试探函数和测试函数的说明</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

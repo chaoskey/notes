@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="构造通用参考单元（二）【翻译】"><meta property="og:title" content="构造通用参考单元（二）【翻译】" />
+<meta property="og:description" content="I.方法论》4.构造通用参考单元（二）
+【章节目录】
+4·4 单元的例子
+我们用一些标准的有限元来说明这些概念。 也请读者参考第3章，以便更全面地审查单元及其属性。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/0104/" />
+<meta property="article:published_time" content="2021-01-01T08:41:20+08:00" />
+<meta property="article:modified_time" content="2021-01-01T08:41:20+08:00" />
+<title>构造通用参考单元（二）【翻译】 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a>
+<ul>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E6%96%B9%E6%B3%95">第二章 有限元方法</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%B8%B8%E8%A7%81%E6%9C%89%E9%99%90%E5%85%83">第三章 常见有限元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8%E5%8F%82%E8%80%83%E5%8D%95%E5%85%83">第四章 构造通用参考单元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F">第五章 有限元变分形式</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%BB%84%E8%A3%85">第六章 有限元组装</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%AD%A3%E4%BA%A4%E8%A1%A8%E7%A4%BA">第七章 有限元变分形式的正交表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA">第八章 有限元变分形式的张量表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E7%9A%84%E7%A6%BB%E6%95%A3%E4%BC%98%E5%8C%96">第九章 有限元矩阵计算的离散优化</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E7%AB%A0-dolfincpython%E6%9C%89%E9%99%90%E5%85%83%E5%BA%93">第十章 DOLFIN：C++/Python有限元库</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-ufl%E6%9C%89%E9%99%90%E5%85%83%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80">第十七章 UFL：有限元形式语言</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-unicorn%E7%BB%9F%E4%B8%80%E7%9A%84%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6%E6%B1%82%E8%A7%A3%E5%99%A8">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>构造通用参考单元（二）【翻译】</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#i方法论4构造通用参考单元二">I.方法论》4.构造通用参考单元（二）</a>
+      <ul>
+        <li><a href="#44-单元的例子">4·4 单元的例子</a>
+          <ul>
+            <li><a href="#441-其它多项式空间的基底">4·4·1 其它多项式空间的基底</a></li>
+          </ul>
+        </li>
+        <li><a href="#45-多项式空间上的操作">4·5 多项式空间上的操作</a>
+          <ul>
+            <li><a href="#451-求值">4·5·1 求值</a></li>
+            <li><a href="#452-微分">4·5·2 微分</a></li>
+            <li><a href="#453-积分">4·5·3 积分</a></li>
+            <li><a href="#454-维面facet关联">4·5·4 维面（facet）关联</a></li>
+            <li><a href="#455-线性泛函">4·5·5 线性泛函</a></li>
+            <li><a href="#456-参考单元的映射">4·5·6 参考单元的映射</a></li>
+            <li><a href="#457-局部到全局的自由度映射">4·5·7 局部到全局的自由度映射</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0105/">
+    下一页<br>有限元变分形式【翻译】
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0103/">
+      上一页<br>构造通用参考单元（一）【翻译】
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/fem/0104/">构造通用参考单元（二）【翻译】</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2021-01-01</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/FEniCS">FEniCS</a>
+      , 
+      <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95">有限元法</a>
+      , 
+      <a href="/notes/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">偏微分方程</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0104.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h1 id="i方法论4构造通用参考单元二">I.方法论》4.构造通用参考单元（二）</h1>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%9b%9b%e7%ab%a0-%e6%9e%84%e9%80%a0%e9%80%9a%e7%94%a8%e5%8f%82%e8%80%83%e5%8d%95%e5%85%83">章节目录</a>】</p>
+<h2 id="44-单元的例子">4·4 单元的例子</h2>
+<p>我们用一些标准的有限元来说明这些概念。 也请读者参考第3章，以便更全面地审查单元及其属性。</p>
+<p><strong>例4.1 拉格朗日单元</strong></p>
+<p><img src="/notes/images/0207.jpg" alt="0207.jpg"></p>
+<center>图4.2 一次和二次的拉格朗日单元。</center>
+<p>图4.2所示， 最常见的拉格朗日单元。 其自由度由黑点表示，黑点表示点值。 一次单元显示在左边的三角形中，其自由度包括每个顶点的点值。 也就是说，自由度
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(\ell_i:V \to \mathbb{R}\)
+</span>
+为：</p>
+
+
+
+<span class="katex">
+  \[
+\ell_i(v) = \int_T{v \delta_{x_i} dx} = v(x_i) \tag{4.22}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(x_i\)
+</span>
+是顶点
+
+
+<span class="katex">
+  \((0,0), (1,0), (0,1)\)
+</span>
+ ，而
+
+
+<span class="katex">
+  \(\delta\)
+</span>
+是狄拉克函数。  相应的基函数是
+
+
+<span class="katex">
+  \(1−x−y, x, y\)
+</span>
+。  二次单元显示在右边的三角形中。  它具有六个自由度，三个在顶点，三个在边上，都是点值。  拉格朗日单元产生分段连续多项式，因此非常适合用作
+
+
+<span class="katex">
+  \(H^1\)
+</span>
+的近似。  在任意维上的单纯形上，
+
+
+<span class="katex">
+  \(q\)
+</span>
+次拉格朗日单元可张
+
+
+<span class="katex">
+  \(\mathcal{P}_q\)
+</span>
+。</p>
+<p><strong>例4.2 Hermite单元</strong></p>
+<p><img src="/notes/images/0208.jpg" alt="0208.jpg"></p>
+<center>图4.3 三次Hermite单元。</center>
+<p>图4.3所示，2维参考三角形上的Hermite单元。  黑点表示点值，而深灰色圆圈表示x和y偏导数值。  也就是说，与顶点
+
+
+<span class="katex">
+  \(x_i\)
+</span>
+相关的自由度
+
+
+<span class="katex">
+  \(\ell_{i_k}:\mathcal{V} \to \mathbb{R}\)
+</span>
+为：</p>
+
+
+
+<span class="katex">
+  \[
+\ell_{i_1}(v) = \int_T{v \delta_{x_i} dx} = v(x_i) \tag{4.23}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+\ell_{i_2}(v) = \int_T{\frac{\partial v}{\partial x} \delta_{x_i} dx}=\frac{\partial}{\partial x} v(x_i)  \tag{4.24}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+\ell_{i_3}(v) = \int_T{\frac{\partial v}{\partial y} \delta_{x_i} dx} =\frac{\partial}{\partial y} v(x_i) \tag{4.25}
+\]
+</span>
+
+<p>再加上一个内部点值，一共十个自由度，这与
+
+
+<span class="katex">
+  \(\mathcal{P}_3\)
+</span>
+中的自由度数相同。  Hermite单元的一个特征就是它在顶点处具有连续导数（但是不一定有
+
+
+<span class="katex">
+  \(H^2\)
+</span>
+-符合的近似）。</p>
+<p><strong>例4.3 Raviart–Thomas单元</strong></p>
+<p><img src="/notes/images/0209.jpg" alt="0209.jpg"></p>
+<center>图4.4 三角形的一次Raviart–Thomas单元。</center>
+<p>如图4.4所示，这是最低阶的Raviart–Thomas单元。  与之前的单元相比，此单元有一个向量值函数空间。  箭头代表法线矢量； 也就是说，自由度
+
+
+<span class="katex">
+  \(\ell_i:\mathcal{V} \to \mathbb{R}\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\ell_i(v) = \int_T{v \cdot n_i dx} \tag{4.26}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(n_i\)
+</span>
+是边
+
+
+<span class="katex">
+  \(i\)
+</span>
+上的向外法向矢量。  Raviart–Thomas单元是具有三个自由度的矢量空间。  因此，标准基底
+
+
+<span class="katex">
+  \([\mathcal{P}_q]^d\)
+</span>
+不是合适的起点，我们改用
+
+
+<span class="katex">
+  \(V = [\mathcal{P}_0]^2 \oplus x \mathcal{H}_0\)
+</span>
+。  Raviart–Thomas单元通常用于
+
+
+<span class="katex">
+  \(H(\mathrm{div})\)
+</span>
+中的近似值。  我们注意到，也可以根据法向分量的点值来定义此单元。</p>
+<h3 id="441-其它多项式空间的基底">4·4·1 其它多项式空间的基底</h3>
+<p>上面介绍的基底适合构造许多有限元，但是正如我们刚刚看到的，它们并非在所有情况下都有效。  二维的Raviart–Thomas函数空间由下张成：</p>
+
+
+
+<span class="katex">
+  \[
+[\mathcal{P}_n]^2 \oplus  \left(\begin{aligned}y \\ x\end{aligned}\right) \mathcal{H}_n^2 \tag{4.27}
+\]
+</span>
+
+<p>因此，该单元需要用
+
+
+<span class="katex">
+  \(\left(\begin{aligned}y \\ x\end{aligned}\right) \mathcal{H}_n^2\)
+</span>
+加强多项式向量
+
+
+<span class="katex">
+  \((P_n^2)^2\)
+</span>
+的基底。  另一方面，三角形上的Brezzi-Douglas-Fortin-Marini单元被定义为：</p>
+
+
+
+<span class="katex">
+  \[
+\{u \in [\mathcal{P}_n(T)]^2 : u \cdot n \in \mathcal{P}_{n−1}(E_i), E_i \in \mathcal{E}(T)\} \tag{4.28}
+\]
+</span>
+
+<p>其中， 
+
+
+<span class="katex">
+  \(\mathcal{E}(T)\)
+</span>
+ 表示
+
+
+<span class="katex">
+  \(T\)
+</span>
+的维面。</p>
+<p>因此，该单元要求从
+
+
+<span class="katex">
+  \([\mathcal{P}_n(T)]^2\)
+</span>
+中剔除一部分函数。 这种剔除由约束
+
+
+<span class="katex">
+  \(u \cdot n \in \mathcal{P}_{n-1}(E_i)\)
+</span>
+表示。</p>
+<p>该空间基底的获得，有些微妙。  FIAT和SyFi已经开发了不同的，但在数学上等效的解决方案。  在SyFi中，由于它使用符号表示，因此可以轻松地用幂基底来表达多项式，并将与垂直于边缘的n阶多项式相对应的系数设置为零。  FIAT以类似的方式利用勒让德多项式的正交性来表示约束。  也就是说，在边缘
+
+
+<span class="katex">
+  \(E_i\)
+</span>
+上，以下约束适用：</p>
+
+
+
+<span class="katex">
+  \[
+\ell_i^C(u) = \int_{E_i}{(u \cdot n)\mu_n^i} = 0 \tag{4.29}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(\mu_n^i\)
+</span>
+是边
+
+
+<span class="katex">
+  \(E_i\)
+</span>
+上的n次勒让德多项式。</p>
+<p>通常，假设有
+
+
+<span class="katex">
+  \(m\)
+</span>
+个约束和
+
+
+<span class="katex">
+  \(n - m\)
+</span>
+个自由度。令</p>
+
+
+
+<span class="katex">
+  \[
+V^1_{ij} = \ell_i(\phi_j), 1 \le i \le n − m, 1 \le j \le n \tag{4.30}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+V^2_{ij} = \ell^C_i(\phi_j), n-m < i \le n, 1 \le j \le n \tag{4.31}
+\]
+</span>
+
+<p>和</p>
+
+
+
+<span class="katex">
+  \[
+V = \left(\begin{aligned}V^1 \\ V^2\end{aligned}\right) \tag{4.32}
+\]
+</span>
+
+<p>现在考虑矩阵方程</p>
+
+
+
+<span class="katex">
+  \[
+V \alpha^T= I^{n,n−m} \tag{4.33}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(I^{n,n-m}\)
+</span>
+表示
+
+
+<span class="katex">
+  \(n \times (n-m)\)
+</span>
+单位矩阵。  如前所述，
+
+
+<span class="katex">
+  \(\alpha\)
+</span>
+的第
+
+
+<span class="katex">
+  \(j\)
+</span>
+列
+
+
+<span class="katex">
+  \(\{\phi_j\}\)
+</span>
+中第
+
+
+<span class="katex">
+  \(j\)
+</span>
+项的，以
+
+
+<span class="katex">
+  \(\{\psi_i\}\)
+</span>
+为节点基底函数的展开系数。  此外，
+
+
+<span class="katex">
+  \(V^2 \alpha^T= 0\)
+</span>
+，意味着节点基底函数应该满足约束条件。  除了Brezzi-Douglas-Fortin-Marini单元之外，还有根据约束多项式定义的其他例子，比如Nédélec（Nédélec，1980），Arnold-Winther（Arnold and Winther，2002），Mardal-Tai-Winther（ Mardal等，2002），Tai-Winther（Tai和Winther，2006）和Bell（Ciarlet，2002）的单元族。</p>
+<h2 id="45-多项式空间上的操作">4·5 多项式空间上的操作</h2>
+<p>在这里，我们展示了如何根据线性代数运算来转换各种重要运算，并假设这些运算可在原始基底
+
+
+<span class="katex">
+  \(\{\psi_i\}^n_{i=1}\)
+</span>
+上执行。</p>
+<h3 id="451-求值">4·5·1 求值</h3>
+<p>为了计算在给定点
+
+
+<span class="katex">
+  \(x \in T\)
+</span>
+处的节点基底
+
+
+<span class="katex">
+  \(\{\phi_i\}^n_{i=1}\)
+</span>
+，只需简单地计算向量</p>
+
+
+
+<span class="katex">
+  \[
+\Psi_i = \psi_i(x) \tag{4.34}
+\]
+</span>
+
+<p>进而</p>
+
+
+
+<span class="katex">
+  \[
+\phi_i(x) \equiv \Phi_i = \sum_j{\alpha_{ij} \Psi_j} \tag{4.35}
+\]
+</span>
+
+<p>通常，节点基函数被要求是在点组
+
+
+<span class="katex">
+  \(\{x_j\}^m_{j=1} \subset T\)
+</span>
+上的。    出于性能原因，优先考虑执行矩阵乘积。  因此，不妨定义
+
+
+<span class="katex">
+  \(\Psi_{ij}=\Psi_i(x_j)\)
+</span>
+和
+
+
+<span class="katex">
+  \(\Phi_{ij}=\Phi_i(x_j)\)
+</span>
+。 然后，所有节点基函数都可以通过乘法来计算：</p>
+
+
+
+<span class="katex">
+  \[
+\Phi_{ij} = \sum_k{\alpha_{ik}\Psi_{kj}} \tag{4.36}
+\]
+</span>
+
+<h3 id="452-微分">4·5·2 微分</h3>
+<p>微分则更复杂，并提供更多选择。  令
+
+
+<span class="katex">
+  \(\alpha=（\alpha_1, \alpha_2, \dots, \alpha_d）\)
+</span>
+为多重索引，因此</p>
+
+
+
+<span class="katex">
+  \[
+D^\alpha \equiv \frac{\partial^{|\alpha|}}{\partial x_1^{\alpha_1} \partial x_2^{\alpha_2} \dots \partial x_d^{\alpha_d}} \tag{4.37}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(|\alpha| = \sum^d_{i=1} \alpha_i\)
+</span>
+，并且我们想计算数组：</p>
+
+
+
+<span class="katex">
+  \[
+\Phi_i^\alpha = D^\alpha \phi_i(x) \tag{4.38}
+\]
+</span>
+
+<p>对一些
+
+
+<span class="katex">
+  \(x \in T\)
+</span>
+。</p>
+<p>一个明显的选择是对原始基函数
+
+
+<span class="katex">
+  \(\{\psi_i\}\)
+</span>
+微分得到一个数组：</p>
+
+
+
+<span class="katex">
+  \[
+\Psi_i^\alpha = D^\alpha \psi_i(x) \tag{4.39}
+\]
+</span>
+
+<p>进而</p>
+
+
+
+<span class="katex">
+  \[
+\Phi_i^\alpha = \sum_j{\alpha_{ij}\Psi^\alpha_{ji}} \tag{4.40}
+\]
+</span>
+
+<p>根据这些预设，可以方便地计算
+
+
+<span class="katex">
+  \(\{\psi_i\}\)
+</span>
+的所有导数。  在符号计算或使用幂基底时，通常这是对的。  对于Bernstein，雅可比和勒让德多项式，有递归关系可用，请参见Karniadakis和Sherwin（2005）； Kirby（2010b）。  通常情况下，Dubiner基底包含一个坐标奇点，以防止自动微分作用于顶部顶点。  Kirby（2010a）的最新工作重新制定了递归关系以考虑这种可能性。</p>
+<p>如果乐意的话（或者由特定开始基底所要求的），还可以计算
+
+
+<span class="katex">
+  \(\{\phi_i\}\)
+</span>
+的一阶导数矩阵，并构造比它们更高阶的导数。  对于每个坐标方向
+
+
+<span class="katex">
+  \(x_k\)
+</span>
+，构造矩阵
+
+
+<span class="katex">
+  \(D^k\)
+</span>
+以满足：</p>
+
+
+
+<span class="katex">
+  \[
+\frac{\partial \phi_i}{\partial x_i} = D^k_{ij} \phi_j \tag{4.41}
+\]
+</span>
+
+<p>如何做到这种依赖于所选择基底的操作。  有关基于Dubiner的更详细信息，请参见Dubiner（1991）。</p>
+<h3 id="453-积分">4·5·3 积分</h3>
+<p>在参考域上，对基函数（包括基本函数和/或其导数的乘积）的积分，可以通过数值，符号或精确地用一些已知公式来执行。  通常，正交的情况很容易执行。  例如，可以从各种参考单元获得正交规则（Dunavant，1985； Keegan等，2008；Šolín等，2004）。</p>
+<h3 id="454-维面facet关联">4·5·4 维面（facet）关联</h3>
+<p>正如我们在定义Brezzi-Douglas-Marini单元时所看到的，有必要有与多边形域的各个维面相关联的多项式。  Bernstein多项式通过重心坐标表示，因此自然与维面关联。  勒让德和雅可比多项式也很容易与重心坐标中的一维面关联。</p>
+<h3 id="455-线性泛函">4·5·5 线性泛函</h3>
+<p>线性泛函通常是根据积分，逐点求值和微分的线性组合进行转换的。</p>
+<h3 id="456-参考单元的映射">4·5·6 参考单元的映射</h3>
+<p>FEniCS软件和许多其他有限元代码中，普遍采用的一种惯例是将节点基函数从参考胞元映射到网格中的每个胞元。  有时，这就像更改坐标一样简单。 在其他情况下，则更为复杂。  为了完整起见，我们简要地描述了根据参考单元映射创建全局有限元的基底。  因此，令
+
+
+<span class="katex">
+  \(T\)
+</span>
+为网格中的一个全局多边形，
+
+
+<span class="katex">
+  \(\hat{T}\)
+</span>
+为对应的参考多边形。  在坐标
+
+
+<span class="katex">
+  \(x \in T\)
+</span>
+和
+
+
+<span class="katex">
+  \(\hat{x} \in \hat{T}\)
+</span>
+之间，我们使用映射</p>
+
+
+
+<span class="katex">
+  \[
+x = F_T(\hat{x}) = A_T(\hat{x}) + x_0 \tag{4.42}
+\]
+</span>
+
+<p>这个映射的雅可比：</p>
+
+
+
+<span class="katex">
+  \[
+J(\hat{x}) =\frac{\partial x}{\partial \hat{x}} = \frac{\partial A_T(\hat{x})}{\partial \hat{x}}  \tag{4.43}
+\]
+</span>
+
+<p>目前，FEniCS仅支持
+
+
+<span class="katex">
+  \(T\)
+</span>
+和
+
+
+<span class="katex">
+  \(\hat{T}\)
+</span>
+间的仿射映射，这意味着
+
+
+<span class="katex">
+  \(x = F_T(\hat{x})= A_T \hat{x} + x_0\)
+</span>
+和
+
+
+<span class="katex">
+  \(J = A_T\)
+</span>
+。  等参单元的一个基函数，被定义成参考单元上的相应基函数：</p>
+
+
+
+<span class="katex">
+  \[
+\phi(x) = \hat{\phi}(\hat{x}) \tag{4.44}
+\]
+</span>
+
+<p>然后可以在参考多边形上执行积分，</p>
+
+
+
+<span class="katex">
+  \[
+\int_T{\phi(x) dx} = \int_{\hat{T}}{\hat{\phi}(\hat{x}) \mathrm{det} \ J d\hat{x}}  \tag{4.45}
+\]
+</span>
+
+<p>空间导数由参考单元上的导数和使用链规则的几何映射来定义，</p>
+
+
+
+<span class="katex">
+  \[
+\frac{\partial \phi}{\partial x_i} = \sum_j{\frac{\partial \hat{\phi}}{\partial \hat{x}_j}\frac{\partial \hat{x}_j}{\partial x_i} } \tag{4.46}
+\]
+</span>
+
+<p>上面基函数映射通常对于
+
+
+<span class="katex">
+  \(H^1\)
+</span>
+中的近似值。  对于
+
+
+<span class="katex">
+  \(H(\mathrm{div})\)
+</span>
+或
+
+
+<span class="katex">
+  \(H(\mathrm{curl})\)
+</span>
+的近似，必须使用Piola映射，其中基函数的映射不同于几何映射。  也就是说，对于
+
+
+<span class="katex">
+  \(H(\mathrm{div})\)
+</span>
+单元，Piola映射为：</p>
+
+
+
+<span class="katex">
+  \[
+\phi(x) = \frac{1}{|\mathrm{det} \ J|} J \hat{\phi}(\hat{x}) \tag{4.47}
+\]
+</span>
+
+<p>当通过UFC使用网格实体编号时（参见第16章），使用
+
+
+<span class="katex">
+  \(\frac{1}{\mathrm{det} \ J}\)
+</span>
+代替
+
+
+<span class="katex">
+  \(\frac{1}{|\mathrm{det} \ J|}\)
+</span>
+是有利的。 这是因为行列式的符号与法向矢量的符号相关，参见Rognes等（2009），以了解Piola映射及其在FFC中的实施的更多信息。  某些单元，比如Rannacher-Turek单元（Turek，1999； Rannacher和Turek，1992），相对参考单元的类似定义，在全局定义时具有更好的性质。</p>
+<h3 id="457-局部到全局的自由度映射">4·5·7 局部到全局的自由度映射</h3>
+<p><img src="/notes/images/0210.jpg" alt="0210.jpg"></p>
+<center>图4.5 在一对胞元上将一对二次局部函数空间拼接在一起，以形成全局连续的分段二次函数空间。 </center>
+<p>如图4.5所示，有限元通过自由度连续地拼接在一起。  为了完成这种拼接，单元应提供决定是否应共享某些相邻单元自由度的标识符。  一种替代方案是使参考胞元上的每个自由度与参考胞元中的一个点相关。  然后，几何映射通过（4.42）给出网格中的全局点，该全局点标识了自由度。 也就是说，如果不同单元对应于网格中的相同全局点，则它们的自由度是共享的。  也就是说，每个自由度可以与参考单元上的局部网格实体，例如顶点，边或面有关。  单元映射后，自由度将与全局网格中的相应网格实体相关。 此替代方法要求对相应的网格实体进行编号。</p>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%9b%9b%e7%ab%a0-%e6%9e%84%e9%80%a0%e9%80%9a%e7%94%a8%e5%8f%82%e8%80%83%e5%8d%95%e5%85%83">章节目录</a>】</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0105/">
+    下一页<br>有限元变分形式【翻译】
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0103/">
+      上一页<br>构造通用参考单元（一）【翻译】
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0104.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/fem/0104.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#i方法论4构造通用参考单元二">I.方法论》4.构造通用参考单元（二）</a>
+      <ul>
+        <li><a href="#44-单元的例子">4·4 单元的例子</a>
+          <ul>
+            <li><a href="#441-其它多项式空间的基底">4·4·1 其它多项式空间的基底</a></li>
+          </ul>
+        </li>
+        <li><a href="#45-多项式空间上的操作">4·5 多项式空间上的操作</a>
+          <ul>
+            <li><a href="#451-求值">4·5·1 求值</a></li>
+            <li><a href="#452-微分">4·5·2 微分</a></li>
+            <li><a href="#453-积分">4·5·3 积分</a></li>
+            <li><a href="#454-维面facet关联">4·5·4 维面（facet）关联</a></li>
+            <li><a href="#455-线性泛函">4·5·5 线性泛函</a></li>
+            <li><a href="#456-参考单元的映射">4·5·6 参考单元的映射</a></li>
+            <li><a href="#457-局部到全局的自由度映射">4·5·7 局部到全局的自由度映射</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

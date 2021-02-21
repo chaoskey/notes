@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>备忘 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E5%A4%87%E5%BF%98/</link>
+    <description>Recent content in 备忘 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Mon, 13 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E5%A4%87%E5%BF%98/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>小技巧备忘</title>
+      <link>https://chaoskey.gitee.io/notes/posts/0004/</link>
+      <pubDate>Mon, 13 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/posts/0004/</guid>
+      <description>&lt;h2 id=&#34;1-本地mdlatex如何完美发布到知乎&#34;&gt;1 本地md+LaTex如何完美发布到知乎？&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我已写成了脚本：&lt;a href=&#34;https://gitee.com/chaoskey/notes/raw/master/forzhihu&#34;&gt;forzhihu&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;答：知乎编辑器提供了md上传，还提供了&lt;code&gt;https://www.zhihu.com/equation?tex=...&lt;/code&gt;接口，并且支持贴图自动上传。　因此完全支持本地Markdown+LaTex完美发布到知乎，具体步骤如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用本地Markdown编辑器放心写作。【我使用&lt;code&gt;Typora&lt;/code&gt;】&lt;/li&gt;
+&lt;li&gt;将本地图片换成网上图片，我个人的做法是先发布到&lt;code&gt;gitbook&lt;/code&gt;，比如我的&lt;a href=&#34;https://chaoskey.gitee.io/notes/&#34;&gt;&lt;code&gt;https://chaoskey.gitee.io/notes/&lt;/code&gt;&lt;/a&gt;。然后复制图片链接，替换原本地图片链接，图片数量一般不多，手工替换也不麻烦。&lt;/li&gt;
+&lt;li&gt;将LaTex代码用&lt;code&gt;https://www.zhihu.com/equation?tex=...&lt;/code&gt;替换。首先得有支持正则表达全文置换编辑器【我使用&lt;code&gt;Visual Studio Code&lt;/code&gt;】，然后将　&lt;code&gt;\$\$(\n*)\s*(.*?)(\n*)\s*\$\$&lt;/code&gt;　替换成　&lt;code&gt;$1&amp;lt;img src=&amp;quot;https://www.zhihu.com/equation?tex=$2&amp;quot; alt=&amp;quot;$2&amp;quot; class=&amp;quot;ee_img tr_noresize&amp;quot; eeimg=&amp;quot;1&amp;quot;&amp;gt;$3&lt;/code&gt;。 当然前面这个正则表达式的形式要以实际为准。&lt;/li&gt;
+&lt;li&gt;最后，保存文件，然后打开知乎编辑器，上传md文件，简单调整后，发布，完工。&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

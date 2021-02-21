@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>场论 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E5%9C%BA%E8%AE%BA/</link>
+    <description>Recent content in 场论 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Fri, 24 Apr 2020 20:13:17 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E5%9C%BA%E8%AE%BA/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>场及其对称性</title>
+      <link>https://chaoskey.gitee.io/notes/docs/theophy/0081/</link>
+      <pubDate>Fri, 24 Apr 2020 20:13:17 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0081/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;场的拉格朗日形式，保持明显的洛伦兹协变性。&lt;/p&gt;
+&lt;p&gt;场的哈密顿形式，依赖于时空的1+3分解，因为时间变量在&lt;code&gt;共轭动量密度&lt;/code&gt;中扮演了特殊的角色。&lt;/p&gt;
+&lt;p&gt;有限维Noether定理，条件更松，&lt;strong&gt;每个单参微分同胚群对应一个守恒量&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;场的Noether定理，有更严格的要求，&lt;strong&gt;每个单参等度规群对应一个守恒流&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>流形上的拉格朗日力学</title>
+      <link>https://chaoskey.gitee.io/notes/docs/theophy/0015/</link>
+      <pubDate>Fri, 24 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0015/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;一个具有约束的力学系的&lt;code&gt;位形空间&lt;/code&gt;是一个&lt;code&gt;微分流形&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;拉格朗日力学&lt;/code&gt;其实就是个理论框架。&lt;/p&gt;
+&lt;p&gt;有限自由度系统可直接&lt;code&gt;拉格朗日量&lt;/code&gt;描述。&lt;/p&gt;
+&lt;p&gt;场论（无限自由度系统）则可用&lt;code&gt;拉格朗日密度&lt;/code&gt;描述。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>众数 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E4%BC%97%E6%95%B0/</link>
+    <description>Recent content in 众数 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Sat, 29 Jun 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E4%BC%97%E6%95%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>3.3 贝塔-二项模型</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0041/</link>
+      <pubDate>Sat, 29 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0041/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在给定一离散观察序列的情况下, 数字游戏涉及从有限假设空间推断出离散变量的分布, 
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(h \in \mathcal{H}\)
+&lt;/span&gt;
+。这使计算变得特别简单：我们只需要求和，乘和除。然而，在许多应用中，未知参数是连续的，因此假设空间是
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathbb{R}^K\)
+&lt;/span&gt;
+的某个子集, 其中
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(K\)
+&lt;/span&gt;
+是参数的个数. 这使数学变得复杂，因为我们必须用积分代替和。但是，基本思路是一样的。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

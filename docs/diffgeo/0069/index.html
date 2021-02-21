@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="李变换群"><meta property="og:title" content="李变换群" />
+<meta property="og:description" content="
+李变换群，就是李群作用于流形，这种“作用”其实就是变换，这种变换的集合构成的群。 就是李群的实现，或 李群的表示。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/diffgeo/0069/" />
+<meta property="article:published_time" content="2020-02-23T10:04:08+08:00" />
+<meta property="article:modified_time" content="2020-02-23T10:04:08+08:00" />
+<title>李变换群 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a>
+<ul>
+<li><a href="/notes/docs/diffgeo/0005/">基于抽象指标的张量分析</a></li>
+<li><a href="/notes/docs/diffgeo/0006/">流形上的导数算符</a></li>
+<li><a href="/notes/docs/diffgeo/0007/">流形上的平移</a></li>
+<li><a href="/notes/docs/diffgeo/0008/">黎曼曲率张量</a></li>
+<li><a href="/notes/docs/diffgeo/0009/">流形间的映射</a></li>
+<li><a href="/notes/docs/diffgeo/0010/">流形上的李导数</a></li>
+<li><a href="/notes/docs/diffgeo/0011/">Killing矢量场</a></li>
+<li><a href="/notes/docs/diffgeo/0012/">子流形和超曲面</a></li>
+<li><a href="/notes/docs/diffgeo/0013/">流形上的微分形式及其对偶</a></li>
+<li><a href="/notes/docs/diffgeo/0014/">流形上的微积分</a></li>
+<li><a href="/notes/docs/diffgeo/0016/">李群李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0068/">常用李群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0069/"class=active>李变换群</a></li>
+<li><a href="/notes/docs/diffgeo/0070/">微分几何中的计算（Julia版）</a></li>
+<li><a href="/notes/docs/diffgeo/0073/">辛群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0074/">辛流形</a></li>
+<li><a href="/notes/docs/diffgeo/0076/">流形上的旋量和旋量场（初步）</a></li>
+<li><a href="/notes/docs/diffgeo/0077/">流形上的旋量和旋量场（几何解释）</a></li>
+<li><a href="/notes/docs/diffgeo/0078/">流形上的旋量和旋量场（导数算符和曲率)</a></li>
+<li><a href="/notes/docs/diffgeo/0079/">流形上的旋量和旋量场（自旋系数和克氏符）</a></li>
+<li><a href="/notes/docs/diffgeo/0082/">李群李代数伴随表示和Killing型、Casimir算符</a></li>
+<li><a href="/notes/docs/diffgeo/0083/">半单李代数的标准形式</a></li>
+<li><a href="/notes/docs/diffgeo/0084/">半单李代数的根系、权系和Dynkin图</a></li>
+<li><a href="/notes/docs/diffgeo/0085/">半单李代数的Casimir不变算符</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>李变换群</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#李变换群">李变换群</a></li>
+        <li><a href="#单参微分同胚群">单参微分同胚群</a></li>
+        <li><a href="#killing矢量场">Killing矢量场</a></li>
+        <li><a href="#另类killing矢量场">&ldquo;另类&quot;Killing矢量场</a></li>
+        <li><a href="#计算李代数结构常数">计算李代数结构常数</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0070/">
+    下一页<br>微分几何中的计算（Julia版 计划长期维护）
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0068/">
+      上一页<br>常用李群及其李代数
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/diffgeo/0069/">李变换群</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-02-23</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95">微分几何</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E6%B5%81%E5%BD%A2">流形</a>
+      , 
+      <a href="/notes/tags/%E6%9D%8E%E7%BE%A4">李群</a>
+      , 
+      <a href="/notes/tags/%E6%9D%8E%E4%BB%A3%E6%95%B0">李代数</a>
+      , 
+      <a href="/notes/tags/%E5%8F%98%E6%8D%A2%E7%BE%A4">变换群</a>
+      , 
+      <a href="/notes/tags/julia">julia</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0069.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<blockquote>
+<p><code>李变换群</code>，就是李群作用于流形，这种“作用”其实就是变换，这种变换的集合构成的群。 就是<code>李群的实现</code>，或 <code>李群的表示</code>。</p>
+</blockquote>
+<h2 id="李变换群">李变换群</h2>
+<p>前面已经接触过了<code>单参微分同胚群</code>
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(\phi:\mathbb{R}\times M \to M\)
+</span>
+。只需要把
+
+
+<span class="katex">
+  \(\mathbb{R}\)
+</span>
+换成李群
+
+
+<span class="katex">
+  \(G\)
+</span>
+就得到了李变换群。</p>
+<p>考虑李群
+
+
+<span class="katex">
+  \(G\)
+</span>
+和流形
+
+
+<span class="katex">
+  \(M\)
+</span>
+，
+
+
+<span class="katex">
+  \(C^\infty\)
+</span>
+映射
+
+
+<span class="katex">
+  \(\sigma:G\times M\to M\)
+</span>
+成为上的一个<code>李变换群</code>，若</p>
+<ul>
+<li>1） 
+
+
+<span class="katex">
+  \(\forall g\in G,\quad \sigma_g:M\to M\)
+</span>
+是微分同胚；</li>
+<li>2）
+
+
+<span class="katex">
+  \(\sigma_{gh}=\sigma_g \circ \sigma_h,\quad \forall g,h\in G\)
+</span>
+。</li>
+</ul>
+<p>
+
+
+<span class="katex">
+  \(\sigma\)
+</span>
+可诱导出另外两个映射(方框中)：</p>
+
+
+
+<span class="katex">
+  \[
+\sigma(g,p)=\boxed{\sigma_g(p)=\sigma_p(g)},\quad \forall g\in G, p\in M
+\]
+</span>
+
+<p>条件2）保证了，从李群
+
+
+<span class="katex">
+  \(G=\{g\}\)
+</span>
+到李变换群
+
+
+<span class="katex">
+  \(\{\sigma_g:M\to M|g\in G\}\)
+</span>
+的自然映射
+
+
+<span class="katex">
+  \(g\mapsto\sigma_g\)
+</span>
+是一个同态映射。这个同态映射成为
+
+
+<span class="katex">
+  \(G\)
+</span>
+的一个<code>实现</code>，则称
+
+
+<span class="katex">
+  \(M\)
+</span>
+为<code>实现空间</code>。  如果这个同态是同构，则称
+
+
+<span class="katex">
+  \(G\)
+</span>
+为<code>忠实实现</code>。</p>
+<p>可以说，李群
+
+
+<span class="katex">
+  \(G\)
+</span>
+决定了流形
+
+
+<span class="katex">
+  \(M\)
+</span>
+上的一个李变换群。</p>
+<h2 id="单参微分同胚群">单参微分同胚群</h2>
+<p>特别地，李群
+
+
+<span class="katex">
+  \(G\)
+</span>
+的每个<code>单参子群</code>决定了流形
+
+
+<span class="katex">
+  \(M\)
+</span>
+上的一个<code>单参微分同胚群</code>。</p>
+<p><img src="/notes/images/0108.svg" alt="0108.svg"></p>
+<p>如图，李群
+
+
+<span class="katex">
+  \(G\)
+</span>
+的李代数
+
+
+<span class="katex">
+  \(\mathscr{G}\)
+</span>
+的一个元素
+
+
+<span class="katex">
+  \(A_e\)
+</span>
+唯一确定一个单参数子群
+
+
+<span class="katex">
+  \(\gamma(t)\)
+</span>
+。在流形
+
+
+<span class="katex">
+  \(M\)
+</span>
+上任意选一点
+
+
+<span class="katex">
+  \(p\)
+</span>
+，在单参子群
+
+
+<span class="katex">
+  \(\gamma\in G\)
+</span>
+的作用下，得到流形
+
+
+<span class="katex">
+  \(M\)
+</span>
+上的一个单参微分同胚群
+
+
+<span class="katex">
+  \((\sigma_p\circ\gamma) (t)\)
+</span>
+。 进而在流形
+
+
+<span class="katex">
+  \(M\)
+</span>
+的
+
+
+<span class="katex">
+  \(p\)
+</span>
+点确定唯一的矢量
+
+
+<span class="katex">
+  \(\xi_p\)
+</span>
+：
+
+
+
+<span class="katex">
+  \[
+\xi_p=\left.\frac{d}{dt}\right|_{t=0}\sigma_p(\gamma(t))=\sigma_{p*}\left.\frac{d}{dt}\right|_{t=0}\gamma(t)=\sigma_{p*}A_e
+\]
+</span>
+
+由此可见：</p>
+<blockquote>
+<p>对于给定的李变换群
+
+
+<span class="katex">
+  \(\sigma:G\times M\to M\)
+</span>
+，李群
+
+
+<span class="katex">
+  \(G\)
+</span>
+的李代数
+
+
+<span class="katex">
+  \(\mathscr{G}\)
+</span>
+的每个元素
+
+
+<span class="katex">
+  \(A_e\)
+</span>
+对应流形
+
+
+<span class="katex">
+  \(M\)
+</span>
+上的一个
+
+
+<span class="katex">
+  \(C^\infty\)
+</span>
+矢量场
+
+
+<span class="katex">
+  \(\xi\)
+</span>
+。 故有映射
+
+
+<span class="katex">
+  \(\chi:\mathscr{G}\to \{\xi\}\)
+</span>
+</p>
+</blockquote>
+<h2 id="killing矢量场">Killing矢量场</h2>
+<p>进一步考虑一个特殊情况：带度规流形
+
+
+<span class="katex">
+  \((M,g_{ab})\)
+</span>
+，而李群
+
+
+<span class="katex">
+  \(G\)
+</span>
+是
+
+
+<span class="katex">
+  \(M\)
+</span>
+的等度规群，即李变换群
+
+
+<span class="katex">
+  \(\sigma:G\times M\to M\)
+</span>
+的每个
+
+
+<span class="katex">
+  \(\sigma_g:M\to M\)
+</span>
+都是等度规映射。</p>
+<p>这时，李群
+
+
+<span class="katex">
+  \(G\)
+</span>
+的每个单参子群
+
+
+<span class="katex">
+  \(\gamma(t)\)
+</span>
+产生的单参微分同胚群
+
+
+<span class="katex">
+  \(\{\sigma_{\gamma(t)}|t\in \mathbb{R}\}\)
+</span>
+升格为单参等度规群。其轨道切矢
+
+
+<span class="katex">
+  \(\xi\)
+</span>
+就是
+
+
+<span class="katex">
+  \((M,g_{ab})\)
+</span>
+上的Killing矢量场。即，</p>
+
+
+
+<span class="katex">
+  \[
+\chi:\mathscr{G}\to \mathscr{K}
+\]
+</span>
+
+<p>Killing矢量场，在对易子为李括号下，也成为李代数。 事实上，映射
+
+
+<span class="katex">
+  \(\chi:\mathscr{G}\to \mathscr{K}\)
+</span>
+对李括号保到只相差一个符号的程度：</p>
+
+
+
+<span class="katex">
+  \[
+\chi([A_e,B_e])=-[\chi(A_e),\chi(B_e)],\quad \forall A_e,B_e\in \mathscr{G}
+\]
+</span>
+
+<p>于是有必要映入新的映射
+
+
+<span class="katex">
+  \(\psi:\mathscr{G}\to \mathscr{K}\)
+</span>
+，能够保李括号：</p>
+
+
+
+<span class="katex">
+  \[
+\psi(A_e)=-\chi(A_e),\quad A_e\in \mathscr{G}\\
+\psi[A_e,B_e]=[\psi(A_e),\psi(B_e)],\quad \forall A_e,B_e\in \mathscr{G}
+\]
+</span>
+
+<p>进而保证了，映射
+
+
+<span class="katex">
+  \(\psi:\mathscr{G}\to \mathscr{K}\)
+</span>
+是李代数同态映射。</p>
+<blockquote>
+<p>如果的每个Killing矢量场都是完备矢量场，则每个都能产生单参等度规群，进而等度规群
+
+
+<span class="katex">
+  \(G\)
+</span>
+（因而其李代数
+
+
+<span class="katex">
+  \(\mathscr{G}\)
+</span>
+）与
+
+
+<span class="katex">
+  \(\mathscr{K}\)
+</span>
+的维度相同，于是
+
+
+<span class="katex">
+  \(\psi:\mathscr{G}\to \mathscr{K}\)
+</span>
+就是李代数同构。</p>
+</blockquote>
+<h2 id="另类killing矢量场">&ldquo;另类&quot;Killing矢量场</h2>
+<p>前面谈的是基于等度规映射Killing矢量场。并且在此基础上有三条性质：</p>
+<ul>
+<li>1）
+
+
+<span class="katex">
+  \(\mathscr{K}=\{\xi\}\)
+</span>
+是矢量空间；</li>
+<li>2）矢量场对易子作为李括号使得
+
+
+<span class="katex">
+  \(\mathscr{K}\)
+</span>
+成为李代数；</li>
+<li>3）映射
+
+
+<span class="katex">
+  \(\chi:\mathscr{G}\to \mathscr{K}\)
+</span>
+在相差一个负号的意义下“保李括号”。</li>
+</ul>
+<p>但我们发现，即使不要求等度规，矢量场集合
+
+
+<span class="katex">
+  \(\{\xi\}\)
+</span>
+也能满足这三条。所以不妨也可直接将
+
+
+<span class="katex">
+  \(\{\xi\}\)
+</span>
+定义称Killing矢量场，称之为流形
+
+
+<span class="katex">
+  \(M\)
+</span>
+上关于李群
+
+
+<span class="katex">
+  \(G\)
+</span>
+的Killing矢量场。</p>
+<p>以后说到“Killing矢量场”，如果没有加定语说明，表示原生意义上的Killing矢量场；如果加了如上定语约束，则是这里的“另类”Killing矢量场。</p>
+<p>当然，如果对映射
+
+
+<span class="katex">
+  \(\sigma:G\times M\to M\)
+</span>
+不加要求，
+
+
+<span class="katex">
+  \(\dim \mathscr{K}\)
+</span>
+可能小于
+
+
+<span class="katex">
+  \(\dim \mathscr{G}\)
+</span>
+。</p>
+<p>但是，如果映射
+
+
+<span class="katex">
+  \(\sigma:G\times M\to M\)
+</span>
+是<code>有效的</code>，即</p>
+
+
+
+<span class="katex">
+  \[
+\sigma_g(p)=p \quad \Rightarrow \quad g=e,\quad \forall p \in M
+\]
+</span>
+
+<p>(这个条件等价于
+
+
+<span class="katex">
+  \(g\mapsto \sigma_g\)
+</span>
+是一一映射， 还等价于
+
+
+<span class="katex">
+  \(G\)
+</span>
+在
+
+
+<span class="katex">
+  \(M\)
+</span>
+上的实现是忠实的)， 那么 
+
+
+<span class="katex">
+  \(\chi:\mathscr{G}\to \mathscr{K}\)
+</span>
+是同构映射，进而
+
+
+<span class="katex">
+  \(\psi:\mathscr{G}\to \mathscr{K}\)
+</span>
+是李代数同构。</p>
+<h2 id="计算李代数结构常数">计算李代数结构常数</h2>
+<p>利用基于等度规映射的Killing矢量场计算等度规群的李代数的结构常数。</p>
+<p>这里部分步骤，我可以用Julia来计算， 以后有类似的更复杂的，可以复制这段代码，作点修改就可以计算了。</p>
+<p>【范例目标】：3维欧氏空间
+
+
+<span class="katex">
+  \((\mathbb{R}^3,\delta_{ab})\)
+</span>
+中的2维球面
+
+
+<span class="katex">
+  \((S^2,h_{ab})\)
+</span>
+。</p>
+<p>首先，这个球面的等度规群是三维空间转动群
+
+
+<span class="katex">
+  \(G=\mathrm{SO}(3)\)
+</span>
+。</p>
+<p>其次，计算这个球面的诱导度规
+
+
+<span class="katex">
+  \(h_{ab}\)
+</span>
+:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#66d9ef">using</span> SymPy
+
+<span style="color:#a6e22e">@vars</span> θ φ real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+
+<span style="color:#75715e"># 坐标变换</span>
+X<span style="color:#f92672">=</span>[sin(θ)<span style="color:#f92672">*</span>cos(φ),sin(θ)<span style="color:#f92672">*</span>sin(φ),cos(θ)]
+Q<span style="color:#f92672">=</span>[θ,φ]
+
+<span style="color:#75715e"># 三维欧氏度规矩阵g</span>
+g <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>eye(<span style="color:#ae81ff">3</span>) <span style="color:#f92672">.*</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>]
+
+<span style="color:#75715e"># 计算二维球面上的诱导度规矩阵h，及其逆hi</span>
+M<span style="color:#f92672">=</span>[diff(x,q) <span style="color:#66d9ef">for</span> x <span style="color:#66d9ef">in</span> X, q <span style="color:#66d9ef">in</span> Q]
+h<span style="color:#f92672">=</span> simplify<span style="color:#f92672">.</span>(sympy<span style="color:#f92672">.</span><span style="color:#66d9ef">Matrix</span>(M<span style="color:#f92672">&#39;*</span>g<span style="color:#f92672">*</span>M))
+hi <span style="color:#f92672">=</span> inv(h)
+h
+</code></pre></div><p>计算结果： 
+
+
+<span class="katex">
+  \(\begin{bmatrix}1 & 0 \\ 0 & \sin^{2} θ\end{bmatrix}\)
+</span>
+</p>
+<p>第三步：根据度规计算克氏符，然后列出所有Killing方程：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 待求的Killing矢量场的分量</span>
+ξ <span style="color:#f92672">=</span> SymFunction(<span style="color:#e6db74">&#34;ξ^1,ξ^2&#34;</span>)
+
+<span style="color:#75715e"># 根据度规计算克氏符</span>
+Γ <span style="color:#f92672">=</span> sum([(<span style="color:#ae81ff">1</span><span style="color:#f92672">//</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">*</span>hi[σ,ρ]<span style="color:#f92672">*</span>(diff(h[μ,ρ],Q[υ])<span style="color:#f92672">+</span>
+            diff(h[υ,ρ],Q[μ])<span style="color:#f92672">-</span>diff(h[μ,υ],Q[ρ])) 
+        <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>,υ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span> ,σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>] 
+    <span style="color:#66d9ef">for</span> ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>)
+
+<span style="color:#75715e"># 列出所有独立Killing方程组</span>
+eqs <span style="color:#f92672">=</span> [(<span style="color:#ae81ff">0</span>⩵diff(sum(h[υ,ρ]<span style="color:#f92672">*</span>ξ[ρ](θ,φ) <span style="color:#66d9ef">for</span> ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>),Q[μ])<span style="color:#f92672">+</span>
+        diff(sum(h[μ,ρ]<span style="color:#f92672">*</span>ξ[ρ](θ,φ) <span style="color:#66d9ef">for</span> ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>),Q[υ])<span style="color:#f92672">-</span>
+        <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>sum(Γ[μ,υ,σ]<span style="color:#f92672">*</span>sum(h[σ,ρ]<span style="color:#f92672">*</span>ξ[ρ](θ,φ) <span style="color:#66d9ef">for</span> ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>) 
+            <span style="color:#66d9ef">for</span> σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>)) 
+    <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>,υ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>  <span style="color:#66d9ef">if</span> μ <span style="color:#f92672">≤</span> υ ]
+</code></pre></div><p>结果是：
+
+
+<span class="katex">
+  \(\begin{bmatrix}0 = 2 \frac{\partial}{\partial θ} \operatorname{ξ^{1}}{\left (θ,φ \right )}\\0 = \sin^{2}{\left (θ \right )} \frac{\partial}{\partial θ} \operatorname{ξ^{2}}{\left (θ,φ \right )} + \frac{\partial}{\partial φ} \operatorname{ξ^{1}}{\left (θ,φ \right )}\\0 = 2 \operatorname{ξ^{1}}{\left (θ,φ \right )} \sin{\left (θ \right )} \cos{\left (θ \right )} + 2 \sin^{2}{\left (θ \right )} \frac{\partial}{\partial φ} \operatorname{ξ^{2}}{\left (θ,φ \right )}\end{bmatrix}\)
+</span>
+</p>
+<p>第四步，求解这组方程的通解。</p>
+<p>首先通过观察，很容易得到第一组特解：</p>
+
+
+
+<span class="katex">
+  \[
+(\xi_3)^a=-\left(\frac{\partial}{\partial \varphi}\right)^a, \quad \xi_3=(0,-1)
+\]
+</span>
+
+<p>然后，由方程１和３有
+
+
+<span class="katex">
+  \(\xi^1(\theta,\varphi)=f(\varphi),\quad \xi^2(\theta,\varphi)=g(\theta)h(\varphi)\)
+</span>
+ ，回代方程3，并分离变量得：</p>
+
+
+
+<span class="katex">
+  \[
+-\frac{f(\varphi)}{h'(\varphi)}=\frac{g(\theta)}{\cot(\theta)}=C
+\]
+</span>
+
+<p>当
+
+
+<span class="katex">
+  \(C=0\)
+</span>
+，只有全0平凡解。所以必须
+
+
+<span class="katex">
+  \(C\ne0\)
+</span>
+，于是有：</p>
+
+
+
+<span class="katex">
+  \[
+f(\varphi)=-C \ h'(\varphi),\quad g(\theta)=C \cot(\theta)
+\]
+</span>
+
+<p>回代方程2得：</p>
+
+
+
+<span class="katex">
+  \[
+h''(\varphi)+h(\varphi)=0
+\]
+</span>
+
+<p>得到
+
+
+<span class="katex">
+  \(h(\varphi)\)
+</span>
+得两个特解: 
+
+
+<span class="katex">
+  \(\sin(\varphi),\quad \cos(\varphi)\)
+</span>
+。</p>
+<p>最后，回代并整理得到剩余两个特解：</p>
+
+
+
+<span class="katex">
+  \[
+(\xi_2)^a=-\cos\theta \left(\frac{\partial}{\partial \theta}\right)^a+\cot\theta \sin\theta\left(\frac{\partial}{\partial \varphi}\right)^a, \quad \xi_2=(-\cos\theta,\cot\theta\sin\theta)\\ (\xi_1)^a=\sin\theta \left(\frac{\partial}{\partial \theta}\right)^a+\cot\theta \cos\theta\left(\frac{\partial}{\partial \varphi}\right)^a, \quad \xi_1=(\sin\theta,\cot\theta\cos\theta)
+\]
+</span>
+
+<p>这三个特解，可选作Killing矢量场得一组基矢。</p>
+<p>第五步，获得李代数得结构常数表达式 （只要写出，上面这三个基矢量的三组对易子即可）</p>
+
+
+
+<span class="katex">
+  \[
+[\xi_1,\xi_2]^a=(\xi_3)^a,\quad [\xi_2,\xi_3]^a=(\xi_1)^a,\quad [\xi_3,\xi_1]^a=(\xi_2)^a
+\]
+</span></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0070/">
+    下一页<br>微分几何中的计算（Julia版 计划长期维护）
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0068/">
+      上一页<br>常用李群及其李代数
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0069.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/diffgeo/0069.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#李变换群">李变换群</a></li>
+        <li><a href="#单参微分同胚群">单参微分同胚群</a></li>
+        <li><a href="#killing矢量场">Killing矢量场</a></li>
+        <li><a href="#另类killing矢量场">&ldquo;另类&quot;Killing矢量场</a></li>
+        <li><a href="#计算李代数结构常数">计算李代数结构常数</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

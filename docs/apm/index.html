@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="主动投资组合管理"><meta property="og:title" content="主动投资组合管理" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/apm/" />
+<meta property="og:updated_time" content="2018-05-27T20:20:35+08:00" />
+<title>主动投资组合管理 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<link rel="alternate" type="application/rss+xml" href="https://chaoskey.gitee.io/notes/docs/apm/index.xml" title="学习笔记" />
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"class=active><strong>主动投资组合管理</strong></a>
+<ul>
+<li><a href="/notes/docs/apm/0017/">第一章 绪论</a></li>
+<li><a href="/notes/docs/apm/0018/">第二章 一致预期收益率：资本资产定价模型</a></li>
+<li><a href="/notes/docs/apm/0019/">第三章 风险</a></li>
+<li><a href="/notes/docs/apm/0020/">第四章 超常收益率、业绩基准和附加值</a></li>
+<li><a href="/notes/docs/apm/0021/">第五章 残差风险和残差收益率：信息率</a></li>
+<li><a href="/notes/docs/apm/0022/">第六章 主动管理基本定律</a></li>
+<li><a href="/notes/docs/apm/0023/">第七章 预期收益率和套利定价理论</a></li>
+<li><a href="/notes/docs/apm/0024/">第八章 估值理论</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>主动投资组合管理</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#主动投资组合管理">主动投资组合管理</a>
+      <ul>
+        <li><a href="#电子书">电子书</a></li>
+        <li><a href="#目录">目录</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+<article class="markdown"><h1 id="主动投资组合管理">主动投资组合管理</h1>
+<h2 id="电子书">电子书</h2>
+<p>主动投资组合管理：创造高收益并控制风险的量化投资方法（原书第2版）-[美]理查德·C·格林诺德 等-李腾 等(译)-机械工业出版社-2014</p>
+<p>Active Portfolio Management：A Quantitative Approach for Providing Superior Returns and Controlling Risk, 2ed, Grinold ＆ Kahn, MacGraw-Hill, 2000</p>
+<p><a href="https://github.com/chaoskey/notes/tree/master/apm/pdf">https://github.com/chaoskey/notes/tree/master/apm/pdf</a></p>
+<h2 id="目录">目录</h2>
+<div class="book-columns flex flex-wrap">
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li><a href="/notes/docs/apm/0017/">第一章 绪论</a></li>
+<li><a href="/notes/docs/apm/0018/">第二章 一致预期收益率：资本资产定价模型</a></li>
+<li><a href="/notes/docs/apm/0019/">第三章 风险</a></li>
+<li><a href="/notes/docs/apm/0020/">第四章 超常收益率、业绩基准和附加值</a></li>
+</ul>
+
+  </div>
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li><a href="/notes/docs/apm/0021/">第五章 残差风险和残差收益率：信息率</a></li>
+<li><a href="/notes/docs/apm/0022/">第六章 主动管理基本定律</a></li>
+<li><a href="/notes/docs/apm/0023/">第七章 预期收益率和套利定价理论</a></li>
+<li><a href="/notes/docs/apm/0024/">第八章 估值理论</a></li>
+</ul>
+
+  </div>
+  
+</div></article>
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/apm/_index.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/apm/_index.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#主动投资组合管理">主动投资组合管理</a>
+      <ul>
+        <li><a href="#电子书">电子书</a></li>
+        <li><a href="#目录">目录</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

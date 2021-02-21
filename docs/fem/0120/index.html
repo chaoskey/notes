@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="UFL：有限元形式语言》表达式【翻译】"><meta property="og:title" content="UFL：有限元形式语言》表达式【翻译】" />
+<meta property="og:description" content="II.实现》17.UFL：有限元形式语言》表达式
+【章节目录】
+17·4 定义表达式
+UFL的大多数内容涉及如何声明表达式，例如公式17.13中的积分表达式。 最基本的表达式是终值，它们不依赖于其他表达式。  其他表达式称为算符，将在17.4.2-17.4.5节中讨论。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/0120/" />
+<meta property="article:published_time" content="2021-02-01T10:46:53+08:00" />
+<meta property="article:modified_time" content="2021-02-01T10:46:53+08:00" />
+<title>UFL：有限元形式语言》表达式【翻译】 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a>
+<ul>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E6%96%B9%E6%B3%95">第二章 有限元方法</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%B8%B8%E8%A7%81%E6%9C%89%E9%99%90%E5%85%83">第三章 常见有限元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8%E5%8F%82%E8%80%83%E5%8D%95%E5%85%83">第四章 构造通用参考单元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F">第五章 有限元变分形式</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%BB%84%E8%A3%85">第六章 有限元组装</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%AD%A3%E4%BA%A4%E8%A1%A8%E7%A4%BA">第七章 有限元变分形式的正交表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA">第八章 有限元变分形式的张量表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E7%9A%84%E7%A6%BB%E6%95%A3%E4%BC%98%E5%8C%96">第九章 有限元矩阵计算的离散优化</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E7%AB%A0-dolfincpython%E6%9C%89%E9%99%90%E5%85%83%E5%BA%93">第十章 DOLFIN：C++/Python有限元库</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-ufl%E6%9C%89%E9%99%90%E5%85%83%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80">第十七章 UFL：有限元形式语言</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-unicorn%E7%BB%9F%E4%B8%80%E7%9A%84%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6%E6%B1%82%E8%A7%A3%E5%99%A8">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>UFL：有限元形式语言》表达式【翻译】</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ii实现17ufl有限元形式语言表达式">II.实现》17.UFL：有限元形式语言》表达式</a>
+      <ul>
+        <li><a href="#174-定义表达式">17·4 定义表达式</a>
+          <ul>
+            <li><a href="#1741-形式的参数">17·4·1 形式的参数</a></li>
+            <li><a href="#1742-索引记号">17·4·2 索引记号</a></li>
+            <li><a href="#1743-代数算符和函数">17·4·3 代数算符和函数</a></li>
+            <li><a href="#1744-微分算符">17·4·4 微分算符</a></li>
+            <li><a href="#1745-其他算符">17·4·5 其他算符</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0121/">
+    下一页<br>UFL：有限元形式语言》形式算符&amp;表达式的表示【翻译】
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0119/">
+      上一页<br>UFL：有限元形式语言》概述&amp;有限元空间&amp;形式【翻译】
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/fem/0120/">UFL：有限元形式语言》表达式【翻译】</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2021-02-01</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/FEniCS">FEniCS</a>
+      , 
+      <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95">有限元法</a>
+      , 
+      <a href="/notes/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">偏微分方程</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0120.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h1 id="ii实现17ufl有限元形式语言表达式">II.实现》17.UFL：有限元形式语言》表达式</h1>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80">章节目录</a>】</p>
+<h2 id="174-定义表达式">17·4 定义表达式</h2>
+<p>UFL的大多数内容涉及如何声明表达式，例如公式17.13中的积分表达式。 最基本的表达式是终值，它们不依赖于其他表达式。  其他表达式称为算符，将在17.4.2-17.4.5节中讨论。</p>
+<p>UFL中的终值类型包括形式参数（这是第17.4.1节的主题），几何量和字面常量。 字面常量中有标量整数和浮点值，以及dxd单位矩阵<code>I = Identity(d)</code>。 要获得单位向量，只需使用单位矩阵的行或列，例如<code>e0 = I[0,:]</code>。 同样，<code>I[i,j]</code>表示Kronecker 
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(\delta\)
+</span>
+函数
+
+
+<span class="katex">
+  \(\delta_{ij}\)
+</span>
+（有关索引记号的详细信息，请参见第17.4.2节）。 可用的几何值是空间坐标<code>x ↔ cell.x</code>和维面法线<code>n ↔ cell.n</code>。 几何维数可由<code>cell.d</code>获得。</p>
+<h3 id="1741-形式的参数">17·4·1 形式的参数</h3>
+<p>基函数和系数函数分别由参数和系数表示。  形式的参数顺序由UFL代码中声明的形式参数的顺序决定。 每个基函数参数代表其有限元空间的基底中的任何函数</p>
+
+
+
+<span class="katex">
+  \[
+\phi^j \in \{\phi_k^j\}, \qquad V_h^j = \mathrm{span} \left\{φ_k^j\right\} \tag{17.14}
+\]
+</span>
+
+<p>目的是稍后针对所有
+
+
+<span class="katex">
+  \(\phi_k\)
+</span>
+计算如公式（17.12）所示的形式。 每个系数函数
+
+
+<span class="katex">
+  \(w\)
+</span>
+代表有限元空间
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+中的离散函数；通常是带系数
+
+
+<span class="katex">
+  \(w_k\)
+</span>
+的基函数
+
+
+<span class="katex">
+  \(\phi_k\in V_h\)
+</span>
+加权和</p>
+
+
+
+<span class="katex">
+  \[
+w =\sum^{|V_h|}_{k=1}w_k\phi_k \tag{17.15}
+\]
+</span>
+
+<p>例外情况是系数函数只能逐点求值，这些函数使用带有“正交”族的有限元声明。 基函数被声明为任意单元，如下所示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># UFL code</span>
+<span style="color:#75715e"># phi = Argument(element) </span>
+phi <span style="color:#f92672">=</span> Argument(element, <span style="color:#ae81ff">0</span>) <span style="color:#75715e"># 较新的版本中至少要有两个输入； 0表示关联首个子单元</span>
+v <span style="color:#f92672">=</span> TestFunction(element)
+u <span style="color:#f92672">=</span> TrialFunction(element)
+</code></pre></div><p>通过使用<code>TestFunction</code>和<code>TrialFunction</code>声明代替<code>Argument</code>，您可以忽略它们的相对顺序。对于元数为r &gt; 2的形式，只能使用<code>Argument</code>。</p>
+<p>对任意单元，可类似地声明系数函数，并且存在用于声明常系数的简写记号：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># UFL code</span>
+w <span style="color:#f92672">=</span> Coefficient(element)
+c <span style="color:#f92672">=</span> Constant(cell)
+v <span style="color:#f92672">=</span> VectorConstant(cell)
+M <span style="color:#f92672">=</span> TensorConstant(cell)
+</code></pre></div><p>如果需要混合有限元空间
+
+
+<span class="katex">
+  \(V_h = V_h^0 \times V_h^1\)
+</span>
+中的形式参数
+
+
+<span class="katex">
+  \(u\)
+</span>
+，但是使用子函数
+
+
+<span class="katex">
+  \(u_0\in V_h^0\)
+</span>
+和
+
+
+<span class="katex">
+  \(u_1\in V_h^1\)
+</span>
+更容易表示此形式，则可以使用<code>split</code>的通用方式，将混合函数或基函数分解到其子函数中：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># UFL code</span>
+V <span style="color:#f92672">=</span> V0<span style="color:#f92672">*</span>V1
+<span style="color:#75715e"># V = element * element  # 由于V0和V1前面没给赋值，不妨用这个V代替测试</span>
+u <span style="color:#f92672">=</span> Coefficient(V)
+u0, u1 <span style="color:#f92672">=</span> split(u)
+</code></pre></div><p><code>split</code>函数可以处理任意混合单元。 另外，一个方便的速记符号表示法是在参数声明后加上分隔符</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># UFL code</span>
+v0, v1 <span style="color:#f92672">=</span> TestFunctions(V)
+u0, u1 <span style="color:#f92672">=</span> TrialFunctions(V)
+f0, f1 <span style="color:#f92672">=</span> Coefficients(V)
+</code></pre></div><h3 id="1742-索引记号">17·4·2 索引记号</h3>
+<p>UFL允许同时使用张量代数和索引记号来处理任意秩的张量表达式。 假设大家基本熟悉张量代数和索引记号。 这里的重点是如何在UFL中表示索引记号。</p>
+<p>假设标准正交欧几里德基底
+
+
+<span class="katex">
+  \(\{e_k \in \mathbb{R}^d\}^d_{k=1}\)
+</span>
+，那么向量可表示成此基底下的标量分量。 二阶张量可以用标量分量来表示，对应的基底是
+
+
+<span class="katex">
+  \(\left\{e_i \otimes  e_j\right\}^d_{i, j=1}\)
+</span>
+。 任意阶张量可以用相同的方式表示，如此所示。</p>
+
+
+
+<span class="katex">
+  \[
+v =\sum^d_{k=1}v_k e_k \tag{17.16}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+A =\sum^d_{i=1}\sum^d_{j=1}A_{ij}e_i \otimes e_j \tag{17.17}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+C =\sum^d_{i=1}\sum^d_{j=1}\sum^d_{k=1} C_{ijk}e_i \otimes e_j \otimes e_k \tag{17.18}
+\]
+</span>
+
+<p>在这里，
+
+
+<span class="katex">
+  \(v\)
+</span>
+，
+
+
+<span class="katex">
+  \(A\)
+</span>
+和
+
+
+<span class="katex">
+  \(C\)
+</span>
+分别是1、2和3阶张量。 如果索引没有赋值（例如
+
+
+<span class="katex">
+  \(v_i\)
+</span>
+中的
+
+
+<span class="katex">
+  \(i\)
+</span>
+），则称其为自由的；如果索引具有固定值（例如
+
+
+<span class="katex">
+  \(v_1\)
+</span>
+中的
+
+
+<span class="katex">
+  \(1\)
+</span>
+），则称其为固定的。 带有自由索引的表达式表示您可以通过将固定值分配给索引来获得任意表达式。 表达式
+
+
+<span class="katex">
+  \(A_{ij}\)
+</span>
+是标量值，表示欧几里德基底下的张量
+
+
+<span class="katex">
+  \(A\)
+</span>
+的任意分量
+
+
+<span class="katex">
+  \( (i, j)\)
+</span>
+。 在纸上工作时，很容易在张量记号（
+
+
+<span class="katex">
+  \(A\)
+</span>
+）和索引记号（
+
+
+<span class="katex">
+  \(A_{ij}\)
+</span>
+）之间切换，因为知道张量及其组成部分是相同物理量的不同表示。 在编程语言中，我们必须表示成一个操作，从张量到标量分量的映射，并显式返回。从张量到其分量的映射，对于2阶张量可定义为</p>
+
+
+
+<span class="katex">
+  \[
+A_{ij} = A : (e_i \otimes e_j) \tag{17.19}
+\]
+</span>
+
+<p>这使用索引记号<code>A[i,j]</code>来做到。 从分量值
+
+
+<span class="katex">
+  \(A_{ij}\)
+</span>
+定义张量
+
+
+<span class="katex">
+  \(A\)
+</span>
+为</p>
+
+
+
+<span class="katex">
+  \[
+A = A_{ij}e_i \otimes e_j \tag{17.20}
+\]
+</span>
+
+<p>并使用函数<code>as_tensor(Aij, (i,j))</code>来做到。 为了说明这点，考虑两个向量的外积
+
+
+<span class="katex">
+  \(A = u \otimes v = u_i v_j e_i \otimes e_j\)
+</span>
+，以及相应的标量分量
+
+
+<span class="katex">
+  \(A_{ij}\)
+</span>
+。 一种实现方法是</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># UFL code</span>
+A <span style="color:#f92672">=</span> outer(u, v)
+Aij <span style="color:#f92672">=</span> A[i, j]
+</code></pre></div><p>或者，可以使用索引记号直接表示A的分量，例如
+
+
+<span class="katex">
+  \(A_{ij} = u_i v_j\)
+</span>
+。  然后可以通过以下方式将
+
+
+<span class="katex">
+  \(A_{ij}\)
+</span>
+映射到
+
+
+<span class="katex">
+  \(A\)
+</span>
+：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># UFL code</span>
+Aij <span style="color:#f92672">=</span> v[j]<span style="color:#f92672">*</span>u[i]
+A <span style="color:#f92672">=</span> as_tensor(Aij, (i, j))
+</code></pre></div><p>这两对代码在数学上是等效的，每对代码的结果都是变量<code>A</code>代表张量
+
+
+<span class="katex">
+  \(A\)
+</span>
+，变量<code>Aij</code>代表张量
+
+
+<span class="katex">
+  \(A_{ij}\)
+</span>
+。 请注意，自由索引没有顺序，因此它们在表达式<code>v[j]*u[i]</code>中的出现顺序微不足道。 可以使用专用函数<code>as_vector</code>和<code>as_matrix</code>代替<code>as_tensor</code>。 尽管上面的示例使用了2阶张量，但是映射可推广到任意阶张量。</p>
+<p>在为表达式建立索引时，还可以使用固定索引，例如在表示单个标量分量的<code>A[0,1]</code>中。 固定索引也可以与自由索引混合，例如<code>A[0,i]</code>。 另外，可以使用切片代替索引。 使用切片的示例是<code>A[0,:]</code>，它是表示A的第0行的向量表达式。 要创建新索引，您可以创建一个索引或一次创建多个索引：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># UFL code</span>
+i <span style="color:#f92672">=</span> Index()
+j, k, l <span style="color:#f92672">=</span> indices(<span style="color:#ae81ff">3</span>)
+</code></pre></div><p>有一组预定义的索引<code>i, j, k, l</code>和<code>p, q, r, s</code>，这些索引对于大多数应用来说应该是足够的。</p>
+<p>如果您的分量不是表示为具有自由索引的表达式，而是表示为独立的不相关的标量表达式，那么可以使用<code>as_tensor</code>及其对等的函数来构建张量。 例如，让我们定义一个2D旋转矩阵，可将向量表达式旋转
+
+
+<span class="katex">
+  \(\frac{\pi}{2}\)
+</span>
+：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># UFL code</span>
+th <span style="color:#f92672">=</span> pi<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>
+A <span style="color:#f92672">=</span> as_matrix([[ cos(th), <span style="color:#f92672">-</span>sin(th)],
+               [ sin(th), cos(th)]])
+u <span style="color:#f92672">=</span> A<span style="color:#f92672">*</span>v
+</code></pre></div><p>当在一项中出现重复索引时，根据爱因斯坦约定，隐含对这些索引的求和。 特别是，索引化二阶或更高阶张量（<code>A[i,i]</code>），微分一个带自由索引的表达式 (<code>v[i].dx(i)</code>)，或者将两个具有共享自由索引的表达式相乘(<code>u[i]*v[i]</code>)， 这三种情况都可出现重复指标。</p>
+
+
+
+<span class="katex">
+  \[
+A_{ii} \equiv \sum_i A_{ii}, \qquad v_i u_i \equiv \sum_i v_i u_i, \qquad v_{i, i} \equiv \sum_i v_{i, i} \tag{17.21}
+\]
+</span>
+
+<p>表达式<code>Aij = A[i,j]</code>在内部使用<code>Indexed</code>类表示。 <code>Aij</code>是A的引用，并保持原始张量表达式A的表示不变。 隐式求和被显式表示成使用<code>IndexSum</code>类的表达式。 由于这种显式表示，许多算法变得更容易实现， 因为Product实例永远不能隐式表示成求和。 有关表示类的更多详细信息，请参见第17.6节。</p>
+<h3 id="1743-代数算符和函数">17·4·3 代数算符和函数</h3>
+<p>UFL定义了可用于组成表达式的一组全面的算符。 基本的代数算符<code>+, -, *, /</code>可以在大多数UFL表达式之间使用，但有一些限制。 除法要求分母是没有自由索引的标量表达式。 求和操作各项必须具有相同的形状和一组自由索引。</p>
+<p>乘法算符*只能在两个标量，一个标量和任何张量，一个矩阵和一个向量以及两个矩阵之间才有效。 对于一些极少数情况，我们可以明确地使用张量代数算符和索引记号来定义其他乘积。 两个具有共享自由索引表达式的乘积意味着对这些索引求和，有关索引记号的更多信息，请参见第17.4.2节。</p>
+<p>三个常用算符是<code>dot(a, b)</code>，<code>inner(a, b)</code>和<code>outer(a, b)</code>。 两个任意阶张量的<strong>点积</strong>是第1个张量的最后一个索引与第2个张量的第一个索引的求和。 有一些例子：</p>
+
+
+
+<span class="katex">
+  \[
+v \cdot u = v_i u_i \tag{17.22}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+A \cdot u = A_{ij} u_j e_i \tag{17.23}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+A \cdot B = A_{ik} B_{kj} e_i e_j \tag{17.24}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+C \cdot A = C_{ijk} A_{kl}e_i e_j e_l \tag{17.25}
+\]
+</span>
+
+<p><strong>内积</strong>是对所有索引求和，例如
+
+
+
+<span class="katex">
+  \[
+v : u = v_i u_i \tag{17.26}
+\]
+</span>
+</p>
+
+
+
+<span class="katex">
+  \[
+A : B = A_{ij} B_{ij}, \tag{17.27}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+C : D = C_{ijkl}D_{ijkl} \tag{17.28}
+\]
+</span>
+
+<p><strong>外积</strong>的一些示例
+
+
+
+<span class="katex">
+  \[
+v \otimes u = v_i u_j e_i e_j \tag{17.29}
+\]
+</span>
+</p>
+
+
+
+<span class="katex">
+  \[
+A \otimes u = A_{ij} u_k e_i e_j e_k \tag{17.30}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+A \otimes B = A_{ij} B_{kl} e_i e_j e_k e_l \tag{17.31}
+\]
+</span>
+
+<p>其他常见的张量代数算符有<code>cross(u,v)</code>，<code>transpose(A)</code>（或<code>A.T</code>），<code>tr(A)</code>，<code>det(A)</code>，<code>inv(A)</code>，<code>ofac(A)</code>，<code>dev（A</code>），<code>skew(A)</code>和<code>sym(A)</code>。这些张量代数算符中的大多数，都要求作用到没有自由索引的张量。 这些算符的详细定义可以在手册中找到。</p>
+<p>作用于无自由索引标量表达式的一组通用基本函数算符， 比如：<code>abs(f)</code>，<code>pow(f, g)</code>，<code>sqrt(f)</code>，<code>exp(f)</code>，<code>ln(f)</code>，<code>cos(f)</code>， <code>sin(f)</code>，<code>tan(f)</code>，<code>acos(f)</code>，<code>asin(f)</code>，<code>atan(f)</code>和<code>sign(f)</code>。 任何携带标量参数的算符，都可逐元地应用到张量上，比如 <code>elem_op(sin, A)</code>。</p>
+<h3 id="1744-微分算符">17·4·4 微分算符</h3>
+<p>UFL实现了关于三种不同的变量的导数 。 最常用的一种是空间导数。 表达式也可以求关于任意用户定义变量的微分 。 并且最后一种导数是形式或函数关于离散函数系数的导数； 即关于系数或常数。 形式导数在第17.5.1节中说明。</p>
+<p>请注意，导数在声明时是不会立即计算的。 有关如何计算导数的讨论，请参见第17.7节。</p>
+<p><strong>空间导数</strong>    基本空间导数
+
+
+<span class="katex">
+  \(\frac{\partial f}{\partial x_i}\)
+</span>
+可以用两种等效的方式表示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># UFL code</span>
+df <span style="color:#f92672">=</span> Dx(f, i)
+df <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>dx(i)
+</code></pre></div><p>在此，<code>df</code>表示
+
+
+<span class="katex">
+  \(f\)
+</span>
+在空间方向
+
+
+<span class="katex">
+  \(x_i\)
+</span>
+上的导数。 索引
+
+
+<span class="katex">
+  \(i\)
+</span>
+可以是代表一个固定空间方向
+
+
+<span class="katex">
+  \(x_i\)
+</span>
+上以示区别的整数，也可以是代表以示方向差异的自由索引。 符号<code>f.dx(i)</code>旨在反映索引记号
+
+
+<span class="katex">
+  \(f_{,i}\)
+</span>
+，它是
+
+
+<span class="katex">
+  \(\frac{\partial f}{\partial x_i}\)
+</span>
+的简写。 重复索引意味着求和，这样向量值表达式v的散度可以写成
+
+
+<span class="katex">
+  \(v_{i, i}\)
+</span>
+或<code>v[i].dx(i)</code>。</p>
+<p>定义了几种常见的复合空间导数算符，即梯度(gradient)，散度(divergence)和旋度算符(curl)。 这些算符分别命名为<code>grad</code>，<code>div</code>，<code>nabla_grad</code>，<code>nabla_div</code>，<code>curl</code>和<code>rot</code>（rot是curl的同义词）。 请注意，定义梯度和散度有两种常用方法，并且UFL同时支持之。</p>
+<p>令
+
+
+<span class="katex">
+  \(s\)
+</span>
+为标量表达式，
+
+
+<span class="katex">
+  \(v\)
+</span>
+为向量表达式，
+
+
+<span class="katex">
+  \(M\)
+</span>
+为r阶张量表达式。 在UFL中，算符的<code>grad</code>被明确定义为</p>
+
+
+
+<span class="katex">
+  \[
+(\mathrm{grad}(s))_i = s_{,i} \tag{17.32}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+(\mathrm{grad}(v))_{ij} = v_{i,j} \tag{17.33}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+(\mathrm{grad}(M))_{i_1\dots i_r k} = M_{i_1\dots i_r, k} \tag{17.34}
+\]
+</span>
+
+<p>并且算符<code>div</code>相应地定义为</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{div}(v) = v_{i, i} \tag{17.35}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+(\mathrm{div}(M))_{i_1 \dots i_{r−1}} = M_{i_1\dots i_r, i_r}  \tag{17.36}
+\]
+</span>
+
+<p>相反，<code>nabla_*</code>算符的定义依赖
+
+
+<span class="katex">
+  \(\nabla\)
+</span>
+算符</p>
+
+
+
+<span class="katex">
+  \[
+∇ \equiv e_k \frac{\partial}{\partial x_k}  \tag{17.37}
+\]
+</span>
+
+<p>算符<code>nabla_grad</code>是
+
+
+<span class="katex">
+  \(\nabla\)
+</span>
+与其操作对象的外积：</p>
+
+
+
+<span class="katex">
+  \[
+(\nabla s)_i = s_{,i} \tag{17.38}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+(\nabla v)_{ij} = v_{j,i} \tag{17.39}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+(\nabla M)_{k,i_1 \dots i_r} = M_{i_1 \dots i_r, k} \tag{17.40}
+\]
+</span>
+
+<p>同样，算符<code>nabla_div</code>是
+
+
+<span class="katex">
+  \(\nabla\)
+</span>
+与其操作对象的点积：</p>
+
+
+
+<span class="katex">
+  \[
+\nabla \cdot v = v_{i, i} \tag{17.41}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+(\nabla \cdot M)_{i_2 \dots i_r} = M_{i_1 \dots i_r, i_1} \tag{17.42}
+\]
+</span>
+
+<p>从值形状的角度考虑，<code>grad</code>算符将一个轴附加到其操作对象的形状的末尾，而<code>nabla_grad</code>算符则是预先就选定了轴。 对于标量梯度，结果是相同的。 相应地，<code>div</code>算符是与其操作对象关于最后一个索引求和，而<code>nabla_div</code>算符是与其操作对象关于第一个索引求和。 对于向量的散度，也是相同的结果。</p>
+<p>算符<code>curl</code>和<code>rot</code>按惯例是没有区别的。 对3维向量表达式，可以由
+
+
+<span class="katex">
+  \(\nabla\)
+</span>
+算符和叉积来定义旋度：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\mathrm{curl}(v) & \equiv \nabla \times v \\ &=e_0(v_{2,1} − v_{1,2}) − e_1(v_{2,0} − v_{0,2}) + e_2(v_{1,0} − v_{0,1})\end{aligned} \tag{17.43}
+\]
+</span>
+
+<p>对于2维向量和标量表达式，定义为：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{curl}(v) \equiv v_{1,0} − v_{0,1} \tag{17.44}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+\mathrm{curl}(f) \equiv f_{,1}e_0 − f_{,0}e_1 \tag{17.45}
+\]
+</span>
+
+<p><strong>用户定义变量</strong>   第二类微分变量是用户定义的变量，可以表示任意表达式。 关于任意量的自动求导，对很多任务都是有用的，比如：从物性定律微分到计算灵敏度。 可以将任意表达式
+
+
+<span class="katex">
+  \(g\)
+</span>
+指定为一个变量
+
+
+<span class="katex">
+  \(v\)
+</span>
+。 被定义为
+
+
+<span class="katex">
+  \(v\)
+</span>
+的函数的表达式
+
+
+<span class="katex">
+  \(f\)
+</span>
+，可对
+
+
+<span class="katex">
+  \(f\)
+</span>
+作关于
+
+
+<span class="katex">
+  \(v\)
+</span>
+的微分:</p>
+
+
+
+<span class="katex">
+  \[
+v = g \tag{17.46}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+f = f (v) \tag{17.47}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+h(v) = \frac{\partial f (v)}{\partial v}  \tag{17.48}
+\]
+</span>
+
+<p>设
+
+
+<span class="katex">
+  \(g = \sin(x_0)\)
+</span>
+和
+
+
+<span class="katex">
+  \(f = e^{v^2}\)
+</span>
+，得到 
+
+
+<span class="katex">
+  \(h = 2v e^{v^2} = 2 \sin(x_0)e^{\sin^2(x_0)}\)
+</span>
+，可以实现如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># UFL code</span>
+<span style="color:#75715e"># 在较新的版本中，cell没有x这个成员，改用随后的两行代码</span>
+<span style="color:#75715e"># g = sin(cell.x[0])  </span>
+x <span style="color:#f92672">=</span> SpatialCoordinate(cell)
+g <span style="color:#f92672">=</span> sin(x[<span style="color:#ae81ff">0</span>])
+v <span style="color:#f92672">=</span> variable(g)
+f <span style="color:#f92672">=</span> exp(v<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>)
+h <span style="color:#f92672">=</span> diff(f, v)
+</code></pre></div><p>尝试在Python会话中运行此代码并打印表达式。 结果是</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+<span style="color:#960050;background-color:#1e0010">»</span><span style="color:#f92672">&gt;</span><span style="color:#66d9ef">print</span>(v)
+var0(sin((x)[<span style="color:#ae81ff">0</span>]))
+<span style="color:#960050;background-color:#1e0010">»</span><span style="color:#f92672">&gt;</span><span style="color:#66d9ef">print</span>(h)
+d<span style="color:#f92672">/</span>d[var0(sin((x)[<span style="color:#ae81ff">0</span>]))] (exp((var0(sin((x)[<span style="color:#ae81ff">0</span>]))) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span>))
+</code></pre></div><p>注意，该变量有标签“var0”，并且h仍表示抽象导数。第17.7节解释了如何计算导数。</p>
+<h3 id="1745-其他算符">17·4·5 其他算符</h3>
+<p>还提供了一些算符来实现不连续Galerkin方法。 基本概念是将表达式限制在内部维面的正侧或负侧，分别简单地表示为<code>v(&quot;+&quot;)</code>或<code>v(&quot;-&quot;)</code>。 最重要的是，实现了算符<code>avg</code>和<code>jump</code>，被定义为</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{avg}(v) =\frac{1}{2}(v^+ + v^−) \tag{17.49}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+\mathrm{jump}(v) = v^+ − v^− \tag{17.50}
+\]
+</span>
+
+<p>这些算符只能被用于内部维面上的积分（<code>*dS</code>）。</p>
+<p>UFL中包含的唯一控制流结构是条件表达式。 条件表达式取两个值之一，具体取决于布尔逻辑表达式的结果。 语法是</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># UFL code</span>
+f <span style="color:#f92672">=</span> conditional(condition, true_value, false_value)
+</code></pre></div><p>解释为</p>
+
+
+
+<span class="katex">
+  \[
+f = \left\{\begin{aligned}\mathrm{true\_value}, &\qquad 如果 \mathrm{condition}为真 \\ \mathrm{false\_value} , &\qquad 否则 \end{aligned} \right. \tag{17.51}
+\]
+</span>
+
+<p>条件可以是以下之一</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lt(a, b)</code> 
+
+
+<span class="katex">
+  \(\leftrightarrow (a < b)\)
+</span>
+</td>
+<td><code>gt(a, b</code> 
+
+
+<span class="katex">
+  \(\leftrightarrow (a > b)\)
+</span>
+</td>
+</tr>
+<tr>
+<td><code>le(a, b)</code> 
+
+
+<span class="katex">
+  \(\leftrightarrow (a \le b)\)
+</span>
+</td>
+<td><code>ge(a, b)</code> 
+
+
+<span class="katex">
+  \(\leftrightarrow (a \ge b)\)
+</span>
+</td>
+</tr>
+<tr>
+<td><code>eq(a, b)</code> 
+
+
+<span class="katex">
+  \(\leftrightarrow(a = b)\)
+</span>
+</td>
+<td><code>ne(a, b)</code> 
+
+
+<span class="katex">
+  \(\leftrightarrow (a \ne b)\)
+</span>
+</td>
+</tr>
+<tr>
+<td><code>And(P, Q)</code> 
+
+
+<span class="katex">
+  \(\leftrightarrow (P \wedge Q)\)
+</span>
+</td>
+<td><code>Or(P, Q)</code> 
+
+
+<span class="katex">
+  \(\leftrightarrow (P \vee Q)\)
+</span>
+</td>
+</tr>
+<tr>
+<td><code>Not(P)</code> 
+
+
+<span class="katex">
+  \(\leftrightarrow (\neg P)\)
+</span>
+</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80">章节目录</a>】</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0121/">
+    下一页<br>UFL：有限元形式语言》形式算符&amp;表达式的表示【翻译】
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0119/">
+      上一页<br>UFL：有限元形式语言》概述&amp;有限元空间&amp;形式【翻译】
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0120.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/fem/0120.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ii实现17ufl有限元形式语言表达式">II.实现》17.UFL：有限元形式语言》表达式</a>
+      <ul>
+        <li><a href="#174-定义表达式">17·4 定义表达式</a>
+          <ul>
+            <li><a href="#1741-形式的参数">17·4·1 形式的参数</a></li>
+            <li><a href="#1742-索引记号">17·4·2 索引记号</a></li>
+            <li><a href="#1743-代数算符和函数">17·4·3 代数算符和函数</a></li>
+            <li><a href="#1744-微分算符">17·4·4 微分算符</a></li>
+            <li><a href="#1745-其他算符">17·4·5 其他算符</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

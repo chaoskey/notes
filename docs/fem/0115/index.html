@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DOLFIN：C&#43;&#43;/Python有限元库》变分形式/组装/边界条件【翻译】"><meta property="og:title" content="DOLFIN：C&#43;&#43;/Python有限元库》变分形式/组装/边界条件【翻译】" />
+<meta property="og:description" content="II.实现》10.DOLFIN：C&#43;&#43;/Python有限元库》变分形式/组装/边界条件
+【章节目录】
+10·3·7 变分形式
+DOLFIN依靠FEniCS工具链FIAT–UFL–FFC / SFC–UFC来计算有限元变分形式。  使用形式编译器FFC或SFC（第11章和第15章）之一来编译以UFL形式语言表示的变分形式（第17章），DOLFIN使用生成的UFC代码（第16章）来计算（组装）变分形式 。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/0115/" />
+<meta property="article:published_time" content="2021-01-11T09:27:35+08:00" />
+<meta property="article:modified_time" content="2021-01-11T09:27:35+08:00" />
+<title>DOLFIN：C&#43;&#43;/Python有限元库》变分形式/组装/边界条件【翻译】 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a>
+<ul>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E6%96%B9%E6%B3%95">第二章 有限元方法</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%B8%B8%E8%A7%81%E6%9C%89%E9%99%90%E5%85%83">第三章 常见有限元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8%E5%8F%82%E8%80%83%E5%8D%95%E5%85%83">第四章 构造通用参考单元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F">第五章 有限元变分形式</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%BB%84%E8%A3%85">第六章 有限元组装</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%AD%A3%E4%BA%A4%E8%A1%A8%E7%A4%BA">第七章 有限元变分形式的正交表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA">第八章 有限元变分形式的张量表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E7%9A%84%E7%A6%BB%E6%95%A3%E4%BC%98%E5%8C%96">第九章 有限元矩阵计算的离散优化</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E7%AB%A0-dolfincpython%E6%9C%89%E9%99%90%E5%85%83%E5%BA%93">第十章 DOLFIN：C++/Python有限元库</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-ufl%E6%9C%89%E9%99%90%E5%85%83%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80">第十七章 UFL：有限元形式语言</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-unicorn%E7%BB%9F%E4%B8%80%E7%9A%84%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6%E6%B1%82%E8%A7%A3%E5%99%A8">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>DOLFIN：C&#43;&#43;/Python有限元库》变分形式/组装/边界条件【翻译】</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ii实现10dolfincpython有限元库变分形式组装边界条件">II.实现》10.DOLFIN：C++/Python有限元库》变分形式/组装/边界条件</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#1037-变分形式">10·3·7 变分形式</a></li>
+            <li><a href="#1038-有限元组装">10·3·8 有限元组装</a></li>
+            <li><a href="#1039-边界条件">10·3·9 边界条件</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0116/">
+    下一页<br>DOLFIN：C&#43;&#43;/Python有限元库》变分问题/文件/可视化【翻译】
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0114/">
+      上一页<br>DOLFIN：C&#43;&#43;/Python有限元库》有限元/函数/表达式【翻译】
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/fem/0115/">DOLFIN：C&#43;&#43;/Python有限元库》变分形式/组装/边界条件【翻译】</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2021-01-11</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/FEniCS">FEniCS</a>
+      , 
+      <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95">有限元法</a>
+      , 
+      <a href="/notes/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">偏微分方程</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0115.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h1 id="ii实现10dolfincpython有限元库变分形式组装边界条件">II.实现》10.DOLFIN：C++/Python有限元库》变分形式/组装/边界条件</h1>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93">章节目录</a>】</p>
+<h3 id="1037-变分形式">10·3·7 变分形式</h3>
+<p>DOLFIN依靠FEniCS工具链FIAT–UFL–FFC / SFC–UFC来计算有限元变分形式。  使用形式编译器FFC或SFC（第11章和第15章）之一来编译以UFL形式语言表示的变分形式（第17章），DOLFIN使用生成的UFC代码（第16章）来计算（组装）变分形式 。</p>
+<p>UFL形式语言允许广泛的变分形式以接近数学符号的语言来表达，作为例证，下面的表达式定义（或部分定义）了线性弹性问题离散化的双线性和线性形式：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># UFL code</span>
+a <span style="color:#f92672">=</span> inner(sigma(u), epsilon(v))<span style="color:#f92672">*</span>dx
+L <span style="color:#f92672">=</span> dot(f, v)<span style="color:#f92672">*</span>dx
+</code></pre></div><p>这应该与相应的数学符号进行比较：</p>
+
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \[
+a(u, v) = \int_\Omega  \sigma(u) : \epsilon(v)dx \tag{10.3}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+L(v) = \int_\Omega f \cdot v dx \tag{10.4}
+\]
+</span>
+
+<p>在此，
+
+
+<span class="katex">
+  \(\epsilon(v) = (\mathrm{grad} \ v + (\mathrm{grad} \ v)^T)/2\)
+</span>
+表示对称梯度，
+
+
+<span class="katex">
+  \(\sigma(v) = 2\mu \epsilon(v) + \lambda \mathrm{tr} \ \epsilon(v) I\)
+</span>
+是应力张量。  有关UFL形式语言的详细介绍，请参阅第17章。</p>
+<p>C++接口的用户必须通过在命令行上调用形式编译器来显式处理代码生成过程。  为了求解选择了特定参数值（Lamé常数
+
+
+<span class="katex">
+  \(\mu\)
+</span>
+和
+
+
+<span class="katex">
+  \(\lambda\)
+</span>
+）的线性弹性问题，用户可以在名为Elasticity.ufl的文件中键入以下代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># UFL code</span>
+
+V <span style="color:#f92672">=</span> VectorElement(<span style="color:#e6db74">&#34;Lagrange&#34;</span>, tetrahedron, <span style="color:#ae81ff">1</span>)
+
+u <span style="color:#f92672">=</span> TrialFunction(V)
+v <span style="color:#f92672">=</span> TestFunction(V)
+f <span style="color:#f92672">=</span> Coefficient(V)
+
+E <span style="color:#f92672">=</span> <span style="color:#ae81ff">10.0</span>
+nu <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.3</span>
+
+mu <span style="color:#f92672">=</span> E <span style="color:#f92672">/</span> (<span style="color:#ae81ff">2.0</span><span style="color:#f92672">*</span>(<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">+</span> nu))
+lmbda <span style="color:#f92672">=</span> E<span style="color:#f92672">*</span>nu <span style="color:#f92672">/</span> ((<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">+</span> nu)<span style="color:#f92672">*</span>(<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">2.0</span><span style="color:#f92672">*</span>nu))
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sigma</span>(v):
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">2.0</span><span style="color:#f92672">*</span>mu<span style="color:#f92672">*</span>sym(grad(v)) <span style="color:#f92672">+</span> lmbda<span style="color:#f92672">*</span>tr(sym(grad(v)))<span style="color:#f92672">*</span>Identity(v<span style="color:#f92672">.</span>cell()<span style="color:#f92672">.</span>d)
+
+a <span style="color:#f92672">=</span> inner(sigma(u), sym(grad(v)))<span style="color:#f92672">*</span>dx
+L <span style="color:#f92672">=</span> dot(f, v)<span style="color:#f92672">*</span>dx
+</code></pre></div><p>可以使用符合UFL/UFC的形式编译器来编译此代码，以生成UFC C++代码。 例如，使用FFC：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Bash code</span>
+ffc -l dolfin Elasticity.ufl
+</code></pre></div><p>这将生成一个名为Elasticity.h的C++头文件（包括实现），该头文件可以包含在C++程序中，并用于实例化
+
+
+<span class="katex">
+  \(a\)
+</span>
+和
+
+
+<span class="katex">
+  \(L\)
+</span>
+这两种形式：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;dolfin.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Elasticity.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> dolfin;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    UnitSquare mesh(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">8</span>);
+    Elasticity<span style="color:#f92672">::</span>FunctionSpace V(mesh);
+    Elasticity<span style="color:#f92672">::</span>BilinearForm a(V, V);
+    Elasticity<span style="color:#f92672">::</span>LinearForm L(V);
+    MyExpression f; <span style="color:#75715e">// code for the definition of MyExpression omitted
+</span><span style="color:#75715e"></span>    L.f <span style="color:#f92672">=</span> f;
+
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+
+}
+</code></pre></div><p>形式的实例化涉及其定义所在的FunctionSpace实例化。  在创建形式之后，任何出现在形式定义中的系数（此处为右侧f）必须被加上。 Python用户可依赖于自动代码生成，并直接将变分形式定义为Python脚本的一部分：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+
+<span style="color:#f92672">from</span> dolfin <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+
+mesh <span style="color:#f92672">=</span> UnitSquare(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">8</span>)
+V <span style="color:#f92672">=</span> VectorFunctionSpace(mesh, <span style="color:#e6db74">&#34;Lagrange&#34;</span>, <span style="color:#ae81ff">1</span>)
+
+u <span style="color:#f92672">=</span> TrialFunction(V)
+v <span style="color:#f92672">=</span> TestFunction(V)
+f <span style="color:#f92672">=</span> MyExpression() <span style="color:#75715e"># code emitted for the definition of f</span>
+
+E <span style="color:#f92672">=</span> <span style="color:#ae81ff">10.0</span>
+nu <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.3</span>
+
+mu <span style="color:#f92672">=</span> E <span style="color:#f92672">/</span> (<span style="color:#ae81ff">2.0</span><span style="color:#f92672">*</span>(<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">+</span> nu))
+lmbda <span style="color:#f92672">=</span> E<span style="color:#f92672">*</span>nu <span style="color:#f92672">/</span> ((<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">+</span> nu)<span style="color:#f92672">*</span>(<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">2.0</span><span style="color:#f92672">*</span>nu))
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sigma</span>(v):
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">2.0</span><span style="color:#f92672">*</span>mu<span style="color:#f92672">*</span>sym(grad(v)) <span style="color:#f92672">+</span> lmbda<span style="color:#f92672">*</span>tr(sym(grad(v)))<span style="color:#f92672">*</span>Identity(v<span style="color:#f92672">.</span>cell()<span style="color:#f92672">.</span>d)
+
+a <span style="color:#f92672">=</span> inner(sigma(u), sym(grad(v)))<span style="color:#f92672">*</span>dx
+L <span style="color:#f92672">=</span> dot(f, v)<span style="color:#f92672">*</span>dx
+</code></pre></div><p>这个脚本将触发自动代码生成，以定义FunctionSpace V。 两种形式
+
+
+<span class="katex">
+  \(a\)
+</span>
+和
+
+
+<span class="katex">
+  \(L\)
+</span>
+的代码生成被推迟到相应的离散算符（矩阵和向量）被组装的那一刻。</p>
+<h3 id="1038-有限元组装">10·3·8 有限元组装</h3>
+<p>DOLFIN的核心功能是有限元变分形式的组装。  给定变分形式（
+
+
+<span class="katex">
+  \(a\)
+</span>
+），DOLFIN组装出相应的离散算符（
+
+
+<span class="katex">
+  \(A\)
+</span>
+）。  离散算符的组装服从第6章中描述的一般算法。  以下代码说明了如何分别从泛函（
+
+
+<span class="katex">
+  \(M\)
+</span>
+），线性形式（
+
+
+<span class="katex">
+  \(L\)
+</span>
+）和双线性形式（
+
+
+<span class="katex">
+  \(a\)
+</span>
+）组装出标量（
+
+
+<span class="katex">
+  \(m\)
+</span>
+），向量（
+
+
+<span class="katex">
+  \(b\)
+</span>
+）和矩阵（
+
+
+<span class="katex">
+  \(A\)
+</span>
+）：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>Vector b;
+Matrix A;
+
+<span style="color:#66d9ef">double</span> m <span style="color:#f92672">=</span> assemble(M);
+assemble(b, L);
+assemble(A, a);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+m <span style="color:#f92672">=</span> assemble(M)
+b <span style="color:#f92672">=</span> assemble(L)
+A <span style="color:#f92672">=</span> assemble(a)
+</code></pre></div><p>从Python接口组装变分形式会在运行时自动触发代码生成，编译和链接。 生成的代码将自动实例化并发送到DOLFIN C++编译器。  结果，从Python接口进行有限元组装与从C++接口进行组装同样高效，而处理自动代码生成的开销却很小。  生成的代码将被缓存以供以后重用，因此，相同形式的重复组装或两次运行相同程序不会重新触发代码生成。  相反，先前生成的代码会从缓存中自动加载。</p>
+<p>DOLFIN提供了一种通用的组装算法，用于以任何形式组装任何等级的张量（标量，向量，矩阵等）。  这是可能的，因为组装算法依赖于GenericTensor接口，组装算法依赖于变体形式及其特定离散化的部分是在组装之前生成的，并且网格接口是维数无关的。  组装算法接受许多可选参数，这些参数控制在组装之前是否应重置已组装张量的稀疏性，以及在组装之前是否应将张量清零。  如果在特定子域（使用dx(0)， dx(1)等）上定义了形式，参数也可以支持网格的特定子域。</p>
+<p>除了<code>assemble</code>函数外，DOLFIN还提供<code>assemble_system</code>函数，该函数可组装由双线性和线性形式组成的一对形式，并在组装过程中应用基本边界条件。  边界条件的应用作为<code>assemble_system</code>的调用的一部分，可保持所组装矩阵的对称性（请参见第6章）。</p>
+<p>组装算法已针对使用MPI的分布式内存架构（集群）和使用OpenMP的共享内存架构（多核）进行了并行化。 第10.4节对此进行了更详细的讨论。</p>
+<h3 id="1039-边界条件">10·3·9 边界条件</h3>
+<p>DOLFIN可以处理Neumann（自然）边界和Dirichlet（基本）边界条件的应用。  自然边界条件通常通过问题的变分陈述来应用，而基本边界条件通常应用于离散的方程组。</p>
+<p><strong>自然边界条件</strong>。  自然边界条件通常是作为边界项出现的，这是将微分方程的部分乘以测试函数再积分得到的结果。 作为一个简单的例子，我们考虑线性弹性变分问题。  支配弹性体位移的偏微分方程可以表示为</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned} - \mathrm{div} \ \sigma(u) &= f \qquad \mathrm{in} \ \Omega \\ \sigma \cdot n &= g \qquad \mathrm{on} \ \Gamma_N \subset \partial \Omega \\ u &= u_0 \qquad  \mathrm{on} \  \Gamma_D \subset \partial \Omega \end{aligned}  \tag{10.5}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(u\)
+</span>
+是要计算的未知位移场，
+
+
+<span class="katex">
+  \(\sigma(u)\)
+</span>
+是应力张量，
+
+
+<span class="katex">
+  \(f\)
+</span>
+是给定的力密度，
+
+
+<span class="katex">
+  \(g\)
+</span>
+是在边界的一部分
+
+
+<span class="katex">
+  \(\Gamma_N\)
+</span>
+上的给定牵引，
+
+
+<span class="katex">
+  \(u_0\)
+</span>
+是在边界的一部分
+
+
+<span class="katex">
+  \(\Gamma_D\)
+</span>
+上的给定位移。 乘以测试函数v并分部积分，我们得到</p>
+
+
+
+<span class="katex">
+  \[
+\int_\Omega \sigma(u) : \epsilon(v)dx − \int_{\partial \Omega}(\sigma \cdot n) \cdot v ds = \int_\Omega f \cdot v dx \tag{10.6}
+\]
+</span>
+
+<p>这里，我们利用
+
+
+<span class="katex">
+  \(\sigma(u)\)
+</span>
+的对称性，可将
+
+
+<span class="katex">
+  \(\mathrm{grad} \ v\)
+</span>
+替换为对称梯度
+
+
+<span class="katex">
+  \(\epsilon(v)\)
+</span>
+。 由于位移
+
+
+<span class="katex">
+  \(u\)
+</span>
+在Dirichlet边界
+
+
+<span class="katex">
+  \(\Gamma_D\)
+</span>
+上是已知的，因此让
+
+
+<span class="katex">
+  \(\Gamma_D\)
+</span>
+上的
+
+
+<span class="katex">
+  \(v=0\)
+</span>
+。  此外，我们用边界
+
+
+<span class="katex">
+  \(\Gamma_N\)
+</span>
+其余部分（Neumann）上的给定牵引
+
+
+<span class="katex">
+  \(g\)
+</span>
+替换
+
+
+<span class="katex">
+  \(\sigma \cdot n\)
+</span>
+以获得</p>
+
+
+
+<span class="katex">
+  \[
+\int_\Omega \sigma(u) : \epsilon(v)dx = \int_\Omega f \cdot v dx + \int_{\partial \Omega}(\sigma \cdot n) \cdot v ds\int_{\partial \Omega}g \cdot v ds  \tag{10.7}
+\]
+</span>
+
+<p>以下代码演示了，作为.ufl文件的一部分或Python脚本的一部分，如何以UFL形式语言实现此变分问题：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># UFL code</span>
+a <span style="color:#f92672">=</span> inner(sigma(u), sym(grad(v)))<span style="color:#f92672">*</span>dx
+L <span style="color:#f92672">=</span> dot(f, v)<span style="color:#f92672">*</span>dx <span style="color:#f92672">+</span> dot(g, v)<span style="color:#f92672">*</span>ds
+</code></pre></div><p>要指定边界积分<code>dot(g, v)*ds</code>只沿Neumann边界
+
+
+<span class="katex">
+  \(\Gamma_N\)
+</span>
+求值，必须指定边界的哪一部分包括在
+
+
+<span class="katex">
+  \(ds\)
+</span>
+积分中。 如果只有一个Neumann边界，则可以简单地将
+
+
+<span class="katex">
+  \(ds\)
+</span>
+积分写为，包括Dirichlet边界在内的，整个边界的积分，因为将沿着Dirichlet边界将测试函数v设置为零。</p>
+<p>如果存在多个Neumann边界条件，则必须使用FacetFunction来指定Neumann边界。  此FacetFunction必须为Mesh的每个维面指定其所属的边界部分。  对于当前示例，一种适当的策略是用0标记Neumann边界上的每个维面，并用1标记所有其他维面（包括域内部维面）。  这可以通过许多不同的方式来完成。  一种简单的方法是使用程序MeshBuilder，并以图形方式标记Mesh的各个维面。 另一个选择是通过DOLFIN类SubDomain。  以下代码说明了如何将
+
+
+<span class="katex">
+  \(x = 0.5\)
+</span>
+左侧的所有边界维面标记为第一Neumann边界，而将所有其他边界维面标记为第二Neumann边界。  注意，用on_boundary作为参数，提供给DOLFIN的inside函数。  此参数表明一个点是否位于
+
+
+<span class="katex">
+  \(\Omega\)
+</span>
+的边界
+
+
+<span class="katex">
+  \(\partial \Omega\)
+</span>
+上，这使我们可以仅标记
+
+
+<span class="katex">
+  \(x = 0.5\)
+</span>
+左侧边界维面。  还要注意，使用DOLFIN_EPS可以确保由于有限精度算术而包含的点可能恰好位于
+
+
+<span class="katex">
+  \(x = 0.5\)
+</span>
+的右侧。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NeumannBoundary</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> SubDomain
+{
+    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">inside</span>(<span style="color:#66d9ef">const</span> Array<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&amp;</span> x, <span style="color:#66d9ef">bool</span> on_boundary) <span style="color:#66d9ef">const</span>
+    {
+        <span style="color:#66d9ef">return</span> x[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">+</span> DOLFIN_EPS <span style="color:#f92672">&amp;&amp;</span> on_boundary;
+    }
+};
+
+NeumannBoundary neumann_boundary;
+FacetFunction<span style="color:#f92672">&lt;</span>uint<span style="color:#f92672">&gt;</span> exterior_facet_domains(mesh);
+exterior_facet_domains.set_all(<span style="color:#ae81ff">1</span>);
+neumann_boundary.mark(exterior_facet_domains, <span style="color:#ae81ff">0</span>);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NeumannBoundary</span>(SubDomain):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inside</span>(self, x, on_boundary):
+        <span style="color:#66d9ef">return</span> x[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">+</span> DOLFIN_EPS <span style="color:#f92672">and</span> on_boundary
+
+neumann_boundary <span style="color:#f92672">=</span> NeumannBoundary()
+exterior_facet_domains <span style="color:#f92672">=</span> FacetFunction(<span style="color:#e6db74">&#34;uint&#34;</span>, mesh)
+exterior_facet_domains<span style="color:#f92672">.</span>set_all(<span style="color:#ae81ff">1</span>)
+neumann_boundary<span style="color:#f92672">.</span>mark(exterior_facet_domains, <span style="color:#ae81ff">0</span>)
+</code></pre></div><p>当与使用ds(0)和ds(1)定义的积分组合时，这些积分将分别对应于x = 0.5左侧和x = 0.5右侧所有维面边界上的积分。</p>
+<p>一旦将边界指定为FacetFunction，就可以使用该对象来定义相应的积分域。  这在C++和Python中是不同的。 对C++，必须将ds成员变量分配给相应形式的：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>a.ds <span style="color:#f92672">=</span> exterior_facet_domains;
+L.ds <span style="color:#f92672">=</span> exterior_facet_domains;
+</code></pre></div><p>除了根据ds成员变量指定的external_facet_domains之外，可以类似地使用dx成员变量指定cell_domains和使用dS变量指定interior_facet_domains。  请注意，不同形式可能会使用不同的边界定义。  对Python，可以通过下标简单地将边界定义连接到相应的测度：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+dss <span style="color:#f92672">=</span> ds[neumann_boundary]
+a <span style="color:#f92672">=</span> <span style="color:#f92672">...</span> <span style="color:#f92672">+</span> g<span style="color:#f92672">*</span>v<span style="color:#f92672">*</span>dss(<span style="color:#ae81ff">0</span>) <span style="color:#f92672">+</span> h<span style="color:#f92672">*</span>v<span style="color:#f92672">*</span>dss(<span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> <span style="color:#f92672">...</span>
+</code></pre></div><p>是否正确指定边界是常见的错误来源。  为了调试边界条件的详情，可通过将FacetFunction写入VTK文件（请参阅文件I/O部分）或使用<code>plot</code>命令来绘制指定边界标记的FacetFunction可能会有所帮助。  使用<code>plot</code>命令时，绘图会显示插值到Mesh顶点的维面值。  因此，在这种情况下，必须小心解释靠近区域边界（角）的图。  在VTK输出中不存在该问题。</p>
+<p><strong>基本边界条件</strong>。   基本边界条件的应用是由DirichletBC类处理的。  使用此类，可以根据FunctionSpace，Function或Expression以及子域来指定Dirichlet边界条件。  可以根据SubDomain对象或FacetFunction的各项来指定子域。  DirichletBC指定的解应等于给定子域上的给定值。</p>
+<p>以下代码示例说明了，对弹性问题 (10.5)，在Dirichlet边界
+
+
+<span class="katex">
+  \(\Gamma_D\)
+</span>
+（此处假定为
+
+
+<span class="katex">
+  \(x = 0.5\)
+</span>
+右侧的边界的一部分）上，如何使用SubDomain类来定义Dirichlet条件
+
+
+<span class="katex">
+  \(u(x) = u_0(x) = \sin x\)
+</span>
+ 。  或者，可以使用FacetFunction指定子域。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DirichletValue</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Expression
+{
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">eval</span>(Array<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&amp;</span> values, <span style="color:#66d9ef">const</span> Array<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&amp;</span> x) <span style="color:#66d9ef">const</span>
+    {
+        values[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> sin(x[<span style="color:#ae81ff">0</span>]);
+    }
+};
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DirichletBoundary</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> SubDomain
+{
+    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">inside</span>(<span style="color:#66d9ef">const</span> Array<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&amp;</span> x, <span style="color:#66d9ef">bool</span> on_boundary) <span style="color:#66d9ef">const</span>
+    {
+        <span style="color:#66d9ef">return</span> x[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">-</span> DOLFIN_EPS <span style="color:#f92672">&amp;&amp;</span> on_boundary;
+    }
+};
+
+DirichletValue u_0;
+DirichletBoundary Gamma_D;
+
+DirichletBC <span style="color:#a6e22e">bc</span>(V, u_0, Gamma_D);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DirichletValue</span>(Expression):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">eval</span>(self, value, x):
+        values[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> sin(x[<span style="color:#ae81ff">0</span>])
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DirichletBoundary</span>(SubDomain):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inside</span>(self, x, on_boundary):
+        <span style="color:#66d9ef">return</span> x[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">-</span> DOLFIN_EPS <span style="color:#f92672">and</span> on_boundary
+
+u_0 <span style="color:#f92672">=</span> DirichletValue()
+Gamma_D <span style="color:#f92672">=</span> DirichletBoundary()
+
+bc <span style="color:#f92672">=</span> DirichletBC(V, u_0, Gamma_D)
+</code></pre></div><p>Python用户还可以使用以下紧凑语法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+u_0 <span style="color:#f92672">=</span> Expression(<span style="color:#e6db74">&#34;sin(x[0])&#34;</span>)
+bc <span style="color:#f92672">=</span> DirichletBC(V, u_0, <span style="color:#e6db74">&#34;x[0] &gt; 0.5 &amp;&amp; on_boundary&#34;</span>)
+</code></pre></div><p>为了加快Dirichlet边界条件的应用，Python接口的用户还可以使用函数<code>compile_subdomains</code>。  有关详细信息，请参阅DOLFIN程序员参考。</p>
+<p>可以将Dirichlet边界条件应用于线性系统或与Function相关的自由度矢量，如以下代码示例所示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>bc.apply(A, b);
+bc.apply(u.vector());
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+bc<span style="color:#f92672">.</span>apply(A, b)
+bc<span style="color:#f92672">.</span>apply(u<span style="color:#f92672">.</span>vector())
+</code></pre></div><p>将Dirichlet边界条件应用于线性系统将识别，应设为给定值的，所有自由度，并对线性系统进行修改，以使其解满足边界条件。  这是通过将与Dirichlet值相对应的矩阵行对角线归零并插入1，并将Dirichlet值插入右侧矢量的相应项中来实现的。  边界条件的这种应用不能保持对称性。 如果需要对称性，则可以选择使用<code>assemble_system</code>函数，它在组装过程中对称地应用Dirichlet边界条件。</p>
+<p>多个边界条件可以应用于单个系统或向量。  如果将两个不同的边界条件应用于相同的自由度，则最后应用的值将覆盖任何先前设置的值。</p>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93">章节目录</a>】</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0116/">
+    下一页<br>DOLFIN：C&#43;&#43;/Python有限元库》变分问题/文件/可视化【翻译】
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0114/">
+      上一页<br>DOLFIN：C&#43;&#43;/Python有限元库》有限元/函数/表达式【翻译】
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0115.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/fem/0115.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ii实现10dolfincpython有限元库变分形式组装边界条件">II.实现》10.DOLFIN：C++/Python有限元库》变分形式/组装/边界条件</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#1037-变分形式">10·3·7 变分形式</a></li>
+            <li><a href="#1038-有限元组装">10·3·8 有限元组装</a></li>
+            <li><a href="#1039-边界条件">10·3·9 边界条件</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

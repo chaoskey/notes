@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>守恒律 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E5%AE%88%E6%81%92%E5%BE%8B/</link>
+    <description>Recent content in 守恒律 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Wed, 26 Feb 2020 20:14:33 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E5%AE%88%E6%81%92%E5%BE%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>对称性与守恒律（Noether定理）</title>
+      <link>https://chaoskey.gitee.io/notes/docs/theophy/0072/</link>
+      <pubDate>Wed, 26 Feb 2020 20:14:33 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0072/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;如果知道所有对称性，原则上可以写出具体拉格朗日量。如果只知道部分对称性，也可根据&lt;code&gt;Noether定理&lt;/code&gt;得知对称性所关联的守恒律。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Noether定理&lt;/code&gt;：每一个保持拉格朗日量不变的单参微分同胚群（对称性），必有运动方程组对应的一个首次积分（守恒律）。&lt;/p&gt;
+&lt;p&gt;套路：研究无穷小变换下的拉格朗日量变换。&lt;/p&gt;
+&lt;p&gt;然后，就是三个经典范例。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="整合Julia和Python的集成环境（Win10）"><meta property="og:title" content="整合Julia和Python的集成环境（Win10）" />
+<meta property="og:description" content="目标
+１） 统一利用Visual Studio Code作为Julia和Python的ＩＤＥ
+２） 统一利用Jupyter作为Julia和Python的Notebook
+３） 以Julia作为我主要的使用语言，确保能调用Python的库包" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/julia/0001/" />
+<meta property="article:published_time" content="2020-01-08T19:20:35+08:00" />
+<meta property="article:modified_time" content="2020-01-08T19:20:35+08:00" />
+<title>整合Julia和Python的集成环境（Win10） | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a>
+<ul>
+<li><a href="/notes/docs/julia/0001/"class=active>整合Julia和Python的集成环境（Win10）</a></li>
+<li><a href="/notes/docs/julia/0095/">科学计算环境搭建（Win10+WSL2+Ubuntu）</a></li>
+<li><a href="/notes/docs/julia/0002/">Julia中的数学符号演算</a></li>
+<li><a href="/notes/docs/julia/0003/">基于Julia的科学计算功能库整理</a></li>
+<li><a href="/notes/docs/diffgeo/0070/">微分几何中的计算</a></li>
+<li><a href="/notes/docs/julia/0088/">平面三体问题</a></li>
+<li><a href="/notes/docs/julia/0089/">有限差分法求解一维热传导方程</a></li>
+<li><a href="/notes/docs/julia/0090/">Galerkin法解常微分方程边值问题</a></li>
+<li><a href="/notes/docs/julia/0091/">有限元法解常微分方程边值问题</a></li>
+<li><a href="/notes/docs/julia/0092/">有限元之平面三角单元</a></li>
+<li><a href="/notes/docs/julia/0093/">有限元之Delaunay三角剖分</a></li>
+<li><a href="/notes/docs/julia/0094/">有限元法解偏微分方程（FEniCS）</a></li>
+<li><a href="/notes/docs/julia/0096/">有限元法求解牛顿流体（FEniCS）</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>整合Julia和Python的集成环境（Win10）</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#目标">目标</a></li>
+        <li><a href="#第一步-安装anaconda">第一步 安装Anaconda</a></li>
+        <li><a href="#第二步-安装julia">第二步 安装Julia</a></li>
+        <li><a href="#第三步-为julia配置vscode">第三步 为Julia配置VSCode</a></li>
+        <li><a href="#第四步-为julia配置jupyter">第四步 为Julia配置Jupyter</a></li>
+        <li><a href="#第五步-安装gr库">第五步 安装GR库</a></li>
+        <li><a href="#第六步-julia调用python库包的基础配置">第六步 Julia调用Python库包的基础配置</a></li>
+        <li><a href="#大功告成">大功告成</a></li>
+        <li><a href="#第七步-改用jupyter-lab-淘汰掉juppter-notebook">第七步 改用Jupyter Lab 【“淘汰掉”Juppter Notebook】</a></li>
+        <li><a href="#第八步-整合wolframscript">第八步 整合WolframScript</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/julia/0002/">
+    下一页<br>Julia中的数学符号演算
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/posts/0067/">
+      上一页<br>通过实例掌握流编辑器sed
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/julia/0001/">整合Julia和Python的集成环境（Win10）</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-01-08</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/julia">julia</a>
+      , 
+      <a href="/notes/tags/python">python</a>
+      , 
+      <a href="/notes/tags/jupyter">jupyter</a>
+      , 
+      <a href="/notes/tags/vscode">vscode</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/julia/0001.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h2 id="目标">目标</h2>
+<p>１） 统一利用<strong>Visual Studio Code</strong>作为Julia和Python的ＩＤＥ</p>
+<p>２） 统一利用<strong>Jupyter</strong>作为Julia和Python的Notebook</p>
+<p>３） 以Julia作为我主要的使用语言，确保能调用Python的库包</p>
+<h2 id="第一步-安装anaconda">第一步 安装Anaconda</h2>
+<blockquote>
+<p>国内建议到<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/">清华开源镜像</a>站根据各自的情况选择下载。</p>
+</blockquote>
+<p>1）下载、安装【按提示安装VSCode，如果没有的话】</p>
+<p>我选择的是： Anaconda3-5.3.1-Windows-x86_64.exe   建议安装在非系统盘。</p>
+<p>2）配置国内镜像，我选择<a href="https://mirror.tuna.tsinghua.edu.cn/help/anaconda/">清华开源镜像</a>：</p>
+<ul>
+<li>启动Anaconda命令行，执行下面命令配置镜像：</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/  
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/  
+conda config --set show_channel_urls yes
+</code></pre></div><ul>
+<li>检查镜像设置</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">conda config --show channels
+</code></pre></div><p>3）安装时VSCode自动配置好了，如果手工安装的VSCode,需要手工搜索安装Anaconda扩展</p>
+<p><img src="/notes/images/0151.jpg" alt="0151.jpg"></p>
+<p>4）最后用VSCode写一个简单的Hello World程序验证之。</p>
+<h2 id="第二步-安装julia">第二步 安装Julia</h2>
+<blockquote>
+<p>国内建议到<a href="https://mirrors.bfsu.edu.cn/julia-releases/bin/">北外镜像站</a>站根据各自的情况选择下载。</p>
+</blockquote>
+<p>1）Julia的下载、安装、设置环境变量PATH</p>
+<p>我选择的是： julia-1.4.2-win64.exe 建议安装在非系统盘。</p>
+<p>2） 设置Julia库目录  【注意目录要和实际一致】</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">mklink <span style="color:#f92672">/</span>D <span style="color:#f92672">/</span>J  <span style="color:#f92672">%</span>HOMEPATH<span style="color:#f92672">%\.</span>julia D<span style="color:#f92672">:\</span>ProgramData<span style="color:#f92672">\</span>Julia<span style="color:#f92672">\</span>JuliaDepot
+</code></pre></div><ol start="3">
+<li>设置<a href="https://mirrors.bfsu.edu.cn/help/julia/">北外镜像站</a>   【要重启julia】</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># %HOMEPATH%\.julia\config\startup.jl</span>
+ENV[<span style="color:#e6db74">&#34;JULIA_PKG_SERVER&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://mirrors.bfsu.edu.cn/julia/static&#34;</span>
+</code></pre></div><p>4）更新Julia库</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#f92672">&gt;</span> julia
+
+julia <span style="color:#f92672">&gt;</span> ]
+pkg<span style="color:#f92672">&gt;</span> update
+</code></pre></div><h2 id="第三步-为julia配置vscode">第三步 为Julia配置VSCode</h2>
+<p>1）安装julia扩展插件</p>
+<p><img src="/notes/images/0001.jpg" alt="0001.jpg"></p>
+<p>2）打开 文件》首选项》设置，设置Julia命令路径【注意红圈标记】</p>
+<p><img src="/notes/images/0013.jpg" alt="0013.jpg"></p>
+<p><img src="/notes/images/0014.jpg" alt="0014.jpg"></p>
+<p>3）写一个简单的Hello world程序，验证配置是否成功。</p>
+<h2 id="第四步-为julia配置jupyter">第四步 为Julia配置Jupyter</h2>
+<p>安装Anaconda时，已经为Python配置过Jupyter了，现在只要补充为Julia配置即可。</p>
+<p>1）设置Jupyter路径 【要重启julia】</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># %HOMEPATH%/.julia/config/startup.jl  【注意和实际一致】</span>
+ENV[<span style="color:#e6db74">&#34;JUPYTER&#34;</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;D:</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">ProgramData</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Anaconda3</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Scripts</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">jupyter.exe&#34;</span>
+</code></pre></div><ol start="2">
+<li>然后安装IJulia</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">]
+pkg<span style="color:#f92672">&gt;</span> add IJulia
+</code></pre></div><p>3） 设置jupter的默认目录：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 务必在Anaconda命令行中执行</span>
+jupyter notebook <span style="color:#f92672">--</span>generate<span style="color:#f92672">-</span>config
+
+<span style="color:#75715e"># 这个命令会生成一个文件：</span>
+<span style="color:#75715e"># %HOMEPATH%/.jupyter/jupyter_notebook_config.py</span>
+
+<span style="color:#75715e"># 在此文件中找到下行，取消注释，修改目标目录【以实际为准】</span>
+<span style="color:#75715e"># c.NotebookApp.notebook_dir = u&#39;E:\\Work&#39;</span>
+</code></pre></div><ol start="4">
+<li>启动Jupyter Notebook，能看见julia内核就算成功。</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 在Anaconda命令行中执行</span>
+
+jupyter notebook
+</code></pre></div><p><img src="/notes/images/0004.jpg" alt="0004.jpg"></p>
+<h2 id="第五步-安装gr库">第五步 安装GR库</h2>
+<p>1）首先当然试图正常安装，如果一切正常，后续步骤忽略</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#f92672">&gt;</span> julia
+
+julia<span style="color:#f92672">&gt;</span> ]
+pkg<span style="color:#f92672">&gt;</span> add GR
+</code></pre></div><p>2） 如果报错，或等待时间太长，意味着是网络问题. 并且大概率是卡在build阶段。  那么你务必准备好翻墙软件再继续：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 建议在cmd命令行中开始</span>
+
+<span style="color:#75715e"># 设置代理【以实际为准】</span>
+<span style="color:#f92672">&gt;</span> set http_proxy<span style="color:#f92672">=</span>http<span style="color:#f92672">://</span><span style="color:#ae81ff">127.0</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0.1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">9081</span>
+<span style="color:#f92672">&gt;</span> set https_proxy<span style="color:#f92672">=</span>http<span style="color:#f92672">://</span><span style="color:#ae81ff">127.0</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0.1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">9081</span>
+
+<span style="color:#f92672">&gt;</span> julia
+
+julia<span style="color:#f92672">&gt;</span> ]
+pkg<span style="color:#f92672">&gt;</span> build GR
+
+Ctrl<span style="color:#f92672">+</span>c
+
+julia<span style="color:#f92672">&gt;</span> exit()
+
+<span style="color:#75715e"># 清除代理</span>
+<span style="color:#f92672">&gt;</span> set http_proxy<span style="color:#f92672">=</span>
+<span style="color:#f92672">&gt;</span> set https_proxy<span style="color:#f92672">=</span>
+</code></pre></div><ul>
+<li>
+<p>验证安装成功否【也可在jupyter notebook中执行】</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#66d9ef">using</span> GR
+histogram(randn(<span style="color:#ae81ff">10000</span>))
+</code></pre></div></li>
+</ul>
+<p><img src="/notes/images/0152.jpg" alt="0152.jpg"></p>
+<h2 id="第六步-julia调用python库包的基础配置">第六步 Julia调用Python库包的基础配置</h2>
+<p>Ａ．进入Julia命令行，首先设置Python的路径 【要重启julia】</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># vim ~/.julia/config/startup.jl  【注意和实际一致】</span>
+ENV[<span style="color:#e6db74">&#34;PYTHON&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;D:</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">ProgramData</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Anaconda3</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">python.exe&#34;</span>
+</code></pre></div><p>Ｂ．安装调用Python的基础库</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">]
+pkg<span style="color:#f92672">&gt;</span> add PyCall
+</code></pre></div><p>Ｃ．以SymPy作为范例，先安装范例需要的Python库，然后执行相应的代码</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">]
+pkg<span style="color:#f92672">&gt;</span> add SymPy　<span style="color:#75715e"># 安装Python库的对应接口库</span>
+
+<span style="color:#66d9ef">using</span> SymPy
+
+<span style="color:#a6e22e">@vars</span> x h <span style="color:#75715e"># 定义符号变量</span>
+limit((sin(x<span style="color:#f92672">+</span>h)<span style="color:#f92672">-</span>sin(x))<span style="color:#f92672">/</span>h,h,<span style="color:#ae81ff">0</span>) <span style="color:#75715e"># 求极限</span>
+diff(sin(x)) <span style="color:#75715e"># 求导</span>
+</code></pre></div><p><img src="/notes/images/0005.jpg" alt="0005.jpg"></p>
+<h2 id="大功告成">大功告成</h2>
+<hr>
+<blockquote>
+<p>后面的内容是额外补充的</p>
+</blockquote>
+<hr>
+<h2 id="第七步-改用jupyter-lab-淘汰掉juppter-notebook">第七步 改用Jupyter Lab 【“淘汰掉”Juppter Notebook】</h2>
+<p>【Juppter Notebook的配置全部保留】</p>
+<p>安装Jupyter Lab：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 在Anaconda命令行中执行</span>
+
+conda install <span style="color:#f92672">-</span>c conda<span style="color:#f92672">-</span>forge jupyterlab
+</code></pre></div><p>启动Jupyter Lab</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 在Anaconda命令行中执行</span>
+
+jupyter lab
+</code></pre></div><p>启动后的效果：</p>
+<p><img src="/notes/images/0153.jpg" alt="0153.jpg"></p>
+<h2 id="第八步-整合wolframscript">第八步 整合WolframScript</h2>
+<blockquote>
+<p>假设1)你已经安装了Wolfram Mathematica 或 免费的WolframEngine，都有WolframScript，并设置好PATH环境变量;</p>
+<p>假设2）你已经安装配置好了Git，并设置好PATH环境变量</p>
+</blockquote>
+<p>参考 <a href="https://github.com/WolframResearch/WolframLanguageForJupyter">WolframLanguageForJupyter</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 务必在Anaconda命令行中执行【要和jupyter整合】</span>
+
+git clone https<span style="color:#f92672">://</span>github<span style="color:#f92672">.</span>com<span style="color:#f92672">/</span>WolframResearch<span style="color:#f92672">/</span>WolframLanguageForJupyter<span style="color:#f92672">.</span>git
+
+cd WolframLanguageForJupyter
+
+<span style="color:#f92672">.\</span>configure<span style="color:#f92672">-</span>jupyter<span style="color:#f92672">.</span>wls add
+</code></pre></div><p>重启Jupyter Lab， 就可以看见前面那张图中的<code>Wolfram Lanquaqe</code>的图标。</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/julia/0002/">
+    下一页<br>Julia中的数学符号演算
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/posts/0067/">
+      上一页<br>通过实例掌握流编辑器sed
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/julia/0001.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/julia/0001.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#目标">目标</a></li>
+        <li><a href="#第一步-安装anaconda">第一步 安装Anaconda</a></li>
+        <li><a href="#第二步-安装julia">第二步 安装Julia</a></li>
+        <li><a href="#第三步-为julia配置vscode">第三步 为Julia配置VSCode</a></li>
+        <li><a href="#第四步-为julia配置jupyter">第四步 为Julia配置Jupyter</a></li>
+        <li><a href="#第五步-安装gr库">第五步 安装GR库</a></li>
+        <li><a href="#第六步-julia调用python库包的基础配置">第六步 Julia调用Python库包的基础配置</a></li>
+        <li><a href="#大功告成">大功告成</a></li>
+        <li><a href="#第七步-改用jupyter-lab-淘汰掉juppter-notebook">第七步 改用Jupyter Lab 【“淘汰掉”Juppter Notebook】</a></li>
+        <li><a href="#第八步-整合wolframscript">第八步 整合WolframScript</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

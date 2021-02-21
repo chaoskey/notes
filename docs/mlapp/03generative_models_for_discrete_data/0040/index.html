@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="3.2 贝叶斯概念学习"><meta property="og:title" content="3.2 贝叶斯概念学习" />
+<meta property="og:description" content="返回本章目录
+考虑孩子如何学习理解单词的含义，例如“狗”。据推测，孩子的父母指出了这个概念的正面例子，说“看着可爱的小狗！”或“小心小狗”等等。然而，他们提供反面的例子是不太可能的，“看看那只非狗“?。当然，在积极的学习过程中可能会得到负面的例子 - 孩子说“看狗”，父母说“那是猫，亲爱的，不是狗” - 但心理学研究表明，人们可以仅从正面例子来学习概念（Xu和Tenenbaum 2007）。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0040/" />
+<meta property="article:published_time" content="2019-06-28T20:20:35+08:00" />
+<meta property="article:modified_time" content="2019-06-28T20:20:35+08:00" />
+<title>3.2 贝叶斯概念学习 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a>
+<ul>
+<li><a href="/notes/docs/mlapp/01introduction/">第一章 导论</a></li>
+<li><a href="/notes/docs/mlapp/02probability/">第二章 概率</a></li>
+<li><a href="/notes/docs/mlapp/03generative_models_for_discrete_data/">第三章 基于离散数据的生成式模型</a></li>
+<li><a href="/notes/docs/mlapp/04gaussian_models/">第四章 高斯模型</a></li>
+<li><a href="/notes/docs/mlapp/05bayesian_statistics/">第五章 贝叶斯统计</a></li>
+<li><a href="/notes/docs/mlapp/06frequentist_statistics/">第六章 频率派统计</a></li>
+<li><a href="/notes/docs/mlapp/07linear_regression/">第七章 线性回归</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>3.2 贝叶斯概念学习</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#321-拟然likelihood">3.2.1 拟然(Likelihood)</a></li>
+        <li><a href="#322-先验prior">3.2.2 先验(Prior)</a></li>
+        <li><a href="#323-后验posterior">3.2.3 后验(Posterior)</a></li>
+        <li><a href="#324-后验预测分布">3.2.4 后验预测分布</a></li>
+        <li><a href="#325-一个更加复杂的先验">3.2.5 一个更加复杂的先验</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0041/">
+    下一页<br>3.3 贝塔-二项模型
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0039/">
+      上一页<br>3.1 引言
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/mlapp/03generative_models_for_discrete_data/0040/">3.2 贝叶斯概念学习</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2019-06-28</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">机器学习</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E6%A6%82%E5%BF%B5%E5%AD%A6%E4%B9%A0">概念学习</a>
+      , 
+      <a href="/notes/tags/%E6%8B%9F%E7%84%B6">拟然</a>
+      , 
+      <a href="/notes/tags/%E5%85%88%E9%AA%8C">先验</a>
+      , 
+      <a href="/notes/tags/%E5%90%8E%E9%AA%8C">后验</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/03generative_models_for_discrete_data/0040.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<p><a href="/notes/docs/mlapp/03generative_models_for_discrete_data/"><strong>返回本章目录</strong></a></p>
+<p>考虑孩子如何学习理解单词的含义，例如“狗”。据推测，孩子的父母指出了这个概念的正面例子，说“看着可爱的小狗！”或“小心小狗”等等。然而，他们提供反面的例子是不太可能的，“看看那只非狗“?。当然，在积极的学习过程中可能会得到负面的例子 - 孩子说“看狗”，父母说“那是猫，亲爱的，不是狗” - 但心理学研究表明，人们可以仅从正面例子来学习概念（Xu和Tenenbaum 2007）。</p>
+<p><img src="" alt="0057.jpg"></p>
+<blockquote>
+<p>图3.1 在这个数字游戏中, 8个人的平均经验预测分布。头两行：表示看到
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(\mathcal{D}=\{16\}\)
+</span>
+和
+
+
+<span class="katex">
+  \(\mathcal{D}=\{20\}\)
+</span>
+之后 。这说明了以数字为中心扩散的相似性。第三行：看到
+
+
+<span class="katex">
+  \(\mathcal{D}=\{16,8,2,64\}\)
+</span>
+之后 。也看到基于规则的相似行为（2次幂）。底排：看到
+
+
+<span class="katex">
+  \(\mathcal{D}=\{16,23,19,20\}\)
+</span>
+之后 。这说明了聚焦的相似性（数字接近20）。</p>
+</blockquote>
+<p>我们可以认为单词含义学习, 等同于<strong>概念学习</strong>, 也等同于二项分类。为了明白这点，定义
+
+
+<span class="katex">
+  \(f(\boldsymbol{x})=1\)
+</span>
+表示 
+
+
+<span class="katex">
+  \(\boldsymbol{x}\)
+</span>
+ 是概念C的示例; 否则, 
+
+
+<span class="katex">
+  \(f(\boldsymbol{x})=0\)
+</span>
+ 。然后，目标就是学习定义在集合C上的指标函数
+
+
+<span class="katex">
+  \(f\)
+</span>
+。通过允许不确定的
+
+
+<span class="katex">
+  \(f\)
+</span>
+ 或等效的C的元素，我们可以模拟<strong>模糊集理论</strong>，但使用标准概率演算。请注意，标准二项分类器技术同时需要正例和负例。相比之下，我们将设计一种方法，仅从正例中学习。</p>
+<p>出于教学目的，我们将考虑一个非常简单的概念学习案例，称为 <strong>数字游戏</strong>，基于Josh Tenenbaum博士论文的一部分（Tenenbaum 1999）。游戏如下进行: 我选择了一些简单的算术概念 C，例如“素数”或“1到10之间的数字”。然后我给你一系列随机选择的正例
+
+
+<span class="katex">
+  \(\mathcal{D}=\{\boldsymbol{x}_1,\dots,\boldsymbol{x}_N\},\boldsymbol{x}_i \in C\)
+</span>
+ ，并问你一个新的测试例
+
+
+<span class="katex">
+  \(\tilde{\boldsymbol{x}}\)
+</span>
+是否属于C，即我要求你对
+
+
+<span class="katex">
+  \(\tilde{\boldsymbol{x}}\)
+</span>
+进行分类。</p>
+<p>假设，为简单起见，所有数字都是1到100之间的整数。现在如果我告诉你“16”是概念的一个正例。你认为还有哪些其他那些数字是正例？ 17？ 6？ 32？ 99？只用一个案例很难说清楚，所以你的预测会很模糊。据推测，在某种意义上与16相似的数字更有可能。但是以什么方式相似？ 17是类似的，因为它是“靠近”，6是相似的，因为它有一个共同的数字，32是相似的，因为它也是偶数和2的幂，但99似乎不相似。因此，一些数字比其他数字更可能。我们可以将其表示为概率分布
+
+
+<span class="katex">
+  \(p(\tilde{\boldsymbol{x}}|\mathcal{D})\)
+</span>
+: 对任何数据
+
+
+<span class="katex">
+  \(\tilde{\boldsymbol{x}} \in \{1,\dots,100\}\)
+</span>
+, 在给定数据集
+
+
+<span class="katex">
+  \(\mathcal{D}\)
+</span>
+条件下, 
+
+
+<span class="katex">
+  \(\tilde{\boldsymbol{x}} \in C\)
+</span>
+的概率 。称之为 <strong>后验预测分布</strong>。 图3.1（顶排）显示了从实验室实验获得的人的预测分布。我们看到人们在各种相似性下预测与16相似的数字。</p>
+<p>现在假设我告诉你，8,2和64 也是 正面的例子。现在你可能会猜到隐藏的概念是“2次幂”。这是一个案例<strong>归纳</strong>的。鉴于这一假设，预测分布是非常具体的，并将其大部分落在2次幂数上，如图3.1（第三行）所示。相反，如果我告诉你的数据是
+
+
+<span class="katex">
+  \(\mathcal{D}=\{16,23,19,20\}\)
+</span>
+， 你将得到不同的<strong>泛化梯度</strong>( you will get a different kind of <strong>generalization gradient</strong> )，如图3.1（底部）。</p>
+<p>我们如何解释这种行为并在机器中模拟它？经典方法, 归纳起来说, 假设我们有一个概念的<strong>假设空间</strong>(hypothesis space) 
+
+
+<span class="katex">
+  \(\mathcal{H}\)
+</span>
+, 比如: 奇数，偶数，1到100之间的所有数，2次幂，所有以
+
+
+<span class="katex">
+  \(j\)
+</span>
+结尾的数(
+
+
+<span class="katex">
+  \(0 \le j \le 9\)
+</span>
+), 等等. 和数据
+
+
+<span class="katex">
+  \(\mathcal{D}\)
+</span>
+一致的
+
+
+<span class="katex">
+  \(\mathcal{H}\)
+</span>
+子集被称作<strong>版本空间</strong>(version space)。正如我们看到例子那样，版本空间越小，我们对这个概念越肯定（Mitchell 1997）。</p>
+<p>然而，版本空间并不是全部。看到
+
+
+<span class="katex">
+  \(\mathcal{D}=\{16\}\)
+</span>
+后 ，有许多一致的规则; 如何将它们结合起来预测
+
+
+<span class="katex">
+  \(\tilde{\boldsymbol{x}} \in C\)
+</span>
+？此外，看到
+
+
+<span class="katex">
+  \(\mathcal{D}=\{16,8,2,64\}\)
+</span>
+后，你为什么选择“2次幂”规则，而不是说，“所有的偶数”，或“2次幂-{32}”，这两者都与证据一致？ 为此, 我们现在将提供贝叶斯解释。</p>
+<h2 id="321-拟然likelihood">3.2.1 拟然(Likelihood)</h2>
+<p>我们必须解释, 在看到
+
+
+<span class="katex">
+  \(\mathcal{D}=\{16,8,2,64\}\)
+</span>
+之后, 为什么选择
+
+
+<span class="katex">
+  \(h_{two}\overset{\Delta}{=}\)
+</span>
+&quot;2次幂&quot; ，而不是说 
+
+
+<span class="katex">
+  \(h_{even}\overset{\Delta}{=}\)
+</span>
+&quot;偶数&quot;. 考虑到两种假设都与证据相一致。关键的直觉是我们想要避免<strong>可疑的巧合</strong>。如果真正的概念是偶数，为什么我们只看到碰巧是2次幂数字？</p>
+<p>为了形式化这一点，让我们假设从一个概念的<strong>外延</strong>随机均匀地采样获得示例 。 （概念外延只是属于它的数字集合，例如，
+
+
+<span class="katex">
+  \(h_{even}\)
+</span>
+的外延是
+
+
+<span class="katex">
+  \(\{2,4,6,\dots,98,100\}\)
+</span>
+; “以9结尾的数”的外延是
+
+
+<span class="katex">
+  \(\{9,19,\dots,99\}\)
+</span>
+. Tenenbaum称其为<strong>强抽样假设</strong>。 给定这个假设，从
+
+
+<span class="katex">
+  \(h\)
+</span>
+中独立地采样出
+
+
+<span class="katex">
+  \(\mathcal{D}\)
+</span>
+的概率:</p>
+
+
+
+<span class="katex">
+  \[
+p(\mathcal{D} | h)=\left[  \dfrac {1} {{\rm size}(h)}  \right]^N=\left[  \dfrac {1} {\left| h \right|}  \right]^N,  \quad N=\left| \mathcal{D} \right|  \tag{3.2}
+\]
+</span>
+
+<p>这个关键的等式体现了Tenenbaum所说的<strong>尺寸原理</strong>，这意味着该模型倾向于与数据一致的最简单（最小）假设。这通常被称为 <strong>奥卡姆剃刀</strong> 。</p>
+<p>看看它是如何工作的，令让
+
+
+<span class="katex">
+  \(\mathcal{D}=\{ 16 \}\)
+</span>
+ , 那么
+
+
+<span class="katex">
+  \(p(\mathcal{D} | h_{two})={1 \over 6}\)
+</span>
+。因为
+
+
+<span class="katex">
+  \(h_{two}\)
+</span>
+只有6个的小于100的2的幂, 但是
+
+
+<span class="katex">
+  \(p(\mathcal{D} | h_{even})={1 \over 50}\)
+</span>
+，因为有50个偶数。所以
+
+
+<span class="katex">
+  \(h= h_{two}\)
+</span>
+的拟然高过
+
+
+<span class="katex">
+  \(h= h_{even}\)
+</span>
+。 对于4个例子的
+
+
+<span class="katex">
+  \(\mathcal{D}\)
+</span>
+，
+
+
+<span class="katex">
+  \(h_{two}\)
+</span>
+的拟然是
+
+
+<span class="katex">
+  \(\left( 1 \over 6 \right)^4=7.7 \times 10^{-4}\)
+</span>
+，而
+
+
+<span class="katex">
+  \(h_{even}\)
+</span>
+的拟然是
+
+
+<span class="katex">
+  \(\left( 1 \over 50 \right)^4=1.6 \times 10^{-7}\)
+</span>
+。这里<strong>似然比</strong> 几乎是
+
+
+<span class="katex">
+  \(5000:1\)
+</span>
+，有利于
+
+
+<span class="katex">
+  \(h_{two}\)
+</span>
+。这个数据支持了我们先前的直觉，即,如果
+
+
+<span class="katex">
+  \(\mathcal{D}=\{16,8,2,64\}\)
+</span>
+ 是由
+
+
+<span class="katex">
+  \(h_{even}\)
+</span>
+生成. 那么很可能是可疑的巧合.</p>
+<h2 id="322-先验prior">3.2.2 先验(Prior)</h2>
+<p>假设
+
+
+<span class="katex">
+  \(\mathcal{D}=\{16,8,2,64\}\)
+</span>
+。 给定此数据，概念
+
+
+<span class="katex">
+  \(h^{'}=\)
+</span>
+&quot;排除32的2次幂&quot;比
+
+
+<span class="katex">
+  \(h=\)
+</span>
+&quot;2次幂&quot;更可能，因为
+
+
+<span class="katex">
+  \(h^{'}\)
+</span>
+不需要解释这组例子中缺少32的巧合。</p>
+<p><img src="" alt="0058.jpg"></p>
+<blockquote>
+<p>图3.2 
+
+
+<span class="katex">
+  \(\mathcal{D}=\{16\}\)
+</span>
+的 先验, 拟然和后验。</p>
+</blockquote>
+<p>但是，假设
+
+
+<span class="katex">
+  \(h^{'}=\)
+</span>
+&quot;2次幂-{32}&ldquo;比
+
+
+<span class="katex">
+  \(h=\)
+</span>
+&quot;2次幂&quot;似乎“概念上很不自然”。我们可以通过为这种不自然概念指定低的先验概率来捕捉这种直觉。当然，您的先验可能与我的不同。这种贝叶斯推理的<strong>主观</strong>方面引起了很多争议，因为它意味着，例如，儿童和数学教授将会得到不同的答案。事实上，他们可能不仅有不同的先验，而且还有不同的假设空间。然而，我们可以通过将儿童和数学教授的假设空间定义为相同来确定，然后将孩子的先验权重设置为某些“高级”概念为零。因此，先验空间和假设空间之间没有明显的区别。</p>
+<p>虽然先验的主观性是有争议的，但它实际上非常有用。如果你被告知这些数字来自某些算术规则，那么给定1200,1500,900和1400，你可能会认为400可能，但1183不太可能。但如果你被告知数字是健康胆固醇水平的例子，你可能会认为400不太可能，1183可能。因此，我们看到先验是可以使背景知识对问题产生影响的机制。没有这个，快速学习（即从小样本尺寸）是不可能的。</p>
+<p>那么，我们应该使用什么先验呢？为了便于说明，让我们使用一个简单的先验，它将均匀概率放在30个简单的算术概念上，例如“偶数”，“奇数”，“素数”，“以9结尾的数字”，等等。为了事情更有趣，我们将故意使概念变得更加古怪进而更像先验。我们包括两个“不自然”概念，即“2次幂+{37}”和“2次幂-{32}”，但给它们较低的先验权重。有关此先验的图，请参见图3.2（a）。我们稍后会考虑稍微复杂一点。</p>
+<h2 id="323-后验posterior">3.2.3 后验(Posterior)</h2>
+<p>后验是拟然乘上先验再归一化。我们有</p>
+
+
+
+<span class="katex">
+  \[
+p(h | \mathcal{D}) = \dfrac {p(\mathcal{D} | h) p(h)} {\sum_{h^{'} \in \mathcal{H}} {p(\mathcal{D} | h^{'}) p(h^{'})}}= \dfrac {p(h) \mathbb{I}(\mathcal{D} \in h)/\left| h \right|^N } {\sum_{h^{'} \in \mathcal{H}} {p(h^{'}) \mathbb{I}(\mathcal{D} \in h')/\left| h^{'} \right|^N}}   \tag{3.3}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(\mathbb{I}(\mathcal{D} \in h)=1\)
+</span>
+当且仅当所有数据都在假设
+
+
+<span class="katex">
+  \(h\)
+</span>
+的外延中。图3.2描绘了在看到
+
+
+<span class="katex">
+  \(\mathcal{D}=\{16\}\)
+</span>
+后的先验，拟然可能性和后验 。我们看到后验是先验和拟然的结合。在大多数概念的情况下，先验是均匀的，因此后验与拟然成比例。然而，“2次幂+{37}”和“2次幂-{32}”的“不自然的”概念具有低的后验支撑，尽管由于低先验而具有高拟然。相反，由于低拟然，奇数的概念具有较低的后验支持，尽管具有较高的先验。</p>
+<p><img src="" alt="0059.jpg"></p>
+<blockquote>
+<p>图3.3 
+
+
+<span class="katex">
+  \(\mathcal{D}=\{16,8,2,64\}\)
+</span>
+的 先验, 拟然和后验。</p>
+</blockquote>
+<p>图3.3绘制了 看到
+
+
+<span class="katex">
+  \(\mathcal{D} = \{ 16,8,2,64 \}\)
+</span>
+后的先验 ,拟然和后验 。现在，在2次幂概念的拟然更加突出，所以这支配了后验。本质上，学习者有一个<strong>惊喜的</strong>时刻，并且证实了这个新概念。 （这里我们看到非自然概念需要较低的先验，否则我们将拟合数据, 以凸显“2次幂-{32}”。）</p>
+<p>一般来说，当我们有足够的数据时，后验
+
+
+<span class="katex">
+  \(p(h | \mathcal{D})\)
+</span>
+变得在单个概念上显著，称之为MAP估计(最大后验估计)，即,</p>
+
+
+
+<span class="katex">
+  \[
+p(h | \mathcal{D}) \to \delta_{\hat{h}^{\rm MAP}} \left(h\right) \tag{3.4}
+\]
+</span>
+
+<p>其中 
+
+
+<span class="katex">
+  \(\hat{h}^{\rm MAP} = \underset{h}{\rm argmax} \ p(h | \mathcal{D})\)
+</span>
+ 是后验模式，并且
+
+
+<span class="katex">
+  \(\delta\)
+</span>
+ 是 <strong>狄拉克量度</strong>, 定义为:</p>
+
+
+
+<span class="katex">
+  \[
+\delta_x(A) = \begin{cases}  1 & x \in A \\ 0 & x \notin A\end{cases} \tag{3.5}
+\]
+</span>
+
+<p>请注意，MAP估计可以被写为:</p>
+
+
+
+<span class="katex">
+  \[
+\hat{h}^{\rm MAP}= \underset{h}{\rm argmax} \ p(\mathcal{D} | h) p(h) = \underset{h}{\rm argmax} \ [ {\rm log} \  p(\mathcal{D} | h) + {\rm log} \  p(h)]  \tag{3.6}
+\]
+</span>
+
+<p>由于似然项指数依赖
+
+
+<span class="katex">
+  \(N\)
+</span>
+， 并且先验保持不变，随着我们获得越来越多的数据，MAP估计收敛到<strong>最大似然估计</strong>(<strong>MLE</strong>):</p>
+
+
+
+<span class="katex">
+  \[
+\hat{h}^{\rm mle} \overset{\Delta}{=} \underset{h}{\rm argmax} \ p(\mathcal{D} | h) = \underset{h}{\rm argmax} \ {\rm log} \ p(\mathcal{D} | h) \tag{3.7}
+\]
+</span>
+
+<p>换句话说，如果我们有足够的数据，我们会看到的<strong>数据淹没先验</strong>( data overwhelms the prior)。在这种情况下, MAP估计收敛于MLE。</p>
+<p>如果这个真的假设在假设空间中，那么MAP/ML估计将收敛于该假设。因此我们说贝叶斯推断（及 ML估计）是一致估计（详见6.4.1节）。我们也说这个假设空间是<strong>极限可识别的</strong>(identiﬁable in the limit)，这意味着我们可以从极其有限的数据中恢复真相。如果我们的假设类不足以代表“真理”（通常就是这种情况），我们将趋于尽可能接近真理的假设。然而，将这种“亲近”概念的形式化已超出本章的范围。</p>
+<h2 id="324-后验预测分布">3.2.4 后验预测分布</h2>
+<p><img src="" alt="0060.jpg"></p>
+<blockquote>
+<p>图3.4 看到一个正例
+
+
+<span class="katex">
+  \(\mathcal{D}=\{16\}\)
+</span>
+后的后验假设及其相应的预测分布。图中的点表示与此假设一致的数字。右边的图
+
+
+<span class="katex">
+  \(p(h | \mathcal{D})\)
+</span>
+是假设
+
+
+<span class="katex">
+  \(h\)
+</span>
+的权重。通过所有点的加权求和，我们得到
+
+
+<span class="katex">
+  \(p(\tilde{\boldsymbol{x}} \in C | \mathcal{D})\)
+</span>
+（ 顶部的图）。</p>
+</blockquote>
+<p>后验是我们关于世界的内在<strong>信念状态</strong>(belief state) 。测试我们的信念是否合理的方法是使用它们来预测客观可观察的数量（这是科学方法的基础）。具体来说，在这种意义下, 后验预测分布 可由下式给出.</p>
+
+
+
+<span class="katex">
+  \[
+p(\tilde{\boldsymbol{x}} \in C | \mathcal{D}) = \sum_h {p(y=1 | \tilde{\boldsymbol{x}},h) p(h | \mathcal{D})} \tag{3.8}
+\]
+</span>
+
+<p>这就是对所有假设的预测的进行加权平均, 被称为 <strong>贝叶斯模型平均</strong> （Hoeting等，1999）, 如图3.4所示。 图中底部的点显示了每个假设的预测; 右边的垂直曲线显示了与每个假设相关的权重。如果我们将每一行乘以它的权重并加起来，我们得到图中顶部的分布。</p>
+<p>当我们有一个小的 和/或 模糊的数据集时，后验
+
+
+<span class="katex">
+  \(p(h | \mathcal{D})\)
+</span>
+是模糊的，这导致宽的预测分布。然而，一旦我们“解决了问题”，后验就变成了以MAP估计为中心的delta函数。在这种情况下，预测分布变成:</p>
+
+
+
+<span class="katex">
+  \[
+p(\tilde{\boldsymbol{x}} \in C | \mathcal{D}) = \sum_h {p(\tilde{\boldsymbol{x}} |h) \delta_{\hat{h}}(h)} \tag{3.9}
+\]
+</span>
+
+<p>被称为 预测概率密度的<strong>插入式近似</strong>(plug-in approximation) ,并且由于其简单性而被广泛使用。然而，总的来说，这不足以代表我们的不确定性，而且我们的预测不会像使用BMA那样“平稳”。我们将在本书后面看到更多这方面的例子。</p>
+<p>尽管MAP学习很简单，但它无法解释从基于相似性的推理（具有不确定的后验）到基于规则的推理（具有某些后验）的逐渐转变。例如，假设我们观察到
+
+
+<span class="katex">
+  \(\mathcal{D}=\{16\}\)
+</span>
+ 。如果我们使用上面的简单先验，则最小一致假设是“4的所有幂”，因此只有4和16得到非零概率的预测。这当然是过拟合的一个例子。给定
+
+
+<span class="katex">
+  \(\mathcal{D}=\{16,8,2,64\}\)
+</span>
+，MAP 假设是“2次幂”。因此，当我们看到更多数据时，插入式预测分布变得更宽（或保持不变）：它开始狭窄的，但由于看到更多数据而被迫扩大。相比之下，在贝叶斯方法中，如果我们学的更多, 那么开始宽泛然后缩小，这更直观。特别是，给定
+
+
+<span class="katex">
+  \(\mathcal{D}=\{16\}\)
+</span>
+ ，有许多具有不可忽视的后验支撑的假设，因此预测分布是宽泛的。然而，当我们看到
+
+
+<span class="katex">
+  \(\mathcal{D}=\{16,8,2,64\}\)
+</span>
+， 后验集中在一个假设上，因此，预测分布变得更窄。因此，插入方法和贝叶斯方法的预测在小样本环境中是完全不同的，尽管我们看到更多数据时, 它们都收敛到的相同的答案。</p>
+<h2 id="325-一个更加复杂的先验">3.2.5 一个更加复杂的先验</h2>
+<p><img src="" alt="0061.jpg"></p>
+<blockquote>
+<p>图3.5 使用完整假设空间模型的预测分布。与图3.1比较。贝叶斯模型的预测仅绘出针对人类数据是可用的那些值
+
+
+<span class="katex">
+  \(\tilde{\boldsymbol{x}}\)
+</span>
+ ; 这就是为什么顶部图的线比图3.4更稀疏的原因。</p>
+</blockquote>
+<p>为人类行为建模，Tenenbaum使用了一个稍微复杂的先验，通过分析人们如何衡量数字之间相似性的一些实验数据得出结论, 更详细信息，请参阅（Tenenbaum 1999，p208）。结果是一组类似于上面提到的算术概念，加上所有 n和m之间的区间(
+
+
+<span class="katex">
+  \(1 \le n,m \le 100\)
+</span>
+)。 （注意，这些假设不是相互排斥）。因此这个先验是两个先验的<strong>混合物</strong>，一个前面提及的算术规则，另一个以上的区间:</p>
+
+
+
+<span class="katex">
+  \[
+p(h)=\pi_0 \  p_{\rm rules} (h) +(1-\pi_0) \ p_{\rm interval} (h) \tag{3.10}
+\]
+</span>
+
+<p>模型中仅有的自由参数是相对权重
+
+
+<span class="katex">
+  \(\pi_0\)
+</span>
+，在现有的这两个先验部分中。这个值对结果并不十分敏感，只要
+
+
+<span class="katex">
+  \(\pi_0 > 0.5\)
+</span>
+，反映的一个事实是人们更有可能想到规则所定义的概念。这个使用更大的假设空间的模型的预测分布, 如图3.5所示。它与人类预测分布惊人地相似，如图3.1所示，尽管它不适用于人类数据（以假设空间的选择为模）。</p>
+<p><a href="/notes/docs/mlapp/03generative_models_for_discrete_data/"><strong>返回本章目录</strong></a></p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0041/">
+    下一页<br>3.3 贝塔-二项模型
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0039/">
+      上一页<br>3.1 引言
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/03generative_models_for_discrete_data/0040.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/mlapp/03generative_models_for_discrete_data/0040.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#321-拟然likelihood">3.2.1 拟然(Likelihood)</a></li>
+        <li><a href="#322-先验prior">3.2.2 先验(Prior)</a></li>
+        <li><a href="#323-后验posterior">3.2.3 后验(Posterior)</a></li>
+        <li><a href="#324-后验预测分布">3.2.4 后验预测分布</a></li>
+        <li><a href="#325-一个更加复杂的先验">3.2.5 一个更加复杂的先验</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

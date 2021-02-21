@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>伽利略 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E4%BC%BD%E5%88%A9%E7%95%A5/</link>
+    <description>Recent content in 伽利略 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Tue, 25 Feb 2020 08:19:37 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E4%BC%BD%E5%88%A9%E7%95%A5/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>流形视角下的牛顿力学(杀鸡用牛刀)</title>
+      <link>https://chaoskey.gitee.io/notes/docs/theophy/0071/</link>
+      <pubDate>Tue, 25 Feb 2020 08:19:37 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0071/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;本文真是杀鸡用牛刀，但好处是彻底厘清了如何用对称性构造拉格朗日量的一般套路。&lt;/p&gt;
+&lt;p&gt;本文通过强算Killing方程的笨方法，来确定伽利略时空，特别是欧氏空间的完整对称性，进而得到无穷小生成元（变换），最后用这组无穷小变换在拉格朗日量上的不变性来确定拉格朗日量。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

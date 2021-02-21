@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="常用李群及其李代数"><meta property="og:title" content="常用李群及其李代数" />
+<meta property="og:description" content="
+一般线性群
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+  \(GL(m)\)
+
+，全体可逆线性映射的集合。
+正交群
+
+
+
+  \(O(m)\)
+
+，正定度规下，全体保度规线性映射的集合。【正定度规下，保度规 
+
+
+
+  \(\Longrightarrow\)
+
+ 保内积。】
+洛伦兹群
+
+
+
+  \(O(1,3)\)
+
+，正交归一基底下度规矩阵是
+
+
+
+  \(\mathrm{diag}(-1,1,1,1)\)
+
+时，全体保度规线性映射的集合。
+酉群
+
+
+
+  \(U(m)\)
+
+，就是复数域中的全体保内积线性算符（即酉算符）的集合。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/diffgeo/0068/" />
+<meta property="article:published_time" content="2020-02-21T11:02:10+08:00" />
+<meta property="article:modified_time" content="2020-02-21T11:02:10+08:00" />
+<title>常用李群及其李代数 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a>
+<ul>
+<li><a href="/notes/docs/diffgeo/0005/">基于抽象指标的张量分析</a></li>
+<li><a href="/notes/docs/diffgeo/0006/">流形上的导数算符</a></li>
+<li><a href="/notes/docs/diffgeo/0007/">流形上的平移</a></li>
+<li><a href="/notes/docs/diffgeo/0008/">黎曼曲率张量</a></li>
+<li><a href="/notes/docs/diffgeo/0009/">流形间的映射</a></li>
+<li><a href="/notes/docs/diffgeo/0010/">流形上的李导数</a></li>
+<li><a href="/notes/docs/diffgeo/0011/">Killing矢量场</a></li>
+<li><a href="/notes/docs/diffgeo/0012/">子流形和超曲面</a></li>
+<li><a href="/notes/docs/diffgeo/0013/">流形上的微分形式及其对偶</a></li>
+<li><a href="/notes/docs/diffgeo/0014/">流形上的微积分</a></li>
+<li><a href="/notes/docs/diffgeo/0016/">李群李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0068/"class=active>常用李群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0069/">李变换群</a></li>
+<li><a href="/notes/docs/diffgeo/0070/">微分几何中的计算（Julia版）</a></li>
+<li><a href="/notes/docs/diffgeo/0073/">辛群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0074/">辛流形</a></li>
+<li><a href="/notes/docs/diffgeo/0076/">流形上的旋量和旋量场（初步）</a></li>
+<li><a href="/notes/docs/diffgeo/0077/">流形上的旋量和旋量场（几何解释）</a></li>
+<li><a href="/notes/docs/diffgeo/0078/">流形上的旋量和旋量场（导数算符和曲率)</a></li>
+<li><a href="/notes/docs/diffgeo/0079/">流形上的旋量和旋量场（自旋系数和克氏符）</a></li>
+<li><a href="/notes/docs/diffgeo/0082/">李群李代数伴随表示和Killing型、Casimir算符</a></li>
+<li><a href="/notes/docs/diffgeo/0083/">半单李代数的标准形式</a></li>
+<li><a href="/notes/docs/diffgeo/0084/">半单李代数的根系、权系和Dynkin图</a></li>
+<li><a href="/notes/docs/diffgeo/0085/">半单李代数的Casimir不变算符</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>常用李群及其李代数</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#一般线性群">一般线性群</a></li>
+        <li><a href="#正交群">正交群</a></li>
+        <li><a href="#洛伦兹群">洛伦兹群</a></li>
+        <li><a href="#酉群">酉群</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0069/">
+    下一页<br>李变换群
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0016/">
+      上一页<br>李群李代数
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/diffgeo/0068/">常用李群及其李代数</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-02-21</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95">微分几何</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E6%B5%81%E5%BD%A2">流形</a>
+      , 
+      <a href="/notes/tags/%E6%9D%8E%E7%BE%A4">李群</a>
+      , 
+      <a href="/notes/tags/%E6%9D%8E%E4%BB%A3%E6%95%B0">李代数</a>
+      , 
+      <a href="/notes/tags/%E6%AD%A3%E4%BA%A4%E7%BE%A4">正交群</a>
+      , 
+      <a href="/notes/tags/%E6%B4%9B%E4%BC%A6%E5%85%B9%E7%BE%A4">洛伦兹群</a>
+      , 
+      <a href="/notes/tags/%E9%85%89%E7%BE%A4">酉群</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0068.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<blockquote>
+<p>一般线性群
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(GL(m)\)
+</span>
+，全体可逆线性映射的集合。</p>
+<p>正交群
+
+
+<span class="katex">
+  \(O(m)\)
+</span>
+，正定度规下，全体保度规线性映射的集合。【正定度规下，保度规 
+
+
+<span class="katex">
+  \(\Longrightarrow\)
+</span>
+ 保内积。】</p>
+<p>洛伦兹群
+
+
+<span class="katex">
+  \(O(1,3)\)
+</span>
+，正交归一基底下度规矩阵是
+
+
+<span class="katex">
+  \(\mathrm{diag}(-1,1,1,1)\)
+</span>
+时，全体保度规线性映射的集合。</p>
+<p>酉群
+
+
+<span class="katex">
+  \(U(m)\)
+</span>
+，就是复数域中的全体保内积线性算符（即酉算符）的集合。</p>
+</blockquote>
+<h2 id="一般线性群">一般线性群</h2>
+<p>考虑
+
+
+<span class="katex">
+  \(m\)
+</span>
+维矢量空间
+
+
+<span class="katex">
+  \(V\)
+</span>
+， 
+
+
+<span class="katex">
+  \(\mathrm{GL}(m)\)
+</span>
+代表
+
+
+<span class="katex">
+  \(V\to V\)
+</span>
+的全体可逆线性映射的集合，以映射复合作为群乘法，恒等映射即为恒等元，易见
+
+
+<span class="katex">
+  \(\mathrm{GL}(m)\)
+</span>
+构成李群。</p>
+<p>因为
+
+
+<span class="katex">
+  \(V\to V\)
+</span>
+的线性映射就是
+
+
+<span class="katex">
+  \(V\)
+</span>
+上的
+
+
+<span class="katex">
+  \((1,1)\)
+</span>
+型张量，所以</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{GL}(m)=\{T\in \mathscr{T}_V(1,1)\}
+\]
+</span>
+
+<p>为
+
+
+<span class="katex">
+  \(V\)
+</span>
+取定一个基底（及其对偶基底），得到群元张量
+
+
+<span class="katex">
+  \(T\)
+</span>
+的分量，即可逆矩阵（
+
+
+<span class="katex">
+  \(m^2\)
+</span>
+个分量），此时单位矩阵为恒等元。于是得到与上面表示相互同构的另一个表示：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{GL}(m)=\{A\in M(m,\mathbb{R})| \det A\ne 0\}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(M(m,\mathbb{R})\)
+</span>
+代表
+
+
+<span class="katex">
+  \(m\times m\)
+</span>
+实矩阵。</p>
+<p>注意，
+
+
+<span class="katex">
+  \(\mathrm{GL}(m,\mathbb{R})\)
+</span>
+是非紧且非连通李群，取其包含恒等元的一个连通李子群，记作：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{GL}^+(m)=\{A\in M(m,\mathbb{R})| \det A \gt 0\}
+\]
+</span>
+
+<p>
+
+
+<span class="katex">
+  \(\mathrm{GL}(m)\)
+</span>
+的李代数
+
+
+<span class="katex">
+  \(\mathscr{G\!L}(m)\)
+</span>
+，与全体实矩阵构成的矢量空间同构，即：</p>
+
+
+
+<span class="katex">
+  \[
+\mathscr{G\!L}(m)=M(m,\mathbb{R})
+\]
+</span>
+
+<p>在这里，<code>指数数映射</code>具有显式的展开形式:</p>
+
+
+
+<span class="katex">
+  \[
+\exp(A)=I+A+\frac{1}{2!}A^2+\frac{1}{3!}A^3+\dots,\quad \forall A\in \mathscr{G\!L}(m)
+\]
+</span>
+
+<h2 id="正交群">正交群</h2>
+<p>如果考虑带正定度规的矢量空间
+
+
+<span class="katex">
+  \((V,g_{ab})\)
+</span>
+，可以在
+
+
+<span class="katex">
+  \(\mathrm{GL}(m)\)
+</span>
+的基础上提出<code>保度规</code>的要求，即要求线性映射
+
+
+<span class="katex">
+  \(Z:V\to V\)
+</span>
+保度规(方框中的要求)：
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}&\boxed{g_{ab}(Z^a_{\ \ c}v^c)(Z^b_{\ \ d}u^d)=g_{cd}v^c u^d,\quad \forall v,u\in V} \\ \Longleftrightarrow & g_{ab}Z^a_{\ \ c}Z^b_{\ \ d}=g_{cd}\quad \text{【因为}v,u\text{选择的任意性】} \end{aligned}
+\]
+</span>
+</p>
+<p>这类线性映射的集合构成的李群，称之为<code>正交群</code>
+
+
+<span class="katex">
+  \(O(m)\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+O(m)=\{Z^a_{\ \ b}\in \mathscr{T}_V(1,1)| g_{ab}Z^a_{\ \ c}Z^b_{\ \ d}=g_{cd}\}
+\]
+</span>
+
+<p>为
+
+
+<span class="katex">
+  \((V,g_{ab})\)
+</span>
+取定一个正交归一基底（及其对偶基底），于是：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}&g_{ab}Z^a_{\ \ c}Z^b_{\ \ d}=g_{cd}\\ \Longrightarrow & \delta_{\sigma\rho}=\delta_{\mu\upsilon}Z^\mu_{\ \ \sigma}Z^\upsilon_{\ \ \rho}=(Z^T)^{\ \ \mu}_\sigma\delta_{\mu\upsilon}Z^\upsilon_{\ \ \rho}\quad \text{【因为正交归一基底】}\\ \Longleftrightarrow & I=Z^T I Z = Z^T Z \quad \text{【写成矩阵形式】} \end{aligned}
+\]
+</span>
+
+<p>于是，
+
+
+<span class="katex">
+  \(O(m)\)
+</span>
+可写成同构的形式：</p>
+
+
+
+<span class="katex">
+  \[
+O(m)=\{Z\in \mathrm{GL}(m)| Z^T Z = I\}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(I\)
+</span>
+是单位矩阵，
+
+
+<span class="katex">
+  \(Z\)
+</span>
+则是<code>正交矩阵</code>。
+
+
+<span class="katex">
+  \(O(m)\)
+</span>
+是
+
+
+<span class="katex">
+  \(\mathrm{GL}(m)\)
+</span>
+的最大紧致李子群。</p>
+<p>特别地有：
+
+
+
+<span class="katex">
+  \[
+O(1)=\{1\}\cup\{-1\}
+\]
+</span>
+</p>
+
+
+
+<span class="katex">
+  \[
+O(2)=\left\{\begin{bmatrix} \cos\alpha & -\sin\alpha \\ \sin\alpha & \cos\alpha \end{bmatrix}|\alpha\in \mathbb{R}\right\}\cup\left\{\begin{bmatrix} \cos\alpha & \sin\alpha \\ \sin\alpha & -\cos\alpha \end{bmatrix}|\alpha\in \mathbb{R}\right\}
+\]
+</span>
+
+<p>由于
+
+
+<span class="katex">
+  \(\det Z=\pm1\)
+</span>
+，
+
+
+<span class="katex">
+  \(O(m)\)
+</span>
+注定也是非连通的。 把包含恒等元的分支记作
+
+
+<span class="katex">
+  \(\mathrm{SO}(m)\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{SO}(m)=\{Z\in O(m)| \det A=1 \}
+\]
+</span>
+
+<p>称为<code>特殊正交群</code>。 最常用的是<code>三维空间转动群</code>
+
+
+<span class="katex">
+  \(SO(3)\)
+</span>
+。</p>
+<p>正交群
+
+
+<span class="katex">
+  \(O(m)\)
+</span>
+和其李子群
+
+
+<span class="katex">
+  \(\mathrm{SO}(m)\)
+</span>
+的有相同的李代数
+
+
+<span class="katex">
+  \(\mathscr{O}(m)\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\mathscr{O}(m)=\{A\in M(m,\mathbb{R})| A^T = -A \}\\ \dim O(m)= \dim \mathscr{O}(m)=\frac{1}{2}m(m-1)
+\]
+</span>
+
+<h2 id="洛伦兹群">洛伦兹群</h2>
+<p>和正交群
+
+
+<span class="katex">
+  \(O(3)\)
+</span>
+的差别：不再要求是正定度规，但要求度规
+
+
+<span class="katex">
+  \(g_{ab}\)
+</span>
+在正交归一基底下的度规矩阵是
+
+
+<span class="katex">
+  \(\mathrm{diag}(-1,1,1,1)\)
+</span>
+。</p>
+<p>类似
+
+
+<span class="katex">
+  \(O(3)\)
+</span>
+可写出
+
+
+<span class="katex">
+  \(O(1,3)\)
+</span>
+：</p>
+<p>1） 线性映射集合视角</p>
+
+
+
+<span class="katex">
+  \[
+O(1,3)=\{\Lambda^a_{\ \ b}\in \mathscr{T}_V(1,1)| g_{ab}\Lambda^a_{\ \ c}\Lambda^b_{\ \ d}=g_{cd}\}
+\]
+</span>
+
+<p>2）正交归一基底下矩阵集合视角</p>
+
+
+
+<span class="katex">
+  \[
+O(1,3)=\{\Lambda\in \mathrm{GL}(m+1)| \Lambda^T \eta \Lambda = \eta\},\quad \eta\overset{\Delta}{=}\mathrm{diag}(-1,1,1,1)
+\]
+</span>
+
+<p>先看更简单的情况
+
+
+<span class="katex">
+  \(O(1,1)\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}O(1,1)&=O^\uarr_+(1,1)\cup O^\uarr_-(1,1)\cup O^\darr_-(1,1)\cup O^\darr_+(1,1)\\  O^\uarr_+(1,1)&= \left\{\begin{bmatrix} \mathrm{ch} \lambda & -\mathrm{sh}\lambda \\ -\mathrm{sh}\lambda & \mathrm{ch} \lambda \end{bmatrix}|\lambda\in \mathbb{R}\right\},\quad \det \Lambda=1,\Lambda^0_{\ \ 0}\ge 1\\ O^\uarr_-(1,1)&=\left\{\begin{bmatrix} \mathrm{ch}\lambda & -\mathrm{sh}\lambda \\ \mathrm{sh}\lambda & -\mathrm{ch}\lambda \end{bmatrix}|\lambda\in \mathbb{R}\right\},\quad \det \Lambda=-1,\Lambda^0_{\ \ 0}\ge 1\\ O^\darr_-(1,1)&=\left\{\begin{bmatrix} -\mathrm{ch}\lambda & \mathrm{sh}\lambda \\ -\mathrm{sh}\lambda & \mathrm{ch}\lambda \end{bmatrix}|\lambda\in \mathbb{R}\right\},\quad \det \Lambda=-1,\Lambda^0_{\ \ 0}\le -1\\ O^\darr_+(1,1)&=\left\{\begin{bmatrix} -\mathrm{ch}\lambda & \mathrm{sh}\lambda \\ \mathrm{sh}\lambda & -\mathrm{ch}\lambda \end{bmatrix}|\lambda\in \mathbb{R}\right\},\quad \det \Lambda=1,\Lambda^0_{\ \ 0}\le -1\end{aligned}
+\]
+</span>
+
+<p><img src="/notes/images/0106.svg" alt="0106.svg"></p>
+<p><strong>注意</strong>: 其中只有
+
+
+<span class="katex">
+  \(O^\uarr_+(1,1)\)
+</span>
+是李群
+
+
+<span class="katex">
+  \(O(1,1)\)
+</span>
+的李子群。</p>
+<p>类似地，洛伦兹群
+
+
+<span class="katex">
+  \(L=O(1,3)\)
+</span>
+，也类似存在4个连通分支，每个分支各存在一个特殊元素：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}& L\text{的恒等元} &I&=\mathrm{diag}(1,1,1,1)&\in& L^\uarr_+\\ & L\text{的空间反射元} &r_s&=\mathrm{diag}(1,-1,-1,-1)&\in& L^\uarr_- = r_sL^\uarr_+ \\ & L\text{的时间反射元} &r_t&=\mathrm{diag}(-1,1,1,1)&\in& L^\darr_- = r_tL^\uarr_+ \\ & L\text{的时空反演元}& i_{ts}&=r_t r_s=-I&\in& L^\darr_+ = i_{ts}L^\uarr_+\end{aligned}
+\]
+</span>
+
+<p>其中只有包含恒等元的分支
+
+
+<span class="katex">
+  \(L^\uarr_+\)
+</span>
+构成李群，是
+
+
+<span class="katex">
+  \(L\)
+</span>
+的李子群，称为<code>固有洛伦兹群</code>，是6维连通流形，流形结构为
+
+
+<span class="katex">
+  \(\mathbb{R}^3\times SO(3)\)
+</span>
+。</p>
+<p>同
+
+
+<span class="katex">
+  \(O(3)\)
+</span>
+类似，洛伦兹群
+
+
+<span class="katex">
+  \(L=O(1,3)\)
+</span>
+及其李子群
+
+
+<span class="katex">
+  \(L^\uarr_+\)
+</span>
+有相同的李代数
+
+
+<span class="katex">
+  \(\mathscr{O}(1,3)\)
+</span>
+:：</p>
+
+
+
+<span class="katex">
+  \[
+\mathscr{O}(1,3)=\{A\in M(4,\mathbb{R})| A^T \eta A = \eta \}\\ \dim O(1,3) = \dim \mathscr{O}(1,3) = \dim \mathscr{O}(4)=6
+\]
+</span>
+
+<h2 id="酉群">酉群</h2>
+<p>如果把实矢量空间扩展称复矢量空间，那么
+
+
+<span class="katex">
+  \(\mathrm{GL}(m)\)
+</span>
+对应
+
+
+<span class="katex">
+  \(\mathrm{GL}(m,\mathbb{C})\)
+</span>
+，这个新群是连通李群（不存在多分支）。</p>
+<p>我们知道正交群
+
+
+<span class="katex">
+  \(O(m)\)
+</span>
+，有保度规的要求，进而必然保内积。而酉群
+
+
+<span class="katex">
+  \(U(m)\)
+</span>
+，就是这种要求保内积的
+
+
+<span class="katex">
+  \(\mathrm{GL}(m,\mathbb{C})\)
+</span>
+子群。但是复矢量空间的内积只对第二个矢量是线性的，对第一个矢量则为共轭线性。即：</p>
+
+
+
+<span class="katex">
+  \[
+(g,f)=\overline{(f,g)},\quad \forall f,g\in V
+\]
+</span>
+
+<p>很明显，当复矢量空间
+
+
+<span class="katex">
+  \(V\)
+</span>
+退化成实矢量空间时，内积对所作用的两个矢量都是<code>线性的</code>。</p>
+<p>类似实矢量空间，线性映射
+
+
+<span class="katex">
+  \(\eta:V\to \mathbb{C}\)
+</span>
+就是复矢量空间
+
+
+<span class="katex">
+  \(V\)
+</span>
+对应的一个对偶矢量，所有对偶矢量的集合就是
+
+
+<span class="katex">
+  \(V\)
+</span>
+的对偶矢量空间
+
+
+<span class="katex">
+  \(V^*\)
+</span>
+。据此
+
+
+<span class="katex">
+  \(V\)
+</span>
+上的每个线性映射（算符）
+
+
+<span class="katex">
+  \(A:V\to V\)
+</span>
+可以诱导出
+
+
+<span class="katex">
+  \(V^*\)
+</span>
+上的一个线性映射（算符）
+
+
+<span class="katex">
+  \(A^*:V^*\to V^*\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}A^*:&V^*\to V^* \\  &\eta \mapsto  A^*\eta \\ & (A^*\eta)(f)\overset{\Delta}{=}\eta(A f),\quad \forall f\in V \end{aligned}
+\]
+</span>
+
+<p>
+
+
+<span class="katex">
+  \(A^*\)
+</span>
+称之为
+
+
+<span class="katex">
+  \(A\)
+</span>
+的<code>对偶算符</code>。这是一个线性算符，并且
+
+
+<span class="katex">
+  \(A^*\)
+</span>
+和
+
+
+<span class="katex">
+  \(A\)
+</span>
+的对应关系也是<code>线性的</code>。</p>
+<p>此外，我们还知道有限维矢量空间
+
+
+<span class="katex">
+  \(V\)
+</span>
+和其对偶矢量空间
+
+
+<span class="katex">
+  \(V^*\)
+</span>
+是相互同构的，记作
+
+
+<span class="katex">
+  \(\phi:V\to V^*\)
+</span>
+，这是一个反线性映射。  进而
+
+
+<span class="katex">
+  \(V\)
+</span>
+上线性算符
+
+
+<span class="katex">
+  \(A\)
+</span>
+的对偶算符
+
+
+<span class="katex">
+  \(A^*\)
+</span>
+又可自然诱导出
+
+
+<span class="katex">
+  \(V\)
+</span>
+上的一个线性算符
+
+
+<span class="katex">
+  \(A^\dagger:V \to V\)
+</span>
+，如图：</p>
+<p><img src="/notes/images/0107.svg" alt="0107.svg"></p>
+<p>
+
+
+<span class="katex">
+  \(A^\dagger\)
+</span>
+称之为
+
+
+<span class="katex">
+  \(A\)
+</span>
+的<code>伴随算符</code>。这是一个线性算符，并且
+
+
+<span class="katex">
+  \(A^\dagger\)
+</span>
+和
+
+
+<span class="katex">
+  \(A\)
+</span>
+的对应关系则是<code>反线性的</code>(共轭线性)。</p>
+<p>最后，借助对偶矢量作用于矢量得实数得特点，将<code>内积</code>定义为：</p>
+
+
+
+<span class="katex">
+  \[
+(f,g)\overset{\Delta}{=}\eta_f g,\quad \quad \forall f,g\in V
+\]
+</span>
+
+<p>进而有
+
+
+<span class="katex">
+  \(\boxed{(f,Ag)=(A^\dagger f,g)}\)
+</span>
+，因为：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}(f,Ag)&=n_f(Ag)\quad \text{【内积定义】}\\ &=(A^*\eta_f)(g)\quad \text{【对偶算符定义】}\\ &=\eta_h(g)=(h,g)\quad \text{【见上图标注,及内积定义】}\\ &=(A^\dagger f,g)\quad \text{【见上图标注】}\end{aligned}
+\]
+</span>
+
+<p>此外，
+
+
+<span class="katex">
+  \(\boxed{(f,Ag)=(Bf,g)\quad \Rightarrow \quad B=A^\dagger}\)
+</span>
+，因为：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}&0=(Bf,g)-(A^\dagger f,g)=(Bf-A^\dagger f,g),\quad \forall f,g\in V\\ \Longrightarrow & 0=(Bf-A^\dagger f,Bf-A^\dagger f)\quad \text{因为}g\text{可任意选择}\\  \Longrightarrow &0=Bf-A^\dagger f\quad \text{相同矢量内积为0的充要条件}\\  \Longrightarrow &B=A^\dagger \quad \text{因为}f\text{可任意选择}\end{aligned}
+\]
+</span>
+
+<p>有上面的准备，下面就容易了。现在可以谈保内积的线性算符
+
+
+<span class="katex">
+  \(U\)
+</span>
+，称之为<code>酉算符</code>（或 <code>幺正算符</code>）：</p>
+
+
+
+<span class="katex">
+  \[
+(Uf,Ug)=(f,g),\quad \forall f,g\in V
+\]
+</span>
+
+<p>算符
+
+
+<span class="katex">
+  \(U\)
+</span>
+为<code>酉算符</code>的充要条件是：
+
+
+<span class="katex">
+  \(U^\dagger U=\delta\)
+</span>
+。其中，
+
+
+<span class="katex">
+  \(\delta\)
+</span>
+是恒等算符。</p>
+<p>为
+
+
+<span class="katex">
+  \(V\)
+</span>
+选择一个正交归一基底
+
+
+<span class="katex">
+  \(\{e_i\}\)
+</span>
+，
+
+
+<span class="katex">
+  \(V\)
+</span>
+上任意算符
+
+
+<span class="katex">
+  \(A\)
+</span>
+可用矩阵表示:</p>
+
+
+
+<span class="katex">
+  \[
+A_{ij}=(e_i,A e_j)=(A^\dagger e_i,e_j)=\overline{(e_j,A^\dagger e_i)}=\overline{(A^\dagger)_{ji}}
+\]
+</span>
+
+<p>即：</p>
+
+
+
+<span class="katex">
+  \[
+A^\dagger = \overline{A^T}
+\]
+</span>
+
+<p>进而，算符
+
+
+<span class="katex">
+  \(U\)
+</span>
+为<code>酉算符</code>的充要条件的矩阵形式：
+
+
+<span class="katex">
+  \(U^{-1}=U^\dagger=\overline{U^T}\)
+</span>
+。  对应的矩阵
+
+
+<span class="katex">
+  \(U\)
+</span>
+称为<code>酉矩阵</code>（或 <code>幺正矩阵</code>）。</p>
+<p>如果
+
+
+<span class="katex">
+  \(U\)
+</span>
+为酉矩阵，那么：</p>
+
+
+
+<span class="katex">
+  \[
+\det U=e^{i\varphi},\quad \varphi\in \mathbb{R},\quad \text{即} \left|\det U\right|=1
+\]
+</span>
+
+<p>所以，酉群
+
+
+<span class="katex">
+  \(U(m)\)
+</span>
+可定义为：</p>
+
+
+
+<span class="katex">
+  \[
+U(m)\overset{\Delta}{=}\{U\in \mathrm{GL}(m,\mathbb{C})| U^\dagger U = I\}
+\]
+</span>
+
+<p>酉群
+
+
+<span class="katex">
+  \(U(m)\)
+</span>
+是紧致的连通流形。</p>
+<p>
+
+
+<span class="katex">
+  \(A\)
+</span>
+是<code>厄米矩阵</code>，若
+
+
+<span class="katex">
+  \(A^\dagger = A\)
+</span>
+；  
+
+
+<span class="katex">
+  \(A\)
+</span>
+是<code>反厄米矩阵</code>，若
+
+
+<span class="katex">
+  \(A^\dagger = -A\)
+</span>
+；</p>
+<p>酉群
+
+
+<span class="katex">
+  \(U(m)\)
+</span>
+的李代数
+
+
+<span class="katex">
+  \(\mathscr{U}(m)\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\mathscr{U}(m)=\{A\in\mathscr{G\!L}(m,\mathbb{C})|A^\dagger=-A\}\\  \dim U(m)=\dim \mathscr{U}(m)=m^2
+\]
+</span>
+
+<p>特殊酉群
+
+
+<span class="katex">
+  \(\mathrm{SU}(m)\)
+</span>
+可定义为：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{SU}(m)\overset{\Delta}{=}\{U\in U(m)| \det U=1 \}
+\]
+</span>
+
+<p><code>特殊酉群</code>
+
+
+<span class="katex">
+  \(\mathrm{SU}(m)\)
+</span>
+的李代数
+
+
+<span class="katex">
+  \(\mathscr{S\!U}(m)\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\mathscr{S\!U}(m)=\{A\in\mathscr{U}(m)|\mathrm{tr} A=0\}\\  \dim \mathrm{SU}(m)=\dim \mathscr{S\!U}(m)=m^2-1
+\]
+</span></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0069/">
+    下一页<br>李变换群
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0016/">
+      上一页<br>李群李代数
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0068.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/diffgeo/0068.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#一般线性群">一般线性群</a></li>
+        <li><a href="#正交群">正交群</a></li>
+        <li><a href="#洛伦兹群">洛伦兹群</a></li>
+        <li><a href="#酉群">酉群</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

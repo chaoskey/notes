@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>权系 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E6%9D%83%E7%B3%BB/</link>
+    <description>Recent content in 权系 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Thu, 07 May 2020 10:23:40 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E6%9D%83%E7%B3%BB/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>半单李代数的根系、权系和Dynkin图</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0084/</link>
+      <pubDate>Thu, 07 May 2020 10:23:40 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0084/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Dynkin图&lt;/code&gt;，可以完全确定“单根矢量几何”，所有根矢量都可用单根线性表出。&lt;/p&gt;
+&lt;p&gt;根系虽然不唯一，但这种不唯一性不会导致“几何”意义上的变化。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;权&lt;/code&gt;，就是零根空间（嘉当子代数）所有基底的共同本征矢对应的本征根组成的矢量。而这个共同本征矢被称作&lt;code&gt;权矢量&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;非零根标准基底对应升降算符。正根对应升算符，负根对应降算符。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;权矢量&lt;/code&gt;在升降算符的作用后，依然是&lt;code&gt;权矢量&lt;/code&gt;，并且对应的&lt;code&gt;权&lt;/code&gt;被提高或降低了。&lt;/p&gt;
+&lt;p&gt;如果某个&lt;code&gt;权矢量&lt;/code&gt;被升算符作用后得零，那么该&lt;code&gt;权矢量&lt;/code&gt;是最高权矢量，对应的权是最高权。&lt;/p&gt;
+&lt;p&gt;通过&lt;code&gt;Dynkin图&lt;/code&gt;可衍生出不可约表示图，利用相关性质容易计算出不可约表示维度。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>黎曼曲率 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E9%BB%8E%E6%9B%BC%E6%9B%B2%E7%8E%87/</link>
+    <description>Recent content in 黎曼曲率 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Mon, 24 Feb 2020 09:44:05 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E9%BB%8E%E6%9B%BC%E6%9B%B2%E7%8E%87/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>微分几何中的计算（Julia版 计划长期维护）</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0070/</link>
+      <pubDate>Mon, 24 Feb 2020 09:44:05 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0070/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Julia&lt;/code&gt;，对数学符号真太友好了。&lt;/p&gt;
+&lt;p&gt;前面的笔记中，我曾穿插了些相关的符号计算，本文作为一个汇总，并且未来的一些有特点的代码，我也将汇总于此，用作备忘。&lt;/p&gt;
+&lt;p&gt;用&lt;code&gt;Julia&lt;/code&gt;进行张量符号计算的关键：1）先要写出（多重）数组友好的公式，然后用&lt;code&gt;Julia&lt;/code&gt;实现之； 2）使用了&lt;code&gt;SymPy&lt;/code&gt;，外加&lt;code&gt;Julia&lt;/code&gt;本身的语法优势。&lt;/p&gt;
+&lt;p&gt;我曾想过将代码封装成函数，但发现直接用代码似乎更好。首先代码不复杂，其次， 暴露代码细节还能和数学公式相互对照，不容易出错。 有种“所见即所得”的感觉。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

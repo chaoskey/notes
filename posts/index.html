@@ -1,0 +1,3288 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Posts\"><meta property="og:title" content="" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/posts/" />
+<meta property="og:updated_time" content="2021-02-18T11:04:32+08:00" />
+<title>Posts\ | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<link rel="alternate" type="application/rss+xml" href="https://chaoskey.gitee.io/notes/posts/index.xml" title="学习笔记" />
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<ul>
+<li><a href="/notes/posts/"class=active><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Posts\</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+<nav>
+    <ul>
+  
+    
+    <li class="book-section-flat">
+      <strong>分类</strong>
+      <ul>
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+        <li class="flex justify-between">
+          <a href="/notes/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+          <span>50</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/">科学计算</a>
+          <span>41</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/categories/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/">微分几何</a>
+          <span>25</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/categories/%E7%90%86%E8%AE%BA%E7%89%A9%E7%90%86/">理论物理</a>
+          <span>9</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/categories/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84/">量化投资</a>
+          <span>9</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/categories/%E7%BB%B4%E6%8A%A4/">维护</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/categories/%E6%9D%82%E8%AE%B0/">杂记</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/categories/julia/">julia</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/categories/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95/">有限元法</a>
+          <span>1</span>
+        </li>
+      
+      </ul>
+    </li>
+    
+  
+    
+    <li class="book-section-flat">
+      <strong>标签</strong>
+      <ul>
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95/">有限元法</a>
+          <span>34</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/FEniCS/">FEniCS</a>
+          <span>32</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/">偏微分方程</a>
+          <span>31</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%B5%81%E5%BD%A2/">流形</a>
+          <span>25</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/julia/">julia</a>
+          <span>17</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF/">贝叶斯</a>
+          <span>11</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%AF%B9%E7%A7%B0%E6%80%A7/">对称性</a>
+          <span>10</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8A%95%E8%B5%84/">投资</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">线性回归</a>
+          <span>6</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%9D%8E%E4%BB%A3%E6%95%B0/">李代数</a>
+          <span>6</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%97%8B%E9%87%8F/">旋量</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%9D%8E%E7%BE%A4/">李群</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%90%8E%E9%AA%8C/">后验</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%85%88%E9%AA%8C/">先验</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E9%A3%8E%E9%99%A9/">风险</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%AF%BC%E6%95%B0%E7%AE%97%E7%AC%A6/">导数算符</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%88%86%E5%B8%83/">分布</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/">数值计算</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E9%A2%84%E6%B5%8B/">预测</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8B%9F%E7%84%B6/">拟然</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/">微分方程</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%9D%87%E5%80%BC/">均值</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%9B%B2%E7%8E%87/">曲率</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%96%B9%E5%B7%AE/">方差</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%BE%AE%E5%88%86%E5%BD%A2%E5%BC%8F/">微分形式</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/hugo/">hugo</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/killing/">killing</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%82%96%E8%AE%BA/">悖论</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%B2%AD%E5%9B%9E%E5%BD%92/">岭回归</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BC%B0%E8%AE%A1%E5%99%A8/">估计器</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%85%8B%E6%B0%8F%E7%AC%A6/">克氏符</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/latex/">latex</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/">监督学习</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BF%A1%E6%81%AF%E7%8E%87/">信息率</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/Casimir%E7%AE%97%E7%AC%A6/">Casimir算符</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%A0%81%E4%BA%91/">码云</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BD%93%E5%85%83/">体元</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%A8%A1%E5%9E%8B/">模型</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%A4%B4%E5%AF%B8/">头寸</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%B8%BB%E5%8A%A8%E7%AE%A1%E7%90%86/">主动管理</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%BB%9F%E8%AE%A1/">统计</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%B5%8B%E5%9C%B0%E7%BA%BF/">测地线</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E9%A2%91%E7%8E%87%E6%B4%BE/">频率派</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/">无监督学习</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%93%88%E5%AF%86%E9%A1%BF/">哈密顿</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%9C%BA%E8%AE%BA/">场论</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%9B%9E%E5%BD%92/">回归</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%BD%AE%E4%BF%A1%E5%8C%BA%E9%97%B4/">置信区间</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%AD%A3%E5%88%99%E5%8C%96/">正则化</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/sympy/">sympy</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%A5%97%E5%88%A9/">套利</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/jupyter/">jupyter</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%95%88%E7%94%A8/">效用</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%96%B9%E5%90%91%E5%AF%BC%E6%95%B0/">方向导数</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9/">模型选择</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/python/">python</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%B3%8A%E6%9D%BE/">泊松</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/markdown/">markdown</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%BE%9B%E6%B5%81%E5%BD%A2/">辛流形</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%B9%A0%E9%A2%98/">习题</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8B%9F%E5%90%88/">拟合</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%88%86%E7%B1%BB/">分类</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/typora/">typora</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%AE%8B%E5%B7%AE/">残差</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8A%80%E5%B7%A7/">技巧</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/">损失函数</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%BC%A0%E9%87%8F/">张量</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%AE%9A%E4%BB%B7/">定价</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%AD%A3%E5%88%99%E5%9D%90%E6%A0%87/">正则坐标</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BC%B0%E5%80%BC/">估值</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%B3%95%E4%BD%99%E7%9F%A2/">法余矢</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%B6%85%E5%8F%82%E6%95%B0/">超参数</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%9F%BA%E5%87%BD%E6%95%B0/">基函数</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%A5%94%E7%A7%AF/">楔积</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%B3%95%E7%9F%A2/">法矢</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%89%9B%E9%A1%BF%E5%8A%9B%E5%AD%A6/">牛顿力学</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/vscode/">vscode</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%AF%B9%E6%98%93%E5%AD%90/">对易子</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%AF%B1%E5%AF%BC%E5%BA%A6%E8%A7%84/">诱导度规</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%AD%A3%E4%BA%A4%E7%BE%A4/">正交群</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BC%BC%E7%84%B6/">似然</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%AF%81%E6%8D%AE/">证据</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E9%99%8D%E7%BB%B4/">降维 </a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BA%92%E4%BF%A1%E6%81%AF/">互信息</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%8D%8F%E6%96%B9%E5%B7%AE/">协方差</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%A4%9A%E5%9B%A0%E5%AD%90/">多因子</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%9D%8E%E5%AF%BC%E6%95%B0/">李导数</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/obsidian/">obsidian</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%AD%90%E6%B5%81%E5%BD%A2/">子流形</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%87%AA%E4%B8%BE/">自举</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%BE%AE%E5%88%86%E5%90%8C%E8%83%9A/">微分同胚</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BC%97%E6%95%B0/">众数</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E9%BB%8E%E6%9B%BC%E6%9B%B2%E7%8E%87/">黎曼曲率</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BC%AF%E5%8A%AA%E5%88%A9/">伯努利</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%B8%89%E8%A7%92%E5%89%96%E5%88%86/">三角剖分</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98/">最小二乘</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8E%A8%E5%89%8D%E6%98%A0%E5%B0%84/">推前映射</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8B%89%E5%9B%9E%E6%98%A0%E5%B0%84/">拉回映射</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%8B%AC%E7%AB%8B%E6%80%A7/">独立性</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/noether/">noether</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%99/">决策规则</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%BE%B9%E9%99%85%E6%8B%9F%E7%84%B6/">边际拟然</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%89%9B%E9%A1%BF%E6%B5%81%E4%BD%93/">牛顿流体</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%9C%80%E8%BF%91%E9%82%BB/">最近邻</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BC%B0%E8%AE%A1/">估计</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/p%E5%80%BC/">p值</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%A6%82%E5%BF%B5%E5%AD%A6%E4%B9%A0/">概念学习</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/capm/">capm</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%9D%8E%E6%8B%AC%E5%8F%B7/">李括号</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/Delaunay/">Delaunay</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%9F%A5%E4%B9%8E/">知乎</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8A%BD%E8%B1%A1%E6%8C%87%E6%A0%87/">抽象指标</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%B8%80%E8%87%B4%E9%A2%84%E6%9C%9F/">一致预期</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%9F%A2%E9%87%8F%E5%9C%BA/">矢量场</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%8E%9A%E5%B0%BE/">厚尾</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%9B%B8%E5%85%B3%E6%80%A7/">相关性</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%BA%9E%E5%8A%A0%E8%8E%B1%E7%BE%A4/">庞加莱群</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%8F%AF%E4%BF%A1%E5%8C%BA%E9%97%B4/">可信区间</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8E%A8%E6%96%AD/">推断</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%B9%B3%E7%A7%BB/">平移</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%81%8F%E5%A5%BD/">偏好</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/">坐标变换</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%BE%A4/">群</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9/">特征选择</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%B4%9B%E4%BC%A6%E5%85%B9%E7%BE%A4/">洛伦兹群</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%AE%88%E6%81%92%E5%BE%8B/">守恒律</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E9%87%87%E6%A0%B7%E5%88%86%E5%B8%83/">采样分布</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%8F%82%E6%95%B0%E6%A8%A1%E5%9E%8B/">参数模型</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/scipy/">scipy</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%81%9A%E7%B1%BB/">聚类</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%B8%82%E5%9C%BA%E7%BB%84%E5%90%88/">市场组合</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88/">投资组合</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%AD%A3%E5%88%99%E5%8F%98%E6%8D%A2/">正则变换</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%8F%98%E6%8D%A2%E7%BE%A4/">变换群</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E9%85%89%E7%BE%A4/">酉群</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%8A%9B%E5%AD%A6/">力学</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80/">奥卡姆剃刀</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BC%BD%E5%88%A9%E7%95%A5/">伽利略</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%BB%B6%E6%8B%93/">延拓</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81/">交叉验证</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E9%80%82%E9%85%8D%E5%9D%90%E6%A0%87%E7%B3%BB/">适配坐标系</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%94%B6%E7%9B%8A/">收益</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%88%86%E4%BD%8D%E6%95%B0/">分位数</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%88%86%E7%B1%BB%E5%99%A8/">分类器</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E9%98%BF%E5%B0%94%E6%B3%95/">阿尔法</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%81%94%E5%90%88%E6%A6%82%E7%8E%87/">联合概率</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%89%B9%E5%BE%81%E7%9F%A2%E9%87%8F/">特征矢量</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/">微积分</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%A0%87%E5%87%86%E5%B7%AE/">标准差</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%AE%9A%E5%90%91/">定向</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8A%95%E5%BD%B1%E6%98%A0%E5%B0%84/">投影映射</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%81%94%E7%BB%9C/">联络</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%B7%AE%E5%88%86/">有限差分</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%B6%85%E6%9B%B2%E9%9D%A2/">超曲面</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/">科学计算</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%BF%87%E6%8B%9F%E5%90%88/">过拟合</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/">概率论</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/">随机变量</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%B8%AD%E6%80%A7/">中性</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%BE%9B%E7%BE%A4/">辛群</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%90%86%E6%80%A7%E8%A1%8C%E4%B8%BA/">理性行为</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%A4%A7%E6%A0%B7%E6%9C%AC/">大样本</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/Gauss%E5%AE%9A%E7%90%86/">Gauss定理</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/sed/">sed</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%85%B8%E5%9E%8B%E7%BE%A4/">典型群</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%B5%8C%E5%85%A5/">嵌入</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BC%B0%E8%AE%A1%E9%87%8F/">估计量</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%A8%B3%E5%81%A5%E6%80%A7/">稳健性</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%A4%96%E5%BE%AE%E5%88%86/">外微分</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%A0%B9%E7%B3%BB/">根系</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%BB%B4%E5%BA%A6%E8%AF%85%E5%92%92/">维度诅咒</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7/">不确定性</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%A4%87%E5%BF%98/">备忘</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%AC%A6%E5%8F%B7%E6%BC%94%E7%AE%97/">符号演算</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%87%AA%E7%94%B1%E5%9C%BA/">自由场</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%B5%81%E4%BD%93%E5%8A%9B%E5%AD%A6/">流体力学</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/Stokes%E5%AE%9A%E7%90%86/">Stokes定理</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%8F%8D%E7%A7%B0%E5%BA%A6%E8%A7%84/">反称度规</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E9%87%8F%E5%AD%90%E5%9C%BA%E8%AE%BA/">量子场论</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8C%87%E6%95%B0%E6%98%A0%E5%B0%84/">指数映射</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%87%B8%E6%80%A7/">凸性</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%AD%89%E5%BA%A6%E8%A7%84%E6%98%A0%E5%B0%84/">等度规映射</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/Galerkin/">Galerkin</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5/">拉格朗日</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%B8%9A%E7%BB%A9%E5%9F%BA%E5%87%86/">业绩基准</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%9D%83%E7%B3%BB/">权系</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%81%8F%E5%B7%AE/">偏差</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%B4%9D%E5%A1%94/">贝塔</a>
+          <span>1</span>
+        </li>
+      
+      </ul>
+    </li>
+    
+  
+  </ul>
+
+</nav>
+
+    </aside>
+  
+ 
+      </header>
+
+      
+  
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/notes/posts/%E5%9F%BA%E4%BA%8EObsidianHugoGitee%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/">基于Obsidian＋Hugo＋Gitee的笔记系统</a>
+    </h2>
+    
+
+<div>
+
+  <h5>2021-02-18</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%BB%B4%E6%8A%A4">维护</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/hugo">hugo</a>
+      , 
+      <a href="/notes/tags/%E7%A0%81%E4%BA%91">码云</a>
+      , 
+      <a href="/notes/tags/obsidian">obsidian</a>
+      , 
+      <a href="/notes/tags/markdown">markdown</a>
+      , 
+      <a href="/notes/tags/latex">latex</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/posts/%e5%9f%ba%e4%ba%8eObsidian%ef%bc%8bHugo%ef%bc%8bGitee%e7%9a%84%e7%ac%94%e8%ae%b0%e7%b3%bb%e7%bb%9f.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+
+    <p>本文基于Typora＋Hugo＋Gitee的笔记系统，仅把Typora改成Obsidian而已。
+Obsidian是一个强大的知识库，可在纯文本Markdown文件的本地文件夹上运行。 支持双向链接（Roam Link）。
+通过gitee可实现云同步；通过gitee pages可以发布成网页。
+但是，Hugo无法解析Obsidian的双向链接，解决这个问题是本文的目标。
+【解决方案】 我通过shell脚本和Hugo短代码的配合解决这个问题。 通过shell脚本将Obsidian的双向链接转换成Hugo可以识别的自定义格式；Hugo短代码则负责解析这种自定义格式。
+本笔记系统是我自用，仅供参考。
+ 回顾基于Typora＋Hugo＋Gitee的笔记系统 改进后的笔记系统，支持形如[[...]]以及![[...]]的双向链接（后者支持图片），自然就支持Obsidian； 如果你不使用双向链接，也可以使用Typora（甚至任意文本编辑器）。 所以Typora＋Hugo＋Gitee的笔记系统是基础，具体使用方法参见我的笔记主页：https://gitee.com/chaoskey/notes。此处不再多说！
+用Hugo短代码获得目标页面路径 使用方式 在md文件中需要的地方插入：{{&lt; roamlink &quot;docs/fem/_index#第五章 有限元变分形式&quot; &gt;}} 。 能在插入的地方显示对应的页面相对路径，就我的笔记而言，结果是：/notes/docs/fem/#第五章-有限元变分形式。
+又比如：{{&lt; roamlink &quot;0097&quot; &gt;}} ， 就我的笔记而言，结果是：/notes/docs/fem/0097/。
+如果没有重复的文件名，无须指定路径，通过hugo自定义短代吗，可以获得实际的页面路径（如第2例）；如果有重复文件名，则需要指定更详细的相对路径（如第1例）。
+这种功能，就是为双向链接量身定制的，因为[[...]]或![[...]]可能只给出一个文件名，而非完整的路径。
+实现方式 具体代码（Hugo短代码）见项目文件： roamlink.html 。
+为了避免获取的页面路径含空格和换行符，代码被压缩成一行。为清晰起见，我见代码展开如下：
+{{ if gt (len .Params) 0 }} &lt;!-- 输入解析 --&gt; {{ $keys := (split (index .Params 0) &#34;#&#34;) }} {{ $tag := &#34;&#34; }} {{ if (gt (len $keys) 1) }} &lt;!
+        <a href="/notes/posts/%E5%9F%BA%E4%BA%8EObsidianHugoGitee%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/notes/posts/0004/">小技巧备忘</a>
+    </h2>
+    
+
+<div>
+
+  <h5>2020-01-13</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E6%9D%82%E8%AE%B0">杂记</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E5%A4%87%E5%BF%98">备忘</a>
+      , 
+      <a href="/notes/tags/%E7%9F%A5%E4%B9%8E">知乎</a>
+      , 
+      <a href="/notes/tags/%E6%8A%80%E5%B7%A7">技巧</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/posts/0004.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+
+    <p><h2 id="1-本地mdlatex如何完美发布到知乎">1 本地md+LaTex如何完美发布到知乎？</h2>
+<blockquote>
+<p>我已写成了脚本：<a href="https://gitee.com/chaoskey/notes/raw/master/forzhihu">forzhihu</a></p>
+</blockquote>
+<p>答：知乎编辑器提供了md上传，还提供了<code>https://www.zhihu.com/equation?tex=...</code>接口，并且支持贴图自动上传。　因此完全支持本地Markdown+LaTex完美发布到知乎，具体步骤如下：</p>
+<ul>
+<li>用本地Markdown编辑器放心写作。【我使用<code>Typora</code>】</li>
+<li>将本地图片换成网上图片，我个人的做法是先发布到<code>gitbook</code>，比如我的<a href="https://chaoskey.gitee.io/notes/"><code>https://chaoskey.gitee.io/notes/</code></a>。然后复制图片链接，替换原本地图片链接，图片数量一般不多，手工替换也不麻烦。</li>
+<li>将LaTex代码用<code>https://www.zhihu.com/equation?tex=...</code>替换。首先得有支持正则表达全文置换编辑器【我使用<code>Visual Studio Code</code>】，然后将　<code>\$\$(\n*)\s*(.*?)(\n*)\s*\$\$</code>　替换成　<code>$1&lt;img src=&quot;https://www.zhihu.com/equation?tex=$2&quot; alt=&quot;$2&quot; class=&quot;ee_img tr_noresize&quot; eeimg=&quot;1&quot;&gt;$3</code>。 当然前面这个正则表达式的形式要以实际为准。</li>
+<li>最后，保存文件，然后打开知乎编辑器，上传md文件，简单调整后，发布，完工。</li>
+</ul>
+        <a href="/notes/posts/0004/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/notes/posts/0067/">通过实例掌握流编辑器sed</a>
+    </h2>
+    
+
+<div>
+
+  <h5>2020-01-08</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%BB%B4%E6%8A%A4">维护</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/sed">sed</a>
+      , 
+      <a href="/notes/tags/latex">latex</a>
+      , 
+      <a href="/notes/tags/hugo">hugo</a>
+      , 
+      <a href="/notes/tags/typora">typora</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/posts/0067.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+
+    <p><h2 id="缘由">缘由</h2>
+<p>由于Hugo对Markdown的解析和LaTeX存在诸多冲突。比如：当LaTex中出现<code>\\</code>、<code>\{</code>、<code>\}</code>之类的东西，Hugo就无法正常解析数学公式。</p>
+<p>解决方案之一就是用Hugo的<code>shortcodes</code>机制，在md文件中用形如<code>{{&lt; katex [display] &gt;}}latex code{{&lt; /katex &gt;}}</code>格式。</p>
+<p>这样一来，网站显示正常了，但在本地Typora就无法识别了。 个人体验不好。</p>
+<p>于是我想到用流编编器<code>sed</code>对md内容进行替换。 我以前用<code>sed</code>都是简单的情况，复杂需求我就不会用了。 于是有了此文。</p>
+        <a href="/notes/posts/0067/">...</a>
+      
+    </p>
+  </article>
+  
+  <article class="markdown book-post">
+    <h2>
+      <a href="/notes/posts/0000/">用Hugo&#43;码云搭建支持Markdown&#43;LaTeX的云笔记</a>
+    </h2>
+    
+
+<div>
+
+  <h5>2020-01-07</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%BB%B4%E6%8A%A4">维护</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/hugo">hugo</a>
+      , 
+      <a href="/notes/tags/%E7%A0%81%E4%BA%91">码云</a>
+      , 
+      <a href="/notes/tags/typora">typora</a>
+      , 
+      <a href="/notes/tags/markdown">markdown</a>
+      , 
+      <a href="/notes/tags/latex">latex</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/posts/0000.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+
+    <p><h2 id="目标配置好后的日常操作">目标(配置好后的日常操作)</h2>
+<blockquote>
+<p>更新流程简单舒服，页面主题简洁，完全支持Markdown+LaTeX。</p>
+</blockquote>
+<p>1）<strong>本地撰写</strong>内容：用<a href="https://www.typora.io/">Typora</a>写基于Markdown+LaTeX的内容。</p>
+<p>2）利用静态网站生成器Hugo生成待发布的静态文件： 执行<code>./forgitee</code>。</p>
+<ul>
+<li>这个脚本实际依次执行了：1. 对所有md文件进行部分内容替换，确保站点可以完全解析； 2. 执行<code>hugo -D</code>,生成待发布的静态文件，生成文件夹<code>public</code>;  3. 执行<code>./fortypora</code>对所有md文件进行逆向置换复原，确保Typora打开能完全显示正常。</li>
+</ul>
+<p>3） 将站点<strong>git提交</strong>到<a href="https://gitee.com">码云（gitee）</a>： <a href="https://gitee.com/chaoskey/notes">https://gitee.com/chaoskey/notes</a></p>
+<ul>
+<li>包括站点全部源码（相当于文档云同步）和生成的静态文件目录<code>public</code>。</li>
+</ul>
+<p>4） 部署到： <a href="https://chaoskey.gitee.io/notes">https://chaoskey.gitee.io/notes</a></p>
+<p>5） 一键发布的脚本<code>./publish</code>（注意，必须根据你自己的情况修改之），依次执行了： 1.  <code>./forgitee</code>;  2.  将修改过的笔记提交到<code>master</code>分支； 3. 将<code>public</code>提交到<code>gh-pages</code>分支；  4. 将<code>gh-pages</code>分支<code>push</code>到<code>gitee</code>和<code>github</code>。</p>
+<p><img src="/notes/images/0103.jpg" alt="0103.jpg"></p>
+        <a href="/notes/posts/0000/">...</a>
+      
+    </p>
+  </article>
+  
+
+  
+
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/posts/_index.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/posts/_index.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+<nav>
+    <ul>
+  
+    
+    <li class="book-section-flat">
+      <strong>分类</strong>
+      <ul>
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+        <li class="flex justify-between">
+          <a href="/notes/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+          <span>50</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/">科学计算</a>
+          <span>41</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/categories/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/">微分几何</a>
+          <span>25</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/categories/%E7%90%86%E8%AE%BA%E7%89%A9%E7%90%86/">理论物理</a>
+          <span>9</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/categories/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84/">量化投资</a>
+          <span>9</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/categories/%E7%BB%B4%E6%8A%A4/">维护</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/categories/julia/">julia</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/categories/%E6%9D%82%E8%AE%B0/">杂记</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/categories/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95/">有限元法</a>
+          <span>1</span>
+        </li>
+      
+      </ul>
+    </li>
+    
+  
+    
+    <li class="book-section-flat">
+      <strong>标签</strong>
+      <ul>
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95/">有限元法</a>
+          <span>34</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/FEniCS/">FEniCS</a>
+          <span>32</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/">偏微分方程</a>
+          <span>31</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%B5%81%E5%BD%A2/">流形</a>
+          <span>25</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/julia/">julia</a>
+          <span>17</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF/">贝叶斯</a>
+          <span>11</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%AF%B9%E7%A7%B0%E6%80%A7/">对称性</a>
+          <span>10</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8A%95%E8%B5%84/">投资</a>
+          <span>8</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%9D%8E%E4%BB%A3%E6%95%B0/">李代数</a>
+          <span>6</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">线性回归</a>
+          <span>6</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%97%8B%E9%87%8F/">旋量</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%AF%BC%E6%95%B0%E7%AE%97%E7%AC%A6/">导数算符</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%90%8E%E9%AA%8C/">后验</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E9%A3%8E%E9%99%A9/">风险</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%85%88%E9%AA%8C/">先验</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%9D%8E%E7%BE%A4/">李群</a>
+          <span>5</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%88%86%E5%B8%83/">分布</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/">微分方程</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/">数值计算</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8B%9F%E7%84%B6/">拟然</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E9%A2%84%E6%B5%8B/">预测</a>
+          <span>4</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/killing/">killing</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%9D%87%E5%80%BC/">均值</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%82%96%E8%AE%BA/">悖论</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BF%A1%E6%81%AF%E7%8E%87/">信息率</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/Casimir%E7%AE%97%E7%AC%A6/">Casimir算符</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%B2%AD%E5%9B%9E%E5%BD%92/">岭回归</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/latex/">latex</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BC%B0%E8%AE%A1%E5%99%A8/">估计器</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%BE%AE%E5%88%86%E5%BD%A2%E5%BC%8F/">微分形式</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%85%8B%E6%B0%8F%E7%AC%A6/">克氏符</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/">监督学习</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/hugo/">hugo</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%9B%B2%E7%8E%87/">曲率</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%96%B9%E5%B7%AE/">方差</a>
+          <span>3</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%95%88%E7%94%A8/">效用</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%9B%9E%E5%BD%92/">回归</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8B%9F%E5%90%88/">拟合</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%A4%B4%E5%AF%B8/">头寸</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%A8%A1%E5%9E%8B/">模型</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%96%B9%E5%90%91%E5%AF%BC%E6%95%B0/">方向导数</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9/">模型选择</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%BD%AE%E4%BF%A1%E5%8C%BA%E9%97%B4/">置信区间</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/markdown/">markdown</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%BC%A0%E9%87%8F/">张量</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%BE%9B%E6%B5%81%E5%BD%A2/">辛流形</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%AE%8B%E5%B7%AE/">残差</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%AD%A3%E5%88%99%E5%8C%96/">正则化</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%93%88%E5%AF%86%E9%A1%BF/">哈密顿</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/sympy/">sympy</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%B8%BB%E5%8A%A8%E7%AE%A1%E7%90%86/">主动管理</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/jupyter/">jupyter</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%BB%9F%E8%AE%A1/">统计</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/typora/">typora</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%B9%A0%E9%A2%98/">习题</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%B5%8B%E5%9C%B0%E7%BA%BF/">测地线</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/">无监督学习</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/python/">python</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8A%80%E5%B7%A7/">技巧</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E9%A2%91%E7%8E%87%E6%B4%BE/">频率派</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BD%93%E5%85%83/">体元</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%9C%BA%E8%AE%BA/">场论</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%A0%81%E4%BA%91/">码云</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%A5%97%E5%88%A9/">套利</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/">损失函数</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%AE%9A%E4%BB%B7/">定价</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%B3%8A%E6%9D%BE/">泊松</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%88%86%E7%B1%BB/">分类</a>
+          <span>2</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/Delaunay/">Delaunay</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%81%8F%E5%B7%AE/">偏差</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%81%94%E7%BB%9C/">联络</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E9%87%8F%E5%AD%90%E5%9C%BA%E8%AE%BA/">量子场论</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%81%8F%E5%A5%BD/">偏好</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E9%99%8D%E7%BB%B4/">降维 </a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7/">不确定性</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%AD%A3%E5%88%99%E5%9D%90%E6%A0%87/">正则坐标</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/Gauss%E5%AE%9A%E7%90%86/">Gauss定理</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%A8%B3%E5%81%A5%E6%80%A7/">稳健性</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%9F%A5%E4%B9%8E/">知乎</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%8F%82%E6%95%B0%E6%A8%A1%E5%9E%8B/">参数模型</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%8B%AC%E7%AB%8B%E6%80%A7/">独立性</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%99/">决策规则</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8B%89%E5%9B%9E%E6%98%A0%E5%B0%84/">拉回映射</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%B8%82%E5%9C%BA%E7%BB%84%E5%90%88/">市场组合</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%B8%9A%E7%BB%A9%E5%9F%BA%E5%87%86/">业绩基准</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%B4%9B%E4%BC%A6%E5%85%B9%E7%BE%A4/">洛伦兹群</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%BE%A4/">群</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%B8%89%E8%A7%92%E5%89%96%E5%88%86/">三角剖分</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%88%86%E4%BD%8D%E6%95%B0/">分位数</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/p%E5%80%BC/">p值</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8E%A8%E6%96%AD/">推断</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%87%B8%E6%80%A7/">凸性</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%B9%B3%E7%A7%BB/">平移</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5/">拉格朗日</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BC%B0%E8%AE%A1%E9%87%8F/">估计量</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%A4%9A%E5%9B%A0%E5%AD%90/">多因子</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%89%B9%E5%BE%81%E7%9F%A2%E9%87%8F/">特征矢量</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BC%B0%E5%80%BC/">估值</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/">科学计算</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/scipy/">scipy</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%89%9B%E9%A1%BF%E6%B5%81%E4%BD%93/">牛顿流体</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%B7%AE%E5%88%86/">有限差分</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80/">奥卡姆剃刀</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%A5%94%E7%A7%AF/">楔积</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%B6%85%E5%8F%82%E6%95%B0/">超参数</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%8A%9B%E5%AD%A6/">力学</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%B5%8C%E5%85%A5/">嵌入</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%BE%AE%E5%88%86%E5%90%8C%E8%83%9A/">微分同胚</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%94%B6%E7%9B%8A/">收益</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%9D%83%E7%B3%BB/">权系</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%BA%9E%E5%8A%A0%E8%8E%B1%E7%BE%A4/">庞加莱群</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%AF%B9%E6%98%93%E5%AD%90/">对易子</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/vscode/">vscode</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8C%87%E6%95%B0%E6%98%A0%E5%B0%84/">指数映射</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BC%BD%E5%88%A9%E7%95%A5/">伽利略</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%B4%9D%E5%A1%94/">贝塔</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%8F%8D%E7%A7%B0%E5%BA%A6%E8%A7%84/">反称度规</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%A0%B9%E7%B3%BB/">根系</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%AF%81%E6%8D%AE/">证据</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%A0%87%E5%87%86%E5%B7%AE/">标准差</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%B5%81%E4%BD%93%E5%8A%9B%E5%AD%A6/">流体力学</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%BE%9B%E7%BE%A4/">辛群</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%A4%A7%E6%A0%B7%E6%9C%AC/">大样本</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%BF%87%E6%8B%9F%E5%90%88/">过拟合</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8A%95%E5%BD%B1%E6%98%A0%E5%B0%84/">投影映射</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%B3%95%E4%BD%99%E7%9F%A2/">法余矢</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/">坐标变换</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%9C%80%E8%BF%91%E9%82%BB/">最近邻</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/obsidian/">obsidian</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/Galerkin/">Galerkin</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%B8%AD%E6%80%A7/">中性</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%8E%9A%E5%B0%BE/">厚尾</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BC%B0%E8%AE%A1/">估计</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%9B%B8%E5%85%B3%E6%80%A7/">相关性</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%B3%95%E7%9F%A2/">法矢</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%A6%82%E7%8E%87%E8%AE%BA/">概率论</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%A4%87%E5%BF%98/">备忘</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%B8%80%E8%87%B4%E9%A2%84%E6%9C%9F/">一致预期</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%A4%96%E5%BE%AE%E5%88%86/">外微分</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88/">投资组合</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%88%86%E7%B1%BB%E5%99%A8/">分类器</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E9%98%BF%E5%B0%94%E6%B3%95/">阿尔法</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E9%80%82%E9%85%8D%E5%9D%90%E6%A0%87%E7%B3%BB/">适配坐标系</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%BB%B6%E6%8B%93/">延拓</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BC%97%E6%95%B0/">众数</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%9D%8E%E6%8B%AC%E5%8F%B7/">李括号</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%81%9A%E7%B1%BB/">聚类</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%85%B8%E5%9E%8B%E7%BE%A4/">典型群</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81/">交叉验证</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%AE%9A%E5%90%91/">定向</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F/">随机变量</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%8F%AF%E4%BF%A1%E5%8C%BA%E9%97%B4/">可信区间</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%AE%88%E6%81%92%E5%BE%8B/">守恒律</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E9%87%87%E6%A0%B7%E5%88%86%E5%B8%83/">采样分布</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/sed/">sed</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/noether/">noether</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%81%94%E5%90%88%E6%A6%82%E7%8E%87/">联合概率</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%9F%A2%E9%87%8F%E5%9C%BA/">矢量场</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%9D%8E%E5%AF%BC%E6%95%B0/">李导数</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%BE%AE%E7%A7%AF%E5%88%86/">微积分</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%B6%85%E6%9B%B2%E9%9D%A2/">超曲面</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/capm/">capm</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/Stokes%E5%AE%9A%E7%90%86/">Stokes定理</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%BE%B9%E9%99%85%E6%8B%9F%E7%84%B6/">边际拟然</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BA%92%E4%BF%A1%E6%81%AF/">互信息</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%87%AA%E4%B8%BE/">自举</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%AD%A3%E4%BA%A4%E7%BE%A4/">正交群</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%8D%8F%E6%96%B9%E5%B7%AE/">协方差</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BC%BC%E7%84%B6/">似然</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%89%9B%E9%A1%BF%E5%8A%9B%E5%AD%A6/">牛顿力学</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%AC%A6%E5%8F%B7%E6%BC%94%E7%AE%97/">符号演算</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%AD%90%E6%B5%81%E5%BD%A2/">子流形</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98/">最小二乘</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8E%A8%E5%89%8D%E6%98%A0%E5%B0%84/">推前映射</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%9F%BA%E5%87%BD%E6%95%B0/">基函数</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9/">特征选择</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E5%8F%98%E6%8D%A2%E7%BE%A4/">变换群</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%AF%B1%E5%AF%BC%E5%BA%A6%E8%A7%84/">诱导度规</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E8%87%AA%E7%94%B1%E5%9C%BA/">自由场</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E4%BC%AF%E5%8A%AA%E5%88%A9/">伯努利</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E9%85%89%E7%BE%A4/">酉群</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%BB%B4%E5%BA%A6%E8%AF%85%E5%92%92/">维度诅咒</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%AD%89%E5%BA%A6%E8%A7%84%E6%98%A0%E5%B0%84/">等度规映射</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%8A%BD%E8%B1%A1%E6%8C%87%E6%A0%87/">抽象指标</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%A6%82%E5%BF%B5%E5%AD%A6%E4%B9%A0/">概念学习</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E9%BB%8E%E6%9B%BC%E6%9B%B2%E7%8E%87/">黎曼曲率</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E6%AD%A3%E5%88%99%E5%8F%98%E6%8D%A2/">正则变换</a>
+          <span>1</span>
+        </li>
+      
+        <li class="flex justify-between">
+          <a href="/notes/tags/%E7%90%86%E6%80%A7%E8%A1%8C%E4%B8%BA/">理性行为</a>
+          <span>1</span>
+        </li>
+      
+      </ul>
+    </li>
+    
+  
+  </ul>
+
+</nav>
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

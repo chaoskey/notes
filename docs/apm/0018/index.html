@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="第二章 一致预期收益率：资本资产定价模型"><meta property="og:title" content="第二章 一致预期收益率：资本资产定价模型" />
+<meta property="og:description" content="几个概念
+
+收益率
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+  \(R_P\)
+
+
+
+某个资产P在某个期间的收益率。
+
+超额收益率
+
+超额是相对无风险资产而言的，于是资产的超额收益率
+
+
+
+  \(r_P\)
+
+就是资产收益率
+
+
+
+  \(R_P\)
+
+与同期无风险资产收益率
+
+
+
+  \(R_f\)
+
+的差额：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/apm/0018/" />
+<meta property="article:published_time" content="2018-05-20T20:20:35+08:00" />
+<meta property="article:modified_time" content="2018-05-20T20:20:35+08:00" />
+<title>第二章 一致预期收益率：资本资产定价模型 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a>
+<ul>
+<li><a href="/notes/docs/apm/0017/">第一章 绪论</a></li>
+<li><a href="/notes/docs/apm/0018/"class=active>第二章 一致预期收益率：资本资产定价模型</a></li>
+<li><a href="/notes/docs/apm/0019/">第三章 风险</a></li>
+<li><a href="/notes/docs/apm/0020/">第四章 超常收益率、业绩基准和附加值</a></li>
+<li><a href="/notes/docs/apm/0021/">第五章 残差风险和残差收益率：信息率</a></li>
+<li><a href="/notes/docs/apm/0022/">第六章 主动管理基本定律</a></li>
+<li><a href="/notes/docs/apm/0023/">第七章 预期收益率和套利定价理论</a></li>
+<li><a href="/notes/docs/apm/0024/">第八章 估值理论</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>第二章 一致预期收益率：资本资产定价模型</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#几个概念">几个概念</a></li>
+        <li><a href="#超额收益率分解">超额收益率分解</a></li>
+        <li><a href="#capm">CAPM</a></li>
+        <li><a href="#一致预期收益率">一致预期收益率</a></li>
+        <li><a href="#技术性假设">技术性假设</a></li>
+        <li><a href="#属性及其特征组合">属性及其特征组合</a></li>
+        <li><a href="#全1向量及其特征组合c">全1向量及其特征组合C</a></li>
+        <li><a href="#贝塔及业绩基准组合b">贝塔及业绩基准组合B</a></li>
+        <li><a href="#预期超额收益率及其特征组合q">预期超额收益率及其特征组合q</a></li>
+        <li><a href="#阿尔法及其特征组合a">阿尔法及其特征组合A</a></li>
+        <li><a href="#组合q">组合Q</a></li>
+        <li><a href="#部分特征组合的列表">部分特征组合的列表</a></li>
+        <li><a href="#有效前沿">有效前沿</a></li>
+        <li><a href="#资本资产定价模型">资本资产定价模型</a></li>
+        <li><a href="#市场组合m">市场组合M</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0019/">
+    下一页<br>第三章 风险
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0017/">
+      上一页<br>第一章 绪论
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/apm/0018/">第二章 一致预期收益率：资本资产定价模型</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2018-05-20</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84">量化投资</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E6%8A%95%E8%B5%84">投资</a>
+      , 
+      <a href="/notes/tags/%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88">投资组合</a>
+      , 
+      <a href="/notes/tags/%E5%B8%82%E5%9C%BA%E7%BB%84%E5%90%88">市场组合</a>
+      , 
+      <a href="/notes/tags/%E6%AE%8B%E5%B7%AE">残差</a>
+      , 
+      <a href="/notes/tags/%E4%B8%80%E8%87%B4%E9%A2%84%E6%9C%9F">一致预期</a>
+      , 
+      <a href="/notes/tags/%E5%AE%9A%E4%BB%B7">定价</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/apm/0018.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h2 id="几个概念">几个概念</h2>
+<ul>
+<li><strong>收益率</strong>
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(R_P\)
+</span>
+</li>
+</ul>
+<p>某个资产P在某个期间的收益率。</p>
+<ul>
+<li><strong>超额收益率</strong></li>
+</ul>
+<p><strong>超额</strong>是相对无风险资产而言的，于是资产的超额收益率
+
+
+<span class="katex">
+  \(r_P\)
+</span>
+就是资产收益率
+
+
+<span class="katex">
+  \(R_P\)
+</span>
+与同期无风险资产收益率
+
+
+<span class="katex">
+  \(R_f\)
+</span>
+的差额：</p>
+<span class="katex">
+  \[
+r_P = R_P - R_F
+\]
+</span>
+
+<ul>
+<li><strong>预期超额收益率</strong>　<strong>预期</strong>对应与“数学期望”的概念，预期超额收益率是对未来超额收益率的的估计：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+f_P = \mathrm{E}\{ r_P \}
+\]
+</span>
+
+<ul>
+<li><strong>资产</strong>与<strong>投资组合</strong></li>
+</ul>
+<p>资产与投资组合本质上可以看作同一个概念：任意一个投资组合都可以看成是某种资产（比如持有某种基金），任何一个资产也都可以看成一个投资组合（比如，持有一只股票，可以看这只股票的头寸非零，其它股票头寸为零的投资组合）。当然，故名思义，投资组合也可以看成投资一堆资产的组合，每种资产分配特定的头寸权重，于是任意投资组合（简称组合）都可以用<strong>头寸权重列向量</strong>表示：</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{h}=(h_1,\dots,h_N)^T
+\]
+</span>
+
+<p>于是组合P可表示成
+
+
+<span class="katex">
+  \(\boldsymbol{h}_P\)
+</span>
+。类似地，也有一堆资产的<strong>超额收益率列向量</strong>和<strong>预期超额收益率列向量</strong>：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\boldsymbol{r} = (r_1,\dots,r_N)^T \\
+\boldsymbol{f} = (f_1,\dots,f_N)^T
+\end{aligned}
+\]
+</span>
+
+<p>于是组合P的超额收益率
+
+
+<span class="katex">
+  \(r_P\)
+</span>
+及预期超额收益率
+
+
+<span class="katex">
+  \(f_P\)
+</span>
+可分别表示为：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+r_P = \boldsymbol{r}^T \boldsymbol{h}_P \\
+f_P = \boldsymbol{f}^T \boldsymbol{h}_P
+\end{aligned}
+\]
+</span>
+
+<p>另外，将风险资产的超额收益率之间的<strong>协方差矩阵</strong>(假设非奇异的)记作：</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{V} = \mathrm{E}\{(\boldsymbol{r} - \mathrm{E}\boldsymbol{r} )(\boldsymbol{r} - \mathrm{E}\boldsymbol{r} )^T\} = (\mathrm{Cov}\{r_i,r_j\})_{N \times N} \overset{\Delta}{=} (V_{i j})_{N \times N}
+\]
+</span>
+
+<ul>
+<li><strong>市场组合M</strong></li>
+</ul>
+<p>很自然，市场中所有资产按其市值作为权重，必然构成一个最大的组合，这就是市场组合。对应的超额收益率和预期超额收益率分别是
+
+
+<span class="katex">
+  \(r_M\)
+</span>
+和
+
+
+<span class="katex">
+  \(f_M\)
+</span>
+。</p>
+<ul>
+<li>组合的<strong>属性值</strong>或<strong>暴露度</strong></li>
+</ul>
+<p>前面已经涉及了资产的两种属性：超额收益率和预期超额收益率，以及组合的超额收益率和预期超额收益率。前者表示所有资产的属性列向量，后者是组合的属性值。</p>
+<p>一般地，如果我们将资产的<strong>属性</strong>记作
+
+
+<span class="katex">
+  \(\boldsymbol{a}\)
+</span>
+（列向量），那么组合P的<strong>属性值</strong>
+
+
+<span class="katex">
+  \(a_P\)
+</span>
+可定义成：</p>
+
+
+
+<span class="katex">
+  \[
+a_P = \boldsymbol{a}^T \boldsymbol{h}_P
+\]
+</span>
+
+<p>在书中，组合P（关于属性
+
+
+<span class="katex">
+  \(\boldsymbol{a}\)
+</span>
+）的属性值
+
+
+<span class="katex">
+  \(a_P\)
+</span>
+，又被称作组合P对属性
+
+
+<span class="katex">
+  \(\boldsymbol{a}\)
+</span>
+的<strong>暴露度</strong>。</p>
+<p>具有明显经济含义时，我们往往使用<strong>属性值</strong>的说法（比如，组合的超额收益率）；没有明显经济含义时，往往使用<strong>暴露度</strong>的说法。</p>
+<ul>
+<li><strong>年化</strong></li>
+</ul>
+<p>当某属性随着预测期长度按某幂次增长时，都可引入年化概念。比如：预期收益率，随预测期长度线性增长；风险(标准差)，随预测期长度的平方根增长，对应的<strong>年化</strong>与<strong>月度</strong>的变换分别是：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+f_{年化} = 12 \ f_{月度} = \dfrac{1}{\Delta t} \ f_{\Delta t} \\
+\sigma_{年化} = \sqrt{12} \ \sigma_{月度}  =  \sqrt{\dfrac{1}{\Delta t}} \ \sigma_{\Delta t}
+\end{aligned}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(\Delta t\)
+</span>
+是以年为单位的预测期长度。</p>
+<p>为了方便对不同预测期的同一属性进行比较，标准的做法是：统一以年化属性作为比较标准。以后，凡是可以年化的属性，在列出年化转换公式后，如果不作声明，都是指年化属性。</p>
+<h2 id="超额收益率分解">超额收益率分解</h2>
+<p>为了对<strong>超额收益率</strong>进行分解，线性分解是我们最容易想到的，而<strong>市场组合M</strong>提供了一个理想的分解基准，于是自然会想到源自线性回归分析的<strong>贝塔</strong>概念。</p>
+<p>组合P的<strong>贝塔值</strong>（是一个相对概念，默认是对市场组合M而言），可定义成：</p>
+
+
+
+<span class="katex">
+  \[
+\beta_P = \frac{\mathrm{Cov}\{r_P,r_M\}}{\mathrm{Var}\{r_M\}}
+\]
+</span>
+
+<p>容易验证：市场组合M的贝塔值是1，无风险资产的贝塔值是0。</p>
+<p>贝塔是一个先验概念（向未来看，假设当前已知），贝塔的概念源自线性回归分析，比如组合P在时期
+
+
+<span class="katex">
+  \(t=1,\dots,T\)
+</span>
+上的超额收益率
+
+
+<span class="katex">
+  \(r_P(t)\)
+</span>
+对同期市场超额收益率
+
+
+<span class="katex">
+  \(r_M(t)\)
+</span>
+的回归：</p>
+
+
+
+<span class="katex">
+  \[
+r_P(t) =\alpha_P+ \beta_P r_M(t) + \epsilon_P(t)
+\]
+</span>
+
+<p>其中，回归分析得到的对
+
+
+<span class="katex">
+  \(\beta_P\)
+</span>
+和
+
+
+<span class="katex">
+  \(\alpha_P\)
+</span>
+的估计值被称作<strong>实现的</strong>或<strong>历史的贝塔值</strong>和<strong>阿尔法值</strong>，而
+
+
+<span class="katex">
+  \(\epsilon_P(t)\)
+</span>
+则是零均值随机项。历史贝塔则是一个后验证概念（向历史看）。</p>
+<p>一旦知道组合P的贝塔值，那么可将组合P的<strong>超额收益率</strong>分解成<strong>市场部分</strong>和<strong>残差部分</strong>：</p>
+
+
+
+<span class="katex">
+  \[
+r_P = \beta_P r_M + \theta_P
+\]
+</span>
+
+<p>其中，假设<strong>残差收益率</strong>
+
+
+<span class="katex">
+  \(\theta_P=\alpha_P + \epsilon_P\)
+</span>
+与<strong>市场收益率</strong>
+
+
+<span class="katex">
+  \(r_M\)
+</span>
+是不相关的。</p>
+<p>进而，也可将组合P的<strong>预期超额收益率</strong>分解为：</p>
+
+
+
+<span class="katex">
+  \[
+f_P = \beta_P f_M + \alpha_P
+\]
+</span>
+
+<p>其中，<strong>预期残差收益率</strong>恰好是组合P的<strong>阿尔法值</strong>
+
+
+<span class="katex">
+  \(\alpha_P=\mathrm{E}\{ \theta_P \}\)
+</span>
+。</p>
+<p>组合P的<strong>方差</strong>也可分解成：</p>
+
+
+
+<span class="katex">
+  \[
+\sigma_P^2 = \beta_P^2 \sigma_M^2 + \omega_P^2
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(\omega_P^2\)
+</span>
+是组合P的残差方差，即
+
+
+<span class="katex">
+  \(\omega_P^2 = \mathrm{Var}\{\theta_P\}\)
+</span>
+。</p>
+<h2 id="capm">CAPM</h2>
+<p>一般而言，市场组合M的预期残差收益率严格为0。 因为
+
+
+<span class="katex">
+  \(\alpha_M=f_M-\beta_M f_M＝f_M- f_M=0\)
+</span>
+。</p>
+<p>但CAPM更理想化地认为，任何股票或组合的的预期残差收益率都为0（即，
+
+
+<span class="katex">
+  \(\alpha_P=\mathrm{E}\{ \theta_P \} = 0\)
+</span>
+）。进而任意组合P的<strong>预期超额收益率</strong>正比于组合P的<strong>贝塔值</strong>：</p>
+
+
+
+<span class="katex">
+  \[
+\mu_P = \beta_P \mu_M
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(\mu_P=\mathrm{E}\{r_P\}\)
+</span>
+是组合P的预期超额收益率，
+
+
+<span class="katex">
+  \(\mu_M=\mathrm{E}\{r_M\}\)
+</span>
+是市场组合M的预期超额收益率。（用
+
+
+<span class="katex">
+  \(\mu\)
+</span>
+替代
+
+
+<span class="katex">
+  \(f\)
+</span>
+表示CAPM观点下的预期超额收益率）</p>
+<p>在CAPM下，持有异于市场组合的投资组合的投资者在玩一个零和游戏。此类投资者承担了额外的风险却没有获得额外的预期收益。这个逻辑导致<strong>被动投资</strong>，即买入并持有市场组合。</p>
+<p>CAPM的合理性依赖你认可不存在“更傻的傻瓜”。即使你不认可，CAPM也提供了一个可以参考的合理基准。</p>
+<p>CAPM和有效市场理论虽然不一样，但却是一致的。前者强调如果不存在“更傻的傻瓜”，那么没有人能够战胜市场。而有效市场理论，则为不存在“更傻的傻瓜”提供了某种理由，比如强有效市场理论，认为市场价格包含了一切相关信息。</p>
+<p>CAPM是关于预期的(先验的)。无论是先验还是后验证。无风险资产和市场组合连接而成直线被称作<strong>证券市场线</strong>。先验情况下，是在“贝塔-预期收益率”图中的直线，并且所有组合精确落在市场线上；后验情况下，是在“贝塔-收益率”图中的直线。一般而言，实现的组合很可能不落在市场线上，这些组合和市场线的垂直偏差，就是实现的残差收益率。</p>
+<h2 id="一致预期收益率">一致预期收益率</h2>
+<p>所谓<strong>一致</strong>，即无一例外的意思，这里特指大家都在CAPM模型下，算出的结果。<strong>一致预期收益率</strong>就是CAPM预期收益率。后面将证明：CAPM产生的预期收益率恰好使得市场组合是均值/方差最优的。所以，市场组合可被称为<strong>一致组合</strong>。</p>
+<p>一致预期收益率的价值在于它为我们设立了一个比较基准。</p>
+<p>主动管理决策就是由我们的预测与一致预期收益率之间的差异来驱动的。</p>
+<p>CAPM为一致预期收益率提供了一个有效来源，但不是预测预期收益率的唯一方法；另一种提供预期收益率的替代方法是APT，但是不能作为一致收益率的来源。</p>
+<h2 id="技术性假设">技术性假设</h2>
+<p>在单一投资期内不进行组合的再平衡操作，并且假设：</p>
+<ol>
+<li>存在一个无风险资产；</li>
+<li>所有一阶和二阶矩均存在；</li>
+<li>不存在零风险的全额投资组合；</li>
+<li>最小方差全额投资组合C的预期超额收益率严格正值。</li>
+</ol>
+<p>其中最后一个假设可能会被放松。</p>
+<h2 id="属性及其特征组合">属性及其特征组合</h2>
+<ul>
+<li>示意：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">任意属性</th>
+<th style="text-align:left">特征组合P</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">
+
+
+<span class="katex">
+  \(\boldsymbol{a}=(a_1,\dots,a_n)^T\)
+</span>
+</td>
+<td style="text-align:left">
+
+
+<span class="katex">
+  \(\boldsymbol{h}_P=(h_{P,1},\dots,h_{P,n})^T\)
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>定义：</li>
+</ul>
+<p>非零属性
+
+
+<span class="katex">
+  \(\boldsymbol{a}\)
+</span>
+的特征组合
+
+
+<span class="katex">
+  \(\boldsymbol{h}_a\)
+</span>
+：对
+
+
+<span class="katex">
+  \(\boldsymbol{a}\)
+</span>
+具有单位暴露度的最小风险组合。</p>
+<ul>
+<li>数学表述：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\underset{\boldsymbol{h}}{\min} & \boldsymbol{h}^T \boldsymbol{V} \boldsymbol{h} \\
+\quad s.t. & \boldsymbol{a}^T \boldsymbol{h} = 1
+\end{aligned}
+\]
+</span>
+
+<ul>
+<li>用拉格朗日乘子法可求得特征组合解（意味着非零属性对应一个唯一特征组合）：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{h}_a = \dfrac {\boldsymbol{V}^{-1} \boldsymbol{a}} {\boldsymbol{a}^T \boldsymbol{V}^{-1} \boldsymbol{a}}
+\]
+</span>
+
+<ul>
+<li>该特征组合的方差：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\sigma_a^2 = \boldsymbol{h}_a^T \boldsymbol{V} \boldsymbol{h}_a = \dfrac {1} {\boldsymbol{a}^T \boldsymbol{V}^{-1} \boldsymbol{a}}
+\]
+</span>
+
+<ul>
+<li>由上述两式变形可得：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{a} = \dfrac {\boldsymbol{V} \boldsymbol{h}_a} {\sigma_a^2}
+\]
+</span>
+
+<p>这表明属性
+
+
+<span class="katex">
+  \(\boldsymbol{a}\)
+</span>
+也是相对其特征组合
+
+
+<span class="katex">
+  \(\boldsymbol{h}_a\)
+</span>
+的贝塔：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\beta_i &= \dfrac{\mathrm{Cov}\{r_i,r_a\}}{\sigma_a^2}  = \dfrac{\mathrm{Cov}\{r_i,\sum_j{r_j h_{a,j}}\}}{\sigma_a^2} \\ &= \dfrac{\sum_j{\mathrm{Cov}\{r_i,r_j \} h_{a,j}}}{\sigma_a^2}  = \dfrac{\sum_j{V_{i,j} h_{a,j}}}{\sigma_a^2} \\ & \Longrightarrow \boldsymbol{\beta}_{相对组合\boldsymbol{h}_a} = \dfrac{\boldsymbol{V} \boldsymbol{h}_a}{\sigma_a^2}=\boldsymbol{a}
+\end{aligned}
+\]
+</span>
+
+<p>第一个等式是根据贝塔的扩展定义（默认是相对市场组合M，这里扩展成相对任意指定组合）。</p>
+<ul>
+<li>考虑属性及其特征组合对
+
+
+<span class="katex">
+  \((\boldsymbol{a},\boldsymbol{h}_a)\)
+</span>
+和 
+
+
+<span class="katex">
+  \((\boldsymbol{d},\boldsymbol{h}_d)\)
+</span>
+ ，以及交叉暴露度
+
+
+<span class="katex">
+  \(a_d\)
+</span>
+和
+
+
+<span class="katex">
+  \(d_a\)
+</span>
+。　那么这两个特征组合的协方差为：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\sigma_{a,d} =\boldsymbol{h}_a^T \boldsymbol{V} \boldsymbol{h}_d = a_d \sigma_a^2 = d_a \sigma_d^2
+\]
+</span>
+
+<ul>
+<li>属性
+
+
+<span class="katex">
+  \(\kappa \boldsymbol{a}(\kappa>0)\)
+</span>
+的特征组合是
+
+
+<span class="katex">
+  \(\boldsymbol{h}_a / \kappa\)
+</span>
+（通过除于
+
+
+<span class="katex">
+  \(\kappa\)
+</span>
+，确保对属性的单位暴露度）。</li>
+<li>从属性到其特征组合，保线性但不保线性系数。一般地，如果
+
+
+<span class="katex">
+  \(\boldsymbol{a}=\sum \kappa \ \boldsymbol{d}\)
+</span>
+（
+
+
+<span class="katex">
+  \(\kappa,\boldsymbol{d}\)
+</span>
+都忽略了求和下标，请自行脑补），那么：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+&\boldsymbol{h}_a = \sum \dfrac {\kappa \ \sigma_a^2} {\sigma_d^2} \boldsymbol{h}_d \\
+\mathrm{where} \quad & \dfrac {1} {\sigma_a^2} = \sum \dfrac {\kappa \ a_d} {\sigma_d^2}
+\end{aligned}
+\]
+</span>
+
+<h2 id="全1向量及其特征组合c">全1向量及其特征组合C</h2>
+<ul>
+<li>示意：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">全1向量</th>
+<th style="text-align:left">组合C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">
+
+
+<span class="katex">
+  \(\boldsymbol{e}=(1,\dots,1)^T\)
+</span>
+</td>
+<td style="text-align:left">
+
+
+<span class="katex">
+  \(h_C\)
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>这是第一个特殊的特征组合。属性及其特征组合的一般结论，必然适用于这个特征组合上。如非强调，不再重复列出相关结论。</li>
+<li>组合C特点：</li>
+</ul>
+<p>１）组合P对
+
+
+<span class="katex">
+  \(\boldsymbol{e}\)
+</span>
+的暴露度
+
+
+<span class="katex">
+  \(e_P=\boldsymbol{e}^T \boldsymbol{h}_P=\sum_i{h_{P,i}}\)
+</span>
+就是组合P权重之和，进而单位暴露度就是全额投资，所以组合C就是<strong>最小风险全额投资组合</strong>；</p>
+<p>２）任何资产对组合C的贝塔恒为1；</p>
+<p>３）对全额投资组合P而言，
+
+
+<span class="katex">
+  \(\sigma_{P,C} = \sigma_C^2\)
+</span>
+。</p>
+<h2 id="贝塔及业绩基准组合b">贝塔及业绩基准组合B</h2>
+<ul>
+<li>示意：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">贝塔</th>
+<th style="text-align:left">组合B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">
+
+
+<span class="katex">
+  \(\boldsymbol{\beta}\)
+</span>
+</td>
+<td style="text-align:left">
+
+
+<span class="katex">
+  \(h_B\)
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>说明：</li>
+</ul>
+<p>这里的贝塔是特指，相对某个有特定含义的组合（业绩基准组合）的贝塔。而前面称“属性
+
+
+<span class="katex">
+  \(\boldsymbol{a}\)
+</span>
+也是相对其特征组合
+
+
+<span class="katex">
+  \(\boldsymbol{h}_a\)
+</span>
+的贝塔”，其中的贝塔相对的组合是没有特定含义的，是任意选定的一个组合。以后，我们提及贝塔这个概念时，除非人为指定，根据上下文，默认有可能是相对市场组合M，也可能是相对业绩基准组合B。</p>
+<ul>
+<li>组合B特点：</li>
+</ul>
+<p>业绩基准就是贝塔值等于1的最小风险组合，
+
+
+<span class="katex">
+  \(\beta_B=1\)
+</span>
+。</p>
+<h2 id="预期超额收益率及其特征组合q">预期超额收益率及其特征组合q</h2>
+<ul>
+<li>示意：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">预期超额收益率</th>
+<th style="text-align:left">组合q</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">
+
+
+<span class="katex">
+  \(\boldsymbol{f}\)
+</span>
+</td>
+<td style="text-align:left">
+
+
+<span class="katex">
+  \(h_q\)
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>夏普率</strong></li>
+</ul>
+<p>对任何风险组合
+
+
+<span class="katex">
+  \(P(\sigma_P>0)\)
+</span>
+,<strong>夏普率</strong>
+
+
+<span class="katex">
+  \(\mathrm{SR}_P\)
+</span>
+定义：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{SR}_P = \frac {f_P} {\sigma_P}
+\]
+</span>
+
+<ul>
+<li>组合q特点：</li>
+</ul>
+<p>１） 组合q就是最大夏普率组合：
+
+
+<span class="katex">
+  \(\mathrm{SR}_q = \underset{P}{\max}\{ \mathrm{SR}_P \} = \sqrt{\boldsymbol{f}^T \boldsymbol{V}^{-1} \boldsymbol{f}}\)
+</span>
+ ；</p>
+<p>２）组合q的预期超额收益率为1；</p>
+<p>３）组合q对应的预期超额收益率可表示成：
+
+
+<span class="katex">
+  \(\boldsymbol{f} = (\dfrac {\boldsymbol{V} \boldsymbol{h}_q} {\sigma_q}) \mathrm{SR}_q\)
+</span>
+ ；</p>
+<p>４）任何组合P和组合q的夏普率有关系：
+
+
+<span class="katex">
+  \(\mathrm{SR}_P=\rho_{P,q} \mathrm{SR}_q,\quad\rho_{P,q}=\dfrac {\sigma_{P,q}} {\sigma_P \sigma_q}\)
+</span>
+ ；</p>
+<p>５）组合q投资于风险资产的权重，即组合q对属性
+
+
+<span class="katex">
+  \(\boldsymbol{e}\)
+</span>
+的暴露度：
+
+
+<span class="katex">
+  \(e_q=\dfrac {f_C \sigma_q^2} {\sigma_C^2}\)
+</span>
+。</p>
+<h2 id="阿尔法及其特征组合a">阿尔法及其特征组合A</h2>
+<ul>
+<li>示意：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">阿尔法</th>
+<th style="text-align:left">组合A</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">
+
+
+<span class="katex">
+  \(\boldsymbol{\alpha}=\boldsymbol{f}-\boldsymbol{\beta} f_B\)
+</span>
+</td>
+<td style="text-align:left">
+
+
+<span class="katex">
+  \(h_A\)
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>组合A特点：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned} \alpha_B=0, \beta_A=0, \sigma_{A,B}=0 \alpha_q = 1 - f_B \beta_q \\ \boldsymbol{h}_A=\dfrac {\sigma_A^2} {\sigma_q^2} \boldsymbol{h}_q - \dfrac {f_B \sigma_A^2} {\sigma_B^2} \boldsymbol{h}_B \quad \dfrac 1 {\sigma_A^2}=\dfrac {\alpha_q} {\sigma_q^2} \end{aligned}
+\]
+</span>
+
+<h2 id="组合q">组合Q</h2>
+<ul>
+<li>示意：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Q属性</th>
+<th style="text-align:left">组合Q</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">
+
+
+<span class="katex">
+  \(e_q \boldsymbol{f}\)
+</span>
+</td>
+<td style="text-align:left">
+
+
+<span class="katex">
+  \(\boldsymbol{h}_Q\)
+</span>
+（当
+
+
+<span class="katex">
+  \(f_C>0\)
+</span>
+）</td>
+</tr>
+</tbody>
+</table>
+<p>假设
+
+
+<span class="katex">
+  \(f_C>0\)
+</span>
+，即：组合C的预期超额收益率大于0。这条假设导致的关键信息：组合Q的头寸是组合q头寸的正整数倍，进而这两个组合的夏普率相同，并且各自与其它任意组合的相关系数都对应相等。</p>
+<ul>
+<li>组合q是净多头，即
+
+
+<span class="katex">
+  \(e_q>0\)
+</span>
+。</li>
+<li>令<strong>组合Q</strong>是属性
+
+
+<span class="katex">
+  \(e_q f\)
+</span>
+对应的特征组合,则：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned} e_Q=1\\ \boldsymbol{h}_Q=\dfrac {\boldsymbol{h}_q} {e_q} \\ \mathrm{SR}_Q=\mathrm{SR}_q \\ \mathrm{SR}_P=\rho_{P,Q} \mathrm{SR}_Q, \forall P \end{aligned}
+\]
+</span>
+
+<ul>
+<li>用组合Ｑ表达预期超额收益率</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned} &\dfrac{f_C}{\sigma_C^2}=\dfrac{f_Q}{\sigma_Q^2}\\ &\boldsymbol{f} = f_Q \dfrac{\boldsymbol{V} \boldsymbol{h}_Q}{\sigma_Q^2} = f_Q \boldsymbol{\beta}_{相对组合Q} \end{aligned}
+\]
+</span>
+
+<p>这是一个很重要的结论：<strong>资产预期超额收益率列向量与资产关于组合Q的贝塔值列向量成比例</strong>。</p>
+<ul>
+<li>组合Ｑ的贝塔值（注意区分
+
+
+<span class="katex">
+  \(\boldsymbol{\beta}_{相对组合Q}\)
+</span>
+和
+
+
+<span class="katex">
+  \(\beta_Q\)
+</span>
+，前者是相对组合Q的贝塔列向量，后者是组合Q对贝塔的暴露度(值)）</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\beta_Q=\dfrac{f_B \sigma_Q^2}{f_Q \sigma_B^2}
+\]
+</span>
+
+<ul>
+<li>如果业绩基准组合是全额投资，即
+
+
+<span class="katex">
+  \(e_B=1\)
+</span>
+，那么：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\beta_Q=\dfrac{\beta_C f_B}{f_C}
+\]
+</span>
+
+<h2 id="部分特征组合的列表">部分特征组合的列表</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">特征组合</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">
+
+
+<span class="katex">
+  \(\boldsymbol{f}\)
+</span>
+</td>
+<td style="text-align:left">
+
+
+<span class="katex">
+  \(h_q\)
+</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+
+
+<span class="katex">
+  \(e_q \boldsymbol{f}\)
+</span>
+</td>
+<td style="text-align:left">
+
+
+<span class="katex">
+  \(h_Q\)
+</span>
+（当
+
+
+<span class="katex">
+  \(f_C>0\)
+</span>
+）</td>
+</tr>
+<tr>
+<td style="text-align:left">
+
+
+<span class="katex">
+  \(\boldsymbol{\beta}\)
+</span>
+</td>
+<td style="text-align:left">
+
+
+<span class="katex">
+  \(h_B\)
+</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+
+
+<span class="katex">
+  \(\boldsymbol{e}\)
+</span>
+</td>
+<td style="text-align:left">
+
+
+<span class="katex">
+  \(h_C\)
+</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+
+
+<span class="katex">
+  \(\boldsymbol{\alpha}=\boldsymbol{f}-\boldsymbol{\beta} f_B\)
+</span>
+</td>
+<td style="text-align:left">
+
+
+<span class="katex">
+  \(h_A\)
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="有效前沿">有效前沿</h2>
+<ul>
+<li>定义：</li>
+</ul>
+<p>一个组合被称为**(全额投资)有效的**，如果它在所有具有相同预期收益率的全额投资组合中具有最小的风险。</p>
+<ul>
+<li>数学表示：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\underset{\boldsymbol{h}=\boldsymbol{h}_P}{\min} & \frac{1}{2} \boldsymbol{h}^T \boldsymbol{V} \boldsymbol{h} \\
+\quad s.t. & \boldsymbol{e}^T \boldsymbol{h} = 1 \\
+\quad & \boldsymbol{f}^T \boldsymbol{h} = f_P
+\end{aligned}
+\]
+</span>
+
+<ul>
+<li>求解概要</li>
+</ul>
+<p>第一步：列出拉格朗日乘子方程：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\boldsymbol{h} = \lambda_1 \boldsymbol{V}^{-1} \boldsymbol{e} + \lambda_2 \boldsymbol{V}^{-1} \boldsymbol{f} \\
+\quad \\
+\quad \lambda_1 \boldsymbol{e}^T \boldsymbol{V}^{-1} \boldsymbol{e} + \lambda_2 \boldsymbol{e}^T \boldsymbol{V}^{-1} \boldsymbol{e} = 1 \\
+\quad \lambda_1 \boldsymbol{f}^T \boldsymbol{V}^{-1} \boldsymbol{e} + \lambda_2 \boldsymbol{f}^T \boldsymbol{V}^{-1} \boldsymbol{f} = f_P
+\end{aligned}
+\]
+</span>
+
+<p>第二步：尽可能用组合Ｃ和组合Ｑ来表示方程的各个部分：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\boldsymbol{V}^{-1} \boldsymbol{e} = \dfrac{1}{\sigma_C^2} \boldsymbol{h}_C  \boldsymbol{V}^{-1} \boldsymbol{f} = \dfrac{f_Q}{\sigma_Q^2} \boldsymbol{h}_Q \\
+\boldsymbol{e}^T \boldsymbol{V}^{-1} \boldsymbol{e} = \dfrac{1}{\sigma_C^2}  \boldsymbol{f}^T \boldsymbol{V}^{-1} \boldsymbol{f} = \dfrac{f_Q^2}{\sigma_Q^2} \\
+\boldsymbol{e}^T \boldsymbol{V}^{-1} \boldsymbol{f} = \boldsymbol{f}^T \boldsymbol{V}^{-1} \boldsymbol{e} = \dfrac{f_Q}{\sigma_Q^2} = \dfrac{f_C}{\sigma_C^2}
+\end{aligned}
+\]
+</span>
+
+<p>第三步：重写拉格朗日乘子方程：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\boldsymbol{h}_P = \dfrac{\lambda_1}{\sigma_C^2} \boldsymbol{h}_C + \dfrac{f_Q \lambda_2}{\sigma_Q^2} \boldsymbol{h}_Q \\
+\quad \\
+\quad \dfrac{1}{\sigma_C^2} \lambda_1 + \dfrac{f_Q}{\sigma_Q^2} \lambda_2 = 1 \\
+\quad \dfrac{f_C}{\sigma_C^2} \lambda_1 + \dfrac{f_Q^2}{\sigma_Q^2} \lambda_2 = f_P
+\end{aligned}
+\]
+</span>
+
+<p>第四步：求解结果：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\quad \lambda_1 = \sigma_C^2 \dfrac{f_Q-f_P}{f_Q-f_C} \\
+\quad \lambda_2 = \dfrac{\sigma_Q^2}{f_Q} \dfrac{f_P-f_C}{f_Q-f_C} \\
+\quad \\
+\boldsymbol{h}_P = \dfrac{f_Q-f_P}{f_Q-f_C} \boldsymbol{h}_C + \dfrac{f_P-f_C}{f_Q-f_C} \boldsymbol{h}_Q
+\end{aligned}
+\]
+</span>
+
+<ul>
+<li>有效组合的内蕴属性：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{a}_P = \dfrac{1}{\sigma_P^2 (f_Q-f_C)} (\sigma_C^2(f_Q-f_P) \boldsymbol{e} + \sigma_Q^2 (f_P-f_C) e_q \boldsymbol{f})
+\]
+</span>
+
+<ul>
+<li>有效组合的方差（有效组合Ｐ作为变量）：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\sigma_P^2 = \sigma_C^2 + \kappa (f_P - f_C)^2 \\
+\quad \kappa = \dfrac{\sigma_Q^2-\sigma_C^2}{(f_Q - f_C)^2}
+\end{aligned}
+\]
+</span>
+
+<h2 id="资本资产定价模型">资本资产定价模型</h2>
+<p>如果</p>
+<p>１）所有投资者都具有均值/方差偏好;</p>
+<p>２）所有资产都纳入分析；</p>
+<p>３）所有投资者都知道预期超额收益率</p>
+<p>４）所有投资者都对资产的方差和协方差具有一致的观点；</p>
+<p>５）没有交易成本和税负。</p>
+<p>那么组合Ｑ等于组合Ｍ（市场组合），并且</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{f} = \boldsymbol{\mu} = \boldsymbol{\beta} \boldsymbol{\mu}_M
+\]
+</span>
+
+<p>【提示】首先根据前面的结论“资产预期超额收益率列向量与资产关于组合Q的贝塔值列向量成比例”，在这个结论以及前提假设下，每位投资都会选择组合Q和无风险资产F的某种比例组成的投资组合。 而所有投资者的组合按投资市值加权平均就是市场组合M，其中无风险资产的汇总必然等于0（所有借出＝所有借入），并且所有投资组合的汇总必然是全额投资组合。 所以市场组合M就是组合Q，相对组合Q的贝塔就是贝塔（默认相对市场组合M的）。</p>
+<h2 id="市场组合m">市场组合M</h2>
+<p>注意：本小节涉及的贝塔是相对市场组合M而言；不要求CAPM成立。</p>
+<p>１）市场组合M必然是全额投资组合，即
+
+
+<span class="katex">
+  \(e_M=1\)
+</span>
+。</p>
+<p>２）市场贝塔(列向量)可表示成：
+
+
+<span class="katex">
+  \(\boldsymbol{\beta}=\dfrac{\boldsymbol{V} \boldsymbol{h}_M}{\sigma_M^2}\)
+</span>
+，并且市场组合M是市场贝塔
+
+
+<span class="katex">
+  \(\boldsymbol{\beta}\)
+</span>
+的特征组合；</p>
+<p>３）组合C的贝塔值：
+
+
+<span class="katex">
+  \(\beta_C=\dfrac{\sigma_C^2}{\sigma_M^2}\)
+</span>
+。</p>
+<p>【提示】
+
+
+<span class="katex">
+  \(\beta_C \sigma_M^2=e_M \sigma_C^2=\sigma_C^2\)
+</span>
+</p>
+<p>由于组合C是最小方差组合，所以
+
+
+<span class="katex">
+  \(\beta_C \le 1\)
+</span>
+，并且
+
+
+<span class="katex">
+  \(\beta_C=1\)
+</span>
+当且仅当市场组合M恰好为最小方差组合。</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0019/">
+    下一页<br>第三章 风险
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0017/">
+      上一页<br>第一章 绪论
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/apm/0018.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/apm/0018.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#几个概念">几个概念</a></li>
+        <li><a href="#超额收益率分解">超额收益率分解</a></li>
+        <li><a href="#capm">CAPM</a></li>
+        <li><a href="#一致预期收益率">一致预期收益率</a></li>
+        <li><a href="#技术性假设">技术性假设</a></li>
+        <li><a href="#属性及其特征组合">属性及其特征组合</a></li>
+        <li><a href="#全1向量及其特征组合c">全1向量及其特征组合C</a></li>
+        <li><a href="#贝塔及业绩基准组合b">贝塔及业绩基准组合B</a></li>
+        <li><a href="#预期超额收益率及其特征组合q">预期超额收益率及其特征组合q</a></li>
+        <li><a href="#阿尔法及其特征组合a">阿尔法及其特征组合A</a></li>
+        <li><a href="#组合q">组合Q</a></li>
+        <li><a href="#部分特征组合的列表">部分特征组合的列表</a></li>
+        <li><a href="#有效前沿">有效前沿</a></li>
+        <li><a href="#资本资产定价模型">资本资产定价模型</a></li>
+        <li><a href="#市场组合m">市场组合M</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

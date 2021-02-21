@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="流形间的映射"><meta property="og:title" content="流形间的映射" />
+<meta property="og:description" content="
+流形间的点映射
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+  \(\phi\)
+
+，可以看作对点的推前映射
+
+
+
+  \(\phi=\phi_*\)
+
+；对张量(场)
+
+
+
+  \(T\)
+
+的拉回映射
+
+
+
+  \(\phi^*\)
+
+，可看成该张量(场)
+
+
+
+  \(T\)
+
+与某种推前映射
+
+
+
+  \(\phi_*\)
+
+的复合映射
+
+
+
+  \(\phi^*T=T\circ\phi_*\)
+
+；对张量(场)
+
+
+
+  \(T\)
+
+的推前映射
+
+
+
+  \(\phi_*\)
+
+，可看成该张量(场)
+
+
+
+  \(T\)
+
+与某种拉回映射
+
+
+
+  \(\phi^*\)
+
+的复合映射
+
+
+
+  \(\phi_*T=T\circ\phi^*\)
+
+。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/diffgeo/0009/" />
+<meta property="article:published_time" content="2020-01-19T19:20:35+08:00" />
+<meta property="article:modified_time" content="2020-01-19T19:20:35+08:00" />
+<title>流形间的映射 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a>
+<ul>
+<li><a href="/notes/docs/diffgeo/0005/">基于抽象指标的张量分析</a></li>
+<li><a href="/notes/docs/diffgeo/0006/">流形上的导数算符</a></li>
+<li><a href="/notes/docs/diffgeo/0007/">流形上的平移</a></li>
+<li><a href="/notes/docs/diffgeo/0008/">黎曼曲率张量</a></li>
+<li><a href="/notes/docs/diffgeo/0009/"class=active>流形间的映射</a></li>
+<li><a href="/notes/docs/diffgeo/0010/">流形上的李导数</a></li>
+<li><a href="/notes/docs/diffgeo/0011/">Killing矢量场</a></li>
+<li><a href="/notes/docs/diffgeo/0012/">子流形和超曲面</a></li>
+<li><a href="/notes/docs/diffgeo/0013/">流形上的微分形式及其对偶</a></li>
+<li><a href="/notes/docs/diffgeo/0014/">流形上的微积分</a></li>
+<li><a href="/notes/docs/diffgeo/0016/">李群李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0068/">常用李群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0069/">李变换群</a></li>
+<li><a href="/notes/docs/diffgeo/0070/">微分几何中的计算（Julia版）</a></li>
+<li><a href="/notes/docs/diffgeo/0073/">辛群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0074/">辛流形</a></li>
+<li><a href="/notes/docs/diffgeo/0076/">流形上的旋量和旋量场（初步）</a></li>
+<li><a href="/notes/docs/diffgeo/0077/">流形上的旋量和旋量场（几何解释）</a></li>
+<li><a href="/notes/docs/diffgeo/0078/">流形上的旋量和旋量场（导数算符和曲率)</a></li>
+<li><a href="/notes/docs/diffgeo/0079/">流形上的旋量和旋量场（自旋系数和克氏符）</a></li>
+<li><a href="/notes/docs/diffgeo/0082/">李群李代数伴随表示和Killing型、Casimir算符</a></li>
+<li><a href="/notes/docs/diffgeo/0083/">半单李代数的标准形式</a></li>
+<li><a href="/notes/docs/diffgeo/0084/">半单李代数的根系、权系和Dynkin图</a></li>
+<li><a href="/notes/docs/diffgeo/0085/">半单李代数的Casimir不变算符</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>流形间的映射</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#自然诱导映射的构造套路">自然诱导映射的构造套路</a></li>
+        <li><a href="#流形间标量场映射拉回映射">流形间标量场映射，拉回映射</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#流形间矢量映射推前映射切映射">流形间矢量映射，推前映射，切映射</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#流形间对偶矢量场映射">流形间对偶矢量场映射</a></li>
+        <li><a href="#拉回映射和推前映射定义的延拓">拉回映射和推前映射定义的延拓</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#微分同胚下的拉回和推前映射">微分同胚下的拉回和推前映射</a></li>
+        <li><a href="#微分同胚映射的主动和被动观点">微分同胚映射的主动和被动观点</a></li>
+        <li><a href="#几个有用的性质">几个有用的性质</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0010/">
+    下一页<br>流形上的李导数
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0008/">
+      上一页<br>黎曼曲率张量
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/diffgeo/0009/">流形间的映射</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-01-19</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95">微分几何</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E6%B5%81%E5%BD%A2">流形</a>
+      , 
+      <a href="/notes/tags/%E6%8E%A8%E5%89%8D%E6%98%A0%E5%B0%84">推前映射</a>
+      , 
+      <a href="/notes/tags/%E6%8B%89%E5%9B%9E%E6%98%A0%E5%B0%84">拉回映射</a>
+      , 
+      <a href="/notes/tags/%E5%BB%B6%E6%8B%93">延拓</a>
+      , 
+      <a href="/notes/tags/%E5%BE%AE%E5%88%86%E5%90%8C%E8%83%9A">微分同胚</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0009.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<blockquote>
+<p>流形间的<code>点映射</code>
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(\phi\)
+</span>
+，可以看作对点的<code>推前映射</code>
+
+
+<span class="katex">
+  \(\phi=\phi_*\)
+</span>
+；对张量(场)
+
+
+<span class="katex">
+  \(T\)
+</span>
+的<code>拉回映射</code>
+
+
+<span class="katex">
+  \(\phi^*\)
+</span>
+，可看成该张量(场)
+
+
+<span class="katex">
+  \(T\)
+</span>
+与某种推前映射
+
+
+<span class="katex">
+  \(\phi_*\)
+</span>
+的<code>复合映射</code>
+
+
+<span class="katex">
+  \(\phi^*T=T\circ\phi_*\)
+</span>
+；对张量(场)
+
+
+<span class="katex">
+  \(T\)
+</span>
+的<code>推前映射</code>
+
+
+<span class="katex">
+  \(\phi_*\)
+</span>
+，可看成该张量(场)
+
+
+<span class="katex">
+  \(T\)
+</span>
+与某种拉回映射
+
+
+<span class="katex">
+  \(\phi^*\)
+</span>
+的<code>复合映射</code>
+
+
+<span class="katex">
+  \(\phi_*T=T\circ\phi^*\)
+</span>
+。</p>
+</blockquote>
+<p>考虑两个流形
+
+
+<span class="katex">
+  \(M,N\)
+</span>
+间的一个光滑映射
+
+
+<span class="katex">
+  \(\phi:M \to N\)
+</span>
+。一旦有了流形之间的映射，就可以探讨流形间张量(场)之间的映射。</p>
+<h2 id="自然诱导映射的构造套路">自然诱导映射的构造套路</h2>
+<p>这里，我们用构造性的方法来引入
+
+
+<span class="katex">
+  \(\phi\)
+</span>
+的<code>自然诱导映射</code>，其中
+
+
+<span class="katex">
+  \(T\)
+</span>
+代表张量场或张量。</p>
+<p>
+
+
+<span class="katex">
+  \(\phi\)
+</span>
+的所有<code>自然诱导映射</code>，组成集合
+
+
+<span class="katex">
+  \(\mathbb{F}_{\phi}\)
+</span>
+，其元素满足：</p>
+<ol>
+<li><strong>平凡元素</strong>：
+
+
+<span class="katex">
+  \(\phi \in \mathbb{F}_{\phi}\)
+</span>
+；</li>
+<li><strong>构造规则</strong>：如果存在
+
+
+<span class="katex">
+  \(\varphi\in \mathbb{F}_{\phi}\)
+</span>
+，使得
+
+
+<span class="katex">
+  \(T\)
+</span>
+ 与 
+
+
+<span class="katex">
+  \(T\circ\varphi\)
+</span>
+ 是同型张量(场)。据此可定义新的映射
+
+
+<span class="katex">
+  \(\theta:T\mapsto \theta(T)\overset{\Delta}{=} T\circ\varphi\)
+</span>
+，那么
+
+
+<span class="katex">
+  \(\theta \in \mathbb{F}_\phi\)
+</span>
+；</li>
+<li><strong>同一认定</strong>：如果
+
+
+<span class="katex">
+  \(\theta\in \mathbb{F}_\phi\)
+</span>
+是
+
+
+<span class="katex">
+  \(\varphi\in \mathbb{F}_\phi\)
+</span>
+的延拓，那么认定
+
+
+<span class="katex">
+  \(\theta=\varphi\in \mathbb{F}_\phi\)
+</span>
+。</li>
+</ol>
+<h2 id="流形间标量场映射拉回映射">流形间标量场映射，拉回映射</h2>
+<p>目前已知：
+
+
+<span class="katex">
+  \(\phi\in\mathbb{F}_\phi\)
+</span>
+，
+
+
+<span class="katex">
+  \(\phi\)
+</span>
+是点到点的<code>流形映射</code>。</p>
+<p>为了能将标量场
+
+
+<span class="katex">
+  \(f\)
+</span>
+和
+
+
+<span class="katex">
+  \(\phi : M \to N\)
+</span>
+构造出复合映射，只能选择
+
+
+<span class="katex">
+  \(f:N \to \mathbb{R}\)
+</span>
+，进而对应复合映射
+
+
+<span class="katex">
+  \(f\circ\phi:M \to \mathbb{R}\)
+</span>
+。因为
+
+
+<span class="katex">
+  \(f\in\mathscr{F}_N,f\circ\phi\in\mathscr{F}_M\)
+</span>
+，所以得到
+
+
+<span class="katex">
+  \(\phi^*\in\mathbb{F}_\phi\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned} &\phi^* :& \mathscr{F}_N  &\to \mathscr{F}_M \\ &\quad&   f &\mapsto f\circ\phi\\ & & &  (\phi^* f)|_p \overset{\Delta}{=} f|_{\phi(p)} \quad \forall p \in M \end{aligned}
+\]
+</span>
+
+<p>这个映射是
+
+
+<span class="katex">
+  \(\mathscr{F}_N \to \mathscr{F}_M\)
+</span>
+，和
+
+
+<span class="katex">
+  \(\phi\)
+</span>
+的映射
+
+
+<span class="katex">
+  \(M\to N\)
+</span>
+方向相反，所以称
+
+
+<span class="katex">
+  \(\phi^*\)
+</span>
+为<code>拉回映射</code>。</p>
+<h4 id="基本性质">基本性质</h4>
+<ol>
+<li>
+
+
+<span class="katex">
+  \(\phi^* : \mathscr{F}_N  \to \mathscr{F}_M\)
+</span>
+是线性映射。</li>
+<li>
+
+
+<span class="katex">
+  \(\phi^*(f g)=\phi^*(f)\phi^*(g),\quad \forall f,g \in \mathscr{F}_N\)
+</span>
+。</li>
+</ol>
+<h2 id="流形间矢量映射推前映射切映射">流形间矢量映射，推前映射，切映射</h2>
+<p>目前已知：
+
+
+<span class="katex">
+  \(\phi,\phi^*\in\mathbb{F}_\phi\)
+</span>
+，
+
+
+<span class="katex">
+  \(\phi\)
+</span>
+是点到点的<code>流形映射</code>，
+
+
+<span class="katex">
+  \(\phi^*\)
+</span>
+则是标量场到标量场的<code>拉回映射</code>。</p>
+<h4 id="1-流形间矢量场映射">1 流形间矢量场映射？</h4>
+<p>因为矢量场
+
+
+<span class="katex">
+  \(v^a\)
+</span>
+是标量场到实数的映射，只能与
+
+
+<span class="katex">
+  \(\phi^* : \mathscr{F}_N  \to \mathscr{F}_M\)
+</span>
+才可能构成复合映射，并且只能选择
+
+
+<span class="katex">
+  \(v^a:\mathscr{F}_M\to\mathbb{R}\)
+</span>
+，进而对应复合映射
+
+
+<span class="katex">
+  \(v^a\circ\phi^*:\mathscr{F}_N \to \mathbb{R}\)
+</span>
+。因为
+
+
+<span class="katex">
+  \(v^a\in\mathscr{F}_M(1,0),v^a\circ\phi^*\in\mathscr{F}_N(1,0)\)
+</span>
+，所以得到一个可能的<code>自然诱导映射</code>
+
+
+<span class="katex">
+  \(\theta\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned} &\theta :& \mathscr{F}_M(1,0)  &\to \mathscr{F}_N(1,0) \\ &\quad&   v^a &\mapsto v^a\circ\phi^*\\ & & &  (\theta v)|_q(f) \overset{\Delta}{=} v|_{\phi^{-1}(q)}(\phi^*f) \quad \forall q \in N, f \in \mathscr{F}_N  \end{aligned}
+\]
+</span>
+
+<p>最后一个式子要求流形映射
+
+
+<span class="katex">
+  \(\phi\)
+</span>
+是可逆的。但关于
+
+
+<span class="katex">
+  \(\phi\)
+</span>
+的约定，这逆像未必存在，所以无法定义关于矢量场的自然诱导映射。</p>
+<h4 id="2-矢量的自然诱导映射">2 矢量的自然诱导映射</h4>
+<p>退而求其次，选择两个点
+
+
+<span class="katex">
+  \(p\in M,\phi(p)\in N\)
+</span>
+，研究切空间
+
+
+<span class="katex">
+  \(V_p\)
+</span>
+和
+
+
+<span class="katex">
+  \(V_{\phi(p)}\)
+</span>
+之间的映射：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned} &\phi_* :& V_p  &\to V_{\phi(p)} \\ &\quad&   v^a &\mapsto v^a\circ\phi^*\\ & & &  (\phi_* v)(f) \overset{\Delta}{=} v(\phi^*f) \quad \forall f \in \mathscr{F}_N \end{aligned}
+\]
+</span>
+
+<p>注意：这个映射是将
+
+
+<span class="katex">
+  \(V_p\)
+</span>
+映射倒
+
+
+<span class="katex">
+  \(V_{\phi(p)}\)
+</span>
+，这和
+
+
+<span class="katex">
+  \(\phi\)
+</span>
+的映射方向一致，所以称
+
+
+<span class="katex">
+  \(\phi_*\)
+</span>
+为<code>推前映射</code>。此外，这个映射是把切空间的点映射到切空间，所以又称
+
+
+<span class="katex">
+  \(\phi_*\)
+</span>
+为<code>切映射</code>。</p>
+<h4 id="3-基本性质">3 基本性质</h4>
+<ol>
+<li>
+
+
+<span class="katex">
+  \(\phi_*:V_p\to V_{\phi(p)}\)
+</span>
+是线性映射；</li>
+<li>曲线
+
+
+<span class="katex">
+  \(C(t)\)
+</span>
+在
+
+
+<span class="katex">
+  \(C(t_0)\)
+</span>
+点切矢
+
+
+<span class="katex">
+  \(T^a\)
+</span>
+的像
+
+
+<span class="katex">
+  \(\phi_*T^a\)
+</span>
+是曲线像
+
+
+<span class="katex">
+  \(\phi(C(t))\)
+</span>
+在
+
+
+<span class="katex">
+  \(\phi(C(t_0))\)
+</span>
+点的切矢。</li>
+</ol>
+<h2 id="流形间对偶矢量场映射">流形间对偶矢量场映射</h2>
+<p>目前已知：
+
+
+<span class="katex">
+  \(\phi,\phi^*,\phi_*\in\mathbb{F}_\phi\)
+</span>
+，
+
+
+<span class="katex">
+  \(\phi\)
+</span>
+是点到点的<code>流形映射</code>，
+
+
+<span class="katex">
+  \(\phi^*\)
+</span>
+是标量场到标量场的<code>拉回映射</code>，
+
+
+<span class="katex">
+  \(\phi_*\)
+</span>
+则是切空间到切空间的<code>推前映射</code>。</p>
+<p>由于对偶矢量场
+
+
+<span class="katex">
+  \(\omega_a\)
+</span>
+是矢量场到实数的映射，
+
+
+<span class="katex">
+  \(\phi,\phi^*,\phi_*\)
+</span>
+都无法和其复合。但对指定
+
+
+<span class="katex">
+  \(p\in M\)
+</span>
+的情况下，是可能与
+
+
+<span class="katex">
+  \(\phi_*:V_p\to V_{\phi(p)}\)
+</span>
+进行复合的，此时只能选择
+
+
+<span class="katex">
+  \(\omega_a|_{\phi(p)}:V_{\phi(p)\to\mathbb{R}}\)
+</span>
+，构成复合映射
+
+
+<span class="katex">
+  \(\omega_a|_p\circ\phi_*:V_p\to\mathbb{R}\)
+</span>
+。</p>
+<p>由此可见，对偶矢量场映射具有“拉回”的特点，但毕竟对偶矢量场
+
+
+<span class="katex">
+  \(\omega_a\)
+</span>
+与
+
+
+<span class="katex">
+  \(\phi_*\)
+</span>
+无法直接复合。所以对
+
+
+<span class="katex">
+  \(\phi^*\)
+</span>
+的定义进行延拓，确保对偶矢量场的“拉回”：</p>
+<p>
+
+
+<span class="katex">
+  \[
+\begin{aligned} &\phi^* :& \mathscr{F}_N(0,1)  &\to \mathscr{F}_M(0,1) \\ &\quad&   \omega_a &\mapsto \omega_a\circ\phi_*\\ & & &  (\phi^* \omega)|_p \overset{\Delta}{=} \omega_a|_{\phi(p)} \quad \forall p \in M\\ & & &  (\phi^* \omega)|_p v^a \overset{\Delta}{=} \omega_a|_{\phi(p)} (\phi_*v)^a \quad \forall p \in M, v^a\in V_p \end{aligned}
+\]
+</span>
+
+注意：</p>
+<ol>
+<li>
+
+
+<span class="katex">
+  \(\phi\)
+</span>
+本身就可以看成是<code>对流形点的推前映射</code>：
+
+
+<span class="katex">
+  \(\phi_*(p)=\phi(p)\)
+</span>
+。这也符合前面将
+
+
+<span class="katex">
+  \(\phi\)
+</span>
+看出自身的自然诱导映射的要求。</li>
+<li>最后一个式子是定义的细化。</li>
+</ol>
+<h2 id="拉回映射和推前映射定义的延拓">拉回映射和推前映射定义的延拓</h2>
+<p>根据前面<code>矢量推前映射</code>和<code>对偶矢量场拉回映射</code>的定义，可以进行更一般的定义延拓。</p>
+<h4 id="拉回映射的延拓">拉回映射的延拓</h4>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned} &\phi^* : &\mathscr{F}_N(0,l)  &\to \mathscr{F}_M(0,l) \\ &\quad&   T_{a_1\dots a_l} &\mapsto T_{a_1\dots a_l}\circ\phi_*\\ & & &  (\phi^* T)_{a_1\dots a_l}|_p \overset{\Delta}{=} T_{a_1\dots a_l}|_{\phi(p)} \quad \forall p \in M\\ & & &  (\phi^* T)_{a_1\dots a_l}|_p (v_1)^{a_1}\dots(v_l)^{a_l} \overset{\Delta}{=} T_{a_1\dots a_l}|_{\phi(p)} (\phi_*v_1)^{a_1}\dots(\phi_*v_l)^{a_l} \\ & & &  \quad \forall p \in M, (v_1)^{a_1},\dots, (v_l)^{a_l}\in V_p \end{aligned}
+\]
+</span>
+
+<h4 id="推前映射的延拓">推前映射的延拓</h4>
+<p>为了方便延拓，先把矢量推前映射，改写成等价形式：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned} &\phi_* :& V_p  &\to V_{\phi(p)} \\ &\quad&   v^a &\mapsto v^a\circ\phi^*\\ & & &  (\phi_* v)^a\omega_a \overset{\Delta}{=} v^a(\phi^*\omega)_a \quad \forall \omega \in \mathscr{F}_N(0,1) \end{aligned}
+\]
+</span>
+
+<p>因为
+
+
+<span class="katex">
+  \(\forall\omega_a\in \mathscr{F}_M(0,1),\exists f\in\mathscr{F}_M,(df)_a=\omega_a\)
+</span>
+，所以
+
+
+<span class="katex">
+  \(v(f)=(df)_av^a=v^a\omega_a\)
+</span>
+。也就是说：矢量既可以看成是标量场到实数的映射，也可以看成是对偶矢量到实数的映射。</p>
+<p>于是有推前映射的延拓定义：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned} &\phi_* :& \mathscr{T}_{V_p}(k,0)  &\to \mathscr{T}_{V_{\phi(p)}}(k,0),\quad p\in M \\ &\quad&   T^{a_1\dots a_k} &\mapsto T^{a_1\dots a_k}\circ\phi^*\\ & & &  (\phi_* T)^{a_1\dots a_k}(\omega^1)_{a_1}\dots(\omega^k)_{a_k} \overset{\Delta}{=} T^{a_1\dots a_k}(\phi^*\omega^1)_{a_1}\dots(\phi^*\omega^k)_{a_k}\\ & & & \quad \forall \omega^1\dots \omega^k \in V^*_{\phi(p)} \end{aligned}
+\]
+</span>
+
+<h2 id="微分同胚下的拉回和推前映射">微分同胚下的拉回和推前映射</h2>
+<p>如果
+
+
+<span class="katex">
+  \(\phi:M\to N\)
+</span>
+是微分同胚映射，那么推前映射
+
+
+<span class="katex">
+  \(\phi_*\)
+</span>
+也可以把
+
+
+<span class="katex">
+  \((k,0)\)
+</span>
+张量场推前为
+
+
+<span class="katex">
+  \((k,0)\)
+</span>
+张量场：
+
+
+
+<span class="katex">
+  \[
+\phi_*:\mathscr{F}_M(k,0)\to\mathscr{F}_N(k,0)
+\]
+</span>
+
+此外，由于
+
+
+<span class="katex">
+  \(\phi^{-1}\)
+</span>
+存在且光滑，那么也可以对
+
+
+<span class="katex">
+  \((0,l)\)
+</span>
+型张量场进行推前映射：
+
+
+
+<span class="katex">
+  \[
+\phi_*=(\phi^{-1})^*:\mathscr{F}_M(0,l)\to \mathscr{F}_N(0,l)
+\]
+</span>
+
+进一步，可以对
+
+
+<span class="katex">
+  \((k,l)\)
+</span>
+型张量场进行推前映射：
+
+
+
+<span class="katex">
+  \[
+\phi_*:\mathscr{F}_M(k,l)\to \mathscr{F}_N(k,l)
+\]
+</span>
+
+比如，
+
+
+<span class="katex">
+  \((\phi_*T)^a_{\ \ b}|_q\omega_a v^b\overset{\Delta}{=}T^a_{\ \ b}|_{\phi^{-1}(q)}(\phi^*\omega)_a(\phi^*v)^b,\quad \forall q\in N,\omega_a\in V^*_q,v^b\in V_q\)
+</span>
+</p>
+<p>同理，拉回映射也可以推广到
+
+
+<span class="katex">
+  \((k,l)\)
+</span>
+型张量场：
+
+
+
+<span class="katex">
+  \[
+\phi^*:\mathscr{F}_N(k,l)\to \mathscr{F}_M(k,l)
+\]
+</span>
+
+比如，
+
+
+<span class="katex">
+  \((\phi^*T)^a_{\ \ b}|_p\omega_a v^b\overset{\Delta}{=}T^a_{\ \ b}|_{\phi(p)}(\phi_*\omega)_a(\phi_*v)^b,\quad \forall p\in M,\omega_a\in V^*_p,v^b\in V_p\)
+</span>
+</p>
+<h2 id="微分同胚映射的主动和被动观点">微分同胚映射的主动和被动观点</h2>
+<p>当初给<code>微分流形</code>下定义时，就是借助<code>微分同胚映射</code>定义的，区别是当初是用<code>局域微分同胚</code>
+
+
+<span class="katex">
+  \(O\to V,\quad O\subset M, V\subset\mathbb{R}^n\)
+</span>
+的概念，而我们这里是<code>全局微分同胚</code>
+
+
+<span class="katex">
+  \(M\to N\)
+</span>
+。</p>
+<p>当初借助两个局域微分同胚定义两个坐标系，进而之间存在坐标变换。现在，也能引入两个微分同胚映射：第一个借用
+
+
+<span class="katex">
+  \(\mathbb{R}^n\)
+</span>
+：
+
+
+<span class="katex">
+  \(O_1\to V,\quad O_1\subset M, V\subset\mathbb{R}^n\)
+</span>
+，第二个则直接借用
+
+
+<span class="katex">
+  \(N\)
+</span>
+：是
+
+
+<span class="katex">
+  \(\phi^{-1}[O_2]\to O_2,\quad \phi^{-1}[O_2]\subset M,O_2\subset N\)
+</span>
+。 这就引入了下面提及的<code>被动观点</code>。</p>
+<p>微分同胚映射的<code>主动观点</code>，自然就是点到点的变换
+
+
+<span class="katex">
+  \(p\mapsto \phi(p)\)
+</span>
+及其导致的张量变换
+
+
+<span class="katex">
+  \(T\mapsto \phi_*T\)
+</span>
+。</p>
+<p>微分同胚映射的<code>被动观点</code>，就是将映射
+
+
+<span class="katex">
+  \(\phi:M\to N\)
+</span>
+看成一个新的局域坐标系，进而和局域老坐标系存在变换关系，完全可以套用当初普通坐标变换的做法。</p>
+<p>将
+
+
+<span class="katex">
+  \(O_1\subset M\)
+</span>
+对应的&quot;老&quot;坐标系记作
+
+
+<span class="katex">
+  \(\{x^\mu\}\)
+</span>
+，将
+
+
+<span class="katex">
+  \(O_2\subset N\)
+</span>
+对应的坐标系记作
+
+
+<span class="katex">
+  \(\{y^\mu\}\)
+</span>
+，进而可将
+
+
+<span class="katex">
+  \(\phi^{-1}[O_2] \subset M\)
+</span>
+对应的新坐标记作
+
+
+<span class="katex">
+  \(\{x'^\mu\}，x'^\mu(q)\overset{\Delta}{=}y^\mu(\phi(q))\quad \forall q\in \phi^{-1}[O_2]\)
+</span>
+。</p>
+<p>微分同胚映射的<code>主动观点</code>和<code>被动观点</code>的等价性，体现在下面的关系：
+
+
+
+<span class="katex">
+  \[
+\left.(\phi_*T)^{\mu_1\dots\mu_k}_{\ \qquad \upsilon_1\dots\upsilon_l}\right|_{\phi(p)}=\left.T'^{\mu_1\dots\mu_k}_{\ \qquad \upsilon_1\dots\upsilon_l}\right|_p,\quad \forall T\in \mathscr{F}_M(k,l)
+\]
+</span>
+</p>
+<h2 id="几个有用的性质">几个有用的性质</h2>
+<p>如果
+
+
+<span class="katex">
+  \(\phi:M\to N\)
+</span>
+是光滑映射，那么：
+
+
+
+<span class="katex">
+  \[
+\phi^*(T_{a_1\dots a_l}S_{b_1\dots b_{l'}})=\phi^*(T_{a_1\dots a_l})\phi^*(S_{b_1\dots b_{l'}})\\ \phi_*(T^{a_1\dots a_k}S^{b_1\dots b_{k'}})=\phi_*(T^{a_1\dots a_k})\phi_*(S^{b_1\dots b_{k'}})
+\]
+</span>
+
+如果
+
+
+<span class="katex">
+  \(\phi:M\to N\)
+</span>
+是同胚映射，那么：
+
+
+
+<span class="katex">
+  \[
+\phi_*(T^{a_1\dots a_k}_{\ \qquad b_1\dots b_l}S^{c_1\dots c_{k'}}_{\ \qquad d_1\dots d_{l'}})=\phi_*(T^{a_1\dots a_l}_{\ \qquad b_1\dots b_l})\phi_*(S^{c_1\dots c_{k'}}_{\ \qquad d_1\dots d_{l'}})
+\]
+</span>
+
+如果
+
+
+<span class="katex">
+  \(\phi:M\to N\)
+</span>
+是同胚映射，那么
+
+
+<span class="katex">
+  \(\phi_*\)
+</span>
+(
+
+
+<span class="katex">
+  \(\phi^*\)
+</span>
+)与缩并可交换次序。</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0010/">
+    下一页<br>流形上的李导数
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0008/">
+      上一页<br>黎曼曲率张量
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0009.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/diffgeo/0009.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#自然诱导映射的构造套路">自然诱导映射的构造套路</a></li>
+        <li><a href="#流形间标量场映射拉回映射">流形间标量场映射，拉回映射</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#流形间矢量映射推前映射切映射">流形间矢量映射，推前映射，切映射</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#流形间对偶矢量场映射">流形间对偶矢量场映射</a></li>
+        <li><a href="#拉回映射和推前映射定义的延拓">拉回映射和推前映射定义的延拓</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#微分同胚下的拉回和推前映射">微分同胚下的拉回和推前映射</a></li>
+        <li><a href="#微分同胚映射的主动和被动观点">微分同胚映射的主动和被动观点</a></li>
+        <li><a href="#几个有用的性质">几个有用的性质</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

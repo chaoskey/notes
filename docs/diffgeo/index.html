@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="微分几何笔记"><meta property="og:title" content="微分几何笔记" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/diffgeo/" />
+<meta property="og:updated_time" content="2020-01-23T20:20:35+08:00" />
+<title>微分几何笔记 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<link rel="alternate" type="application/rss+xml" href="https://chaoskey.gitee.io/notes/docs/diffgeo/index.xml" title="学习笔记" />
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"class=active><strong>微分几何笔记</strong></a>
+<ul>
+<li><a href="/notes/docs/diffgeo/0005/">基于抽象指标的张量分析</a></li>
+<li><a href="/notes/docs/diffgeo/0006/">流形上的导数算符</a></li>
+<li><a href="/notes/docs/diffgeo/0007/">流形上的平移</a></li>
+<li><a href="/notes/docs/diffgeo/0008/">黎曼曲率张量</a></li>
+<li><a href="/notes/docs/diffgeo/0009/">流形间的映射</a></li>
+<li><a href="/notes/docs/diffgeo/0010/">流形上的李导数</a></li>
+<li><a href="/notes/docs/diffgeo/0011/">Killing矢量场</a></li>
+<li><a href="/notes/docs/diffgeo/0012/">子流形和超曲面</a></li>
+<li><a href="/notes/docs/diffgeo/0013/">流形上的微分形式及其对偶</a></li>
+<li><a href="/notes/docs/diffgeo/0014/">流形上的微积分</a></li>
+<li><a href="/notes/docs/diffgeo/0016/">李群李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0068/">常用李群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0069/">李变换群</a></li>
+<li><a href="/notes/docs/diffgeo/0070/">微分几何中的计算（Julia版）</a></li>
+<li><a href="/notes/docs/diffgeo/0073/">辛群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0074/">辛流形</a></li>
+<li><a href="/notes/docs/diffgeo/0076/">流形上的旋量和旋量场（初步）</a></li>
+<li><a href="/notes/docs/diffgeo/0077/">流形上的旋量和旋量场（几何解释）</a></li>
+<li><a href="/notes/docs/diffgeo/0078/">流形上的旋量和旋量场（导数算符和曲率)</a></li>
+<li><a href="/notes/docs/diffgeo/0079/">流形上的旋量和旋量场（自旋系数和克氏符）</a></li>
+<li><a href="/notes/docs/diffgeo/0082/">李群李代数伴随表示和Killing型、Casimir算符</a></li>
+<li><a href="/notes/docs/diffgeo/0083/">半单李代数的标准形式</a></li>
+<li><a href="/notes/docs/diffgeo/0084/">半单李代数的根系、权系和Dynkin图</a></li>
+<li><a href="/notes/docs/diffgeo/0085/">半单李代数的Casimir不变算符</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>微分几何笔记</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#微分几何笔记">微分几何笔记</a>
+      <ul>
+        <li><a href="#基础概念提要">基础概念提要</a></li>
+        <li><a href="#目录">目录</a></li>
+        <li><a href="#参考文献">参考文献</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+<article class="markdown"><h1 id="微分几何笔记">微分几何笔记</h1>
+<h2 id="基础概念提要">基础概念提要</h2>
+<p>本系列直接跳过了 <code>拓扑</code>、<code>流形</code>、<code>张量</code>等基础概念。为此，我特意先用纯文字按我的理解对一些基础概念进行提要（可能不严谨，着重提要而已）。</p>
+<p>所谓<code>拓扑</code>，就是开集族。 用集合的语言，通过三条公理严格定义开集。这三条公理就是：1）两个平凡开集；2）有限个开集交的封闭性；3）无限个开集并的封闭性。</p>
+<p>所谓<code>拓扑空间</code>，就是定义了拓扑的集合。</p>
+<p>所谓拓扑空间之间<code>连续映射</code>，就是指开集逆像必为开的映射。</p>
+<p>所谓<code>同胚映射</code>，就是一一到上且正反都连续的映射。就纯拓扑空间而言，表示“像的不能再像”。</p>
+<p>所谓<code>闭集</code>，就是补集为开的子集。</p>
+<p>所谓拓扑空间<code>连通性</code>，就是指即开又闭的集合只有两个平凡开集(闭集)。</p>
+<p>所谓<code>微分流形</code>，就是能被一组开集覆盖，每个开集同胚于一个欧氏空间，任意两个这种同胚映射的复合都是光滑的。</p>
+<p>所谓<code>切矢量</code>（简称<code>矢量</code>），就流形上过某点的某条曲线的切矢。也可以看成是把函数变成实数并满足莱布尼兹律的线性映射。 如果为流形上每点都指定一个切矢量，就构成一个<code>矢量场</code>。</p>
+<p>至于<code>对偶矢量</code>，首先<code>矢量</code>也可以看成是把函数变成实数的线性映射，其次<code>对偶矢量</code>可看成把矢量变成实数线性映射。  同时，<code>矢量</code>和<code>对偶矢量</code>还可以相互作用得实数，这个特点就是<code>对偶</code>。并且还可利用这个特点证明<code>矢量空间</code>和<code>对偶矢量空间</code>相互同构。</p>
+<p>所谓<code>张量</code>，就是利用<code>矢量</code>和<code>对偶矢量</code>都是线性映射的特点，经过&quot;多重组合&quot;得到的多重线性映射。</p>
+<p>所谓<code>度规张量</code>，就是对称非退化的(0,2)型张量。任何带度规的矢量空间都有正交归一基底。</p>
+<h2 id="目录">目录</h2>
+<div class="book-columns flex flex-wrap">
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li><a href="/notes/docs/diffgeo/0005/">1. 基于抽象指标的张量分析</a></li>
+<li><a href="/notes/docs/diffgeo/0006/">2. 流形上的导数算符</a></li>
+<li><a href="/notes/docs/diffgeo/0007/">3. 流形上的平移</a></li>
+<li><a href="/notes/docs/diffgeo/0008/">4. 黎曼曲率张量</a></li>
+<li><a href="/notes/docs/diffgeo/0009/">5. 流形间的映射</a></li>
+<li><a href="/notes/docs/diffgeo/0010/">6. 流形上的李导数</a></li>
+<li><a href="/notes/docs/diffgeo/0011/">7. Killing矢量场</a></li>
+<li><a href="/notes/docs/diffgeo/0012/">8. 子流形和超曲面</a></li>
+<li><a href="/notes/docs/diffgeo/0013/">9. 流形上的微分形式及其对偶</a></li>
+<li><a href="/notes/docs/diffgeo/0014/">10. 流形上的微积分</a></li>
+<li><a href="/notes/docs/diffgeo/0016/">11. 李群李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0068/">12. 常用李群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0069/">13. 李变换群</a></li>
+<li><a href="/notes/docs/diffgeo/0070/">14. 微分几何中的计算（Julia版）</a></li>
+</ul>
+
+  </div>
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li><a href="/notes/docs/diffgeo/0073/">15. 辛群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0074/">16. 辛流形</a></li>
+<li><a href="/notes/docs/diffgeo/0076/">17. 流形上的旋量和旋量场（初步）</a></li>
+<li><a href="/notes/docs/diffgeo/0077/">18. 流形上的旋量和旋量场（几何解释）</a></li>
+<li><a href="/notes/docs/diffgeo/0078/">19. 流形上的旋量和旋量场（导数算符和曲率)</a></li>
+<li><a href="/notes/docs/diffgeo/0079/">20. 流形上的旋量和旋量场（自旋系数和克氏符）</a></li>
+<li><a href="/notes/docs/diffgeo/0082/">21. 李群李代数伴随表示和Killing型、Casimir算符</a></li>
+<li><a href="/notes/docs/diffgeo/0083/">22. 半单李代数的标准形式</a></li>
+<li><a href="/notes/docs/diffgeo/0084/">23. 半单李代数的根系、权系和Dynkin图</a></li>
+<li><a href="/notes/docs/diffgeo/0085/">24. 半单李代数的Casimir不变算符</a></li>
+</ul>
+
+  </div>
+  
+</div>
+
+<h2 id="参考文献">参考文献</h2>
+<p>1）现代物理基础丛书07-微分几何入门与广义相对论(上册.第2版)-梁灿彬＆周彬-科学出版社-2006</p>
+<p>2）现代物理基础丛书25-微分几何入门与广义相对论(中册.第2版)-梁灿彬＆周彬-科学出版社-2009</p>
+<p>3）现代物理基础丛书28-微分几何入门与广义相对论(下册.第2版)-梁灿彬＆周彬-科学出版社-2009</p>
+<p>4）现代物理基础丛书02-物理学家用微分几何(第2版)－侯伯元&amp;侯伯宇-科学出版社-2004</p>
+<p>5）General Relativity（广义相对论）, Robert M.Wald, Chicago, 1984</p>
+<p>6）通向实在之路：宇宙法则的完全指南-[英]罗杰·彭罗斯-王文浩(译)-湖南科学技术出版社-6月, 2008</p>
+<p>7）Gravitation（引力论·大黑书）, Misner Thorne Wheeler , W.H.Freeman, 1973</p>
+<p>8）Spinors and Space-Time Vol.1：Two-spinor calculus and relativistic fields（旋量与时空 卷1：两旋量微积分与相对论场），R.Penrose W.Rindler，Cambridge，1984</p>
+<p>9）The Theory of Spinors（旋量理论），Elie.Cartan ，Dover，1981</p>
+<p>10）数学物理学百科全书(英文版.全5卷)-[法]费朗克斯-Elsevier出版-2007</p>
+<p>11）<a href="http://mooc.chaoxing.com/course/79317.html">Lie 代数理论及其在物理学中的应用(共127)-周彬-北京师范大学</a></p>
+<p>12）典型群及其在物理学上的应用-[新西兰]B·G·怀邦-冯承天(译)-科学出版社-1982</p>
+<p>13）物理学中的群论（上下合卷）-陶瑞宝-上海科学技术出版社-1986</p>
+<p>14）李代数及其表示理论导引-[美]J.E.汉弗莱斯-陈志杰(译)-上海科学技术出版社-1981</p></article>
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/_index.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/diffgeo/_index.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#微分几何笔记">微分几何笔记</a>
+      <ul>
+        <li><a href="#基础概念提要">基础概念提要</a></li>
+        <li><a href="#目录">目录</a></li>
+        <li><a href="#参考文献">参考文献</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DOLFIN：C&#43;&#43;/Python有限元库》线性代数【翻译】"><meta property="og:title" content="DOLFIN：C&#43;&#43;/Python有限元库》线性代数【翻译】" />
+<meta property="og:description" content="II.实现》10.DOLFIN：C&#43;&#43;/Python有限元库》线性代数
+【章节目录】
+10·3 功能
+DOLFIN被组织为库（模块）的集合，每个库都覆盖某个功能区域。  我们在这里回顾这些领域，并解释最常用的类和函数的用途和用法。  回顾是自下而上的； 也就是说，我们首先描述DOLFIN的核心低层功能（线性代数和网格），然后向上移动以描述高层功能。  有关更多详细信息，请参阅FEniCS项目网页上的DOLFIN程序员参考和Logg and Wells（2010）。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/0112/" />
+<meta property="article:published_time" content="2021-01-07T10:05:30+08:00" />
+<meta property="article:modified_time" content="2021-01-07T10:05:30+08:00" />
+<title>DOLFIN：C&#43;&#43;/Python有限元库》线性代数【翻译】 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a>
+<ul>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E6%96%B9%E6%B3%95">第二章 有限元方法</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%B8%B8%E8%A7%81%E6%9C%89%E9%99%90%E5%85%83">第三章 常见有限元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8%E5%8F%82%E8%80%83%E5%8D%95%E5%85%83">第四章 构造通用参考单元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F">第五章 有限元变分形式</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%BB%84%E8%A3%85">第六章 有限元组装</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%AD%A3%E4%BA%A4%E8%A1%A8%E7%A4%BA">第七章 有限元变分形式的正交表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA">第八章 有限元变分形式的张量表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E7%9A%84%E7%A6%BB%E6%95%A3%E4%BC%98%E5%8C%96">第九章 有限元矩阵计算的离散优化</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E7%AB%A0-dolfincpython%E6%9C%89%E9%99%90%E5%85%83%E5%BA%93">第十章 DOLFIN：C++/Python有限元库</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-ufl%E6%9C%89%E9%99%90%E5%85%83%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80">第十七章 UFL：有限元形式语言</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-unicorn%E7%BB%9F%E4%B8%80%E7%9A%84%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6%E6%B1%82%E8%A7%A3%E5%99%A8">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>DOLFIN：C&#43;&#43;/Python有限元库》线性代数【翻译】</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ii实现10dolfincpython有限元库线性代数">II.实现》10.DOLFIN：C++/Python有限元库》线性代数</a>
+      <ul>
+        <li><a href="#103-功能">10·3 功能</a>
+          <ul>
+            <li><a href="#1031-线性代数">10·3·1 线性代数</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0113/">
+    下一页<br>DOLFIN：C&#43;&#43;/Python有限元库》网格【翻译】
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0111/">
+      上一页<br>DOLFIN：C&#43;&#43;/Python有限元库》概述/接口【翻译】
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/fem/0112/">DOLFIN：C&#43;&#43;/Python有限元库》线性代数【翻译】</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2021-01-07</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/FEniCS">FEniCS</a>
+      , 
+      <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95">有限元法</a>
+      , 
+      <a href="/notes/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">偏微分方程</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0112.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h1 id="ii实现10dolfincpython有限元库线性代数">II.实现》10.DOLFIN：C++/Python有限元库》线性代数</h1>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93">章节目录</a>】</p>
+<h2 id="103-功能">10·3 功能</h2>
+<p>DOLFIN被组织为库（模块）的集合，每个库都覆盖某个功能区域。  我们在这里回顾这些领域，并解释最常用的类和函数的用途和用法。  回顾是自下而上的； 也就是说，我们首先描述DOLFIN的核心低层功能（线性代数和网格），然后向上移动以描述高层功能。  有关更多详细信息，请参阅FEniCS项目网页上的DOLFIN程序员参考和Logg and Wells（2010）。</p>
+<h3 id="1031-线性代数">10·3·1 线性代数</h3>
+<p>DOLFIN提供了一系列线性代数对象和函数，包括向量，稠密和稀疏矩阵，直接和迭代线性求解器以及特征值求解器，并通过一个简单且一致的接口来实现。  对于大多数基础功能，DOLFIN依赖于第三方库，例如PETSc和Trilinos。  DOLFIN定义了抽象基类GenericTensor，GenericMatrix和GenericVector，它们在整个库中被了广泛使用。  在DOLFIN中提供了针对多个后端这些通用接口的实现，从而实现了针对不同后端的通用接口。  用户还可以通过实现通用接口来包装其他线性代数后端。</p>
+<p><strong>矩阵和向量</strong>。   创建矩阵和向量的最简单方法是通过Matrix和Vector类。  通常，Matrix和Vector表示分布式线性代数对象，当并行运行时，这些对象可以跨（MPI）进程存储。  与有限元库中最常用的用法一致，Vector使用稠密存储，而Matrix使用稀疏存储。  可以如下创建向量：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>Vector x;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+x <span style="color:#f92672">=</span> Vector()
+</code></pre></div><p>可以通过以下方式创建矩阵：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>Matrix A;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+A <span style="color:#f92672">=</span> Matrix()
+</code></pre></div><p>在大多数应用程序中，用户可能需要创建矩阵或向量，但是对线性代数对象的大多数操作（包括调整大小）将在库内部进行，并且用户无需直接对对象进行操作。</p>
+<p>以下代码说明了如何创建大小为100的向量：【原文的代码已经过期了，被我注释掉了】</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e">// Vector x(100);
+</span><span style="color:#75715e"></span>x.init(<span style="color:#ae81ff">100</span>);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+<span style="color:#75715e"># x = Vector(100)</span>
+x<span style="color:#f92672">.</span>init(<span style="color:#ae81ff">100</span>)
+</code></pre></div><p>许多后端支持分布式线性代数用于并行计算，在这种情况下，向量x的全局大小为100，而DOLFIN将在（近）相等大小的部分中跨进程划分向量。</p>
+<p>创建一个给定大小的矩阵（稀疏矩阵）要更复杂，因此通常需要根据稀疏矩阵的结构（稀疏模式）进行初始化（分配数据结构）。  必要时，稀疏矩阵的初始化由DOLFIN处理。</p>
+<p>尽管DOLFIN支持分布式线性代数对象用于并行计算，但很少有用户在并行数据布局级别接触到细节。  库将自动处理跨进程的对象分配。</p>
+<p><strong>求解线性系统</strong>。  解决线性系统
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(Ax = b\)
+</span>
+的最简单方法是使用</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>solve(A, x, b);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+solve(A, x, b)
+
+</code></pre></div><p>DOLFIN将使用默认方法来求解方程组。  可以给出可选的参数来指定求解线性系统时使用的算法，对于迭代方法，则指定使用的前置条件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>solve(A, x, b, <span style="color:#e6db74">&#34;lu&#34;</span>);
+solve(A, x, b, <span style="color:#e6db74">&#34;gmres&#34;</span>, <span style="color:#e6db74">&#34;ilu&#34;</span>);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+solve(A, x, b, <span style="color:#e6db74">&#34;lu&#34;</span>);
+solve(A, x, b, <span style="color:#e6db74">&#34;gmres&#34;</span>, <span style="color:#e6db74">&#34;ilu&#34;</span>)
+</code></pre></div><p>可用的方法和预处理器取决于DOLFIN配置了哪个线性代数后端。  要列出可用的求解器方法和预处理器，可以使用以下命令：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>list_lu_solver_methods();
+list_krylov_solver_methods();
+list_krylov_solver_preconditioners();
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+list_lu_solver_methods()
+list_krylov_solver_methods()
+list_krylov_solver_preconditioners()
+</code></pre></div><p>使用函数solve很简单，但是对解决过程的细节几乎没有控制。  对于许多应用程序，希望对求解过程进行一定程度的控制，并在整个模拟过程中重用求解器对象。</p>
+<p>线性系统
+
+
+<span class="katex">
+  \(Ax = b\)
+</span>
+可以使用LU分解（一种直接方法）求解，如下所示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>LUSolver <span style="color:#a6e22e">solver</span>(A);
+solver.solve(x, b);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+solver <span style="color:#f92672">=</span> LUSolver(A)
+solver<span style="color:#f92672">.</span>solve(x, b)
+</code></pre></div><p>或者，可以在构造后设置与线性求解器关联的算符
+
+
+<span class="katex">
+  \(A\)
+</span>
+：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>LUSolver solver;
+solver.set_operator(A);
+solver.solve(x, b);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+solver <span style="color:#f92672">=</span> LUSolver()
+solver<span style="color:#f92672">.</span>set_operator(A)
+solver<span style="color:#f92672">.</span>solve(x, b)
+</code></pre></div><p>当通过函数接口传递线性求解器并将算符设置在函数内部时，这很有用。</p>
+<p>在某些情况下，对于给定的矩阵
+
+
+<span class="katex">
+  \(A\)
+</span>
+和不同的向量
+
+
+<span class="katex">
+  \(b\)
+</span>
+，或对于不同的
+
+
+<span class="katex">
+  \(A\)
+</span>
+，但具有相同的非零结构，系统
+
+
+<span class="katex">
+  \(Ax = b\)
+</span>
+可以求解多次。  如果A的非零结构不变，那么可以通知LU求解器来重复求解来提高效率：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>solver.parameters[<span style="color:#e6db74">&#34;same_nonzero_pattern&#34;</span>] <span style="color:#f92672">=</span> true;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+solver<span style="color:#f92672">.</span>parameters[<span style="color:#e6db74">&#34;same_nonzero_pattern&#34;</span>] <span style="color:#f92672">=</span> True
+</code></pre></div><p>在
+
+
+<span class="katex">
+  \(A\)
+</span>
+不变的情况下，可以通过重新使用
+
+
+<span class="katex">
+  \(A\)
+</span>
+的LU分解来显着减少后续求解时间。  分解重用由参数<code>reuse_factorization</code>控制。</p>
+<p>某些后端可能会规定要使用的特定LU求解器。  这取决于DOLFIN为后端配置了哪些求解器，以及如何配置第三方线性代数后端。</p>
+<p>方程组
+
+
+<span class="katex">
+  \(Ax = b\)
+</span>
+可以使用预处理Krylov求解器通过以下方式求解：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>KrylovSolver <span style="color:#a6e22e">solver</span>(A);
+solver.solve(x, b);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+solver <span style="color:#f92672">=</span> KrylovSolver(A)
+solver<span style="color:#f92672">.</span>solve(x, b)
+</code></pre></div><p>上面将使用默认的预处理器和求解器以及默认参数。  如果构造的KrylovSolver没有矩阵算符A，则可以在构造后设置算符：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>KrylovSolver solver;
+solver.set_operator(A);
+solver.solve(x, b);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+solver <span style="color:#f92672">=</span> KrylovSolver()
+solver<span style="color:#f92672">.</span>set_operator(A)
+solver<span style="color:#f92672">.</span>solve(x, b)
+</code></pre></div><p>在某些情况下，使用不同于
+
+
+<span class="katex">
+  \(A\)
+</span>
+的前置条件矩阵
+
+
+<span class="katex">
+  \(P\)
+</span>
+可能会有用：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>KrylovSolver solver;
+solver.set_operators(A, P);
+solver.solve(x, b);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+solver <span style="color:#f92672">=</span> KrylovSolver()
+solver<span style="color:#f92672">.</span>set_operators(A, P)
+solver<span style="color:#f92672">.</span>solve(x, b)
+</code></pre></div><p>可以设置Krylov求解器的各种参数。 一些常见的参数是：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+solver <span style="color:#f92672">=</span> KrylovSolver()
+solver<span style="color:#f92672">.</span>parameters[<span style="color:#e6db74">&#34;relative_tolerance&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0e-6</span>
+solver<span style="color:#f92672">.</span>parameters[<span style="color:#e6db74">&#34;absolute_tolerance&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0e-15</span>
+solver<span style="color:#f92672">.</span>parameters[<span style="color:#e6db74">&#34;divergence_limit&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0e4</span>
+solver<span style="color:#f92672">.</span>parameters[<span style="color:#e6db74">&#34;maximum_iterations&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">10000</span>
+solver<span style="color:#f92672">.</span>parameters[<span style="color:#e6db74">&#34;error_on_nonconvergence&#34;</span>] <span style="color:#f92672">=</span> True
+solver<span style="color:#f92672">.</span>parameters[<span style="color:#e6db74">&#34;nonzero_initial_guess&#34;</span>] <span style="color:#f92672">=</span> False
+</code></pre></div><p>可以类似地从C++设置参数。  可以通过参数控制打印KrylovSolver收敛的摘要和收敛历史的详细信息：可以通过参数控制打印KrylovSolver收敛的摘要和收敛历史的详细信息：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>KrylovSolver solver;
+solver.parameters[<span style="color:#e6db74">&#34;report&#34;</span>] <span style="color:#f92672">=</span> true;
+solver.parameters[<span style="color:#e6db74">&#34;monitor_convergence&#34;</span>] <span style="color:#f92672">=</span> true;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+solver <span style="color:#f92672">=</span> KrylovSolver()
+solver<span style="color:#f92672">.</span>parameters[<span style="color:#e6db74">&#34;report&#34;</span>] <span style="color:#f92672">=</span> True
+solver<span style="color:#f92672">.</span>parameters[<span style="color:#e6db74">&#34;monitor_convergence&#34;</span>] <span style="color:#f92672">=</span> True
+</code></pre></div><p>可以在构造求解器对象时设置要使用的特定Krylov求解器和预处理器。  最简单的方法是通过字符串描述设置Krylov方法和前置条件。 例如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>KrylovSolver <span style="color:#a6e22e">solver</span>(<span style="color:#e6db74">&#34;gmres&#34;</span>, <span style="color:#e6db74">&#34;ilu&#34;</span>);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+solver <span style="color:#f92672">=</span> KrylovSolver(<span style="color:#e6db74">&#34;gmres&#34;</span>, <span style="color:#e6db74">&#34;ilu&#34;</span>)
+</code></pre></div><p>上面指定了通用最小残差（GMRES）方法作为求解器，以及不完全LU（ILU）预处理。</p>
+<p>当配置好后端（如PETSc和Trilinos），可以应用各种各样的Krylov方法和预处理器，并且有大量的求解器和预处理器参数可设置。  除了此处描述的内容外，DOLFIN还提供了更高级的接口，允许对求解过程进行更精细的控制。  用户也可以提供自己的预处理器。</p>
+<p><strong>求解特征值问题</strong>。   DOLFIN使用基于PETSc的库SLEPc来求解特征值问题。  SLEPc接口仅适用于基于PETSc的线性代数对象。  因此，有必要使用基于PETSc的对象，或将默认的线性代数后端设置为PETSc和向下转换的对象（如下一节所述）。  以下代码说明了特征值问题
+
+
+<span class="katex">
+  \(Ax =\lambda x\)
+</span>
+的解：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// Create matrix
+</span><span style="color:#75715e"></span>PETScMatrix A;
+
+<span style="color:#75715e">// Code omitted for setting the entries of A
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// Create eigensolver
+</span><span style="color:#75715e"></span>SLEPcEigenSolver <span style="color:#a6e22e">eigensolver</span>(A);
+
+<span style="color:#75715e">// Compute all eigenvalues of A
+</span><span style="color:#75715e"></span>eigensolver.solve();
+
+<span style="color:#75715e">// Get first eigenpair
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">double</span> lambda_real, lambda_complex;
+PETScVector x_real, x_complex;
+eigensolver.get_eigenpair(lambda_real, lambda_complex, x_real, x_complex, <span style="color:#ae81ff">0</span>);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+
+<span style="color:#75715e"># Create matrix</span>
+A <span style="color:#f92672">=</span> PETScMatrix()
+
+<span style="color:#75715e"># Code omitted for setting the entries of A</span>
+
+<span style="color:#75715e"># Create eigensolver</span>
+eigensolver <span style="color:#f92672">=</span> SLEPcEigenSolver(A)
+
+<span style="color:#75715e"># Compute all eigenvalues of A</span>
+eigensolver<span style="color:#f92672">.</span>solve()
+
+<span style="color:#75715e"># Get first eigenpair</span>
+lambda_r, lambda_c, x_real, x_complex <span style="color:#f92672">=</span> eigensolver<span style="color:#f92672">.</span>get_eigenpair(<span style="color:#ae81ff">0</span>)
+</code></pre></div><p>特征值的实分量和复分量分别以lambda_real和lambda_complex返回，特征向量的实分量和复分量分别以x_real和x_complex返回。</p>
+<p>要为广义特征值问题
+
+
+<span class="katex">
+  \(Ax =\lambda Mx\)
+</span>
+创建求解器，可以使用
+
+
+<span class="katex">
+  \(A\)
+</span>
+和
+
+
+<span class="katex">
+  \(M\)
+</span>
+来构造特征求解器：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>PETScMatrix A;
+PETScMatrix M;
+
+<span style="color:#75715e">// Code omitted for setting the entries of A and M
+</span><span style="color:#75715e"></span>SLEPcEigenSolver <span style="color:#a6e22e">eigensolver</span>(A, M);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+A <span style="color:#f92672">=</span> PETScMatrix()
+M <span style="color:#f92672">=</span> PETScMatrix()
+
+<span style="color:#75715e"># Code omitted for setting the entries of A and M</span>
+
+eigensolver <span style="color:#f92672">=</span> SLEPcEigenSolver(A, M)
+</code></pre></div><p>用户可以通过参数系统设置许多选项，以控制特征值问题求解过程。  要打印可用参数的列表，请分别从C ++和Python调用<code>info(eigensolver.parameters, true)</code>和 <code>info(eigensolver.parameters, True)</code>。</p>
+<p><strong>选择线性代数后端</strong>。   Matrix，Vector，LUSolver和KrylovSolver对象均基于特定的线性代数后端。  默认后端取决于配置DOLFIN时启用了哪些后端。  可以通过全局参数<code>linear_algebra_backend</code>设置后端。  将PETSc用作线性代数后端：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>parameters[<span style="color:#e6db74">&#34;linear_algebra_backend&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;PETSc&#34;</span>;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+parameters[<span style="color:#e6db74">&#34;linear_algebra_backend&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;PETSc&#34;</span>
+</code></pre></div><p>在创建线性代数对象之前，应先设置此参数。  要使用Trilinos集合中的Epetra，应将参数<code>linear_algebra_backend</code>设置为<code>Epetra</code>。  对于uBLAS，参数应设置为<code>uBLAS</code>，对于MTL4，参数应设置为<code>MTL4</code>。</p>
+<p>用户可以显式创建使用特定后端的线性代数对象。  通常，此类对象以后端名称开头。  例如，通过以下方法创建基于PETSc的向量和LU求解器：</p>
+<pre><code>// C++ code
+PETScVector x;
+PETScLUSolver solver;
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+x <span style="color:#f92672">=</span> PETScVector()
+solver <span style="color:#f92672">=</span> PETScLUSolver()
+</code></pre></div><p><strong>求解非线性系统</strong>。   DOLFIN提供了类<code>NewtonSolver</code>的牛顿求解器，用于求解如下的非线性方程组</p>
+
+
+
+<span class="katex">
+  \[
+F(x) = 0 \tag{10.1}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(x \in \mathbb{R}^n\)
+</span>
+ 和 
+
+
+<span class="katex">
+  \(F : \mathbb{R}^n \to \mathbb{R}^n\)
+</span>
+。  为了使用DOLFIN的牛顿求解器解决此类问题，用户需要提供<code>NonlinearProblem</code>的子类。  <code>NonlinearProblem</code>对象的目的是求
+
+
+<span class="katex">
+  \(F\)
+</span>
+及其雅可比行列式
+
+
+<span class="katex">
+  \(J : \mathbb{R}^n \to \mathbb{R}^n \times \mathbb{R}^n\)
+</span>
+。  下面是一个用户提供的用于求解非线性微分方程的<code>MyNonlinearProblem</code>类的概要。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyNonlinearProblem</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> NonlinearProblem
+{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+
+<span style="color:#75715e">// Constructor
+</span><span style="color:#75715e"></span>MyNonlinearProblem(<span style="color:#66d9ef">const</span> Form<span style="color:#f92672">&amp;</span> L, <span style="color:#66d9ef">const</span> Form<span style="color:#f92672">&amp;</span> a,
+                   <span style="color:#66d9ef">const</span> BoundaryCondition<span style="color:#f92672">&amp;</span> bc) <span style="color:#f92672">:</span> L(L), a(a), bc(bc) {}
+
+<span style="color:#75715e">// User-defined residual vector F
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">F</span>(GenericVector<span style="color:#f92672">&amp;</span> b, <span style="color:#66d9ef">const</span> GenericVector<span style="color:#f92672">&amp;</span> x)
+{
+    assemble(b, L);
+    bc.apply(b, x);
+}
+
+<span style="color:#75715e">// User-defined Jacobian matrix J
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">J</span>(GenericMatrix<span style="color:#f92672">&amp;</span> A, <span style="color:#66d9ef">const</span> GenericVector<span style="color:#f92672">&amp;</span> x)
+{
+    assemble(A, a);
+    bc.apply(A);
+}
+
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">const</span> Form<span style="color:#f92672">&amp;</span> L;
+    <span style="color:#66d9ef">const</span> Form<span style="color:#f92672">&amp;</span> a;
+    <span style="color:#66d9ef">const</span> BoundaryCondition<span style="color:#f92672">&amp;</span> bc;
+};
+</code></pre></div><p><code>MyNonlinearProblem</code>对象是使用线性形式L（组装时对应于F）和双线性形式a（组装时对应于J）构造的。  稍后将在例子中详细讨论使<code>Form</code>和<code>BoundaryCondition</code>类的使用。  可以在Python中定义相同的<code>MyNonlinearProblem</code>类：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyNonlinearProblem</span>(NonlinearProblem):
+    <span style="color:#66d9ef">def</span> __init__(self, L, a, bc):
+        NonlinearProblem<span style="color:#f92672">.</span>__init__(self)
+        self<span style="color:#f92672">.</span>L <span style="color:#f92672">=</span> L
+        self<span style="color:#f92672">.</span>a <span style="color:#f92672">=</span> a
+        self<span style="color:#f92672">.</span>bc <span style="color:#f92672">=</span> bc
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">F</span>(self, b, x):
+        assemble(self<span style="color:#f92672">.</span>L, tensor<span style="color:#f92672">=</span>b)
+        self<span style="color:#f92672">.</span>bc<span style="color:#f92672">.</span>apply(b, x)
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">J</span>(self, A, x):
+        assemble(self<span style="color:#f92672">.</span>a, tensor<span style="color:#f92672">=</span>A)
+        self<span style="color:#f92672">.</span>bc<span style="color:#f92672">.</span>apply(A)
+</code></pre></div><p>一旦定义了非线性问题的类，就可以创建一个<code>NewtonSolver</code>对象，并且可以使用牛顿求解器来计算非线性问题的解向量
+
+
+<span class="katex">
+  \(x\)
+</span>
+：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>MyNonlinearProblem <span style="color:#a6e22e">problem</span>(L, a, bc);
+NewtonSolver newton_solver;
+
+newton_solver.solve(problem, u.vector());
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+problem <span style="color:#f92672">=</span> MyNonlinearProblem(L, a, bc)
+newton_solver <span style="color:#f92672">=</span> NewtonSolver()
+
+newton_solver<span style="color:#f92672">.</span>solve(problem, u<span style="color:#f92672">.</span>vector())
+</code></pre></div><p><code>NewtonSolver</code>有许多参数可设。  确定牛顿求解器行为的一些参数有：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+newton_solver <span style="color:#f92672">=</span> NewtonSolver()
+newton_solver<span style="color:#f92672">.</span>parameters[<span style="color:#e6db74">&#34;maximum_iterations&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>
+newton_solver<span style="color:#f92672">.</span>parameters[<span style="color:#e6db74">&#34;relative_tolerance&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0e-6</span>
+newton_solver<span style="color:#f92672">.</span>parameters[<span style="color:#e6db74">&#34;absolute_tolerance&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0e-10</span>
+newton_solver<span style="color:#f92672">.</span>parameters[<span style="color:#e6db74">&#34;error_on_nonconvergence&#34;</span>] <span style="color:#f92672">=</span> False
+</code></pre></div><p>类似地，C++也可设置参数。  在测试收敛性时，通常会检查残差F的范数。  有时，用检查迭代校正
+
+
+<span class="katex">
+  \(dx\)
+</span>
+的范数替代会很有用的。  这由参数<code>convergence_criterion</code>控制，可以将其设置为&quot;residual&quot;以检查残差F的大小，或设置为&quot;incremental&quot;以检查增量
+
+
+<span class="katex">
+  \(dx\)
+</span>
+的大小。</p>
+<p>对于更高级的用法，可以使用指定在求解过程中使用的线性求解器和前置条件的构造的<code>NewtonSolver</code>。</p>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93">章节目录</a>】</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0113/">
+    下一页<br>DOLFIN：C&#43;&#43;/Python有限元库》网格【翻译】
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0111/">
+      上一页<br>DOLFIN：C&#43;&#43;/Python有限元库》概述/接口【翻译】
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0112.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/fem/0112.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ii实现10dolfincpython有限元库线性代数">II.实现》10.DOLFIN：C++/Python有限元库》线性代数</a>
+      <ul>
+        <li><a href="#103-功能">10·3 功能</a>
+          <ul>
+            <li><a href="#1031-线性代数">10·3·1 线性代数</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

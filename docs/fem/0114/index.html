@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DOLFIN：C&#43;&#43;/Python有限元库》有限元/函数/表达式【翻译】"><meta property="og:title" content="DOLFIN：C&#43;&#43;/Python有限元库》有限元/函数/表达式【翻译】" />
+<meta property="og:description" content="II.实现》10.DOLFIN：C&#43;&#43;/Python有限元库》有限元/函数/表达式
+【章节目录】
+10·3·3 有限元
+第2章和第3章讨论的有限元的概念（Ciarlet定义）是由DOLFIN FiniteElement类实现的。  此类在C&#43;&#43;和Python接口中的实现方式有所不同。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/0114/" />
+<meta property="article:published_time" content="2021-01-09T09:19:08+08:00" />
+<meta property="article:modified_time" content="2021-01-09T09:19:08+08:00" />
+<title>DOLFIN：C&#43;&#43;/Python有限元库》有限元/函数/表达式【翻译】 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a>
+<ul>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E6%96%B9%E6%B3%95">第二章 有限元方法</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%B8%B8%E8%A7%81%E6%9C%89%E9%99%90%E5%85%83">第三章 常见有限元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8%E5%8F%82%E8%80%83%E5%8D%95%E5%85%83">第四章 构造通用参考单元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F">第五章 有限元变分形式</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%BB%84%E8%A3%85">第六章 有限元组装</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%AD%A3%E4%BA%A4%E8%A1%A8%E7%A4%BA">第七章 有限元变分形式的正交表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA">第八章 有限元变分形式的张量表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E7%9A%84%E7%A6%BB%E6%95%A3%E4%BC%98%E5%8C%96">第九章 有限元矩阵计算的离散优化</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E7%AB%A0-dolfincpython%E6%9C%89%E9%99%90%E5%85%83%E5%BA%93">第十章 DOLFIN：C++/Python有限元库</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-ufl%E6%9C%89%E9%99%90%E5%85%83%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80">第十七章 UFL：有限元形式语言</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-unicorn%E7%BB%9F%E4%B8%80%E7%9A%84%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6%E6%B1%82%E8%A7%A3%E5%99%A8">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>DOLFIN：C&#43;&#43;/Python有限元库》有限元/函数/表达式【翻译】</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ii实现10dolfincpython有限元库有限元函数表达式">II.实现》10.DOLFIN：C++/Python有限元库》有限元/函数/表达式</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#1033-有限元">10·3·3 有限元</a></li>
+            <li><a href="#1034-函数空间">10·3·4 函数空间</a></li>
+            <li><a href="#1035-函数">10·3·5 函数</a></li>
+            <li><a href="#1036-表达式">10·3·6 表达式</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0115/">
+    下一页<br>DOLFIN：C&#43;&#43;/Python有限元库》变分形式/组装/边界条件【翻译】
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0113/">
+      上一页<br>DOLFIN：C&#43;&#43;/Python有限元库》网格【翻译】
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/fem/0114/">DOLFIN：C&#43;&#43;/Python有限元库》有限元/函数/表达式【翻译】</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2021-01-09</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/FEniCS">FEniCS</a>
+      , 
+      <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95">有限元法</a>
+      , 
+      <a href="/notes/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">偏微分方程</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0114.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h1 id="ii实现10dolfincpython有限元库有限元函数表达式">II.实现》10.DOLFIN：C++/Python有限元库》有限元/函数/表达式</h1>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93">章节目录</a>】</p>
+<h3 id="1033-有限元">10·3·3 有限元</h3>
+<p>第2章和第3章讨论的有限元的概念（Ciarlet定义）是由DOLFIN FiniteElement类实现的。  此类在C++和Python接口中的实现方式有所不同。</p>
+<p>FiniteElement类的C++实现依赖于由形式编译器（例如FFC或SFC）生成的代码，分别在第11章和第15章中进行了讨论。  FiniteElement类本质上是UFC类ufc::finite_element的包装器类。  C++ FiniteElement提供了ufc::finite_element的所有功能。  DOLFIN C ++接口的用户通常不会直接使用FiniteElement类，但是它是FunctionSpace类的重要构建块，下面将对此进行讨论。  但是，开发高级算法的用户需要对有限元基函数进行运行时评估，他们需要熟悉FiniteElement接口。  有关详细信息，请参阅DOLFIN程序员参考。</p>
+<p>Python接口也提供了FiniteElement类。  Python FiniteElement类直接从UFL Python模块导入（请参见第17章）。  就其本身而论，它只是可用于定义变分问题的特定有限元标签。  可以使用DOLFIN FunctionSpace类更方便地定义变分问题，因此Python接口的用户很少会遇到FiniteElement类。  但是，希望使用Python开发算法的高级用户，  而此算法需要UFC接口中定义的功能（例如基函数的运行时求值），可以通过在Python接口内显式生成代码来访问此类功能。  这可以通过调用DOLFIN的<code>jit</code>函数（即时编译）来完成，该函数将UFL FiniteElement作为输入并返回一个包含ufc::finite_element和ufc::dofmap的对。  返回的对象是通过首先生成相应的C++代码，然后将该C++代码编译并包装到Python模块中来创建的。  因此，返回的对象可直接在Python中使用。</p>
+<p>FiniteElement的自由度可以通过调用plot(element)从Python接口直接绘制。  这将画出有限元的形状图，并按照第3章中的符号表示其自由度。</p>
+<p><img src="/notes/images/0242.jpg" alt="0242.jpg"></p>
+<center>表10.3 DOLFIN 1.0支持的有限元列表。 FEniCS部分支持灰色斜体单元，但并非整个工具链都支持。</center>
+<p>表10.3列出了DOLFIN当前支持的有限元（以及工具链FIAT–UFL–FFC / SFC–UFC）。  FiniteElement可以使用其全名或简称来指定（来自Python），如以下代码示例所示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">//</span> UFL code
+
+element <span style="color:#f92672">=</span> FiniteElement(<span style="color:#e6db74">&#34;Lagrange&#34;</span>, tetrahedron, <span style="color:#ae81ff">5</span>)
+element <span style="color:#f92672">=</span> FiniteElement(<span style="color:#e6db74">&#34;CG&#34;</span>, tetrahedron, <span style="color:#ae81ff">5</span>)
+
+element <span style="color:#f92672">=</span> FiniteElement(<span style="color:#e6db74">&#34;Brezzi-Douglas-Marini&#34;</span>, triangle, <span style="color:#ae81ff">3</span>)
+element <span style="color:#f92672">=</span> FiniteElement(<span style="color:#e6db74">&#34;BDM&#34;</span>, triangle, <span style="color:#ae81ff">3</span>)
+
+element <span style="color:#f92672">=</span> FiniteElement(<span style="color:#e6db74">&#34;Nedelec 1st kind H(curl)&#34;</span>, tetrahedron, <span style="color:#ae81ff">2</span>)
+element <span style="color:#f92672">=</span> FiniteElement(<span style="color:#e6db74">&#34;N1curl&#34;</span>, tetrahedron, <span style="color:#ae81ff">2</span>)
+</code></pre></div><h3 id="1034-函数空间">10·3·4 函数空间</h3>
+<p>DOLFIN FunctionSpace类表示有限元函数空间
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+，如第2章所定义。  FunctionSpace的数据用由Mesh，DofMap和FiniteElement组成的三元组表示：</p>
+<center>FunctionSpace = (Mesh, DofMap, FiniteElement)</center>
+<p>Mesh定义了计算域及其离散化。  FiniteElement定义了Mesh的任何给定胞元上的局部函数空间。  请注意，如果在同一Mesh上创建两个或更多FunctionSpaces，则该Mesh在两个FunctionSpaces间共享。</p>
+<p><strong>创建函数空间</strong>。 对于FiniteElement类，在C++和Python接口中对FunctionSpace的处理方式有所不同。  在C++中，FunctionSpace的实例化依赖于生成的代码。  例如，我们在这里考虑创建一个FunctionSpace，用来表示三角形上的连续分段线性拉格朗日多项式。  首先，必须以UFL形式语言定义相应的有限元。  为此，我们将以下代码输入到名为Lagrange.ufl的文件中：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">//</span> UFL code
+element <span style="color:#f92672">=</span> FiniteElement(<span style="color:#e6db74">&#34;Lagrange&#34;</span>, triangle, <span style="color:#ae81ff">1</span>)
+</code></pre></div><p>然后，我们可以使用FFC之类的形式编译器生成C++代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Bash code</span>
+ffc -l dolfin Lagrange.ufl
+</code></pre></div><p>这将生成一个名为Lagrange.h的文件，我们可以将其包含在C++程序中以实例化给定Mesh上的FunctionSpace：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;dolfin.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Lagrange.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> dolfin;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    UnitSquare mesh(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">8</span>);
+    Lagrange<span style="color:#f92672">::</span>FunctionSpace V(mesh);
+
+    ...
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+
+}
+</code></pre></div><p>在典型的应用中，不是通过单独的<code>.ufl</code>文件生成FunctionSpace，而是将其作为变分问题的生成代码的一部分来生成的。</p>
+<p>从Python接口，可以直接创建一个FunctionSpace，如以下代码所示，该代码创建与上述示例相同的函数空间（三角形上的分段线性拉格朗日多项式）：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+
+mesh <span style="color:#f92672">=</span> UnitSquare(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">8</span>)
+V <span style="color:#f92672">=</span> FunctionSpace(mesh, <span style="color:#e6db74">&#34;Lagrange&#34;</span>, <span style="color:#ae81ff">1</span>)
+</code></pre></div><p><strong>混合空间</strong>。  可以从函数空间的任意组合来创建混合函数空间。  作为示例，我们在这里考虑为，离散化的Stokes或不可压缩的Navier–Stokes方程，创建Taylor–Hood函数空间。  此混合函数空间是速度场的矢量值连续分段二次函数空间和压力场的标量连续分段线性函数空间的张量积。  可以很容易地以UFL格式文件（用于代码生成并随后将其包含在C++程序中）或直接在Python脚本中定义，如以下代码示例所示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">//</span> UFL code
+V <span style="color:#f92672">=</span> VectorElement(<span style="color:#e6db74">&#34;Lagrange&#34;</span>, triangle, <span style="color:#ae81ff">2</span>)
+Q <span style="color:#f92672">=</span> FiniteElement(<span style="color:#e6db74">&#34;Lagrange&#34;</span>, triangle, <span style="color:#ae81ff">1</span>)
+W <span style="color:#f92672">=</span> V<span style="color:#f92672">*</span>Q
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+V <span style="color:#f92672">=</span> VectorFunctionSpace(mesh, <span style="color:#e6db74">&#34;Lagrange&#34;</span>, <span style="color:#ae81ff">2</span>)
+Q <span style="color:#f92672">=</span> FunctionSpace(mesh, <span style="color:#e6db74">&#34;Lagrange&#34;</span>, <span style="color:#ae81ff">1</span>)
+W <span style="color:#f92672">=</span> V<span style="color:#f92672">*</span>Q
+</code></pre></div><p>DOLFIN允许生成任意嵌套的混合函数空间。  混合功能空间可以用作构建较大混合空间的块。  当从两个以上的函数空间（被嵌套在同一级别）创建混合函数空间时，则必须使用MixedElement构造函数（在UFL/C++中）或MixedFunctionSpace构造函数（在Python中）。  这是因为Python会将表达式V<em>Q</em>P解释为(V*Q)<em>P，这将创建一个包含两个子空间的混合函数空间：混合空间V</em>Q和空间P。  如果不是这样，则必须使用UFL/C++中的MixedElement([V, Q, P])或Python中的MixedFunctionSpace([V, Q, P])来定义混合函数空间。</p>
+<p><strong>子空间</strong>。  对于混合函数空间，可以访问其子空间。  这些子空间通常不同于，被用来在其自由度映射（DofMap对象）中创建混合空间的，函数空间。 子空间对于将边界条件应用于混合单元的组件特别有用。  我们在下面会回到这个问题。</p>
+<h3 id="1035-函数">10·3·5 函数</h3>
+<p>Function类表示了，在第2章中定义的，有限元空间
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+中一个有限元函数
+
+
+<span class="katex">
+  \(u_h\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+u_h(x) = \sum^N_{j=1} U_j\phi_j(x) \tag{10.2}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(U \in \mathbb{R}^N\)
+</span>
+是函数
+
+
+<span class="katex">
+  \(u_h\)
+</span>
+的自由度矢量，而
+
+
+<span class="katex">
+  \(\{\phi_j\}^N_{j=1}\)
+</span>
+是
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+的基底。  Function被表示成FunctionSpace和GenericVector中的项：</p>
+<center>Function = (FunctionSpace, GenericVector)</center>
+<p>FunctionSpace定义了函数空间Vh，而GenericVector持有自由度向量U； 参见图10.5。  在分布式内存体系结构上并行运行时，FunctionSpace和GenericVector分布在各个进程中。</p>
+<p><img src="/notes/images/0243.jpg" alt="0243.jpg"></p>
+<center>图10.5 由三角形单元组成的网格上的分段线性有限元函数
+
+
+<span class="katex">
+  \(u_h\)
+</span>
+。 自由度向量U由网格顶点处的
+
+
+<span class="katex">
+  \(u_h\)
+</span>
+值给出。</center>
+<p><strong>创建Function</strong>。 function!creation</p>
+<p>要在FunctionSpace上创建Function，只需以FunctionSpace作为参数调用Function类的构造函数，如以下代码示例所示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>Function <span style="color:#a6e22e">u</span>(V);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+
+u <span style="color:#f92672">=</span> Function(V)
+</code></pre></div><p>如果在同一个FunctionSpace上创建了两个或更多Function，则FunctionSpace将在这些Function之间共享。</p>
+<p>Function通常被用于保存偏微分方程计算出的解。  然后，可以通过求解方程组来获得自由度U，如以下代码例子所示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>Function <span style="color:#a6e22e">u</span>(V);
+solve(A, u.vector(), b);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+
+u <span style="color:#f92672">=</span> Function(V)
+solve(A, u<span style="color:#f92672">.</span>vector(), b)
+</code></pre></div><p>线性系统的组装和求解过程由Linear/NonlinearVariationalSolver类自动处理，下面将对其进行详细讨论。</p>
+<p><strong>Function求值</strong>。  可以在计算域内的任意点对Function求值。  首先定位包含给定点的网格胞元，然后计算该胞元上基函数的线性组合来，这就是Function的计算值。  查找胞元，利用了一个有效的搜索树算法，该算法是CGAL的一部分。</p>
+<p>以下代码示例说明了标量值和向量值函数在C++和Python接口中的函数求值：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e"># Evaluation of scalar function
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">double</span> scalar <span style="color:#f92672">=</span> u(<span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0.3</span>);
+
+<span style="color:#75715e"># Evaluation of vector-valued function
+</span><span style="color:#75715e"></span>Array<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> vector(<span style="color:#ae81ff">3</span>);
+u(vector, <span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0.3</span>);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+
+<span style="color:#75715e"># Evaluation of scalar function</span>
+scalar <span style="color:#f92672">=</span> u(<span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0.3</span>)
+
+<span style="color:#75715e"># Evaluation of vector-valued function</span>
+vector <span style="color:#f92672">=</span> u(<span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0.3</span>)
+</code></pre></div><p>当并行运行在分布式网格时，这些函数只能在存储在本地进程中的网格部分点上求值。</p>
+<p><strong>子函数</strong>。  对于在混合FunctionSpace上构造的Function，可以访问Function的子功能（组件），例如绘制混合系统的分量解。  子函数可以以浅拷贝或深拷贝的形式访问。  默认情况下，子函数以浅拷贝形式访问，这意味着子函数与其父函数共享数据。  它们提供对父函数数据的视图。  有时，也可能希望将子函数作为深层副本进行访问。  深度复制的子函数不会与父函数共享其数据（即，所持有自由度向量）。  Function对象的浅层副本和深层副本本身都是Function对象，并且可以（除某些例外）用作常规的Function对象。</p>
+<p>在C++和Python中，创建子函数的浅层副本和深层副本的方式有所不同，如以下代码示例所示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>
+Function <span style="color:#a6e22e">w</span>(W);
+
+<span style="color:#75715e">// Create shallow copies
+</span><span style="color:#75715e"></span>Function<span style="color:#f92672">&amp;</span> u <span style="color:#f92672">=</span> w[<span style="color:#ae81ff">0</span>];
+Function<span style="color:#f92672">&amp;</span> p <span style="color:#f92672">=</span> w[<span style="color:#ae81ff">1</span>];
+
+<span style="color:#75715e">// Create deep copies
+</span><span style="color:#75715e"></span>Function uu <span style="color:#f92672">=</span> w[<span style="color:#ae81ff">0</span>];
+Function pp <span style="color:#f92672">=</span> w[<span style="color:#ae81ff">1</span>];
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+
+w <span style="color:#f92672">=</span> Function(W)
+
+<span style="color:#75715e"># Create shallow copies</span>
+u, p <span style="color:#f92672">=</span> w<span style="color:#f92672">.</span>split()
+
+<span style="color:#75715e"># Create deep copies</span>
+uu, pp <span style="color:#f92672">=</span> w<span style="color:#f92672">.</span>split(deepcopy<span style="color:#f92672">=</span>True)
+</code></pre></div><p>请注意，从Python接口访问组件，例如w[0]不会像在C++接口中那样创建新的Function对象。  而是创建一个UFL表达式，该表达式表示原始Function的一个分量。</p>
+<h3 id="1036-表达式">10·3·6 表达式</h3>
+<p>Expression类与Function类密切相关，因为它表示在有限元素空间上可以被求值的函数。 但是，Function必须定义在自由度矢量各项上，而Expression可以根据例如坐标值，其他几何实体或表查询自由地定义。</p>
+<p>通过Expression类的子类，并重载<code>eva</code>l函数，可以在C++和Python中定义一个Expression，如下面的代码示例所示，这个示例将函数
+
+
+<span class="katex">
+  \(f(x, y)= sin x cos y\)
+</span>
+定义为Expression：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyExpression</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Expression
+{
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">eval</span>(Array<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&amp;</span> values, <span style="color:#66d9ef">const</span> Array<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&amp;</span> x) <span style="color:#66d9ef">const</span>
+    {
+        values[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> sin(x[<span style="color:#ae81ff">0</span>])<span style="color:#f92672">*</span>cos(x[<span style="color:#ae81ff">1</span>]);
+    }
+};
+
+MyExpression f;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyExpression</span>(Expression):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">eval</span>(self, values, x):
+        values[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> sin(x[<span style="color:#ae81ff">0</span>])<span style="color:#f92672">*</span>cos(x[<span style="color:#ae81ff">1</span>])
+
+f <span style="color:#f92672">=</span> MyExpression()
+</code></pre></div><p>对于向量值（或张量值）Expression，还必须指定Expression的值形状。 下面的代码示例演示如何实现向量值函数
+
+
+<span class="katex">
+  \(g(x, y) = (\sin x, \cos y)\)
+</span>
+。 在C++和Python中，值的形状定义略有不同。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyExpression</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Expression
+{
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">eval</span>(Array<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&amp;</span> values, <span style="color:#66d9ef">const</span> Array<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&amp;</span> x) <span style="color:#66d9ef">const</span>
+    {
+        values[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> sin(x[<span style="color:#ae81ff">0</span>]);
+        values[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> cos(x[<span style="color:#ae81ff">1</span>]);
+    }
+
+    uint <span style="color:#a6e22e">value_rank</span>() <span style="color:#66d9ef">const</span>
+    {
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+    }
+
+    uint <span style="color:#a6e22e">value_dimension</span>(uint i) <span style="color:#66d9ef">const</span>
+    {
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">2</span>;
+    }
+
+};
+
+MyExpression g;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyExpression</span>(Expression):
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">eval</span>(self, values, x):
+        values[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> sin(x[<span style="color:#ae81ff">0</span>])
+        values[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> cos(x[<span style="color:#ae81ff">1</span>])
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">value_shape</span>(self):
+        <span style="color:#66d9ef">return</span> (<span style="color:#ae81ff">2</span>,)
+
+g <span style="color:#f92672">=</span> MyExpression()
+</code></pre></div><p>上面的用于表达式定义的函子（functor）构造很强大，并且允许用户定义复杂的表达式，对它的求值可能涉及作为<code>eval</code>函数一部分的任意运算。  对于诸如
+
+
+<span class="katex">
+  \(f (x, y) = \sin x \cos y\)
+</span>
+和
+
+
+<span class="katex">
+  \(g(x, y) = (\sin x, \cos y)\)
+</span>
+的简单表达式，Python接口的用户可以使用更简单的语法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+
+f <span style="color:#f92672">=</span> Expression(<span style="color:#e6db74">&#34;sin(x[0])*cos(x[1])&#34;</span>)
+g <span style="color:#f92672">=</span> Expression((<span style="color:#e6db74">&#34;sin(x[0])&#34;</span>, <span style="color:#e6db74">&#34;cos(x[1])&#34;</span>))
+</code></pre></div><p>上面的代码将自动生成DOLFIN C++ Expression类的子类，这些子类会使<code>eval</code>函数重载。  这样做的好处是效率更高，因为对eval函数的回调是在C++中而不是在Python中进行的。</p>
+<p>在Python接口中，能被用来实现一个时间依赖表达式的一个特性是，在表达式字符串中使用变量。  例如，可以使用变量
+
+
+<span class="katex">
+  \(t\)
+</span>
+表示时间：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+h <span style="color:#f92672">=</span> Expression(<span style="color:#e6db74">&#34;t*sin(x[0])*cos(x[1])&#34;</span>, t<span style="color:#f92672">=</span><span style="color:#ae81ff">0.0</span>)
+    <span style="color:#66d9ef">while</span> t <span style="color:#f92672">&lt;</span> T:
+        h<span style="color:#f92672">.</span>t <span style="color:#f92672">=</span> t
+        <span style="color:#f92672">...</span>
+        t <span style="color:#f92672">+=</span> dt
+</code></pre></div><p>
+
+
+<span class="katex">
+  \(t\)
+</span>
+变量在这里已被用于创建时间依赖表达式。  可以使用任意变量名称，只要它们不与内置函数的名称（例如
+
+
+<span class="katex">
+  \(\sin\)
+</span>
+或
+
+
+<span class="katex">
+  \(\exp\)
+</span>
+）冲突即可。</p>
+<p>除上述示例外，Python接口还通过提供C++ Expression类的定义来直接定义C++ Expression类的（更复杂的）子类。 有关更多信息，请参阅DOLFIN程序员参考。</p>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93">章节目录</a>】</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0115/">
+    下一页<br>DOLFIN：C&#43;&#43;/Python有限元库》变分形式/组装/边界条件【翻译】
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0113/">
+      上一页<br>DOLFIN：C&#43;&#43;/Python有限元库》网格【翻译】
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0114.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/fem/0114.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ii实现10dolfincpython有限元库有限元函数表达式">II.实现》10.DOLFIN：C++/Python有限元库》有限元/函数/表达式</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#1033-有限元">10·3·3 有限元</a></li>
+            <li><a href="#1034-函数空间">10·3·4 函数空间</a></li>
+            <li><a href="#1035-函数">10·3·5 函数</a></li>
+            <li><a href="#1036-表达式">10·3·6 表达式</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

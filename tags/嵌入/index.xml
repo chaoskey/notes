@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>嵌入 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E5%B5%8C%E5%85%A5/</link>
+    <description>Recent content in 嵌入 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Tue, 21 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E5%B5%8C%E5%85%A5/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>子流形和超曲面</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0012/</link>
+      <pubDate>Tue, 21 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0012/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;嵌入&lt;/code&gt;，就是&amp;quot;足够像&amp;quot;地映射到更高维流形“内部”。这种“内部”区域就是&lt;code&gt;子流形&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;超曲面&lt;/code&gt;，就是低一维的&lt;code&gt;子流形&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;法余矢&lt;/code&gt;，就是能够和超曲面矢量基底一起张成&amp;quot;母&amp;quot;流形的一个矢量基底所对应的对偶矢量基底。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;法矢&lt;/code&gt;，就是存在度规情况下，用度规将&lt;code&gt;法余矢&lt;/code&gt;的指标&amp;quot;提升&amp;quot;得到矢量。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;诱导度规&lt;/code&gt;，就是和&amp;quot;母&amp;quot;流形度规保持&amp;quot;自然一致&amp;quot;的子流形度规。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;投影映射&lt;/code&gt;，就是&lt;code&gt;诱导度规&lt;/code&gt;&amp;ldquo;下降&amp;quot;一个指标，也是将&amp;quot;母&amp;quot;流形任意矢量投影到子流形切空间的映射。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

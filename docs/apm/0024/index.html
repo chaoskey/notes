@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="第八章 估值理论"><meta property="og:title" content="第八章 估值理论" />
+<meta property="og:description" content="离散随机模型
+考虑
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+  \(N&#43;1\)
+
+个资产，经历
+
+
+
+  \(T\)
+
+个时间单位的，关于价格的离散随机过程：
+
+
+
+
+前续
+当前
+后续
+
+
+
+
+时刻
+
+
+
+
+  \(t-1\)
+
+
+
+
+
+
+  \(t\)
+
+
+
+
+
+
+  \(t&#43;1\)
+
+
+
+
+状态
+
+
+
+
+  \(\phi(s,t)\)
+
+
+
+
+
+
+  \(s=\phi(z,t&#43;1)\)
+
+
+
+
+
+
+  \(z\)
+
+
+
+
+
+时刻
+
+
+
+  \(t\)
+
+的每个状态
+
+
+
+  \(s\)
+
+代表：在时刻
+
+
+
+  \(t\)
+
+的历史价格路径。如果给定时刻
+
+
+
+  \(t\)
+
+的状态
+
+
+
+  \(s\)
+
+，那么
+
+
+
+  \(s\)
+
+有确定的前续状态记为
+
+
+
+  \(\phi(s,t)\)
+
+，而
+
+
+
+  \(s\)
+
+的后续状态是不确定的，将
+
+
+
+  \(s\)
+
+所有可能的后续状态集记为
+
+
+
+  \(\Omega(s,t)\)
+
+；并且将时刻
+
+
+
+  \(t\)
+
+的所有状态集记为
+
+
+
+  \(\Phi(t)\)
+
+。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/apm/0024/" />
+<meta property="article:published_time" content="2018-05-26T20:20:35+08:00" />
+<meta property="article:modified_time" content="2018-05-26T20:20:35+08:00" />
+<title>第八章 估值理论 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a>
+<ul>
+<li><a href="/notes/docs/apm/0017/">第一章 绪论</a></li>
+<li><a href="/notes/docs/apm/0018/">第二章 一致预期收益率：资本资产定价模型</a></li>
+<li><a href="/notes/docs/apm/0019/">第三章 风险</a></li>
+<li><a href="/notes/docs/apm/0020/">第四章 超常收益率、业绩基准和附加值</a></li>
+<li><a href="/notes/docs/apm/0021/">第五章 残差风险和残差收益率：信息率</a></li>
+<li><a href="/notes/docs/apm/0022/">第六章 主动管理基本定律</a></li>
+<li><a href="/notes/docs/apm/0023/">第七章 预期收益率和套利定价理论</a></li>
+<li><a href="/notes/docs/apm/0024/"class=active>第八章 估值理论</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>第八章 估值理论</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#离散随机模型">离散随机模型</a></li>
+        <li><a href="#套利机会">套利机会</a></li>
+        <li><a href="#估值公式资产定价第一基本定律">估值公式：资产定价第一基本定律</a></li>
+        <li><a href="#风险调整期望风险中性期望">风险调整期望（风险中性期望）</a></li>
+        <li><a href="#确定现金流的估值">确定现金流的估值</a></li>
+        <li><a href="#关于风险中性期望的计算">关于风险中性期望的计算</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0025/">
+    下一页<br>1.1 机器学习：什么和为什么？
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0023/">
+      上一页<br>第七章 预期收益率和套利定价理论
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/apm/0024/">第八章 估值理论</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2018-05-26</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84">量化投资</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E6%8A%95%E8%B5%84">投资</a>
+      , 
+      <a href="/notes/tags/%E6%A8%A1%E5%9E%8B">模型</a>
+      , 
+      <a href="/notes/tags/%E5%A4%B4%E5%AF%B8">头寸</a>
+      , 
+      <a href="/notes/tags/%E5%A5%97%E5%88%A9">套利</a>
+      , 
+      <a href="/notes/tags/%E4%BC%B0%E5%80%BC">估值</a>
+      , 
+      <a href="/notes/tags/%E9%A3%8E%E9%99%A9">风险</a>
+      , 
+      <a href="/notes/tags/%E4%B8%AD%E6%80%A7">中性</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/apm/0024.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h2 id="离散随机模型">离散随机模型</h2>
+<p>考虑
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(N+1\)
+</span>
+个资产，经历
+
+
+<span class="katex">
+  \(T\)
+</span>
+个时间单位的，关于价格的离散随机过程：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">前续</th>
+<th style="text-align:center">当前</th>
+<th style="text-align:center">后续</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">时刻</td>
+<td style="text-align:center">
+
+
+<span class="katex">
+  \(t-1\)
+</span>
+</td>
+<td style="text-align:center">
+
+
+<span class="katex">
+  \(t\)
+</span>
+</td>
+<td style="text-align:center">
+
+
+<span class="katex">
+  \(t+1\)
+</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center">状态</td>
+<td style="text-align:center">
+
+
+<span class="katex">
+  \(\phi(s,t)\)
+</span>
+</td>
+<td style="text-align:center">
+
+
+<span class="katex">
+  \(s=\phi(z,t+1)\)
+</span>
+</td>
+<td style="text-align:center">
+
+
+<span class="katex">
+  \(z\)
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p>时刻
+
+
+<span class="katex">
+  \(t\)
+</span>
+的每个<strong>状态</strong>
+
+
+<span class="katex">
+  \(s\)
+</span>
+代表：在时刻
+
+
+<span class="katex">
+  \(t\)
+</span>
+的历史价格路径。如果给定时刻
+
+
+<span class="katex">
+  \(t\)
+</span>
+的状态
+
+
+<span class="katex">
+  \(s\)
+</span>
+，那么
+
+
+<span class="katex">
+  \(s\)
+</span>
+有确定的<strong>前续状态</strong>记为
+
+
+<span class="katex">
+  \(\phi(s,t)\)
+</span>
+，而
+
+
+<span class="katex">
+  \(s\)
+</span>
+的<strong>后续状态</strong>是不确定的，将
+
+
+<span class="katex">
+  \(s\)
+</span>
+所有可能的<strong>后续状态集</strong>记为
+
+
+<span class="katex">
+  \(\Omega(s,t)\)
+</span>
+；并且将时刻
+
+
+<span class="katex">
+  \(t\)
+</span>
+的<strong>所有状态集</strong>记为
+
+
+<span class="katex">
+  \(\Phi(t)\)
+</span>
+。</p>
+<p>假设我们知道时刻
+
+
+<span class="katex">
+  \(t\)
+</span>
+状态
+
+
+<span class="katex">
+  \(s\)
+</span>
+的发生概率为
+
+
+<span class="katex">
+  \(\pi(s,t)>0\)
+</span>
+。</p>
+<p>资产价格由
+
+
+<span class="katex">
+  \(\boldsymbol{p}(s,t)=(p_0(s,t),\dots,p_N(s,t))^T\)
+</span>
+表示，即在时刻
+
+
+<span class="katex">
+  \(t\)
+</span>
+状态
+
+
+<span class="katex">
+  \(s\)
+</span>
+下的价格向量。特别地，
+
+
+<span class="katex">
+  \(t=0\)
+</span>
+时刻仅有一种状态，不妨记
+
+
+<span class="katex">
+  \(\boldsymbol{p}(s,0)=\boldsymbol{p}(0)\)
+</span>
+。第0个资产是无风险资产：</p>
+
+
+
+<span class="katex">
+  \[
+p_0(z,t+1)=\left[1+i_F(s,t) \right]\ p_0(s,t) , \quad \forall z\in \Omega(s,t)
+\]
+</span>
+
+<p>引入与前几章<strong>头寸权重</strong>类似的概念－<strong>投资策略</strong>
+
+
+<span class="katex">
+  \(\boldsymbol{w}(s,t)=(w_0(s,t),\dots,w_N(s,t))^T\)
+</span>
+，表示资产的持仓数。进而可定义投资组合在时刻
+
+
+<span class="katex">
+  \(t\)
+</span>
+状态
+
+
+<span class="katex">
+  \(s\)
+</span>
+下的价值：</p>
+
+
+
+<span class="katex">
+  \[
+W(s,t)=\boldsymbol{w}^T(s,t)\ \boldsymbol{p}(s,t)
+\]
+</span>
+
+<p>强制投资策略满足<strong>自融资约束</strong>（组合价值在头寸调整前与调整后是一致的）：</p>
+
+
+
+<span class="katex">
+  \[
+W(s,t)=\boldsymbol{w}^T(s,t)\ \boldsymbol{p}(s,t)=\boldsymbol{w}^T(\phi(s,t),t-1)\ \boldsymbol{p}(s,t), \quad \forall t\ge1, \forall s\in \Phi(t)
+\]
+</span>
+
+<h2 id="套利机会">套利机会</h2>
+<p>我们称<strong>套利机会</strong>存在，如果存在满足如下性质的投资策略：</p>
+<p>１）所需初始资金非正，即
+
+
+<span class="katex">
+  \(W(0)\le0\)
+</span>
+：</p>
+<p>２）绝对不会亏钱，即
+
+
+<span class="katex">
+  \(W(s,T)\ge 0, \quad \forall s\in \Phi(T)\)
+</span>
+；</p>
+<p>３）至少在一种可能结果中赚钱，即
+
+
+<span class="katex">
+  \(\sum\limits_{s\in \Phi(T)}{W(s,T)}>0\)
+</span>
+。</p>
+<h2 id="估值公式资产定价第一基本定律">估值公式：资产定价第一基本定律</h2>
+<p>如果不存在套利机会，那么存在一个正值的估值乘子
+
+
+<span class="katex">
+  \(v(s,t)>0\)
+</span>
+，满足：</p>
+
+
+
+<span class="katex">
+  \[
+\frac{\boldsymbol{p}(0)}{p_0(0)}=\sum_{s\in \Phi(t)}{\pi(s,t) v(s,t) \frac{\boldsymbol{p}(s,t)}{p_0(s,t)}}
+\]
+</span>
+
+<p>证明有待细看（尚未完全看懂）。</p>
+<h2 id="风险调整期望风险中性期望">风险调整期望（风险中性期望）</h2>
+<p>第一基本定律的证明过程中构造出一个新的概率
+
+
+<span class="katex">
+  \(\pi(s,t)\)
+</span>
+，称作<strong>风险中性概率</strong>或<strong>鞅概率</strong>，进而构造出价值乘子
+
+
+<span class="katex">
+  \(v(s,t)\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+v(s,t)=\frac{\pi^*(s,t)}{\pi(s,t)}
+\]
+</span>
+
+<p>注意到第一基本定律具有数学期望的形式，进而可改写成：</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{p}(0) = p_0(0)\ \mathrm{E}\left\{v(t) \frac{\boldsymbol{p}(t)}{p_0(t)}\right\} = p_0(0)\ \mathrm{E}^*\left\{\frac{\boldsymbol{p}(t)}{p_0(t)}\right\}, \quad \forall t\ge 1
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(\mathrm{E}\)
+</span>
+是<strong>真实概率分布</strong>的数学期望，我称之为<strong>真实期望</strong>，而
+
+
+<span class="katex">
+  \(\mathrm{E}^*\)
+</span>
+则是<strong>风险中性概率分布</strong>的数学期望，在本书中被称作<strong>风险调整期望</strong>，我认为称作<strong>风险中性期望</strong>似乎更好。而前面的价值乘子
+
+
+<span class="katex">
+  \(v(s,t)\)
+</span>
+，就是一个Radon-Nikodyn导致。</p>
+<p>所有现代的估值理论，包括期权定价理论、CAPM和APT都使用了上述形式的估值公式。</p>
+<h2 id="确定现金流的估值">确定现金流的估值</h2>
+<p>资产定价第一基本定律，本质上一个递推公式：
+
+
+<span class="katex">
+  \(t=0\)
+</span>
+时刻的正确定价依赖于
+
+
+<span class="katex">
+  \(t>0\)
+</span>
+时刻的正确定价。特别地，对于一个确定的现金流，递推的结果就是：任何
+
+
+<span class="katex">
+  \(t\)
+</span>
+时刻的估值完全由相对
+
+
+<span class="katex">
+  \(t\)
+</span>
+时刻的未来剩余现金流确定。也就是对现金流的每个偿付套用估值公式然后求和，而特定
+
+
+<span class="katex">
+  \(t\)
+</span>
+时刻的确定现金偿付就是对应的定价，记作
+
+
+<span class="katex">
+  \(\mathrm{cf}(t)\)
+</span>
+，于是有：</p>
+
+
+
+<span class="katex">
+  \[
+p=p(0)=\sum_{t=1}^T{\mathrm{E}^*\{\frac{p(t)}{(1+i_F)^t}\}}=\sum_{t=1}^T{\frac{\mathrm{cf}(t)}{(1+i_F)^t}}
+\]
+</span>
+
+<p>注意：对应确定的现金流，任何时刻都只有一种状态，无论是真实概率还是风险中性概率都是1。</p>
+<h2 id="关于风险中性期望的计算">关于风险中性期望的计算</h2>
+<p>需要假定市场无套利，才能利用资产定价第一基本定律进行估值定价。</p>
+<p>如果要对某个资产进行定价，首先需要知道风险中性概率分布，进而才能进行风险中性期望的计算。</p>
+<p>如果有当前（
+
+
+<span class="katex">
+  \(t=0\)
+</span>
+时刻）的市场价格
+
+
+<span class="katex">
+  \(\boldsymbol{p}\)
+</span>
+（根据假设，必定已经合理定价）和未来（
+
+
+<span class="katex">
+  \(t>0\)
+</span>
+时刻）的可能状态
+
+
+<span class="katex">
+  \(s\in \Phi(t)\)
+</span>
+对应的价格
+
+
+<span class="katex">
+  \(\boldsymbol{p}(s,t)\)
+</span>
+，根据定价公式可以确定风险中性概率分布
+
+
+<span class="katex">
+  \(\pi^*(s,t)\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{p}=p_0\mathrm{E}^*\left\{\frac{\boldsymbol{p}(t)}{p_0(t)}\right\}=p_0\sum_{s\in \Phi(t)}{\pi^*(s,t) \frac{\boldsymbol{p}(s,t)}{p_0(s,t)}}
+\]
+</span>
+
+<p>如果考虑离散状态
+
+
+<span class="katex">
+  \(s=1,\dots,S\)
+</span>
+，上述关系可改写矩阵方程形式：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+&\dfrac{\boldsymbol{p}}{p_0}=\boldsymbol{D}\ \boldsymbol{\pi}^* \\
+其中，&\boldsymbol{D}=(D_{i,s})_{(N+1)\times S} \quad t时刻，第i资产第s状态"标准化价格" \\
+& \boldsymbol{\pi}^*=(\pi_1^*,\dots,\pi_S^*) \quad 第s状态发生的概率
+\end{aligned}
+\]
+</span>
+
+<p>矩阵方程的第0资产(无风险资产)对应的分量方程恰满足概率归一条件：</p>
+
+
+
+<span class="katex">
+  \[
+1=\sum_{s=1}^S{\pi_s^*}
+\]
+</span>
+
+<p>对于
+
+
+<span class="katex">
+  \(S\)
+</span>
+个状态，只需要
+
+
+<span class="katex">
+  \(S-1\)
+</span>
+个风险资产就可以确定风险中性概率分布。</p>
+<p>我们发现，无需知道真实概率分布（也无法知道），只要不存在套利机会，并且知道一部分基础资产的市场价格，那么就可唯一确定风险中性概率分布。</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0025/">
+    下一页<br>1.1 机器学习：什么和为什么？
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0023/">
+      上一页<br>第七章 预期收益率和套利定价理论
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/apm/0024.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/apm/0024.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#离散随机模型">离散随机模型</a></li>
+        <li><a href="#套利机会">套利机会</a></li>
+        <li><a href="#估值公式资产定价第一基本定律">估值公式：资产定价第一基本定律</a></li>
+        <li><a href="#风险调整期望风险中性期望">风险调整期望（风险中性期望）</a></li>
+        <li><a href="#确定现金流的估值">确定现金流的估值</a></li>
+        <li><a href="#关于风险中性期望的计算">关于风险中性期望的计算</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

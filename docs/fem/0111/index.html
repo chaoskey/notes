@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DOLFIN：C&#43;&#43;/Python有限元库》概述/接口【翻译】"><meta property="og:title" content="DOLFIN：C&#43;&#43;/Python有限元库》概述/接口【翻译】" />
+<meta property="og:description" content="II.实现》10.DOLFIN：C&#43;&#43;/Python有限元库》概述/接口
+【章节目录】
+DOLFIN是一个用作FEniCS主要用户接口的C&#43;&#43;/Python库。  在本章中，我们将回顾DOLFIN的功能。  我们还将详细讨论DOLFIN某些关键特性的实现。  有关DOLFIN的设计和实现的一般讨论，请参见Logg and Wells（2010）。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/0111/" />
+<meta property="article:published_time" content="2021-01-06T16:58:50+08:00" />
+<meta property="article:modified_time" content="2021-01-06T16:58:50+08:00" />
+<title>DOLFIN：C&#43;&#43;/Python有限元库》概述/接口【翻译】 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a>
+<ul>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E6%96%B9%E6%B3%95">第二章 有限元方法</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%B8%B8%E8%A7%81%E6%9C%89%E9%99%90%E5%85%83">第三章 常见有限元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8%E5%8F%82%E8%80%83%E5%8D%95%E5%85%83">第四章 构造通用参考单元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F">第五章 有限元变分形式</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%BB%84%E8%A3%85">第六章 有限元组装</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%AD%A3%E4%BA%A4%E8%A1%A8%E7%A4%BA">第七章 有限元变分形式的正交表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA">第八章 有限元变分形式的张量表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E7%9A%84%E7%A6%BB%E6%95%A3%E4%BC%98%E5%8C%96">第九章 有限元矩阵计算的离散优化</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E7%AB%A0-dolfincpython%E6%9C%89%E9%99%90%E5%85%83%E5%BA%93">第十章 DOLFIN：C++/Python有限元库</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-ufl%E6%9C%89%E9%99%90%E5%85%83%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80">第十七章 UFL：有限元形式语言</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-unicorn%E7%BB%9F%E4%B8%80%E7%9A%84%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6%E6%B1%82%E8%A7%A3%E5%99%A8">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>DOLFIN：C&#43;&#43;/Python有限元库》概述/接口【翻译】</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ii实现10dolfincpython有限元库概述接口">II.实现》10.DOLFIN：C++/Python有限元库》概述/接口</a>
+      <ul>
+        <li><a href="#101-概述">10·1 概述</a></li>
+        <li><a href="#102-用户接口">10·2 用户接口</a>
+          <ul>
+            <li><a href="#1021-c接口">10·2·1 C＋＋接口</a></li>
+            <li><a href="#1022-python接口">10·2·2 Python接口</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0112/">
+    下一页<br>DOLFIN：C&#43;&#43;/Python有限元库》线性代数【翻译】
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0110/">
+      上一页<br>有限元矩阵计算的离散优化【翻译】
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/fem/0111/">DOLFIN：C&#43;&#43;/Python有限元库》概述/接口【翻译】</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2021-01-06</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/FEniCS">FEniCS</a>
+      , 
+      <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95">有限元法</a>
+      , 
+      <a href="/notes/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">偏微分方程</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0111.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h1 id="ii实现10dolfincpython有限元库概述接口">II.实现》10.DOLFIN：C++/Python有限元库》概述/接口</h1>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93">章节目录</a>】</p>
+<p>DOLFIN是一个用作FEniCS主要用户接口的C++/Python库。  在本章中，我们将回顾DOLFIN的功能。  我们还将详细讨论DOLFIN某些关键特性的实现。  有关DOLFIN的设计和实现的一般讨论，请参见Logg and Wells（2010）。</p>
+<h2 id="101-概述">10·1 概述</h2>
+<p>FEniCS的大部分功能是DOLFIN一部分实现的。  它为基于偏微分方程的模型提供了一个问题解决环境，并实现了FEniCS功能的核心部分，包括计算网格和有限元组装的数据结构和算法。  为了提供简单一致的用户接口，DOLFIN封装了其他FEniCS组件和外部软件的功能，并处理了这些组件之间的通信。</p>
+<p>图10.1概述了FEniCS组件与外部软件之间的关系。  如图所示的软件地图显示了在C++或Python中在DOLFIN用户接口之上的用户应用实现。  用户应用也可以使用FEniCS Apps开发，FEniCS Apps是在FEniCS / DOLFIN之上实现的一组求解器。  DOLFIN本身既是用户接口，又是FEniCS的核心组件。  用户程序，FEniCS的其他核心组件和外部软件之间的所有通信都通过包装层进行路由，这些包装层是DOLFIN用户接口的一部分。  特别地，将UFL形式语言（第17章）表示的变分形式传递给形式编译器FFC（第11章）或SFC（第15章）以生成UFC代码（第16章），然后被DOLFIN用来组装线性系统。  对于FFC，代码生成取决于有限单元后端FIAT（第13章），即时编译实用程序Instant（第14章）和可选的优化后端FErari（第12章）。  最后，DOLFIN提供的绘图功能由Viper实现。  DOLFIN C++接口的用户可能会遇到这种通信，要求用户可通过在命令行上调用形式编译器从UFL形式文件显式地生成UFC代码。</p>
+<p>DOLFIN也依赖于外部软件来实现重要功能，例如线性代数库PETSc，Trilinos，uBLAS和MTL4，以及网格剖分库ParMETIS和SCOTCH（Pellegrini）。</p>
+<p><img src="/notes/images/0236.jpg" alt="0236.jpg"></p>
+<center>图10.1 DOLFIN充当FEniCS的主要用户接口，并处理FEniCS的各个组件与外部软件之间的通信。 实线表示依赖关系，虚线表示数据流。</center>
+<h2 id="102-用户接口">10·2 用户接口</h2>
+<p>DOLFIN提供了两个用户接口。  一个接口被实现为传统的C++库，另一个接口被实现为标准的Python模块。  这两个接口几乎相同，但是在某些情况下，C++或Python的特定语言功能要求接口有所不同。 尤其是，Python接口通过使用运行时（即时）代码生成，增加了自动化程度。  下面，我们对DOLFIN的两个用户接口的设计和实现进行评论。</p>
+<h3 id="1021-c接口">10·2·1 C＋＋接口</h3>
+<p>DOLFIN C++接口被设计为标准的面向对象的C++库。  它提供了诸如Matrix，Vector，Mesh，FiniteElement，FunctionSpace和Function的类，这些类为有限元计算的重要概念建模（请参见图10.2）。  它还提供了少量的自由函数（不是类的成员函数的函数），特别是组装和求解，可以与DOLFIN类对象一起使用以实现有限元求解器。  该接口被设计为尽可能简单，并且不影响通用性。  包装外部软件时，将提供一个简单且一致的用户接口，以允许快速开发求解器而无需处理外部库接口中的差异。  但是，DOLFIN旨在与外部软件灵活地进行交互。  特别是在DOLFIN为外部库提供包装器的情况下，例如Matrix和Vector类，它们包装了线性代数库（例如PETSc和Trilinos）中的数据结构，高级用户可以在必要时访问基础数据结构以便使用包装了外部库中的本地功能。</p>
+<p><img src="/notes/images/0237.jpg" alt="0237.jpg"></p>
+<center>图10.2 DOLFIN的一些最重要的组件和类的示意图。 箭头指示依赖性。 </center>
+<p>为了使用DOLFIN C++接口求解偏微分方程，用户必须使用UFL形式语言表达有限元变分问题。  就是通过将形式输入到单独的.ufl文件中并使用形式编译器编译这些文件以生成符合UFC的C++代码来完成的。  然后可以将生成的代码包含在DOLFIN C++程序中。  我们在10.3节中回到这个问题。</p>
+<p>为了在C++中使用DOLFIN，用户需要包括DOLFIN C++库中的一个或多个头文件。 在最简单的情况下，其中包括头文件dolfin.h，该头文件又包括所有其他DOLFIN头文件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;dolfin.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> dolfin;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="1022-python接口">10·2·2 Python接口</h3>
+<p>在过去的十年中，Python已成为快速开发用于科学计算的仿真代码的有吸引力的选择。  Python带来了高级脚本语言的优点，面向对象语言的优势以及大量用于数值计算的库。</p>
+<p>DOLFIN Python接口的大部分是使用SWIG从C++接口自动生成的（Beazley，1996； SWIG）。  由于C++和Python接口的功能都是作为DOLFIN C++库的一部分实现的，因此对于大多数操作，通过C++和Python接口，DOLFIN同样有效。</p>
+<p>DOLFIN Python接口提供了一些C++接口无法提供的功能。  特别是，将UFL形式语言无缝集成到Python接口中，并且在运行时自动处理代码生成。  要从Python使用DOLFIN，用户需要从DOLFIN Python模块导入功能。  在最简单的情况下，其中Python模块中的dolfin包括了所有功能：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+
+<span style="color:#f92672">from</span> dolfin <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</code></pre></div><p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93">章节目录</a>】</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0112/">
+    下一页<br>DOLFIN：C&#43;&#43;/Python有限元库》线性代数【翻译】
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0110/">
+      上一页<br>有限元矩阵计算的离散优化【翻译】
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0111.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/fem/0111.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ii实现10dolfincpython有限元库概述接口">II.实现》10.DOLFIN：C++/Python有限元库》概述/接口</a>
+      <ul>
+        <li><a href="#101-概述">10·1 概述</a></li>
+        <li><a href="#102-用户接口">10·2 用户接口</a>
+          <ul>
+            <li><a href="#1021-c接口">10·2·1 C＋＋接口</a></li>
+            <li><a href="#1022-python接口">10·2·2 Python接口</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="5.6 经验贝叶斯"><meta property="og:title" content="5.6 经验贝叶斯" />
+<meta property="og:description" content="返回本章目录
+在分层贝叶斯模型中，我们需要计算多个级别潜在变量的后验。 例如，在两级模型中，我们需要计算
+
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+  \[
+p(\boldsymbol{\eta}, \boldsymbol{\theta} | \mathcal{D}) \propto p(\mathcal{D} | \boldsymbol{\theta}) p(\boldsymbol{\theta} | \boldsymbol{\eta}) p(\boldsymbol{\eta})  \tag{5.78}
+\]
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0050/" />
+<meta property="article:published_time" content="2019-07-09T20:20:35+08:00" />
+<meta property="article:modified_time" content="2019-07-09T20:20:35+08:00" />
+<title>5.6 经验贝叶斯 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a>
+<ul>
+<li><a href="/notes/docs/mlapp/01introduction/">第一章 导论</a></li>
+<li><a href="/notes/docs/mlapp/02probability/">第二章 概率</a></li>
+<li><a href="/notes/docs/mlapp/03generative_models_for_discrete_data/">第三章 基于离散数据的生成式模型</a></li>
+<li><a href="/notes/docs/mlapp/04gaussian_models/">第四章 高斯模型</a></li>
+<li><a href="/notes/docs/mlapp/05bayesian_statistics/">第五章 贝叶斯统计</a></li>
+<li><a href="/notes/docs/mlapp/06frequentist_statistics/">第六章 频率派统计</a></li>
+<li><a href="/notes/docs/mlapp/07linear_regression/">第七章 线性回归</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>5.6 经验贝叶斯</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#561示例贝塔-二项模型">5.6.1示例：贝塔-二项模型</a></li>
+        <li><a href="#562-示例高斯-高斯模型">5.6.2 示例：高斯-高斯模型</a>
+          <ul>
+            <li><a href="#5621-示例预测棒球比分">5.6.2.1 示例：预测棒球比分</a></li>
+            <li><a href="#5622-估计超参数">5.6.2.2 估计超参数</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0051/">
+    下一页<br>5.7 贝叶斯决策理论
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0049/">
+      上一页<br>5.5 分层贝叶斯
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/mlapp/05bayesian_statistics/0050/">5.6 经验贝叶斯</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2019-07-09</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">机器学习</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E6%A8%A1%E5%9E%8B">模型</a>
+      , 
+      <a href="/notes/tags/%E9%A2%84%E6%B5%8B">预测</a>
+      , 
+      <a href="/notes/tags/%E8%B6%85%E5%8F%82%E6%95%B0">超参数</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/05bayesian_statistics/0050.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<p><a href="/notes/docs/mlapp/05bayesian_statistics/"><strong>返回本章目录</strong></a></p>
+<p>在分层贝叶斯模型中，我们需要计算多个级别潜在变量的后验。 例如，在两级模型中，我们需要计算</p>
+
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \[
+p(\boldsymbol{\eta}, \boldsymbol{\theta} | \mathcal{D}) \propto p(\mathcal{D} | \boldsymbol{\theta}) p(\boldsymbol{\theta} | \boldsymbol{\eta}) p(\boldsymbol{\eta})  \tag{5.78}
+\]
+</span>
+
+<p>在某些情况下，我们可以分析地将
+
+
+<span class="katex">
+  \(\boldsymbol{\theta}\)
+</span>
+边缘化; 每个分量只是计算
+
+
+<span class="katex">
+  \(p(\boldsymbol{\eta} | \mathcal{D})\)
+</span>
+的简单问题。</p>
+<p>作为计算捷径，我们可以用点估计近似超参数的后验，
+
+
+<span class="katex">
+  \(p(\boldsymbol{\eta} | \mathcal{D}) \approx \delta_{\hat{\boldsymbol{\eta}}} (\boldsymbol{\eta})\)
+</span>
+，其中
+
+
+<span class="katex">
+  \(\hat{\boldsymbol{\eta}}= {\rm argmax} \ p(\boldsymbol{\eta} | \mathcal{D})\)
+</span>
+。 由于
+
+
+<span class="katex">
+  \(\boldsymbol{\eta}\)
+</span>
+在维数上通常远小于
+
+
+<span class="katex">
+  \(\boldsymbol{\theta}\)
+</span>
+，因此不太容易过拟合，因此我们可以安全地在
+
+
+<span class="katex">
+  \(\boldsymbol{\eta}\)
+</span>
+上使用均匀的先验。 然后估计变成了</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\boldsymbol{\eta}}= {\rm argmax}  \ p(\boldsymbol{\eta} | \mathcal{D}) = {\rm argmax}  \ \left[\int {p(\mathcal{D}|\boldsymbol{\theta}) p(\boldsymbol{\theta} | \boldsymbol{\eta}) d \boldsymbol{\theta}} \right] \tag{5.79}
+\]
+</span>
+
+<p>括号内的量是边际或积分拟然，有时称为证据。 这种整体方法称为<strong>经验贝叶斯</strong>（EB）或<strong>II型最大似然</strong>。 在机器学习中，它有时被称为<strong>证据程序</strong>。</p>
+<p>经验贝叶斯违反了先验应该独立于数据选择的原则。 然而，我们可以将其视为分层贝叶斯模型中推理的计算上便宜的近似，正如我们将MAP估计视为一级模型
+
+
+<span class="katex">
+  \(\boldsymbol{\theta} \to \mathcal{D}\)
+</span>
+中的推理近似。 事实上，我们可以构建一个层次结构，然后执行积分，“更多的贝叶斯”如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">最大拟然</td>
+<td style="text-align:center">
+
+
+<span class="katex">
+  \(\hat{\boldsymbol{\theta}}={\rm argmax}_{\boldsymbol{\theta}} \  p(\mathcal{D} \| \boldsymbol{\theta})\)
+</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center">MAP估计</td>
+<td style="text-align:center">
+
+
+<span class="katex">
+  \(\hat{\boldsymbol{\theta}}={\rm argmax}_{\boldsymbol{\theta}} \  p(\mathcal{D} \| \boldsymbol{\theta}) p(\boldsymbol{\theta} \| \boldsymbol{\eta})\)
+</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center">ML-II(经验贝叶斯)</td>
+<td style="text-align:center">
+
+
+<span class="katex">
+  \(\hat{\boldsymbol{\eta}}={\rm argmax}_{\boldsymbol{\eta}}  \int {p(\mathcal{D} \| \boldsymbol{\theta}) p(\boldsymbol{\theta} \| \boldsymbol{\eta})d \boldsymbol{\theta}}= {\rm argmax}_{\boldsymbol{\eta}} \  p(\mathcal{D} \| \boldsymbol{\eta})\)
+</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center">MAP-II</td>
+<td style="text-align:center">
+
+
+<span class="katex">
+  \(\hat{\boldsymbol{\eta}}={\rm argmax}_{\boldsymbol{\eta}}  \int {p(\mathcal{D} \| \boldsymbol{\theta}) p(\boldsymbol{\theta} \| \boldsymbol{\eta}) p(\boldsymbol{\eta})d \boldsymbol{\theta}}= {\rm argmax}_{\boldsymbol{\eta}} \  p(\mathcal{D} \| \boldsymbol{\eta})p(\boldsymbol{\eta})\)
+</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:center">完全贝叶斯</td>
+<td style="text-align:center">
+
+
+<span class="katex">
+  \(p(\boldsymbol{\eta}, \boldsymbol{\theta} \| \mathcal{D}) \propto p(\mathcal{D} \| \boldsymbol{\theta}) p(\boldsymbol{\theta} \| \boldsymbol{\eta}) p(\boldsymbol{\eta})\)
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p>注意，EB可以显示具有良好的频率属性（参见例如（Carlin和Louis 1996; Efron 2010）），因此它被非贝叶斯主义者广泛使用。 例如，在6.3.3.2节中讨论的流行的James-Stein估计可以使用EB导出。</p>
+<h2 id="561示例贝塔-二项模型">5.6.1示例：贝塔-二项模型</h2>
+<p>让我们回到癌症发病率模型。 我们可以分析地积分
+
+
+<span class="katex">
+  \(\theta_i\)
+</span>
+，并直接写下边际拟然：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+p(\mathcal{D} | a,b) = & \prod_i{\int{{\rm Bin}(x_i|N_i,\theta_i){\rm Beta}(\theta_i|a,b)d\theta_i}} \\
+\quad = & \prod_i{\dfrac{B(a+x_i,b+N_i-x_i)}{B(a,b)}} 
+\end{aligned} \tag{5.80-81}
+\]
+</span>
+
+<p>在（Minka 2000e）中讨论了使这个关于a和b最大化的各种方法。</p>
+<p>估计了a和b之后，我们可以使用共轭分析以常规方式插入超参数来计算后验
+
+
+<span class="katex">
+  \(p(\theta_i | \hat{a},\hat{b},\mathcal{D})\)
+</span>
+。 最终结果是每个
+
+
+<span class="katex">
+  \(\theta_i\)
+</span>
+的后验均值是依赖于
+
+
+<span class="katex">
+  \(\boldsymbol{\eta}=(a,b)\)
+</span>
+的局部MLE和先验均值的加权平均; 但由于
+
+
+<span class="katex">
+  \(\boldsymbol{\eta}\)
+</span>
+是根据所有数据估算的，因此每个
+
+
+<span class="katex">
+  \(\theta_i\)
+</span>
+都受到所有数据的影响。</p>
+<h2 id="562-示例高斯-高斯模型">5.6.2 示例：高斯-高斯模型</h2>
+<p>我们现在研究另一个类似于癌症率例子的例子，除了数据是实值的。 我们将使用高斯似然和高斯先验。 这将允许我们分析地写下解决方案。</p>
+<p>特别是，假设我们有来自多个相关组的数据。 例如，
+
+
+<span class="katex">
+  \(x_{ij}\)
+</span>
+可以是学校
+
+
+<span class="katex">
+  \(j\)
+</span>
+中的学生
+
+
+<span class="katex">
+  \(i\)
+</span>
+的考试分数，
+
+
+<span class="katex">
+  \(j = 1:D\)
+</span>
+且
+
+
+<span class="katex">
+  \(i = 1:N_j\)
+</span>
+。 我们想要估算每所学校的平均分数
+
+
+<span class="katex">
+  \(\theta_j\)
+</span>
+。 然而，由于样本大小
+
+
+<span class="katex">
+  \(N_j\)
+</span>
+对于某些学校来说可能很小，我们可以通过使用分层贝叶斯模型来规范化问题，其中我们假设
+
+
+<span class="katex">
+  \(\theta_j\)
+</span>
+来自共同的先验
+
+
+<span class="katex">
+  \(N(\mu，\tau^2)\)
+</span>
+。</p>
+<p>联合分布具有以下形式：</p>
+
+
+
+<span class="katex">
+  \[
+p(\boldsymbol{\theta},\mathcal{D}|\boldsymbol{\eta}, \sigma^2)= \prod_{j=1}^D{\mathcal{N}(\theta_j|\mu,\tau^2)\prod_{i=1}^{N_j}{\mathcal{N}(x_{ij}|\theta_j,\sigma^2)}} \tag{5.82}
+\]
+</span>
+
+<p>我们假设
+
+
+<span class="katex">
+  \(\sigma^2\)
+</span>
+是已知的简单的。 （我们在练习24.4中放松了这个假设。）我们解释如何估计下面的
+
+
+<span class="katex">
+  \(\boldsymbol{\eta}\)
+</span>
+。 一旦我们估计了
+
+
+<span class="katex">
+  \(\boldsymbol{\eta}=(\mu,\tau)\)
+</span>
+，我们就可以计算
+
+
+<span class="katex">
+  \(\theta_j\)
+</span>
+上的后验。 要做到这一点，以下面的形式简化重写联合分布，利用值为
+
+
+<span class="katex">
+  \(x_{ij}\)
+</span>
+和方差
+
+
+<span class="katex">
+  \(\sigma^2\)
+</span>
+的
+
+
+<span class="katex">
+  \(N_j\)
+</span>
+个高斯测量相当于值为
+
+
+<span class="katex">
+  \(\bar{x}_j \overset{\Delta}{=}\frac{1}{N_j}\sum_{i=1}^{N_j}{x_{ij}}\)
+</span>
+方差为
+
+
+<span class="katex">
+  \(\sigma_j^2\overset{\Delta}{=}\sigma^2/N_j\)
+</span>
+的一次测量的事实。 这会产生</p>
+
+
+
+<span class="katex">
+  \[
+p(\boldsymbol{\theta},\mathcal{D}|\hat{\boldsymbol{\eta}}, \sigma^2)= \prod_{j=1}^D{\mathcal{N}(\theta_j|\hat{\mu},\hat{\tau}^2)\mathcal{N}(\bar{x}_j|\theta_j,\sigma_j^2)} \tag{5.83}
+\]
+</span>
+
+<p>从这一点可以看出，依据第4.4.1节的结果, 后验可由下式给出</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+p(\theta_j|\mathcal{D},\hat{\mu},\hat{\tau}^2) = & \mathcal{N}(\theta_j|\hat{B}_j \hat{\mu} + (1-\hat{B}_j)\bar{x}_j,(1-\hat{B}_j)\sigma_j^2)  \\
+\hat{B}_j \overset{\Delta}{=} & \dfrac{\sigma_j^2}{
+\sigma_j^2+\hat{\tau}^2} 
+\end{aligned} \tag{5.84-85}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(\hat{\mu}= \bar{x}\)
+</span>
+和
+
+
+<span class="katex">
+  \(\hat{\tau}^2\)
+</span>
+将在下面定义。</p>
+<p>量
+
+
+<span class="katex">
+  \(0 \le \hat{B}_j \le 1\)
+</span>
+控制朝向总体平均值
+
+
+<span class="katex">
+  \(\mu\)
+</span>
+的<strong>收缩</strong>程度。 如果数据对于组
+
+
+<span class="katex">
+  \(j\)
+</span>
+是可靠的（例如，因为样本大小
+
+
+<span class="katex">
+  \(N_j\)
+</span>
+很大），则
+
+
+<span class="katex">
+  \(\sigma_j^2\)
+</span>
+相对于
+
+
+<span class="katex">
+  \(\tau^2\)
+</span>
+将是小的; 因此
+
+
+<span class="katex">
+  \(\hat{B}_j\)
+</span>
+会很小，当估算
+
+
+<span class="katex">
+  \(\theta_j\)
+</span>
+时我们会更加重视
+
+
+<span class="katex">
+  \(\bar{x}_j\)
+</span>
+。 然而，样本量较小的组将更加规范化（缩小到整体平均
+
+
+<span class="katex">
+  \(\mu\)
+</span>
+）。 我们将在下面看到一个例子。</p>
+<p>如果所有组
+
+
+<span class="katex">
+  \(j\)
+</span>
+的
+
+
+<span class="katex">
+  \(\sigma_j=\sigma\)
+</span>
+，则后验均值变为</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\theta}_j=\hat{B} \bar{x} + (1-\hat{B})\bar{x}_j = \bar{x} +  (1-\hat{B})(\bar{x}_j-\bar{x}) \tag{5.86}
+\]
+</span>
+
+<p>这与第6.3.3.2节中讨论的James Stein估计完全相同。</p>
+<h3 id="5621-示例预测棒球比分">5.6.2.1 示例：预测棒球比分</h3>
+<p><img src="" alt="0081.jpg"></p>
+<blockquote>
+<p>图5.12 （a）MLE参数（上）和相应的缩减估计（下）。 （b）我们绘制了5个玩家的真实参数（蓝色），后验平均估计值（绿色）和MLE（红色）。 由_shrinkageDemoBaseball_生成的图。</p>
+</blockquote>
+<p>我们现在给出一个应用于棒球击球平均值的收缩的例子，来自（Efron和Morris 1975）。 我们观察了在第一场T = 45场比赛中D = 18名球员的命中数。 命中数
+
+
+<span class="katex">
+  \(b_i\)
+</span>
+， 我们假设
+
+
+<span class="katex">
+  \(b_j \sim {\rm Bin}(T，\theta_j)\)
+</span>
+，其中
+
+
+<span class="katex">
+  \(\theta_j\)
+</span>
+是球员
+
+
+<span class="katex">
+  \(j\)
+</span>
+的“真实”击球平均值。 目标是估计
+
+
+<span class="katex">
+  \(\theta_j\)
+</span>
+。 MLE当然是
+
+
+<span class="katex">
+  \(\hat{\theta}_j= x_j\)
+</span>
+，其中
+
+
+<span class="katex">
+  \(x_j = b_j / T\)
+</span>
+是经验击球均值。 但是，我们可以使用EB方法做得更好。</p>
+<p>为了应用上述高斯收缩方法，我们要求似然是高斯
+
+
+<span class="katex">
+  \(x_j \sim \mathcal{N}(\theta_j,\sigma^2)\)
+</span>
+的(已知
+
+
+<span class="katex">
+  \(\sigma^2\)
+</span>
+)。 （因为我们假设
+
+
+<span class="katex">
+  \(N_j = 1\)
+</span>
+，所以我们删除了
+
+
+<span class="katex">
+  \(i\)
+</span>
+下标，因为
+
+
+<span class="katex">
+  \(x_j\)
+</span>
+已经代表了球员
+
+
+<span class="katex">
+  \(j\)
+</span>
+的平均值。）但是，在这个例子中我们有二项似然。 虽然这具有正确的均值
+
+
+<span class="katex">
+  \(\mathbb{E} [x_j] =\theta_j\)
+</span>
+，但方差不是常数：</p>
+
+
+
+<span class="katex">
+  \[
+{\rm var}[x_j] = \dfrac{1}{T} {\rm var}[b_j]=\dfrac{T\theta_j(1-\theta_j)}{T^2}=\dfrac{\theta_j(1-\theta_j)}{T} \tag{5.87}
+\]
+</span>
+
+<p>因此，让我们将<strong>方差稳定变换</strong>(<strong>variance stabilizing transform</strong>) 应用于
+
+
+<span class="katex">
+  \(x_j\)
+</span>
+以更好地匹配高斯假设：</p>
+
+
+
+<span class="katex">
+  \[
+y_j \to f(y_j)=\sqrt{T} \arcsin (2y_j-1) \tag{5.88}
+\]
+</span>
+
+<p>现在我们有近似
+
+
+<span class="katex">
+  \(y_j \sim \mathcal{N}(f(\theta_j),1)= \mathcal{N}(\mu_j,1)\)
+</span>
+。 我们使用高斯收缩来估计
+
+
+<span class="katex">
+  \(\mu_j\)
+</span>
+，利用了公式5.86并取
+
+
+<span class="katex">
+  \(\sigma^2= 1\)
+</span>
+，然后我们作一个逆变换</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\theta}_j=0.5(\sin(\hat{\mu}_j/\sqrt{T})+1) \tag{5.89}
+\]
+</span>
+
+<p>结果如图5.12（a-b）所示。 在（a）中，我们绘制了MLE
+
+
+<span class="katex">
+  \(\hat{\theta}_j\)
+</span>
+和后验均值
+
+
+<span class="katex">
+  \(\bar{\theta}_j\)
+</span>
+。我们看到所有估计都缩小到全局均值0.265。 在（b）中，我们绘制真值
+
+
+<span class="katex">
+  \(\theta_j\)
+</span>
+，MLE
+
+
+<span class="katex">
+  \(\hat{\theta}_j\)
+</span>
+和后验均值
+
+
+<span class="katex">
+  \(\bar{\theta}_j\)
+</span>
+。 （
+
+
+<span class="katex">
+  \(\theta_j\)
+</span>
+的“真实”值是从大量独立游戏中估算出来的。）我们看到，平均而言，收缩估计比MLE更接近真实参数。 具体而言，对定义为
+
+
+<span class="katex">
+  \({\rm MSE} = \dfrac{1}{N}\sum_{j=1}^D{(\theta_j-\bar{\theta})^2}\)
+</span>
+的均方误差而言, 使用收缩估计
+
+
+<span class="katex">
+  \(\bar{\theta}_j\)
+</span>
+比使用MLE的
+
+
+<span class="katex">
+  \(\hat{\theta}_j\)
+</span>
+小三倍。</p>
+<h3 id="5622-估计超参数">5.6.2.2 估计超参数</h3>
+<p>在本节中，我们给出了估计
+
+
+<span class="katex">
+  \(\boldsymbol{\eta}\)
+</span>
+的算法。 首先假设
+
+
+<span class="katex">
+  \(\sigma_j^2=\sigma^2\)
+</span>
+对于所有组都是相同的。 在这种情况下，我们可以推导出EB的封闭式估计值，正如我们现在所示。 从公式4.126，我们有</p>
+
+
+
+<span class="katex">
+  \[
+p(\bar{x}_j|\mu,\tau^2,\sigma^2) = \int{\mathcal{N}(\bar(x)_j|\theta_j,\sigma^2)\mathcal{N}(\theta_j|\mu,\tau^2)d\theta_j} = \mathcal{N}(\bar{x}_j | \mu,\tau^2+\sigma^2) \tag{5.90}
+\]
+</span>
+
+<p>因此，边际拟然是</p>
+
+
+
+<span class="katex">
+  \[
+p(\mathcal{D}|\mu,\tau^2,\sigma^2) = \prod_{j=1}^D {\mathcal{N}(\bar{x}_j | \mu,\tau^2+\sigma^2)} \tag{5.91}
+\]
+</span>
+
+<p>因此，我们可以使用通常的MLE估计高斯参数。 对于
+
+
+<span class="katex">
+  \(\mu\)
+</span>
+，我们有</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\mu} = \dfrac{1}{D}\sum_{j=1}^D{\bar{x}_j} = \bar{x} \tag{5.92}
+\]
+</span>
+
+<p>这是整体均值。</p>
+<p>对于方差，我们可以使用矩匹配（相当于高斯的MLE）：我们简单地将模型方差等同于经验方差：</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\tau}^2 + \sigma^2 = \dfrac{1}{D} \sum_{j=1}^D{(\bar{x}_j-\bar{x})^2} \overset{\Delta}{=} s^2 \tag{5.93}
+\]
+</span>
+
+<p>所以
+
+
+<span class="katex">
+  \(\hat{\tau}^2= s^2 - \sigma^2\)
+</span>
+。 由于我们知道
+
+
+<span class="katex">
+  \(\tau^2\)
+</span>
+必须是正数，因此通常使用以下修订估算：</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\tau}^2=\max\{0,s^2-\sigma^2\}=(s^2-\sigma^2)_+ \tag{5.94}
+\]
+</span>
+
+<p>因此收缩因子是</p>
+
+
+
+<span class="katex">
+  \[
+\hat{B}=\dfrac{\sigma^2}{\sigma^2+\hat{\tau}^2} = \dfrac{\sigma^2}{\sigma^2+(s^2-\sigma^2)_+}   \tag{5.95}
+\]
+</span>
+
+<p>在
+
+
+<span class="katex">
+  \(\sigma_j^2\)
+</span>
+不同的情况下，我们不能再以封闭形式得出解。 练习11.13讨论了如何使用EM算法导出EB估计，练习24.4讨论了如何在此层次模型中执行完全贝叶斯推理。</p>
+<p><a href="/notes/docs/mlapp/05bayesian_statistics/"><strong>返回本章目录</strong></a></p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0051/">
+    下一页<br>5.7 贝叶斯决策理论
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0049/">
+      上一页<br>5.5 分层贝叶斯
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/05bayesian_statistics/0050.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/mlapp/05bayesian_statistics/0050.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#561示例贝塔-二项模型">5.6.1示例：贝塔-二项模型</a></li>
+        <li><a href="#562-示例高斯-高斯模型">5.6.2 示例：高斯-高斯模型</a>
+          <ul>
+            <li><a href="#5621-示例预测棒球比分">5.6.2.1 示例：预测棒球比分</a></li>
+            <li><a href="#5622-估计超参数">5.6.2.2 估计超参数</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

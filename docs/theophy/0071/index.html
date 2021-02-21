@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="流形视角下的牛顿力学(杀鸡用牛刀)"><meta property="og:title" content="流形视角下的牛顿力学(杀鸡用牛刀)" />
+<meta property="og:description" content="
+本文真是杀鸡用牛刀，但好处是彻底厘清了如何用对称性构造拉格朗日量的一般套路。
+本文通过强算Killing方程的笨方法，来确定伽利略时空，特别是欧氏空间的完整对称性，进而得到无穷小生成元（变换），最后用这组无穷小变换在拉格朗日量上的不变性来确定拉格朗日量。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/theophy/0071/" />
+<meta property="article:published_time" content="2020-02-25T08:19:37+08:00" />
+<meta property="article:modified_time" content="2020-02-25T08:19:37+08:00" />
+<title>流形视角下的牛顿力学(杀鸡用牛刀) | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a>
+<ul>
+<li><a href="/notes/docs/theophy/0015/">流形上的拉格朗日力学</a></li>
+<li><a href="/notes/docs/theophy/0071/"class=active>流形视角下的牛顿力学</a></li>
+<li><a href="/notes/docs/theophy/0072/">对称性与守恒律（Noether定理）</a></li>
+<li><a href="/notes/docs/theophy/0075/">辛流形上的哈密顿力学</a></li>
+<li><a href="/notes/docs/theophy/0080/">闵氏时空对称性的三种观点</a></li>
+<li><a href="/notes/docs/theophy/0081/">场及其对称性</a></li>
+<li><a href="/notes/docs/theophy/0086/">庞加莱群的单粒子态的表示</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>流形视角下的牛顿力学(杀鸡用牛刀)</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#伽利略时空">伽利略时空</a></li>
+        <li><a href="#欧氏空间的killing矢量场">欧氏空间的Killing矢量场</a></li>
+        <li><a href="#由伽利略时空对称性确定自由粒子的拉格朗日量">由伽利略时空对称性确定自由粒子的拉格朗日量</a></li>
+        <li><a href="#质点系的拉格朗日量">质点系的拉格朗日量</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/theophy/0072/">
+    下一页<br>对称性与守恒律（Noether定理）
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0070/">
+      上一页<br>微分几何中的计算（Julia版 计划长期维护）
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/theophy/0071/">流形视角下的牛顿力学(杀鸡用牛刀)</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-02-25</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%90%86%E8%AE%BA%E7%89%A9%E7%90%86">理论物理</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E6%B5%81%E5%BD%A2">流形</a>
+      , 
+      <a href="/notes/tags/%E5%AF%B9%E7%A7%B0%E6%80%A7">对称性</a>
+      , 
+      <a href="/notes/tags/%E4%BC%BD%E5%88%A9%E7%95%A5">伽利略</a>
+      , 
+      <a href="/notes/tags/killing">killing</a>
+      , 
+      <a href="/notes/tags/%E7%89%9B%E9%A1%BF%E5%8A%9B%E5%AD%A6">牛顿力学</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/theophy/0071.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<blockquote>
+<p>本文真是杀鸡用牛刀，但好处是彻底厘清了如何用对称性构造拉格朗日量的一般套路。</p>
+<p>本文通过强算Killing方程的笨方法，来确定伽利略时空，特别是欧氏空间的完整对称性，进而得到无穷小生成元（变换），最后用这组无穷小变换在拉格朗日量上的不变性来确定拉格朗日量。</p>
+</blockquote>
+<h2 id="伽利略时空">伽利略时空</h2>
+<p><code>伽利略时空流形</code>
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(M\)
+</span>
+的时间和空间是绝对分离的：
+
+
+<span class="katex">
+  \(M=\mathbb{R}^3\times \mathbb{R}\)
+</span>
+。</p>
+<p><code>伽利略时空李群</code>(10维)：
+
+
+<span class="katex">
+  \(G=\mathrm{SO}(3)\times T(3)\times T(4)\)
+</span>
+</p>
+<ul>
+<li>空间平移群
+
+
+<span class="katex">
+  \(T(3)\)
+</span>
+：
+
+
+<span class="katex">
+  \(x^\mu\to x^\mu+b^\mu\)
+</span>
+</li>
+<li>空间旋转群
+
+
+<span class="katex">
+  \(\mathrm{SO}(3)\)
+</span>
+： 
+
+
+<span class="katex">
+  \(x^\mu \to A^\mu_{\ \ \upsilon} x^\upsilon,\quad A^TA=I\)
+</span>
+</li>
+<li>时间平移群
+
+
+<span class="katex">
+  \(\mathbb{R}\)
+</span>
+： 
+
+
+<span class="katex">
+  \(t\to t+c\)
+</span>
+</li>
+<li>伽利略惯性平移群
+
+
+<span class="katex">
+  \(\mathbb{R}^3\)
+</span>
+： 
+
+
+<span class="katex">
+  \(x^\mu \to x^\mu +v^\mu t\)
+</span>
+</li>
+</ul>
+<p>
+
+
+<span class="katex">
+  \(M\)
+</span>
+的空间部分（欧氏空间）
+
+
+<span class="katex">
+  \(\mathbb{R}^3\)
+</span>
+的度规（线元表示）</p>
+
+
+
+<span class="katex">
+  \[
+ds^2=(dx)^2+(dy)^2+(dz)^2
+\]
+</span>
+
+<p>伽利略时空
+
+
+<span class="katex">
+  \(M\)
+</span>
+在李群
+
+
+<span class="katex">
+  \(G\)
+</span>
+的作用下是<code>欧氏等度规李变换</code>，即<code>欧氏线元</code>是不变量。</p>
+<h2 id="欧氏空间的killing矢量场">欧氏空间的Killing矢量场</h2>
+<p>由于伽利略时空的时间和空间是绝对分离的，同时与时间相关的对称性都是平移，所以，有必要先单独分析三维欧氏空间的对称性。</p>
+<p>可通过求解Killing方程确定欧氏空间的平移群
+
+
+<span class="katex">
+  \(T(3)\)
+</span>
+和转动群
+
+
+<span class="katex">
+  \(\mathrm{SO}(3)\)
+</span>
+。合起来对应Killing矢量的6个基底所张成的空间。 下面给出<code>Julia</code>代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#66d9ef">using</span> SymPy
+
+<span style="color:#75715e"># 选择欧氏坐标系</span>
+<span style="color:#a6e22e">@vars</span> x y z real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+X <span style="color:#f92672">=</span> [x,y,z]
+
+<span style="color:#75715e"># 待求的Killing矢量场的分量</span>
+ξ <span style="color:#f92672">=</span> SymFunction(<span style="color:#e6db74">&#34;ξ^1,ξ^2,ξ^3&#34;</span>)
+
+<span style="color:#75715e"># 欧氏度规及逆度规</span>
+g <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>eye(<span style="color:#ae81ff">3</span>) <span style="color:#f92672">.*</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>] 
+gi <span style="color:#f92672">=</span> inv(g)
+
+<span style="color:#75715e"># 根据度规计算克氏符</span>
+Γ <span style="color:#f92672">=</span> sum([(<span style="color:#ae81ff">1</span><span style="color:#f92672">//</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">*</span>gi[σ,ρ]<span style="color:#f92672">*</span>(diff(g[μ,ρ],X[υ])<span style="color:#f92672">+</span>
+            diff(g[υ,ρ],X[μ])<span style="color:#f92672">-</span>diff(g[μ,υ],X[ρ])) 
+        <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>,υ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span> ,σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>] 
+    <span style="color:#66d9ef">for</span> ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>)
+
+<span style="color:#75715e"># 列出所有独立Killing方程组</span>
+eqs <span style="color:#f92672">=</span> [(<span style="color:#ae81ff">0</span>⩵diff(sum(g[υ,ρ]<span style="color:#f92672">*</span>ξ[ρ](x,y,z) <span style="color:#66d9ef">for</span> ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>),X[μ])<span style="color:#f92672">+</span>
+        diff(sum(g[μ,ρ]<span style="color:#f92672">*</span>ξ[ρ](x,y,z) <span style="color:#66d9ef">for</span> ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>),X[υ])<span style="color:#f92672">-</span>
+        <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>sum(Γ[μ,υ,σ]<span style="color:#f92672">*</span>sum(g[σ,ρ]<span style="color:#f92672">*</span>ξ[ρ](x,y,z) <span style="color:#66d9ef">for</span> ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>) 
+            <span style="color:#66d9ef">for</span> σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>)) 
+    <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>,υ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>  <span style="color:#66d9ef">if</span> μ <span style="color:#f92672">≤</span> υ ]
+</code></pre></div><p><img src="/notes/images/0115.jpg" alt="0115.jpg"></p>
+<p>根据方程1、3、6，可设：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\xi(x,y,z)&=\Big(\xi^1(x,y,z),\xi^2(x,y,z),\xi^3(x,y,z)\Big)^T\\&=\Big(f(y,z),g(x,z),h(x,y)\Big)^T\end{aligned}
+\]
+</span>
+
+<p>带入方程2、4、5，并分离变量得：</p>
+
+
+
+<span class="katex">
+  \[
+\frac{\partial f(y,z)}{\partial y}=-\frac{\partial g(x,z)}{\partial x}=C_1(z)\\ \frac{\partial f(y,z)}{\partial z}=-\frac{\partial h(x,y)}{\partial x}=C_2(y)\\ \frac{\partial g(x,z)}{\partial z}=-\frac{\partial h(x,y)}{\partial y}=C_3(x)
+\]
+</span>
+
+<p>当
+
+
+<span class="katex">
+  \(C_1(z)=C_2(y)=C_3(x)=0\)
+</span>
+时，有三个平移特解：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}(\xi_4)^a=\left(\frac{\partial}{\partial x}\right)^a \overset{\Delta}{=}(e_1)^a\quad \xi_4=(1,0,0)^T\\ (\xi_5)^a=\left(\frac{\partial}{\partial y}\right)^a\overset{\Delta}{=}(e_2)^a \quad \xi_5=(0,1,0)^T\\ (\xi_6)^a=\left(\frac{\partial}{\partial z}\right)^a\overset{\Delta}{=}(e_3)^a\quad \xi_6=(0,0,1)^T\end{aligned}}
+\]
+</span>
+
+<p>当
+
+
+<span class="katex">
+  \(C_1(z)=C_2(y)=0,C_3(x)\ne0\)
+</span>
+时，有一个沿
+
+
+<span class="katex">
+  \(x\)
+</span>
+轴平移特解（前面已有），一个绕
+
+
+<span class="katex">
+  \(x\)
+</span>
+轴转动特解（新解）：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{(\xi_1)^a=z\left(\frac{\partial}{\partial y}\right)^a-y\left(\frac{\partial}{\partial z}\right)^a\quad \xi_1=(0,z,-y)^T}
+\]
+</span>
+
+<p>当
+
+
+<span class="katex">
+  \(C_1(z)=0,C_2(y)\ne 0,C_3(x)=0\)
+</span>
+时，有一个沿
+
+
+<span class="katex">
+  \(y\)
+</span>
+轴平移特解（前面已有），一个绕
+
+
+<span class="katex">
+  \(y\)
+</span>
+轴转动特解（新解）：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{(\xi_2)^a=-z\left(\frac{\partial}{\partial x}\right)^a+x\left(\frac{\partial}{\partial z}\right)^a\quad \xi_2=(-z,0,x)^T}
+\]
+</span>
+
+<p>当
+
+
+<span class="katex">
+  \(C_1(z)=0,C_2(y)\ne 0,C_3(x)\ne 0\)
+</span>
+时，一个绕
+
+
+<span class="katex">
+  \(y\)
+</span>
+轴转动特解（前面已有），一个绕
+
+
+<span class="katex">
+  \(x\)
+</span>
+轴转动特解（前面已有）。</p>
+<p>当
+
+
+<span class="katex">
+  \(C_1(z)\ne 0,C_2(y)= 0,C_3(x)=0\)
+</span>
+时，一个沿
+
+
+<span class="katex">
+  \(z\)
+</span>
+轴平移特解（前面已有），一个绕
+
+
+<span class="katex">
+  \(z\)
+</span>
+轴转动特解（新解）：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{(\xi_3)^a=y\left(\frac{\partial}{\partial x}\right)^a-x\left(\frac{\partial}{\partial y}\right)^a\quad \xi_3=(y,-x,0)^T}
+\]
+</span>
+
+<p>
+
+
+<span class="katex">
+  \(C_1(z),C_2(y),C_3(x)\)
+</span>
+还剩下三种组合，但相关得特解都和前面重复了。</p>
+<p>所以，三维欧氏空间的6维Killing矢量场，由三个平移
+
+
+<span class="katex">
+  \(\{(e_1)^a,(e_2)^a,(e_3)^a\}\)
+</span>
+和三个转动
+
+
+<span class="katex">
+  \(\{(\xi_1)^a,(\xi_2)^a,(\xi_3)^a\}\)
+</span>
+，一共6个特解张成。</p>
+<p>这三个转动基底（特解）
+
+
+<span class="katex">
+  \(\{(\xi_1)^a,(\xi_2)^a,(\xi_3)^a\}\)
+</span>
+，构成一个反对称矩阵，这就是
+
+
+<span class="katex">
+  \(\mathrm{SO}(3)\)
+</span>
+的三个生成元，每列代表一个生成元（也是李代数
+
+
+<span class="katex">
+  \(\mathscr{S\!O}(3)\)
+</span>
+上的三个基底）：</p>
+
+
+
+<span class="katex">
+  \[
+\{\xi^\mu_{\ \ \upsilon}\}=\begin{bmatrix}0 & -z & y \\ z & 0 & -x \\ -y & x & 0 \end{bmatrix}
+\]
+</span>
+
+<p>于是，空间旋转群可改写成参数形式(利用了李代数到李群的指数映射)：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{x^\mu\to \exp\left[\varepsilon \xi^\mu_{\ \ \upsilon}\right] x^\upsilon=x^\mu+\varepsilon \xi^\mu_{\ \ \upsilon} x^\upsilon=x^\mu+\xi^\mu_{\ \ \upsilon} \varepsilon^\upsilon}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(\varepsilon\)
+</span>
+是无穷小参数，
+
+
+<span class="katex">
+  \(\varepsilon^\upsilon=\varepsilon x^\mu\)
+</span>
+则是
+
+
+<span class="katex">
+  \(\varepsilon\)
+</span>
+诱导的三个无穷小量，对应
+
+
+<span class="katex">
+  \(\mathrm{SO}(3)\)
+</span>
+的三个参数。</p>
+<h2 id="由伽利略时空对称性确定自由粒子的拉格朗日量">由伽利略时空对称性确定自由粒子的拉格朗日量</h2>
+<p>首先，在<code>空间、时间的无穷小平移变换</code>下，必须保持拉格朗量不变，这意味着拉格朗日量不显含位置和时间，即：</p>
+
+
+
+<span class="katex">
+  \[
+L(\dot{x}^\mu)
+\]
+</span>
+
+<p>然后，在<code>无穷小空间转动变换</code>下，也必须保持拉格朗量不变（优先保证相等，其次也可精确到相差一个全微分），即：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}&L(\dot{x}^\mu+\dot{\xi}^\mu_{\ \ \upsilon} \varepsilon^\upsilon)=L(\dot{x}^\mu)+\frac{d}{dt}f(t,x^\mu) \quad \text{【代入无穷小转动】} \\  \Rightarrow \quad & \begin{cases}\dfrac{\partial L}{\partial \dot{x}^\mu} \dot{\xi}^\mu_{\ \ 1} \varepsilon^1=\dfrac{d}{dt}f_1(t,x^\mu)\\ \dfrac{\partial L}{\partial \dot{x}^\mu} \dot{\xi}^\mu_{\ \ 2} \varepsilon^2=\dfrac{d}{dt}f_2(t,x^\mu)\\ \dfrac{\partial L}{\partial \dot{x}^\mu} \dot{\xi}^\mu_{\ \ 3} \varepsilon^3=\dfrac{d}{dt}f_3(t,x^\mu)\end{cases} \quad \text{【保留一阶项】}\\  \Rightarrow \quad & \begin{cases}\dfrac{d}{dt}f_1(t,x,y,z)=\varepsilon^1 (\dot{z}\dfrac{\partial L}{\partial \dot{y}}-\dot{y}\dfrac{\partial L}{\partial \dot{z}})\\ \dfrac{d}{dt}f_2(t,x,y,z)=\varepsilon^2 (-\dot{z}\dfrac{\partial L}{\partial \dot{x}}+\dot{x}\dfrac{\partial L}{\partial \dot{z}})\\ \dfrac{d}{dt}f_3(t,x,y,z)=\varepsilon^3 (\dot{y}\dfrac{\partial L}{\partial \dot{x}}-\dot{x}\dfrac{\partial L}{\partial \dot{y}})\end{cases} \quad \text{【将Killing矢量转动基底代入】}\\  \Rightarrow \quad & \begin{cases}\dot{z}\dfrac{\partial L}{\partial \dot{y}}-\dot{y}\dfrac{\partial L}{\partial \dot{z}}=0\\ -\dot{z}\dfrac{\partial L}{\partial \dot{x}}+\dot{x}\dfrac{\partial L}{\partial \dot{z}}=0\\  \dot{y}\dfrac{\partial L}{\partial \dot{x}}-\dot{x}\dfrac{\partial L}{\partial \dot{y}}=0\end{cases} \quad \text{【确保变换后拉格朗日量不变】}\\  \Rightarrow \quad & \dfrac{\partial L}{\partial \dot{x}}/\dot{x}=\dfrac{\partial L}{\partial \dot{y}}/\dot{y}=\dfrac{\partial L}{\partial \dot{z}}/\dot{z}\\  \Rightarrow \quad & \boxed{L=L(\dot{x}^2+\dot{y}^2+\dot{z}^2)=L(v^2)}  \end{aligned}
+\]
+</span>
+
+<p>最后，在<code>无穷小伽利略惯性平移变换</code>下(变换的相对速度
+
+
+<span class="katex">
+  \(\vec{\varepsilon}\to 0\)
+</span>
+)，也必须保持拉格朗量不变（优先保证相等，其次也可精确到相差一个全微分），即：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}&L(\left|\vec{v}+\vec{\varepsilon}\right|^2)=L(v^2)+\frac{d}{dt}f(t,\vec{r})\\ \Rightarrow \quad & L(v^2+2\vec{v}\cdot \vec{\varepsilon}+\varepsilon^2)=L(v^2)+\frac{d}{dt}f(t,\vec{r})\\ \Rightarrow \quad & 2\vec{v}\cdot \vec{\varepsilon}\frac{\partial L}{\partial v^2}=\frac{d}{dt}f(t,\vec{r})\end{aligned}
+\]
+</span>
+
+<p>我们注意到最后一个等式左边无法取0（因为
+
+
+<span class="katex">
+  \(L\)
+</span>
+取常数无意义），那么只能保证是时间的全导数。进而只能取
+
+
+<span class="katex">
+  \(\dfrac{\partial L}{\partial v^2}\)
+</span>
+为常数，即：</p>
+
+
+
+<span class="katex">
+  \[
+L=\frac{m}{2}v^2
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(m\)
+</span>
+成为质点的质量。</p>
+<h2 id="质点系的拉格朗日量">质点系的拉格朗日量</h2>
+<p>根据，各自完全独立系统的总拉格朗量等于部分拉格朗量之和，然后再补上表示各质点间相互作用的某个函数
+
+
+<span class="katex">
+  \(-U\)
+</span>
+，则有封闭质点系拉格朗日量的一般形式:</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{L=\sum_\alpha{\frac{1}{2}m_\alpha v_\alpha^2}-U(\vec{r}_1,\vec{r}_2,\dots)}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(T=\sum_\alpha{\frac{1}{2}m_\alpha v_\alpha^2}\)
+</span>
+称为<code>系统动能</code>，
+
+
+<span class="katex">
+  \(U\)
+</span>
+则成为<code>系统势能</code>。</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/theophy/0072/">
+    下一页<br>对称性与守恒律（Noether定理）
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0070/">
+      上一页<br>微分几何中的计算（Julia版 计划长期维护）
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/theophy/0071.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/theophy/0071.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#伽利略时空">伽利略时空</a></li>
+        <li><a href="#欧氏空间的killing矢量场">欧氏空间的Killing矢量场</a></li>
+        <li><a href="#由伽利略时空对称性确定自由粒子的拉格朗日量">由伽利略时空对称性确定自由粒子的拉格朗日量</a></li>
+        <li><a href="#质点系的拉格朗日量">质点系的拉格朗日量</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

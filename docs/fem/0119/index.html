@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="UFL：有限元形式语言》概述&amp;有限元空间&amp;形式【翻译】"><meta property="og:title" content="UFL：有限元形式语言》概述&amp;有限元空间&amp;形式【翻译】" />
+<meta property="og:description" content="II.实现》17.UFL：有限元形式语言》概述&amp;有限元空间&amp;形式
+【章节目录】
+统一形式语言（UFL，Alnæs和Logg，2009年）是一种领域专用语言，用于描述变分形式和函数的有限元离散化。 更准确地说，该语言定义了一个灵活的用户接口，用于定义近似于数学符号弱形式的有限元空间和表达式。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/0119/" />
+<meta property="article:published_time" content="2021-01-31T09:41:19+08:00" />
+<meta property="article:modified_time" content="2021-01-31T09:41:19+08:00" />
+<title>UFL：有限元形式语言》概述&amp;有限元空间&amp;形式【翻译】 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a>
+<ul>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E6%96%B9%E6%B3%95">第二章 有限元方法</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%B8%B8%E8%A7%81%E6%9C%89%E9%99%90%E5%85%83">第三章 常见有限元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8%E5%8F%82%E8%80%83%E5%8D%95%E5%85%83">第四章 构造通用参考单元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F">第五章 有限元变分形式</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%BB%84%E8%A3%85">第六章 有限元组装</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%AD%A3%E4%BA%A4%E8%A1%A8%E7%A4%BA">第七章 有限元变分形式的正交表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA">第八章 有限元变分形式的张量表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E7%9A%84%E7%A6%BB%E6%95%A3%E4%BC%98%E5%8C%96">第九章 有限元矩阵计算的离散优化</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E7%AB%A0-dolfincpython%E6%9C%89%E9%99%90%E5%85%83%E5%BA%93">第十章 DOLFIN：C++/Python有限元库</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-ufl%E6%9C%89%E9%99%90%E5%85%83%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80">第十七章 UFL：有限元形式语言</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-unicorn%E7%BB%9F%E4%B8%80%E7%9A%84%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6%E6%B1%82%E8%A7%A3%E5%99%A8">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>UFL：有限元形式语言》概述&amp;有限元空间&amp;形式【翻译】</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ii实现17ufl有限元形式语言概述有限元空间形式">II.实现》17.UFL：有限元形式语言》概述&amp;有限元空间&amp;形式</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#1701-相关工作">17·0·1 相关工作</a></li>
+          </ul>
+        </li>
+        <li><a href="#171-概述">17·1 概述</a>
+          <ul>
+            <li><a href="#1711-设计目标">17·1·1 设计目标</a></li>
+            <li><a href="#1712-动机的例子">17·1·2 动机的例子</a></li>
+          </ul>
+        </li>
+        <li><a href="#172-定义有限元空间">17·2 定义有限元空间</a></li>
+        <li><a href="#173-定义形式">17·3 定义形式</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0120/">
+    下一页<br>UFL：有限元形式语言》表达式【翻译】
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0118/">
+      上一页<br>DOLFIN：C&#43;&#43;/Python有限元库》注记【翻译】
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/fem/0119/">UFL：有限元形式语言》概述&amp;有限元空间&amp;形式【翻译】</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2021-01-31</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/FEniCS">FEniCS</a>
+      , 
+      <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95">有限元法</a>
+      , 
+      <a href="/notes/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">偏微分方程</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0119.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h1 id="ii实现17ufl有限元形式语言概述有限元空间形式">II.实现》17.UFL：有限元形式语言》概述&amp;有限元空间&amp;形式</h1>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80">章节目录</a>】</p>
+<p>统一形式语言（UFL，Alnæs和Logg，2009年）是一种领域专用语言，用于描述变分形式和函数的有限元离散化。 更准确地说，该语言定义了一个灵活的用户接口，用于定义近似于数学符号弱形式的有限元空间和表达式。</p>
+<p>FEniCS项目提供了一个框架，用于构建求解偏微分方程（PDE）的应用程序。 UFL是此框架的核心组件之一。 它定义了你表示PDE的语言。 它是形式编译器FFC和SFC的输入语言和前端，这在第11章和第15章中介绍过。 UFL实现还提供了可以用形式编译器简化编译过程的算法。 这些形式编译器的输出是符合UFC规范的C++代码（Stroustrup，1997），这在第16章中说明过。 该代码可与第10章介绍的C++/Python库DOLFIN一起使用，以有效地组装线性系统并计算PDE的解。 请注意，本章并未涵盖如何实际求解UFL中定义的方程。 有关如何使用完整的FEniCS框架求解方程式的教程，请参见第1章。</p>
+<p>本章既适合希望学习如何表示方程式的FEniCS用户，也适合希望了解UFL在内部是如何工作的其他FEniCS开发人员和技术用户。 因此，本章的各节将组织更多的技术细节。 第17.1-17.5节概述了终端用户所看到的语言，并面向所有受众。 第17.6-17.9节解释了实现的设计，并深入一些实现细节。 在这样的行文中，必须省略该语言的许多细节，有关更详尽的描述，请参阅UFL手册（Alnæs和Logg，2009）。 请注意，本章涉及UFL版本1.0.0，并且用户接口和实现都可能在将来的版本中更改。</p>
+<p>从简要概述开始，我们提及UFL的主要设计目标，并在第17.1节中展示非平凡PDE的实现例子。 接下来，我们将在第17.2节中介绍如何定义有限元空间，然后在第17.3节中介绍形式的整体结构及其描述。  该语言的主要部分涉及从一组数据类型和运算符定义表达式，这将在17.4节中讨论。 应用于形式整体的算符是第17.5节的主题。</p>
+<p>本章的技术部分从第17.6节开始，讨论表达式的表示。 在这里定义的符号和数据结构基础上，第17.7节讨论了如何计算导数。 第17.8节讨论了一些核心内部算法及其实现中的关键问题。 第17.9节中的主题是一些特定编程语言Python（van Rossum等）中的实现细节。 最后，第17.10节讨论了UFL项目的未来前景。</p>
+<h3 id="1701-相关工作">17·0·1 相关工作</h3>
+<p>在其他几个项目中，也从其他角度追求：结合领域专用语言和符号计算的有限元方法。 Sundance（Long，2003，2004b，a）直接在C++中实现了一个符号引擎来定义变分形式，并支持自动微分。 Life项目（Prud’homme，2006b，a）使用基于表达模板技术的嵌入在C++的领域专用语言来指定变分形式。 SfePy（Cimrman等人，2008）使用SymPy作为符号引擎，并通过有限元方法对其进行了扩展。 GetDP（Dular和Geuzaine，2005年）是另一个使用领域专用语言表示变分形式的项目。 Mathematica软件包AceGen（Korelc，1997，2002）使用Mathematica的符号功能为有限元方法生成有效的代码。 所有这些软件包的共同点都集中在偏微分方程的高级描述上，以在仿真软件的开发中实现更高的人工效率。</p>
+<p>UFL几乎类似于符号计算库，但其范围，目标和优先级与通用符号计算项目不同，例如GiNaC（Bauer等人，2002），Swiginac（Skavhaug和ˇCertík，2009）和SymPy（ˇCertík等人，2009）。 作为领域专用语言和形式编译器前端，UFL不适合大规模符号计算。</p>
+<h2 id="171-概述">17·1 概述</h2>
+<h3 id="1711-设计目标">17·1·1 设计目标</h3>
+<p>UFL是对FFC和SFC早期版本所使用形式语言的统一，完善和重新实现。 这种语言的发展受到诸多因素的推动，其中最重要的是：</p>
+<ul>
+<li>一种更丰富的形式语言，尤其是其可用于表示非线性PDE。</li>
+<li>表达式和形式的自动微分。</li>
+<li>提高形式编译器技术的性能，来有效处理更复杂的方程。</li>
+</ul>
+<p>UFL满足了所有这些要求，因此，它代表了FEniCS项目功能的重大进步。</p>
+<p>FFC形式语言之后，支持张量代数和索引符号建模，并进一步推广。 该语言包括了一些以前仅SFC支持的非线性算符和函数。 表达式和形式的微分已成为该语言的一个组成部分，比以前在SFC中实现这些功能的方式要容易得多。 总之，UFL作为一种统一的形式语言，结合了FFC和SFC的优点，并增加了其他功能。</p>
+<p>配合以前形式编译器基准，基于UFL的新一代形式编译器所生成的代码效率已被验证匹配。（Alnæs和Mardal，2010；Ølgaard和Wells，2010） 现在，形式编译过程足够快，可以融合到常规应用程序构建过程中。 以前需要太多内存来编译，或者花费数十分钟甚至几小时来编译的复杂形式，现在都可以在几秒钟内用SFC和FFC进行编译。</p>
+<h3 id="1712-动机的例子">17·1·2 动机的例子</h3>
+<p>在UFL的最初开发过程中，一个主要的动机例子是具有大形变的弹性方程。 特别是，生物组织模型使用具有各向异性和强非线性的复杂超弹性本构定律。 为了用FEniCS实现这些方程，必须解决上面列出的所有三个设计目标。 下面显示了超弹性方程的一种形式及其对应的UFL实现。 请记住，这仅是为了说明形式语言和方程式自然表达之间的紧密对应关系。 这些方程的含义对于读者来说不是必需的。 第27章更详细地介绍了非线性弹性。 注意，许多其他示例与UFL一起分发。</p>
+<p>在这里介绍的超弹性方程的公式中，未知函数是位移向量场
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(u\)
+</span>
+。 物性系数
+
+
+<span class="katex">
+  \(c_1\)
+</span>
+和
+
+
+<span class="katex">
+  \(c_2\)
+</span>
+是标量常数。 根据应变能量函数
+
+
+<span class="katex">
+  \(W(C)\)
+</span>
+，计算第二类Piola-Kirchhoff应力张量
+
+
+<span class="katex">
+  \(S\)
+</span>
+。 
+
+
+<span class="katex">
+  \(W\)
+</span>
+定义了本构定律，这里是简单的Mooney-Rivlin定律。 与位移和应力有关的方程式：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}F &= I + \mathrm{grad} \ u \\ C &= F^⊤ F \\ I_C &= \mathrm{tr}(C) \\ II_C &=\frac{1}{2}\left(\mathrm{tr}(C)^2 − \mathrm{tr}(CC)\right)\\ W &= c_1(I_C − 3) + c_2(II_C − 3)\\ S &= 2 \frac{\partial W} {\partial C} \end{aligned} \tag{17.1}
+\]
+</span>
+
+<p>为了简单起见，在此示例中，我们忽略了外部力和边界力，并假设为准稳态，从而导致以下力学问题。  寻求
+
+
+<span class="katex">
+  \(u\)
+</span>
+，以满足：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{div}(FS) = 0, \qquad \mathrm{in} \ dx \tag{17.2}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+u = u_0, \qquad \mathrm{on} \ ds \tag{17.3}
+\]
+</span>
+
+<p>有限元方法在第2章中介绍过，因此我们仅将简要地介绍此处采取的步骤。 首先，我们将等式（17.2）与测试函数
+
+
+<span class="katex">
+  \(\phi\in V\)
+</span>
+相乘，然后在域
+
+
+<span class="katex">
+  \(\Omega\)
+</span>
+上积分，然后分部积分。 于是，非线性变分问题读为：需求
+
+
+<span class="katex">
+  \(u\in V\)
+</span>
+，满足</p>
+
+
+
+<span class="katex">
+  \[
+L(u; \phi) = \int_\Omega FS : \mathrm{grad} \ \phi \ dx = 0 \qquad \forall \phi \in V \tag{17.4}
+\]
+</span>
+
+<p>为了简洁起见，这里我们省略了系数
+
+
+<span class="katex">
+  \(c_1\)
+</span>
+和
+
+
+<span class="katex">
+  \(c_2\)
+</span>
+。 将位移场近似为
+
+
+<span class="katex">
+  \(u \approx u_h = \sum_k u_k \psi_k\)
+</span>
+，其中
+
+
+<span class="katex">
+  \(\psi_k \in V_h \approx V\)
+</span>
+是试探函数，并使用牛顿法求解非线性方程，最终得到一个待求解的方程组</p>
+
+
+
+<span class="katex">
+  \[
+\sum^{|V_h|}_{k=1}\frac{\partial L(u_h; \phi)}{\partial u_k} \Delta u_k = −L(u_h; \phi)\qquad  \forall \phi \in V_h \tag{17.5}
+\]
+</span>
+
+<p>UFL可以自动计算与等式（17.5）左侧相对应的双线性形式 
+
+
+<span class="katex">
+  \(a(u; \psi, \phi)\)
+</span>
+，从而</p>
+
+
+
+<span class="katex">
+  \[
+a(u_h; \psi_k, \phi) =\frac{\partial L(u_h; \phi)}{\partial u_k}\qquad k = 1,\dots, |V_h| \tag{17.6}
+\]
+</span>
+
+<p><img src="/notes/images/0249.jpg" alt="0249.jpg"></p>
+<center>图17.1 使用Mooney-Rivlin物性定律的超弹性方程的UFL实现。</center>
+<p>图17.1显示了UFL中公式（17.1），（17.4）和（17.6）的实现。 注意数学符号和UFL源代码之间的紧密关系。 特别要注意，本构定律和残差方程的自动微分。 算符diff可应用于表达式的微分（关于指定变量，例如C）， 而算符derivative可以应用于整个形式的导数（关于比如
+
+
+<span class="katex">
+  \(u\)
+</span>
+的离散函数的每个系数）。 这些特征的组合允许通过简单地改变
+
+
+<span class="katex">
+  \(W\)
+</span>
+来实现新的物性定律，其余的则是自动的。 在以下各节中，将说明此实现中使用的符号，定义和算符。</p>
+<h2 id="172-定义有限元空间">17·2 定义有限元空间</h2>
+<p>多边形胞元在UFL中由基本形状定义，并被描述为</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># UFL code</span>
+cell <span style="color:#f92672">=</span> Cell(shapestring)
+</code></pre></div><p>UFL定义了一组有效的多边形胞元形状：“interval”，“triangle”，“tetrahedron”，“quadrilateral”和“hexahedron”。 所有形状的胞元对象都是预先定义的，可以用下面的写法代替</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># UFL code</span>
+cell <span style="color:#f92672">=</span> tetrahedron
+</code></pre></div><p>在本章的其余部分，变量名cell将被用于任何有合法参数胞元，以使示例的维数尽可能独立。</p>
+<p>UFL定义了用于声明有限元空间的语法，但对实际的多项式基底或自由度一无所知的。 多项式基底是通过在预定的基本单元族中极其提供多项式次数来隐式选择的，但是UFL假定每个有限元空间
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+只存在一个具有固定顺序的基础； 那就是</p>
+
+
+
+<span class="katex">
+  \[
+V_h = \mathrm{span} \left\{\phi_j\right\}^n_{j=1}  \tag{17.7}
+\]
+</span>
+
+<p>基本的标量单元可以组合形成矢量单元或张量单元，并且单元可以轻松地组合为任意混合单元的层次结构。</p>
+<p>UFL中的一组预定义单元族名称包括“ Lagrange”（简称“ CG”），代表标量Lagrange有限元（连续的分段多项式函数），“ Discontinuous Lagrange”（简称“ DG”），代表标量不连续的Lagrange有限元（不连续的分段多项式函数），以及可以在手册中找到的其他族的范围。 为了方便起见，每个族都有一个关联的简称。要从Python将所有有效族打印到屏幕，请调用<code>show_elements()</code>。</p>
+<p>声明单元的语法最好通过一些示例进行解释。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># UFL code</span>
+
+cell <span style="color:#f92672">=</span> tetrahedron
+
+P <span style="color:#f92672">=</span> FiniteElement(<span style="color:#e6db74">&#34;Lagrange&#34;</span>, cell, <span style="color:#ae81ff">1</span>)
+V <span style="color:#f92672">=</span> VectorElement(<span style="color:#e6db74">&#34;Lagrange&#34;</span>, cell, <span style="color:#ae81ff">2</span>)
+T <span style="color:#f92672">=</span> TensorElement(<span style="color:#e6db74">&#34;DG&#34;</span>, cell, <span style="color:#ae81ff">0</span>, symmetry<span style="color:#f92672">=</span>True)
+
+TH <span style="color:#f92672">=</span> V<span style="color:#f92672">*</span>P
+ME <span style="color:#f92672">=</span> MixedElement(T, V, P)
+</code></pre></div><p>在第一行中，从一组预定义的胞元中选择一个多边形胞元。 然后声明了标量线性拉格朗日单元P，以及二次矢量拉格朗日单元V。 接下来定义一个对称的2秩张量单元T，它在每个胞元上也是分段恒定的。 代码继续声明了混合单元TH，该单元将二次矢量单元V和线性标量单元P组合在一起。 该单元被称为Taylor-Hood单元。 最后，声明另一个具有三个子单元的混合单元。 请注意，<code>T*V*P</code>的写法不会导致具有三个直接子单元的混合单元，而只会产生MixedElement(MixedElement(T, V), P)。</p>
+<h2 id="173-定义形式">17·3 定义形式</h2>
+<p>考虑在
+
+
+<span class="katex">
+  \(\partial\Omega_0\)
+</span>
+和
+
+
+<span class="katex">
+  \(\partial\Omega_1\)
+</span>
+上两个不同边界条件的泊松方程，</p>
+
+
+
+<span class="katex">
+  \[
+a(w; u, v) = \int_\Omega w \ \mathrm{grad} \ u \cdot \mathrm{grad} \ v \ dx \tag{17.8}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+L(f , g, h; v) = \int_\Omega f v \ dx + \int_{\partial \Omega_0}g^2 v \ ds + \int_{\partial \Omega_1}h v \ ds \tag{17.9}
+\]
+</span>
+
+<p>这些形式可以在UFL中表示为：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># UFL code</span>
+a <span style="color:#f92672">=</span> w<span style="color:#f92672">*</span>dot(grad(u), grad(v))<span style="color:#f92672">*</span>dx
+L <span style="color:#f92672">=</span> f<span style="color:#f92672">*</span>v<span style="color:#f92672">*</span>dx <span style="color:#f92672">+</span> g<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>v<span style="color:#f92672">*</span>ds(<span style="color:#ae81ff">0</span>) <span style="color:#f92672">+</span> h<span style="color:#f92672">*</span>v<span style="color:#f92672">*</span>ds(<span style="color:#ae81ff">1</span>)
+</code></pre></div><p>其中，乘以测度dx，ds(0)和ds(1)分别表示积分
+
+
+<span class="katex">
+  \(\int_{\Omega}(\cdot)dx\)
+</span>
+，积分
+
+
+<span class="katex">
+  \(\int_{\Omega_0}(\cdot)ds\)
+</span>
+和
+
+
+<span class="katex">
+  \(\int_{\Omega_1}(\cdot)ds\)
+</span>
+。</p>
+<p>UFL所表示的形式用于有限元离散化，然后编译为用于计算单元张量的有效代码。 考虑上面的示例，在一系列基函数并且系数函数固定后，具有一个系数函数
+
+
+<span class="katex">
+  \(w\)
+</span>
+的双线性形式
+
+
+<span class="katex">
+  \(a\)
+</span>
+在各点已被算出，即</p>
+
+
+
+<span class="katex">
+  \[
+V_h^1 = \mathrm{span} \left\{\phi_k^1\right\}, V_h^2 = \mathrm{span} \left\{\phi_k^2\right\}, V_h^3 = \mathrm{span} \left\{\phi_k^3\right\} \tag{17.10}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+w =\sum^{|V_h^3|}_{k=1}w_k\phi_k^3, \qquad \{w_k\} 给定 \tag{17.11}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+A_{ij} = a(w; \phi_i^1, \phi_j^2), \qquad i = 1, \cdots, |V_h^1|, j = 1,\cdots , |V_h^2| \tag{17.12}
+\]
+</span>
+
+<p>通常，UFL旨在表示以下一般化的形式：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}&a(w^1, . . . , w^n; \phi^1, \dots, \phi^r) \\ = &\sum^{n_c}_{k=1} \int_{\Omega_k}I_k^c dx + \sum^{n_e}_{k=1} \int_{\partial\Omega_k}I_k^e ds + \sum^{n_i}_{k=1} \int_{\Gamma_k}I_k^i dS \end{aligned}\tag{17.13}
+\]
+</span>
+
+<p>本章的大部分内容讨论定义积分表达式
+
+
+<span class="katex">
+  \(I_k^c\)
+</span>
+，
+
+
+<span class="katex">
+  \(I_k^e\)
+</span>
+和
+
+
+<span class="katex">
+  \(I_k^i\)
+</span>
+的方法。 其余的符号将在下面说明。</p>
+<p>形式的参数分为两组，即基函数
+
+
+<span class="katex">
+  \(\phi^1, \dots , \phi^r\)
+</span>
+和系数函数
+
+
+<span class="katex">
+  \(w^1, \dots , w^n\)
+</span>
+。 所有
+
+
+<span class="katex">
+  \(\{\phi^k\}\)
+</span>
+和
+
+
+<span class="katex">
+  \(\{w^k\}\)
+</span>
+都是具有一个基底的某些离散函数空间中的函数。  注意，UFL从来不知道具体的基函数
+
+
+<span class="katex">
+  \(\{\phi_j^k\}\)
+</span>
+和系数
+
+
+<span class="katex">
+  \(\{w_k\}\)
+</span>
+，但是我们假设每个有限元空间的基底都是固定的。 固定顺序仅在要区别不同形式时才重要，如第17.7节所述。</p>
+<p>有效形式表达式的每个项都必须是一个精确积分的标量值表达式，并且在
+
+
+<span class="katex">
+  \(\{\phi^k\}\)
+</span>
+中必须是线性的。 任何项都可能对系数函数具有非线性依赖。 带有一个或两个基函数参数（r = 1, 2）的形式分别称为线性形式或双线性形式，而忽略了它对系数函数的依赖。 在应用程序中使用时，它们将被组装成向量和矩阵。 仅依赖系数函数（r = 0）的形式称为泛函，因为它将被组装为实数。 r&gt;2的多重线性形式也被支持，但不常用的。</p>
+<p>整个域表示为
+
+
+<span class="katex">
+  \(\Omega\)
+</span>
+，外部边界表示为
+
+
+<span class="katex">
+  \(\partial \Omega\)
+</span>
+，而三角剖分的一组内部维面表示为
+
+
+<span class="katex">
+  \(\Gamma\)
+</span>
+。 子域用一个后缀标记，例如
+
+
+<span class="katex">
+  \(\Omega_k\subset\Omega\)
+</span>
+。 如上所述，积分是通过与测度相乘来表示的，并且UFL定义了测度
+
+
+<span class="katex">
+  \(dx\)
+</span>
+，
+
+
+<span class="katex">
+  \(ds\)
+</span>
+和
+
+
+<span class="katex">
+  \(dS\)
+</span>
+。 总之，存在三种具有相应UFL表示形式的积分</p>
+<ul>
+<li>
+
+
+<span class="katex">
+  \(\int_{\Omega_k}(\cdot)dx \leftrightarrow (\cdot)*dx(k)\)
+</span>
+，称之为胞元积分，</li>
+<li>
+
+
+<span class="katex">
+  \(\int_{\partial\Omega_k}(\cdot)ds \leftrightarrow (\cdot)*ds(k)\)
+</span>
+，称之为外维面积分，</li>
+<li>
+
+
+<span class="katex">
+  \(\int_{\Gamma_k}(\cdot)dS \leftrightarrow (\cdot)*dS(k)\)
+</span>
+，称之为内维面积分。</li>
+</ul>
+<p>可以通过将元数据附加到测度对象上来实现为形式的每项定义不同的正交顺序，例如</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># UFL code</span>
+dx02 <span style="color:#f92672">=</span> dx(<span style="color:#ae81ff">0</span>, { <span style="color:#e6db74">&#34;integration_order&#34;</span>: <span style="color:#ae81ff">2</span> })
+dx14 <span style="color:#f92672">=</span> dx(<span style="color:#ae81ff">1</span>, { <span style="color:#e6db74">&#34;integration_order&#34;</span>: <span style="color:#ae81ff">4</span> })
+dx12 <span style="color:#f92672">=</span> dx(<span style="color:#ae81ff">1</span>, { <span style="color:#e6db74">&#34;integration_order&#34;</span>: <span style="color:#ae81ff">2</span> })
+L <span style="color:#f92672">=</span> f<span style="color:#f92672">*</span>v<span style="color:#f92672">*</span>dx02 <span style="color:#f92672">+</span> g<span style="color:#f92672">*</span>v<span style="color:#f92672">*</span>dx14 <span style="color:#f92672">+</span> h<span style="color:#f92672">*</span>v<span style="color:#f92672">*</span>dx12
+</code></pre></div><p>元数据还可用于为每项分别覆盖其他形式编译器特定选项。 有关此特性的更多详细信息，请参见UFL和形式编译器的手册。</p>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80">章节目录</a>】</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0120/">
+    下一页<br>UFL：有限元形式语言》表达式【翻译】
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0118/">
+      上一页<br>DOLFIN：C&#43;&#43;/Python有限元库》注记【翻译】
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0119.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/fem/0119.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ii实现17ufl有限元形式语言概述有限元空间形式">II.实现》17.UFL：有限元形式语言》概述&amp;有限元空间&amp;形式</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#1701-相关工作">17·0·1 相关工作</a></li>
+          </ul>
+        </li>
+        <li><a href="#171-概述">17·1 概述</a>
+          <ul>
+            <li><a href="#1711-设计目标">17·1·1 设计目标</a></li>
+            <li><a href="#1712-动机的例子">17·1·2 动机的例子</a></li>
+          </ul>
+        </li>
+        <li><a href="#172-定义有限元空间">17·2 定义有限元空间</a></li>
+        <li><a href="#173-定义形式">17·3 定义形式</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

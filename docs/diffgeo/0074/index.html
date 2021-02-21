@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="辛流形"><meta property="og:title" content="辛流形" />
+<meta property="og:description" content="
+通过类比(维)黎曼流形掌握辛流形的基本概念。
+辛构造，就是闭的反称度规。辛流形，就是配备了辛构造的流形。
+具有相同维度的所有辛流形均局域辛同构（保辛结构的微分同胚映射）。
+辛矢量场是Killing矢量场的类似概念，是无穷小对称生成元。
+如果
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+  \(X^b\omega_{ba}\)
+
+是恰当的，那么对应的辛矢量场
+
+
+
+  \(X^a\)
+
+就是哈密顿矢量场。
+泊松括号，  把哈密顿力学和辛流形联系到一起。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/diffgeo/0074/" />
+<meta property="article:published_time" content="2020-02-28T16:55:40+08:00" />
+<meta property="article:modified_time" content="2020-02-28T16:55:40+08:00" />
+<title>辛流形 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a>
+<ul>
+<li><a href="/notes/docs/diffgeo/0005/">基于抽象指标的张量分析</a></li>
+<li><a href="/notes/docs/diffgeo/0006/">流形上的导数算符</a></li>
+<li><a href="/notes/docs/diffgeo/0007/">流形上的平移</a></li>
+<li><a href="/notes/docs/diffgeo/0008/">黎曼曲率张量</a></li>
+<li><a href="/notes/docs/diffgeo/0009/">流形间的映射</a></li>
+<li><a href="/notes/docs/diffgeo/0010/">流形上的李导数</a></li>
+<li><a href="/notes/docs/diffgeo/0011/">Killing矢量场</a></li>
+<li><a href="/notes/docs/diffgeo/0012/">子流形和超曲面</a></li>
+<li><a href="/notes/docs/diffgeo/0013/">流形上的微分形式及其对偶</a></li>
+<li><a href="/notes/docs/diffgeo/0014/">流形上的微积分</a></li>
+<li><a href="/notes/docs/diffgeo/0016/">李群李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0068/">常用李群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0069/">李变换群</a></li>
+<li><a href="/notes/docs/diffgeo/0070/">微分几何中的计算（Julia版）</a></li>
+<li><a href="/notes/docs/diffgeo/0073/">辛群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0074/"class=active>辛流形</a></li>
+<li><a href="/notes/docs/diffgeo/0076/">流形上的旋量和旋量场（初步）</a></li>
+<li><a href="/notes/docs/diffgeo/0077/">流形上的旋量和旋量场（几何解释）</a></li>
+<li><a href="/notes/docs/diffgeo/0078/">流形上的旋量和旋量场（导数算符和曲率)</a></li>
+<li><a href="/notes/docs/diffgeo/0079/">流形上的旋量和旋量场（自旋系数和克氏符）</a></li>
+<li><a href="/notes/docs/diffgeo/0082/">李群李代数伴随表示和Killing型、Casimir算符</a></li>
+<li><a href="/notes/docs/diffgeo/0083/">半单李代数的标准形式</a></li>
+<li><a href="/notes/docs/diffgeo/0084/">半单李代数的根系、权系和Dynkin图</a></li>
+<li><a href="/notes/docs/diffgeo/0085/">半单李代数的Casimir不变算符</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>辛流形</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#辛流形的辛构造">辛流形的辛构造</a></li>
+        <li><a href="#辛流形的反称内积">辛流形的反称内积</a></li>
+        <li><a href="#辛流形的正则坐标">辛流形的正则坐标</a></li>
+        <li><a href="#矢量场到对偶矢量场的自然同构">矢量场到对偶矢量场的自然同构</a></li>
+        <li><a href="#辛构造的特别之处与对称度规相比">辛构造的特别之处（与对称度规相比）</a></li>
+        <li><a href="#辛矢量场和killing矢量场类比">辛矢量场(和Killing矢量场类比)</a></li>
+        <li><a href="#哈密顿矢量场">哈密顿矢量场</a></li>
+        <li><a href="#泊松括号">泊松括号</a></li>
+        <li><a href="#局域正则坐标表示">局域正则坐标表示</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/theophy/0075/">
+    下一页<br>辛流形上的哈密顿力学
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0073/">
+      上一页<br>辛群及其李代数
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/diffgeo/0074/">辛流形</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-02-28</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95">微分几何</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E6%B5%81%E5%BD%A2">流形</a>
+      , 
+      <a href="/notes/tags/%E8%BE%9B%E6%B5%81%E5%BD%A2">辛流形</a>
+      , 
+      <a href="/notes/tags/%E5%93%88%E5%AF%86%E9%A1%BF">哈密顿</a>
+      , 
+      <a href="/notes/tags/%E6%B3%8A%E6%9D%BE">泊松</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0074.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<blockquote>
+<p>通过类比(维)黎曼流形掌握辛流形的基本概念。</p>
+<p><code>辛构造</code>，就是<code>闭的反称度规</code>。<code>辛流形</code>，就是配备了<code>辛构造</code>的流形。</p>
+<p>具有相同维度的所有辛流形均<code>局域辛同构</code>（保辛结构的微分同胚映射）。</p>
+<p><code>辛矢量场</code>是Killing矢量场的类似概念，是<code>无穷小对称生成元</code>。</p>
+<p>如果
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(X^b\omega_{ba}\)
+</span>
+是<code>恰当的</code>，那么对应的辛矢量场
+
+
+<span class="katex">
+  \(X^a\)
+</span>
+就是<code>哈密顿矢量场</code>。</p>
+<p><code>泊松括号</code>，  把<code>哈密顿力学</code>和<code>辛流形</code>联系到一起。</p>
+</blockquote>
+<h2 id="辛流形的辛构造">辛流形的辛构造</h2>
+<p>上一节，给出了这是和<code>(对称)度规</code>类似的<code>反称度规</code>的概念，也是一个非奇异2-形式。 在此基础上可以定义<code>辛构造</code>。</p>
+<p>
+
+
+<span class="katex">
+  \(2n\)
+</span>
+维光滑流形
+
+
+<span class="katex">
+  \(M\)
+</span>
+上的2-形式
+
+
+<span class="katex">
+  \(\boldsymbol{\omega}\in\Lambda_M(2)\)
+</span>
+，若满足以下两个条件：</p>
+<ul>
+<li>1）
+
+
+<span class="katex">
+  \(\boldsymbol{\omega}\)
+</span>
+是<code>反称度规</code>。【
+
+
+<span class="katex">
+  \(\boldsymbol{\omega}\)
+</span>
+是非奇异的】</li>
+<li>2）
+
+
+<span class="katex">
+  \(\boldsymbol{\omega}\)
+</span>
+是<code>闭的</code>。【
+
+
+<span class="katex">
+  \(d\boldsymbol{\omega}=0\)
+</span>
+】</li>
+</ul>
+<p>则称
+
+
+<span class="katex">
+  \(\boldsymbol{\omega}\)
+</span>
+为流形
+
+
+<span class="katex">
+  \(M\)
+</span>
+上的<code>辛结构</code>。只满足条件1）的，叫<code>近辛结构</code>。只满足条件2）的，则叫<code>予辛结构</code>。</p>
+<p>配有辛结构的光滑流形
+
+
+<span class="katex">
+  \((M,\boldsymbol{\omega})\)
+</span>
+，称为<code>辛流形</code>。</p>
+<p>注意：上一节用
+
+
+<span class="katex">
+  \(s_{ab}\)
+</span>
+表示<code>反称度规</code>，目的是强调和(对称)度规
+
+
+<span class="katex">
+  \(g_{ab}\)
+</span>
+的类比，从本节开始用
+
+
+<span class="katex">
+  \(\boldsymbol{\omega}\)
+</span>
+表示<code>反称度规</code>，目的是强调这也是一个微分形式。</p>
+<h2 id="辛流形的反称内积">辛流形的反称内积</h2>
+<p>首先，
+
+
+<span class="katex">
+  \(\boldsymbol{\omega}\)
+</span>
+作为<code>反称度规</code>，上一节的相关性质，也是辛流形的性质。</p>
+<p>此外，在流形
+
+
+<span class="katex">
+  \(M\)
+</span>
+上每点
+
+
+<span class="katex">
+  \(p\)
+</span>
+的切空间
+
+
+<span class="katex">
+  \(V_p\)
+</span>
+上，从双线性映射
+
+
+<span class="katex">
+  \(V_p\times V_p\to \mathbb{R}\)
+</span>
+的角度看
+
+
+<span class="katex">
+  \(\boldsymbol{\omega}\)
+</span>
+，实际上定义了
+
+
+<span class="katex">
+  \(V_p\)
+</span>
+上两个矢量的<code>反称内积</code>：</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{\omega}(u,v)=-\boldsymbol{\omega}(v,u),\quad \forall u,v\in V_p
+\]
+</span>
+
+<p>
+
+
+<span class="katex">
+  \(\boldsymbol{\omega}\)
+</span>
+的非奇异性则要求：</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{\omega}(u,v)=0,\quad \forall v\in V_p \quad\Longrightarrow \quad u=0
+\]
+</span>
+
+<h2 id="辛流形的正则坐标">辛流形的正则坐标</h2>
+<p>上一节已经涉及了<code>正则基底</code>，本节自然也期望存在一个局域坐标系
+
+
+<span class="katex">
+  \(\{q^\mu,p_\mu\}\)
+</span>
+，使得
+
+
+<span class="katex">
+  \(\boldsymbol{\omega}\)
+</span>
+也有完全一样的简单形式：</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{\omega}=(dp_\mu)_a\wedge(dq^\mu)_b
+\]
+</span>
+
+<p>很幸运，<code>Danboux定理</code>保证了这一点。所以这个特殊的局域坐标
+
+
+<span class="katex">
+  \(\{q^\mu,p_\mu\}\)
+</span>
+称作<code>正则坐标</code>，也被称作<code>Danboux坐标</code>。</p>
+<p>此外，这里
+
+
+<span class="katex">
+  \(p_\mu\)
+</span>
+取下标形式的原因：首先，这个特殊坐标下
+
+
+<span class="katex">
+  \(p_\mu=\delta_{\mu\upsilon}p^\upsilon\backsimeq p^\mu\)
+</span>
+，含义一样；其次，也为了和哈密顿力学中正则坐标保持一致的习惯。</p>
+<h2 id="矢量场到对偶矢量场的自然同构">矢量场到对偶矢量场的自然同构</h2>
+<p>流形
+
+
+<span class="katex">
+  \(M\)
+</span>
+即使没有任何额外结构，矢量场和对偶矢量场也是同构的。但这种同构映射有多种选择，没有谁更特殊。 一旦配置了某种结构，就可能存在一种特别自然的同构映射， 比如，(对称)度规所诱导的同构映射。</p>
+<p>类似的，对辛流形
+
+
+<span class="katex">
+  \((M,\boldsymbol{\omega})\)
+</span>
+而言，
+
+
+<span class="katex">
+  \(\boldsymbol{\omega}\)
+</span>
+不但可以看成
+
+
+<span class="katex">
+  \(\boldsymbol{\omega}:V_p\times V_p\to \mathbb{R}\)
+</span>
+的内积映射，作为
+
+
+<span class="katex">
+  \((0,2)\)
+</span>
+型张量，也可以看成是映射
+
+
+<span class="katex">
+  \(\omega_{ab}:V_p\to V^*_p\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\omega_{ab}:&V_p\to V^*_p\\ & v^a\mapsto v_a\overset{\Delta}{=}\omega_{ab}v^b\end{aligned}
+\]
+</span>
+
+<p>对应也有逆映射
+
+
+<span class="katex">
+  \(\omega^{ab}:V^*_p\to V_p\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\omega^{ab}:&V^*_p\to V_p\\ & v_a\mapsto v^a=\omega^{ab}v_b\end{aligned}
+\]
+</span>
+
+<p>所以，反称度规
+
+
+<span class="katex">
+  \(\boldsymbol{\omega}\)
+</span>
+是一个非常自然的
+
+
+<span class="katex">
+  \(V_p\to V^*_p\)
+</span>
+的同构映射；进而反称度规场
+
+
+<span class="katex">
+  \(\boldsymbol{\omega}\)
+</span>
+也是矢量场到对偶矢量场的自然同构
+
+
+<span class="katex">
+  \(\omega_{ab}:\mathscr{F}_M(1,0)\to\mathscr{F}_M(0,1)\)
+</span>
+。</p>
+<p>同时，和度规
+
+
+<span class="katex">
+  \(g_{ab}\)
+</span>
+一样，
+
+
+<span class="katex">
+  \(\boldsymbol{\omega}=\omega_{ab}\)
+</span>
+也具有&quot;提升&quot;和&quot;下降&quot;指标的作用。</p>
+<h2 id="辛构造的特别之处与对称度规相比">辛构造的特别之处（与对称度规相比）</h2>
+<p>对(伪)黎曼流形
+
+
+<span class="katex">
+  \((M,g_{ab})\)
+</span>
+而言，在每点
+
+
+<span class="katex">
+  \(p\in M\)
+</span>
+的切空间
+
+
+<span class="katex">
+  \(V_p\)
+</span>
+上，度规张量的分量矩阵都能通过坐标变换化成对角形式
+
+
+<span class="katex">
+  \(g_{\mu\upsilon}=\delta_{\mu\upsilon}\)
+</span>
+。  但是，一般不能在
+
+
+<span class="katex">
+  \(p\)
+</span>
+点邻域上处处化为对角形（同一套坐标变换下），除非曲率张量系数全为0。</p>
+<p>但辛流形
+
+
+<span class="katex">
+  \((M,\boldsymbol{\omega})\)
+</span>
+有些不一样，由于辛结构
+
+
+<span class="katex">
+  \(\boldsymbol{\omega}\)
+</span>
+是局域可积的，可局域辛同胚于标准型，即可在任意点的邻域通过保辛结构的坐标变换化为标准型：</p>
+
+
+
+<span class="katex">
+  \[
+(\omega_{\mu\upsilon})=\begin{pmatrix} 0 & -I_{n} \\ I_{n} & 0 \end{pmatrix}\\ \quad \\ \boldsymbol{\omega}=(dp_\mu)_a\wedge(dq^\mu)_b
+\]
+</span>
+
+<p>这是<code>Danboux定理</code>所保证的。这说明：具有相同维度的所有辛流形均<code>局域辛同构</code>（保辛结构的微分同胚映射）。 也就是说<code>辛流形</code>实际上是整体的。</p>
+<h2 id="辛矢量场和killing矢量场类比">辛矢量场(和Killing矢量场类比)</h2>
+<p><code>辛群</code>
+
+
+<span class="katex">
+  \(S\!p(n)\)
+</span>
+作为<code>辛流形</code>
+
+
+<span class="katex">
+  \((M,\boldsymbol{\omega})\)
+</span>
+上得<code>变换群</code>，即保辛结构变换的群，其上的李代数
+
+
+<span class="katex">
+  \(\mathscr{S\!p}(n)\)
+</span>
+的元素
+
+
+<span class="katex">
+  \(X^a\in\mathscr{F}_M(1,0)\)
+</span>
+就是这个<code>变换群</code>的<code>无穷小生成元</code>。</p>
+<p>如果辛结构沿这个<code>无穷小生成元</code>
+
+
+<span class="katex">
+  \(X^a\)
+</span>
+的李导数为0，即满足：</p>
+
+
+
+<span class="katex">
+  \[
+\mathscr{L}_X\boldsymbol{\omega}=0
+\]
+</span>
+
+<p>那么称这个生成元
+
+
+<span class="katex">
+  \(X^a\)
+</span>
+就是<code>辛矢量场</code>，也就是<code>无穷小对称生成元</code>。</p>
+<p>辛矢量场的集合记作
+
+
+<span class="katex">
+  \(\mathrm{Sym}(M)\)
+</span>
+。考虑
+
+
+<span class="katex">
+  \(X,Y\in \mathrm{Sym}{M}\)
+</span>
+，由于
+
+
+<span class="katex">
+  \([\mathscr{L}_X,\mathscr{L}_Y]=\mathscr{L}_{[X,Y]}\)
+</span>
+，可以证明
+
+
+<span class="katex">
+  \([X,Y]\)
+</span>
+也是辛矢量场。这说明
+
+
+<span class="katex">
+  \(\mathrm{Sym}(M)\)
+</span>
+形成
+
+
+<span class="katex">
+  \(M\)
+</span>
+上向量场李代数
+
+
+<span class="katex">
+  \(\mathscr{X}(M)\)
+</span>
+的李子代数。</p>
+<p>根据李导数算子
+
+
+<span class="katex">
+  \(L_X\)
+</span>
+、外微分算子
+
+
+<span class="katex">
+  \(d\)
+</span>
+、缩并算子
+
+
+<span class="katex">
+  \(i_X\)
+</span>
+之间的<code>Cartan公式</code>有：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\mathscr{L}_X \boldsymbol{\omega}&=(d \circ i_X+i_X \circ d)\boldsymbol{\omega}, \quad i_X\omega_{a_1\dots a_r}\overset{\Delta}{=}X^{a_1}\omega_{a_1\dots a_r}\\ &=(d \circ i_X)\boldsymbol{\omega},\qquad d\boldsymbol{\omega}=0 \\ &=d ( X^b\omega_{ba})\end{aligned}
+\]
+</span>
+
+<p>这说明有如下等价说法：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}&X^a\in \mathscr{S\!p}(n)\text{是无穷小对称生成元}\\ \quad\Leftrightarrow\quad &X^a\text{是辛矢量场}\\ \quad\Leftrightarrow\quad &\mathscr{L}_X\boldsymbol{\omega}=0\\ \quad\Leftrightarrow\quad &d ( X^b\omega_{ba})=0\qquad X^b\omega_{ba}\text{是闭1-形式}\end{aligned}
+\]
+</span>
+
+<p>而(伪)黎曼流形
+
+
+<span class="katex">
+  \((M,g_{ab})\)
+</span>
+对应的<code>无穷小对称生成元</code>，是指满足
+
+
+<span class="katex">
+  \(\mathscr{L}_v g_{ab}=0\)
+</span>
+的矢量场
+
+
+<span class="katex">
+  \(v^a\)
+</span>
+，即<code>Killing矢量场</code>。</p>
+<p>此外，独立Killing矢量场的个数最多是
+
+
+<span class="katex">
+  \(n(n+1)/2,\quad n=\dim M\)
+</span>
+。但是，独立辛矢量场的个数有无限多个。</p>
+<h2 id="哈密顿矢量场">哈密顿矢量场</h2>
+<p>我们已经知道一个<code>微分形式</code>是<code>恰当的</code>，那必然是<code>闭的</code>。 但如果是<code>闭的</code>，未必是<code>恰当的</code>。</p>
+<p>对<code>辛矢量场</code>
+
+
+<span class="katex">
+  \(X^a\in\mathrm{Sym}(M)\)
+</span>
+而言，
+
+
+<span class="katex">
+  \(X^b\omega_{ba}\)
+</span>
+是<code>闭的</code>。  如果同时是<code>恰当的</code>，即存在标量场
+
+
+<span class="katex">
+  \(f\in\mathscr{F}_M\)
+</span>
+满足：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}&X^b\omega_{ba}=-\frac{1}{2}df,\quad \exist f\in \mathscr{F}_M \\ \Longleftrightarrow\quad  & \boxed{X^a=\frac{1}{2}\omega^{ab}(df)_b=\frac{1}{2}\omega^{ab}\nabla_b f}\overset{\Delta}{=}X^a_f\end{aligned}
+\]
+</span>
+
+<p>此时，我们称是
+
+
+<span class="katex">
+  \(X^a\)
+</span>
+是
+
+
+<span class="katex">
+  \(f\)
+</span>
+的<code>哈密顿矢量场</code>。哈密顿矢量场的集合记作
+
+
+<span class="katex">
+  \(\mathrm{Ham}(M)\)
+</span>
+，也构成李代数。</p>
+<p>根据微分形式<code>闭的</code>和<code>恰当的</code>的关系，我们知道<code>哈密顿矢量</code>必定是<code>辛矢量</code>，但反之不一定。 既有如下李代数的包含链：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{Ham}(M)\subset\mathrm{Sym}(M)\subset\mathscr{X}(M)
+\]
+</span>
+
+<h2 id="泊松括号">泊松括号</h2>
+<p>在辛流形
+
+
+<span class="katex">
+  \((M,\boldsymbol{\omega})\)
+</span>
+上，可以定义任意两个标量场
+
+
+<span class="katex">
+  \(f\)
+</span>
+和
+
+
+<span class="katex">
+  \(g\)
+</span>
+的<code>泊松括号</code>：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\{f,g\}&\overset{\Delta}{=}\frac{1}{2}\omega^{ab}(df)_a(dg)_b,\quad \forall f,g\in\mathscr{F}_M \\ &=\frac{1}{2}\omega^{ab}(\nabla_a f)(\nabla_b g) \\ &=X^a_g\nabla_a f=-X^a_f\nabla_a g\\ &=-\frac{1}{2}\omega_{ab} X^a_f X^b_g \end{aligned}
+\]
+</span>
+
+<p>这样定义的<code>泊松括号</code>具有如下性质：</p>
+<ul>
+<li>1）实双线性：
+
+
+<span class="katex">
+  \(\{\alpha f+\beta g,h\}=\alpha\{f,h\}+\beta\{g,h\},\quad \forall \alpha,\beta\in\mathbb{R},f,g,h\in\mathscr{F}_M\)
+</span>
+</li>
+<li>2）反对称：
+
+
+<span class="katex">
+  \(\{f,g\}=-\{g,f\}\)
+</span>
+</li>
+<li>3）雅可比恒等式：
+
+
+<span class="katex">
+  \(\{f,\{g,h\}\}+\{g,\{h,f\}\}+\{h,\{f,g\}\}=0\)
+</span>
+</li>
+<li>4）莱布尼茨规则：
+
+
+<span class="katex">
+  \(\{f,gh\}=g\{f,h\}+\{f,g\}h\)
+</span>
+</li>
+</ul>
+<p>头三条性质保证了
+
+
+<span class="katex">
+  \(\mathscr{F}_M\)
+</span>
+形成李代数。</p>
+<h2 id="局域正则坐标表示">局域正则坐标表示</h2>
+<p>若在辛流形
+
+
+<span class="katex">
+  \((M,\boldsymbol{\omega})\)
+</span>
+上选择<code>局域正则坐标</code>，于是有：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\text{辛结构}\qquad& \boldsymbol{\omega}=\omega_{ab}=(dp_\mu)_a\wedge(dq^\mu)_b\\ &\omega^{ab}= 2\left[\left(\frac{\partial}{\partial q^\mu}\right)^a\left(\frac{\partial}{\partial p_\mu}\right)^b-\left(\frac{\partial}{\partial q^\mu}\right)^b\left(\frac{\partial}{\partial p_\mu}\right)^a\right]\\ \text{哈密顿矢量场}\qquad& X^a_f=\frac{\partial f}{\partial p_\mu}\left(\frac{\partial}{\partial q^\mu}\right)^a-\frac{\partial f}{\partial q^\mu}\left(\frac{\partial}{\partial p_\mu}\right)^a\\ \text{泊松括号}\qquad& \{f,g\}=\frac{\partial f}{\partial p_\mu}\frac{\partial g}{\partial q^\mu}-\frac{\partial f}{\partial q^\mu}\frac{\partial g}{\partial p_\mu} \end{aligned}}
+\]
+</span></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/theophy/0075/">
+    下一页<br>辛流形上的哈密顿力学
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0073/">
+      上一页<br>辛群及其李代数
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0074.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/diffgeo/0074.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#辛流形的辛构造">辛流形的辛构造</a></li>
+        <li><a href="#辛流形的反称内积">辛流形的反称内积</a></li>
+        <li><a href="#辛流形的正则坐标">辛流形的正则坐标</a></li>
+        <li><a href="#矢量场到对偶矢量场的自然同构">矢量场到对偶矢量场的自然同构</a></li>
+        <li><a href="#辛构造的特别之处与对称度规相比">辛构造的特别之处（与对称度规相比）</a></li>
+        <li><a href="#辛矢量场和killing矢量场类比">辛矢量场(和Killing矢量场类比)</a></li>
+        <li><a href="#哈密顿矢量场">哈密顿矢量场</a></li>
+        <li><a href="#泊松括号">泊松括号</a></li>
+        <li><a href="#局域正则坐标表示">局域正则坐标表示</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

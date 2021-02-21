@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>killing on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/killing/</link>
+    <description>Recent content in killing on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Tue, 25 Feb 2020 08:19:37 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/killing/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>流形视角下的牛顿力学(杀鸡用牛刀)</title>
+      <link>https://chaoskey.gitee.io/notes/docs/theophy/0071/</link>
+      <pubDate>Tue, 25 Feb 2020 08:19:37 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0071/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;本文真是杀鸡用牛刀，但好处是彻底厘清了如何用对称性构造拉格朗日量的一般套路。&lt;/p&gt;
+&lt;p&gt;本文通过强算Killing方程的笨方法，来确定伽利略时空，特别是欧氏空间的完整对称性，进而得到无穷小生成元（变换），最后用这组无穷小变换在拉格朗日量上的不变性来确定拉格朗日量。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>微分几何中的计算（Julia版 计划长期维护）</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0070/</link>
+      <pubDate>Mon, 24 Feb 2020 09:44:05 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0070/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Julia&lt;/code&gt;，对数学符号真太友好了。&lt;/p&gt;
+&lt;p&gt;前面的笔记中，我曾穿插了些相关的符号计算，本文作为一个汇总，并且未来的一些有特点的代码，我也将汇总于此，用作备忘。&lt;/p&gt;
+&lt;p&gt;用&lt;code&gt;Julia&lt;/code&gt;进行张量符号计算的关键：1）先要写出（多重）数组友好的公式，然后用&lt;code&gt;Julia&lt;/code&gt;实现之； 2）使用了&lt;code&gt;SymPy&lt;/code&gt;，外加&lt;code&gt;Julia&lt;/code&gt;本身的语法优势。&lt;/p&gt;
+&lt;p&gt;我曾想过将代码封装成函数，但发现直接用代码似乎更好。首先代码不复杂，其次， 暴露代码细节还能和数学公式相互对照，不容易出错。 有种“所见即所得”的感觉。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>Killing矢量场</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0011/</link>
+      <pubDate>Mon, 20 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0011/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Killing矢量场&lt;/code&gt;描述了&lt;code&gt;(伪)黎曼流形&lt;/code&gt;的对称性，每一种对称性都与一个&lt;code&gt;Killing矢量场&lt;/code&gt;相关联。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

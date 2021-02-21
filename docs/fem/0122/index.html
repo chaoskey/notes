@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="UFL：有限元形式语言》计算导数&amp;算法(一)【翻译】"><meta property="og:title" content="UFL：有限元形式语言》计算导数&amp;算法(一)【翻译】" />
+<meta property="og:description" content="II.实现》17.UFL：有限元形式语言》计算导数&amp;算法(一)
+【章节目录】
+17·7 计算导数
+当由形式语言的终端用户声明任何种类的导数表达式时，都会构造一个表达式对象来表示它，但不会计算任何内容。 这种表达式对象的类型是Derivative的子类。在从导数表达式生成低级代码之前，必须应用某种求导数的算法，因为差分算符本身在C&#43;&#43;等低级语言中不可用。 计算精确的导数很重要，它消除了差分除法的近似。 存在几种用于计算精确导数的替代算法。 所有相关算法都基于链规则，并结合每种表达式对象类型的规则差异。 算法之间的主要区别在于子表达式的重用程度以及子表达式的累积方式。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/0122/" />
+<meta property="article:published_time" content="2021-02-03T07:32:33+08:00" />
+<meta property="article:modified_time" content="2021-02-03T07:32:33+08:00" />
+<title>UFL：有限元形式语言》计算导数&amp;算法(一)【翻译】 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a>
+<ul>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E6%96%B9%E6%B3%95">第二章 有限元方法</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%B8%B8%E8%A7%81%E6%9C%89%E9%99%90%E5%85%83">第三章 常见有限元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8%E5%8F%82%E8%80%83%E5%8D%95%E5%85%83">第四章 构造通用参考单元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F">第五章 有限元变分形式</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%BB%84%E8%A3%85">第六章 有限元组装</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%AD%A3%E4%BA%A4%E8%A1%A8%E7%A4%BA">第七章 有限元变分形式的正交表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA">第八章 有限元变分形式的张量表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E7%9A%84%E7%A6%BB%E6%95%A3%E4%BC%98%E5%8C%96">第九章 有限元矩阵计算的离散优化</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E7%AB%A0-dolfincpython%E6%9C%89%E9%99%90%E5%85%83%E5%BA%93">第十章 DOLFIN：C++/Python有限元库</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-ufl%E6%9C%89%E9%99%90%E5%85%83%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80">第十七章 UFL：有限元形式语言</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-unicorn%E7%BB%9F%E4%B8%80%E7%9A%84%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6%E6%B1%82%E8%A7%A3%E5%99%A8">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>UFL：有限元形式语言》计算导数&amp;算法(一)【翻译】</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ii实现17ufl有限元形式语言计算导数算法一">II.实现》17.UFL：有限元形式语言》计算导数&amp;算法(一)</a>
+      <ul>
+        <li><a href="#177-计算导数">17·7 计算导数</a>
+          <ul>
+            <li><a href="#1771-计算导数的方法">17·7·1 计算导数的方法</a></li>
+            <li><a href="#1772-前向模式自动微分">17·7·2 前向模式自动微分</a></li>
+            <li><a href="#1773-张量和索引表达式的扩展">17·7·3 张量和索引表达式的扩展</a></li>
+            <li><a href="#1774-高阶导数">17·7·4 高阶导数</a></li>
+            <li><a href="#1775-基本微分规则">17·7·5 基本微分规则</a></li>
+          </ul>
+        </li>
+        <li><a href="#178-算法">17·8 算法</a>
+          <ul>
+            <li><a href="#1781-python中的有效树遍历">17·8·1 Python中的有效树遍历</a></li>
+            <li><a href="#1782-python中基于类型的函数分派">17·8·2 Python中基于类型的函数分派</a></li>
+            <li><a href="#1783-表达式变换的实现">17·8·3 表达式变换的实现</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0123/">
+    下一页<br>UFL：有限元形式语言》算法(二)&amp;实现的问题【翻译】
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0121/">
+      上一页<br>UFL：有限元形式语言》形式算符&amp;表达式的表示【翻译】
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/fem/0122/">UFL：有限元形式语言》计算导数&amp;算法(一)【翻译】</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2021-02-03</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/FEniCS">FEniCS</a>
+      , 
+      <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95">有限元法</a>
+      , 
+      <a href="/notes/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">偏微分方程</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0122.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h1 id="ii实现17ufl有限元形式语言计算导数算法一">II.实现》17.UFL：有限元形式语言》计算导数&amp;算法(一)</h1>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80">章节目录</a>】</p>
+<h2 id="177-计算导数">17·7 计算导数</h2>
+<p>当由形式语言的终端用户声明任何种类的导数表达式时，都会构造一个表达式对象来表示它，但不会计算任何内容。 这种表达式对象的类型是Derivative的子类。在从导数表达式生成低级代码之前，必须应用某种求导数的算法，因为差分算符本身在C++等低级语言中不可用。 计算精确的导数很重要，它消除了差分除法的近似。 存在几种用于计算精确导数的替代算法。 所有相关算法都基于链规则，并结合每种表达式对象类型的规则差异。 算法之间的主要区别在于子表达式的重用程度以及子表达式的累积方式。</p>
+<p>将导数的计算混入每个形式编译器的代码生成策略中，这将导致实现工作的显著重复。 为了分离问题并保持代码的可管理性，微分作为UFL的一部分实现，以使形式编译器独立于UFL中所选择的微分策略。 因此，对已求值的导数表达式，使用与任何其他表达式相同的表示是有利的。 在形式编译器解释表达式之前，应先对差分算符进行求值，以使剩下的算符只能是非差分算符。 由于UFL不知道终端的空间导数，这是一个例外，因为它们是由形式编译器提供的。</p>
+<p>下面，讨论一些最简单的算法之间的异同。  在解释了当前在UFL中实现的算法之后，讨论了张量和索引记号以及高阶导数的扩展。 最后，本节以关于终端表达式的微分规则的一些注释收尾。</p>
+<h3 id="1771-计算导数的方法">17·7·1 计算导数的方法</h3>
+<p>设计用于计算导数的算法时，要考虑到不同的最终目标。 符号微分（SD）将单个符号表达式作为输入，并为其求导生成新的符号表达式。 自动微分（AD）将用来计算一个函数的程序作为输入，并生成一个新程序以计算此函数的导数。 存在几种AD算法变体，最常见的两种是正向模式AD和反向模式AD（Griewank，1989）。 存在更高级的算法，并且是活跃的研究主题。 UFL表达式是一个符号表达式，由表达式树表示。 但是表达式树是有向无环图，表示用来对表达式求值的程序。 因此，在这种情况下，SD和AD之间的界限似乎变得不太明显。</p>
+<p>单纯地应用，SD会产生巨大的表达式，这不但需要在计算过程中占用大量内存，而且如果直接编写代码则效率很低。 但是，一些符号微分效率低下的例证，如在Griewank（1989）中，是基于在一些独立的计算机代数系统（CAS）中计算导数的闭式表达式。 直接将大表达式的结果复制到计算机代码中可能会导致代码效率低下。  编译器可能无法检测到常见的子表达式，尤其是如果CAS中的化简和重写规则已更改了子表达式的结构并具有重用潜力时。</p>
+<p>通常，AD是能够处理SD无法处理的算法。 将AD应用于通用源代码的工具必须处理许多复杂问题，例如子例程，全局变量，任意循环和分支（Bischof等，1992，2002； Giering和Kaminski，1998）。 由于UFL中对程序流结构的支持非常有限，因此UFL中的AD实施不会遇到这种麻烦。 在第17.7.2节中，将更详细地解释在UFL中SD和前向模式AD之间的相似性。</p>
+<h3 id="1772-前向模式自动微分">17·7·2 前向模式自动微分</h3>
+<p>回顾算法5，表示用于根据一组终端值
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(\{t_i\}\)
+</span>
+和一组基本算符
+
+
+<span class="katex">
+  \(\{f_i\}\)
+</span>
+来计算表达式
+
+
+<span class="katex">
+  \(z\)
+</span>
+的程序。 暂时假设
+
+
+<span class="katex">
+  \(\{f_i\}\)
+</span>
+中没有微分算符。 然后可以扩展该算法以计算导数
+
+
+<span class="katex">
+  \(\frac{dz}{dv}\)
+</span>
+，其中
+
+
+<span class="katex">
+  \(v\)
+</span>
+表示任何类型的微分变量。 此扩展给出了算法6。</p>
+<p>这种扩展程序以同时计算表达式
+
+
+<span class="katex">
+  \(z\)
+</span>
+及其导数
+
+
+<span class="katex">
+  \(\frac{dz}{dv}\)
+</span>
+的方式称为<strong>前向模式自动微分</strong>（AD）。 通过将
+
+
+<span class="katex">
+  \(y_i\)
+</span>
+和
+
+
+<span class="katex">
+  \(\frac{d y_i}{dv}\)
+</span>
+重命名得到新序列
+
+
+<span class="katex">
+  \(\langle \hat{y}_j\rangle^{\hat{n}}_{j = 1}\)
+</span>
+的，如重写自算法6的算法7所示，该算法与算法5同构（它们具有完全相同的结构）。</p>
+<p><img src="/notes/images/0253.jpg" alt="0253.jpg"></p>
+<p><img src="/notes/images/0254.jpg" alt="0254.jpg"></p>
+<p>由于算法5中的程序可以表示为DAG，而算法7与算法5同构，因此算法7中的程序也可以表示为DAG。 因此，计算
+
+
+<span class="katex">
+  \(\frac{dz}{dv}\)
+</span>
+的程序可表示成由根据终端值和非微分算符构建的表达式树。</p>
+<p>当前实现的用于计算UFL中的导数的算法紧密遵循正向模式AD。 由于结果是一个新的表达式树，因此该算法也可以称为符号微分。 在这方面，两者之间的区别在于实现细节。 为了确保我们可以正确地重用表达式，UFL中的化简规则避免了修改算符的操作数。 因此，形式编译器可以轻松检测表达式中自然重复的模式。 然后可以通过将子表达式放在哈希映射中来实现有效的通用子表达式消除。 但是，存在诸如<code>0∗f → 0</code>和<code>1∗f → f</code>之类的化简，称为<strong>常数折叠</strong>，这在构造差分算法时会自动简化其结果。 这些化简对于导数计算期间的存储器使用以及结果程序的性能至关重要。</p>
+<h3 id="1773-张量和索引表达式的扩展">17·7·3 张量和索引表达式的扩展</h3>
+<p>到目前为止，我们还没有考虑非标量表达式和带有自由索引表达式的导数。  此问题不会影响整体算法，但是会影响每种表达式类型的局部求导规则。</p>
+<p>考虑带有A和B矩阵表达式的<code>diff(A, B)</code>表达式。 张量关于张量的导数的意思很容易通过索引记号来定义，此记号在微分规则中大量使用：</p>
+
+
+
+<span class="katex">
+  \[
+\frac{dA}{dB}=\frac{d A_{ij}}{d B_{kl}} e_i \otimes e_j \otimes e_k \otimes e_l \tag{17.69}
+\]
+</span>
+
+<p>子表达式的导数经常是以被求值成字面常量。 对于索引表达式，重要的是，自由索引必须与导数一起正确传播。 因此，微分表达式有时会包含带有自由索引标记的字面常量。</p>
+<p>当索引求和绑定索引
+
+
+<span class="katex">
+  \(i\)
+</span>
+时，这是一个罕见而棘手的极端情况，比如 
+
+
+<span class="katex">
+  \((v_i v_i)\)
+</span>
+并且对其作关于
+
+
+<span class="katex">
+  \(x_i\)
+</span>
+的求导尝试。 最简单的例子是表达式
+
+
+<span class="katex">
+  \((v_i v_i)_{,j}\)
+</span>
+，它具有一个自由索引
+
+
+<span class="katex">
+  \(j\)
+</span>
+。 如果将
+
+
+<span class="katex">
+  \(j\)
+</span>
+替换为
+
+
+<span class="katex">
+  \(i\)
+</span>
+，则仍然可以很好地定义表达式，但是您永远不会手动编写
+
+
+<span class="katex">
+  \((v_i v_i)_{,i}\)
+</span>
+。 如果括号中的表达式定义为变量<code>e = v[i]*v[i]</code>，则表达式<code>e.dx(i)</code>看起来毫无问题。 但是，随着导数（包括索引
+
+
+<span class="katex">
+  \(i\)
+</span>
+）传播到终端，这将引起问题。 如果在当前的UFL实现中遇到这种情况，将检测到该情况并触发错误消息。 要变通解决此问题，只需使用不同的索引实例。 在UFL的未来版本中，可以通过重新标记索引来将任何表达式 
+
+
+<span class="katex">
+  \((\sum_i e_i)_{,i}\)
+</span>
+更改为 
+
+
+<span class="katex">
+  \((\sum_j e_j)_{,i}\)
+</span>
+来处理这种情况。</p>
+<h3 id="1774-高阶导数">17·7·4 高阶导数</h3>
+<p>简单的前向模式AD实现（例如算法6）仅考虑一个微分变量。 还必须支持使用微分变量的任何组合的高阶或嵌套微分算符。 一个简单的例子说明这样的表达式可以是</p>
+
+
+
+<span class="katex">
+  \[
+a = \frac{d}{dx} \left(\frac{d}{dx} f (x) + 2\frac{d}{dy} g(x, y)\right) \tag{17.70}
+\]
+</span>
+
+<p>考虑泛函框架中嵌套导数的实现的探讨，可以浏览几篇论文（Karczmarczuk，2001； Pearlmutter和Siskind，2007； Siskind和Pearlmutter，2008）。</p>
+<p>在当前的UFL实现中，已经用不同的方式解决了。 考虑方程（17.70），该方法只是首先计算最里面的导数
+
+
+<span class="katex">
+  \(\frac{d}{dx} f (x)\)
+</span>
+和
+
+
+<span class="katex">
+  \(\frac{d}{dy} g(x, y)\)
+</span>
+，然后计算外面的导数。 这种方法之所以可行，是因为与其他任何表达式一样，将求导计算的结果表示为表达式树。 之所以选择这种方法，是因为它易于实现且易于验证。 其他方法是否更快尚未进行调查。 此外，将来可以尝试使用可选的AD算法，例如反向模式，而无需担心在第一个实现中的嵌套导数。</p>
+<p>外部控制器函数<code>apply_ad</code>可处理可能有嵌套导数的表达式的单变量AD例程。 这个AD例程是一个接受导数表达式节点并返回已计算的单变量导数表达式的函数。  该例程可以是算法7的实现。 <code>apply_ad</code>的结果在数学上与输入相等，但是没有剩余的导数表达式节点。</p>
+<p>函数<code>apply_ad</code>的工作方式是：以后序遍历递归树，发现以导数根表示的子树，并将提供的AD例程应用于导数的子树。 由于<code>apply_ad</code>已访问导数节点的子节点，因此可以确保它们不含导数表达式节点，并且AD例程仅需要使用算法6和7处理上面讨论的情况。</p>
+<p><code>ad_routine</code>的复杂度应为
+
+
+<span class="katex">
+  \(O(n)\)
+</span>
+，其中
+
+
+<span class="katex">
+  \(n\)
+</span>
+为表达式树的大小。 导数表达式的大小与原始表达式成比例。 如果表达式树中有
+
+
+<span class="katex">
+  \(d\)
+</span>
+个导数表达式节点，则此算法的复杂度为
+
+
+<span class="katex">
+  \(O(dn)\)
+</span>
+，因为<code>ad_routine</code>要应用于子表达式
+
+
+<span class="katex">
+  \(d\)
+</span>
+次。 最坏情况，<code>apply_ad</code>的复杂度为
+
+
+<span class="katex">
+  \(O(n^2)\)
+</span>
+，但实际上
+
+
+<span class="katex">
+  \(d \ll n\)
+</span>
+。 该算法的递归实现如图17.4所示。</p>
+<p><img src="/notes/images/0255.jpg" alt="0255.jpg"></p>
+<center>图17.4 apply_ad过程的简单递归实现。</center>
+<h3 id="1775-基本微分规则">17·7·5 基本微分规则</h3>
+<p>要实现上述算法描述，我们必须为所有表达式节点类型实现微分规则。 算符的导数可以实现为与微分变量无关的通用规则，此乃众所周知，不再赘述。 终端表达式的导数取决于微分变量类型。 字面常量的导数当然总是为零，并且只有几何量的空间导数为非零。 由于UFL不知道形式参数（它们由形式编译器从外部提供），因此它们的空间导数( 
+
+
+<span class="katex">
+  \(\frac{\partial \phi^k}{\partial x_i}\)
+</span>
+ 和 
+
+
+<span class="katex">
+  \(\frac{\partial w^k}{\partial x_i}\)
+</span>
+ ) 也被视为输入参数。 在所有导数计算中，均假设形式系数不依赖于微分变量。 还有另外两种情况需要解释，用户定义变量和关于Coefficient的系数的导数。</p>
+<p>如果
+
+
+<span class="katex">
+  \(v\)
+</span>
+是一个Variable，那么我们可为任意终端表达式t定义
+
+
+<span class="katex">
+  \(\frac{dv}{dt} \equiv 0\)
+</span>
+。 如果
+
+
+<span class="katex">
+  \(v\)
+</span>
+为标量值，则
+
+
+<span class="katex">
+  \(\frac{dv}{dv}\equiv 1\)
+</span>
+。  此外，如果
+
+
+<span class="katex">
+  \(V\)
+</span>
+是张量值Variable，那么它关于自身的导数就是</p>
+
+
+
+<span class="katex">
+  \[
+\frac{dV}{dV}=\frac{d V_{ij}}{d V_{kl}} e_i \otimes e_j \otimes e_k \otimes e_l = \delta_{ik}\delta_{jl}e_i \otimes e_j \otimes e_k \otimes e_l \tag{17.71}
+\]
+</span>
+
+<p>另外，变量关于除了自身的其它量的导数，等于其表示的表达式的导数：</p>
+
+
+
+<span class="katex">
+  \[
+v = g \tag{17.72}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+\frac{dv}{dz}= \frac{dg}{dz} \tag{17.73}
+\]
+</span>
+
+<p>最后，我们考虑算符导数，它表示关于函数
+
+
+<span class="katex">
+  \(w\)
+</span>
+的所有系数
+
+
+<span class="katex">
+  \(\{w_k\}\)
+</span>
+的微分。  考虑一个对象单元，它表示一个以
+
+
+<span class="katex">
+  \(\{\phi_k\}\)
+</span>
+为基底的有限元空间
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+。 接下来考虑在此空间中定义的形式参数：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># UFL code</span>
+<span style="color:#75715e"># v = Argument(element) # 在较新版本中报错</span>
+v <span style="color:#f92672">=</span> Argument(element, <span style="color:#ae81ff">1</span>)
+w <span style="color:#f92672">=</span> Coefficient(element)
+</code></pre></div><p>Argument实例
+
+
+<span class="katex">
+  \(v\)
+</span>
+表示任何
+
+
+<span class="katex">
+  \(v\in \{\phi_k\}\)
+</span>
+，而Coefficient实例
+
+
+<span class="katex">
+  \(w\)
+</span>
+代表求和</p>
+
+
+
+<span class="katex">
+  \[
+w = \sum_k w_k \phi_k(x) \tag{17.74}
+\]
+</span>
+
+<p>
+
+
+<span class="katex">
+  \(w\)
+</span>
+关于任意
+
+
+<span class="katex">
+  \(w_k\)
+</span>
+的导数是
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+中对应的基函数，</p>
+
+
+
+<span class="katex">
+  \[
+\frac{\partial w}{\partial w_k}= \phi_k, \qquad k = 1, \dots , |V_h| \tag{17.75}
+\]
+</span>
+
+<p>可以用v表示，因为</p>
+
+
+
+<span class="katex">
+  \[
+v \in \langle \phi_k\rangle^{|V_h|}_{k=1} = \left\langle \frac{\partial w}{w_k}\right\rangle^{|V_h|}_{k=1} \tag{17.76}
+\]
+</span>
+
+<p>请注意，
+
+
+<span class="katex">
+  \(v\)
+</span>
+应该是尚未在形式中使用的基函数实例。</p>
+<h2 id="178-算法">17·8 算法</h2>
+<p>在本节中，将讨论一些核心算法和关键实现问题，其中大部分与Python编程语言有关。 因此，本节主要面向开发人员以及需要在技术层面上与UFL相关的其他人员。 Python用户可能还会在这里发现一些有趣的技术。</p>
+<h3 id="1781-python中的有效树遍历">17·8·1 Python中的有效树遍历</h3>
+<p>使用递归很自然地表示对树中所有节点执行一些操作：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">walk</span>(expression, pre_action, post_action):
+    pre_action(expression)
+    <span style="color:#66d9ef">for</span> o <span style="color:#f92672">in</span> expression<span style="color:#f92672">.</span>operands():
+        walk(o)
+    post_action(expression)
+</code></pre></div><p>此实现同时涵盖顺序遍历和后顺序遍历，在顺序遍历中每个节点在其子节点之前被访问，在后顺序遍历中每个节点在其子节点之后被访问。</p>
+<p>在节点集合上实现迭代的一种更“pythonic”的方法是使用生成器。 最小的实现可能是</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">post_traversal</span>(root):
+    <span style="color:#66d9ef">for</span> o <span style="color:#f92672">in</span> root<span style="color:#f92672">.</span>operands():
+        <span style="color:#66d9ef">yield</span> post_traversal(o)
+    <span style="color:#66d9ef">yield</span> root
+</code></pre></div><p>然后启用自然的Python语法在表达式节点上进行迭代：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+<span style="color:#66d9ef">for</span> e <span style="color:#f92672">in</span> post_traversal(expression):
+    post_action(e)
+</code></pre></div><p>为了提高效率，UFL中<code>post_traversal</code>的实际实现并未使用递归。 函数调用在Python中非常昂贵，这使得非递归实现比上面的实现快一个数量级。</p>
+<h3 id="1782-python中基于类型的函数分派">17·8·2 Python中基于类型的函数分派</h3>
+<p>符号计算和编译器实现中的常见任务是基于表达式节点类型来选择某些操作。 对于选定的少数几个操作，这是通过使用Expr子类中的函数重载来完成的，但这并不适合所有操作。  在许多情况下，特定类型的操作可以在算法中更好地实现，而不是分布在类定义中。 这种实现模式称为“访问者”模式（Gamma等，1995）。 UFL中的实现与静态类型语言（例如C++）中使用的模式有所不同。</p>
+<p>实现基于类型操作选择的一种方法是使用类型开关，它是一系列<code>if-tests</code>，如下所示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">operation</span>(expression):
+    <span style="color:#66d9ef">if</span> isinstance(expression, IntValue):
+        <span style="color:#66d9ef">return</span> int_operation(expression)
+    <span style="color:#66d9ef">elif</span> isinstance(expression, Sum):
+        <span style="color:#66d9ef">return</span> sum_operation(expression)
+    <span style="color:#75715e"># etc.</span>
+</code></pre></div><p>这种方法存在几个问题，其中一个是要检查的类型很多时的效率问题。 通过<code>MultiFunction</code>类可以实现一种效率与类型数无关的基于类型的函数分派机制。 底层机制是根据输入参数的类型进行字典查找（为O(1)），然后调用字典中的查找函数。 查找表仅在<code>MultiFunction</code>构造函数中构建一次。 使用Python的运行时类型检查功能会自动发现要插入表中的函数。</p>
+<p>多重函数声明为<code>MultiFunction</code>的子类。 对于应该特别处理的每种类型，在子类中声明一个成员函数。 Expr类使用<code>CamelCaps</code>命名约定，该约定会自动将对应函数名称转换成<code>underscore_notation</code>（例如<code>IndexSum</code>和<code>index_sum</code>）。 如果没有为类型声明处理函数，则使用最接近的超类处理函数。 注意，<code>MultiFunction</code>实现专用于<code>Expr</code>类层次结构中的类型。 以下示例代码说明了多重函数的声明和使用：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+
+<span style="color:#f92672">from</span> ufl.corealg.multifunction <span style="color:#f92672">import</span> MultiFunction <span style="color:#75715e"># 译者添加</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ExampleFunction</span>(MultiFunction):
+    <span style="color:#66d9ef">def</span> __init__(self):
+        MultiFunction<span style="color:#f92672">.</span>__init__(self)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">terminal</span>(self, expression):
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Got a Terminal subtype </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">.&#34;</span> <span style="color:#f92672">%</span> type(expression)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">operator</span>(self, expression):
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Got an Operator subtype </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">.&#34;</span> <span style="color:#f92672">%</span> type(expression)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">argument</span>(self, expression):
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Got an Argument.&#34;</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sum</span>(self, expression):
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Got a Sum.&#34;</span>
+
+m <span style="color:#f92672">=</span> ExampleFunction()
+
+cell <span style="color:#f92672">=</span> triangle
+<span style="color:#75715e"># x = cell.x</span>
+x <span style="color:#f92672">=</span> SpatialCoordinate(cell)
+element <span style="color:#f92672">=</span> FiniteElement(<span style="color:#e6db74">&#34;Lagrange&#34;</span>, cell, <span style="color:#ae81ff">1</span>)
+<span style="color:#75715e"># print(m(Argument(element)))</span>
+<span style="color:#66d9ef">print</span>(m(Argument(element,<span style="color:#ae81ff">1</span>)))
+<span style="color:#66d9ef">print</span>(m(x))
+<span style="color:#66d9ef">print</span>(m(x[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> x[<span style="color:#ae81ff">1</span>]))
+<span style="color:#66d9ef">print</span>(m(x[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> x[<span style="color:#ae81ff">1</span>]))
+</code></pre></div><p>注意，<code>argument</code>和<code>sum</code>将处理得到确切类型<code>Argument</code>和<code>Sum</code>的实例，而终端表达式和算符将处理类型<code>SpatialCoordinate</code>和<code>Product</code>，因为它们没有特定的处理程序。</p>
+<h3 id="1783-表达式变换的实现">17·8·3 表达式变换的实现</h3>
+<p>表达式的许多变换可以通过递归实现将某种特定类型的操作应用到每个表达式节点。 操作示例包括将表达式节点转换为字符串表示，使用符号外部库表达式的表示或具有某些不同属性的UFL表示。 此模式的一个简单变体可以使用多重函数来实现，来表示特定类型的操作：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">apply</span>(e, multifunction):
+    ops <span style="color:#f92672">=</span> [apply(o, multifunction) <span style="color:#66d9ef">for</span> o <span style="color:#f92672">in</span> e<span style="color:#f92672">.</span>operands()]
+    <span style="color:#66d9ef">return</span> multifunction(e, <span style="color:#f92672">*</span>ops)
+</code></pre></div><p>基本思想如下。 给定一个表达式节点e，首先将变换应用于每个子节点。 然后使用已变换过的子节点作为输入，根据e的类型返回一些特定的运算结果。</p>
+<p><code>Transformer</code>类实现了此模式。 使用这种模式定义一个新算法涉及到声明一个<code>Transformer</code>子类，并将特定类型的操作实现为此类的成员函数，就像使用<code>MultiFunction</code>一样。 区别在于成员函数对表达式节点的每个操作数都接受一个附加参数。 提供变换后的子节点作为这些附加参数。 以下代码将终端对象替换为在词典映射中找到的对象，并使用变换后的表达式树的<code>reconstructs</code>算符。 通过调用以类Visitor模式命名的visit函数将算法应用于表达式。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+
+<span style="color:#f92672">from</span> ufl.algorithms <span style="color:#f92672">import</span> Transformer <span style="color:#75715e"># 译者添加</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Replacer</span>(Transformer):
+    <span style="color:#66d9ef">def</span> __init__(self, mapping):
+        Transformer<span style="color:#f92672">.</span>__init__(self)
+        self<span style="color:#f92672">.</span>mapping <span style="color:#f92672">=</span> mapping
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">operator</span>(self, e, <span style="color:#f92672">*</span>ops):
+        <span style="color:#66d9ef">return</span> e<span style="color:#f92672">.</span>reconstruct(<span style="color:#f92672">*</span>ops)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">terminal</span>(self, e):
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>mapping<span style="color:#f92672">.</span>get(e, e)
+
+f <span style="color:#f92672">=</span> Constant(triangle)
+r <span style="color:#f92672">=</span> Replacer({f: f<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>})
+g <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>visit(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>f)  <span style="color:#75715e"># 报错，我尚未找到原因</span>
+</code></pre></div><p>运行此代码后，结果为
+
+
+<span class="katex">
+  \(g = 2f^2\)
+</span>
+。 <code>replace</code>函数的实际实现与此代码相似。</p>
+<p>在某些情况下，不应在子节点的父节点之前访问子节点。 使用<code>Transformer</code>可以轻松表达这种区别，只需为变换后的操作数省略成员函数参数即可。 有关使用此模式的算法的许多示例，请参见源代码。</p>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80">章节目录</a>】</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0123/">
+    下一页<br>UFL：有限元形式语言》算法(二)&amp;实现的问题【翻译】
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0121/">
+      上一页<br>UFL：有限元形式语言》形式算符&amp;表达式的表示【翻译】
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0122.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/fem/0122.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ii实现17ufl有限元形式语言计算导数算法一">II.实现》17.UFL：有限元形式语言》计算导数&amp;算法(一)</a>
+      <ul>
+        <li><a href="#177-计算导数">17·7 计算导数</a>
+          <ul>
+            <li><a href="#1771-计算导数的方法">17·7·1 计算导数的方法</a></li>
+            <li><a href="#1772-前向模式自动微分">17·7·2 前向模式自动微分</a></li>
+            <li><a href="#1773-张量和索引表达式的扩展">17·7·3 张量和索引表达式的扩展</a></li>
+            <li><a href="#1774-高阶导数">17·7·4 高阶导数</a></li>
+            <li><a href="#1775-基本微分规则">17·7·5 基本微分规则</a></li>
+          </ul>
+        </li>
+        <li><a href="#178-算法">17·8 算法</a>
+          <ul>
+            <li><a href="#1781-python中的有效树遍历">17·8·1 Python中的有效树遍历</a></li>
+            <li><a href="#1782-python中基于类型的函数分派">17·8·2 Python中基于类型的函数分派</a></li>
+            <li><a href="#1783-表达式变换的实现">17·8·3 表达式变换的实现</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Julia中的数学符号演算"><meta property="og:title" content="Julia中的数学符号演算" />
+<meta property="og:description" content="前言
+在整合Julia和Python的集成环境中已经配置好环境，可以在Jupyter中进行学习研究了。
+由于Julia本身暂时还没有好用的符号演算库，只好借用Python的SymPy库。所以，标题应该是“Julia和Python中的数学符号演算”，但由于本文都在Julia环境下进行，单独说Julia将就也可以。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/julia/0002/" />
+<meta property="article:published_time" content="2020-01-11T19:20:35+08:00" />
+<meta property="article:modified_time" content="2020-01-11T19:20:35+08:00" />
+<title>Julia中的数学符号演算 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a>
+<ul>
+<li><a href="/notes/docs/julia/0001/">整合Julia和Python的集成环境（Win10）</a></li>
+<li><a href="/notes/docs/julia/0095/">科学计算环境搭建（Win10+WSL2+Ubuntu）</a></li>
+<li><a href="/notes/docs/julia/0002/"class=active>Julia中的数学符号演算</a></li>
+<li><a href="/notes/docs/julia/0003/">基于Julia的科学计算功能库整理</a></li>
+<li><a href="/notes/docs/diffgeo/0070/">微分几何中的计算</a></li>
+<li><a href="/notes/docs/julia/0088/">平面三体问题</a></li>
+<li><a href="/notes/docs/julia/0089/">有限差分法求解一维热传导方程</a></li>
+<li><a href="/notes/docs/julia/0090/">Galerkin法解常微分方程边值问题</a></li>
+<li><a href="/notes/docs/julia/0091/">有限元法解常微分方程边值问题</a></li>
+<li><a href="/notes/docs/julia/0092/">有限元之平面三角单元</a></li>
+<li><a href="/notes/docs/julia/0093/">有限元之Delaunay三角剖分</a></li>
+<li><a href="/notes/docs/julia/0094/">有限元法解偏微分方程（FEniCS）</a></li>
+<li><a href="/notes/docs/julia/0096/">有限元法求解牛顿流体（FEniCS）</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Julia中的数学符号演算</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#前言">前言</a></li>
+        <li><a href="#变量符号">变量符号</a></li>
+        <li><a href="#带假设的变量符号">带假设的变量符号</a></li>
+        <li><a href="#sympy中的特殊常数">SymPy中的特殊常数</a></li>
+        <li><a href="#符号置换">符号置换</a></li>
+        <li><a href="#符号转换成数值">符号转换成数值</a></li>
+        <li><a href="#多项式常用操作">多项式常用操作</a>
+          <ul>
+            <li><a href="#1-展开">1 展开</a></li>
+            <li><a href="#2-因式分解">2 因式分解</a></li>
+            <li><a href="#3-合并同类项">3 合并同类项</a></li>
+            <li><a href="#4-化简">4 化简</a></li>
+          </ul>
+        </li>
+        <li><a href="#有理式常用操作">有理式常用操作</a>
+          <ul>
+            <li><a href="#1-分部">1 分部</a></li>
+            <li><a href="#2-合并公母">2 合并公母</a></li>
+            <li><a href="#3-消去分子分母公因子">3 消去分子分母公因子</a></li>
+          </ul>
+        </li>
+        <li><a href="#指数化简">指数化简</a></li>
+        <li><a href="#三角化简">三角化简</a></li>
+        <li><a href="#多项式系数">多项式系数</a></li>
+        <li><a href="#多项式的根">多项式的根</a>
+          <ul>
+            <li><a href="#1-实数根">1 实数根</a></li>
+            <li><a href="#2-复数根">2 复数根</a></li>
+            <li><a href="#3-更通用的求解方法">3 更通用的求解方法</a></li>
+          </ul>
+        </li>
+        <li><a href="#solve函数">solve函数</a></li>
+        <li><a href="#solve中的逻辑操作">solve中的逻辑操作</a></li>
+        <li><a href="#绘图">绘图</a></li>
+        <li><a href="#微积分">微积分</a>
+          <ul>
+            <li><a href="#1-极限">1 极限</a></li>
+            <li><a href="#2-导数">2 导数</a></li>
+            <li><a href="#3-积分">3 积分</a></li>
+            <li><a href="#4-泰勒级数">4 泰勒级数</a></li>
+          </ul>
+        </li>
+        <li><a href="#求和">求和</a></li>
+        <li><a href="#向量值函数">向量值函数</a></li>
+        <li><a href="#矩阵">矩阵</a></li>
+        <li><a href="#微分方程">微分方程</a>
+          <ul>
+            <li><a href="#初值问题">初值问题</a></li>
+          </ul>
+        </li>
+        <li><a href="#最后说明">最后说明</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/julia/0003/">
+    下一页<br>基于Julia的科学计算功能库整理
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/julia/0001/">
+      上一页<br>整合Julia和Python的集成环境（Win10）
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/julia/0002/">Julia中的数学符号演算</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-01-11</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/julia">julia</a>
+      , 
+      <a href="/notes/tags/%E7%AC%A6%E5%8F%B7%E6%BC%94%E7%AE%97">符号演算</a>
+      , 
+      <a href="/notes/tags/sympy">sympy</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/julia/0002.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h2 id="前言">前言</h2>
+<p>在<a href="https://joistwang.gitbook.io/notes/self/0001">整合Julia和Python的集成环境</a>中已经配置好环境，可以在<strong>Jupyter</strong>中进行学习研究了。</p>
+<p>由于Julia本身暂时还没有好用的符号演算库，只好借用Python的SymPy库。所以，标题应该是“Julia和Python中的数学符号演算”，但由于本文都在Julia环境下进行，单独说Julia将就也可以。</p>
+<p>安装SymPy:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">]
+pkg<span style="color:#f92672">&gt;</span> add SymPy　<span style="color:#75715e"># 安装SymPy的对应接口库</span>
+</code></pre></div><p>本文的内容主要来自，<a href="https://github.com/JuliaPy/SymPy.jl/blob/master/examples/tutorial.md">SymPy.jl教程</a> 和 <a href="https://docs.sympy.org/1.5.1/tutorial/index.html">SymPy官方教程</a>。</p>
+<p>模块导入:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#66d9ef">using</span> SymPy
+</code></pre></div><h2 id="变量符号">变量符号</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x y z                <span style="color:#75715e"># 无假设变量定义１</span>
+
+a,b,c <span style="color:#f92672">=</span> Sym(<span style="color:#e6db74">&#34;a,b,c&#34;</span>)       <span style="color:#75715e"># 无假设变量定义２</span>
+</code></pre></div><h2 id="带假设的变量符号">带假设的变量符号</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">u <span style="color:#f92672">=</span> symbols(<span style="color:#e6db74">&#34;u&#34;</span>)            <span style="color:#75715e"># 无假设变量定义３</span>
+
+t <span style="color:#f92672">=</span> symbols(<span style="color:#e6db74">&#34;t&#34;</span>, real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>) <span style="color:#75715e"># 带假设变量定义</span>
+y1, y2 <span style="color:#f92672">=</span> symbols(<span style="color:#e6db74">&#34;y1, y2&#34;</span>, positive<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>)
+alpha <span style="color:#f92672">=</span> symbols(<span style="color:#e6db74">&#34;alpha&#34;</span>, integer<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>, positive<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>)
+
+<span style="color:#a6e22e">@vars</span> u1 u2 positive<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>   <span style="color:#75715e"># @vars也能定义带假设变量</span>
+</code></pre></div><p>比如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#66d9ef">using</span> SymPy
+
+<span style="color:#a6e22e">@vars</span> x real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span> y
+
+solve(x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)  <span style="color:#75715e"># 应该无解（没实数解）</span>
+
+solve(y<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)  <span style="color:#75715e"># 应该有解</span>
+</code></pre></div><p><img src="/notes/images/0006.jpg" alt="0006.jpg"></p>
+<h2 id="sympy中的特殊常数">SymPy中的特殊常数</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">PI, oo
+</code></pre></div><p>依次代表SymPy中的<strong>符号圆周率</strong>，<strong>符号无穷大</strong>。 务必注意和julia中的pi和
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(\infty\)
+</span>
+区分。</p>
+<h2 id="符号置换">符号置换</h2>
+<p>单变量置换：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x y
+ex <span style="color:#f92672">=</span> x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+ex<span style="color:#f92672">.</span>subs(x, y)   <span style="color:#75715e"># 结果是y^2 + 2x +1</span>
+</code></pre></div><p>多变量置换</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x y z
+ex <span style="color:#f92672">=</span> x <span style="color:#f92672">+</span> y <span style="color:#f92672">+</span> z
+
+ex<span style="color:#f92672">.</span>subs((x,y),(<span style="color:#ae81ff">1</span>,pi)) <span style="color:#75715e"># 不建议这样置换，无法得到正确结果</span>
+ex(x<span style="color:#f92672">=&gt;</span><span style="color:#ae81ff">1</span>, y<span style="color:#f92672">=&gt;</span>pi)       <span style="color:#75715e">#  推荐使用</span>
+ex(<span style="color:#ae81ff">1</span>,pi)  　　　　　　  <span style="color:#75715e"># 等价与 ex(y=&gt;1, z=&gt;pi)</span>
+</code></pre></div><p><img src="/notes/images/0007.jpg" alt="0007.jpg"></p>
+<h2 id="符号转换成数值">符号转换成数值</h2>
+<p>以圆周率为范例展示（注意：后面有是符号还是数值的注释）：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">PI              <span style="color:#75715e"># 符号圆周率, 符号</span>
+N(PI)           <span style="color:#75715e"># 转换成无理数圆周率，数值</span>
+PI<span style="color:#f92672">.</span>evalf()　    <span style="color:#75715e"># 转换成默认个有效位数的圆周率，还是符号</span>
+PI<span style="color:#f92672">.</span>evalf(<span style="color:#ae81ff">30</span>)　  <span style="color:#75715e"># 转换成30个有效位数的圆周率，还是符号</span>
+N(PI<span style="color:#f92672">.</span>evalf(<span style="color:#ae81ff">30</span>)) <span style="color:#75715e"># 最后转换成有理数，数值</span>
+</code></pre></div><p><img src="/notes/images/0008.jpg" alt="0008.jpg"></p>
+<h2 id="多项式常用操作">多项式常用操作</h2>
+<h3 id="1-展开">1 展开</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x
+
+expr <span style="color:#f92672">=</span> expand(prod((x<span style="color:#f92672">-</span>i) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">5</span>))
+</code></pre></div><p>结果是：
+
+
+<span class="katex">
+  \(x^5−15x^4+85x^3−225x^2+274x−120\)
+</span>
+</p>
+<h3 id="2-因式分解">2 因式分解</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">factor(expr)
+</code></pre></div><p>结果是：
+
+
+<span class="katex">
+  \((x−5)(x−4)(x−3)(x−2)(x−1)\)
+</span>
+</p>
+<p>非规则多项式，有时也能因式分解：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">factor(exp(<span style="color:#ae81ff">2</span>x) <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>exp(x) <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>)
+</code></pre></div><p>结果是：
+
+
+<span class="katex">
+  \((e^x+1)(e^x+2)\)
+</span>
+</p>
+<h3 id="3-合并同类项">3 合并同类项</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x y q
+
+q <span style="color:#f92672">=</span> x<span style="color:#f92672">*</span>y <span style="color:#f92672">+</span> x<span style="color:#f92672">*</span>y<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>y <span style="color:#f92672">+</span> x
+
+collect(q, x)
+</code></pre></div><p>结果是：　
+
+
+<span class="katex">
+  \(x^2y+x(y^2+y+1)\)
+</span>
+</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">collect(q, y)
+</code></pre></div><p>结果是：
+
+
+<span class="katex">
+  \(xy^2+x+y(x^2+x)\)
+</span>
+</p>
+<h3 id="4-化简">4 化简</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">simplify(q)
+</code></pre></div><p>结果是：
+
+
+<span class="katex">
+  \(x(xy+y^2+y+1)\)
+</span>
+</p>
+<p>有时，展开操作也能起到化简的作用，可酌情先试试：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">expand((x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>(x <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">-</span> (x <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>x)
+</code></pre></div><p>结果是: -2</p>
+<h2 id="有理式常用操作">有理式常用操作</h2>
+<h3 id="1-分部">1 分部</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">apart( (<span style="color:#ae81ff">4</span>x<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">21</span>x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">10</span>x <span style="color:#f92672">+</span> <span style="color:#ae81ff">12</span>) <span style="color:#f92672">/</span>  (x<span style="color:#f92672">^</span><span style="color:#ae81ff">4</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>x<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>x))
+</code></pre></div><p>结果是：
+
+
+<span class="katex">
+  \(\dfrac{2x−1}{x^2+x+1}−\dfrac{1}{x+4}+\dfrac{3}{x}\)
+</span>
+</p>
+<h3 id="2-合并公母">2 合并公母</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">together(<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>)
+</code></pre></div><p>结果是：
+
+
+<span class="katex">
+  \(\dfrac{1}{x^2}(x+1)\)
+</span>
+</p>
+<h3 id="3-消去分子分母公因子">3 消去分子分母公因子</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">cancel((x<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span><span style="color:#f92672">-</span><span style="color:#ae81ff">6</span>x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">+</span><span style="color:#ae81ff">11</span>x<span style="color:#f92672">-</span><span style="color:#ae81ff">6</span>)<span style="color:#f92672">/</span>(x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>x<span style="color:#f92672">+</span><span style="color:#ae81ff">4</span>))
+</code></pre></div><p>结果是：
+
+
+<span class="katex">
+  \(\dfrac{x^2−5x+6}{x−4}\)
+</span>
+</p>
+<p>原式本质是：
+
+
+<span class="katex">
+  \(\dfrac{(x-1)(x-2)(x-3)}{(x-1)(x-4)}\)
+</span>
+</p>
+<h2 id="指数化简">指数化简</h2>
+<p>可以对含指数的表达式进行无条件或有条件的化简。背后实际是调用powsimp</p>
+<p>有条件化简：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x y nonnegative<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span> a real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+simplify(x<span style="color:#f92672">^</span>a <span style="color:#f92672">*</span> y<span style="color:#f92672">^</span>a <span style="color:#f92672">-</span> (x<span style="color:#f92672">*</span>y)<span style="color:#f92672">^</span>a)
+</code></pre></div><p>结果是：0</p>
+<p>无条件化简：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x y a
+simplify(x<span style="color:#f92672">^</span>a <span style="color:#f92672">*</span> y<span style="color:#f92672">^</span>a <span style="color:#f92672">-</span> (x<span style="color:#f92672">*</span>y)<span style="color:#f92672">^</span>a)
+</code></pre></div><p>结果是：
+
+
+<span class="katex">
+  \(x^ay^a−(xy)^a\)
+</span>
+</p>
+<h2 id="三角化简">三角化简</h2>
+<p>三角表达式的化简，背后实际是调用trigsimp，当然我们可以不关心。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> θ real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+
+simplify(cos(θ)<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> sin(θ)<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>)
+simplify(sin(<span style="color:#ae81ff">2</span>θ) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>sin(θ)<span style="color:#f92672">*</span>cos(θ))
+</code></pre></div><p>结果分别是： 1, 0</p>
+<h2 id="多项式系数">多项式系数</h2>
+<p>提取多项式系数</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> a b c x
+p <span style="color:#f92672">=</span> a<span style="color:#f92672">*</span>x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> b<span style="color:#f92672">*</span>x <span style="color:#f92672">+</span> c
+
+p<span style="color:#f92672">.</span>coeff(x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>)  <span style="color:#75715e"># a</span>
+p<span style="color:#f92672">.</span>coeff(x)    <span style="color:#75715e"># b</span>
+p(x<span style="color:#f92672">=&gt;</span><span style="color:#ae81ff">0</span>)       <span style="color:#75715e"># c</span>
+</code></pre></div><p>注意：SymPy原生有函数coeffs()来获取所有系数，但在Julia中执行会失败。但有两种变通的方法可以使用。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># p.coeffs() # SymPy原生有这个函数，但在Julia中执行会失败</span>
+
+<span style="color:#75715e"># 变通的方法</span>
+Sym[[p<span style="color:#f92672">.</span>coeff(x<span style="color:#f92672">^</span>i) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> N(degree(p,gen<span style="color:#f92672">=</span>x))<span style="color:#f92672">:-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">1</span>]; p(x<span style="color:#f92672">=&gt;</span><span style="color:#ae81ff">0</span>)]  
+
+<span style="color:#75715e"># 通过sympy构造对应的q, 这样才能调用SymPy原生的coeffs</span>
+q <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Poly(p, x)
+q<span style="color:#f92672">.</span>coeffs()
+</code></pre></div><h2 id="多项式的根">多项式的根</h2>
+<h3 id="1-实数根">1 实数根</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">real_roots(x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>)
+real_roots((x<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>)<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>(x<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">*</span>(x<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>x<span style="color:#f92672">*</span>(x<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>(x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>))
+</code></pre></div><p>结果分别是： 
+
+
+<span class="katex">
+  \(\left[ \begin{array}{r}- \sqrt{2}\\ \sqrt{2}\end{array} \right]\)
+</span>
+　和　
+
+
+<span class="katex">
+  \(\left[ \begin{array}{r}-1\\0\\1\\2\\3\\3\end{array} \right]\)
+</span>
+</p>
+<h3 id="2-复数根">2 复数根</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">Sym(roots(a<span style="color:#f92672">*</span>x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> b<span style="color:#f92672">*</span>x <span style="color:#f92672">+</span> c,x))
+
+Sym(roots((x<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>)<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>(x<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">*</span>(x<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>x<span style="color:#f92672">*</span>(x<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>(x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)))
+
+<span style="color:#75715e"># 对应的数值根</span>
+<span style="color:#75715e"># nroots((x-3)^2*(x-2)*(x-1)*x*(x+1)*(x^2 + x + 1)) </span>
+</code></pre></div><p>结果分别是：　 
+
+
+<span class="katex">
+  \(\left \{ - \frac{b}{2 a} - \frac{1}{2 a} \sqrt{- 4 a c + b^{2}} : 1, \quad - \frac{b}{2 a} + \frac{1}{2 a} \sqrt{- 4 a c + b^{2}} : 1\right \}\)
+</span>
+　和　
+
+
+<span class="katex">
+  \(\left \{ -1 : 1, \quad 0 : 1, \quad 1 : 1, \quad 2 : 1, \quad 3 : 2, \quad - \frac{1}{2} - \frac{\sqrt{3} i}{2} : 1, \quad - \frac{1}{2} + \frac{\sqrt{3} i}{2} : 1\right \}\)
+</span>
+</p>
+<h3 id="3-更通用的求解方法">3 更通用的求解方法</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">rts <span style="color:#f92672">=</span> solve((x<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>)<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>(x<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">*</span>(x<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>x<span style="color:#f92672">*</span>(x<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>(x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>))
+
+<span style="color:#75715e"># 可求得数值</span>
+<span style="color:#75715e"># N.(rts)</span>
+</code></pre></div><p>结果是： 
+
+
+<span class="katex">
+  \(\left[ \begin{array}{r}-1\\0\\1\\2\\3\\- \frac{1}{2} - \frac{\sqrt{3} i}{2}\\- \frac{1}{2} + \frac{\sqrt{3} i}{2}\end{array} \right]\)
+</span>
+</p>
+<h2 id="solve函数">solve函数</h2>
+<p>除了仅查找单变量多项式的根以外，solve函数还具有更广泛的用途。该函数尝试求解表达式为0或一组表达式都为0的情况。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">solve(cos(x) <span style="color:#f92672">-</span> sin(x))     <span style="color:#75715e"># 返回一个确定范围内的解</span>
+solveset(cos(x) <span style="color:#f92672">-</span> sin(x))  <span style="color:#75715e"># 返回一个解集合</span>
+</code></pre></div><p>结果分别是： 
+
+
+<span class="katex">
+  \(\left[ \begin{array}{r}- \frac{3 \pi}{4}\\ \frac{\pi}{4}\end{array} \right]\)
+</span>
+ 和 
+
+
+<span class="katex">
+  \(\left\{2 n \pi + \frac{5 \pi}{4}\; |\; n \in \mathbb{Z}\right\} \cup \left\{2 n \pi + \frac{\pi}{4}\; |\; n \in \mathbb{Z}\right\}\)
+</span>
+</p>
+<p>其中，solveset得到的是一个集合，对有限解集而言，可用collect来收集解，但需要先转换成Julia集，再收集：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">v <span style="color:#f92672">=</span> solveset(x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">4</span>)
+
+collect(<span style="color:#66d9ef">Set</span>(v<span style="color:#f92672">...</span>)) <span style="color:#75715e"># 先转换成Julia集，再收集</span>
+
+elements(v) <span style="color:#75715e"># 也可以直接获得</span>
+</code></pre></div><p>第二个表达式的结果是： 
+
+
+<span class="katex">
+  \(\left[ \begin{array}{r}-2\\2\end{array} \right]\)
+</span>
+</p>
+<p>需要注意的是，SymPy中的solve是有局限性的，如果没有形式解，将会报错：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">solve(cos(x) <span style="color:#f92672">-</span> x)  <span style="color:#75715e"># 没有形式解，会报错</span>
+</code></pre></div><p>此时，只能求对应的数值解：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">nsolve(cos(x) <span style="color:#f92672">-</span> x, <span style="color:#ae81ff">1</span>)
+</code></pre></div><p>结果是：0.7390851332151606416553120876738734040134117589007574649656806357732846548836</p>
+<p>尽管不是什么都是能求解，但可能的话，能够给出一般形式的解，比如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> a b c real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+p <span style="color:#f92672">=</span> a<span style="color:#f92672">*</span>x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> b<span style="color:#f92672">*</span>x <span style="color:#f92672">+</span> c
+
+solve(p, x)
+solveset(p, x)
+</code></pre></div><p>结果分别是： 
+
+
+<span class="katex">
+  \(\left[ \begin{array}{r}\frac{1}{2 a} \left(- b + \sqrt{- 4 a c + b^{2}}\right)\\- \frac{1}{2 a} \left(b + \sqrt{- 4 a c + b^{2}}\right)\end{array} \right]\)
+</span>
+　和 
+
+
+<span class="katex">
+  \(\left\{- \frac{b}{2 a} - \frac{1}{2 a} \sqrt{- 4 a c + b^{2}}, - \frac{b}{2 a} + \frac{1}{2 a} \sqrt{- 4 a c + b^{2}}\right\}\)
+</span>
+</p>
+<p>还可以求解方程组：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x y real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+exs <span style="color:#f92672">=</span> [<span style="color:#ae81ff">2</span>x<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>y<span style="color:#f92672">-</span><span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">3</span>x<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>y<span style="color:#f92672">-</span><span style="color:#ae81ff">12</span>]
+d <span style="color:#f92672">=</span> solve(exs)
+Sym(d)
+</code></pre></div><p>结果是： 
+
+
+<span class="katex">
+  \(\left \{ x : \frac{60}{17}, \quad y : - \frac{6}{17}\right \}\)
+</span>
+</p>
+<p>将这个结果代入原方程，看是否每个表达式都为０：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">map(ex <span style="color:#f92672">-&gt;</span> ex<span style="color:#f92672">.</span>subs(d), exs)
+</code></pre></div><p>ＯＫ，结果的确都为０：　 
+
+
+<span class="katex">
+  \(\left[ \begin{array}{r}0\\0\end{array} \right]\)
+</span>
+</p>
+<p>我们也可以选定求解变量：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> a b c h real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+p <span style="color:#f92672">=</span> a<span style="color:#f92672">*</span>x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> b<span style="color:#f92672">*</span>x <span style="color:#f92672">+</span> c
+fn <span style="color:#f92672">=</span> cos
+exs <span style="color:#f92672">=</span> [fn(<span style="color:#ae81ff">0</span><span style="color:#f92672">*</span>h)<span style="color:#f92672">-</span>p(x<span style="color:#f92672">=&gt;</span><span style="color:#ae81ff">0</span>), fn(h)<span style="color:#f92672">-</span>p(x <span style="color:#f92672">=&gt;</span> h), fn(<span style="color:#ae81ff">2</span>h)<span style="color:#f92672">-</span>p(x <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">2</span>h)]
+d <span style="color:#f92672">=</span> solve(exs, [a,b,c]) <span style="color:#75715e"># 选定a,b,c为待求解变量</span>
+Sym(d)
+</code></pre></div><p>结果是： 
+
+
+<span class="katex">
+  \(\left \{ a : \frac{1}{2 h^{2}} \left(- 2 \cos{\left (h \right )} + \cos{\left (2 h \right )} + 1\right), \quad b : \frac{1}{2 h} \left(4 \cos{\left (h \right )} - \cos{\left (2 h \right )} - 3\right), \quad c : 1\right \}\)
+</span>
+</p>
+<p>将结果d代入p表达式:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">quad_approx <span style="color:#f92672">=</span> p<span style="color:#f92672">.</span>subs(d)
+</code></pre></div><p>得到：
+
+
+<span class="katex">
+  \(1 + \frac{x}{2 h} \left(4 \cos{\left (h \right )} - \cos{\left (2 h \right )} - 3\right) + \frac{x^{2}}{2 h^{2}} \left(- 2 \cos{\left (h \right )} + \cos{\left (2 h \right )} + 1\right)\)
+</span>
+</p>
+<p>最后我们再求解一个方程：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">n <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+<span style="color:#a6e22e">@vars</span> x c
+as <span style="color:#f92672">=</span> Sym[<span style="color:#e6db74">&#34;a</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span>(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)]
+bs <span style="color:#f92672">=</span> Sym[<span style="color:#e6db74">&#34;b</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span>(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)]
+p <span style="color:#f92672">=</span> sum([as[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">*</span>x<span style="color:#f92672">^</span>i <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span>(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)])
+q <span style="color:#f92672">=</span> sum([bs[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">*</span>(x<span style="color:#f92672">-</span>c)<span style="color:#f92672">^</span>i <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span>(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)])
+d <span style="color:#f92672">=</span> solve(p<span style="color:#f92672">-</span>q, bs)
+Sym(d)
+</code></pre></div><p>结果是： 
+
+
+<span class="katex">
+  \(\left \{ b_{0} : a_{0} + a_{1} c + a_{2} c^{2}, \quad b_{1} : a_{1} + 2 a_{2} c, \quad b_{2} : a_{2}\right \}\)
+</span>
+</p>
+<h2 id="solve中的逻辑操作">solve中的逻辑操作</h2>
+<p>前面的solve中，没必须将表达式写成ex=0，但对更复杂的方程，还是需要逻辑操作的。</p>
+<p>在SymPy中，定义了各种逻辑操作：Eq, Lt, Le, Ge, Gt。　在Julia中则可用符号替代：<code>\ll[tab]</code>(
+
+
+<span class="katex">
+  \(\ll\)
+</span>
+), <code>\leqq[tab]</code>(
+
+
+<span class="katex">
+  \(\leqq\)
+</span>
+), <code>\Equal[tab]</code>(
+
+
+<span class="katex">
+  \(==\)
+</span>
+), <code>\geqq[tab]</code>(
+
+
+<span class="katex">
+  \(\geqq\)
+</span>
+), <code>\gg[tab]</code>(
+
+
+<span class="katex">
+  \(\gg\)
+</span>
+) , <code>\neg[tab]</code>(
+
+
+<span class="katex">
+  \(\neg\)
+</span>
+)。</p>
+<p>比如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x y real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+exs <span style="color:#f92672">=</span> [<span style="color:#ae81ff">2</span>x<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>y ⩵ <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">3</span>x<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>y ⩵ <span style="color:#ae81ff">12</span>]    <span style="color:#75715e">## Using \Equal[tab]</span>
+d <span style="color:#f92672">=</span> solve(exs)
+Sym(d)
+</code></pre></div><p>结果是： 
+
+
+<span class="katex">
+  \(\left \{ x : \frac{60}{17}, \quad y : - \frac{6}{17}\right \}\)
+</span>
+</p>
+<h2 id="绘图">绘图</h2>
+<p>Plots库可以直接绘制处于符号状态的表达式，比如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#66d9ef">using</span> Plots
+
+<span style="color:#a6e22e">@vars</span> x
+
+plot(x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>)
+</code></pre></div><p><img src="/notes/images/0009.jpg" alt="0009.jpg"></p>
+<p>再比如参数绘制：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">plot(sin(<span style="color:#ae81ff">2</span>x), cos(<span style="color:#ae81ff">3</span>x), <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">4</span>pi)
+</code></pre></div><p><img src="/notes/images/0010.jpg" alt="0010.jpg"></p>
+<h2 id="微积分">微积分</h2>
+<h3 id="1-极限">1 极限</h3>
+<p>比如计算
+
+
+<span class="katex">
+  \(\lim\limits_{x \to +\infty}{\dfrac{\sin(x)}{x}}=1\)
+</span>
+，有两种写法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x
+
+limit(sin(x)<span style="color:#f92672">/</span>x, x, <span style="color:#ae81ff">0</span>) <span style="color:#75715e"># 写法１：3个参数</span>
+limit(sin(x)<span style="color:#f92672">/</span>x, x<span style="color:#f92672">=&gt;</span><span style="color:#ae81ff">0</span>) <span style="color:#75715e"># 写法２：2个参数, 我喜欢这种</span>
+</code></pre></div><p>至于
+
+
+<span class="katex">
+  \(\infty\)
+</span>
+，可以写成两个o来表示，即<code>oo</code>：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">limit((<span style="color:#ae81ff">1</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>x)<span style="color:#f92672">^</span>x, x <span style="color:#f92672">=&gt;</span> oo)　<span style="color:#75715e"># 结果是　e</span>
+</code></pre></div><p>即：
+
+
+<span class="katex">
+  \(\lim\limits_{x \to \infty}{(1+\dfrac{1}{x})^x}=e\)
+</span>
+</p>
+<p>再比如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> a positive<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+
+ex <span style="color:#f92672">=</span> (sqrt(<span style="color:#ae81ff">2</span>a<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span><span style="color:#f92672">*</span>x<span style="color:#f92672">-</span>x<span style="color:#f92672">^</span><span style="color:#ae81ff">4</span>) <span style="color:#f92672">-</span> a<span style="color:#f92672">*</span>(a<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>x)<span style="color:#f92672">^</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">//</span><span style="color:#ae81ff">3</span>)) <span style="color:#f92672">/</span> (a <span style="color:#f92672">-</span> (a<span style="color:#f92672">*</span>x<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span>)<span style="color:#f92672">^</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">//</span><span style="color:#ae81ff">4</span>))
+
+ex(x<span style="color:#f92672">=&gt;</span>a)          <span style="color:#75715e"># 返回NaN，错误</span>
+denom(ex)(x <span style="color:#f92672">=&gt;</span> a), numer(ex)(x <span style="color:#f92672">=&gt;</span> a)<span style="color:#75715e"># 返回(0,0),找到原因</span>
+limit(ex, x <span style="color:#f92672">=&gt;</span> a) <span style="color:#75715e"># 返回16a/9,正确</span>
+</code></pre></div><h4 id="左右极限">左、右极限</h4>
+<p>对于左右极限，可用表示方向的可选参数<code>dir=&quot;-&quot;</code>, <code>dir=&quot;+&quot;</code>,比如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">limit(sign(x), x <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">0</span>, dir<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-&#34;</span>), limit(sign(x), x <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">0</span>, dir<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;+&#34;</span>)  <span style="color:#75715e"># 结果是：　(-1,1)</span>
+</code></pre></div><h4 id="数值的局限性">数值的局限性</h4>
+<p>我现在考虑一个特别的函数
+
+
+<span class="katex">
+  \(f(x)=x^{- \log{\left (\log{\left (\log{\left (\log{\left (\frac{1}{x} \right )} \right )} \right )} \right )} + 1}\)
+</span>
+,很明显这个函数的定义域是：
+
+
+<span class="katex">
+  \((0,\infty)\)
+</span>
+</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">f(x) <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>x<span style="color:#f92672">^</span>(log(log(log(log(<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>x)))) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
+
+plot(f(x),<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0.1</span>) <span style="color:#75715e"># 绘图展示此函数的形态</span>
+</code></pre></div><p><img src="/notes/images/0002.jpg" alt="0002.jpg"></p>
+<p>从此图看，我们会感觉到，向左趋向0的极限，趋向
+
+
+<span class="katex">
+  \(\infty\)
+</span>
+的极限都应该是０。但实际情况是：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">limit(f(x), x <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">0</span>, dir<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;＋&#34;</span>), limit(f(x), x <span style="color:#f92672">=&gt;</span> oo)
+</code></pre></div><p>返回的结果是：(oo, 0)。</p>
+<p>这个例子说明了<code>数值的局限性</code>。<code>limit</code>函数使用了Gruntz算法，它比简单的极限数值尝试可靠得多。</p>
+<h3 id="2-导数">2 导数</h3>
+<p>我们自然可以根据导数的定义用极限进行求导：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x h
+f(x) <span style="color:#f92672">=</span> exp(x)<span style="color:#f92672">*</span>sin(x)
+limit((f(x<span style="color:#f92672">+</span>h) <span style="color:#f92672">-</span> f(x)) <span style="color:#f92672">/</span> h, h, <span style="color:#ae81ff">0</span>)
+</code></pre></div><p>返回结果是：
+
+
+<span class="katex">
+  \(e^{x} \sin{\left (x \right )} + e^{x} \cos{\left (x \right )}\)
+</span>
+</p>
+<p>关于求导，推荐的方法还是使用<code>diff</code>函数：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">diff(f(x))  　　<span style="color:#75715e"># 对默认符号变量x求导</span>
+diff(f(x),x)   <span style="color:#75715e"># 对指定符号变量x求导, 【推荐】</span>
+</code></pre></div><p>返回结果：
+
+
+<span class="katex">
+  \(e^{x} \sin{\left (x \right )} + e^{x} \cos{\left (x \right )}\)
+</span>
+</p>
+<p>二阶导数（n阶导数类推），比如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">diff(exp(<span style="color:#f92672">-</span>x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>), x, <span style="color:#ae81ff">2</span>) <span style="color:#75715e"># 用２表示二阶导数，【推荐】</span>
+diff(exp(<span style="color:#f92672">-</span>x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>), x, x) <span style="color:#75715e"># 用两个x表示二阶导数</span>
+</code></pre></div><p>返回结果：
+
+
+<span class="katex">
+  \(2 \left(2 x^{2} - 1\right) e^{- x^{2}}\)
+</span>
+</p>
+<p>我们经常要求解微分后等于０的方程，可以用<code>diff</code>和<code>solve</code>通过<code>|&gt;</code>进行组合来实现：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">f(x) <span style="color:#f92672">=</span> (<span style="color:#ae81ff">12</span>x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> (x<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span>)
+diff(f(x), x) <span style="color:#f92672">|&gt;</span> solve
+</code></pre></div><p>返回的结果是： 
+
+
+<span class="katex">
+  \(\left[ \begin{array}{r}- \frac{1}{2}\\ \frac{1}{2}\end{array} \right]\)
+</span>
+</p>
+<h4 id="偏导数">偏导数</h4>
+<p><code>diff</code>也可用来求偏导数，比如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x y
+ex <span style="color:#f92672">=</span> x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>cos(y)
+Sym[diff(ex,v1, v2) <span style="color:#66d9ef">for</span> v1 <span style="color:#66d9ef">in</span> [x,y], v2 <span style="color:#66d9ef">in</span> [x,y]]
+</code></pre></div><p>返回的结果： 
+
+
+<span class="katex">
+  \(\left[ \begin{array}{rr}2 \cos{\left (y \right )}&- 2 x \sin{\left (y \right )}\\- 2 x \sin{\left (y \right )}&- x^{2} \cos{\left (y \right )}\end{array}\right]\)
+</span>
+</p>
+<h4 id="形式求导">形式求导</h4>
+<p>所谓<code>形式求导</code>，就是给出求导形式，但暂时不计算出求导结果。比如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">ex <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Derivative(exp(x<span style="color:#f92672">*</span>y), x, y, <span style="color:#ae81ff">2</span>)
+</code></pre></div><p>返回的结果是：
+
+
+<span class="katex">
+  \(\frac{\partial^{3}}{\partial x\partial y^{2}}  e^{x y}\)
+</span>
+。　　　</p>
+<p>这个函数julia中没有，需要通过sympy调用。</p>
+<p>当然，这个形式求导可以在需要的时候将求导结果计算出来：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">ex<span style="color:#f92672">.</span>doit()
+</code></pre></div><p>返回的结果是：
+
+
+<span class="katex">
+  \(x \left(x y + 2\right) e^{x y}\)
+</span>
+</p>
+<h4 id="隐式求导">隐式求导</h4>
+<p>所谓<code>隐式求导</code>，就是给出多个变量之间的方程关系，求其中一个变量相对其它变量的导数。也就是对<code>隐函数求导</code>。 比如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x y                   <span style="color:#75715e"># 定义变量</span>
+F, G <span style="color:#f92672">=</span> SymFunction(<span style="color:#e6db74">&#34;F,G&#34;</span>)   <span style="color:#75715e"># 定义隐函数</span>
+
+ex <span style="color:#f92672">=</span> y<span style="color:#f92672">^</span><span style="color:#ae81ff">4</span> <span style="color:#f92672">-</span> x<span style="color:#f92672">^</span><span style="color:#ae81ff">4</span> <span style="color:#f92672">-</span> y<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#75715e"># 关系ex=0</span>
+ex1 <span style="color:#f92672">=</span> ex(y<span style="color:#f92672">=&gt;</span>F(x))           <span style="color:#75715e"># 将隐函数代入</span>
+ex2 <span style="color:#f92672">=</span> diff(ex1, x)          <span style="color:#75715e"># 求导</span>
+ex3 <span style="color:#f92672">=</span> solve(ex2, F<span style="color:#f92672">&#39;</span>(x))[<span style="color:#ae81ff">1</span>]  <span style="color:#75715e"># 求隐函数导数的形式解</span>
+ex4 <span style="color:#f92672">=</span> ex3(F(x) <span style="color:#f92672">=&gt;</span> y)        <span style="color:#75715e"># 隐函数复原后，就是隐式求导结果</span>
+[ex⩵0,ex1⩵0,ex2⩵0,F<span style="color:#f92672">&#39;</span>(x)⩵ex3,F<span style="color:#f92672">&#39;</span>(x)⩵ex4]
+</code></pre></div><p>计算过程：</p>
+
+
+
+<span class="katex">
+  \[
+\left. \begin{array}{r}- x^{4} + 2 x^{2} + y^{4} - y^{2} = 0\\- x^{4} + 2 x^{2} + F^{4}{\left (x \right )} - F^{2}{\left (x \right )} = 0\\- 4 x^{3} + 4 x + 4 F^{3}{\left (x \right )} \frac{d}{d x} F{\left (x \right )} - 2 F{\left (x \right )} \frac{d}{d x} F{\left (x \right )} = 0\\ \frac{d}{d x} F{\left (x \right )} = \frac{2 x \left(x^{2} - 1\right)}{\left(2 F^{2}{\left (x \right )} - 1\right) F{\left (x \right )}}\\ \frac{d}{d x} F{\left (x \right )} = \frac{2 x \left(x^{2} - 1\right)}{y \left(2 y^{2} - 1\right)}\end{array} \right.
+\]
+</span>
+
+<h4 id="范例最大化诺尔曼窗口的面积">范例：最大化诺尔曼窗口的面积</h4>
+<p>如下图（诺尔曼窗口），周长固定的前提下，求诺尔曼窗口面积最大的宽高。</p>
+<p><img src="/notes/images/0003.jpg" alt="0003.jpg"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> w h P nonnegative<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span> <span style="color:#75715e"># 宽w,高h, 周长P（固定）</span>
+r <span style="color:#f92672">=</span> w<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>                      <span style="color:#75715e"># 半圆的半径r</span>
+A <span style="color:#f92672">=</span> w<span style="color:#f92672">*</span>h <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">//</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> (pi <span style="color:#f92672">*</span> r<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>)  <span style="color:#75715e"># 诺尔曼窗口面积</span>
+p <span style="color:#f92672">=</span> w <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>h <span style="color:#f92672">+</span> pi<span style="color:#f92672">*</span>r            <span style="color:#75715e"># 周长</span>
+</code></pre></div><p>求解目标：A最大化。</p>
+<p>首先根据周长固定的约束条件，消除变量h，保留一个变量w：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">h0 <span style="color:#f92672">=</span>  solve(P<span style="color:#f92672">-</span>p, h)[<span style="color:#ae81ff">1</span>]
+A1 <span style="color:#f92672">=</span> A(h <span style="color:#f92672">=&gt;</span> h0)
+</code></pre></div><p>得到关于w的面积公式：
+
+
+<span class="katex">
+  \(\frac{\pi w^{2}}{8} + w \left(\frac{P}{2} - \frac{\pi w}{4} - \frac{w}{2}\right)\)
+</span>
+</p>
+<p>要使这个面积最大，除了极值外，还需要考虑
+
+
+<span class="katex">
+  \(w=0\)
+</span>
+和
+
+
+<span class="katex">
+  \(h=0\)
+</span>
+这两个端点的情况：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">A1(w <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">0</span>)                     <span style="color:#75715e"># 宽０,则面积０,不是目标解</span>
+b <span style="color:#f92672">=</span> solve((P<span style="color:#f92672">-</span>p)(h <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">0</span>), w)[<span style="color:#ae81ff">1</span>] <span style="color:#75715e"># 高０时所对应的宽</span>
+</code></pre></div><p>下面求面积极值所对应的宽：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">c <span style="color:#f92672">=</span> solve(diff(A1, w), w)[<span style="color:#ae81ff">1</span>]
+</code></pre></div><p>比较宽分别为b,c时，谁面积更大，面积更大者为问题解：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">simplify(A1(w <span style="color:#f92672">=&gt;</span> c)<span style="color:#f92672">-</span>A1(w <span style="color:#f92672">=&gt;</span> b))
+</code></pre></div><p>返回的结果是正值：
+
+
+<span class="katex">
+  \(\frac{2 P^{2}}{16 + \pi^{3} + 20 \pi + 8 \pi^{2}}\)
+</span>
+</p>
+<p>这个结果说明，当宽度为c时，面积最大。 对应的宽度，高度，面积分别是：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">simplify<span style="color:#f92672">.</span>([c,h0(w<span style="color:#f92672">=&gt;</span>c),A1(w<span style="color:#f92672">=&gt;</span>c)])
+</code></pre></div><p>结果是：</p>
+
+
+
+<span class="katex">
+  \[
+\left[ \begin{array}{r}\frac{2 P}{\pi + 4}\\ \frac{P}{\pi + 4}\\ \frac{P^{2}}{2 \left(\pi + 4\right)}\end{array} \right]
+\]
+</span>
+
+<p>这个结果表明：宽是高的２倍为此问题的最优解。</p>
+<h3 id="3-积分">3 积分</h3>
+<p>首先来一个不定积分：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x n real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+
+ex <span style="color:#f92672">=</span> integrate(x<span style="color:#f92672">^</span>n, x)  <span style="color:#75715e"># 不定积分的参数和diff基本一致</span>
+</code></pre></div><p>返回结果： 
+
+
+<span class="katex">
+  \(\begin{cases} \log{\left (x \right )} & \text{for}\: n = -1 \\ \frac{x^{n + 1}}{n + 1} & \text{otherwise} \end{cases}\)
+</span>
+</p>
+<p>至于定积分，只需要将变量扩展成变量区间即可：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">integrate(x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>, (x, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>)) <span style="color:#75715e"># 将不定积分x换成形如(x,0,1)</span>
+</code></pre></div><p>结果是：
+
+
+<span class="katex">
+  \(\dfrac{1}{3}\)
+</span>
+</p>
+<h4 id="多重积分">多重积分</h4>
+<p>多重积分，主要将一个变量元组换成多个变量元组即可，比如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x y
+integrate(x<span style="color:#f92672">*</span>y, (y, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>), (x, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>)) <span style="color:#75715e"># 这里有两个变量元组</span>
+</code></pre></div><p>再比如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 内层积分的变量的上下限可以依赖外层积分的变量</span>
+integrate(x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>y, (y, <span style="color:#ae81ff">0</span>, sqrt(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>)), (x, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>))
+</code></pre></div><h4 id="形式积分">形式积分</h4>
+<p><code>形式积分</code>　和　<code>形式求导</code>对应，比如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">integ <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Integral(sin(x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>), x)
+[integ,integ<span style="color:#f92672">.</span>doit()]
+</code></pre></div><p>结果是： 
+
+
+<span class="katex">
+  \(\left[ \begin{array}{r}\int \sin{\left (x^{2} \right )}\, dx\\ \frac{3 \sqrt{2} \sqrt{\pi} S\left(\frac{\sqrt{2} x}{\sqrt{\pi}}\right)}{8 \Gamma{\left(\frac{7}{4} \right)}} \Gamma{\left(\frac{3}{4} \right)}\end{array} \right]\)
+</span>
+</p>
+<h3 id="4-泰勒级数">4 泰勒级数</h3>
+<p>比如，求关于x，在０点附近，４阶的泰勒级数展开：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x
+s1 <span style="color:#f92672">=</span> series(exp(sin(x)), x, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">4</span>)
+</code></pre></div><p>结果是：
+
+
+<span class="katex">
+  \(1 + x + \frac{x^{2}}{2} + \mathcal{O}\left(x^{4}\right)\)
+</span>
+</p>
+<p>将两个泰勒级数展开式相乘：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">s2 <span style="color:#f92672">=</span> series(cos(exp(x)), x, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">6</span>)
+s3 <span style="color:#f92672">=</span> simplify(s1 <span style="color:#f92672">*</span> s2)　　<span style="color:#75715e">#　相乘后再化简</span>
+</code></pre></div><p>结果是：
+
+
+<span class="katex">
+  \(\cos{\left (1 \right )} + \sqrt{2} x \cos{\left (\frac{\pi}{4} + 1 \right )} - \frac{3 x^{2}}{2} \sin{\left (1 \right )} - \sqrt{2} x^{3} \sin{\left (\frac{\pi}{4} + 1 \right )} + \mathcal{O}\left(x^{4}\right)\)
+</span>
+</p>
+<p>去除高阶项：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">s3<span style="color:#f92672">.</span>removeO()
+</code></pre></div><p>结果是：
+
+
+<span class="katex">
+  \(- \sqrt{2} x^{3} \sin{\left (\frac{\pi}{4} + 1 \right )} - \frac{3 x^{2}}{2} \sin{\left (1 \right )} + \sqrt{2} x \cos{\left (\frac{\pi}{4} + 1 \right )} + \cos{\left (1 \right )}\)
+</span>
+</p>
+<h2 id="求和">求和</h2>
+<p>比如计算
+
+
+<span class="katex">
+  \(\sum\limits_{i=1}^n{i^2}\)
+</span>
+的结果：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> i n
+summation(i<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>, (i, <span style="color:#ae81ff">1</span>, n))
+</code></pre></div><p>结果是：
+
+
+<span class="katex">
+  \(\frac{n^{3}}{3} + \frac{n^{2}}{2} + \frac{n}{6}\)
+</span>
+</p>
+<p>自然也可以进行形式求和：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">sn <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>Sum(<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>i<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>, (i, <span style="color:#ae81ff">1</span>, n))
+</code></pre></div><p>结果是：
+
+
+<span class="katex">
+  \(\sum\limits_{i=1}^{n} \frac{1}{i^{2}}\)
+</span>
+</p>
+<p>关于无穷项求和，有两种方法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">limit(sn<span style="color:#f92672">.</span>doit(), n, oo)      <span style="color:#75715e"># 先求和，再取极限</span>
+summation(<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>i<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>, (i, <span style="color:#ae81ff">1</span>, oo)) <span style="color:#75715e"># 直接求和，【推荐】</span>
+</code></pre></div><p>结果是：
+
+
+<span class="katex">
+  \(\dfrac{\pi^{2}}{6}\)
+</span>
+</p>
+<h2 id="向量值函数">向量值函数</h2>
+<p>在Julia中构造一个符号向量很容易：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x y
+
+v <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,x]
+w <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,y,<span style="color:#ae81ff">3</span>]
+</code></pre></div><p>更一般的向量操作定义在<code>LinearAlgebra</code>中：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#66d9ef">using</span> LinearAlgebra
+
+dot(v,w)
+cross(v,w)
+</code></pre></div><p>通过组合操作可以根据定义计算<code>梯度</code>（<code>多元一阶导数向量</code>），比如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">ex <span style="color:#f92672">=</span> x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>y <span style="color:#f92672">-</span> x<span style="color:#f92672">*</span>y<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>
+Sym[diff(ex,var) <span style="color:#66d9ef">for</span> var <span style="color:#66d9ef">in</span> (x,y)]
+</code></pre></div><p>结果是： 
+
+
+<span class="katex">
+  \(\left[ \begin{array}{r}2 x y - y^{2}\\x^{2} - 2 x y\end{array} \right]\)
+</span>
+</p>
+<p>还可以利用<code>hessian</code>计算<code>多元二阶导数矩阵</code>(<code>海森矩阵</code>)：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">hessian(ex, (x,y))
+</code></pre></div><p>结果是： 
+
+
+<span class="katex">
+  \(\left[ \begin{array}{rr}2 y&2 x - 2 y\\2 x - 2 y&- 2 x\end{array}\right]\)
+</span>
+</p>
+<h2 id="矩阵">矩阵</h2>
+<p>在Julia中，符号矩阵的构造和符号向量的构造一样容易：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x y
+
+M <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span> x; x <span style="color:#ae81ff">1</span>]
+</code></pre></div><p>如果计算的结果是矩阵，但不是Julia型矩阵，不妨依次试试<code>Sym[.]</code>和<code>sympy.Matrix(.)</code>，比如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">M<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>                <span style="color:#75715e"># 形式难看</span>
+Sym(M<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>)           <span style="color:#75715e"># 依然难看</span>
+sympy<span style="color:#f92672">.</span><span style="color:#66d9ef">Matrix</span>(M<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>)　<span style="color:#75715e">#  嗯，合适</span>
+</code></pre></div><p>结果是： 
+
+
+<span class="katex">
+  \(\left[ \begin{array}{rr}x^{2} + 1&2 x\\2 x&x^{2} + 1\end{array}\right]\)
+</span>
+</p>
+<p>计算矩阵行列式：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">det(M)   <span style="color:#75715e"># 方法１，【推荐】</span>
+M<span style="color:#f92672">.</span>det()  <span style="color:#75715e"># 方法２</span>
+</code></pre></div><p>结果：
+
+
+<span class="katex">
+  \(- x^{2} + 1\)
+</span>
+</p>
+<p>计算特征向量：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># A.eigenvects() 有问题</span>
+eigvecs(M)
+</code></pre></div><p>结果： 
+
+
+<span class="katex">
+  \(\left[ \begin{array}{rr}-1&1\\1&1\end{array}\right]\)
+</span>
+</p>
+<p>矩阵对角化：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">A <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span> x; x <span style="color:#ae81ff">1</span>]
+P, D <span style="color:#f92672">=</span> A<span style="color:#f92672">.</span>diagonalize()  <span style="color:#75715e"># M = PDP^-1</span>
+A <span style="color:#f92672">-</span> P<span style="color:#f92672">*</span>D<span style="color:#f92672">*</span>inv(P)          <span style="color:#75715e"># 验证，如果全０则ＯＫ</span>
+</code></pre></div><h2 id="微分方程">微分方程</h2>
+<p>比如，我们要
+
+
+<span class="katex">
+  \(y{\left (x \right )} - 2 \frac{d}{d x} y{\left (x \right )} + \frac{d^{2}}{d x^{2}}  y{\left (x \right )} = \sin{\left (x \right )}\)
+</span>
+的通解：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x
+y <span style="color:#f92672">=</span> SymFunction(<span style="color:#e6db74">&#34;y&#34;</span>)
+diffeq <span style="color:#f92672">=</span> diff(y(x), x, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>diff(y(x)) <span style="color:#f92672">+</span> y(x)⩵ sin(x)
+ex <span style="color:#f92672">=</span> dsolve(diffeq, y(x))
+</code></pre></div><p>结果是：
+
+
+<span class="katex">
+  \(y{\left (x \right )} = \left(C_{1} + C_{2} x\right) e^{x} + \frac{1}{2} \cos{\left (x \right )}\)
+</span>
+</p>
+<p>上面这个微分方程也可以写成：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">diffeq <span style="color:#f92672">=</span> y<span style="color:#f92672">&#39;</span><span style="color:#960050;background-color:#1e0010">&#39;</span>(x) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>y<span style="color:#f92672">&#39;</span>(x) <span style="color:#f92672">+</span> y(x) ⩵ sin(x)
+</code></pre></div><p>如果给定初值条件：
+
+
+<span class="katex">
+  \(y(0)=0,y'(0)=1\)
+</span>
+，进而可确定积分常数
+
+
+<span class="katex">
+  \(C_1,C_2\)
+</span>
+:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">ex1 <span style="color:#f92672">=</span> ex<span style="color:#f92672">.</span>rhs()             <span style="color:#75715e"># 右边的表达式</span>
+<span style="color:#75715e"># 据y(0)=0，得C1</span>
+c1<span style="color:#f92672">=</span>solve(ex1(x<span style="color:#f92672">=&gt;</span><span style="color:#ae81ff">0</span>),Sym(<span style="color:#e6db74">&#34;C1&#34;</span>))[<span style="color:#ae81ff">1</span>]  
+ex2<span style="color:#f92672">=</span>ex1(Sym(<span style="color:#e6db74">&#34;C1&#34;</span>)<span style="color:#f92672">=&gt;</span>c1)     <span style="color:#75715e"># 将c1代入得到只含C2表达式</span>
+<span style="color:#75715e"># 据y&#39;(0)=1，得C2</span>
+c2<span style="color:#f92672">=</span>solve(diff(ex2,x)(x<span style="color:#f92672">=&gt;</span><span style="color:#ae81ff">0</span>)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,Sym(<span style="color:#e6db74">&#34;C2&#34;</span>) )[<span style="color:#ae81ff">1</span>]　
+ex3 <span style="color:#f92672">=</span> ex2(Sym(<span style="color:#e6db74">&#34;C2&#34;</span>) <span style="color:#f92672">=&gt;</span> c2) <span style="color:#75715e"># 将c2代入得最终表达式</span>
+</code></pre></div><p>结果是：
+
+
+<span class="katex">
+  \(\left(\frac{3 x}{2} - \frac{1}{2}\right) e^{x} + \frac{1}{2} \cos{\left (x \right )}\)
+</span>
+</p>
+<h3 id="初值问题">初值问题</h3>
+<p>前面通过比较麻烦方法，先求通解，再初值回代解出积分常数。　其实可以直接解出初值问题，只需要简单加上边值条件的参数即可：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x
+y <span style="color:#f92672">=</span> SymFunction(<span style="color:#e6db74">&#34;y&#34;</span>)
+diffeq <span style="color:#f92672">=</span> y<span style="color:#f92672">&#39;</span><span style="color:#960050;background-color:#1e0010">&#39;</span>(x) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>y<span style="color:#f92672">&#39;</span>(x) <span style="color:#f92672">+</span> y(x) ⩵ sin(x)
+ex <span style="color:#f92672">=</span> dsolve(diffeq, y(x), ics<span style="color:#f92672">=</span>((y, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>), (y<span style="color:#f92672">&#39;</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>)))
+</code></pre></div><p>结果和前面一样。</p>
+<h2 id="最后说明">最后说明</h2>
+<p>符号推演不是万能的，可能没有想要的符号解。如果没有，最终还需要靠数值解法。</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/julia/0003/">
+    下一页<br>基于Julia的科学计算功能库整理
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/julia/0001/">
+      上一页<br>整合Julia和Python的集成环境（Win10）
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/julia/0002.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/julia/0002.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#前言">前言</a></li>
+        <li><a href="#变量符号">变量符号</a></li>
+        <li><a href="#带假设的变量符号">带假设的变量符号</a></li>
+        <li><a href="#sympy中的特殊常数">SymPy中的特殊常数</a></li>
+        <li><a href="#符号置换">符号置换</a></li>
+        <li><a href="#符号转换成数值">符号转换成数值</a></li>
+        <li><a href="#多项式常用操作">多项式常用操作</a>
+          <ul>
+            <li><a href="#1-展开">1 展开</a></li>
+            <li><a href="#2-因式分解">2 因式分解</a></li>
+            <li><a href="#3-合并同类项">3 合并同类项</a></li>
+            <li><a href="#4-化简">4 化简</a></li>
+          </ul>
+        </li>
+        <li><a href="#有理式常用操作">有理式常用操作</a>
+          <ul>
+            <li><a href="#1-分部">1 分部</a></li>
+            <li><a href="#2-合并公母">2 合并公母</a></li>
+            <li><a href="#3-消去分子分母公因子">3 消去分子分母公因子</a></li>
+          </ul>
+        </li>
+        <li><a href="#指数化简">指数化简</a></li>
+        <li><a href="#三角化简">三角化简</a></li>
+        <li><a href="#多项式系数">多项式系数</a></li>
+        <li><a href="#多项式的根">多项式的根</a>
+          <ul>
+            <li><a href="#1-实数根">1 实数根</a></li>
+            <li><a href="#2-复数根">2 复数根</a></li>
+            <li><a href="#3-更通用的求解方法">3 更通用的求解方法</a></li>
+          </ul>
+        </li>
+        <li><a href="#solve函数">solve函数</a></li>
+        <li><a href="#solve中的逻辑操作">solve中的逻辑操作</a></li>
+        <li><a href="#绘图">绘图</a></li>
+        <li><a href="#微积分">微积分</a>
+          <ul>
+            <li><a href="#1-极限">1 极限</a></li>
+            <li><a href="#2-导数">2 导数</a></li>
+            <li><a href="#3-积分">3 积分</a></li>
+            <li><a href="#4-泰勒级数">4 泰勒级数</a></li>
+          </ul>
+        </li>
+        <li><a href="#求和">求和</a></li>
+        <li><a href="#向量值函数">向量值函数</a></li>
+        <li><a href="#矩阵">矩阵</a></li>
+        <li><a href="#微分方程">微分方程</a>
+          <ul>
+            <li><a href="#初值问题">初值问题</a></li>
+          </ul>
+        </li>
+        <li><a href="#最后说明">最后说明</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

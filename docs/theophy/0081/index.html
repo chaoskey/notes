@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="场及其对称性"><meta property="og:title" content="场及其对称性" />
+<meta property="og:description" content="
+场的拉格朗日形式，保持明显的洛伦兹协变性。
+场的哈密顿形式，依赖于时空的1&#43;3分解，因为时间变量在共轭动量密度中扮演了特殊的角色。
+有限维Noether定理，条件更松，每个单参微分同胚群对应一个守恒量。
+场的Noether定理，有更严格的要求，每个单参等度规群对应一个守恒流。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/theophy/0081/" />
+<meta property="article:published_time" content="2020-04-24T20:13:17+08:00" />
+<meta property="article:modified_time" content="2020-04-24T20:13:17+08:00" />
+<title>场及其对称性 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a>
+<ul>
+<li><a href="/notes/docs/theophy/0015/">流形上的拉格朗日力学</a></li>
+<li><a href="/notes/docs/theophy/0071/">流形视角下的牛顿力学</a></li>
+<li><a href="/notes/docs/theophy/0072/">对称性与守恒律（Noether定理）</a></li>
+<li><a href="/notes/docs/theophy/0075/">辛流形上的哈密顿力学</a></li>
+<li><a href="/notes/docs/theophy/0080/">闵氏时空对称性的三种观点</a></li>
+<li><a href="/notes/docs/theophy/0081/"class=active>场及其对称性</a></li>
+<li><a href="/notes/docs/theophy/0086/">庞加莱群的单粒子态的表示</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>场及其对称性</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#场的拉格朗日处理">场的拉格朗日处理</a></li>
+        <li><a href="#场的哈密顿形式">场的哈密顿形式</a></li>
+        <li><a href="#场上的noether定理">场上的Noether定理</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0082/">
+    下一页<br>李群李代数伴随表示和Killing型、Casimir算符
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/theophy/0080/">
+      上一页<br>闵氏时空对称性的三种观点
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/theophy/0081/">场及其对称性</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-04-24</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%90%86%E8%AE%BA%E7%89%A9%E7%90%86">理论物理</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E5%9C%BA%E8%AE%BA">场论</a>
+      , 
+      <a href="/notes/tags/%E5%AF%B9%E7%A7%B0%E6%80%A7">对称性</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/theophy/0081.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<blockquote>
+<p>场的拉格朗日形式，保持明显的洛伦兹协变性。</p>
+<p>场的哈密顿形式，依赖于时空的1+3分解，因为时间变量在<code>共轭动量密度</code>中扮演了特殊的角色。</p>
+<p>有限维Noether定理，条件更松，<strong>每个单参微分同胚群对应一个守恒量</strong>。</p>
+<p>场的Noether定理，有更严格的要求，<strong>每个单参等度规群对应一个守恒流</strong>。</p>
+</blockquote>
+<h2 id="场的拉格朗日处理">场的拉格朗日处理</h2>
+<p>物理上的场
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(\phi\)
+</span>
+，是一个时空函数，还可能带有标识其性质的指标。比如：标量场
+
+
+<span class="katex">
+  \(\psi\)
+</span>
+，矢量场
+
+
+<span class="katex">
+  \(\psi^a\)
+</span>
+，旋量场
+
+
+<span class="katex">
+  \(\psi^A\)
+</span>
+，张量场
+
+
+<span class="katex">
+  \(\psi^{ab}\)
+</span>
+&hellip;&hellip;</p>
+<p>正如有限维位形
+
+
+<span class="katex">
+  \(q^\mu\)
+</span>
+的拉格朗日量</p>
+
+
+
+<span class="katex">
+  \[
+L=L(q^\mu,\dot{q}^\mu)
+\]
+</span>
+
+<p>（无限维）标量场
+
+
+<span class="katex">
+  \(\phi\)
+</span>
+场的拉格朗日量</p>
+
+
+
+<span class="katex">
+  \[
+L=\int_S{\mathscr{L}(\phi,\nabla_a\phi)}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(\phi\)
+</span>
+的定义域是<strong>时空流形</strong>，
+
+
+<span class="katex">
+  \(\mathscr{L}\)
+</span>
+是拉格朗日密度，
+
+
+<span class="katex">
+  \(S\)
+</span>
+是某时刻<strong>三维位形流形</strong>，对标量场而言
+
+
+<span class="katex">
+  \(\nabla_a\phi=\partial_a \phi\)
+</span>
+。</p>
+<p>进而可写出作用量</p>
+
+
+
+<span class="katex">
+  \[
+S=\int_{t_0}^{t_1}{L\ dt}=\boxed{\int_D{\mathscr{L}(\phi,\nabla_a\phi)}}=\int_D{\mathscr{L}(\phi,\nabla_a\phi)\boldsymbol{\varepsilon}}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(D\)
+</span>
+是四维时空位形（如图），由固定的初始三维空间位形
+
+
+<span class="katex">
+  \(A\)
+</span>
+和固定的终了三维空间位形
+
+
+<span class="katex">
+  \(B\)
+</span>
+围成，
+
+
+<span class="katex">
+  \(\boldsymbol{\varepsilon}\)
+</span>
+是时空度规适配体元。</p>
+<p><img src="/notes/images/0131.svg" alt="0131.svg"></p>
+<p>根据<strong>最小作用原理</strong>，可写出标量场的欧拉-拉格朗日方程（以前的笔记推导过，不再复述）：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\frac{\partial \mathscr{L}}{\partial \phi}=\nabla_a\frac{\partial \mathscr{L}}{\partial(\nabla_a\phi)}}
+\]
+</span>
+
+<p>考虑两个相差一个四维散度的拉格朗日密度</p>
+
+
+
+<span class="katex">
+  \[
+\mathscr{L}'=\mathscr{L}+\nabla_a K^a
+\]
+</span>
+
+<p>对应的作用量的变分：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\delta\int_D{\mathscr{L}'}=&\delta\int_D{\mathscr{L}}+\delta\int_D{\nabla_a K^a}\\ =& \delta\int_D{\mathscr{L}}+\delta\int_D{(\nabla_a K^a) \boldsymbol{\varepsilon}}\quad \textcolor{red}{流形上积分定义}\\ =& \delta\int_D{\mathscr{L}}+\delta\int_{\partial D}{K^a n_a \hat{\boldsymbol{\varepsilon}}}\quad \textcolor{red}{流形上Gauss定理}\\ =& \delta\int_D{\mathscr{L}}\quad \textcolor{red}{固定边界积分的变分为0}\end{aligned}
+\]
+</span>
+
+<p>这意味着：<strong>拉格朗日密度</strong>
+
+
+<span class="katex">
+  \(\mathscr{L}\)
+</span>
+相差一个<code>四维散度</code> 等价于  <strong>拉格朗日量</strong>
+
+
+<span class="katex">
+  \(L\)
+</span>
+相差一个<code>全导数</code>。  都对应同一个（场）运动方程。</p>
+<h2 id="场的哈密顿形式">场的哈密顿形式</h2>
+<p>在哈密顿形式中，也有<code>共轭动量密度</code>
+
+
+<span class="katex">
+  \(\pi\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\pi=\frac{\partial\mathscr{L}}{\partial \dot{\phi}}
+\]
+</span>
+
+<p>注意：前面拉格朗日形式能保持明显的洛伦兹协变性，但哈密顿形式则缺少这种明显性。因为时间变量在<code>共轭动量密度</code>中扮演了特殊的角色。这里已经做了时空的1+3分解：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\nabla_\mu=(\nabla_0,\boldsymbol{\nabla})=(\partial/\partial t,\boldsymbol{\nabla})}
+\]
+</span>
+
+<p>于是</p>
+
+
+
+<span class="katex">
+  \[
+\dot{\phi}=\nabla_0\phi=\frac{\partial \phi}{\partial t}
+\]
+</span>
+
+<p>在此基础上定义<code>哈密顿密度</code>
+
+
+<span class="katex">
+  \(\mathscr{H}\)
+</span>
+</p>
+
+
+
+<span class="katex">
+  \[
+\mathscr{H}(\phi,\pi,\boldsymbol{\nabla}\phi)=\mathscr{\pi}\dot{\phi}-\mathscr{L}
+\]
+</span>
+
+<p>注意：这个哈密顿量也体现了1+3分解</p>
+<p>进而作用量的变分为：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}0=\delta S&=\int_D{\delta \mathscr{L}}=\int_D{\delta (\pi\dot{\phi}-\mathscr{H})}\\ &= \int_D{\left(\textcolor{blue}{\dot{\phi}\delta \pi+\pi\delta \dot{\phi}}\textcolor{green}{-\frac{\partial \mathscr{H}}{\partial\phi}\delta\phi-\frac{\partial \mathscr{H}}{\partial\pi}\delta\pi-\frac{\partial \mathscr{H}}{\partial(\boldsymbol{\nabla}\phi)}\cdot\delta\boldsymbol{\nabla}\phi}\right)}\\ &= \int_D{\left(\dot{\phi}\delta \pi+\textcolor{blue}{\pi\frac{\partial}{\partial t}\delta \phi}-\frac{\partial \mathscr{H}}{\partial\phi}\delta\phi-\frac{\partial \mathscr{H}}{\partial\pi}\delta\pi\textcolor{green}{-\frac{\partial \mathscr{H}}{\partial(\boldsymbol{\nabla}\phi)}\cdot\boldsymbol{\nabla}(\delta\phi)}\right)}\\ &= \int_D\left(\dot{\phi}\delta \pi+\textcolor{blue}{\frac{\partial}{\partial t}(\pi\delta \phi)-\dot{\pi}\delta \phi}-\frac{\partial \mathscr{H}}{\partial\phi}\delta\phi-\frac{\partial \mathscr{H}}{\partial\pi}\delta\pi \right. \\ &\qquad \left.\textcolor{green}{-\boldsymbol{\nabla}\cdot\left(\frac{\partial \mathscr{H}}{\partial(\boldsymbol{\nabla}\phi)}\delta\phi\right) +\left(\boldsymbol{\nabla}\cdot\frac{\partial \mathscr{H}}{\partial(\boldsymbol{\nabla}\phi)}\right)\delta\phi}\right)\\ &= \int_D{\left\{\left(\dot{\phi}-\frac{\partial \mathscr{H}}{\partial\pi}\right)\delta\pi-\left(\dot{\pi}+\frac{\partial \mathscr{H}}{\partial\phi}-\boldsymbol{\nabla}\cdot\frac{\partial \mathscr{H}}{\partial(\boldsymbol{\nabla}\phi)}\right)\delta\phi\right\}}\\ &\qquad \qquad +\int_D{\frac{\partial}{\partial t}(\pi\delta \phi)}-\int_D{\boldsymbol{\nabla}\cdot\left(\frac{\partial \mathscr{H}}{\partial(\boldsymbol{\nabla}\phi)}\delta\phi\right)}\quad \textcolor{red}{边界上变分为0} \\ &= \boxed{\int_D{\left\{\left(\dot{\phi}-\frac{\partial \mathscr{H}}{\partial\pi}\right)\delta\pi-\left(\dot{\pi}+\frac{\partial \mathscr{H}}{\partial\phi}-\boldsymbol{\nabla}\cdot\frac{\partial \mathscr{H}}{\partial(\boldsymbol{\nabla}\phi)}\right)\delta\phi\right\}}} \end{aligned}
+\]
+</span>
+
+<p>进而有</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\dot{\phi}&=\frac{\partial \mathscr{H}}{\partial\pi}\\ \dot{\pi}&=-\frac{\partial \mathscr{H}}{\partial\phi}+\boldsymbol{\nabla}\cdot\frac{\partial \mathscr{H}}{\partial(\boldsymbol{\nabla}\phi)}\end{aligned}
+\]
+</span>
+
+<h2 id="场上的noether定理">场上的Noether定理</h2>
+<p>(有限维)<code>Noether定理</code>：每一个保持<code>拉格朗日量</code>不变的单参微分同胚群（对称性），必有运动方程组对应的一个首次积分（守恒律）。</p>
+<p>这个定理，在有限维的情况下证明过。 这里要考察无限维的张量场
+
+
+<span class="katex">
+  \(\phi\)
+</span>
+下的情况，命题中的拉格朗日量改成<code>拉格朗日密度</code>，所谓&quot;不变&quot;，可以精确到相差一个四维散度。</p>
+<p>考察一个单参微分同胚
+
+
+<span class="katex">
+  \(h:\mathbb{R}\times D\to D\)
+</span>
+，条件是保证<code>拉格朗日密度</code>
+
+
+<span class="katex">
+  \(\mathscr{L}\)
+</span>
+不变，即：</p>
+
+
+
+<span class="katex">
+  \[
+\mathscr{L}(h^*_s\phi,h^*_s\nabla_a\phi)=\mathscr{L}(\phi,\nabla_a\phi),\quad s\to0,\quad \forall s\in \mathbb{R}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(h_s\)
+</span>
+对标量场和对偶矢量场的自然诱导映射是拉回映射
+
+
+<span class="katex">
+  \(h^*_s\)
+</span>
+；
+
+
+<span class="katex">
+  \(\nabla_a\)
+</span>
+是度规适配导数算符；此外，单参微分同胚群
+
+
+<span class="katex">
+  \(\{h_s\}\)
+</span>
+，可由某个矢量场
+
+
+<span class="katex">
+  \(\xi^a\)
+</span>
+生成。</p>
+<p>要注意的是，单参微分同胚不一定保度规，所以变换后度规可能会变，进而其适配导数算符也会变。为了准确描述这个变化，需要将<code>拉格朗日密度</code>改写成：</p>
+
+
+
+<span class="katex">
+  \[
+\mathscr{L}=\mathscr{L}(\phi,\nabla_a\phi,g_{ab})
+\]
+</span>
+
+<p>用
+
+
+<span class="katex">
+  \(h_s\)
+</span>
+变换后</p>
+
+
+
+<span class="katex">
+  \[
+\mathscr{L}_s=\mathscr{L}(h^*_s\phi,h^*_s\nabla_a\phi,h^*_s g_{ab})=h^*_s \mathscr{L}(\phi,\nabla_a\phi,g_{ab})
+\]
+</span>
+
+<p>进而</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\xi^a\nabla_a\mathscr{L}&=\mathcal{L}_\xi\mathscr{L}=\left.\frac{d\mathscr{L}_s}{ds}\right|_{s=0}\qquad \textcolor{red}{\mathcal{L}_\xi 表示李导数}\\&=\lim_{s\to 0}\left(\frac{1}{s}(\mathscr{L}(h^*_s\phi,h^*_s\nabla_a\phi,h^*_s g_{ab})-\mathscr{L}(\phi,\nabla_a\phi,g_{ab}))\right)\\ &=\frac{\partial \mathscr{L}}{\partial \phi} \lim_{s\to 0}\left(\frac{1}{s}(h^*_s\phi-\phi)\right)\\ &\qquad +\frac{\partial \mathscr{L}}{\partial (\nabla_a\phi)} \lim_{s\to 0}\left(\frac{1}{s}(h^*_s\nabla_a\phi-\nabla_a\phi)\right)\\ & \qquad + \frac{\partial \mathscr{L}}{\partial (g_{ab})} \lim_{s\to 0}\left(\frac{1}{s}(h^*_s g_{ab}-g_{ab})\right)\\ &=\boxed{\frac{\partial \mathscr{L}}{\partial \phi}\mathcal{L}_{\xi}\phi +\frac{\partial \mathscr{L}}{\partial (\nabla_a\phi)} \mathcal{L}_{\xi}\nabla_a\phi + \frac{\partial \mathscr{L}}{\partial (g_{ab})}\mathcal{L}_{\xi}g_{ab}}\end{aligned}
+\]
+</span>
+
+<p>将拉格朗日方程带入得</p>
+
+
+
+<span class="katex">
+  \[
+\xi^a\nabla_a\mathscr{L}=\left(\nabla_a\frac{\partial \mathscr{L}}{\partial(\nabla_a\phi)}\right)\mathcal{L}_{\xi}\phi +\frac{\partial \mathscr{L}}{\partial (\nabla_a\phi)} \mathcal{L}_{\xi}\nabla_a\phi + \frac{\partial \mathscr{L}}{\partial (g_{ab})}\mathcal{L}_{\xi}g_{ab}
+\]
+</span>
+
+<p>特别地，如果
+
+
+<span class="katex">
+  \(h_s\)
+</span>
+是<strong>等度规映射</strong>，那么
+
+
+<span class="katex">
+  \(\xi^a\)
+</span>
+必然是Killing矢量场，有:</p>
+
+
+
+<span class="katex">
+  \[
+\mathcal{L}_\xi g_{ab}=0\\ \nabla_a\xi^a=g^{ab}\nabla_a\xi_b=g^{(ab)}\nabla_{[a}\xi_{b]}=0\\ \nabla_a\mathcal{L}_\xi\phi=\mathcal{L}_\xi\nabla_a\phi
+\]
+</span>
+
+<p>于是有：</p>
+
+
+
+<span class="katex">
+  \[
+\nabla_a\left(\frac{\partial \mathscr{L}}{\partial(\nabla_a\phi)}\mathcal{L}_{\xi}\phi-\xi^a\mathscr{L}\right)=0
+\]
+</span>
+
+<p>可见矢量场</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{J^a=\frac{\partial \mathscr{L}}{\partial(\nabla_a\phi)}\mathcal{L}_{\xi}\phi-\xi^a\mathscr{L}}
+\]
+</span>
+
+<p>满足连续性方程：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\nabla_a J^a=0}
+\]
+</span>
+
+<p>进而
+
+
+<span class="katex">
+  \(J^a\)
+</span>
+代表某种<code>守恒流密度</code>。</p>
+<p>(场)<code>Noether定理</code>：每一个保持<code>拉格朗日密度</code>不变的单参等度规群（对称性），必有场方程对应的一个连续性（守恒律）。</p>
+<p>特别地，对闵氏时空而言，存在10个独立Killing矢量场
+
+
+<span class="katex">
+  \(\xi^a\)
+</span>
+，相应就有10个独立守恒密度流
+
+
+<span class="katex">
+  \(J^a\)
+</span>
+。</p>
+<p>比如，考虑时间平移Killing矢量场
+
+
+<span class="katex">
+  \(\xi^a=(\partial/\partial t)^a\)
+</span>
+，有</p>
+
+
+
+<span class="katex">
+  \[
+J^a=\frac{\partial \mathscr{L}}{\partial(\nabla_a\phi)}(\partial/ \partial t)^b\nabla_b\phi-(\partial/ \partial t)^a\mathscr{L}=\frac{\partial \mathscr{L}}{\partial(\nabla_a\phi)}\nabla_0\phi-(\partial/\partial t)^a\mathscr{L}
+\]
+</span>
+
+<p>因此</p>
+
+
+
+<span class="katex">
+  \[
+J^0=\frac{\partial \mathscr{L}}{\partial(\nabla_0\phi)}\nabla_0\phi-\mathscr{L}=\mathscr{\pi}\dot{\phi}-\mathscr{L}=\mathscr{H}
+\]
+</span>
+
+<p>此外，还可以定义一个<code>正则能动张量</code>
+
+
+<span class="katex">
+  \(S^{ab}\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{S^{ab}\overset{\Delta}{=}-\frac{\partial \mathscr{L}}{\partial(\nabla_a\phi)}\nabla^b\phi+\mathscr{L}g^{ab}}
+\]
+</span>
+
+<p>则有：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{S^{ab}\xi_b=-J^a \qquad \nabla_a S^{ab}=0 }
+\]
+</span>
+
+<p>注意：
+
+
+<span class="katex">
+  \(\xi^a\)
+</span>
+必须是Killing矢量场，上式才成立。</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0082/">
+    下一页<br>李群李代数伴随表示和Killing型、Casimir算符
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/theophy/0080/">
+      上一页<br>闵氏时空对称性的三种观点
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/theophy/0081.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/theophy/0081.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#场的拉格朗日处理">场的拉格朗日处理</a></li>
+        <li><a href="#场的哈密顿形式">场的哈密顿形式</a></li>
+        <li><a href="#场上的noether定理">场上的Noether定理</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

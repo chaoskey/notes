@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="自由场--现代物理的基础"><meta property="og:title" content="自由场--现代物理的基础" />
+<meta property="og:description" content="
+本篇紧接上一篇笔记《半单李代数的Casimir不变算符》。
+分两种情况（有质量、无质量）探讨单粒子的物理态表示。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/theophy/0087/" />
+<meta property="article:published_time" content="2020-05-13T17:10:52+08:00" />
+<meta property="article:modified_time" content="2020-05-13T17:10:52+08:00" />
+<title>自由场--现代物理的基础 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a>
+<ul>
+<li><a href="/notes/docs/theophy/0015/">流形上的拉格朗日力学</a></li>
+<li><a href="/notes/docs/theophy/0071/">流形视角下的牛顿力学</a></li>
+<li><a href="/notes/docs/theophy/0072/">对称性与守恒律（Noether定理）</a></li>
+<li><a href="/notes/docs/theophy/0075/">辛流形上的哈密顿力学</a></li>
+<li><a href="/notes/docs/theophy/0080/">闵氏时空对称性的三种观点</a></li>
+<li><a href="/notes/docs/theophy/0081/">场及其对称性</a></li>
+<li><a href="/notes/docs/theophy/0086/">庞加莱群的单粒子态的表示</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>自由场--现代物理的基础</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#关于物理对称性的总结">关于物理对称性的总结</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#内禀对称性">内禀对称性</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#量子场论的算符">量子场论的算符</a></li>
+        <li><a href="#0自旋klein-gordon-方程">0自旋，Klein-Gordon 方程</a></li>
+        <li><a href="#12自旋dirac方程">1/2自旋，Dirac方程</a></li>
+        <li><a href="#1自旋proca方程">1自旋，Proca方程</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/julia/0088/">
+    下一页<br>平面三体问题（Julia版）
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/theophy/0086/">
+      上一页<br>庞加莱群的单粒子态的表示
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/theophy/0087/">自由场--现代物理的基础</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-05-13</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%90%86%E8%AE%BA%E7%89%A9%E7%90%86">理论物理</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E9%87%8F%E5%AD%90%E5%9C%BA%E8%AE%BA">量子场论</a>
+      , 
+      <a href="/notes/tags/%E8%87%AA%E7%94%B1%E5%9C%BA">自由场</a>
+      , 
+      <a href="/notes/tags/Casimir%E7%AE%97%E7%AC%A6">Casimir算符</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/theophy/0087.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<blockquote>
+<p>本篇紧接上一篇笔记《半单李代数的Casimir不变算符》。</p>
+<p>分两种情况（有质量、无质量）探讨单粒子的物理态表示。</p>
+</blockquote>
+<h2 id="关于物理对称性的总结">关于物理对称性的总结</h2>
+<blockquote>
+<p>本段是前一批相关学习笔记的概要总结。</p>
+<p>考虑的闵氏度规是
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(\eta=\mathrm{diag}(-1,1,1,1)\)
+</span>
+。</p>
+<p>为了确保不出错，我在草稿中尽可能又重新计算了一遍。</p>
+</blockquote>
+<h4 id="1庞加莱群">1）庞加莱群</h4>
+<p>庞加莱群=洛伦兹群+平移（P）= 旋转（J）+Boost（K）+平移（P）</p>
+<h4 id="2生成元李代数基底">2）生成元（李代数基底）</h4>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}P_\mu &= i\partial_\mu\\ J_i&=-i\varepsilon_i^{\ jk}x_j\partial_k=\frac{1}{2}\varepsilon_i^{\ jk}\textcolor{red}{J_{jk}}\\ K_i &= i(x_i\partial_0 + x_0 \partial_i)=\textcolor{red}{J_{0i}} \end{aligned}}\\ \mu,\upsilon=0,1,2,3\qquad i,j,k=1,2,3 \\ \quad \\ \textcolor{red}{J_{\mu\upsilon}}\overset{\Delta}{=}\begin{pmatrix} 0 & K_1 & K_2 & K_3 \\ -K_1 & 0 & J_3 & -J_2 \\ -K_2 & -J_3 & 0 & J_1 \\ -K_3 & J_2 & -J_1 & 0 \end{pmatrix}\\ J^{i0}=-J_{i0} \quad J^{ij}=J_{ij}
+\]
+</span>
+
+<h4 id="3李代数的结构常数">3）李代数的结构常数</h4>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\quad  &[\textcolor{red}{P_\mu},\textcolor{red}{P_\upsilon}]=0 \quad &[\textcolor{blue}{J_i},\textcolor{blue}{J_j}]=i \ \varepsilon^k_{\ \ ij}\textcolor{blue}{J_k} \\&  [\textcolor{green}{K_i},\textcolor{green}{K_j}]=-i\ \varepsilon^k_{\ \ ij}\textcolor{blue}{J_k} \quad & \\&  [P_0,\textcolor{blue}{J_i}]=0 \quad &[\textcolor{red}{P_i},\textcolor{blue}{J_j}]=i\ \varepsilon^k_{\ \ ij}\textcolor{red}{P_k} \\  & [P_0,\textcolor{green}{K_i}]=i\ \textcolor{red}{P_i} \quad & [\textcolor{red}{P_i},\textcolor{green}{K_j}]=i\ \delta_{ij}P_0 \quad \\  & [\textcolor{blue}{J_i},\textcolor{green}{K_j}]=i\ \varepsilon^k_{\ \ ij}\textcolor{green}{K_k}  \quad &   \end{aligned}}\\ \quad \\ [J_{\mu\upsilon},P_\rho]=i(\eta_{\mu\rho}P_\upsilon-\eta_{\upsilon\rho}P_\mu)\\ [J_{\mu\upsilon},J_{\rho\sigma}]=i(\eta_{\mu\rho}J_{\upsilon\sigma}-\eta_{\mu\sigma}J_{\upsilon\rho}-\eta_{\upsilon\rho}J_{\mu\sigma}+\eta_{\upsilon\sigma}J_{\mu\rho})
+\]
+</span>
+
+<h4 id="4洛伦兹群的表示">4）洛伦兹群的表示</h4>
+<blockquote>
+<p>我特意用颜色标注了(半)整数对
+
+
+<span class="katex">
+  \((j_{-},j_{+})\)
+</span>
+在洛伦兹群中的地位。</p>
+</blockquote>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\Lambda&=\exp\left\{-\frac{\mathbf{i}}{2}\omega_{\mu\upsilon}J^{\mu\upsilon}\right\}=\exp\left\{-\mathbf{i} \boldsymbol{\theta}\cdot\boldsymbol{J}+\mathbf{i} \boldsymbol{\alpha}\cdot \boldsymbol{K}\right\}\\ &=\exp\left\{(\textcolor{blue}{j_{+}-j_{-}})\boldsymbol{\alpha}\cdot\boldsymbol{\sigma}-\mathbf{i}(\textcolor{red}{j_{+}+j_{-}}) \boldsymbol{\theta}\cdot\boldsymbol{\sigma}\right\}\end{aligned}}\\ \quad \\
+\omega_{\mu\upsilon}\overset{\Delta}{=}\begin{pmatrix} 0 & \alpha_1 & \alpha_2 & \alpha_3 \\ -\alpha_1 & 0 & \theta_3 & -\theta_2 \\ -\alpha_2 & -\theta_3 & 0 & \theta_1 \\ -\alpha_3 & \theta_2 & -\theta_1 & 0 \end{pmatrix}\\ \omega^{i0}=-\omega_{i0}\quad \omega^{ij}=\omega_{ij}\\ \quad \\ \boldsymbol{J}=J_{-}+J_{+}=(\textcolor{red}{j_{-}+j_{+}})\boldsymbol{\sigma}=\textcolor{red}{j}\boldsymbol{\sigma}\\ \boldsymbol{K}=\mathbf{i}(J_{-}-J_{+})=\mathbf{i}(\textcolor{blue}{j_{-}-j_{+}})\boldsymbol{\sigma}\\ \quad \\ \boldsymbol{J}_{+}=j_{+}\boldsymbol{\sigma}\quad \boldsymbol{J}_{-}=j_{-}\boldsymbol{\sigma}
+\]
+</span>
+
+<h4 id="5自旋的表示">5）自旋的表示</h4>
+<p>由于洛伦兹群的表示可改写成
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}\Lambda&=\exp\left\{(\textcolor{blue}{j_{+}-j_{-}})\boldsymbol{\alpha}\cdot\boldsymbol{\sigma}-\mathbf{i}(\textcolor{red}{j_{+}+j_{-}}) \boldsymbol{\theta}\cdot\boldsymbol{\sigma}\right\}\\ & = \exp\left\{\textcolor{blue}{j_{-}}(-\boldsymbol{\alpha}-\mathbf{i} \boldsymbol{\theta})\cdot\boldsymbol{\sigma}\right\}\exp\left\{\textcolor{red}{j_{+}}(\boldsymbol{\alpha}-\mathbf{i} \boldsymbol{\theta})\cdot\boldsymbol{\sigma}\right\}\\ &=\left(\overline{L^{-1}}\right)^{\ \textcolor{blue}{2j_{-}}}L^{\ \textcolor{red}{2j_{+}}}\end{aligned}}\\ \quad \\  L\overset{\Delta}{=}\exp\left\{\frac{1}{2}(\boldsymbol{\alpha}-\mathbf{i} \boldsymbol{\theta})\cdot\boldsymbol{\sigma}\right\}
+\]
+</span>
+
+这说明：
+
+
+
+<span class="katex">
+  \[
+\mathfrak{so}(1,3)\cong \mathfrak{su}(2)\otimes\mathfrak{su}(2)
+\]
+</span>
+
+自旋（旋量张量）可用一对(半)整数
+
+
+<span class="katex">
+  \((j_{-},j_{+})\)
+</span>
+标记，若取
+
+
+<span class="katex">
+  \(j=j_{-}+j_{+}\)
+</span>
+，则对应
+
+
+<span class="katex">
+  \(\color{red}{\text{自旋-}j}\)
+</span>
+。 比如：</p>
+<ul>
+<li>自旋0，可用
+
+
+<span class="katex">
+  \((j_{-},j_{+})=(0,0)\)
+</span>
+表示；</li>
+<li>自旋1/2，可用
+
+
+<span class="katex">
+  \((j_{-},j_{+})=(\frac{1}{2},0)\)
+</span>
+或
+
+
+<span class="katex">
+  \((j_{-},j_{+})=(0,\frac{1}{2})\)
+</span>
+表示；</li>
+<li>自旋1，可用
+
+
+<span class="katex">
+  \((j_{-},j_{+})=(\frac{1}{2},\frac{1}{2})\)
+</span>
+表示。</li>
+</ul>
+<p>庞加莱群的表示用两个标量来标记：
+
+
+<span class="katex">
+  \(m,j\)
+</span>
+。其中
+
+
+<span class="katex">
+  \(m\)
+</span>
+可取任意值，
+
+
+<span class="katex">
+  \(j\)
+</span>
+只能取(半)整数。</p>
+<h4 id="6两个casimir算符">6）两个Casimir算符</h4>
+<p>两个庞加莱群有两个不变量，与任意庞加莱李代数元素对易。可用Casimir算符作用于<strong>最高权</strong>对应的本征值标记：
+
+
+
+<span class="katex">
+  \[
+P_\mu P^\mu=-m^2 \quad W_\mu W^\mu =-m^2 j(j+1)\\ W^\mu=\frac{1}{2}\varepsilon^{\mu\upsilon\rho\sigma}P_\upsilon J_{\rho\sigma}
+\]
+</span>
+</p>
+<h4 id="7基本粒子">7）基本粒子</h4>
+<p>庞加莱群的不可约表示的标记就是物理学对<strong>基本粒子的标记</strong>：<strong>质量</strong>
+
+
+<span class="katex">
+  \(m\)
+</span>
+与<strong>自旋</strong>
+
+
+<span class="katex">
+  \(j\)
+</span>
+  。至于粒子的更多特征量（比如：电荷）将从内禀对称性导出。</p>
+<p>相应地，基本粒子可分为如下几种：</p>
+<ul>
+<li>自旋1：由<strong>标量</strong>（记作：
+
+
+<span class="katex">
+  \(\Phi\)
+</span>
+ 或 
+
+
+<span class="katex">
+  \(\phi\)
+</span>
+）描述，标量按庞加莱群的
+
+
+<span class="katex">
+  \((0,0)\)
+</span>
+表示来<strong>变换</strong>。</li>
+<li>自旋1/2：由<strong>旋量</strong>（记作：
+
+
+<span class="katex">
+  \(\Psi\)
+</span>
+ 或 
+
+
+<span class="katex">
+  \(\phi_A\)
+</span>
+）描述，标量按庞加莱群的
+
+
+<span class="katex">
+  \((\frac{1}{2},0)\oplus(0,\frac{1}{2})\)
+</span>
+表示来<strong>变换</strong>。</li>
+<li>自旋1：由<strong>矢量</strong>或<strong>二阶旋量张量</strong>（记作：
+
+
+<span class="katex">
+  \(A\)
+</span>
+ 或 
+
+
+<span class="katex">
+  \(\phi_{AB}\)
+</span>
+）描述，标量按庞加莱群的
+
+
+<span class="katex">
+  \((\frac{1}{2},\frac{1}{2})=(\frac{1}{2},0)\otimes(0,\frac{1}{2})\)
+</span>
+表示来<strong>变换</strong>。</li>
+</ul>
+<p>注意区分<strong>庞加莱群自旋</strong>和<strong>粒子自旋</strong>的区分：前者着重于“变换”，后者表示对应的物理量满足这种“变换规律”。</p>
+<h2 id="内禀对称性">内禀对称性</h2>
+<p>场论中，有两种对称性：1）拉格朗日密度的<strong>时空对称性</strong>；2）拉格朗日密度在场自身的变换下也保持不变，这种不变性称为<strong>内禀对称性</strong>（internal symmetries）。</p>
+<p>比如，
+
+
+<span class="katex">
+  \(S,S'\)
+</span>
+是两个不同观察者，同一个场
+
+
+<span class="katex">
+  \(\phi\)
+</span>
+（省略了标志其性质的指标，比如
+
+
+<span class="katex">
+  \(\phi_A,\phi_{AB}\)
+</span>
+）
+
+
+
+<span class="katex">
+  \[
+S \to \phi(x)\quad S'\to \phi'(x')
+\]
+</span>
+</p>
+<p>涉及两重变换：
+
+
+
+<span class="katex">
+  \[
+x\to x'\quad  \phi\to\phi'
+\]
+</span>
+
+a
+
+
+
+<span class="katex">
+  \[
+\mathcal{J}^a=\frac{\partial\mathscr{L}}{\partial (\nabla_a \phi)}\mathcal{L}_\xi\phi-\xi^a\mathscr{L}
+\]
+</span>
+</p>
+<p>考虑闵氏背景时空的一般拉格朗日量密度
+
+
+<span class="katex">
+  \(\mathscr{L}(\phi(x_\mu),\partial_\mu\phi(x_\mu),x_\mu)\)
+</span>
+。<strong>对称性</strong>则意味着在前面两重变换下：
+
+
+
+<span class="katex">
+  \[
+\delta\mathscr{L}=0
+\]
+</span>
+
+即
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}0=\delta\mathscr{L}&=\frac{\partial\mathscr{L}}{\partial \phi}\delta\phi+\frac{\partial\mathscr{L}}{\partial (\partial_\mu\phi)}\delta(\partial_\mu\phi)+\frac{\partial\mathscr{L}}{\partial x_\mu}\delta x_\mu\\ &=\frac{\partial\mathscr{L}}{\partial \phi}\delta\phi+\frac{\partial\mathscr{L}}{\partial (\partial_\mu\phi)}\delta(\partial_\mu\phi)+\frac{\partial\mathscr{L}}{\partial x_\mu}\delta x_\mu\end{aligned}
+\]
+</span>
+
+注意：</p>
+<ul>
+<li>1）只考虑
+
+
+<span class="katex">
+  \(x\to x'\)
+</span>
+，及其诱导的
+
+
+<span class="katex">
+  \(\phi\to\phi'\)
+</span>
+，我以前的笔记涉及过，这就是纯粹的<strong>时空对称性</strong>。</li>
+<li>2）<strong>内禀对称性</strong>，出现在
+
+
+<span class="katex">
+  \(\phi\to\phi'\)
+</span>
+的自身变换，而非
+
+
+<span class="katex">
+  \(x\to x'\)
+</span>
+的诱导变换。</li>
+</ul>
+<p>为了描述<code>内禀对称性</code>，不妨把
+
+
+<span class="katex">
+  \(x\to x'\)
+</span>
+这部分变换冻结（
+
+
+<span class="katex">
+  \(\delta x_\mu=0\)
+</span>
+），即：
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}0=\delta \mathscr{L}&=\frac{\partial\mathscr{L}}{\partial \phi}\delta\phi+\frac{\partial\mathscr{L}}{\partial (\partial_\mu\phi)}\delta(\partial_\mu\phi)\\ &=\partial_\mu\frac{\partial\mathscr{L}}{\partial (\partial_\mu\phi)}\delta\phi+\frac{\partial\mathscr{L}}{\partial (\partial_\mu\phi)}\delta(\partial_\mu\phi)\\ &=\partial_\mu\frac{\partial\mathscr{L}}{\partial (\partial_\mu\phi)}\delta\phi+\frac{\partial\mathscr{L}}{\partial (\partial_\mu\phi)}\partial_\mu(\delta\phi)\\ &=\partial_\mu\left(\frac{\partial\mathscr{L}}{\partial (\partial_\mu\phi)}\delta\phi\right)\end{aligned}
+\]
+</span>
+
+得到纯<code>内禀对称性</code>的<code>守恒流密度</code>
+
+
+<span class="katex">
+  \(\mathcal{J}^\mu\)
+</span>
+:
+
+
+
+<span class="katex">
+  \[
+\boxed{\partial_\mu \mathcal{J}^\mu=0 \quad \mathcal{J}^\mu\overset{\Delta}{=}\frac{\partial\mathscr{L}}{\partial (\partial_\mu\phi)}\delta\phi}
+\]
+</span>
+</p>
+<h4 id="1场自身的平移不变性">1）场自身的平移不变性</h4>
+<p>此时
+
+
+<span class="katex">
+  \(\delta\phi=i\epsilon\)
+</span>
+，即：【注意：
+
+
+<span class="katex">
+  \(\epsilon\)
+</span>
+也忽略了和
+
+
+<span class="katex">
+  \(\phi\)
+</span>
+一致标识其性质的下标】
+
+
+
+<span class="katex">
+  \[
+\phi\to\phi'=\phi+i\epsilon
+\]
+</span>
+
+这个变换的生成元实际是
+
+
+<span class="katex">
+  \(i \partial/\partial\phi\)
+</span>
+，因为
+
+
+
+<span class="katex">
+  \[
+\phi'=e^{i\epsilon\frac{\partial}{\partial\phi}}\phi\approx(1+i\epsilon\frac{\partial}{\partial\phi})\phi=\phi+i\epsilon
+\]
+</span>
+
+带入
+
+
+<span class="katex">
+  \(\partial_\mu \mathcal{J}^\mu=0\)
+</span>
+得（约掉了
+
+
+<span class="katex">
+  \(i\epsilon\)
+</span>
+）
+
+
+
+<span class="katex">
+  \[
+\partial_\mu\left(\frac{\partial\mathscr{L}}{\partial (\partial_\mu\phi)}\right)=0\\ \textcolor{red}{\Longrightarrow }\partial_t\pi=\partial_0\left(\frac{\partial\mathscr{L}}{\partial (\partial_0\phi)}\right)=-\partial_i\left(\frac{\partial\mathscr{L}}{\partial (\partial_i\phi)}\right)\qquad\textcolor{red}{时空1+3分解}\\ \textcolor{red}{\Longrightarrow } \boxed{\begin{aligned}\partial_t\Pi&=\int_V{\partial_t\pi}=-\int_V\partial_i\left(\frac{\partial\mathscr{L}}{\partial (\partial_i\phi)}\right)\boldsymbol{\varepsilon}\\ &=-\int_{\partial V}\left(\frac{\partial\mathscr{L}}{\partial (\partial_i\phi)}\right)n_i\hat{\boldsymbol{\varepsilon}}\qquad\textcolor{red}{流形上高斯定理}\\ &=0 \qquad\textcolor{red}{当V足够大时，“局域性原理”}\end{aligned}}
+\]
+</span>
+
+所以有结论：<strong>场自身得平移不变性，对应，共轭动量守恒</strong>。</p>
+<h4 id="2场自身的旋转不变性">2）场自身的旋转不变性</h4>
+<p>此时
+
+
+<span class="katex">
+  \(\delta \phi=\epsilon_{\mu\upsilon}J^{\mu\upsilon}\phi\)
+</span>
+，带入
+
+
+<span class="katex">
+  \(\partial_\mu \mathcal{J}^\mu=0\)
+</span>
+得：
+
+
+
+<span class="katex">
+  \[
+\partial_\rho\left(\frac{\partial\mathscr{L}}{\partial (\partial_\rho\phi)}\epsilon_{\mu\upsilon}J^{\mu\upsilon}\phi\right)=0
+\]
+</span>
+</p>
+<h2 id="量子场论的算符">量子场论的算符</h2>
+<p>根据<code>Noether</code>定理，我们知道：</p>
+<ul>
+<li>动量
+
+
+<span class="katex">
+  \(\hat{p}_i\)
+</span>
+，对应空间平移生成元
+
+
+<span class="katex">
+  \(P_i=i\ \partial_i\)
+</span>
+；</li>
+<li>能量
+
+
+<span class="katex">
+  \(\hat{E}\)
+</span>
+，对应时间平移生成元
+
+
+<span class="katex">
+  \(P_i=i\ \partial_0\)
+</span>
+;</li>
+<li>位置
+
+
+<span class="katex">
+  \(\hat{x}_i\)
+</span>
+，没有所谓“位置守恒”的对称性，直接对应
+
+
+<span class="katex">
+  \(\hat{x}_i\to x_i\)
+</span>
+。</li>
+</ul>
+<p>考虑任意一个物理量
+
+
+<span class="katex">
+  \(\phi\)
+</span>
+（省略了标志其性质的指标，比如
+
+
+<span class="katex">
+  \(\phi_A,\phi_{AB}\)
+</span>
+），有：
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\ [\hat{p}_i,\hat{x}_j]\phi&=[i\partial_i,x_j]\phi\\ &=i(\partial_i x_j-x_j\partial_i )\phi\\ &=i\partial_i (x_j\phi)-ix_j\partial_i\\ &=\textcolor{blue}{i(\partial_i x_j)\phi+\cancel{ix_j\partial_i\phi}}-\cancel{ix_j\partial_i\phi}\\ &=i\delta_{ij}\phi\end{aligned}
+\]
+</span>
+
+即：
+
+
+
+<span class="katex">
+  \[
+\boxed{[\hat{p}_i,\hat{x}_j] = i \delta_{ij}}
+\]
+</span>
+
+根据<code>Noether</code>定理，我们还知道：</p>
+<p>​</p>
+<h2 id="0自旋klein-gordon-方程">0自旋，Klein-Gordon 方程</h2>
+<h2 id="12自旋dirac方程">1/2自旋，Dirac方程</h2>
+<h2 id="1自旋proca方程">1自旋，Proca方程</h2></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/julia/0088/">
+    下一页<br>平面三体问题（Julia版）
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/theophy/0086/">
+      上一页<br>庞加莱群的单粒子态的表示
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/theophy/0087.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/theophy/0087.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#关于物理对称性的总结">关于物理对称性的总结</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#内禀对称性">内禀对称性</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#量子场论的算符">量子场论的算符</a></li>
+        <li><a href="#0自旋klein-gordon-方程">0自旋，Klein-Gordon 方程</a></li>
+        <li><a href="#12自旋dirac方程">1/2自旋，Dirac方程</a></li>
+        <li><a href="#1自旋proca方程">1自旋，Proca方程</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

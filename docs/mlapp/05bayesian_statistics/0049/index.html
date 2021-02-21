@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="5.5 分层贝叶斯"><meta property="og:title" content="5.5 分层贝叶斯" />
+<meta property="og:description" content="返回本章目录
+计算后验
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+  \(p(\boldsymbol{\theta} | \mathcal{D})\)
+
+的关键要求是先验
+
+
+
+  \(p(\boldsymbol{\theta} | \boldsymbol{\eta})\)
+
+的指定，其中
+
+
+
+  \(\boldsymbol{\eta}\)
+
+是超参数。 如果我们不知道如何设置
+
+
+
+  \(\boldsymbol{\eta}\)
+
+怎么办？ 在某些情况下，我们可以使用无信息的先验，我们在上面讨论过。 更多贝叶斯方法是在我们的先验前再放置一个先验！ 在图模型（第10章）术语下，我们可以表示如下情况：
+
+
+
+
+  \[
+\boldsymbol{\eta} \to \boldsymbol{\theta} \to \mathcal{D} \tag{5.76}
+\]
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0049/" />
+<meta property="article:published_time" content="2019-07-08T20:20:35+08:00" />
+<meta property="article:modified_time" content="2019-07-08T20:20:35+08:00" />
+<title>5.5 分层贝叶斯 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a>
+<ul>
+<li><a href="/notes/docs/mlapp/01introduction/">第一章 导论</a></li>
+<li><a href="/notes/docs/mlapp/02probability/">第二章 概率</a></li>
+<li><a href="/notes/docs/mlapp/03generative_models_for_discrete_data/">第三章 基于离散数据的生成式模型</a></li>
+<li><a href="/notes/docs/mlapp/04gaussian_models/">第四章 高斯模型</a></li>
+<li><a href="/notes/docs/mlapp/05bayesian_statistics/">第五章 贝叶斯统计</a></li>
+<li><a href="/notes/docs/mlapp/06frequentist_statistics/">第六章 频率派统计</a></li>
+<li><a href="/notes/docs/mlapp/07linear_regression/">第七章 线性回归</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>5.5 分层贝叶斯</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#551-示例癌症发病率建模">5.5.1 示例：癌症发病率建模</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0050/">
+    下一页<br>5.6 经验贝叶斯
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0048/">
+      上一页<br>5.4 先验
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/mlapp/05bayesian_statistics/0049/">5.5 分层贝叶斯</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2019-07-08</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">机器学习</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF">贝叶斯</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/05bayesian_statistics/0049.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<p><a href="/notes/docs/mlapp/05bayesian_statistics/"><strong>返回本章目录</strong></a></p>
+<p>计算后验
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(p(\boldsymbol{\theta} | \mathcal{D})\)
+</span>
+的关键要求是先验
+
+
+<span class="katex">
+  \(p(\boldsymbol{\theta} | \boldsymbol{\eta})\)
+</span>
+的指定，其中
+
+
+<span class="katex">
+  \(\boldsymbol{\eta}\)
+</span>
+是超参数。 如果我们不知道如何设置
+
+
+<span class="katex">
+  \(\boldsymbol{\eta}\)
+</span>
+怎么办？ 在某些情况下，我们可以使用无信息的先验，我们在上面讨论过。 更多贝叶斯方法是在我们的先验前再放置一个先验！ 在图模型（第10章）术语下，我们可以表示如下情况：</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{\eta} \to \boldsymbol{\theta} \to \mathcal{D} \tag{5.76}
+\]
+</span>
+
+<p>这是<strong>分层贝叶斯模型</strong>( <strong>hierarchical Bayesian model</strong>)的一个示例，也称为<strong>多级模型</strong>(<strong>multi-level model</strong>)，因为存在多个级别的未知量。 我们在下面给出一个简单的例子，我们将在本书后面看到许多其他的例子。</p>
+<h2 id="551-示例癌症发病率建模">5.5.1 示例：癌症发病率建模</h2>
+<p>考虑在各个城市预测癌症发病率的问题（这个例子来自（Johnson and Albert 1999，p24））。特别地，假设我们测量不同城市的人数
+
+
+<span class="katex">
+  \(N_i\)
+</span>
+，以及这些城市中死于癌症的人数
+
+
+<span class="katex">
+  \(x_i\)
+</span>
+。我们假设
+
+
+<span class="katex">
+  \(x_i \sim {\rm Bin}(N_i，\theta_i)\)
+</span>
+，并且我们想要估计癌症率
+
+
+<span class="katex">
+  \(\theta_i\)
+</span>
+。一种方法是单独估计它们，但是这将受到稀疏数据问题（低估由于小的
+
+
+<span class="katex">
+  \(N_i\)
+</span>
+引起的癌症速率）的影响。另一种方法是假设所有
+
+
+<span class="katex">
+  \(\theta_i\)
+</span>
+都相同;这称为<strong>参数绑定</strong>(<strong>parameter tying</strong>)。由此产生的混合MLE恰好是只
+
+
+<span class="katex">
+  \(\hat{\theta}=\frac{\sum_i{x_i}}{\sum_i{N_i}}\)
+</span>
+。但是所有城市具有相同比率的假设是相当强的。一种折衷的方法是假设
+
+
+<span class="katex">
+  \(\theta_i\)
+</span>
+是相似的，但可能存在城市特定的变化。这可以通过假设
+
+
+<span class="katex">
+  \(\theta_i\)
+</span>
+是从一些共同分布中得出来建模，比如
+
+
+<span class="katex">
+  \(\theta_i \sim {\rm Beta}(a,b)\)
+</span>
+。完整的联合分布可以写成</p>
+
+
+
+<span class="katex">
+  \[
+p(\mathcal{D}, \boldsymbol{\theta}, \boldsymbol{\eta} | \boldsymbol{N}) = p(\boldsymbol{\eta}) \prod_{i=1}^N {{\rm Bin}(x_i | N_i, \theta_i) {\rm Beta}(\theta_i | \boldsymbol{\eta}) } \tag{5.77}
+\]
+</span>
+
+<p>其中: 
+
+
+<span class="katex">
+  \(\boldsymbol{\eta}=(a,b)\)
+</span>
+。</p>
+<p>注意，我们从数据推断
+
+
+<span class="katex">
+  \(\boldsymbol{\eta}=(a,b)\)
+</span>
+是至关重要的; 如果我们只是将它固定成一个常数，
+
+
+<span class="katex">
+  \(\theta_i\)
+</span>
+将是条件独立的，并且它们之间将没有信息流。 相比之下，通过将
+
+
+<span class="katex">
+  \(\boldsymbol{\eta}\)
+</span>
+视为未知（隐藏变量），我们允许从数据丰富的城市<strong>借用统计力量</strong>应用到数据贫乏的城市。</p>
+<p>假设我们要计算联合后验
+
+
+<span class="katex">
+  \(p(\boldsymbol{\eta}，\boldsymbol{\theta} | \mathcal{D})\)
+</span>
+。 由此我们可以得到边缘后验
+
+
+<span class="katex">
+  \(p(\theta_i | \mathcal{D})\)
+</span>
+。 在图5.11（a）中，我们绘制了后验均值
+
+
+<span class="katex">
+  \(\mathbb{E} [\theta_i | \mathcal{D}]\)
+</span>
+(蓝色条)，以及人口水平均值
+
+
+<span class="katex">
+  \(\mathbb{E} [a /(a + b) | \mathcal{D}]\)
+</span>
+(显示为红线 , 这代表
+
+
+<span class="katex">
+  \(\theta_i\)
+</span>
+的均值）。 我们看到，对于样本量小的城市
+
+
+<span class="katex">
+  \(N_i\)
+</span>
+，相对更强的汇总估计, 后验均值会更小,。 例如，城市1和城市20都有0观察到的癌症发病率，但城市20的人口较少，因此相对城市1, 其人口水平估计（即，它更接近水平红线）的比率更低。</p>
+<p><img src="" alt="0080.jpg"></p>
+<blockquote>
+<p>图5.11 （a）使用来自（Johnson和Albert 1999，第24页）的数据来拟合模型的结果。 第一行：密苏里州20个城市的癌症事件数量
+
+
+<span class="katex">
+  \(x_i\)
+</span>
+。 第二行：人口规模
+
+
+<span class="katex">
+  \(N_i\)
+</span>
+。 最大的城市（编号15）的人口为
+
+
+<span class="katex">
+  \(N_{15} = 53637\)
+</span>
+, 和
+
+
+<span class="katex">
+  \(x_{15} = 54\)
+</span>
+个事件，但我们截断了前两行的垂直轴，以便可以看到其他城市之间的差异。 第三排：MLE
+
+
+<span class="katex">
+  \(\hat{\theta}_i\)
+</span>
+。 红线是汇集的MLE。 第四行：后验均值
+
+
+<span class="katex">
+  \(\mathbb{E} [\theta_i | \mathcal{D}]\)
+</span>
+。 红线是
+
+
+<span class="katex">
+  \(\mathbb{E} [a /(a+b) | \mathcal{D}]\)
+</span>
+，即人口水平均值。 （b）癌症发病率的95％后验可信区间。 由_cancerRatesEb_生成的图</p>
+</blockquote>
+<p>图5.11（b）显示了
+
+
+<span class="katex">
+  \(\theta_i\)
+</span>
+的95％后验可信区间。 我们看到，人口众多（53,637人）的城市15具有较小的后验不确定性。 因此，这个城市对
+
+
+<span class="katex">
+  \(\boldsymbol{\eta}\)
+</span>
+的后验估计影响最大，这反过来将影响其他城市的癌症率估计。 具有最高MLE的城市10和19也具有最高的后验不确定性，反映出这样的高估计与先验（与所有其他城市估计）相矛盾的事实。</p>
+<p>在上面的例子中，我们每个城市有一个参数，来建模响应的概率。 通过使伯努利率参数成为协变量的函数，
+
+
+<span class="katex">
+  \(\theta_i= {\rm sigm}(\boldsymbol{w}_i^T \boldsymbol{x})\)
+</span>
+，我们可以建模多个相关逻辑斯蒂回归任务。 这称为<strong>多任务学习</strong>，将在第9.5节中详细讨论。</p>
+<p><a href="/notes/docs/mlapp/05bayesian_statistics/"><strong>返回本章目录</strong></a></p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0050/">
+    下一页<br>5.6 经验贝叶斯
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0048/">
+      上一页<br>5.4 先验
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/05bayesian_statistics/0049.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/mlapp/05bayesian_statistics/0049.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#551-示例癌症发病率建模">5.5.1 示例：癌症发病率建模</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

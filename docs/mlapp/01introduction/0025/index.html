@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="1.1 机器学习：什么和为什么？"><meta property="og:title" content="1.1 机器学习：什么和为什么？" />
+<meta property="og:description" content="返回本章目录
+
+我们淹没在信息中，渴望知识。 — John Naisbitt。
+
+我们正在进入大数据时代。 例如，有大约1万亿个网页; YouTube一个小时的视频上传，每天相当于10年的内容;1000多人的基因组，每个人的长度为3.8×109个碱基对，已被各种实验室测序; 沃尔玛每小时处理超过1M笔交易，数据库包含超过2.5千兆字节（2.5×1015）的信息（Cukier 2010）; 等等。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0025/" />
+<meta property="article:published_time" content="2019-06-15T20:20:35+08:00" />
+<meta property="article:modified_time" content="2019-06-15T20:20:35+08:00" />
+<title>1.1 机器学习：什么和为什么？ | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a>
+<ul>
+<li><a href="/notes/docs/mlapp/01introduction/">第一章 导论</a></li>
+<li><a href="/notes/docs/mlapp/02probability/">第二章 概率</a></li>
+<li><a href="/notes/docs/mlapp/03generative_models_for_discrete_data/">第三章 基于离散数据的生成式模型</a></li>
+<li><a href="/notes/docs/mlapp/04gaussian_models/">第四章 高斯模型</a></li>
+<li><a href="/notes/docs/mlapp/05bayesian_statistics/">第五章 贝叶斯统计</a></li>
+<li><a href="/notes/docs/mlapp/06frequentist_statistics/">第六章 频率派统计</a></li>
+<li><a href="/notes/docs/mlapp/07linear_regression/">第七章 线性回归</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>1.1 机器学习：什么和为什么？</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#111-机器学习的类型">1.1.1 机器学习的类型</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0026/">
+    下一页<br>1.2 监督学习
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0024/">
+      上一页<br>第八章 估值理论
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/mlapp/01introduction/0025/">1.1 机器学习：什么和为什么？</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2019-06-15</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">机器学习</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0">监督学习</a>
+      , 
+      <a href="/notes/tags/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0">无监督学习</a>
+      , 
+      <a href="/notes/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0">强化学习</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/01introduction/0025.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<p><a href="/notes/docs/mlapp/01introduction/"><strong>返回本章目录</strong></a></p>
+<blockquote>
+<p>我们淹没在信息中，渴望知识。 — John Naisbitt。</p>
+</blockquote>
+<p>我们正在进入<strong>大数据</strong>时代。 例如，有大约1万亿个网页; YouTube一个小时的视频上传，每天相当于10年的内容;1000多人的基因组，每个人的长度为3.8×109个碱基对，已被各种实验室测序; 沃尔玛每小时处理超过1M笔交易，数据库包含超过2.5千兆字节（2.5×1015）的信息（Cukier 2010）; 等等。</p>
+<p>这种大量数据需要自动化的数据分析方法，这就是<strong>机器学习</strong>所提供的。特别是，我们定义机器学习为一组能够自动探测数据中潜在模式的方法，并且用这种模式来预测未来的数据，或在不确定性因素下执行其他类型的决策（例如规划如何收集更多数据！）。</p>
+<p>本书采用的观点是，解决此类问题的最佳方法是使用概率论工具。 概率论可以应用于任何涉及不确定性的问题。 在机器学习中，不确定性有多种形式： 根据过去的一些数据，对未来的最佳预测是什么？什么是解释一些数据的最佳模型？下一步该进行什么样的度量？ 等等。 机器学习的概率方法与统计学领域密切相关，但在重点和术语方面略有不同。</p>
+<p>我们将描述适用于各种数据和任务的各种概率模型。 我们还将描述用于学习和使用此类模型的各种算法。我们的目标不是开发一种特殊技术的烹饪书，而是通过概率建模和推理来全面认识这一领域。虽然我们会关注计算效率，但是在其他书籍中更好地描述了如何将这些方法扩展到真正大规模数据集的细节，例如（Rajaraman和Ullman 2011; Bekkerman等人2011）。</p>
+<p>然而，应该注意的是，即使拥有一个庞大的数据集，实际有效数据点也可能很小。事实上，许多领域的数据都表现出称为<strong>长尾</strong>的特点，这意味着一些事物（例如，单词）非常常见，但大多数事情都非常罕见（详见第2.4.6节）。例如，每天有20％的Google搜索从未见过。这意味着我们在本书中讨论关于从相对较小的样本尺寸进行推广的核心统计问题，即使在大数据时代也仍然非常相关。</p>
+<h2 id="111-机器学习的类型">1.1.1 机器学习的类型</h2>
+<p>机器学习通常分为两大类。第一种方法是<strong>预测性</strong>的或<strong>监督学习</strong>方法，目标是在给定一组有标记的输入-输出对 
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(\mathcal{D} ={(x_i，y_i)}_{i=1}^N\)
+</span>
+ 的情况下学习从输入
+
+
+<span class="katex">
+  \(x\)
+</span>
+到输出
+
+
+<span class="katex">
+  \(y\)
+</span>
+的映射。 这里
+
+
+<span class="katex">
+  \(\mathcal{D}\)
+</span>
+被称为<strong>训练集</strong>，
+
+
+<span class="katex">
+  \(N\)
+</span>
+是训练样本的数量。</p>
+<p>在最简单的设置中，每个训练输入
+
+
+<span class="katex">
+  \(x_i\)
+</span>
+是
+
+
+<span class="katex">
+  \(D\)
+</span>
+维向量，例如表示人的身高和体重。这些被称为<strong>特征</strong>，<strong>属性</strong>或<strong>协变量</strong>。 然而，一般而言，
+
+
+<span class="katex">
+  \(x_i\)
+</span>
+可以是复杂的结构化对象，例如图像，句子，电子邮件消息，时间序列，分子形状，图形等。</p>
+<p>类似地，输出或<strong>响应变量</strong>的形式原则上可以是任何形式，但是大多数方法假设
+
+
+<span class="katex">
+  \(y_i\)
+</span>
+是来自某个有限集的<strong>分类</strong>或<strong>名称变量</strong>，
+
+
+<span class="katex">
+  \(y_i \in {1,\dots,C}\)
+</span>
+（例如男性或女性） 或者
+
+
+<span class="katex">
+  \(y_i\)
+</span>
+是一个实值标量（如收入水平）。当
+
+
+<span class="katex">
+  \(y_i\)
+</span>
+是分类时，问题被称为<strong>分类</strong>或<strong>模式识别</strong>，并且当
+
+
+<span class="katex">
+  \(y_i\)
+</span>
+是实值时，该问题被称为<strong>回归</strong>。另一种变体，称为<strong>序数回归</strong>(译者注: 也叫<strong>排名学习</strong>)，发生在标签空间
+
+
+<span class="katex">
+  \(\mathcal{Y}\)
+</span>
+具有某种自然顺序的地方，例如等级A-F。</p>
+<p>第二种主要的机器学习类型是<strong>描述性</strong>的或<strong>无监督学习</strong>方法。 这里我们只给出输入， 
+
+
+<span class="katex">
+  \(\mathcal{D} = \{ x_i \}_{i = 1}^N\)
+</span>
+ ，目标是在数据中找到“有趣的模式”。这有时被称为<strong>知识发现</strong>。这是一个定义不太明确的问题，因为我们没有被告知要查找哪种模式，并且没有明显的误差度量标准可供使用（与监督学习不同，我们可以将我们对给定
+
+
+<span class="katex">
+  \(x\)
+</span>
+的
+
+
+<span class="katex">
+  \(y\)
+</span>
+的预测进行比较 观察值）。</p>
+<p>还有第三种类型的机器学习，称为<strong>强化学习</strong>，它在某种程度上不太常用。这对于学习如何在给予偶尔的奖励或惩罚信号时的动作或行为很有用。 （例如，考虑一个婴儿如何学会走路。） 不幸的是，RL超出了本书的范围，尽管我们在第5.7节讨论决策理论，这是RL的基础。参见（Kaelbling等人1996; Sutton和Barto 1998; Russell和Norvig 2010; Szepesvari 2010; Wiering和van Otterlo 2012）以获得关于RL的更多信息。</p>
+<p><a href="/notes/docs/mlapp/01introduction/"><strong>返回本章目录</strong></a></p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0026/">
+    下一页<br>1.2 监督学习
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0024/">
+      上一页<br>第八章 估值理论
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/01introduction/0025.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/mlapp/01introduction/0025.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#111-机器学习的类型">1.1.1 机器学习的类型</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

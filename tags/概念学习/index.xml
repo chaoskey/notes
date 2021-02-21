@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>概念学习 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E6%A6%82%E5%BF%B5%E5%AD%A6%E4%B9%A0/</link>
+    <description>Recent content in 概念学习 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Fri, 28 Jun 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E6%A6%82%E5%BF%B5%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>3.2 贝叶斯概念学习</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0040/</link>
+      <pubDate>Fri, 28 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0040/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;考虑孩子如何学习理解单词的含义，例如“狗”。据推测，孩子的父母指出了这个概念的正面例子，说“看着可爱的小狗！”或“小心小狗”等等。然而，他们提供反面的例子是不太可能的，“看看那只非狗“?。当然，在积极的学习过程中可能会得到负面的例子 - 孩子说“看狗”，父母说“那是猫，亲爱的，不是狗” - 但心理学研究表明，人们可以仅从正面例子来学习概念（Xu和Tenenbaum 2007）。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>平移 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E5%B9%B3%E7%A7%BB/</link>
+    <description>Recent content in 平移 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Fri, 17 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E5%B9%B3%E7%A7%BB/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>流形上的平移</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0007/</link>
+      <pubDate>Fri, 17 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0007/</guid>
+      <description>&lt;h2 id=&#34;平移是路径无关的吗&#34;&gt;平移是路径无关的吗？&lt;/h2&gt;
+&lt;p&gt;我们知道，欧氏空间的平移是路径无关的，任意两个位置，平移的结果是唯一的。&lt;/p&gt;
+&lt;p&gt;那么在流形上呢？结论是：&lt;code&gt;流形上的平移是路径依赖的&lt;/code&gt;。只需要一个例子就足以说明，如图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://chaoskey.gitee.io/notes/notes/images/0012.jpg&#34; alt=&#34;0012.jpg&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

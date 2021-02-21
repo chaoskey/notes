@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vscode on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/vscode/</link>
+    <description>Recent content in vscode on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Wed, 08 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/vscode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>整合Julia和Python的集成环境（Win10）</title>
+      <link>https://chaoskey.gitee.io/notes/docs/julia/0001/</link>
+      <pubDate>Wed, 08 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/julia/0001/</guid>
+      <description>&lt;h2 id=&#34;目标&#34;&gt;目标&lt;/h2&gt;
+&lt;p&gt;１） 统一利用&lt;strong&gt;Visual Studio Code&lt;/strong&gt;作为Julia和Python的ＩＤＥ&lt;/p&gt;
+&lt;p&gt;２） 统一利用&lt;strong&gt;Jupyter&lt;/strong&gt;作为Julia和Python的Notebook&lt;/p&gt;
+&lt;p&gt;３） 以Julia作为我主要的使用语言，确保能调用Python的库包&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

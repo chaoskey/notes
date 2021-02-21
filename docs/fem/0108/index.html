@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="有限元变分形式的正交表示（二）【翻译】"><meta property="og:title" content="有限元变分形式的正交表示（二）【翻译】" />
+<meta property="og:description" content="I.方法论》7.有限元变分形式的正交表示（二）
+【章节目录】
+7·3 性能比较
+在本节中，我们研究上一节概述的优化策略对运行时性能的影响。  关键不是要对优化进行严格的分析，而是要提供有关不同策略何时最有效的指示。  我们还将比较正交表示和张量表示的运行时性能（在第8章中进行了介绍），以说明两种方法的优缺点。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/0108/" />
+<meta property="article:published_time" content="2021-01-05T08:24:50+08:00" />
+<meta property="article:modified_time" content="2021-01-05T08:24:50+08:00" />
+<title>有限元变分形式的正交表示（二）【翻译】 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a>
+<ul>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E6%96%B9%E6%B3%95">第二章 有限元方法</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%B8%B8%E8%A7%81%E6%9C%89%E9%99%90%E5%85%83">第三章 常见有限元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8%E5%8F%82%E8%80%83%E5%8D%95%E5%85%83">第四章 构造通用参考单元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F">第五章 有限元变分形式</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%BB%84%E8%A3%85">第六章 有限元组装</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%AD%A3%E4%BA%A4%E8%A1%A8%E7%A4%BA">第七章 有限元变分形式的正交表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA">第八章 有限元变分形式的张量表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E7%9A%84%E7%A6%BB%E6%95%A3%E4%BC%98%E5%8C%96">第九章 有限元矩阵计算的离散优化</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E7%AB%A0-dolfincpython%E6%9C%89%E9%99%90%E5%85%83%E5%BA%93">第十章 DOLFIN：C++/Python有限元库</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-ufl%E6%9C%89%E9%99%90%E5%85%83%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80">第十七章 UFL：有限元形式语言</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-unicorn%E7%BB%9F%E4%B8%80%E7%9A%84%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6%E6%B1%82%E8%A7%A3%E5%99%A8">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>有限元变分形式的正交表示（二）【翻译】</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#i方法论7有限元变分形式的正交表示二">I.方法论》7.有限元变分形式的正交表示（二）</a>
+      <ul>
+        <li><a href="#73-性能比较">7·3 性能比较</a>
+          <ul>
+            <li><a href="#731-正交优化的性能">7·3·1 正交优化的性能</a></li>
+            <li><a href="#732-正交和张量表示的相对性能">7·3·2 正交和张量表示的相对性能</a></li>
+          </ul>
+        </li>
+        <li><a href="#74-表示的自动选择">7·4 表示的自动选择</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0109/">
+    下一页<br>有限元变分形式的张量表示【翻译】
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0107/">
+      上一页<br>有限元变分形式的正交表示（一）【翻译】
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/fem/0108/">有限元变分形式的正交表示（二）【翻译】</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2021-01-05</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/FEniCS">FEniCS</a>
+      , 
+      <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95">有限元法</a>
+      , 
+      <a href="/notes/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">偏微分方程</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0108.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h1 id="i方法论7有限元变分形式的正交表示二">I.方法论》7.有限元变分形式的正交表示（二）</h1>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e4%b8%83%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e5%8f%98%e5%88%86%e5%bd%a2%e5%bc%8f%e7%9a%84%e6%ad%a3%e4%ba%a4%e8%a1%a8%e7%a4%ba">章节目录</a>】</p>
+<h2 id="73-性能比较">7·3 性能比较</h2>
+<p>在本节中，我们研究上一节概述的优化策略对运行时性能的影响。  关键不是要对优化进行严格的分析，而是要提供有关不同策略何时最有效的指示。  我们还将比较正交表示和张量表示的运行时性能（在第8章中进行了介绍），以说明两种方法的优缺点。</p>
+<h3 id="731-正交优化的性能">7·3·1 正交优化的性能</h3>
+<p>将使用两种形式来研究正交优化的性能，即加权拉普拉斯方程（7.1）的双线性形式和第17章方程（17.6）中提供的超弹性模型的双线性形式。  在两种情况下，都将使用二次拉格朗日有限元。</p>
+<p>所有测试均在1.7GHz的Intel Pentium M CPU上进行，带有1.0GB的RAM，运行带有Linux内核2.6.38的Ubuntu 11.10。  我们使用Python v2.7.2和NumPy v1.5.1（均与FFC有关）和g++ v4.6.1来编译符合UFC v2.0.2的C++代码。</p>
+<p>用不同的FFC优化来编译这两种形式，并确定用于计算局部单元张量的浮点运算（flops）次数。  我们将浮点运算（flops）次数定义为代码中“ +”和“ *”运算符所有出现的次数总和。  还可以计算当前FFC优化与标准正交表示的浮点运算次数比（“o/q”）。  然后使用四个不同的优化选项，通过g++编译生成代码，并测量计算单元张量N次所需的时间。  在下面的代码中，我们将用<code>-zeros</code>作为<code>-f eliminate_zeros</code>选项的简写，用<code>-simplify</code>作为<code>-f simplify_expressions</code>选项的简写，用<code>-ip</code>作为<code>-f precompute_ip_const</code>选项的简写，用<code>-basis</code>作为<code>-f precompute_basis_const</code>选项的简写 。</p>
+<p>表7.1显示了具有不同FFC优化的加权拉普拉斯方程的运算次数，而图7.6显示了
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(N = 1 \times 10^7\)
+</span>
+时不同编译器选项的运行时性能。  FFC编译器选项可以在图的x轴上看到，并且四个g++编译器选项以不同的颜色显示。</p>
+<p><img src="/notes/images/0222.jpg" alt="0222.jpg"></p>
+<center>表7.1 加权拉普拉斯方程的运算次数。</center>
+<p><img src="/notes/images/0223.jpg" alt="0223.jpg"></p>
+<center>图7.6 不同编译器选项的加权拉普拉斯方程的运行时性能。 x轴显示FFC编译器选项，颜色表示g++编译器选项。</center>
+<p>对所有的优化选项，FFC和g++编译时间均不到2秒。  从图7.6可以明显看出，g++优化极大地影响了运行时性能。  与不使用g++优化（<code>-O0</code>标记）的情况相比，使用<code>-O2</code>选项时，标准正交代码的运行时间改善了3.31倍，使用<code>-O2 -funroll-loops</code>选项时，改善了5.23倍， <code>-O3</code>选项时为7.75。  使用FFC优化选项<code>-zeros</code>时，<code>-O3</code>选项似乎不会明显改善<code>-O2 -funroll-loops</code>选项的运行时间。  单独使用FFC优化选项<code>-zeros</code>不能改善运行时性能。  实际上，即使将此选项与<code>-simplify</code>选项组合使用，使用此选项与任何其他优化选项的组合也会增加运行时间，与标准的正交表示相比，该选项的操作数明显减少。  值得注意的一点是，如果没有g++优化，即使<code>-ip</code>和<code>-basis</code>选项在运行时存在相同的浮点运算次数，它们在运行时也存在很大差异。  启用g++优化后，将完全消除这种差异，并且两个FFC优化的运行时间相同。  这表明不可能仅凭操作次数就可以预测运行时性能，因为必须考虑FFC优化的类型以及g++编译器选项的预期用途。  这种形式的优化的最佳组合是FFC选项<code>-ip</code>或<code>-basis</code>与g++选项<code>-O3</code>组合，在这种情况下，与没有g++优化的标准正交代码相比，运行时间改善了10.2倍。</p>
+<p><img src="/notes/images/0224.jpg" alt="0224.jpg"></p>
+<center>表7.2 对于超弹性示例，FFC的编译时间和操作次数。</center>
+<p><img src="/notes/images/0225.jpg" alt="0225.jpg"></p>
+<center>图7.7 不同编译器选项的超弹性示例的运行时性能。  x轴显示FFC编译器选项，颜色表示g++编译器选项。</center>
+<p>表7.2给出了具有不同FFC优化的超弹性的双线性形式的操作次数和FFC编译时间，而图7.7显示了
+
+
+<span class="katex">
+  \(N = 1 \times 10^4\)
+</span>
+时不同编译器选项的运行时性能。  计算单元张量所涉及的浮点运算次数，与加权拉普拉斯示例进行比较，很明显，这个问题要复杂得多。  表7.2中的FFC编译时间表明，<code>-simplify</code>优化，正如预期，是执行成本最高的。  对于所有优化选项，所有测试用例的g++编译时间在2到7秒之间。  需要注意的一点是，该问题减少浮点运算次数的范围比加权拉普拉斯问题大得多，不同FFC优化之间的浮点运算次数差异跨越几个数量级。  相比之下，加权拉普拉斯问题的未经优化和最有效的优化策略之间的差异大约为2倍。  在不使用g++优化的情况下，超弹性问题的运行时性能可以直接与浮点运算的次量相关。  当g++优化<code>-O2</code>打开时，此效果变得不太明显。  与g++优化有关的另一点要注意的是，启用<code>-O2</code>以外的其他优化似乎并不能在运行时提供任何进一步的改进。  对于超弹性示例，选项<code>-zeros</code>会对性能产生积极影响，不仅是单独使用时，尤其是与其他FFC优化结合使用时。  这与加权拉普拉斯方程相反。  原因是测试和试探函数是矢量值而不是标量值，从而可以消除更多的零。  最后，请注意，与加权拉普拉斯问题相比，<code>-simplify</code>选项在此示例中的效果特别好。  原因是超弹性形式的性质会导致要用相对复杂的表达式来计算局部单元张量中的项。  但是，此表达式仅包含几个不同的变量（雅可比的逆分量和基函数），这使<code>-simplify</code>选项非常有效，因为许多项是通用的并且可以预先计算和外提的。  对于超弹性形式，优化的最佳组合是FFC选项<code>-simplify -zeros</code>和g++选项<code>-O2 -funroll-loops</code>，与使用FFC或g++而没有优化的情况相比，该代码将代码的运行时性能提高了335倍 。</p>
+<p>对于所考虑的示例，很明显，没有一种优化策略可以在所有情况下都达到最佳。  此外，生成阶段优化能作到最好的程度，取决于g++编译器执行的优化。  对于上述测试案例，不同的C++编译器也很有可能给出不同的结果。 因此，为选择适当的生产代码优化，一般的建议是，选择应基于针对特定问题的基准程序。</p>
+<h3 id="732-正交和张量表示的相对性能">7·3·2 正交和张量表示的相对性能</h3>
+<p><img src="/notes/images/0226.jpg" alt="0226.jpg"></p>
+<center>表7.3 对于二维下的不同多项式阶次和函数个数， 类弹性张量的两种表示形式的操作次数比率（取自Ølgaard和Wells（2010））。</center> 
+<p>如上一节所述，给定类型的优化可能对一类形式有效，而对另一类形式则无效。 类似地，对于不同的方程，可以在正交和张量表示之间观察到差异。  Ølgaard和Wells（2010）对此问题进行了详细研究。  为方便起见，我们在此用表7.3重现这篇论文的主要结论。  本节中显示的结果与二维的类弹性双线性形式有关，该形式预先乘以了多个标量系数
+
+
+<span class="katex">
+  \(f_i\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+a(u,v)=\int_\Omega{(f_0 f_1,\dots,f_{n_f})\nabla^su : \nabla^s v dx} \tag{7.7}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(n_f\)
+</span>
+是预乘系数的个数。  测试和试探函数用
+
+
+<span class="katex">
+  \(v, u \in V_h\)
+</span>
+表示，其中</p>
+
+
+
+<span class="katex">
+  \[
+V_h = \left\{v \in [H^1(\Omega)]^2 : v|_T \in [P_q(T)]^2 \ \forall T \in \mathcal{T}\right\} \tag{7.8}
+\]
+</span>
+
+<p>和系数函数
+
+
+<span class="katex">
+  \(f_i \in W_h\)
+</span>
+，其中</p>
+
+
+
+<span class="katex">
+  \[
+W_h = \left\{f \in H^1(\Omega)  : f|_T \in P_p(T) \ \forall T \in \mathcal{T} \right\}\tag{7.9}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(q\)
+</span>
+和
+
+
+<span class="katex">
+  \(p\)
+</span>
+表示拉格朗日基函数的多项式次数。  系数的个数和多项式的次数是变化的，并且同时记录用张量和正交表示计算局部单元张量所需的浮点运算次数。  通过对正交表示使用优化选项<code>-f eliminate_zeros -f simplify_expressions</code>可获得结果。  在表7.3中，给出了正交表示和张量表示的浮点运算次数比（q/t）。  对浮点运算次数，比率q/t&gt;1表示张量表示更有效，而q/t&lt;1表示正交表示更有效。  在比较两个表示形式的运行时性能时，浮点运算次数是性能的良好指标。  但是，正如我们在上一节中所显示的，对于给定的形式，具有最低浮点运算次数的正交代码并不总是表现最佳。  此外，运行时性能甚至取决于所使用的g++选项。  这就产生了一个问题，即是否有可能仅根据浮点运算次数的估计在表示之间进行良好的选择，如Ølgaard和Wells（2010）所建议的那样。</p>
+<p>但是，仍然可以从表中读取一些一般趋势。  形式中增加系数函数的个数
+
+
+<span class="katex">
+  \(n_f\)
+</span>
+，显然有利于正交表示。 对于
+
+
+<span class="katex">
+  \(n_f=3\)
+</span>
+，可以期望正交表示对于
+
+
+<span class="katex">
+  \(q\)
+</span>
+和
+
+
+<span class="katex">
+  \(p\)
+</span>
+的所有值表现最佳。  增加系数的多项式次数
+
+
+<span class="katex">
+  \(p\)
+</span>
+也有助于正交表示，尽管与增加系数的效果相比，效果不那么明显。  当测试和试探函数的多项式次数
+
+
+<span class="katex">
+  \(q\)
+</span>
+增加时，张量表示似乎表现更好，尽管当系数变低时效果最明显。</p>
+<h2 id="74-表示的自动选择">7·4 表示的自动选择</h2>
+<p>我们已经说明了如何通过为FFC和g++编译器使用各种优化选项，以及通过更改形式的表示来改善变分形式生成代码的运行时性能。  选择形式表示和优化选项的组合以实现最佳性能将不可避免地需要一个所研究特定问题的基准。  但是，通常需要许多复杂程度不同的变分形式来解决更复杂的问题。  为所有这些设置基准既麻烦又耗时。  此外，在模型开发阶段，与变分形式的快速原型制作相比，运行时性能至关重要，只要生成的代码执行得相当好即可。</p>
+<p>因此，FFC的默认是用张量表示的成本测量来自动确定应使用哪种形式表示。  简而言之，成本简单地计算为代表形式的单项式中存在的系数和导数个数之和的最大值。  如果此成本大于当前设置为3的指定阈值，则选择正交表示。  回顾表7.3，当
+
+
+<span class="katex">
+  \(n_f=3\)
+</span>
+时，对于几乎所有测试用例，正交表示的浮点运算次数显着降低。  尽管这种方法似乎是临时的，但对于运行时性能差异非常明显的情况，它会很好地起作用。  重要的是要记住，生成的代码仅与局部单元张量的求值有关，并且值插入稀疏矩阵和求解方程组所需的时间将会降低任何差异，尤其是对于简单形式。  因此，对于运行时性能差异较小的形式，正确选择表示的重要性不那么重要。  未来的改进可能是设计一种策略，使系统也可以自动为正交表示选择优化策略。</p>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e4%b8%83%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e5%8f%98%e5%88%86%e5%bd%a2%e5%bc%8f%e7%9a%84%e6%ad%a3%e4%ba%a4%e8%a1%a8%e7%a4%ba">章节目录</a>】</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0109/">
+    下一页<br>有限元变分形式的张量表示【翻译】
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0107/">
+      上一页<br>有限元变分形式的正交表示（一）【翻译】
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0108.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/fem/0108.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#i方法论7有限元变分形式的正交表示二">I.方法论》7.有限元变分形式的正交表示（二）</a>
+      <ul>
+        <li><a href="#73-性能比较">7·3 性能比较</a>
+          <ul>
+            <li><a href="#731-正交优化的性能">7·3·1 正交优化的性能</a></li>
+            <li><a href="#732-正交和张量表示的相对性能">7·3·2 正交和张量表示的相对性能</a></li>
+          </ul>
+        </li>
+        <li><a href="#74-表示的自动选择">7·4 表示的自动选择</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

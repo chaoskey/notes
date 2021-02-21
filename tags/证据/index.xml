@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>证据 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E8%AF%81%E6%8D%AE/</link>
+    <description>Recent content in 证据 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Sat, 06 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E8%AF%81%E6%8D%AE/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>5.3贝叶斯模型选择</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0047/</link>
+      <pubDate>Sat, 06 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0047/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在图1.18中，我们看到使用过高度数多项式会导致过拟合，而使用过低度数会导致欠拟合。类似地，在图7.8（a）中，我们看到使用太小正则化参数会导致过拟合，而太大值会导致欠拟合。一般来说，当面对一组不同复杂度的模型（即参数分布族）时，我们应该如何选择最好的模型呢？这称为&lt;strong&gt;模型选择&lt;/strong&gt;问题。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

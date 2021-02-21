@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sed on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/sed/</link>
+    <description>Recent content in sed on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Wed, 08 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/sed/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>通过实例掌握流编辑器sed</title>
+      <link>https://chaoskey.gitee.io/notes/posts/0067/</link>
+      <pubDate>Wed, 08 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/posts/0067/</guid>
+      <description>&lt;h2 id=&#34;缘由&#34;&gt;缘由&lt;/h2&gt;
+&lt;p&gt;由于Hugo对Markdown的解析和LaTeX存在诸多冲突。比如：当LaTex中出现&lt;code&gt;\\&lt;/code&gt;、&lt;code&gt;\{&lt;/code&gt;、&lt;code&gt;\}&lt;/code&gt;之类的东西，Hugo就无法正常解析数学公式。&lt;/p&gt;
+&lt;p&gt;解决方案之一就是用Hugo的&lt;code&gt;shortcodes&lt;/code&gt;机制，在md文件中用形如&lt;code&gt;{{&amp;lt; katex [display] &amp;gt;}}latex code{{&amp;lt; /katex &amp;gt;}}&lt;/code&gt;格式。&lt;/p&gt;
+&lt;p&gt;这样一来，网站显示正常了，但在本地Typora就无法识别了。 个人体验不好。&lt;/p&gt;
+&lt;p&gt;于是我想到用流编编器&lt;code&gt;sed&lt;/code&gt;对md内容进行替换。 我以前用&lt;code&gt;sed&lt;/code&gt;都是简单的情况，复杂需求我就不会用了。 于是有了此文。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

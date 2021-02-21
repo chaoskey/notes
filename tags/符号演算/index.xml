@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>符号演算 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E7%AC%A6%E5%8F%B7%E6%BC%94%E7%AE%97/</link>
+    <description>Recent content in 符号演算 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Sat, 11 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E7%AC%A6%E5%8F%B7%E6%BC%94%E7%AE%97/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Julia中的数学符号演算</title>
+      <link>https://chaoskey.gitee.io/notes/docs/julia/0002/</link>
+      <pubDate>Sat, 11 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/julia/0002/</guid>
+      <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;在&lt;a href=&#34;https://joistwang.gitbook.io/notes/self/0001&#34;&gt;整合Julia和Python的集成环境&lt;/a&gt;中已经配置好环境，可以在&lt;strong&gt;Jupyter&lt;/strong&gt;中进行学习研究了。&lt;/p&gt;
+&lt;p&gt;由于Julia本身暂时还没有好用的符号演算库，只好借用Python的SymPy库。所以，标题应该是“Julia和Python中的数学符号演算”，但由于本文都在Julia环境下进行，单独说Julia将就也可以。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

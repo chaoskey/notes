@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="1.2 监督学习"><meta property="og:title" content="1.2 监督学习" />
+<meta property="og:description" content="返回本章目录
+我们通过讨论监督学习来开始我们对机器学习的研究，监督学习是在实践中最广泛使用的ML的形式。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0026/" />
+<meta property="article:published_time" content="2019-06-16T20:20:35+08:00" />
+<meta property="article:modified_time" content="2019-06-16T20:20:35+08:00" />
+<title>1.2 监督学习 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a>
+<ul>
+<li><a href="/notes/docs/mlapp/01introduction/">第一章 导论</a></li>
+<li><a href="/notes/docs/mlapp/02probability/">第二章 概率</a></li>
+<li><a href="/notes/docs/mlapp/03generative_models_for_discrete_data/">第三章 基于离散数据的生成式模型</a></li>
+<li><a href="/notes/docs/mlapp/04gaussian_models/">第四章 高斯模型</a></li>
+<li><a href="/notes/docs/mlapp/05bayesian_statistics/">第五章 贝叶斯统计</a></li>
+<li><a href="/notes/docs/mlapp/06frequentist_statistics/">第六章 频率派统计</a></li>
+<li><a href="/notes/docs/mlapp/07linear_regression/">第七章 线性回归</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>1.2 监督学习</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#121-分类">1.2.1 分类</a>
+          <ul>
+            <li><a href="#1211-示例">1.2.1.1 示例</a></li>
+            <li><a href="#1212-概率预测的必要性">1.2.1.2 概率预测的必要性</a></li>
+            <li><a href="#1213-实际应用">1.2.1.3 实际应用</a></li>
+          </ul>
+        </li>
+        <li><a href="#122-回归">1.2.2 回归</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0027/">
+    下一页<br>1.3 无监督学习
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0025/">
+      上一页<br>1.1 机器学习：什么和为什么？
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/mlapp/01introduction/0026/">1.2 监督学习</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2019-06-16</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">机器学习</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0">监督学习</a>
+      , 
+      <a href="/notes/tags/%E5%88%86%E7%B1%BB">分类</a>
+      , 
+      <a href="/notes/tags/%E5%9B%9E%E5%BD%92">回归</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/01introduction/0026.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<p><a href="/notes/docs/mlapp/01introduction/"><strong>返回本章目录</strong></a></p>
+<p>我们通过讨论监督学习来开始我们对机器学习的研究，监督学习是在实践中最广泛使用的ML的形式。</p>
+<h2 id="121-分类">1.2.1 分类</h2>
+<p>在本节中，我们讨论分类。这里的目标是学习从输入
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(x\)
+</span>
+到输出
+
+
+<span class="katex">
+  \(y\)
+</span>
+的映射，其中
+
+
+<span class="katex">
+  \(y\in {1,\dots,C}\)
+</span>
+，
+
+
+<span class="katex">
+  \(C\)
+</span>
+是类的数量。 如果
+
+
+<span class="katex">
+  \(C = 2\)
+</span>
+，则称为<strong>二项分类</strong>（在这种情况下，我们通常假设
+
+
+<span class="katex">
+  \(y\in {0,1}\)
+</span>
+）; 如果
+
+
+<span class="katex">
+  \(C > 2\)
+</span>
+，则称为<strong>多类分类</strong>。 如果类标签不是互斥的（例如，有人可能被分类为高和强），我们称之为<strong>多标签分类</strong>，但这最好被视为预测多个相关二项类标签（所谓的<strong>多输出模型</strong>）。当我们使用术语“分类”时，我们将表示具有单个输出的多类分类，除非我们另有说明。</p>
+<p>形式化问题的一种方法是<strong>函数逼近</strong>。对于某个未知函数
+
+
+<span class="katex">
+  \(f\)
+</span>
+，我们假设
+
+
+<span class="katex">
+  \(y = f(x)\)
+</span>
+，并且学习的目标是在给定标记训练集的情况下估计函数
+
+
+<span class="katex">
+  \(f\)
+</span>
+，然后使用
+
+
+<span class="katex">
+  \(\hat{y} =\hat{f} (x)\)
+</span>
+进行预测。（我们使用帽子符号^来表示估计值。）我们的主要目标是对新输入进行预测，这意味着我们之前从未见过的输入（这称为<strong>泛化</strong>），因为预测训练集的响应很容易（我们可以查看答案）。</p>
+<h3 id="1211-示例">1.2.1.1 示例</h3>
+<p>作为分类的简单玩具示例，请考虑图1.1（a）中所示的问题。我们有两类对象，分别对应标签0和1。输入是已着色的形状。 这些已由
+
+
+<span class="katex">
+  \(D\)
+</span>
+个特征或属性描述，这些特征或属性存储在
+
+
+<span class="katex">
+  \(N \times D\)
+</span>
+设计矩阵
+
+
+<span class="katex">
+  \(\boldsymbol{X}\)
+</span>
+中，如图1.1（b）所示。输入的特征
+
+
+<span class="katex">
+  \(\boldsymbol{x}\)
+</span>
+可以是离散的，连续的或两者的组合。除了输入之外，我们还有一个训练标签向量
+
+
+<span class="katex">
+  \(\boldsymbol{y}\)
+</span>
+。</p>
+<p><img src="" alt="0021.jpg"></p>
+<blockquote>
+<p>图1.1 左：一些标记有色形状的训练示例，以及3个未标记的测试用例。右：将训练数据表示为
+
+
+<span class="katex">
+  \(N \times D\)
+</span>
+设计矩阵。 行
+
+
+<span class="katex">
+  \(i\)
+</span>
+表示特征向量
+
+
+<span class="katex">
+  \(x_i\)
+</span>
+。 最后一列是标签，
+
+
+<span class="katex">
+  \(y_i \in {0,1}\)
+</span>
+。 基于Leslie Kaelbling的一个人物。</p>
+</blockquote>
+<p>在图1.1中，测试用例是蓝色新月形，黄色圆形和蓝色箭头。 以前都没有见过这些。因此，我们需要在训练集之外进行泛化。一个合理的猜测是蓝色新月应该是
+
+
+<span class="katex">
+  \(y = 1\)
+</span>
+，因为所有蓝色形状在训练集中都标记为1。黄色圆圈更难以分类，因为一些黄色的东西被标记为
+
+
+<span class="katex">
+  \(y = 1\)
+</span>
+并且一些被标记为
+
+
+<span class="katex">
+  \(y = 0\)
+</span>
+，并且一些圆圈被标记为
+
+
+<span class="katex">
+  \(y = 1\)
+</span>
+并且一些
+
+
+<span class="katex">
+  \(y = 0\)
+</span>
+。因此，在黄色圆圈的情况下，不清楚正确的标签应该是什么。 同样，蓝色箭头的正确标签也不清楚。</p>
+<h3 id="1212-概率预测的必要性">1.2.1.2 概率预测的必要性</h3>
+<p>为了处理模糊情况，例如上面的黄色圆圈，希望返回合理的概率。 假设读者已经熟悉概率的基本概念。如果没有，请在必要时查阅第2章进行复习。</p>
+<p>在给定输入向量
+
+
+<span class="katex">
+  \(\boldsymbol{x}\)
+</span>
+和训练集
+
+
+<span class="katex">
+  \(\mathcal{D}\)
+</span>
+的情况下，我们将可能标签上的概率分布表示成
+
+
+<span class="katex">
+  \(p(y | \boldsymbol{x}, \mathcal{D})\)
+</span>
+。通常，这是长度为
+
+
+<span class="katex">
+  \(C\)
+</span>
+的向量。（如果只有两个类，则返回单个数
+
+
+<span class="katex">
+  \(p(y = 1 | \boldsymbol{x},\mathcal{D})\)
+</span>
+就足够了，因为
+
+
+<span class="katex">
+  \(p(y = 1 | \boldsymbol{x},\mathcal{D})+ p(y = 0 | \boldsymbol{x},\mathcal{D})=1\)
+</span>
+.）在我们的符号中，我们通过将&quot;测试输入
+
+
+<span class="katex">
+  \(\boldsymbol{x}\)
+</span>
+和训练集
+
+
+<span class="katex">
+  \(\mathcal{D}\)
+</span>
+&quot;放在条件栏&quot;|&ldquo;的右侧明确表示概率是以
+
+
+<span class="katex">
+  \(\boldsymbol{x},\mathcal{D}\)
+</span>
+为条件的。 我们也会隐含我们用来进行预测的模型形式的条件。当在不同模型之间进行选择时，我们将通过写
+
+
+<span class="katex">
+  \(p(y | \boldsymbol{x},\mathcal{D}, M)\)
+</span>
+来明确这个假设，其中
+
+
+<span class="katex">
+  \(M\)
+</span>
+表示模型。但是，如果模型从上下文中清楚，我们将删除
+
+
+<span class="katex">
+  \(M\)
+</span>
+以简化。</p>
+<p>给定概率输出，我们总能计算我们的“最佳猜测”作为“真实标签”</p>
+
+
+
+<span class="katex">
+  \[
+\hat{y}=\hat{y}(\boldsymbol{x})=\underset{c=1:C}{\rm argmax} \ p(y=c | \boldsymbol{x},\mathcal{D}) \tag{1.1}
+\]
+</span>
+
+<p>这对应于最可能的类标签，称为分布
+
+
+<span class="katex">
+  \(p(y | \boldsymbol{x},\mathcal{D})\)
+</span>
+的<strong>众数</strong>(<strong>mode</strong>); 它也被称为<strong>MAP估计</strong>（MAP代表<strong>最大后验</strong>）。 使用最可能的标签具有直观意义，但我们将在5.7节中为此过程提供更正式的理由。</p>
+<p>现在考虑一个例如黄色圆圈的情况，其中
+
+
+<span class="katex">
+  \(p(y | \boldsymbol{x},\mathcal{D})\)
+</span>
+远离1.0。在这种情况下，我们对自己的回答并不十分自信，所以最好说“我不知道”，而不是回答我们不相信的答案。这在医学和金融等领域尤为重要，我们可能会厌恶风险，正如我们在5.7节中解释的那样。评估风险很重要的另一个应用是播放电视游戏节目，例如Jeopardy。在这个游戏中，参赛者必须解决各种单词拼图并回答各种琐事问题，但如果他们回答错误，他们会赔钱。2011年，IBM公布了一款名为Watson的计算机系统，该系统击败了顶级人类Jeopardy冠军。Watson使用了各种有趣的技术（Ferrucci et al.2010），但对我们目前来说最相关的技术是它包含一个模块来估计它对答案的信心程度。如果有足够的信心，系统只选择“buzz in”做为的答案。 同样，Google有一个称为SmartASS（广告选择系统）的系统，可根据您的搜索历史记录以及其他用户和广告特定功能预测您点击广告的概率（Metz 2010）。此概率称为<strong>点击率</strong>或<strong>CTR</strong>，可用于最大化预期利润。我们将在本书后面讨论SmartASS等系统背后的一些基本原理。</p>
+<h3 id="1213-实际应用">1.2.1.3 实际应用</h3>
+<p>分类可能是最广泛使用的机器学习形式，并且已被用于解决许多有趣且通常困难的现实问题。我们已经提到了一些重要的应用。我们在下面给出更多例子。</p>
+<p><strong>文档分类和垃圾邮件过滤</strong></p>
+<p><img src="" alt="0022.jpg"></p>
+<blockquote>
+<p>图1.2 20个新闻组数据的大小为16242 x 100的子集。 为清晰起见，我们只显示1000行。每行是一个文档（表示为一个包字位向量），每列是一个单词。红线分隔了4个类，它们是（按降序排列）comp，rec，sci，talk（这些是USENET组的标题）。我们可以看到有一些词的子集，其表示该类存在或不存在。 数据可从<a href="http://cs.nyu.edu/~roweis/data.html%E8%8E%B7%E5%BE%97%E3%80%82">http://cs.nyu.edu/~roweis/data.html获得。</a> 由_newsgroupsVisualize_生成的图。</p>
+</blockquote>
+<p>在文档分类中，目标是将文档（例如网页或电子邮件消息）分类为
+
+
+<span class="katex">
+  \(C\)
+</span>
+个类别之一，即计算
+
+
+<span class="katex">
+  \(p(y = c | \boldsymbol{x},\mathcal{D})\)
+</span>
+，其中
+
+
+<span class="katex">
+  \(x\)
+</span>
+是文本的一些表示。一个特例是<strong>垃圾邮件过滤</strong>，其中类别是垃圾邮件
+
+
+<span class="katex">
+  \(y = 1\)
+</span>
+或 正常邮件 
+
+
+<span class="katex">
+  \(y = 0\)
+</span>
+。</p>
+<p>大多数分类器假设输入向量
+
+
+<span class="katex">
+  \(\boldsymbol{x}\)
+</span>
+具有固定大小。以特征向量格式表示可变长度文档的常用方法是使用<strong>词袋</strong>表示。这在3.4.4.1节中有详细解释，但基本思想是定义
+
+
+<span class="katex">
+  \(x_{ij} = 1\)
+</span>
+ 当且仅当 单词
+
+
+<span class="katex">
+  \(j\)
+</span>
+出现在文档
+
+
+<span class="katex">
+  \(i\)
+</span>
+中。 如果我们将此转换应用于数据集中的每个文档，我们将获得二进制文档×单词 共生矩阵：有关示例，请参见图1.2。 本质上，文档分类问题已经减少到一个寻找位模式细微变化的问题。例如，我们可能会注意到大多数垃圾邮件很可能包含“买”，“便宜”，“伟哥”等字样。在练习8.1和练习8.2中，您将获得将各种分类技术应用于垃圾邮件过滤问题的实践经验。</p>
+<p><strong>鲜花分类</strong></p>
+<p><img src="" alt="0023.jpg"></p>
+<blockquote>
+<p>图1.3 三种类型的鸢尾花：setosa，versicolor和virginica。 资料来源：http：//www.statlab.uni-heidelberg.de/data/iris/。 使用Dennis Kramb和SIGNA的许可。</p>
+</blockquote>
+<p><img src="" alt="0024.jpg"></p>
+<blockquote>
+<p>图1.4 将鸢尾花数据可视化为成对散点图。 对角线绘制了4个特征的边缘直方图。 非对角线的图包含所有可能的特征对的散点图。 红圈= setosa，绿钻= versicolor，蓝星= virginica。 由_fisheririsDemo_生成的图。</p>
+</blockquote>
+<p>图1.3给出了另一个分类示例，由统计学家Ronald Fisher提供。目的是学会区分三种不同种类的鸢尾花，称为Setosa，versicolor和virginica。幸运的是，植物学家已经提取了4个有用的特征或特征，不是直接处理图像，而是萼片的长度和宽度，以及花瓣的长度和宽度。（这种<strong>特征提取</strong>是一项重要但困难的任务。大多数机器学习方法都使用某些人选择的特性。稍后我们将讨论一些可以从数据中学习好特征的方法。） 如果我们制作鸢尾花数据的<strong>散点图</strong>，如图1.4所示，我们看到通过检查它们的花瓣长度或宽度是否低于某个阈值，很容易区分Setosa（红色圆圈）和其他两个类别。然而，区分versicolor和virginica稍微难一些; 任何决定都需要至少基于两个特征。 （在应用机器学习方法之前，执行<strong>探索性数据分析</strong>（例如绘制数据）总是一个好主意。）</p>
+<p><strong>图像分类和手写识别</strong></p>
+<p>现在考虑直接对图像进行分类的难题，即人类尚未对数据进行预处理。 我们可能想要将图像整体分类，例如，它是室内还是室外场景？ 它是水平还是垂直的照片？ 它是否包含一只狗？ 这称为<strong>图像分类</strong>。</p>
+<p>在特殊情况下，图像由孤立的手写字母和数字组成，例如，在信件上的邮政编码或邮政编码中，我们可以使用分类来执行手写识别。 该领域使用的标准数据集称为MNIST，代表“美国国家标准技术研究所修订数据集”。 （使用术语“修订”是因为图像已经过预处理以确保数字大部分位于图像的中心。）此数据集包含60,000个训练图像和10,000个数字0到9的测试图像，由不同的人编写。 图像尺寸为28×28，灰度值范围为0：255。有关示例图像，请参见图1.5（a）。</p>
+<p><img src="" alt="0025.jpg"></p>
+<blockquote>
+<p>图1.5 （a）前9个测试MNIST灰度图像。 （b）与（a）相同，但将特征随机排列了。 两种版本的数据的分类性能相同（假设训练数据以相同的方式排列了）。 由_shuffledDigitsDemo_生成的图。</p>
+</blockquote>
+<p><img src="" alt="0026.jpg"></p>
+<blockquote>
+<p>图1.6 面部检测的示例。 （a）输入图像（墨菲家族，2010年8月5日拍摄的照片）。 使用Sherwood Studios的Bernard Diedrich的同意。 （b）分类器的输出，其在不同姿势下检测到5个面部。 这是使用<a href="http://demo.pittpatt.com/">http://demo.pittpatt.com/</a> 上的在线演示制作的。 分类器在1000个手动标记的面部和非面部图像上进行训练，然后应用于测试图像中的一组密集的重叠斑块。 仅返回包含面部概率足够高的一小块。 与Pittpatt.com的实体许可一起使用</p>
+</blockquote>
+<p>许多通用分类方法忽略输入要素中的任何结构，例如空间布局。 因此，他们也可以轻松处理如图1.5（b）所示的数据，这是相同的数据，除了我们将所有特征随机排序了。 （您将在练习1.1中对此进行验证。）这种灵活性既是一种祝福（因为方法是通用的），也是一种诅咒（因为这些方法忽略了明显有用的信息来源）。 我们将在本书后面讨论在输入特性中利用结构的方法。</p>
+<p><strong>人脸检测和识别</strong></p>
+<p>一个更难的问题是在图像中找到对象; 这称为<strong>对象检测</strong>或<strong>对象本地化</strong>。 一个重要的特殊情况是<strong>人脸检测</strong>。 解决该问题的一种方法是将图像划分为在不同位置，比例和方向上的许多小重叠片，并且基于它是否包含面部纹理来对每个这样的片进行分类。 这被称为<strong>滑动窗口检测器</strong>。 然后系统返回面部概率足够高的那些位置。 有关示例，请参见图1.6。 这种面部检测系统内置于大多数现代数码相机中; 检测到的面部的位置用于确定自动对焦的中心。 另一个应用程序会自动模糊Google的StreetView系统中的面孔。</p>
+<p>找到面部后，可以继续进行面部识别，这意味着估计人的身份（见图1.10（a））。 在这种情况下，类标签的数量可能非常大。 此外，应该使用的特征可能与面部检测问题不同：对于识别，诸如发型之类的面部之间的细微差别对于确定身份可能是重要的，但是对于检测，重要的是对这些细节不变， 并只关注面部和非面部之间的差异。 有关视觉对象检测的更多信息，请参阅例如（Szeliski 2010）。</p>
+<h2 id="122-回归">1.2.2 回归</h2>
+<p>回归就像分类一样，除了响应变量是连续的。 图1.7显示了一个简单的例子：我们有一个实值输入
+
+
+<span class="katex">
+  \(x_i\in \mathbb{R}\)
+</span>
+和一个实值响应
+
+
+<span class="katex">
+  \(y_i\in \mathbb{R}\)
+</span>
+。我们考虑将两个模型拟合到数据中：直线和二次函数。 （在后面, 我们将解释如何拟合这些模型。）可能会出现这个基本问题的各种扩展，例如具有高维输入，异常值，非平滑响应等。我们将在本书后面讨论处理此类问题的方法。</p>
+<p><img src="" alt="0027.jpg"></p>
+<blockquote>
+<p>图1.7 （a）对一些1维数据的线性回归。 （b）对相同的数据进行多项式回归（2度）。 由_linregPolyVsDegree_生成的图。</p>
+</blockquote>
+<p>以下是实际回归问题的一些示例。</p>
+<ul>
+<li>根据当前市场情况和其他可能的附带信息预测明天的股市价格。</li>
+<li>预测在YouTube上观看特定视频的观看者的年龄。</li>
+<li>预测机器人手臂末端执行器在3维空间中位置，给出控制信号（扭矩）并且发送到各种电机。</li>
+<li>预测体内前列腺特异性抗原（PSA）的量, 作为许多不同临床测量的功能。</li>
+<li>使用天气数据，时间，门传感器等，预测建筑物内任何位置的温度。</li>
+</ul>
+<p><a href="/notes/docs/mlapp/01introduction/"><strong>返回本章目录</strong></a></p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0027/">
+    下一页<br>1.3 无监督学习
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0025/">
+      上一页<br>1.1 机器学习：什么和为什么？
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/01introduction/0026.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/mlapp/01introduction/0026.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#121-分类">1.2.1 分类</a>
+          <ul>
+            <li><a href="#1211-示例">1.2.1.1 示例</a></li>
+            <li><a href="#1212-概率预测的必要性">1.2.1.2 概率预测的必要性</a></li>
+            <li><a href="#1213-实际应用">1.2.1.3 实际应用</a></li>
+          </ul>
+        </li>
+        <li><a href="#122-回归">1.2.2 回归</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

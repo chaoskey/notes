@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>先验 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E5%85%88%E9%AA%8C/</link>
+    <description>Recent content in 先验 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Sun, 07 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E5%85%88%E9%AA%8C/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>5.4 先验</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0048/</link>
+      <pubDate>Sun, 07 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0048/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;贝叶斯统计数据中最具争议的方面是它依赖于先验。 贝叶斯认为这是不可避免的，因为没有人是&lt;strong&gt;白板&lt;/strong&gt;(&lt;strong&gt;tabula rasa&lt;/strong&gt;或&lt;strong&gt;blank slate&lt;/strong&gt;)：所有的推论都必须以某些关于世界的假设为条件。 然而，人们可能有兴趣尽量减少先验假设的影响。 我们将在下面简要讨论一些方法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>5.3贝叶斯模型选择</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0047/</link>
+      <pubDate>Sat, 06 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0047/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在图1.18中，我们看到使用过高度数多项式会导致过拟合，而使用过低度数会导致欠拟合。类似地，在图7.8（a）中，我们看到使用太小正则化参数会导致过拟合，而太大值会导致欠拟合。一般来说，当面对一组不同复杂度的模型（即参数分布族）时，我们应该如何选择最好的模型呢？这称为&lt;strong&gt;模型选择&lt;/strong&gt;问题。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>3.4 狄利克雷-多项模型</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0042/</link>
+      <pubDate>Sun, 30 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0042/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在上一节中，我们讨论了如何推断硬币&amp;quot;正面&amp;quot;出现的概率。在本节中，我们推广这些结果，以推断出有
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(K\)
+&lt;/span&gt;
+面的骰子出现第
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(k\)
+&lt;/span&gt;
+面的概率。这似乎是另一种玩具练习，但将在后面看到, 我们的研究方法将被广泛用于分析文本数据，生物序列数据等。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>3.3 贝塔-二项模型</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0041/</link>
+      <pubDate>Sat, 29 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0041/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在给定一离散观察序列的情况下, 数字游戏涉及从有限假设空间推断出离散变量的分布, 
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(h \in \mathcal{H}\)
+&lt;/span&gt;
+。这使计算变得特别简单：我们只需要求和，乘和除。然而，在许多应用中，未知参数是连续的，因此假设空间是
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathbb{R}^K\)
+&lt;/span&gt;
+的某个子集, 其中
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(K\)
+&lt;/span&gt;
+是参数的个数. 这使数学变得复杂，因为我们必须用积分代替和。但是，基本思路是一样的。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>3.2 贝叶斯概念学习</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0040/</link>
+      <pubDate>Fri, 28 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0040/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;考虑孩子如何学习理解单词的含义，例如“狗”。据推测，孩子的父母指出了这个概念的正面例子，说“看着可爱的小狗！”或“小心小狗”等等。然而，他们提供反面的例子是不太可能的，“看看那只非狗“?。当然，在积极的学习过程中可能会得到负面的例子 - 孩子说“看狗”，父母说“那是猫，亲爱的，不是狗” - 但心理学研究表明，人们可以仅从正面例子来学习概念（Xu和Tenenbaum 2007）。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

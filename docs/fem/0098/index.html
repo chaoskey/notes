@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="有限元方法（二）【翻译】"><meta property="og:title" content="有限元方法（二）【翻译】" />
+<meta property="og:description" content="I.方法论》2·有限元方法（二）
+【章节目录】
+2·4 有限元函数空间
+在前面的讨论中，我们假设总可以构造无限维函数空间的离散子空间
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+  \(V_h \subset V\)
+
+。有限元方法的一个核心方面是通过将由一组有限元定义的局部函数空间拼凑在一起来构造此类子空间。至此，我们对有限元函数空间的构造进行了总体概述，并将在第3章和第4章中回头讨论一些特定函数空间的构造：
+
+
+
+  \(H^1, H(\mathrm{curl}), H(\mathrm{div}), L^2\)
+
+。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/0098/" />
+<meta property="article:published_time" content="2020-12-17T22:22:30+08:00" />
+<meta property="article:modified_time" content="2020-12-17T22:22:30+08:00" />
+<title>有限元方法（二）【翻译】 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a>
+<ul>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E6%96%B9%E6%B3%95">第二章 有限元方法</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%B8%B8%E8%A7%81%E6%9C%89%E9%99%90%E5%85%83">第三章 常见有限元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8%E5%8F%82%E8%80%83%E5%8D%95%E5%85%83">第四章 构造通用参考单元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F">第五章 有限元变分形式</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%BB%84%E8%A3%85">第六章 有限元组装</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%AD%A3%E4%BA%A4%E8%A1%A8%E7%A4%BA">第七章 有限元变分形式的正交表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA">第八章 有限元变分形式的张量表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E7%9A%84%E7%A6%BB%E6%95%A3%E4%BC%98%E5%8C%96">第九章 有限元矩阵计算的离散优化</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E7%AB%A0-dolfincpython%E6%9C%89%E9%99%90%E5%85%83%E5%BA%93">第十章 DOLFIN：C++/Python有限元库</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-ufl%E6%9C%89%E9%99%90%E5%85%83%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80">第十七章 UFL：有限元形式语言</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-unicorn%E7%BB%9F%E4%B8%80%E7%9A%84%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6%E6%B1%82%E8%A7%A3%E5%99%A8">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>有限元方法（二）【翻译】</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#i方法论2有限元方法二">I.方法论》2·有限元方法（二）</a>
+      <ul>
+        <li><a href="#24-有限元函数空间">2·4 有限元函数空间</a>
+          <ul>
+            <li><a href="#241-网格">2·4·1 网格</a></li>
+            <li><a href="#242-有限元定义">2·4·2 有限元定义</a></li>
+            <li><a href="#243-节点基底">2·4·3 节点基底</a></li>
+            <li><a href="#244-局部到全局映射">2·4·4 局部到全局映射</a></li>
+            <li><a href="#245-全局函数空间">2·4·5 全局函数空间</a></li>
+            <li><a href="#246-参考单元的映射">2·4·6 参考单元的映射</a></li>
+          </ul>
+        </li>
+        <li><a href="#25-有限元求解器">2·5 有限元求解器</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0099/">
+    下一页<br>有限元方法（三）【翻译】
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0097/">
+      上一页<br>有限元方法（一）【翻译】
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/fem/0098/">有限元方法（二）【翻译】</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-12-17</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/FEniCS">FEniCS</a>
+      , 
+      <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95">有限元法</a>
+      , 
+      <a href="/notes/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">偏微分方程</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0098.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h1 id="i方法论2有限元方法二">I.方法论》2·有限元方法（二）</h1>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e4%ba%8c%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e6%96%b9%e6%b3%95">章节目录</a>】</p>
+<h2 id="24-有限元函数空间">2·4 有限元函数空间</h2>
+<p>在前面的讨论中，我们假设总可以构造无限维函数空间的离散子空间
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(V_h \subset V\)
+</span>
+。有限元方法的一个核心方面是通过将由一组有限元定义的局部函数空间拼凑在一起来构造此类子空间。至此，我们对有限元函数空间的构造进行了总体概述，并将在第3章和第4章中回头讨论一些特定函数空间的构造：
+
+
+<span class="katex">
+  \(H^1, H(\mathrm{curl}), H(\mathrm{div}), L^2\)
+</span>
+。</p>
+<h3 id="241-网格">2·4·1 网格</h3>
+<p>为了定义
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+，我们首先将域
+
+
+<span class="katex">
+  \(\Omega\)
+</span>
+划分为有限胞元集(a finite set of cells)
+
+
+<span class="katex">
+  \(\mathcal{T}_h = \{T\}\)
+</span>
+，内部不相交，并且满足：</p>
+
+
+
+<span class="katex">
+  \[
+\cup_{T\in \mathcal{T}_h} T = \Omega \tag{2.39}
+\]
+</span>
+
+<p>这些胞元一起形成了域
+
+
+<span class="katex">
+  \(\Omega\)
+</span>
+的网格。胞元通常是简单的多边形形状，例如：区间、三角形、四边形、四面体或六面体，如下图所示。但是其他形状也是可能的，特别是弯曲的胞元可以正确捕获非多边形区域的边界。</p>
+<p><img src="/notes/images/0179.jpg" alt="0179.jpg"></p>
+<center>图2.2 一、二、三维空间的有限元胞示例。</center>
+<h3 id="242-有限元定义">2·4·2 有限元定义</h3>
+<p>一旦将域
+
+
+<span class="katex">
+  \(\Omega\)
+</span>
+划分为一组胞元，就可以在每个胞元
+
+
+<span class="katex">
+  \(T\)
+</span>
+上定义一个局部函数空间
+
+
+<span class="katex">
+  \(\mathcal{V}\)
+</span>
+，并使用这些局部函数空间来构建全局函数空间
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+。胞元T与局部函数空间
+
+
+<span class="katex">
+  \(\mathcal{V}\)
+</span>
+以及用于描述
+
+
+<span class="katex">
+  \(\mathcal{V}\)
+</span>
+中函数的一组规则一起称为<code>有限元</code>。该定义是由Ciarlet（1976）首次正式提出的，并且至今仍然是标准的表述（Brenner and Scott，2008）。形式化定义如下：有限元是一个三元组
+
+
+<span class="katex">
+  \((T, \mathcal{V}, \mathcal{L})\)
+</span>
+，其中</p>
+<ul>
+<li>
+<p>区域
+
+
+<span class="katex">
+  \(T\)
+</span>
+是
+
+
+<span class="katex">
+  \(\mathbb{R}^d\)
+</span>
+的有界封闭子集（
+
+
+<span class="katex">
+  \(d=1,2,3,\dots\)
+</span>
+），具有非空的内部和分段光滑边界；</p>
+</li>
+<li>
+<p>空间
+
+
+<span class="katex">
+  \(\mathcal{V} = \mathcal{V}(T)\)
+</span>
+是在
+
+
+<span class="katex">
+  \(T\)
+</span>
+上的
+
+
+<span class="katex">
+  \(n\)
+</span>
+维有限维函数空间；</p>
+</li>
+<li>
+<p>自由度（节点）的集合
+
+
+<span class="katex">
+  \(\mathcal{L} = \{\ell_1,\ell_2,\dots,\ell_n\}\)
+</span>
+是对偶空间
+
+
+<span class="katex">
+  \(\mathcal{V}'\)
+</span>
+的基底；也就是
+
+
+<span class="katex">
+  \(\mathcal{V}\)
+</span>
+上有界线性泛函的空间。</p>
+</li>
+</ul>
+<p><img src="/notes/images/0180.jpg" alt="0180.jpg"></p>
+<center>图2.3 线性拉格朗日三角形的自由度是通过在三角形的三个顶点值给出的。</center>
+<p>例如，考虑上图中三角形上的标准线性拉格朗日有限元。这个胞元
+
+
+<span class="katex">
+  \(T\)
+</span>
+由三角形给定，空间
+
+
+<span class="katex">
+  \(\mathcal{V}\)
+</span>
+则由是
+
+
+<span class="katex">
+  \(T\)
+</span>
+上的一次多项式的空间（维数为3的空间）给定。我们可以指定
+
+
+<span class="katex">
+  \(T\)
+</span>
+的三个顶点值作为
+
+
+<span class="katex">
+  \(\mathcal{V}'\)
+</span>
+的基底；那是：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\ell_i : \mathcal{V} \to \mathbb{R} \\  \ell_i(v) = v(x^i) \end{aligned}  \tag{2.40}
+\]
+</span>
+
+<p>对于
+
+
+<span class="katex">
+  \(i = 1,2,3\)
+</span>
+，其中
+
+
+<span class="katex">
+  \(x_i\)
+</span>
+是第i个顶点的坐标。为了确认这确实是有限元，我们需要验证
+
+
+<span class="katex">
+  \(\mathcal{L}\)
+</span>
+是
+
+
+<span class="katex">
+  \(\mathcal{V}'\)
+</span>
+的基底。这等效于
+
+
+<span class="katex">
+  \(\mathcal{L}\)
+</span>
+的唯一性。也就是说，如果
+
+
+<span class="katex">
+  \(v \in \mathcal{V}\)
+</span>
+并且
+
+
+<span class="katex">
+  \(\ell_i(v)= 0,\quad \forall l_i\)
+</span>
+，那么有
+
+
+<span class="katex">
+  \(v = 0\)
+</span>
+（Brenner and Scott，2008）。对于线性拉格朗日三角形，我们注意到如果
+
+
+<span class="katex">
+  \(v\)
+</span>
+在每个顶点为零，那么则
+
+
+<span class="katex">
+  \(v\)
+</span>
+在任何地方都必须为零，因为一个平面由其在三个非共线点的值唯一地确定。由此可见，线性拉格朗日三角形确实是一个有限元。一般而言，确定
+
+
+<span class="katex">
+  \(\mathcal{L}\)
+</span>
+的唯一性可能并非易事。</p>
+<h3 id="243-节点基底">2·4·3 节点基底</h3>
+<p>通过引入
+
+
+<span class="katex">
+  \(\mathcal{V}\)
+</span>
+的节点基底，可以大大简化用局部函数空间
+
+
+<span class="katex">
+  \(\mathcal{V}\)
+</span>
+的基函数表示的
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+中有限元解。
+
+
+<span class="katex">
+  \(\mathcal{V}\)
+</span>
+的节点基底
+
+
+<span class="katex">
+  \(\{\phi_i\}^n_{i=1}\)
+</span>
+是
+
+
+<span class="katex">
+  \(\mathcal{V}\)
+</span>
+的基底，若满足：</p>
+
+
+
+<span class="katex">
+  \[
+\ell_i(\phi_j) = \delta_{ij},\quad i,j=1,2,\dots,n   \tag{2.41}
+\]
+</span>
+
+<p>因此，任何
+
+
+<span class="katex">
+  \(v \in \mathcal{V}\)
+</span>
+都可以表示为：</p>
+
+
+
+<span class="katex">
+  \[
+v = \sum^n_{i=1}{\ell_i(v)\phi_i}  \tag{2.42}
+\]
+</span>
+
+<p>特别地，对于线性拉格朗日三角形，
+
+
+<span class="katex">
+  \(\mathcal{V}\)
+</span>
+中的任何函数
+
+
+<span class="katex">
+  \(v\)
+</span>
+可由
+
+
+<span class="katex">
+  \(v = \sum^3_{i=1}{v(x^i)\phi_i}\)
+</span>
+给出。换句话说，对任何函数
+
+
+<span class="katex">
+  \(v\)
+</span>
+，可以通过计算
+
+
+<span class="katex">
+  \(v\)
+</span>
+处
+
+
+<span class="katex">
+  \(\mathcal{L}\)
+</span>
+中的线性泛函值来获得
+
+
+<span class="katex">
+  \(v\)
+</span>
+的展开系数。因此，我们可以将
+
+
+<span class="katex">
+  \(u_h\)
+</span>
+的展开系数U和
+
+
+<span class="katex">
+  \(\mathcal{L}\)
+</span>
+的线性泛函互相称为对方的自由度。</p>
+<p><strong>例2.2 (线性拉格朗日单纯形的节点基底)</strong> 顶点为
+
+
+<span class="katex">
+  \(x^1 = 0\)
+</span>
+和
+
+
+<span class="katex">
+  \(x^2 = 1\)
+</span>
+的线性拉格朗日区间的节点基底为：</p>
+
+
+
+<span class="katex">
+  \[
+\phi_1(x)=1-x, \quad \phi_2(x) = x  \tag{2.43}
+\]
+</span>
+
+<p>顶点为
+
+
+<span class="katex">
+  \(x^1=(0, 0), x^2=(1, 0), x^3=(0, 1)\)
+</span>
+的线性拉格朗日三角形的节点基底为：</p>
+
+
+
+<span class="katex">
+  \[
+\phi_1(x)=1-x_1-x_2, \quad \phi_2(x) = x_1, \quad \phi_3(x) = x_2  \tag{2.44}
+\]
+</span>
+
+<p>顶点为
+
+
+<span class="katex">
+  \(x^1=(0, 0, 0), x^2=(1, 0, 0),x^3=(0, 1, 0), x^4=(0, 0, 1)\)
+</span>
+的线性拉格朗日四面体的节点基底是：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned} &\phi_1(x) = 1-x_1-x_2-x_3, & \phi_2(x)=x_1 \\ &\phi_3(x)=x_2, & \phi_4(x)=x_3 \end{aligned}  \tag{2.45}
+\]
+</span>
+
+<p>对于任何有限元
+
+
+<span class="katex">
+  \((T, \mathcal{V}, \mathcal{L})\)
+</span>
+，可以通过求解大小为
+
+
+<span class="katex">
+  \(n \times n\)
+</span>
+的线性方程组来计算节点基底。 为了看出这一点，令
+
+
+<span class="katex">
+  \(\{\psi_i\}^n_{n=1}\)
+</span>
+是
+
+
+<span class="katex">
+  \(\mathcal{V}\)
+</span>
+的任意基底（主基底）。如果
+
+
+<span class="katex">
+  \(\mathcal{V}\)
+</span>
+是一个完全多项式空间，或者可以通过奇异值分解或Gram-Schmidt程序计算得出，则这样的基底很容易构造。参见Kirby（2004）。然后，我们可以以主基底项为节点基底建立展开式：</p>
+
+
+
+<span class="katex">
+  \[
+\phi_j = \sum^n_{k=1}{\alpha_{jk}\psi_k}, \quad j = 1,2,\dots, n  \tag{2.46}
+\]
+</span>
+
+<p>带入到本小节（2.4.3节）第一个公式中，有：</p>
+
+
+
+<span class="katex">
+  \[
+\sum^n_{k=1}{\alpha_{jk}\ell_i(\psi_k)} = \delta_{ij},\quad i,j=1,2,\dots,n  \tag{2.47}
+\]
+</span>
+
+<p>换句话说，可以通过求解线性方程组来计算以主基底展开的节点基函数的系数
+
+
+<span class="katex">
+  \(\alpha\)
+</span>
+:</p>
+
+
+
+<span class="katex">
+  \[
+B \alpha^T = I  \tag{2.48}
+\]
+</span>
+
+<p>其中， 
+
+
+<span class="katex">
+  \(B_{ij}=\ell_i(\psi_j)\)
+</span>
+</p>
+<h3 id="244-局部到全局映射">2·4·4 局部到全局映射</h3>
+<p>现在，要从有限元的给定集合
+
+
+<span class="katex">
+  \(\left\{(T, \mathcal{V}_T, \mathcal{L}_T)\right\}_{T\in \mathcal{T}_h}\)
+</span>
+， 定义
+
+
+<span class="katex">
+  \(\Omega\)
+</span>
+上的全局函数空间
+
+
+<span class="katex">
+  \(V_h = \mathrm{span}\left\{\phi_i\right\}^N_{i=1}\)
+</span>
+，我们还需要指定如何将局部函数空间修补在一起。 为此，我们为每个胞元
+
+
+<span class="katex">
+  \(T\in \mathcal{T}_h\)
+</span>
+指定一个局部到全局的映射：</p>
+
+
+
+<span class="katex">
+  \[
+\iota_T : [1,n_T] \to [1, N]  \tag{2.49}
+\]
+</span>
+
+<p>该映射指定了如何将局部自由度
+
+
+<span class="katex">
+  \(\mathcal{L}_T = \{\ell^T_i\}^{n_T}_{i=1}\)
+</span>
+映射到全局自由度
+
+
+<span class="katex">
+  \(\mathcal{L} = \{\ell_i\}^N_{i=1}\)
+</span>
+。更确切地说，全局自由度定义为：</p>
+
+
+
+<span class="katex">
+  \[
+\ell_{\iota_T(i)}(v) = \ell^T_i(v|_T), \quad i = 1,2,\dots,n_T  \tag{2.50}
+\]
+</span>
+
+<p>对于任何
+
+
+<span class="katex">
+  \(v\in V_h\)
+</span>
+，因此，每个局部自由度
+
+
+<span class="katex">
+  \(\ell^T_i \in \mathcal{L}_T\)
+</span>
+对应于由局部到全局映射
+
+
+<span class="katex">
+  \(\iota_T\)
+</span>
+确定的全局自由度
+
+
+<span class="katex">
+  \(\ell_{\iota_T(i)} \in \mathcal{L}\)
+</span>
+。正如我们将看到的，局部到全局的映射以及自由度的选择决定了全局函数空间
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+的连续性。</p>
+<p>对于标准连续分段线性，可以通过简单地将
+
+
+<span class="katex">
+  \(i=1,2,3\)
+</span>
+的每个局部顶点数
+
+
+<span class="katex">
+  \(i\)
+</span>
+映射到相应的全局顶点数
+
+
+<span class="katex">
+  \(\iota_T(i)\)
+</span>
+来定义局部到全局的映射。 对于连续的分段二次，可以将局部到全局的映射基于全局顶点和边号，如图2.4所示，用于由两个三角形组成的简单网格。</p>
+<p><img src="/notes/images/0181.jpg" alt="0181.jpg"></p>
+<center>图2.4 由两个三角形组成的简单网格的局部到全局映射。 左三角形（T）的六个局部自由度被映射到全局自由度
+
+
+<span class="katex">
+  \(\iota_T(i)=1,2,4,9,8,5  \quad  \ i = 1,2,\dots,6\)
+</span>
+。并且右三角形（T'）的六个局部自由度则被映射到全局自由度
+
+
+<span class="katex">
+  \(\iota_{T'}(i)=2,3,4,7,9,6  \quad \ i = 1,2,\dots,6\)
+</span>
+。</center>
+<h3 id="245-全局函数空间">2·4·5 全局函数空间</h3>
+<p>现在可以将全局函数空间
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+定义为满足以下两个条件的
+
+
+<span class="katex">
+  \(\Omega\)
+</span>
+上的一组函数。首先要求</p>
+
+
+
+<span class="katex">
+  \[
+v|_T = \mathcal{V}_T \qquad \forall T \in \mathcal{T}_h  \tag{2.51}  
+\]
+</span>
+
+<p>即，对每个胞元
+
+
+<span class="katex">
+  \(T\)
+</span>
+，
+
+
+<span class="katex">
+  \(v\)
+</span>
+的限制位于局部函数空间
+
+
+<span class="katex">
+  \(\mathcal{V}_T\)
+</span>
+中。其次，我们要求对于任何一对胞元
+
+
+<span class="katex">
+  \((T,T') \in \mathcal{T}_h \times \mathcal{T}_h\)
+</span>
+和任何一对
+
+
+<span class="katex">
+  \((i, i') \in [1,n_T] \times [1, n_{T'}]\)
+</span>
+都满足：</p>
+
+
+
+<span class="katex">
+  \[
+\iota_{T}(i) = \iota_{T'}(i') \tag{2.52}
+\]
+</span>
+
+<p>进而有：</p>
+
+
+
+<span class="katex">
+  \[
+ \ell^T_i(v|_T) = \ell^{T'}_{i'}(v|_{T'}) \tag{2.53}
+\]
+</span>
+
+<p>换句话说，如果两个局部自由度
+
+
+<span class="katex">
+  \(\ell_i^T\)
+</span>
+和
+
+
+<span class="katex">
+  \(\ell_{i'}^{T'}\)
+</span>
+映射到相同的全局自由度，则它们必须针对每个函数
+
+
+<span class="katex">
+  \(v \in V_h\)
+</span>
+达成一致。在此，
+
+
+<span class="katex">
+  \(v|_T\)
+</span>
+表示v在T内部的限制（的连续扩展）。对于通过将两个二次拉格朗日三角形拼凑在一起而获得连续的分段二次空间，在图2.5中对此进行了说明。</p>
+<p><img src="/notes/images/0182.jpg" alt="0182.jpg"></p>
+<center>图2.5 将一对胞元
+
+
+<span class="katex">
+  \((T, T')\)
+</span>
+上的一对二次局部函数空间拼凑在一起，形成一个在
+
+
+<span class="katex">
+  \(\Omega= T \cup T'\)
+</span>
+上的全局连续分段二次函数空间。</center>
+<p>注意，通过这种构造，
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+中的函数在胞元边界上是未定义的， 除非（2.53）强制约束
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+中的函数在胞元边界上是连续的。 但是，这通常不是问题，因为我们可以在函数限制到局域胞元下执行所有操作。</p>
+<p>局部到全局的映射以及自由度的选择决定了全局函数空间
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+的连续性。 对于线性拉格朗日三角形，选择顶点处的值作为自由度，可确保
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+中的所有函数在任意一对相邻三角形的公共边的两个顶点处连续，因此沿整个公共边也连续。 因此，
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+中的函数在整个域
+
+
+<span class="katex">
+  \(\Omega\)
+</span>
+中都是连续的。 结果，由拉格朗日三角形产生的分段线性空间是
+
+
+<span class="katex">
+  \(H^1\)
+</span>
+-符合的, 即
+
+
+<span class="katex">
+  \(V_h \subset H^1(\Omega)\)
+</span>
+。</p>
+<p>人们还可以考虑由每个边的中点定义的自由度。 这就是所谓的Crouzeix-Raviart三角形。 因此，相应的全局Crouzeix-Raviart空间
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+仅在边中点处连续。 Crouzeix-Raviart三角形是
+
+
+<span class="katex">
+  \(H^1\)
+</span>
+-不符合的单元的一个示例。 也就是说，由一组Crouzeix–Raviart单元构成的函数空间
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+不是
+
+
+<span class="katex">
+  \(H_1\)
+</span>
+的子空间。 自由度的其他选择可以确保法向分量的连续性，例如，
+
+
+<span class="katex">
+  \(H(\mathrm{div})\)
+</span>
+-符合的Brezzi–Douglas–Marini单元； 或者确保切向分量的连续性，例如，
+
+
+<span class="katex">
+  \(H(\mathrm{curl})\)
+</span>
+-符合的Nédélec单元。 在第3章中，给出了其它单元的示例，这些单元可通过选择自由度和局部到全局映射来确保不同种类的连续性。</p>
+<h3 id="246-参考单元的映射">2·4·6 参考单元的映射</h3>
+<p>如我们所见，全局函数空间
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+可以用网格
+
+
+<span class="katex">
+  \(\mathcal{T}_h\)
+</span>
+：一组有限元
+
+
+<span class="katex">
+  \(\{(T, \mathcal{V}_T, \mathcal{L}_T)\}_{T \in \mathcal{T}_h}\)
+</span>
+和一组局部到全局映射
+
+
+<span class="katex">
+  \(\{\iota_T\}_{T\in \mathcal{T}_h}\)
+</span>
+来描述 。 我们可以通过引入参考有限元
+
+
+<span class="katex">
+  \((\hat{T},\hat{\mathcal{V}}, \hat{\mathcal{L}})\)
+</span>
+来进一步简化此描述，其中
+
+
+<span class="katex">
+  \(\hat{\mathcal{L}}= \{\hat{\ell}_1,\hat{\ell}_2,\dots,\hat{\ell}_{\hat{n}}\}\)
+</span>
+和一组可逆映射
+
+
+<span class="katex">
+  \(\{F_T\}_{T \in \mathcal{T}_h}\)
+</span>
+，它们将参考单元
+
+
+<span class="katex">
+  \(\hat{T}\)
+</span>
+映射到网格的单元：</p>
+
+
+
+<span class="katex">
+  \[
+T=F_T(\hat{T})\qquad \forall T\in \mathcal{T}_h \tag{2.54}
+\]
+</span>
+
+<p>如图2.6所示。 注意，
+
+
+<span class="katex">
+  \(\hat{T}\)
+</span>
+通常不是网格的一部分。</p>
+<p><img src="/notes/images/0183.jpg" alt="0183.jpg"></p>
+<center>图2.6: 从参考胞元
+
+
+<span class="katex">
+  \(\hat{T}\)
+</span>
+到胞元
+
+
+<span class="katex">
+  \(T \in \mathcal{T}_h\)
+</span>
+的（仿射）映射
+
+
+<span class="katex">
+  \(F_T\)
+</span>
+。</center>
+<p>对于比如（2.7）中这样的离散函数空间
+
+
+<span class="katex">
+  \(H^1\)
+</span>
+，映射
+
+
+<span class="katex">
+  \(F_T\)
+</span>
+通常是仿射的。 也就是说，
+
+
+<span class="katex">
+  \(F_T\)
+</span>
+可以写成
+
+
+<span class="katex">
+  \(F_T(\hat{x})= A_T \hat{x} + b_T\)
+</span>
+的形式，其中
+
+
+<span class="katex">
+  \(A_T \in \mathbb{R}^{d \times d}, b_T \in \mathbb{R}^d\)
+</span>
+，或者也可是等参的(isoparametric)，在这种情况下
+
+
+<span class="katex">
+  \(F_T\)
+</span>
+的分量就是
+
+
+<span class="katex">
+  \(\hat{\mathcal{V}}\)
+</span>
+中的函数。 对于比如（2.16）中的离散函数空间
+
+
+<span class="katex">
+  \(H(\mathrm{div})\)
+</span>
+，或者
+
+
+<span class="katex">
+  \(H(\mathrm{curl})\)
+</span>
+，适当的映射是分别保留法向分量和切向分量的协变和协变Piola映射； 参见Rognes等.（2009）。 为简单起见，我们将下面的讨论限制在
+
+
+<span class="katex">
+  \(F_T\)
+</span>
+是<code>仿射的</code>或<code>等参的</code>情况下。</p>
+<p>对于每个胞元
+
+
+<span class="katex">
+  \(T \in \mathcal{T}_h\)
+</span>
+，由映射
+
+
+<span class="katex">
+  \(F_T\)
+</span>
+生成一个T上的函数空间：</p>
+
+
+
+<span class="katex">
+  \[
+\mathcal{V}_T = \{v : v = \hat{v} \circ F_T^{-1}, \hat{v} \in \hat{\mathcal{V}} \} \tag{2.55}
+\]
+</span>
+
+<p>也就是说,对每个函数
+
+
+<span class="katex">
+  \(v = v(x)\)
+</span>
+，都存在某些
+
+
+<span class="katex">
+  \(\hat{v} \in \hat{\mathcal{V}}\)
+</span>
+，可以将其表示为
+
+
+<span class="katex">
+  \(v(x)=  \hat{v}(F_T^{-1}(x))=  \hat{v} \circ F_T^{-1}(x)\)
+</span>
+。</p>
+<p>映射
+
+
+<span class="katex">
+  \(F_T\)
+</span>
+还可以在
+
+
+<span class="katex">
+  \(\mathcal{V}_T\)
+</span>
+上产生一组自由度
+
+
+<span class="katex">
+  \(\mathcal{L}_T\)
+</span>
+</p>
+
+
+
+<span class="katex">
+  \[
+\mathcal{L}_T = \{\ell_i : \ell_i(v) = \hat{\ell}_i(v \circ F_T), \quad  i = 1, 2,\dots, \hat{n}\} \tag{2.56}
+\]
+</span>
+
+<p>由了映射集
+
+
+<span class="katex">
+  \(\{F_T\}_{T \in \mathcal{T}_h}\)
+</span>
+，我们就可以从参考有限元
+
+
+<span class="katex">
+  \((\hat{T}, \hat{\mathcal{V}}, \hat{\mathcal{L}})\)
+</span>
+生成有限元集
+
+
+<span class="katex">
+  \(\{(T, \mathcal{V}_T, \mathcal{L}_T)\}_{T \in \mathcal{T}_h}\)
+</span>
+ ：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned} T &= F_T(\hat{T}) \\ \mathcal{V}_T &= \{v : v = \hat{v}  \circ F_T^{-1},  \quad \hat{v} \in  \hat{\mathcal{V}}\} \\ \mathcal{L}_T &= \{\ell_i : \ell_i(v) = \hat{\ell}_i(v \circ F_T), \quad i = 1, 2,\dots, \hat{n} = n_T\} \end{aligned}  \tag{2.57}
+\]
+</span>
+
+<p>通过这种构造，我们还能从满足
+
+
+<span class="katex">
+  \(\hat{\ell}_i(\hat{\phi}_j)=\delta_{ij}\)
+</span>
+的参考元上的一组节点基函数
+
+
+<span class="katex">
+  \(\{\hat{\phi}_i\}^{\hat{n}}_{i=1}\)
+</span>
+，获得T上的节点基函数
+
+
+<span class="katex">
+  \(\{\phi^T_i\}^{n_T}_{i=1}\)
+</span>
+。</p>
+<p>为了看到这一点，我们令
+
+
+<span class="katex">
+  \(\phi^T_i=\hat{\phi}_i \circ F^{-1}_T, \quad  i=1,2,\dots,n_T\)
+</span>
+，发现有</p>
+
+
+
+<span class="katex">
+  \[
+\ell_i^T(\phi_j^T)=\hat{\ell}_i(\phi_j^T \circ F_T) = \hat{\ell}_i(\hat{\phi}_j \circ F_T^{-1} \circ F_T) =  \hat{\ell}_i(\hat{\phi}_j) = \delta_{ij} \tag{2.58}
+\]
+</span>
+
+<p>因此
+
+
+<span class="katex">
+  \(\{\phi^T_i\}^{n_T}_{i=1}\)
+</span>
+是
+
+
+<span class="katex">
+  \(\mathcal{V}_T\)
+</span>
+的节点基底。</p>
+<p>因此，我们可以定义指定网格
+
+
+<span class="katex">
+  \(\mathcal{T}_h\)
+</span>
+的函数空间
+
+
+<span class="katex">
+  \(V_h\)
+</span>
+： 一个参考有限元
+
+
+<span class="katex">
+  \((\hat{T}, \hat{\mathcal{V}}, \hat{\mathcal{L}})\)
+</span>
+，一组局部到全局映射
+
+
+<span class="katex">
+  \(\{\iota_T\}_{T \in \mathcal{T}_h}\)
+</span>
+和一组映射
+
+
+<span class="katex">
+  \(\{F_T\}_{T \in \mathcal{T}_h}\)
+</span>
+。 一般而言，对于所有的胞元T， 这个映射不必具有相同的类型，并且并非所有有限元都需要由同一参考有限元生成。 特别地，可以对弯曲边界上的胞元采用不同的（较高阶次）的等参映射。</p>
+<p>上面的构造，对于所谓的<code>仿射等价单元</code>（afﬁne-equivalent elements）（Brenner和Scott，2008）是有效的，如
+
+
+<span class="katex">
+  \(H^1\)
+</span>
+-符合的拉格朗日有限元族。 对于
+
+
+<span class="katex">
+  \(H(\mathrm{div})\)
+</span>
+-符合的和
+
+
+<span class="katex">
+  \(H(\mathrm{curl})\)
+</span>
+的单元，例如Brezzi–Douglas–Marini和Nédélec单元，也可以使用类似的构造，其中必须使用适当的Piola映射来映射基函数（而一个仿射映射仍可能用于几何映射）。 但是，并非所有有限元都可以使用这种简单的构造从参考有限元中生成。 例如，对于Hermite有限元族来说，这种构造是失败的（Ciarlet，2002； Brenner和Scott，2008）。</p>
+<h2 id="25-有限元求解器">2·5 有限元求解器</h2>
+<p>有限元为离散化微分方程提供了一种强大的方法，但是求解出代数系统的结果，即使对于线性系统，也带来了挑战。 一个好的求解器必须处理代数系统的稀疏性和可能出现的不适情况，并且必须能在并行计算机上很好地扩展。 线性求解不仅是线性问题的基本操作，而且用牛顿方法的非线性求解、特征值求解，或者时间步长的每次迭代中也是如此。</p>
+<p>一个经典的，最近重新重视的，是基于高斯消去的直接解法。 得益于支持并行可伸缩性和块结构识别的技术，诸如UMFPACK（Davis，2004）和SuperLU（Li，2005）之类的程序包使直接法在相当大的问题上具有竞争力。</p>
+<p>1970年代和1980年代见证了现代迭代方法的出现。 这些源自经典的迭代方法，例如松弛方法以及Hestenes和Stiefel（1952）的共轭梯度迭代。 与直接法相比，这些技术可以使用更少的内存，并且更易于并行化。</p>
+<p>多重网格方法（Brandt，1977； Wesseling，1992）在网格的层次结构上使用松弛技术来在近似线性时间内求解椭圆方程，通常可用于求解对称问题。 但是，它们所要求网格的层次结构可能并不总是可用。 这促使引入了模拟网格粗化的代数多重网格方法（algebraic multigrid methods，AMG），该方法仅对矩阵项起作用。 成功的AMG发行版，包括Hypre软件包（Falgout和Yang，2002）和ML软件包（Trilinos的一部分）发行（Heroux等，2005）。</p>
+<p>共轭梯度和GMRES（Saad and Schultz，1986）等Krylov方法可生成了一系列逼近线性系统解的近似值。 这些方法仅基于矩阵向量乘积。 通过使用预处理器可以显着改善这些方法的性能，这些预处理器可以转换线性系统</p>
+
+
+
+<span class="katex">
+  \[
+A U = b \tag{2.59}
+\]
+</span>
+
+<p>进而</p>
+
+
+
+<span class="katex">
+  \[
+P^{-1} A U = P^{-1} b  \tag{2.60}
+\]
+</span>
+
+<p>这就是所谓的左预处理。 预处理器
+
+
+<span class="katex">
+  \(P^{-1}\)
+</span>
+也可以从右开始应用，可见
+
+
+<span class="katex">
+  \(A U =(A P^{-1})(P U)\)
+</span>
+，并求解矩阵
+
+
+<span class="katex">
+  \(A P^{-1}\)
+</span>
+的这个修正系统，然后再从
+
+
+<span class="katex">
+  \(P U\)
+</span>
+求解出U。 为了确保良好的收敛性，预处理器
+
+
+<span class="katex">
+  \(P^{-1}\)
+</span>
+应该是
+
+
+<span class="katex">
+  \(A^{-1}\)
+</span>
+的很好近似。 一些预处理是严格代数的，这意味着它们仅使用A中的可用信息。 诸如高斯-塞德尔（Gauss-Seidel）之类的经典松弛方法可以用作预处理，所谓的不完全因子分解也可以用作预处理（Manteuffel，1980； Axelsson，1986； Saad，1994）。 无论是几何还是代数的多重网格，都可以充当强大的因式分解。 其他种类的预处理器需要有关微分方程求解的专门知识，并且可能需要新的与物理过程相关的矩阵建模。 这种方法有时称为基于物理学的预处理器。 诸如FEniCS之类的自动化系统提供了一个有趣的机会，可以协助开发和实施这些功能强大但使用较少的方法。</p>
+<p>幸运的是，这里讨论的许多方法都包含在现代库中，例如PETSc（Balay等人，2004）和Trilinos（Heroux等人，2005）。 FEniCS通常通过这些软件包与刚才讨论过的求解器进行交互，因此主要需要从较高的角度了解各种方法，例如何时使用各种方法以及如何访问它们。</p>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e4%ba%8c%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e6%96%b9%e6%b3%95">章节目录</a>】</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0099/">
+    下一页<br>有限元方法（三）【翻译】
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0097/">
+      上一页<br>有限元方法（一）【翻译】
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0098.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/fem/0098.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#i方法论2有限元方法二">I.方法论》2·有限元方法（二）</a>
+      <ul>
+        <li><a href="#24-有限元函数空间">2·4 有限元函数空间</a>
+          <ul>
+            <li><a href="#241-网格">2·4·1 网格</a></li>
+            <li><a href="#242-有限元定义">2·4·2 有限元定义</a></li>
+            <li><a href="#243-节点基底">2·4·3 节点基底</a></li>
+            <li><a href="#244-局部到全局映射">2·4·4 局部到全局映射</a></li>
+            <li><a href="#245-全局函数空间">2·4·5 全局函数空间</a></li>
+            <li><a href="#246-参考单元的映射">2·4·6 参考单元的映射</a></li>
+          </ul>
+        </li>
+        <li><a href="#25-有限元求解器">2·5 有限元求解器</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

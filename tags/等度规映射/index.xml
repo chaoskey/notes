@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>等度规映射 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E7%AD%89%E5%BA%A6%E8%A7%84%E6%98%A0%E5%B0%84/</link>
+    <description>Recent content in 等度规映射 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Mon, 20 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E7%AD%89%E5%BA%A6%E8%A7%84%E6%98%A0%E5%B0%84/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Killing矢量场</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0011/</link>
+      <pubDate>Mon, 20 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0011/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Killing矢量场&lt;/code&gt;描述了&lt;code&gt;(伪)黎曼流形&lt;/code&gt;的对称性，每一种对称性都与一个&lt;code&gt;Killing矢量场&lt;/code&gt;相关联。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

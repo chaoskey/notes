@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="6.3 频率派决策理论"><meta property="og:title" content="6.3 频率派决策理论" />
+<meta property="og:description" content="返回本章目录
+在频率派或经典决策理论中，存在一个损失函数和一个拟然，但没有先验因而没有后验或后验预期损失。 因此，与贝叶斯情况不同，没有自动推导出最优估计器的方法。 相反，在频率派方法中，我们可以自由选择我们想要的任何估计器或决策程序
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+  \(\delta：\mathcal{X} \to \mathcal{A}\)
+
+。
+选择估计器后，我们将其预期损失或风险定义如下：
+
+
+
+
+  \[
+R(\theta^{\\*},\delta)\overset{\Delta}{=}\mathbb{E}_{p(\tilde{\mathcal{D}}|\theta^{\\*})}\left[L(\theta^{\\*},\delta(\tilde{\mathcal{D}}))\right]=\int{L(\theta^{\\*},\delta(\tilde{\mathcal{D}}))p(\tilde{\mathcal{D}}|\theta^{\\*})d\tilde{\mathcal{D}}} \tag{6.9}
+\]
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0055/" />
+<meta property="article:published_time" content="2019-07-14T20:20:35+08:00" />
+<meta property="article:modified_time" content="2019-07-14T20:20:35+08:00" />
+<title>6.3 频率派决策理论 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a>
+<ul>
+<li><a href="/notes/docs/mlapp/01introduction/">第一章 导论</a></li>
+<li><a href="/notes/docs/mlapp/02probability/">第二章 概率</a></li>
+<li><a href="/notes/docs/mlapp/03generative_models_for_discrete_data/">第三章 基于离散数据的生成式模型</a></li>
+<li><a href="/notes/docs/mlapp/04gaussian_models/">第四章 高斯模型</a></li>
+<li><a href="/notes/docs/mlapp/05bayesian_statistics/">第五章 贝叶斯统计</a></li>
+<li><a href="/notes/docs/mlapp/06frequentist_statistics/">第六章 频率派统计</a></li>
+<li><a href="/notes/docs/mlapp/07linear_regression/">第七章 线性回归</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>6.3 频率派决策理论</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#631-贝叶斯风险">6.3.1 贝叶斯风险</a></li>
+        <li><a href="#632-最小极大风险">6.3.2 最小极大风险</a></li>
+        <li><a href="#633-可接受的估计器admissible-estimators">6.3.3 可接受的估计器(Admissible estimators)</a>
+          <ul>
+            <li><a href="#6331-示例">6.3.3.1 示例</a></li>
+            <li><a href="#6332-stein悖论">6.3.3.2 Stein悖论*</a></li>
+            <li><a href="#6333-可接受还是不够的">6.3.3.3 可接受还是不够的</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0056/">
+    下一页<br>6.4 估计器的理想属性
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0054/">
+      上一页<br>6.2 估计器的采样分布
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/mlapp/06frequentist_statistics/0055/">6.3 频率派决策理论</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2019-07-14</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">机器学习</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E9%A2%91%E7%8E%87%E6%B4%BE">频率派</a>
+      , 
+      <a href="/notes/tags/%E9%A3%8E%E9%99%A9">风险</a>
+      , 
+      <a href="/notes/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF">贝叶斯</a>
+      , 
+      <a href="/notes/tags/%E4%BC%B0%E8%AE%A1%E5%99%A8">估计器</a>
+      , 
+      <a href="/notes/tags/%E5%86%B3%E7%AD%96%E8%A7%84%E5%88%99">决策规则</a>
+      , 
+      <a href="/notes/tags/%E6%82%96%E8%AE%BA">悖论</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/06frequentist_statistics/0055.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<p><a href="/notes/docs/mlapp/06frequentist_statistics/"><strong>返回本章目录</strong></a></p>
+<p>在频率派或经典决策理论中，存在一个损失函数和一个拟然，但没有先验因而没有后验或后验预期损失。 因此，与贝叶斯情况不同，没有自动推导出最优估计器的方法。 相反，在频率派方法中，我们可以自由选择我们想要的任何估计器或决策程序
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(\delta：\mathcal{X} \to \mathcal{A}\)
+</span>
+。</p>
+<p>选择估计器后，我们将其预期损失或<strong>风险</strong>定义如下：</p>
+
+
+
+<span class="katex">
+  \[
+R(\theta^{\\*},\delta)\overset{\Delta}{=}\mathbb{E}_{p(\tilde{\mathcal{D}}|\theta^{\\*})}\left[L(\theta^{\\*},\delta(\tilde{\mathcal{D}}))\right]=\int{L(\theta^{\\*},\delta(\tilde{\mathcal{D}}))p(\tilde{\mathcal{D}}|\theta^{\\*})d\tilde{\mathcal{D}}} \tag{6.9}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(\tilde{\mathcal{D}}\)
+</span>
+是从“自然分布”中采样的数据，其由参数
+
+
+<span class="katex">
+  \(\theta^{\\*}\)
+</span>
+表示。 换句话说，期望是关于估计器采样分布的。 将此与贝叶斯后验预期损失进行比较：</p>
+
+
+
+<span class="katex">
+  \[
+\rho(a|\mathcal{D},\pi)\overset{\Delta}{=}\mathbb{E}_{p(\theta|\mathcal{D},\pi)}\left[L(\theta,a)\right]=\int_\Theta{L(\theta^{\\*},a)p(\theta|\mathcal{D},\pi)d\theta} \tag{6.10}
+\]
+</span>
+
+<p>我们看到贝叶斯方法关于
+
+
+<span class="katex">
+  \(\theta\)
+</span>
+均值（未知）和
+
+
+<span class="katex">
+  \(\mathcal{D}\)
+</span>
+上的条件（已知），而频率派方法在
+
+
+<span class="katex">
+  \(\tilde{\mathcal{D}}\)
+</span>
+上的均值（因此忽略观测到的数据），
+
+
+<span class="katex">
+  \(\theta^{\\*}\)
+</span>
+上的条件（未知）。</p>
+<p>频率派不仅定义不自然，甚至无法计算，因为
+
+
+<span class="katex">
+  \(\theta^{\\*}\)
+</span>
+未知。 因此，我们无法比较不同的估计器的频率派风险来。 我们将在下面讨论各种解决方案。</p>
+<h2 id="631-贝叶斯风险">6.3.1 贝叶斯风险</h2>
+<p>我们如何在估计器中进行选择？ 我们需要一些方法将
+
+
+<span class="katex">
+  \(R(\boldsymbol{\theta}^{\\*},\delta)\)
+</span>
+转换为一个单独的度量
+
+
+<span class="katex">
+  \(R(\delta)\)
+</span>
+，要求不依赖于知道
+
+
+<span class="katex">
+  \(\boldsymbol{\theta}^{\\*}\)
+</span>
+。 一种方法是在
+
+
+<span class="katex">
+  \(\boldsymbol{\theta}^{\\*}\)
+</span>
+上放置先验，然后如下定义一个估计器的<strong>贝叶斯风险</strong>或<strong>积分风险</strong>(<strong>integrated risk</strong>)：</p>
+
+
+
+<span class="katex">
+  \[
+R_B(\delta)\overset{\Delta}{=}\mathbb{E}_{p(\boldsymbol{\theta}^{\\*})}\left[R(\boldsymbol{\theta}^{\\*},\delta)\right]=\int{R(\boldsymbol{\theta}^{\\*},\delta)p(\boldsymbol{\theta}^{\\*})d \boldsymbol{\theta}^{\\*}} \tag{6.11}
+\]
+</span>
+
+<p><strong>贝叶斯估计器</strong>或<strong>贝叶斯决策规则</strong>是最小化预期风险：</p>
+
+
+
+<span class="katex">
+  \[
+\delta_B \overset{\Delta}{=} \underset{\delta}{\rm argmin} \ R_B(\delta) \tag{6.12}
+\]
+</span>
+
+<p>请注意，<strong>积分风险</strong>也称为<strong>预后验风险</strong>(<strong>pre-posterior risk</strong>)，因为它是在我们看到数据之前。 对其进行最小化对于试验设计是有用的。</p>
+<p>我们现在将证明一个非常重要的定理，将贝叶斯和频率派方法与决策理论联系起来。</p>
+<p><strong>定理6.3.1.</strong> 可以通过对每个
+
+
+<span class="katex">
+  \(\boldsymbol{x}\)
+</span>
+最小化后验预期损失来获得贝叶斯估计器。</p>
+<p>证明: 通过改变积分顺序，我们有</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+R_B(\delta)=& \int{\left[\sum_{\boldsymbol{x}}{\sum_y{L(y,\delta(\boldsymbol{x}))p(\boldsymbol{x},y|\boldsymbol{\theta}^{*})}}\right]p(\boldsymbol{\theta}^{*})d\boldsymbol{\theta}^{*}} \\
+\quad = & \sum_{\boldsymbol{x}}{\sum_y{\int_\Theta{L(y,\delta(\boldsymbol{x}))p(\boldsymbol{x},y,\boldsymbol{\theta}^{*})d\boldsymbol{\theta}^{*}}}} \\
+\quad = & \sum_{\boldsymbol{x}}{\left[\sum_y{L(y,\delta(\boldsymbol{x}))p(y | \boldsymbol{x})}\right]p(\boldsymbol{x})}  \\
+\quad = & \sum_{\boldsymbol{x}}{\rho(\delta(\boldsymbol{x})|\boldsymbol{x})p(\boldsymbol{x})} 
+\end{aligned}  \tag{6.13-16}
+\]
+</span>
+
+<p>为了最小化整体期望，我们只是最小化每个
+
+
+<span class="katex">
+  \(\boldsymbol{x}\)
+</span>
+对应的内部项，因此我们的决策规则是</p>
+
+
+
+<span class="katex">
+  \[
+\delta_B(\boldsymbol{x})=\underset{a\in\mathcal{A}}{\rm argmin} \ \rho(a|\boldsymbol{x}) \tag{6.17}
+\]
+</span>
+
+<p>因此，我们看到根据具体情况（如贝叶斯方法）选择最优行动是平均最优的（如在频率派方法中）。 换句话说，贝叶斯方法提供了实现频率派目标的好方法。 事实上，人们可以进一步证明以下几点。</p>
+<p><strong>定理6.3.2.</strong>（Wald，1950） 每个可接受的决策规则都是关于某些（可能是不正确的）先验分布的贝叶斯决策规则。</p>
+<p>这个定理表明，最小化频率派风险的最好方法是贝叶斯！ 参见（Bernardo和Smith 1994，第448页）进一步讨论这一点。</p>
+<h2 id="632-最小极大风险">6.3.2 最小极大风险</h2>
+<p>显然，一些频率派的人不喜欢使用贝叶斯风险，因为它需要选择先验（尽管只出现在估计器计算时，不一定是其构造的一部分）。 另一种方法如下。 将估计器的<strong>最大风险</strong>定义为</p>
+
+
+
+<span class="katex">
+  \[
+R_{\max}(\delta)\overset{\Delta}{=}\underset{\boldsymbol{\theta}^{\\*}}{\max} \ R(\boldsymbol{\theta}^{\\*},\delta) \tag{6.18}
+\]
+</span>
+
+<p>最小极大规则(<strong>minimax rule</strong> )是最小化最大风险：</p>
+
+
+
+<span class="katex">
+  \[
+\delta_{MM}\overset{\Delta}{=}\underset{\delta}{\rm argmin} \ R_{\max}(\delta)  \tag{6.19}
+\]
+</span>
+
+<p><img src="" alt="0087.jpg"></p>
+<blockquote>
+<p>图6.2 两个决策程序δ1和δ2的风险函数。 由于δ1具有较低的最坏情况风险，因此它是最小极大值估计器，尽管δ2对于大多数θ值具有较低的风险。 因此，极小极大估计器过于保守。</p>
+</blockquote>
+<p>例如，在图6.2中，我们看到在
+
+
+<span class="katex">
+  \(\theta^{\\*}\)
+</span>
+的所有可能值范围，
+
+
+<span class="katex">
+  \(\delta_1\)
+</span>
+的最坏情况风险低于
+
+
+<span class="katex">
+  \(\delta_2\)
+</span>
+，因此它是最小极大估计器（有关实际模型中如何计算风险函数的解释，请参见第6.3.3.1节）。</p>
+<p>最小极大估计器具有一定的吸引力。 但是，计算它们可能很难。 并且非常悲观。 事实上，人们可以证明所有极小极大估计器都等同于<strong>最不利先验</strong>(<strong>least favorable prior</strong>)下的贝叶斯估计器。 在大多数统计情况下（不包括博弈论），假设自然是对手，是一个不合理的假设。</p>
+<h2 id="633-可接受的估计器admissible-estimators">6.3.3 可接受的估计器(Admissible estimators)</h2>
+<p>频率派决策理论的基本问题是它依赖知道的真实分布
+
+
+<span class="katex">
+  \(p(·|\theta^{\\*})\)
+</span>
+来评估风险。 然而，无论
+
+
+<span class="katex">
+  \(\theta^{\\*}\)
+</span>
+的值如何，有些估计器可能比另一些更差。 特别地，如果
+
+
+<span class="katex">
+  \(R(\theta,\delta_1) \le R(\theta,\delta_2), \forall \theta \in \Theta\)
+</span>
+，那么我们说
+
+
+<span class="katex">
+  \(\delta_1\)
+</span>
+<strong>支配</strong>
+
+
+<span class="katex">
+  \(\delta_2\)
+</span>
+。 如果对
+
+
+<span class="katex">
+  \(\theta\)
+</span>
+，前述不等式严格成立，那么该支配被认为是严格的。 如果一个估计器不受任何其他估计器的严格支配，则可以认为该估计器是<strong>可接受的</strong>(<strong>admissible</strong>)。</p>
+<h3 id="6331-示例">6.3.3.1 示例</h3>
+<p>让我们举一个例子，基于（Bernardo和Smith 1994）。 考虑估计高斯均值的问题。 我们假设数据是采样自
+
+
+<span class="katex">
+  \(x_i \sim \mathcal{N}(\theta^{\\*},\sigma^2= 1)\)
+</span>
+ ，并使用二次损失
+
+
+<span class="katex">
+  \(L(\theta,\hat{\theta})=(\theta-\hat{\theta})^2\)
+</span>
+。 相应的风险函数是MSE。 一些可能的决策规则或估计器
+
+
+<span class="katex">
+  \(\hat{\theta}(\boldsymbol{x})=\delta(\boldsymbol{x})\)
+</span>
+如下：</p>
+<ul>
+<li>
+
+
+<span class="katex">
+  \(\delta_1(\boldsymbol{x}) = \bar{\boldsymbol{x}}\)
+</span>
+, 样本均值</li>
+<li>
+
+
+<span class="katex">
+  \(\delta_2(\boldsymbol{x}) = \tilde{\boldsymbol{x}}\)
+</span>
+ , 样本中位数</li>
+<li>
+
+
+<span class="katex">
+  \(\delta_3(\boldsymbol{x}) = \theta_0\)
+</span>
+ , 固定值</li>
+<li>
+
+
+<span class="katex">
+  \(\delta_{\kappa}(\boldsymbol{x})\)
+</span>
+ , 
+
+
+<span class="katex">
+  \(\mathcal{N}(\theta|\theta_0,\sigma^2/\kappa)\)
+</span>
+先验下的后验均值:</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\delta_{\kappa}(\boldsymbol{x})=\dfrac{N}{N+\kappa}\bar{x}+\dfrac{\kappa}{N+\kappa}\theta_0 = w \bar{x}+ (1-w)\theta_0  \tag{6.20}
+\]
+</span>
+
+<p>对于
+
+
+<span class="katex">
+  \(\delta_{\kappa}\)
+</span>
+，我们考虑一个弱先验
+
+
+<span class="katex">
+  \(\kappa=1\)
+</span>
+和更强的先验
+
+
+<span class="katex">
+  \(\kappa=1\)
+</span>
+。先验均值是
+
+
+<span class="katex">
+  \(\theta_0\)
+</span>
+，一些固定值。 我们假设
+
+
+<span class="katex">
+  \(\sigma^2\)
+</span>
+是已知的。 （因此
+
+
+<span class="katex">
+  \(\delta_3(\boldsymbol{x})\)
+</span>
+ 与具有无穷强的先验的
+
+
+<span class="katex">
+  \(\delta_{\kappa}(\boldsymbol{x}), \kappa \to \infty\)
+</span>
+相同。）</p>
+<p>现在让我们分析地推导出风险函数。 （我们可以这样做，因为在这个玩具示例中，我们知道真实参数
+
+
+<span class="katex">
+  \(\theta^{\\*}\)
+</span>
+。）在6.4.4节中，我们证明了MSE可以分解为平方偏差加方差：</p>
+
+
+
+<span class="katex">
+  \[
+{\rm MSE}(\hat{\theta}(\cdot)|\theta^{\\*})={\rm var}\left[\hat{\theta}\right]+{\rm bias}^2(\hat{\theta}) \tag{6.21}
+\]
+</span>
+
+<p>样本均值是无偏的，因此其风险为:</p>
+
+
+
+<span class="katex">
+  \[
+{\rm MSE}(\delta_1|\theta^{\\*})={\rm var}[\bar{x}]=\dfrac{\sigma^2}{N} \tag{6.22}
+\]
+</span>
+
+<p>样本中位数也是无偏的。 可以证明方差近似为
+
+
+<span class="katex">
+  \(\pi/(2N)\)
+</span>
+，因此</p>
+
+
+
+<span class="katex">
+  \[
+{\rm MSE}(\delta_2|\theta^{\\*})=\dfrac{\pi}{2N} \tag{6.23}
+\]
+</span>
+
+<p>对于
+
+
+<span class="katex">
+  \(\delta_3(x)=\theta_0\)
+</span>
+，方差为零，因此</p>
+
+
+
+<span class="katex">
+  \[
+{\rm MSE}(\delta_2|\theta^{\\*})=(\theta^{\\*}-\theta_0)^2 \tag{6.24}
+\]
+</span>
+
+<p>最后，对于后验均值，我们有</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+{\rm MSE}(\delta_\kappa|\theta^{*}) = & \mathbb{E}\left[(w \bar{x}+(1-w)\theta_0-\theta^{*})^2\right]  \\
+\quad = & \mathbb{E}\left[(w(\bar{x}-\theta^{*})+(1-w)(\theta_0-\theta^{*}))^2\right] \\
+\quad = & w^2\dfrac{\sigma^2}{N}+(1-w)^2(\theta_0-\theta^{*})^2  \\
+\quad = & \dfrac{1}{(N+\kappa)^2}(N\sigma^2+\kappa^2(\theta_0-\theta^{*})^2)  
+\end{aligned} \tag{6.25-28}
+\]
+</span>
+
+<p>对于
+
+
+<span class="katex">
+  \(N \in \{5,20\}\)
+</span>
+，这些函数绘制在图6.3中。 我们看到，一般来说，最佳估计器取依于
+
+
+<span class="katex">
+  \(\theta^{\\*}\)
+</span>
+的值，这是未知的。 如果非常
+
+
+<span class="katex">
+  \(\theta^{\\*}\)
+</span>
+接近
+
+
+<span class="katex">
+  \(\theta_0\)
+</span>
+，则
+
+
+<span class="katex">
+  \(\delta_3\)
+</span>
+（仅预测
+
+
+<span class="katex">
+  \(\theta_0\)
+</span>
+）最佳。 如果
+
+
+<span class="katex">
+  \(\theta^{\\*}\)
+</span>
+在
+
+
+<span class="katex">
+  \(\theta_0\)
+</span>
+附近的某个合理范围内，那么将
+
+
+<span class="katex">
+  \(\theta_0\)
+</span>
+的先验猜测与实际数据相结合的后验均值是最佳的。 如果
+
+
+<span class="katex">
+  \(\theta^{\\*}\)
+</span>
+远离
+
+
+<span class="katex">
+  \(\theta_0\)
+</span>
+，则MLE最佳。 这一点都不应该令人惊讶：假设我们的先验均值是合理的，通常需要少量收缩（使用具有弱先验的后验均值）。</p>
+<p><img src="" alt="0088.jpg"></p>
+<blockquote>
+<p>图6.3 估计采样自
+
+
+<span class="katex">
+  \(\mathcal{N}(\theta^{\\*},\sigma^2= 1)\)
+</span>
+的高斯均值的风险函数。 实心深蓝色水平线是MLE，当κ= 5时，实心浅蓝色曲线是后验均值。左：N = 5个样本。 右：N = 20个样本。 基于图B.1（Bernardo和Smith 1994）。 由_riskFnGauss_生成的图。</p>
+</blockquote>
+<p>更令人惊讶的是，对于
+
+
+<span class="katex">
+  \(\theta^{\\*}\)
+</span>
+的每个值，决策规则
+
+
+<span class="katex">
+  \(\delta_2\)
+</span>
+（样本中位数）的风险总是高于
+
+
+<span class="katex">
+  \(\delta_1\)
+</span>
+（样本均值）的风险。 因此，针对该特定问题（假设数据来自高斯）, 样本中位数是不可接受的估计器。</p>
+<p>在实践中，样本中位数通常优于样本均值，因为它对异常值更加稳健。 如果我们假设数据来自拉普拉斯分布，其尾部比高斯分布更重，那么可以证明（Minka 2000d）中位数是贝叶斯估计器（在平方损失之下）。 更一般地，我们可以通过使用我们数据的灵活模型（例如混合模型或非参数密度估计器（第14.7.2节））构建稳健(鲁棒)估计器，然后计算后验均值或中位数。</p>
+<h3 id="6332-stein悖论">6.3.3.2 Stein悖论*</h3>
+<p>假设我们有N个iid随机变量
+
+
+<span class="katex">
+  \(X_i \sim \mathcal{N}(\theta_i,1)\)
+</span>
+ ，我们想估计
+
+
+<span class="katex">
+  \(\theta_i\)
+</span>
+。 明显的估计是MLE，在这种情况下设置
+
+
+<span class="katex">
+  \(\hat{\theta}_i= x_i\)
+</span>
+。 事实证明，当
+
+
+<span class="katex">
+  \(N \ge 4\)
+</span>
+时，这是二次损失下的不可接受的估计器。</p>
+<p>为了证明这一点，只要构建一个更好的估计器就足够了。 James-Stein估计器就是这样一个估计器，定义如下：</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\theta}_i=\hat{B}\bar{x}+(1-\hat{B})x_i=\bar{x}+(1-\hat{B})(x_i-\bar{x}) \tag{6.29}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(\bar{x} = \dfrac{1}{N}\sum_{i=1}^N{x_i}\)
+</span>
+，并且
+
+
+<span class="katex">
+  \(0 \le B \le 1\)
+</span>
+是调节常数。 该估计将
+
+
+<span class="katex">
+  \(\theta_i\)
+</span>
+“收缩”到整体均值。 （我们在5.6.2节中使用经验贝叶斯方法推导出这个估计器。）</p>
+<p>可以证明，对于N≥4，这种收缩估计器比MLE（样本均值）有更低的频率派风险（MSE）。这被称为<strong>Stein悖论</strong>。 下面的例子说明了它被称为悖论的原因。 假设
+
+
+<span class="katex">
+  \(\theta_0\)
+</span>
+是学生
+
+
+<span class="katex">
+  \(i\)
+</span>
+的“真实”智商，而
+
+
+<span class="katex">
+  \(X_i\)
+</span>
+是他的考试成绩。 为什么我对
+
+
+<span class="katex">
+  \(\theta_i\)
+</span>
+的估计值依赖全局均值
+
+
+<span class="katex">
+  \(\bar{x}\)
+</span>
+，进而依赖于他学生的分数？ 通过使不同维度不同量上的差异，可以构建更多自相矛盾的例子，例如，
+
+
+<span class="katex">
+  \(\theta_1\)
+</span>
+是我的智商，
+
+
+<span class="katex">
+  \(\theta_2\)
+</span>
+是温哥华的平均降雨量等。</p>
+<p>悖论的解决方案如下。 如果你的目标只是估计
+
+
+<span class="katex">
+  \(\theta_i\)
+</span>
+，你不能比使用
+
+
+<span class="katex">
+  \(x_i\)
+</span>
+更好，但如果目标是估计整个矢量
+
+
+<span class="katex">
+  \(\boldsymbol{\theta}\)
+</span>
+，并且你使用平方误差作为你的损失函数，那么收缩就会有所帮助。 为了看到这一点，假设我们想要从单个样本
+
+
+<span class="katex">
+  \(\boldsymbol{x} \sim \mathcal{N}(\boldsymbol{\theta},\boldsymbol{I})\)
+</span>
+估计
+
+
+<span class="katex">
+  \(\|\boldsymbol{\theta}\|_2^2\)
+</span>
+。 一个简单的估计是
+
+
+<span class="katex">
+  \(\|\boldsymbol{x}\|_2^2\)
+</span>
+，但这会高估结果，因为</p>
+
+
+
+<span class="katex">
+  \[
+\mathbb{E}[\|x\|_2^2]=\mathbb{E}\left[\sum_i{x_i^2}\right]=\sum_{i=1}^N{1+\theta_i^2}=N+\|\boldsymbol{\theta}\|_2^2 \tag{6.30}
+\]
+</span>
+
+<p>因此，我们可以通过汇集信息来降低风险，甚至可以从不相关的来源汇集信息，并缩小到整体均值。 在5.6.2节中，我们给出了贝叶斯的解释。 另见（Efron和Morris 1975）。</p>
+<h3 id="6333-可接受还是不够的">6.3.3.3 可接受还是不够的</h3>
+<p>很明显，我们可以将我们对良好估计器的搜索限制在可接受的估计器类中。 但事实上，构建可接受的估计量很容易，如下例所示。</p>
+<p><strong>定理6.3.3.</strong> 设
+
+
+<span class="katex">
+  \(X \sim \mathcal{N}(\theta, 1)\)
+</span>
+，并考虑在平方损失下估计
+
+
+<span class="katex">
+  \(\theta\)
+</span>
+。 设
+
+
+<span class="katex">
+  \(\delta_1(x)=\theta_0\)
+</span>
+是与数据无关的常数。 这就是一个可接受的估计器。</p>
+<p>证明: 假设不对。 那么还有一些其他估计器
+
+
+<span class="katex">
+  \(\delta_2\)
+</span>
+具有较小的风险，因此
+
+
+<span class="katex">
+  \(R(\theta^{\\*},\delta_2) \le R(\theta^{\\*},\delta_1)\)
+</span>
+，其中不等式必须对某些
+
+
+<span class="katex">
+  \(\theta^{\\*}\)
+</span>
+是严格的。 设真实参数是
+
+
+<span class="katex">
+  \(\theta^{\\*} =\theta_0\)
+</span>
+。 于是
+
+
+<span class="katex">
+  \(R(\theta^{\\*},\delta_1)=0\)
+</span>
+ ，并且</p>
+
+
+
+<span class="katex">
+  \[
+R(\theta^{\\*},\delta_2)=\int{(\delta_2(x)-\theta_0)^2p(x|\theta_0)dx} \tag{6.31}
+\]
+</span>
+
+<p>由于
+
+
+<span class="katex">
+  \(0 \le R(\theta^{\\*},\delta_2) \le R(\theta^{\\*},\delta_1)\)
+</span>
+ ，并且
+
+
+<span class="katex">
+  \(R(\theta^{\\*},\delta_1)= 0\)
+</span>
+，因此我们得到
+
+
+<span class="katex">
+  \(R(\theta^{\\*},\delta_2)= 0\)
+</span>
+，进而
+
+
+<span class="katex">
+  \(\delta_2(x)= \theta_0=\delta_1(x)\)
+</span>
+。 因此，在某个特定点
+
+
+<span class="katex">
+  \(\theta_0\)
+</span>
+，
+
+
+<span class="katex">
+  \(\delta_2\)
+</span>
+可以避免比
+
+
+<span class="katex">
+  \(\delta_1\)
+</span>
+具有更高风险的唯一方法是等于
+
+
+<span class="katex">
+  \(\delta_1\)
+</span>
+。 因此，没有其他估计器
+
+
+<span class="katex">
+  \(\delta_2\)
+</span>
+具有严格较低的风险，因此
+
+
+<span class="katex">
+  \(\delta_2\)
+</span>
+是可接受的。</p>
+<p><a href="/notes/docs/mlapp/06frequentist_statistics/"><strong>返回本章目录</strong></a></p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0056/">
+    下一页<br>6.4 估计器的理想属性
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0054/">
+      上一页<br>6.2 估计器的采样分布
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/06frequentist_statistics/0055.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/mlapp/06frequentist_statistics/0055.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#631-贝叶斯风险">6.3.1 贝叶斯风险</a></li>
+        <li><a href="#632-最小极大风险">6.3.2 最小极大风险</a></li>
+        <li><a href="#633-可接受的估计器admissible-estimators">6.3.3 可接受的估计器(Admissible estimators)</a>
+          <ul>
+            <li><a href="#6331-示例">6.3.3.1 示例</a></li>
+            <li><a href="#6332-stein悖论">6.3.3.2 Stein悖论*</a></li>
+            <li><a href="#6333-可接受还是不够的">6.3.3.3 可接受还是不够的</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

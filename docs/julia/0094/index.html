@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="有限元法解偏微分方程（FEniCS）"><meta property="og:title" content="有限元法解偏微分方程（FEniCS）" />
+<meta property="og:description" content="
+在Julia环境中，使用FenicsPy.jl调用FEniCS库，求解偏微分方程。
+
+以泊松方程（第一边界条件）为例
+
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+  \[
+-\Delta u = f \qquad \boldsymbol{x} \in \Omega \\ u|_{\partial \Omega} =g
+\]
+
+
+范例而已， 本例提供的套路是通用的，大不了多看看文档。
+关键的地方，我特意列出相关链接。
+本文采用软件包： FEniCS。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/julia/0094/" />
+<meta property="article:published_time" content="2020-11-13T16:27:30+08:00" />
+<meta property="article:modified_time" content="2020-11-13T16:27:30+08:00" />
+<title>有限元法解偏微分方程（FEniCS） | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a>
+<ul>
+<li><a href="/notes/docs/julia/0001/">整合Julia和Python的集成环境（Win10）</a></li>
+<li><a href="/notes/docs/julia/0095/">科学计算环境搭建（Win10+WSL2+Ubuntu）</a></li>
+<li><a href="/notes/docs/julia/0002/">Julia中的数学符号演算</a></li>
+<li><a href="/notes/docs/julia/0003/">基于Julia的科学计算功能库整理</a></li>
+<li><a href="/notes/docs/diffgeo/0070/">微分几何中的计算</a></li>
+<li><a href="/notes/docs/julia/0088/">平面三体问题</a></li>
+<li><a href="/notes/docs/julia/0089/">有限差分法求解一维热传导方程</a></li>
+<li><a href="/notes/docs/julia/0090/">Galerkin法解常微分方程边值问题</a></li>
+<li><a href="/notes/docs/julia/0091/">有限元法解常微分方程边值问题</a></li>
+<li><a href="/notes/docs/julia/0092/">有限元之平面三角单元</a></li>
+<li><a href="/notes/docs/julia/0093/">有限元之Delaunay三角剖分</a></li>
+<li><a href="/notes/docs/julia/0094/"class=active>有限元法解偏微分方程（FEniCS）</a></li>
+<li><a href="/notes/docs/julia/0096/">有限元法求解牛顿流体（FEniCS）</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>有限元法解偏微分方程（FEniCS）</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#以泊松方程第一边界条件为例">以泊松方程（第一边界条件）为例</a></li>
+    <li><a href="#第1步将问题转化成变分等式">第1步：将问题转化成变分等式</a></li>
+    <li><a href="#第2步对求解域进行刨分">第2步：对求解域进行刨分</a></li>
+    <li><a href="#第3步构造基于网格的函数空间">第3步：构造基于网格的函数空间</a></li>
+    <li><a href="#第4步边界条件及参数设定">第4步：边界条件及参数设定</a></li>
+    <li><a href="#第5步变分方程的直译">第5步：变分方程的“直译”</a></li>
+    <li><a href="#第6步求解并绘图">第6步：求解并绘图</a></li>
+    <li><a href="#第7步将数据导出然后在paraview中可视化">第7步：将数据导出，然后在ParaView中可视化</a></li>
+    <li><a href="#第8步误差估计及其它">第8步：误差估计及其它</a></li>
+    <li><a href="#初边值问题典型范例热传导方程">初边值问题典型范例：热传导方程</a></li>
+    <li><a href="#更复杂的边界条件以泊松方程为例">更复杂的边界条件（以泊松方程为例）</a></li>
+    <li><a href="#后记">后记</a></li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/julia/0095/">
+    下一页<br>科学计算环境搭建（Win10&#43;WSL2&#43;Ubuntu）
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/julia/0093/">
+      上一页<br>有限元之Delaunay三角剖分
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/julia/0094/">有限元法解偏微分方程（FEniCS）</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-11-13</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/julia">julia</a>
+      , 
+      <a href="/notes/tags/FEniCS">FEniCS</a>
+      , 
+      <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95">有限元法</a>
+      , 
+      <a href="/notes/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">偏微分方程</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/julia/0094.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<blockquote>
+<p>在Julia环境中，使用<a href="https://gitee.com/chaoskey/FenicsPy.jl">FenicsPy.jl</a>调用<code>FEniCS</code>库，求解偏微分方程。</p>
+</blockquote>
+<h1 id="以泊松方程第一边界条件为例">以泊松方程（第一边界条件）为例</h1>
+
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \[
+-\Delta u = f \qquad \boldsymbol{x} \in \Omega \\ u|_{\partial \Omega} =g
+\]
+</span>
+
+<p>范例而已， 本例提供的套路是通用的，大不了多看看文档。</p>
+<p>关键的地方，我特意列出相关链接。</p>
+<p>本文采用软件包： FEniCS。</p>
+<h1 id="第1步将问题转化成变分等式">第1步：将问题转化成变分等式</h1>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}a(u,v)&=L(v)+\int_{\partial \Omega}{\frac{\partial g}{\partial n}vds}  \qquad \forall v \in \left\{v\in H^1(\Omega) \ : \ v|_{\partial \Omega} = g\right\} \\ a(u,v) &\overset{\Delta}{=} \int_\Omega{\nabla u \nabla v d\omega} \\ L(v) &\overset{\Delta}{=} \int_\Omega{f v d\omega} \end{aligned}
+\]
+</span>
+
+<p>因为第一边界条件可通过变换（
+
+
+<span class="katex">
+  \(u \to u + g\)
+</span>
+）化归成0边值问题，所以只需要考虑对应的弱形式(0边界条件)：</p>
+
+
+
+<span class="katex">
+  \[
+a(u,v)=L(v)  \qquad \forall v \in \left\{v\in H^1(\Omega) \ : \ v|_{\partial \Omega} = 0\right\} 
+\]
+</span>
+
+<p>解出0边值问题后，不难通过简单变换得到非零边值问题的解。（这步，<code>FEniCS</code>会自动帮我们作了，不必操心）。</p>
+<p><strong>注意</strong>：第二、三边界条件就没那么简单了，对应的<code>面积分项</code>是不可省略的。</p>
+<p>问题具体化为，比如：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned} f(x,y)&=-6 \\  g(x,y)&=1+x^2+2y^2 \\ & \\ \Omega&=\left\{(x,y)|x^2+y^2 \le 1\right\} \end{aligned}
+\]
+</span>
+
+<p><strong>特别说明</strong>：后续Julia代码涉及的变量名，完全和上面的公式一致。</p>
+<h1 id="第2步对求解域进行刨分">第2步：对求解域进行刨分</h1>
+<p>这里用到了<code>Circle</code>, 更多请查阅文档：</p>
+<p><a href="https://bitbucket.org/fenics-project/mshr/wiki/API">https://bitbucket.org/fenics-project/mshr/wiki/API</a></p>
+<p>也可以通过一组顶点组成的多边形来逼近更复杂的求解域，然后再对这个多边形区域进行刨分，更详细查阅文档：</p>
+<p><a href="https://fenicsproject.org/docs/dolfin/1.4.0/python/demo/documented/mesh-generation/python/documentation.html">https://fenicsproject.org/docs/dolfin/1.4.0/python/demo/documented/mesh-generation/python/documentation.html</a></p>
+<p>这里的求解域很简单，代码如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># https://github.com/chaoskey/FenicsPy.jl</span>
+<span style="color:#66d9ef">using</span> FenicsPy
+
+<span style="color:#75715e"># 求解域Ω设定</span>
+Ω <span style="color:#f92672">=</span> Circle(Point(<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.0</span>),<span style="color:#ae81ff">1</span>)
+mesh <span style="color:#f92672">=</span> generate_mesh(Ω,<span style="color:#ae81ff">16</span>)
+
+plot(mesh)
+</code></pre></div><p><img src="/notes/images/0167.png" alt="0167.png"></p>
+<pre><code>2-element Array{PyCall.PyObject,1}:
+ PyObject &lt;matplotlib.lines.Line2D object at 0x7f8ddf8bd7d0&gt;
+ PyObject &lt;matplotlib.lines.Line2D object at 0x7f8ddf07d210&gt;
+</code></pre>
+<h1 id="第3步构造基于网格的函数空间">第3步：构造基于网格的函数空间</h1>
+<p><code>函数空间</code>(<code>FunctionSpace</code>)，记作
+
+
+<span class="katex">
+  \(V\)
+</span>
+，其定义为：</p>
+
+
+
+<span class="katex">
+  \[
+V = \left\{v\in H^1(\Omega)  \ : \ v|_{\partial \Omega} = g\right\}
+\]
+</span>
+
+<p>与此“孪生”对应：<code>测试函数空间</code>，记作
+
+
+<span class="katex">
+  \(\hat{V}\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\hat{V} = \left\{v\in H^1(\Omega)  \ : \ v|_{\partial \Omega} = 0\right\}
+\]
+</span>
+
+<p>这里我们的<code>函数空间</code>选择最简单的线性插值。</p>
+<ul>
+<li>
+<p>所谓<code>试探函数</code>(<code>TrialFunction</code>), 特指
+
+
+<span class="katex">
+  \(V\)
+</span>
+中的函数。</p>
+</li>
+<li>
+<p>所谓<code>测试函数</code>(<code>testFunction</code>), 则特指
+
+
+<span class="katex">
+  \(\hat{V}\)
+</span>
+中的函数。</p>
+</li>
+</ul>
+<p><a href="https://fenicsproject.org/docs/dolfin/1.3.0/python/programmers-reference/functions/functionspace/FunctionSpace.html">https://fenicsproject.org/docs/dolfin/1.3.0/python/programmers-reference/functions/functionspace/FunctionSpace.html</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 试探函数空间</span>
+<span style="color:#75715e"># 1阶多项式插值（线性插值）</span>
+V <span style="color:#f92672">=</span> FunctionSpace(mesh, <span style="color:#e6db74">&#34;P&#34;</span>, <span style="color:#ae81ff">1</span>)
+
+<span style="color:#75715e"># 函数空间V上的试探函数u</span>
+u <span style="color:#f92672">=</span> TrialFunction(V)
+
+<span style="color:#75715e"># 函数空间V上的测试函数v</span>
+v <span style="color:#f92672">=</span> TestFunction(V);
+</code></pre></div><h1 id="第4步边界条件及参数设定">第4步：边界条件及参数设定</h1>
+<p>关于边界条件的设定参数，可参见：</p>
+<p><a href="https://fenicsproject.org/docs/dolfin/1.4.0/python/programmers-reference/cpp/fem/DirichletBC.html">https://fenicsproject.org/docs/dolfin/1.4.0/python/programmers-reference/cpp/fem/DirichletBC.html</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 源f(x,y)</span>
+<span style="color:#75715e"># f = Expression(&#39;-6&#39;, degree=0)</span>
+f <span style="color:#f92672">=</span> Constant(<span style="color:#f92672">-</span><span style="color:#ae81ff">6.0</span>)
+
+<span style="color:#75715e"># 边界值g(x,y)</span>
+g <span style="color:#f92672">=</span> Expression(<span style="color:#e6db74">&#34;1 + x[0]*x[0] + 2*x[1]*x[1]&#34;</span>, degree<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+
+bc <span style="color:#f92672">=</span> DirichletBC(V, g, <span style="color:#e6db74">&#34;on_boundary&#34;</span>);
+</code></pre></div><h1 id="第5步变分方程的直译">第5步：变分方程的“直译”</h1>
+<p>几乎是前面数学公式的&quot;直译&quot;, 需要注意的是： <code>dx</code> 是预定义量，代表<code>体元</code>, 对应公式中的
+
+
+<span class="katex">
+  \(d\omega\)
+</span>
+。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 定义变分问题(dx是预定的)</span>
+a <span style="color:#f92672">=</span> dot(grad(u), grad(v))<span style="color:#f92672">*</span>dx
+L <span style="color:#f92672">=</span> f<span style="color:#f92672">*</span>v<span style="color:#f92672">*</span>dx;
+</code></pre></div><h1 id="第6步求解并绘图">第6步：求解并绘图</h1>
+<p>关于求解器<code>solve</code>，参见：</p>
+<p><a href="https://fenicsproject.org/docs/dolfin/1.3.0/python/programmers-reference/fem/solving/solve.html">https://fenicsproject.org/docs/dolfin/1.3.0/python/programmers-reference/fem/solving/solve.html</a></p>
+<p><del>但是在 <code>FEniCS.jl</code>中，分成了3个求解器（都是对fenics.solve的封装）：</del></p>
+<p>~~<a href="https://github.com/SciML/FEniCS.jl/blob/master/src/jsolve.jl~~">https://github.com/SciML/FEniCS.jl/blob/master/src/jsolve.jl~~</a></p>
+<p><del>1. 线性求解器: <code>solve</code></del></p>
+<p><del>2. 线性变分求解器： <code>lvsolve</code>   (本例所采用)</del></p>
+<p><del>3. 非线性变分求解器： <code>nlvsolve</code></del></p>
+<p>由于<code>FEniCS.jl</code>不太好用，我重写了FEniCS的Julia封装：<a href="https://gitee.com/chaoskey/FenicsPy.jl">FenicsPy.jl</a>。</p>
+<p>至于<code>FeFunction</code>, 其实就是<code>fenics.Function</code>的封装（为了避免和类Core.Function和函数Base.Function的命名冲突）。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 求解</span>
+u <span style="color:#f92672">=</span> FeFunction(V)  
+solve(a <span style="color:#f92672">==</span> L,u,bc)  
+
+plot(u)
+plot(mesh)
+</code></pre></div><p><img src="/notes/images/0168.png" alt="0168.png"></p>
+<pre><code>Solving linear variational problem.
+
+2-element Array{PyCall.PyObject,1}:
+ PyObject &lt;matplotlib.lines.Line2D object at 0x7f8dde997910&gt;
+ PyObject &lt;matplotlib.lines.Line2D object at 0x7f8dde997d10&gt;
+</code></pre>
+<h1 id="第7步将数据导出然后在paraview中可视化">第7步：将数据导出，然后在ParaView中可视化</h1>
+<p>先用下面的代码导出数据为VTK文件。</p>
+<p>然后在ParaView中打开，可以用交互的方式可视化（下图仅截图示意而已）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">vtkfile <span style="color:#f92672">=</span> File(<span style="color:#e6db74">&#34;poisson/solution.pvd&#34;</span>)
+vtkfile <span style="color:#f92672">&lt;&lt;</span> u;  <span style="color:#75715e">#exports the solution to a vtkfile</span>
+</code></pre></div><p><img src="/notes/images/0169.png" alt="0169.png"></p>
+<h1 id="第8步误差估计及其它">第8步：误差估计及其它</h1>
+<p>我们注意到，这个具体化的泊松问题的精确解，恰好就等于
+
+
+<span class="katex">
+  \(g(x,y)=1+x^2+2y^2\)
+</span>
+，这种巧合源自：</p>
+
+
+
+<span class="katex">
+  \[
+\Delta g(x,y) = 6
+\]
+</span>
+
+<p>恰好把
+
+
+<span class="katex">
+  \(f(x,y)=-6\)
+</span>
+提供的源抵消了，也就是说，如果作变换： 
+
+
+<span class="katex">
+  \(u = U + g(x,y)\)
+</span>
+，可得到<code>无源零边界</code>的泊松问题, 对应的解
+
+
+<span class="katex">
+  \(U=0\)
+</span>
+，所以精确解就是：
+
+
+<span class="katex">
+  \(u=g(x,y)\)
+</span>
+。</p>
+<p>于是可以计算标准差：</p>
+
+
+
+<span class="katex">
+  \[
+E = \sqrt{\int_\Omega{(g-u)^2}d\omega}
+\]
+</span>
+
+<p>可用函数<code>errornorm</code>计算之：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">errornorm(g, u, <span style="color:#e6db74">&#34;L2&#34;</span>)
+</code></pre></div><pre><code>*** Warning: Degree of exact solution may be inadequate for accurate result in errornorm.
+
+0.00444692071683997
+</code></pre>
+<p>也可以直接计算标准差（<strong>奇怪结果不一样，以后再细究</strong>）：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e">#vertex_values_g = array(project(g, V))</span>
+<span style="color:#75715e"># or</span>
+vertex_values_g <span style="color:#f92672">=</span> array(interpolate(g, V))
+vertex_values_u <span style="color:#f92672">=</span> array(u)
+sqrt(sum((vertex_values_g <span style="color:#f92672">-</span> vertex_values_u)<span style="color:#f92672">.^</span><span style="color:#ae81ff">2</span>))
+</code></pre></div><pre><code>0.0541946910486183
+</code></pre>
+<p>查看结果数据：</p>
+<ul>
+<li>1）根据表达式生成在网格顶点上的值(投影)</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># pg = project(g, V)</span>
+<span style="color:#75715e"># or</span>
+pg <span style="color:#f92672">=</span> interpolate(g, V)
+</code></pre></div><pre><code>&quot;Coefficient(FunctionSpace(Mesh(VectorElement(FiniteElement('Lagrange', triangle, 1), dim=2), 3), FiniteElement('Lagrange', triangle, 1)), 71)&quot;
+</code></pre>
+<ul>
+<li>
+<ol start="2">
+<li>查看网格顶点上的值,比如：</li>
+</ol>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">array(pg)
+array(u)
+</code></pre></div><pre><code>549-element Array{Float64,1}:
+ 2.647985350348445
+ 2.593690657292863
+ 2.4339075463156465
+ 2.712889645782536
+ 2.3863642443300686
+ 2.1981490620535595
+ 2.1831070985479455
+ 2.4655691189520748
+ 2.7609431348948275
+ 2.5253575052502386
+ 2.302218396526692
+ 2.4686047402353437
+ 2.02311867450322
+ ⋮
+ 2.261621580085735
+ 2.123167515460912
+ 2.1160030006867037
+ 2.2820357294253473
+ 2.2320866025105017
+ 2.176630600748635
+ 2.0517861914831785
+ 2.5936906572928624
+ 2.5253575052502386
+ 2.4686047402353433
+ 2.4007647581013947
+ 2.3454915028125263
+</code></pre>
+<h1 id="初边值问题典型范例热传导方程">初边值问题典型范例：热传导方程</h1>
+
+
+
+<span class="katex">
+  \[
+\left\{\begin{aligned}\frac{\partial u}{\partial t} &= \nabla^2 u + f   & \mathrm{on} \quad \Omega \times (0,T] \\ u &= u_D & \mathrm{on}\quad  \partial \Omega \times (0,T] \\ u &= u_0 & t=0  \end{aligned} \right .
+\]
+</span>
+
+<p>求解思路：对时间用差分法，对空间用有限元法。 进而有：</p>
+
+
+
+<span class="katex">
+  \[
+\left\{\begin{aligned}a(u^{n+1},v) &= L_{n+1}(v) \qquad n\ge 1 , \quad  v \in \left\{v \in H^1(\Omega) \ : \ v|_{\partial \Omega} = 0\right\} \\ a(u,v) &\overset{\Delta}{=} \int_{\Omega}{(u v + \Delta t\nabla u \cdot \nabla v)d\omega}  \\ L_{n+1}(v) &\overset{\Delta}{=}  \int_{\Omega}{(u^n + \Delta t f^{n+1})v d\omega}  \\ u^0 &=  u_0  \end{aligned} \right .
+\]
+</span>
+
+<p>具体化为, 比如：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned} f(x,y,t)&=0 \\  u_D(x,y,t)&=0 \\  u_0(x,y)&=e^{-a(x^2+y^2)},\quad a=5 \\ & \\ \Omega&=[-2,2]\times[-2,2], \quad t \in [0,2] \end{aligned}
+\]
+</span>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">T <span style="color:#f92672">=</span> <span style="color:#ae81ff">2.0</span>            <span style="color:#75715e"># 时长</span>
+num_steps <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>     <span style="color:#75715e"># 步数</span>
+Δt <span style="color:#f92672">=</span> T <span style="color:#f92672">/</span> num_steps <span style="color:#75715e"># 步长</span>
+
+<span style="color:#75715e"># 在解域空间生成网格</span>
+nx <span style="color:#f92672">=</span> ny <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>
+mesh <span style="color:#f92672">=</span> RectangleMesh(Point(<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>), Point(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), nx, ny)
+
+<span style="color:#75715e"># 函数空间（线性插值）</span>
+V <span style="color:#f92672">=</span> FunctionSpace(mesh, <span style="color:#e6db74">&#34;P&#34;</span>, <span style="color:#ae81ff">1</span>)
+
+<span style="color:#75715e"># 边界条件</span>
+bc <span style="color:#f92672">=</span> DirichletBC(V, Constant(<span style="color:#ae81ff">0</span>), <span style="color:#e6db74">&#34;on_boundary&#34;</span>)
+
+<span style="color:#75715e"># 初值</span>
+u_0 <span style="color:#f92672">=</span> Expression(<span style="color:#e6db74">&#34;exp(-a*pow(x[0], 2) - a*pow(x[1], 2))&#34;</span>, degree<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, a<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
+u_n <span style="color:#f92672">=</span> interpolate(u_0, V)
+
+<span style="color:#75715e"># 定义变分问题</span>
+u <span style="color:#f92672">=</span> TrialFunction(V)
+v <span style="color:#f92672">=</span> TestFunction(V)
+f <span style="color:#f92672">=</span> Constant(<span style="color:#ae81ff">0</span>)
+
+a <span style="color:#f92672">=</span> u<span style="color:#f92672">*</span>v<span style="color:#f92672">*</span>dx <span style="color:#f92672">+</span> Δt<span style="color:#f92672">*</span>dot(grad(u), grad(v))<span style="color:#f92672">*</span>dx
+L <span style="color:#f92672">=</span> (u_n <span style="color:#f92672">+</span> Δt<span style="color:#f92672">*</span>f)<span style="color:#f92672">*</span>v<span style="color:#f92672">*</span>dx
+
+<span style="color:#75715e"># 创建VTK文件，用于保存解</span>
+vtkfile <span style="color:#f92672">=</span> File(<span style="color:#e6db74">&#34;heat_gaussian/solution.pvd&#34;</span>)
+
+<span style="color:#75715e"># 从初值开始，逐步计算</span>
+u <span style="color:#f92672">=</span> FeFunction(V)
+t <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> n <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>num_steps
+    <span style="color:#75715e"># 当前时间</span>
+    <span style="color:#66d9ef">global</span> t <span style="color:#f92672">+=</span> Δt
+
+    <span style="color:#75715e"># 求解</span>
+    solve(a <span style="color:#f92672">==</span> L,u,bc) 
+
+    <span style="color:#75715e"># 保存到文件，并叠加式绘图</span>
+    vtkfile <span style="color:#f92672">&lt;&lt;</span> (u, t)
+    plot(u)
+
+    <span style="color:#75715e"># 更新上一时刻的解</span>
+    u_n<span style="color:#f92672">.</span>assign(u)
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p><img src="/notes/images/0171.png" alt="0171.png"></p>
+<p>在ParaView中打开生成的VTK文件，进行适当可视化交互操作，然后录制成gif文件如下：</p>
+<p><img src="/notes/images/0170.gif" alt="0170.gif"></p>
+<h1 id="更复杂的边界条件以泊松方程为例">更复杂的边界条件（以泊松方程为例）</h1>
+<p>回到最开头的例子，但将泊松方程的边界条件修改为：</p>
+
+
+
+<span class="katex">
+  \[
+\left\{\begin{aligned}-\Delta u &= f & \qquad \boldsymbol{x} \in \Omega \\ u &=u_L & \mathrm{on} \quad \partial \Omega_L \\ u &=u_R & \mathrm{on} \quad \partial \Omega_R  \\ \frac{\partial u}{\partial n} &=g & \mathrm{on} \quad \partial\Omega \end{aligned}\right.
+\]
+</span>
+
+<p>此时，对应的变分方程应改为：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}a(u,v)&=L(v) \qquad \forall v \in \left\{v\in H^1(\Omega) \ : \ v|_{\partial \Omega} = 0\right\} \\ a(u,v) &\overset{\Delta}{=} \int_\Omega{\nabla u \nabla v d\omega} \\ L(v) &\overset{\Delta}{=} \int_\Omega{f v d\omega} +\int_{\partial \Omega}{g v ds}  \end{aligned}
+\]
+</span>
+
+<p>问题具体化为(<strong>注意</strong>：提供的
+
+
+<span class="katex">
+  \(u_L\)
+</span>
+和
+
+
+<span class="katex">
+  \(u_R\)
+</span>
+必须保证其在边界上的连续性)，比如：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned} f(x,y)&=-6 \\  u_L(x,y)&=2+x+y^2  \\  u_R(x,y)&=3+x^2 \\  g(x,y)&=4y \\ & \\ \Omega&=\left\{(x,y)|x^2+y^2 \le 1\right\} \\ \partial\Omega_L&=\left\{(x,y)|x^2+y^2 = 1, x \le 0 \right\} \\ \partial\Omega_R&=\left\{(x,y)|x^2+y^2 = 1, x > 0 \right\} \end{aligned}
+\]
+</span>
+
+<p>在下面的Julia代码中， 前两个边界条件体现在<code>DirichletBC</code>的设置中，而第三个边界条件体现在变分方程中。</p>
+<p><strong>注意</strong>：正如预定义量<code>dx</code>代表体元，<code>ds</code>也是预定义量，代表面元。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 求解域Ω设定</span>
+Ω <span style="color:#f92672">=</span> Circle(Point(<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.0</span>),<span style="color:#ae81ff">1</span>)
+mesh <span style="color:#f92672">=</span> generate_mesh(Ω,<span style="color:#ae81ff">16</span>)
+
+<span style="color:#75715e"># 函数空间(线性插值)</span>
+V <span style="color:#f92672">=</span> FunctionSpace(mesh, <span style="color:#e6db74">&#34;P&#34;</span>, <span style="color:#ae81ff">1</span>)
+u <span style="color:#f92672">=</span> TrialFunction(V)
+v <span style="color:#f92672">=</span> TestFunction(V)
+
+<span style="color:#75715e"># 源f(x,y)</span>
+f <span style="color:#f92672">=</span> Constant(<span style="color:#f92672">-</span><span style="color:#ae81ff">6.0</span>)
+
+<span style="color:#75715e"># 左右边界条件</span>
+u_L <span style="color:#f92672">=</span> Expression(<span style="color:#e6db74">&#34;2 + x[0] + pow(x[1], 2)&#34;</span>, degree<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+bc_L <span style="color:#f92672">=</span> DirichletBC(V, u_L, <span style="color:#e6db74">&#34;on_boundary &amp;&amp; x[0]&lt;=0&#34;</span>)
+
+u_R <span style="color:#f92672">=</span> Expression(<span style="color:#e6db74">&#34;3 + pow(x[0], 2)&#34;</span>, degree<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+bc_R <span style="color:#f92672">=</span> DirichletBC(V, u_L, <span style="color:#e6db74">&#34;on_boundary &amp;&amp; x[0]&gt;0&#34;</span>)
+
+<span style="color:#75715e"># 诺伊曼边界条件</span>
+g <span style="color:#f92672">=</span> Expression(<span style="color:#e6db74">&#34;4*x[1]&#34;</span>, degree<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+
+<span style="color:#75715e"># 定义变分问题(dx 和 ds 都是预定义的)</span>
+a <span style="color:#f92672">=</span> dot(grad(u), grad(v))<span style="color:#f92672">*</span>dx
+L <span style="color:#f92672">=</span> f<span style="color:#f92672">*</span>v<span style="color:#f92672">*</span>dx <span style="color:#f92672">+</span> g<span style="color:#f92672">*</span>v<span style="color:#f92672">*</span>ds
+
+<span style="color:#75715e"># 求解</span>
+u <span style="color:#f92672">=</span> FeFunction(V)  
+solve(a <span style="color:#f92672">==</span> L,u,[bc_L,bc_R]) 
+
+vtkfile <span style="color:#f92672">=</span> File(<span style="color:#e6db74">&#34;poisson2/solution.pvd&#34;</span>)
+vtkfile <span style="color:#f92672">&lt;&lt;</span> u;  <span style="color:#75715e">#exports the solution to a vtkfile</span>
+
+plot(u)
+plot(mesh)
+</code></pre></div><p><img src="/notes/images/0172.png" alt="0172.png"></p>
+<pre><code>Solving linear variational problem.
+
+2-element Array{PyCall.PyObject,1}:
+ PyObject &lt;matplotlib.lines.Line2D object at 0x7f4af82ef6d0&gt;
+ PyObject &lt;matplotlib.lines.Line2D object at 0x7f4af82ef8d0&gt;
+</code></pre>
+<p>在ParaView中打开生成的VTK文件，进行适当可视化交互操作，截图如下：</p>
+<p><img src="/notes/images/0173.png" alt="0173.png"></p>
+<h1 id="后记">后记</h1>
+<p>本文着重有限元法的“套路”， 更多例子可参考：</p>
+<p><a href="https://fenicsproject.org/pub/tutorial/html/ftut1.html">https://fenicsproject.org/pub/tutorial/html/ftut1.html</a></p>
+<p>至于，<code>ParaView</code>的用法，参考：</p>
+<p><a href="https://www.paraview.org/Wiki/The_ParaView_Tutorial">https://www.paraview.org/Wiki/The_ParaView_Tutorial</a></p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/julia/0095/">
+    下一页<br>科学计算环境搭建（Win10&#43;WSL2&#43;Ubuntu）
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/julia/0093/">
+      上一页<br>有限元之Delaunay三角剖分
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/julia/0094.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/julia/0094.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#以泊松方程第一边界条件为例">以泊松方程（第一边界条件）为例</a></li>
+    <li><a href="#第1步将问题转化成变分等式">第1步：将问题转化成变分等式</a></li>
+    <li><a href="#第2步对求解域进行刨分">第2步：对求解域进行刨分</a></li>
+    <li><a href="#第3步构造基于网格的函数空间">第3步：构造基于网格的函数空间</a></li>
+    <li><a href="#第4步边界条件及参数设定">第4步：边界条件及参数设定</a></li>
+    <li><a href="#第5步变分方程的直译">第5步：变分方程的“直译”</a></li>
+    <li><a href="#第6步求解并绘图">第6步：求解并绘图</a></li>
+    <li><a href="#第7步将数据导出然后在paraview中可视化">第7步：将数据导出，然后在ParaView中可视化</a></li>
+    <li><a href="#第8步误差估计及其它">第8步：误差估计及其它</a></li>
+    <li><a href="#初边值问题典型范例热传导方程">初边值问题典型范例：热传导方程</a></li>
+    <li><a href="#更复杂的边界条件以泊松方程为例">更复杂的边界条件（以泊松方程为例）</a></li>
+    <li><a href="#后记">后记</a></li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jupyter on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/jupyter/</link>
+    <description>Recent content in jupyter on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Fri, 13 Nov 2020 20:09:40 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/jupyter/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>科学计算环境搭建（Win10&#43;WSL2&#43;Ubuntu）</title>
+      <link>https://chaoskey.gitee.io/notes/docs/julia/0095/</link>
+      <pubDate>Fri, 13 Nov 2020 20:09:40 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/julia/0095/</guid>
+      <description>&lt;h2 id=&#34;概要&#34;&gt;概要&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;系统平台： Win10_64 + WSL2 + Ubuntu&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;目标：Python3.7+Julia1.5.3+JupyterLab+MatplotLib+SymPy+SciPy+FEniCS2019&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;以Julia作为我主要的使用语言，确保能调用Python的库&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;目前FEniCS不支持Windows，所以我选择 Win10+WSL+Ubuntu&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;del&gt;目前FEniCS2019有问题（至少存在折磨我的问题），所以我选择FEniCS2018&lt;/del&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;FEniCS2019的问题已经解决，所以我还是选择FEniCS2019（详细见后）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>整合Julia和Python的集成环境（Win10）</title>
+      <link>https://chaoskey.gitee.io/notes/docs/julia/0001/</link>
+      <pubDate>Wed, 08 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/julia/0001/</guid>
+      <description>&lt;h2 id=&#34;目标&#34;&gt;目标&lt;/h2&gt;
+&lt;p&gt;１） 统一利用&lt;strong&gt;Visual Studio Code&lt;/strong&gt;作为Julia和Python的ＩＤＥ&lt;/p&gt;
+&lt;p&gt;２） 统一利用&lt;strong&gt;Jupyter&lt;/strong&gt;作为Julia和Python的Notebook&lt;/p&gt;
+&lt;p&gt;３） 以Julia作为我主要的使用语言，确保能调用Python的库包&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

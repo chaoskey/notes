@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>投资 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E6%8A%95%E8%B5%84/</link>
+    <description>Recent content in 投资 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Sat, 26 May 2018 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E6%8A%95%E8%B5%84/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>第八章 估值理论</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0024/</link>
+      <pubDate>Sat, 26 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0024/</guid>
+      <description>&lt;h2 id=&#34;离散随机模型&#34;&gt;离散随机模型&lt;/h2&gt;
+&lt;p&gt;考虑
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(N+1\)
+&lt;/span&gt;
+个资产，经历
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(T\)
+&lt;/span&gt;
+个时间单位的，关于价格的离散随机过程：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;前续&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;当前&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;后续&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;时刻&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(t-1\)
+&lt;/span&gt;
+&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(t\)
+&lt;/span&gt;
+&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(t+1\)
+&lt;/span&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;状态&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\phi(s,t)\)
+&lt;/span&gt;
+&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(s=\phi(z,t+1)\)
+&lt;/span&gt;
+&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(z\)
+&lt;/span&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;时刻
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(t\)
+&lt;/span&gt;
+的每个&lt;strong&gt;状态&lt;/strong&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(s\)
+&lt;/span&gt;
+代表：在时刻
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(t\)
+&lt;/span&gt;
+的历史价格路径。如果给定时刻
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(t\)
+&lt;/span&gt;
+的状态
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(s\)
+&lt;/span&gt;
+，那么
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(s\)
+&lt;/span&gt;
+有确定的&lt;strong&gt;前续状态&lt;/strong&gt;记为
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\phi(s,t)\)
+&lt;/span&gt;
+，而
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(s\)
+&lt;/span&gt;
+的&lt;strong&gt;后续状态&lt;/strong&gt;是不确定的，将
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(s\)
+&lt;/span&gt;
+所有可能的&lt;strong&gt;后续状态集&lt;/strong&gt;记为
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\Omega(s,t)\)
+&lt;/span&gt;
+；并且将时刻
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(t\)
+&lt;/span&gt;
+的&lt;strong&gt;所有状态集&lt;/strong&gt;记为
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\Phi(t)\)
+&lt;/span&gt;
+。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>第七章 预期收益率和套利定价理论</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0023/</link>
+      <pubDate>Fri, 25 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0023/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;套利定价理论(APT)是资本资产定价模型(CAPM)在预测预期收益率上的一个有趣而强力的替代选择。&lt;/p&gt;
+&lt;p&gt;尽管CAPM抓住了最重要的角色－－市场，但是忽略了其它因素对预期收益率的影响，必然在某些时期会出现系统性缺陷。&lt;/p&gt;
+&lt;p&gt;APT是生成预期收益率的模型。&lt;/p&gt;
+&lt;p&gt;APT的应用是艺术，而非科学。&lt;/p&gt;
+&lt;p&gt;APT关注因子和预期收益率之间的关系。&lt;/p&gt;
+&lt;p&gt;APT的灵活性导致它不适合作为一致预期收益率的模型。&lt;/p&gt;
+&lt;p&gt;APT是主动投资经理的一个信息来源。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>第六章 主动管理基本定律</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0022/</link>
+      <pubDate>Thu, 24 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0022/</guid>
+      <description>&lt;h2 id=&#34;基本定律&#34;&gt;基本定律&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;主动管理基本定律&lt;/strong&gt;是信息率的一种近似表达。&lt;/p&gt;
+&lt;p&gt;这条定律基于投资策略的两条基本属性：&lt;/p&gt;
+&lt;p&gt;１）投资策略的&lt;strong&gt;广度&lt;/strong&gt;（
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathrm{BR}\)
+&lt;/span&gt;
+）：策略每年对超常收益率作出的独立预测的数目。&lt;/p&gt;
+&lt;p&gt;２）投资经理的&lt;strong&gt;信息系数&lt;/strong&gt;（
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathrm{IC}\)
+&lt;/span&gt;
+）：每个预测与实现结果之间的相关系数，表征投资经理的能力。简化假设：所有预测的
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathrm{IC}\)
+&lt;/span&gt;
+都是相同的。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>第五章 残差风险和残差收益率：信息率</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0021/</link>
+      <pubDate>Wed, 23 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0021/</guid>
+      <description>&lt;h2 id=&#34;阿尔法&#34;&gt;阿尔法&lt;/h2&gt;
+&lt;p&gt;向未来看（先验），阿尔法是对残差收益率的预测；向过去看（后验），阿尔法是实现的残差收益率的均值。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;阿尔法&lt;/strong&gt;和&lt;strong&gt;贝塔&lt;/strong&gt;都源自线性回归模型（见第2章笔记：超额收益率分解）。&lt;/p&gt;
+&lt;p&gt;本章专注阿尔法的预测；第１２章将评估阿尔法预测的质量；第１７章考虑实现的阿尔法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>第四章 超常收益率、业绩基准和附加值</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0020/</link>
+      <pubDate>Tue, 22 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0020/</guid>
+      <description>&lt;p&gt;CAPM提供一致预期收益率，多因子模型可以帮助控制风险。本章讨论如何进行预期收益率的预测，并概述如何将预测转化成投资组合。&lt;/p&gt;
+&lt;h2 id=&#34;业绩基准&#34;&gt;业绩基准&lt;/h2&gt;
+&lt;p&gt;业绩基准组合的别称：标杆、规范组合。业绩基准组合是投资管理机构化的产物。&lt;/p&gt;
+&lt;p&gt;弃用&lt;strong&gt;市场组合&lt;/strong&gt;，转而使用&lt;strong&gt;业绩基准组合&lt;/strong&gt;。 在新的分析框架下，贝塔、残差风险都是相对某个业绩基准组合而言。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>第三章 风险</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0019/</link>
+      <pubDate>Mon, 21 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0019/</guid>
+      <description>&lt;h2 id=&#34;标准差&#34;&gt;标准差&lt;/h2&gt;
+&lt;p&gt;书中介绍了风险的各种定义及其优劣，最终还是选择标准差作为本书的风险定义。&lt;/p&gt;
+&lt;p&gt;尽管&lt;strong&gt;标准差&lt;/strong&gt;具有某些不足，只要我的假设中依赖或近似依赖正态分布，那么推荐标准差这个风险度量定义。因为它能满足我们普适，对称，灵活和可精确预测的要求。若无特殊要求，我们讨论的风险总是指收益率的年化标准差（以百分之一为单位）。&lt;/p&gt;
+&lt;p&gt;投资组合
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(r_P=\sum_i{w_i r_i}\)
+&lt;/span&gt;
+的标准差：&lt;/p&gt;
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+\begin{aligned}
+   \sigma_P &amp; =\sqrt{\sum_{i,j}{\rho_{i,j}(w_i \sigma_i)(w_j \sigma_j)}} \\
+   &amp; \le \sqrt{(\sum_i{w_i \sigma_i})^2}  \\
+   &amp; = \sum_i{w_i \sigma_i}
+\end{aligned}
+\]
+&lt;/span&gt;</description>
+    </item>
+    
+    <item>
+      <title>第二章 一致预期收益率：资本资产定价模型</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0018/</link>
+      <pubDate>Sun, 20 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0018/</guid>
+      <description>&lt;h2 id=&#34;几个概念&#34;&gt;几个概念&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;收益率&lt;/strong&gt;
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(R_P\)
+&lt;/span&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;某个资产P在某个期间的收益率。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;超额收益率&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;超额&lt;/strong&gt;是相对无风险资产而言的，于是资产的超额收益率
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(r_P\)
+&lt;/span&gt;
+就是资产收益率
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(R_P\)
+&lt;/span&gt;
+与同期无风险资产收益率
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(R_f\)
+&lt;/span&gt;
+的差额：&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>第一章 绪论</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0017/</link>
+      <pubDate>Sat, 19 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0017/</guid>
+      <description>&lt;p&gt;投资的艺术正在演变成投资的科学。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;有效市场理论&lt;/strong&gt;任务无法战胜市场；而&lt;strong&gt;量化主动管理&lt;/strong&gt;则试图战胜市场。&lt;/p&gt;
+&lt;p&gt;尽管&lt;strong&gt;量化主动管理&lt;/strong&gt;试图战胜市场，但承认这的确不容易。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;量化主动管理&lt;/strong&gt;是&lt;strong&gt;现代投资组合理论&lt;/strong&gt;的穷亲戚：有现代投资组合理论的威力和结构，却没有合法的名分。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

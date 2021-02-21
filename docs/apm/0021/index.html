@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="第五章 残差风险和残差收益率：信息率"><meta property="og:title" content="第五章 残差风险和残差收益率：信息率" />
+<meta property="og:description" content="阿尔法
+向未来看（先验），阿尔法是对残差收益率的预测；向过去看（后验），阿尔法是实现的残差收益率的均值。
+阿尔法和贝塔都源自线性回归模型（见第2章笔记：超额收益率分解）。
+本章专注阿尔法的预测；第１２章将评估阿尔法预测的质量；第１７章考虑实现的阿尔法。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/apm/0021/" />
+<meta property="article:published_time" content="2018-05-23T20:20:35+08:00" />
+<meta property="article:modified_time" content="2018-05-23T20:20:35+08:00" />
+<title>第五章 残差风险和残差收益率：信息率 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a>
+<ul>
+<li><a href="/notes/docs/apm/0017/">第一章 绪论</a></li>
+<li><a href="/notes/docs/apm/0018/">第二章 一致预期收益率：资本资产定价模型</a></li>
+<li><a href="/notes/docs/apm/0019/">第三章 风险</a></li>
+<li><a href="/notes/docs/apm/0020/">第四章 超常收益率、业绩基准和附加值</a></li>
+<li><a href="/notes/docs/apm/0021/"class=active>第五章 残差风险和残差收益率：信息率</a></li>
+<li><a href="/notes/docs/apm/0022/">第六章 主动管理基本定律</a></li>
+<li><a href="/notes/docs/apm/0023/">第七章 预期收益率和套利定价理论</a></li>
+<li><a href="/notes/docs/apm/0024/">第八章 估值理论</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>第五章 残差风险和残差收益率：信息率</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#阿尔法">阿尔法</a></li>
+        <li><a href="#阿尔法特征组合a">阿尔法特征组合A</a></li>
+        <li><a href="#信息率">信息率</a></li>
+        <li><a href="#先验信息率对机会的衡量">先验信息率：对机会的衡量</a></li>
+        <li><a href="#后验信息率对业绩的衡量">后验信息率：对业绩的衡量</a></li>
+        <li><a href="#残差前沿投资经理的机会集">残差前沿：投资经理的机会集</a></li>
+        <li><a href="#偏好曲线主动投资经理的目标函数">偏好曲线：主动投资经理的目标函数</a></li>
+        <li><a href="#最优投资组合的残差风险水平">最优投资组合的残差风险水平</a></li>
+        <li><a href="#最大附加值风险调整残差收益率">最大附加值：风险调整残差收益率</a></li>
+        <li><a href="#最优投资组合">最优投资组合</a></li>
+        <li><a href="#单位贝塔值有效前沿">单位贝塔值有效前沿</a></li>
+        <li><a href="#主动头寸组合y无主动现金并无主动贝塔">主动头寸组合Y：无主动现金并无主动贝塔</a></li>
+        <li><a href="#最优无主动贝塔且无主动现金组合">最优无主动贝塔且无主动现金组合</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0022/">
+    下一页<br>第六章 主动管理基本定律
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0020/">
+      上一页<br>第四章 超常收益率、业绩基准和附加值
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/apm/0021/">第五章 残差风险和残差收益率：信息率</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2018-05-23</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84">量化投资</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E6%8A%95%E8%B5%84">投资</a>
+      , 
+      <a href="/notes/tags/%E9%98%BF%E5%B0%94%E6%B3%95">阿尔法</a>
+      , 
+      <a href="/notes/tags/%E8%B4%9D%E5%A1%94">贝塔</a>
+      , 
+      <a href="/notes/tags/%E4%BF%A1%E6%81%AF%E7%8E%87">信息率</a>
+      , 
+      <a href="/notes/tags/%E5%81%8F%E5%A5%BD">偏好</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/apm/0021.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h2 id="阿尔法">阿尔法</h2>
+<p>向未来看（先验），阿尔法是对残差收益率的预测；向过去看（后验），阿尔法是实现的残差收益率的均值。</p>
+<p><strong>阿尔法</strong>和<strong>贝塔</strong>都源自线性回归模型（见第2章笔记：超额收益率分解）。</p>
+<p>本章专注阿尔法的预测；第１２章将评估阿尔法预测的质量；第１７章考虑实现的阿尔法。</p>
+<p>向未来看时，阿尔法是对残差收益率的预测：</p>
+
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{\alpha} = \mathrm{E} \boldsymbol{\theta}
+\]
+</span>
+
+<p>组合P的阿尔法（即组合P对阿尔法的暴露度）：</p>
+
+
+
+<span class="katex">
+  \[
+\alpha_P = \boldsymbol{\alpha}^T \boldsymbol{h}_P
+\]
+</span>
+
+<p>业绩基准组合的阿尔法必然等于零，这也就要求阿尔法向量必须满足这个约束：
+
+
+<span class="katex">
+  \(\alpha_B=0\)
+</span>
+。</p>
+<p>无风险组合F（可用<strong>现金</strong>代称）的阿尔法也必然等于零，这意味着任何由业绩基准和现金构成的投资组合的阿尔法也必然等于零。</p>
+<h2 id="阿尔法特征组合a">阿尔法特征组合A</h2>
+<p>阿尔法向量的特征组合A将尽可能有效地发掘阿尔法向量中的信息。我们在第２章已经掌握了阿尔法向量及其特征组合Ａ的相关结论：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\boldsymbol{h}_A = \dfrac{\boldsymbol{V}^{-1} \boldsymbol{\alpha}}{\boldsymbol{\alpha}^T \boldsymbol{V}^{-1} \boldsymbol{\alpha}} & 组合Ａ的头寸 \\
+\boldsymbol{\alpha}^T h_A = \alpha_A = 1 & 组合Ａ具有单位阿尔法暴露度\\
+\sigma_A^2 = \boldsymbol{h}_A^T \boldsymbol{V} \boldsymbol{h}_A = \dfrac{1}{\boldsymbol{\alpha}^T \boldsymbol{V}^{-1} \boldsymbol{\alpha}} & 组合Ａ的方差 \\
+\boldsymbol{\alpha} = \dfrac{\boldsymbol{V} \boldsymbol{h}_A}{\sigma_A^2} & 用组合Ａ对应的阿尔法向量
+\end{aligned}
+\]
+</span>
+
+<h2 id="信息率">信息率</h2>
+<p><strong>组合P的信息率</strong>
+
+
+<span class="katex">
+  \(\mathrm{IR}_P\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{IR}_P = \left\{ \begin{aligned}
+\frac{\alpha_P}{\omega_P} , \quad & \omega_P > 0 \\
+0, \quad & \omega_P = 0
+\end{aligned} \right.
+\]
+</span>
+
+<p><strong>(最大)信息率</strong>
+
+
+<span class="katex">
+  \(\mathrm{IR}\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{IR} = \underset{P}{\max} \ \mathrm{IR}_P
+\]
+</span>
+
+<p>我们注意到，<strong>信息率</strong>和<strong>夏普率</strong>的概念很相似。前者关注残差收益率，而后者关注组合的预期超额收益率。</p>
+<p>与求<strong>最大夏普率</strong>的套路类似：有一组解(非唯一解)，特别地，这里求单位阿尔法值(
+
+
+<span class="katex">
+  \(\alpha_P=1\)
+</span>
+)的最小残差风险的组合解，必然对应最大信息率。而最小残差风险对应最小风险（需要后续证明），所以组合A恰好具有最高信息率。</p>
+<p>组合Ａ的性质：</p>
+<p>１）组合Ａ的贝塔值为0（即，组合Ａ具有零贝塔暴露度）。因此组合Ａ通常同时具有多空头寸。</p>
+<p>【提示】因为业绩基准收益率和残差收益不相关，进而
+
+
+<span class="katex">
+  \(0=\sigma_{AB} = \beta_A \sigma_B^2 = \alpha_B \sigma_A^2\)
+</span>
+。</p>
+<p>２）组合Ａ具有最高的信息率：
+
+
+<span class="katex">
+  \(\mathrm{IR}= \mathrm{IR}_A = \sqrt{\boldsymbol{\alpha}^T \boldsymbol{V}^{-1} \boldsymbol{\alpha}}\ge \mathrm{IR}_P, \forall P\)
+</span>
+。</p>
+<p>【提示】和&quot;组合q具有最高夏普率&quot;的论证本质一样。</p>
+<p>３）组合Ａ的总风险和残差风险都等于信息率的倒数：
+
+
+<span class="katex">
+  \(\sigma_A = \omega_A = \dfrac{1}{\mathrm{IR}}\)
+</span>
+。</p>
+<p>４）形如
+
+
+<span class="katex">
+  \(\boldsymbol{h}_P = \beta_P \boldsymbol{h}_B + \alpha_P \boldsymbol{h}_A, \quad \alpha_P>0\)
+</span>
+的组合P都具有最高信息率。</p>
+<p>【提示】也和&quot;组合q具有最高夏普率&quot;的论证本质一样。</p>
+<p>５）组合Ｑ也可表示成：
+
+
+<span class="katex">
+  \(\boldsymbol{h}_Q = \beta_Q \boldsymbol{h}_B + \alpha_Q \boldsymbol{h}_A,\quad \beta_Q= \dfrac{f_B \sigma_Q^2}{f_Q \sigma_B^2},\quad \alpha_Q=\dfrac{\sigma_Q^2}{f_Q \omega_A^2}\)
+</span>
+。因此组合Q和组合A的信息率相同。</p>
+<p>【提示】仅用第２章技术附录中的一系列关系易证。</p>
+<p>６）组合A在风险资产中的总持仓权重为：
+
+
+<span class="katex">
+  \(e_A=\dfrac{\alpha_C \omega_A^2}{\sigma_C^2}\)
+</span>
+。</p>
+<p>【提示】
+
+
+<span class="katex">
+  \(\sigma_{CA}=e_A \sigma_C^2=\alpha_C \sigma_A^2=\alpha_C \omega_A^2\)
+</span>
+</p>
+<p>７）任意组合P的信息率：
+
+
+<span class="katex">
+  \(\mathrm{IR}_P=\mathrm{IR}_Q \mathrm{Corr}\{\theta_P,\theta_Q\}\)
+</span>
+。</p>
+<p>【提示】组合A具有零贝塔值；组合A和组合Q的残差收益率完全相关。</p>
+<p>８）最高信息率和最高夏普率的关系：
+
+
+<span class="katex">
+  \(\mathrm{IR}=\dfrac{\alpha_Q}{\omega_Q}=\mathrm{SR} \dfrac{\omega_Q}{\sigma_Q}\)
+</span>
+。</p>
+<p>【提示】用到：性质5；组合Q既是最高夏普率组合
+
+
+<span class="katex">
+  \(\mathrm{SR}=\dfrac{f_Q}{\sigma_Q}\)
+</span>
+ ，组合Q也是最高信息率组合
+
+
+<span class="katex">
+  \(\mathrm{IR}=\dfrac{\alpha_Q}{\omega_Q}\)
+</span>
+；组合A也是最高信息率组合
+
+
+<span class="katex">
+  \(\mathrm{IR}=\dfrac{1}{\omega_A}\)
+</span>
+；
+
+
+<span class="katex">
+  \(\omega_Q=\alpha_Q \omega_A\)
+</span>
+。</p>
+<p>９）阿尔法可表示为：
+
+
+<span class="katex">
+  \(\boldsymbol{\alpha}=\mathrm{IR} \dfrac{\boldsymbol{V} \boldsymbol{h}_A}{\omega_A}=\mathrm{IR} \ \boldsymbol{M\!C\!R\!R}_Q\)
+</span>
+。此性质将资产的阿尔法值与该资产的残差风险边际贡献直接关联起来，关联系数正是信息率。</p>
+<p>【提示】用到：相关定义；特征组合A及其对应属性
+
+
+<span class="katex">
+  \(\boldsymbol{\alpha}\)
+</span>
+的关系。</p>
+<p>１０）业绩基准的夏普率与最高夏普率和最高信息率之间的关系：
+
+
+<span class="katex">
+  \(\mathrm{SR}_B^2 = \mathrm{SR}^2-\mathrm{IR}^2\)
+</span>
+。</p>
+<p>【提示】先推导出
+
+
+<span class="katex">
+  \(\mathrm{SR}^2=\boldsymbol{f}^T \boldsymbol{V}^{-1}\boldsymbol{f}\)
+</span>
+，然后带入
+
+
+<span class="katex">
+  \(\boldsymbol{f}=\boldsymbol{\alpha}+\boldsymbol{\beta} \ f_B\)
+</span>
+。</p>
+<h2 id="先验信息率对机会的衡量">先验信息率：对机会的衡量</h2>
+<p>上一节关于信息率的定义是先验的。</p>
+<p>如果向未来看，组合信息率就是每承担一个单位年化残差风险所能获得的预期年化残差收益率（假设信息被有效利用）。而最大信息率则是投资经理能够获得的年化残差收益率与残差风险的比率。</p>
+<p>和夏普率的性质类似：相同的信息率，可能具有不同的残差收益率和残差风险，尽管其比值相等。所以：<strong>信息率不依赖于投资经理的激进程度</strong>。（实践中，这个论断最终由于投资约束的限制而不再成立。）</p>
+<p>信息率依赖时间尺度。为了避免混乱，统一使用1年作为时间尺度。根据预期收益率和风险的时间尺度换算容易推导出<strong>信息率时间尺度换算</strong>：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{IR}_{年度} = \sqrt{12} \ \mathrm{IR}_{月度} = \sqrt{\frac{1}{\Delta t}} \ \mathrm{IR}_{\Delta t}
+\]
+</span>
+
+<h2 id="后验信息率对业绩的衡量">后验信息率：对业绩的衡量</h2>
+<p><strong>后验证信息率</strong>，是（年化）实现残差收益率对（年化）实现残差风险的比值。在后验情况中，考虑的是某段历史时期的上实现的信息率。</p>
+<p>实现的信息可能（经常）是负值。</p>
+<p>第１７章关于“后验信息率”更多讨论的剧透：后验信息率和回归分析中的阿尔法的
+
+
+<span class="katex">
+  \(t\)
+</span>
+统计量有关。如果回归分析所用数据的长度为Y年，那么：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{IR} \approx \frac{t统计量}{\sqrt{Y}}
+\]
+</span>
+
+<h2 id="残差前沿投资经理的机会集">残差前沿：投资经理的机会集</h2>
+<p>信息率为主动投资经理定义了一条“预算约束”，其直观图像就是<strong>残差前沿</strong>：</p>
+
+
+
+<span class="katex">
+  \[
+\alpha_P = \mathrm{IR} \ \omega_P
+\]
+</span>
+
+<p>残差前沿描述了主动投资经理的机会集。先验信息率决定了主动投资经理的残差前沿。残差前沿是通过原点和组合Ｑ的一条直线，业绩基准组合和无风险资产都落在原点上。</p>
+<h2 id="偏好曲线主动投资经理的目标函数">偏好曲线：主动投资经理的目标函数</h2>
+<p>如果忽略了业绩基准择时，那么主动管理目标的是最大化残差收益率<strong>附加值</strong>：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{IR}[P] = \alpha_P - \lambda_R \omega_P^2
+\]
+</span>
+
+<p>有时附加值也被称作：<strong>确定性等价收益率</strong>。</p>
+<h2 id="最优投资组合的残差风险水平">最优投资组合的残差风险水平</h2>
+<p>信息率描述了主动投资经理可选机会集，主动投资经理需要在机会集中挑选附加值最大的那个投资组合：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+& \underset{P}{\max} \ \{\alpha_P - \lambda_R \omega_P^2\} \\
+s.t. & \alpha_P = \mathrm{IR}\ \omega_P
+\end{aligned}
+\]
+</span>
+
+<p>解得<strong>最优残差风险水平</strong>：</p>
+
+
+
+<span class="katex">
+  \[
+\omega^*=\dfrac{\mathrm{IR}}{2 \lambda_R}
+\]
+</span>
+
+<p>直观理解：<strong>最优投资组合</strong>
+
+
+<span class="katex">
+  \(P^*\)
+</span>
+落在残差前沿和偏好曲线的切点处。</p>
+<h2 id="最大附加值风险调整残差收益率">最大附加值：风险调整残差收益率</h2>
+<p>前面得到最优残差风险，进而算出在可选机会集中最大的附加值：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{VA}^* = \mathrm{VA}[\omega^*] = \frac{\mathrm{IR}^2}{4 \lambda_R} = \frac{\omega^* \mathrm{IR}}{2}
+\]
+</span>
+
+<p>因此，投资经理的信息率决定了他创造附加值的潜力。</p>
+<p><strong>信息率是主动管理的关键</strong>。</p>
+<h2 id="最优投资组合">最优投资组合</h2>
+<p>用组合头寸重新表示附加值优化问题：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{VA} = \underset{\boldsymbol{h}_P}{\max} \ \{ \boldsymbol{\alpha}^T \boldsymbol{h}_P - \lambda_R \boldsymbol{h}_P^T \boldsymbol{V\!R} \ \boldsymbol{h}_P \}
+\]
+</span>
+
+<p>此优化问题的的最优解：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\boldsymbol{h}_P &= \dfrac{1}{2 \lambda_R} \boldsymbol{V\!R}^{-1} \alpha = \dfrac{1}{2 \lambda_R} (\boldsymbol{V}-\sigma_B^2 \boldsymbol{\beta} \ \boldsymbol{\beta}^T)^{-1} \alpha \\
+&= \beta_P \boldsymbol{h}_B + \dfrac{\mathrm{IR}^2}{2 \lambda_R} \boldsymbol{h}_A \quad (此为最优头寸的变形分解)
+\end{aligned}
+\]
+</span>
+
+<p>由此可见，组合A是寻找最优残差头寸的关键。</p>
+<p>【特别说明】我们发现最优解的分解式中，如果将
+
+
+<span class="katex">
+  \(\beta_P\)
+</span>
+理解成任意常数，都不影响最优附加值。这是因为一旦任意选定
+
+
+<span class="katex">
+  \(\beta_P=\boldsymbol{\beta}^T \boldsymbol{h}_P\)
+</span>
+，而最优解
+
+
+<span class="katex">
+  \(\boldsymbol{h}_P\)
+</span>
+是确定的，进而可以反过来选择某个业绩基准组合
+
+
+<span class="katex">
+  \(\boldsymbol{h}_B\)
+</span>
+（非唯一选择）。其中的关键是：最优解
+
+
+<span class="katex">
+  \(\boldsymbol{h}_P\)
+</span>
+是确定。这意味着，最优附加值也是确定的，而不受
+
+
+<span class="katex">
+  \(\beta_P\)
+</span>
+选择的影响，
+
+
+<span class="katex">
+  \(\beta_P\)
+</span>
+的不同选择，影响的仅仅是业绩基准组合的选择。但是一旦确定了业绩基准组合B， 组合A就为附加值提供完全的贡献，而业绩基准组合B对附加值就毫无贡献。</p>
+<h2 id="单位贝塔值有效前沿">单位贝塔值有效前沿</h2>
+<p>第２章附录中提及的有效前沿，全称是全额投资有效前沿。类似地，给定预期收益率的，具有单位贝塔值的最小风险组合，被称作<strong>单位贝塔有效前沿</strong>。</p>
+<p>基于单位贝塔的约束，推导出单位贝塔有效前沿的收益率/方差方程，要比第２章推导全额投资有效前沿的收益率/方差方程容易的多。因为我们很容易列出如下关系：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\sigma_P^2 = \sigma_B^2 + \omega_P^2 \\
+f_P = f_B + \alpha_P \\
+\omega_P^2 = \dfrac{\alpha_P^2}{\mathrm{IR}^2} 
+\end{aligned}
+\]
+</span>
+
+<p>其中，业绩基准组合B就是单位贝塔值组合中风险最小的组合，必然落在单位贝塔有效前沿曲线上。第３个等式，如果你认真解这个单位贝塔有效前沿的优化化问题，会发现单位贝塔有效前沿上的任何组合P都可写成业绩基准组合B和组合A的线性表示，进而说明单位贝塔有效前沿上的所有组合都具有最高信息率。</p>
+<p>根据上述三个关系，立刻可写出单位贝塔有效前沿的收益率/方差方程：</p>
+
+
+
+<span class="katex">
+  \[
+\sigma_P^2 = \sigma_B^2 + \frac{1}{\mathrm{IR}^2} (f_P-f_B)^2
+\]
+</span>
+
+<h2 id="主动头寸组合y无主动现金并无主动贝塔">主动头寸组合Y：无主动现金并无主动贝塔</h2>
+<ul>
+<li>组合C的<strong>残差组合CR</strong>：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{h}_{\mathrm{CR}}=\boldsymbol{h}_C-\beta_C \boldsymbol{h}_B
+\]
+</span>
+
+<ul>
+<li><strong>主动头寸组合Y</strong>：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{h}_Y=\frac{\boldsymbol{h}_A}{\omega_A}-\frac{\mathrm{IR}_C}{\mathrm{IR}} \frac{\boldsymbol{h}_{\mathrm{CR}}}{\omega_C}
+\]
+</span>
+
+<ul>
+<li>组合Y的性质：</li>
+<li>组合Y的贝塔值等于0，即
+
+
+<span class="katex">
+  \(\beta_Y=0\)
+</span>
+；</li>
+<li>组合Y的总方差和残差方差：
+
+
+<span class="katex">
+  \(\sigma_Y^2=\omega_Y^2=1-\left (\dfrac{\mathrm{IR}_C}{\mathrm{IR}} \right )^2\)
+</span>
+；</li>
+<li>组合Y的阿尔法值为：
+
+
+<span class="katex">
+  \(\alpha_Y = \mathrm{IR} \left[ 1-\left (\dfrac{\mathrm{IR}_C}{\mathrm{IR}} \right )^2 \right]\)
+</span>
+；</li>
+<li>组合Y的现金头寸为零，即
+
+
+<span class="katex">
+  \(e_Y=0\)
+</span>
+；</li>
+<li>组合Y的信息率为：
+
+
+<span class="katex">
+  \(\mathrm{IR}_Y= \mathrm{IR} \sqrt{ 1-\left (\dfrac{\mathrm{IR}_C}{\mathrm{IR}} \right )^2 }=\mathrm{IR} \sqrt{ 1- Corr^2\{\theta_Q,\theta_C\}}\)
+</span>
+。</li>
+</ul>
+<h2 id="最优无主动贝塔且无主动现金组合">最优无主动贝塔且无主动现金组合</h2>
+<p>考虑在无主动现金和无主动贝塔的约束下的一个组合优化问题：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+&\underset{\boldsymbol{h}_P}{\max} \ \{ \alpha^T \boldsymbol{h}_P - \lambda_R \boldsymbol{h}_P^T \ \boldsymbol{V\!R} \ \boldsymbol{h}_P\} \\
+s.t. & \boldsymbol{\beta}^T \boldsymbol{h}_P = 1 \quad (无主动贝塔)\\
+& \boldsymbol{e}^T \boldsymbol{h}_P = e_B \quad (无主动现金)
+\end{aligned}
+\]
+</span>
+
+<p>根据第１个约束条件，及其推论
+
+
+<span class="katex">
+  \(\boldsymbol{h}_P=\boldsymbol{h}_B+\boldsymbol{h}_{\mathrm{PR}}\)
+</span>
+，上述优化问题可重写成：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+&\underset{\boldsymbol{h}_{\mathrm{PR}}}{\max} \ \{ \alpha^T \boldsymbol{h}_{\mathrm{PR}} - \lambda_R \boldsymbol{h}_{\mathrm{PR}}^T \ \boldsymbol{V} \ \boldsymbol{h}_{\mathrm{PR}}\} \\
+s.t. & \boldsymbol{\beta}^T \boldsymbol{h}_{\mathrm{PR}} = 0, \quad \boldsymbol{e}^T \boldsymbol{h}_{\mathrm{PR}} = 0
+\end{aligned}
+\]
+</span>
+
+<p>利用拉格朗日乘子法，并结合组合A、组合B和组合C的定义，以及之间的关系，可求得最优解：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\boldsymbol{h}_{\mathrm{PR}} = \dfrac{\mathrm{IR}^2}{2 \lambda_R} \boldsymbol{h}_A + \phi \ \boldsymbol{h}_B + \pi \ \boldsymbol{h}_C \\
+\pi = \dfrac{- \alpha_C}{2 \ \lambda_R \ \omega_C^2} \\
+\phi = - \pi \ \beta_C
+\end{aligned}
+\]
+</span>
+
+<p>回代并整理得：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\boldsymbol{h}_{\mathrm{PR}} &= \dfrac{\mathrm{IR}}{2 \lambda_R} (\dfrac{\boldsymbol{h}_A}{\omega_A}-\dfrac{\mathrm{IR}_C}{\mathrm{IR}}\dfrac{\boldsymbol{h}_C-\beta_C \boldsymbol{h}_B}{\omega_C}) \\
+&\overset{\Delta}{=} \dfrac{\mathrm{IR}}{2 \lambda_R} (\dfrac{\boldsymbol{h}_A}{\omega_A}-\dfrac{\mathrm{IR}_C}{\mathrm{IR}}\dfrac{\boldsymbol{h}_{\mathrm{CR}}}{\omega_C}) \\
+&\overset{\Delta}{=} \dfrac{\mathrm{IR}}{2 \lambda_R} \boldsymbol{h}_Y
+\end{aligned}
+\]
+</span>
+
+<p>由此可见，组合Y与寻找最优无主动贝塔且无主动现金的组合密切相关。</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0022/">
+    下一页<br>第六章 主动管理基本定律
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0020/">
+      上一页<br>第四章 超常收益率、业绩基准和附加值
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/apm/0021.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/apm/0021.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#阿尔法">阿尔法</a></li>
+        <li><a href="#阿尔法特征组合a">阿尔法特征组合A</a></li>
+        <li><a href="#信息率">信息率</a></li>
+        <li><a href="#先验信息率对机会的衡量">先验信息率：对机会的衡量</a></li>
+        <li><a href="#后验信息率对业绩的衡量">后验信息率：对业绩的衡量</a></li>
+        <li><a href="#残差前沿投资经理的机会集">残差前沿：投资经理的机会集</a></li>
+        <li><a href="#偏好曲线主动投资经理的目标函数">偏好曲线：主动投资经理的目标函数</a></li>
+        <li><a href="#最优投资组合的残差风险水平">最优投资组合的残差风险水平</a></li>
+        <li><a href="#最大附加值风险调整残差收益率">最大附加值：风险调整残差收益率</a></li>
+        <li><a href="#最优投资组合">最优投资组合</a></li>
+        <li><a href="#单位贝塔值有效前沿">单位贝塔值有效前沿</a></li>
+        <li><a href="#主动头寸组合y无主动现金并无主动贝塔">主动头寸组合Y：无主动现金并无主动贝塔</a></li>
+        <li><a href="#最优无主动贝塔且无主动现金组合">最优无主动贝塔且无主动现金组合</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

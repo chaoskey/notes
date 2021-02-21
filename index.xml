@@ -1,0 +1,3611 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>索引 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/</link>
+    <description>Recent content in 索引 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Fri, 19 Feb 2021 11:04:02 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Unicorn：统一的连续介质力学求解器（中）【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0125/</link>
+      <pubDate>Fri, 19 Feb 2021 11:04:02 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0125/</guid>
+      <description>&lt;h1 id=&#34;ii实现18unicorn统一的连续介质力学求解器中&#34;&gt;II.实现》18.Unicorn：统一的连续介质力学求解器（中）&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e5%85%ab%e7%ab%a0-unicorn%e7%bb%9f%e4%b8%80%e7%9a%84%e8%bf%9e%e7%bb%ad%e4%bb%8b%e8%b4%a8%e5%8a%9b%e5%ad%a6%e6%b1%82%e8%a7%a3%e5%99%a8&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;h2 id=&#34;184-实现&#34;&gt;18·4 实现&lt;/h2&gt;
+&lt;p&gt;在这里，我们概述了Unicorn的设计。 Unicorn求解器类&lt;code&gt;UCSolver&lt;/code&gt;将Unicorn库中的技术与FEniCS的其他部分结合，合在一起公开一个接口（请参见清单18.6），以模拟连续介质力学中的应用。 求解器实现的主要部分是UC模型的G2离散化的弱形式（请参见图18.4），以及用于误差估计的应力和残差的形式。 来自应用程序的系数被连接到形式，然后由&lt;code&gt;TimeDependentPDE&lt;/code&gt;类执行时间步进。 某些系数，例如
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\delta\)
+&lt;/span&gt;
+稳定化系数，也作为求解器的一部分（而不是作为形式）来进行计算。 求解器计算自适应算法的一次迭代（主求解，对偶求解和网格划分），其中，自适应循环是通过迭代运行一系列网格的求解器来实现的。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>基于Obsidian＋Hugo＋Gitee的笔记系统</title>
+      <link>https://chaoskey.gitee.io/notes/posts/%E5%9F%BA%E4%BA%8EObsidianHugoGitee%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Thu, 18 Feb 2021 11:04:32 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/posts/%E5%9F%BA%E4%BA%8EObsidianHugoGitee%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/</guid>
+      <description>本文基于Typora＋Hugo＋Gitee的笔记系统，仅把Typora改成Obsidian而已。
+Obsidian是一个强大的知识库，可在纯文本Markdown文件的本地文件夹上运行。 支持双向链接（Roam Link）。
+通过gitee可实现云同步；通过gitee pages可以发布成网页。
+但是，Hugo无法解析Obsidian的双向链接，解决这个问题是本文的目标。
+【解决方案】 我通过shell脚本和Hugo短代码的配合解决这个问题。 通过shell脚本将Obsidian的双向链接转换成Hugo可以识别的自定义格式；Hugo短代码则负责解析这种自定义格式。
+本笔记系统是我自用，仅供参考。
+ 回顾基于Typora＋Hugo＋Gitee的笔记系统 改进后的笔记系统，支持形如[[...]]以及![[...]]的双向链接（后者支持图片），自然就支持Obsidian； 如果你不使用双向链接，也可以使用Typora（甚至任意文本编辑器）。 所以Typora＋Hugo＋Gitee的笔记系统是基础，具体使用方法参见我的笔记主页：https://gitee.com/chaoskey/notes。此处不再多说！
+用Hugo短代码获得目标页面路径 使用方式 在md文件中需要的地方插入：{{&amp;lt; roamlink &amp;quot;docs/fem/_index#第五章 有限元变分形式&amp;quot; &amp;gt;}} 。 能在插入的地方显示对应的页面相对路径，就我的笔记而言，结果是：/notes/docs/fem/#第五章-有限元变分形式。
+又比如：{{&amp;lt; roamlink &amp;quot;0097&amp;quot; &amp;gt;}} ， 就我的笔记而言，结果是：/notes/docs/fem/0097/。
+如果没有重复的文件名，无须指定路径，通过hugo自定义短代吗，可以获得实际的页面路径（如第2例）；如果有重复文件名，则需要指定更详细的相对路径（如第1例）。
+这种功能，就是为双向链接量身定制的，因为[[...]]或![[...]]可能只给出一个文件名，而非完整的路径。
+实现方式 具体代码（Hugo短代码）见项目文件： roamlink.html 。
+为了避免获取的页面路径含空格和换行符，代码被压缩成一行。为清晰起见，我见代码展开如下：
+{{ if gt (len .Params) 0 }} &amp;lt;!-- 输入解析 --&amp;gt; {{ $keys := (split (index .Params 0) &amp;#34;#&amp;#34;) }} {{ $tag := &amp;#34;&amp;#34; }} {{ if (gt (len $keys) 1) }} &amp;lt;!</description>
+    </item>
+    
+    <item>
+      <title>Unicorn：统一的连续介质力学求解器（上）【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0124/</link>
+      <pubDate>Sat, 06 Feb 2021 10:38:14 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0124/</guid>
+      <description>&lt;h1 id=&#34;ii实现18unicorn统一的连续介质力学求解器上&#34;&gt;II.实现》18.Unicorn：统一的连续介质力学求解器（上）&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e5%85%ab%e7%ab%a0-unicorn%e7%bb%9f%e4%b8%80%e7%9a%84%e8%bf%9e%e7%bb%ad%e4%bb%8b%e8%b4%a8%e5%8a%9b%e5%ad%a6%e6%b1%82%e8%a7%a3%e5%99%a8&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;p&gt;本章介绍了Unicorn技术，重点介绍了用于统一连续介质（UC）概念和自适应通用Galerkin（G2）离散化的简单，高效和通用算法和软件，将其作为统一的连续介质力学方法。 我们将介绍Unicorn如何适应FEniCS框架，如何为其他FEniCS组件提供接口，Unicorn提供了哪些接口和功能以及如何设计实现的。 我们还将介绍一些使用Unicorn计算的流固耦合（ﬂuid–structure interaction）和适应性的例子。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>UFL：有限元形式语言》算法(二)&amp;实现的问题【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0123/</link>
+      <pubDate>Thu, 04 Feb 2021 11:01:25 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0123/</guid>
+      <description>&lt;h1 id=&#34;ii实现17ufl有限元形式语言算法二实现的问题&#34;&gt;II.实现》17.UFL：有限元形式语言》算法(二)&amp;amp;实现的问题&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;h2 id=&#34;178-算法续前&#34;&gt;17·8 算法（续前）&lt;/h2&gt;
+&lt;h3 id=&#34;1784-重要的变换&#34;&gt;17·8·4 重要的变换&lt;/h3&gt;
+&lt;p&gt;有很多方法可以操纵表达式的表示。 在这里，我们描述了三个特别重要的变换。 注意，这里每一个算法都删除了一些抽象，因此可能删除了一些分析或优化的机会。 为了展示其效果，下面将每种变换应用到下面的表达式&lt;/p&gt;
+
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+a = \mathrm{grad}(f u) \cdot \mathrm{grad}\ v \tag{17.77}
+\]
+&lt;/span&gt;
+
+&lt;p&gt;在本节的最后，给出了一些示例代码来演示更多的表示细节。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>UFL：有限元形式语言》计算导数&amp;算法(一)【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0122/</link>
+      <pubDate>Wed, 03 Feb 2021 07:32:33 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0122/</guid>
+      <description>&lt;h1 id=&#34;ii实现17ufl有限元形式语言计算导数算法一&#34;&gt;II.实现》17.UFL：有限元形式语言》计算导数&amp;amp;算法(一)&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;h2 id=&#34;177-计算导数&#34;&gt;17·7 计算导数&lt;/h2&gt;
+&lt;p&gt;当由形式语言的终端用户声明任何种类的导数表达式时，都会构造一个表达式对象来表示它，但不会计算任何内容。 这种表达式对象的类型是Derivative的子类。在从导数表达式生成低级代码之前，必须应用某种求导数的算法，因为差分算符本身在C++等低级语言中不可用。 计算精确的导数很重要，它消除了差分除法的近似。 存在几种用于计算精确导数的替代算法。 所有相关算法都基于链规则，并结合每种表达式对象类型的规则差异。 算法之间的主要区别在于子表达式的重用程度以及子表达式的累积方式。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>UFL：有限元形式语言》形式算符&amp;表达式的表示【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0121/</link>
+      <pubDate>Tue, 02 Feb 2021 12:56:05 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0121/</guid>
+      <description>&lt;h1 id=&#34;ii实现17ufl有限元形式语言形式算符表达式的表示&#34;&gt;II.实现》17.UFL：有限元形式语言》形式算符&amp;amp;表达式的表示&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;h2 id=&#34;175-形式算符&#34;&gt;17·5 形式算符&lt;/h2&gt;
+&lt;p&gt;一旦定义了一些形式，就有几种方法可以从中计算相关的形式。  上节的算符可用于定义表达式，本节中讨论的算符被用于形式，从而生成新的形式。 形式算符既可以使形式的定义更紧凑，又可以减少错误的可能，因为原始形式中的更改将自动传播到根据它所计算出的形式中。 这些形式算符可以任意组合； 给定一个半线性形式，只需要几条行即可计算出雅可比伴随的作用。  由于这些计算是在形式编译器处理之前完成的，因此在运行时没有任何开销。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>UFL：有限元形式语言》表达式【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0120/</link>
+      <pubDate>Mon, 01 Feb 2021 10:46:53 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0120/</guid>
+      <description>&lt;h1 id=&#34;ii实现17ufl有限元形式语言表达式&#34;&gt;II.实现》17.UFL：有限元形式语言》表达式&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;h2 id=&#34;174-定义表达式&#34;&gt;17·4 定义表达式&lt;/h2&gt;
+&lt;p&gt;UFL的大多数内容涉及如何声明表达式，例如公式17.13中的积分表达式。 最基本的表达式是终值，它们不依赖于其他表达式。  其他表达式称为算符，将在17.4.2-17.4.5节中讨论。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>UFL：有限元形式语言》概述&amp;有限元空间&amp;形式【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0119/</link>
+      <pubDate>Sun, 31 Jan 2021 09:41:19 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0119/</guid>
+      <description>&lt;h1 id=&#34;ii实现17ufl有限元形式语言概述有限元空间形式&#34;&gt;II.实现》17.UFL：有限元形式语言》概述&amp;amp;有限元空间&amp;amp;形式&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;p&gt;统一形式语言（UFL，Alnæs和Logg，2009年）是一种领域专用语言，用于描述变分形式和函数的有限元离散化。 更准确地说，该语言定义了一个灵活的用户接口，用于定义近似于数学符号弱形式的有限元空间和表达式。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>DOLFIN：C&#43;&#43;/Python有限元库》注记【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0118/</link>
+      <pubDate>Wed, 13 Jan 2021 20:31:21 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0118/</guid>
+      <description>&lt;h1 id=&#34;ii实现10dolfincpython有限元库注记&#34;&gt;II.实现》10.DOLFIN：C++/Python有限元库》注记&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;h2 id=&#34;104-实现注记&#34;&gt;10·4 实现注记&lt;/h2&gt;
+&lt;p&gt;在本节中，我们讨论DOLFIN实现的特定方面，包括并行计算，Python接口的生成，以及即时编译。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>DOLFIN：C&#43;&#43;/Python有限元库》日志/诊断/参数【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0117/</link>
+      <pubDate>Tue, 12 Jan 2021 20:56:49 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0117/</guid>
+      <description>&lt;h1 id=&#34;ii实现10dolfincpython有限元库日志诊断参数&#34;&gt;II.实现》10.DOLFIN：C++/Python有限元库》日志/诊断/参数&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;h3 id=&#34;10312-日志诊断&#34;&gt;10·3·12 日志／诊断&lt;/h3&gt;
+&lt;p&gt;DOLFIN提供了一个简单的接口来统一处理日志消息，包括警告和错误。  所有消息都收集到单个流中，这使整个程序（包括DOLFIN库）的输出的目的地和格式可由用户控制。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>DOLFIN：C&#43;&#43;/Python有限元库》变分问题/文件/可视化【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0116/</link>
+      <pubDate>Mon, 11 Jan 2021 18:33:03 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0116/</guid>
+      <description>&lt;h1 id=&#34;ii实现10dolfincpython有限元库变分问题文件可视化&#34;&gt;II.实现》10.DOLFIN：C++/Python有限元库》变分问题/文件/可视化&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;h3 id=&#34;10310-变分问题&#34;&gt;10·3·10 变分问题&lt;/h3&gt;
+&lt;p&gt;变分问题（偏微分方程的有限元离散化）可以在DOLFIN中使用&lt;code&gt;solve&lt;/code&gt;函数轻松解决。  线性和非线性问题都可以解决。  线性问题必须表示为以下规范形式：寻求
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(u \in V\)
+&lt;/span&gt;
+使得&lt;/p&gt;
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+a(u, v) = L(v) \qquad \forall  v \in \hat{V} \tag{10.8}
+\]
+&lt;/span&gt;</description>
+    </item>
+    
+    <item>
+      <title>DOLFIN：C&#43;&#43;/Python有限元库》变分形式/组装/边界条件【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0115/</link>
+      <pubDate>Mon, 11 Jan 2021 09:27:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0115/</guid>
+      <description>&lt;h1 id=&#34;ii实现10dolfincpython有限元库变分形式组装边界条件&#34;&gt;II.实现》10.DOLFIN：C++/Python有限元库》变分形式/组装/边界条件&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;h3 id=&#34;1037-变分形式&#34;&gt;10·3·7 变分形式&lt;/h3&gt;
+&lt;p&gt;DOLFIN依靠FEniCS工具链FIAT–UFL–FFC / SFC–UFC来计算有限元变分形式。  使用形式编译器FFC或SFC（第11章和第15章）之一来编译以UFL形式语言表示的变分形式（第17章），DOLFIN使用生成的UFC代码（第16章）来计算（组装）变分形式 。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>DOLFIN：C&#43;&#43;/Python有限元库》有限元/函数/表达式【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0114/</link>
+      <pubDate>Sat, 09 Jan 2021 09:19:08 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0114/</guid>
+      <description>&lt;h1 id=&#34;ii实现10dolfincpython有限元库有限元函数表达式&#34;&gt;II.实现》10.DOLFIN：C++/Python有限元库》有限元/函数/表达式&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;h3 id=&#34;1033-有限元&#34;&gt;10·3·3 有限元&lt;/h3&gt;
+&lt;p&gt;第2章和第3章讨论的有限元的概念（Ciarlet定义）是由DOLFIN FiniteElement类实现的。  此类在C++和Python接口中的实现方式有所不同。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>DOLFIN：C&#43;&#43;/Python有限元库》网格【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0113/</link>
+      <pubDate>Fri, 08 Jan 2021 10:12:53 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0113/</guid>
+      <description>&lt;h1 id=&#34;ii实现10dolfincpython有限元库网格&#34;&gt;II.实现》10.DOLFIN：C++/Python有限元库》网格&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;h3 id=&#34;1032-网格&#34;&gt;10·3·2 网格&lt;/h3&gt;
+&lt;p&gt;DOLFIN的核心部分是其网格库和Mesh类。  网格库为计算网格提供了数据结构和算法，包括网格连通性（重合关系），网格细化，网格划分和网格相交的计算。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>DOLFIN：C&#43;&#43;/Python有限元库》线性代数【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0112/</link>
+      <pubDate>Thu, 07 Jan 2021 10:05:30 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0112/</guid>
+      <description>&lt;h1 id=&#34;ii实现10dolfincpython有限元库线性代数&#34;&gt;II.实现》10.DOLFIN：C++/Python有限元库》线性代数&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;h2 id=&#34;103-功能&#34;&gt;10·3 功能&lt;/h2&gt;
+&lt;p&gt;DOLFIN被组织为库（模块）的集合，每个库都覆盖某个功能区域。  我们在这里回顾这些领域，并解释最常用的类和函数的用途和用法。  回顾是自下而上的； 也就是说，我们首先描述DOLFIN的核心低层功能（线性代数和网格），然后向上移动以描述高层功能。  有关更多详细信息，请参阅FEniCS项目网页上的DOLFIN程序员参考和Logg and Wells（2010）。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>DOLFIN：C&#43;&#43;/Python有限元库》概述/接口【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0111/</link>
+      <pubDate>Wed, 06 Jan 2021 16:58:50 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0111/</guid>
+      <description>&lt;h1 id=&#34;ii实现10dolfincpython有限元库概述接口&#34;&gt;II.实现》10.DOLFIN：C++/Python有限元库》概述/接口&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;p&gt;DOLFIN是一个用作FEniCS主要用户接口的C++/Python库。  在本章中，我们将回顾DOLFIN的功能。  我们还将详细讨论DOLFIN某些关键特性的实现。  有关DOLFIN的设计和实现的一般讨论，请参见Logg and Wells（2010）。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>有限元矩阵计算的离散优化【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0110/</link>
+      <pubDate>Wed, 06 Jan 2021 13:19:50 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0110/</guid>
+      <description>&lt;h1 id=&#34;i方法论9有限元矩阵计算的离散优化&#34;&gt;I.方法论》9.有限元矩阵计算的离散优化&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e4%b9%9d%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e7%9f%a9%e9%98%b5%e8%ae%a1%e7%ae%97%e7%9a%84%e7%a6%bb%e6%95%a3%e4%bc%98%e5%8c%96&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;p&gt;第8章中，用于单元张量
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(A_T\)
+&lt;/span&gt;
+计算的张量缩并结构不仅可以构造变分形式编译器，而且还可以优化编译器。  对于典型的变分形式，参考张量
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(A^0\)
+&lt;/span&gt;
+具有显著的结构，允许以较低计算成本在任意胞元
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(T\)
+&lt;/span&gt;
+上计算单元张量
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(A_T\)
+&lt;/span&gt;
+。  利用这种结构减少运算次数，自然会导致离散数学中的几个问题。  本章介绍了一些可能的优化，并讨论了构成FErari项目核心的编译时组合优化问题（Kirby等，2006； Kirby和Scott，2007； Kirby和Logg，2008），这是 第12章的主题。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>有限元变分形式的张量表示【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0109/</link>
+      <pubDate>Tue, 05 Jan 2021 14:13:50 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0109/</guid>
+      <description>&lt;h1 id=&#34;i方法论8有限元变分形式的张量表示&#34;&gt;I.方法论》8.有限元变分形式的张量表示&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%85%ab%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e5%8f%98%e5%88%86%e5%bd%a2%e5%bc%8f%e7%9a%84%e5%bc%a0%e9%87%8f%e8%a1%a8%e7%a4%ba&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;p&gt;在第6章中，对有限元变分问题离散化，我们看到在矩阵和向量组装中的一个重要步骤是计算由下式定义的胞元（单元）张量
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(A_T\)
+&lt;/span&gt;
+&lt;/p&gt;
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+A_{T,i} = a_T(\phi_{i_\rho}^{T,\rho}, \dots , \phi_{i_2}^{T,2}, \phi_{i_1}^{T,1}) \tag{8.1}
+\]
+&lt;/span&gt;
+
+&lt;p&gt;这里，
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(a_T\)
+&lt;/span&gt;
+是对多重线性形式
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(a:V_\rho\times\dots\times V_2\times V_1 \to \mathbb{R}\)
+&lt;/span&gt;
+的局部贡献，
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(i=(i_1,i_2,\dots,i_\rho)\)
+&lt;/span&gt;
+是长为
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\rho\)
+&lt;/span&gt;
+的多重指标，并且
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\{\phi_k^{T,j}\}^{n_j}_{k=1}\)
+&lt;/span&gt;
+是局部胞元
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(T\)
+&lt;/span&gt;
+上的局部有限元空间
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(V_{j,h} \subset V_j,\quad j = 1, 2, \dots, \rho\)
+&lt;/span&gt;
+的基底。  在本章中，我们描述了如何通过称为&lt;code&gt;张量表示&lt;/code&gt;的方法来有效地计算胞元张量
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(A_T\)
+&lt;/span&gt;
+。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>有限元变分形式的正交表示（二）【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0108/</link>
+      <pubDate>Tue, 05 Jan 2021 08:24:50 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0108/</guid>
+      <description>&lt;h1 id=&#34;i方法论7有限元变分形式的正交表示二&#34;&gt;I.方法论》7.有限元变分形式的正交表示（二）&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e4%b8%83%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e5%8f%98%e5%88%86%e5%bd%a2%e5%bc%8f%e7%9a%84%e6%ad%a3%e4%ba%a4%e8%a1%a8%e7%a4%ba&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;h2 id=&#34;73-性能比较&#34;&gt;7·3 性能比较&lt;/h2&gt;
+&lt;p&gt;在本节中，我们研究上一节概述的优化策略对运行时性能的影响。  关键不是要对优化进行严格的分析，而是要提供有关不同策略何时最有效的指示。  我们还将比较正交表示和张量表示的运行时性能（在第8章中进行了介绍），以说明两种方法的优缺点。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>有限元变分形式的正交表示（一）【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0107/</link>
+      <pubDate>Mon, 04 Jan 2021 16:43:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0107/</guid>
+      <description>&lt;h1 id=&#34;i方法论7有限元变分形式的正交表示一&#34;&gt;I.方法论》7.有限元变分形式的正交表示（一）&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e4%b8%83%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e5%8f%98%e5%88%86%e5%bd%a2%e5%bc%8f%e7%9a%84%e6%ad%a3%e4%ba%a4%e8%a1%a8%e7%a4%ba&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;p&gt;本章介绍了与有限元变分形式相关的局部单元张量数值积分的常规运行时正交方法，尤其是可以减少浮点运算次数的自动优化。  运行时正交方法的替代方法是第8章中介绍的张量表示。  正交和张量方法都在FFC中实现了（参见第11章）。  在本章中，我们讨论了四种用于优化所生成代码的运行时性能的正交表示策略，并表明优化策略比单纯的实现带来了运行时性能的显着提高。  我们还研究了针对不同方程的正交和张量方法的性能，这将导致人们希望能够在两种表示形式之间进行选择。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>有限元组装【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0106/</link>
+      <pubDate>Sun, 03 Jan 2021 16:42:15 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0106/</guid>
+      <description>&lt;h1 id=&#34;i方法论6有限元组装&#34;&gt;I.方法论》6.有限元组装&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%85%ad%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e7%bb%84%e8%a3%85&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;p&gt;有限元方法可以看作是形成离散线性系统
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(AU = b\)
+&lt;/span&gt;
+或非线性系统
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(b(U)= 0\)
+&lt;/span&gt;
+的方法，对应于微分方程变分形式的离散化。 因此，有限元方法实现的核心部分是根据变分形式计算矩阵和向量。  在本章中，我们描述了用于计算离散算符（张量）
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(A\)
+&lt;/span&gt;
+的标准算法。  将此算法称为&lt;code&gt;有限元组装&lt;/code&gt;（ﬁnite element assembly）。  我们还将讨论标准算法的效率以及对无矩阵方法的扩展。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>有限元变分形式【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0105/</link>
+      <pubDate>Sat, 02 Jan 2021 22:00:53 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0105/</guid>
+      <description>&lt;h1 id=&#34;i方法论5有限元变分形式&#34;&gt;I.方法论》5.有限元变分形式&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%85%ad%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e7%bb%84%e8%a3%85&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;p&gt;FEniCS软件的大部分都致力于变分形式的公式（UFL），变分形式的离散化（FIAT，FFC，SyFi）以及相应离散运算（UFC，DOLFIN）的组装。  本章总结了FEniCS所使用变分形式的表示。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>构造通用参考单元（二）【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0104/</link>
+      <pubDate>Fri, 01 Jan 2021 08:41:20 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0104/</guid>
+      <description>&lt;h1 id=&#34;i方法论4构造通用参考单元二&#34;&gt;I.方法论》4.构造通用参考单元（二）&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%9b%9b%e7%ab%a0-%e6%9e%84%e9%80%a0%e9%80%9a%e7%94%a8%e5%8f%82%e8%80%83%e5%8d%95%e5%85%83&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;h2 id=&#34;44-单元的例子&#34;&gt;4·4 单元的例子&lt;/h2&gt;
+&lt;p&gt;我们用一些标准的有限元来说明这些概念。 也请读者参考第3章，以便更全面地审查单元及其属性。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>构造通用参考单元（一）【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0103/</link>
+      <pubDate>Thu, 24 Dec 2020 12:47:48 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0103/</guid>
+      <description>&lt;h1 id=&#34;i方法论4构造通用参考单元一&#34;&gt;I.方法论》4.构造通用参考单元（一）&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%9b%9b%e7%ab%a0-%e6%9e%84%e9%80%a0%e9%80%9a%e7%94%a8%e5%8f%82%e8%80%83%e5%8d%95%e5%85%83&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;p&gt;本章介绍了在参考域上构造通用有限元类的数学框架。 FIAT和SyFi项目均使用此框架，请分别参见第13章和第15章。 我们的目标是提供一个框架，可以自动构建具有非常复杂基底的单纯有限元。 我们从有限元的经典Ciarlet定义及其“节点”基底（这个抽象概念，比标准的面向节点的拉格朗日多项式更加通用和强大）出发开展工作。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>常见有限元（三）【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0102/</link>
+      <pubDate>Tue, 22 Dec 2020 10:35:40 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0102/</guid>
+      <description>&lt;h1 id=&#34;i方法论3常见有限元三&#34;&gt;I.方法论》3.常见有限元（三）&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e4%b8%89%e7%ab%a0-%e5%b8%b8%e8%a7%81%e6%9c%89%e9%99%90%e5%85%83&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;h2 id=&#34;36-l-有限元&#34;&gt;3·6 L² 有限元&lt;/h2&gt;
+&lt;p&gt;
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(L^2\)
+&lt;/span&gt;
+单元，通常指的是其元素非
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(C^0\)
+&lt;/span&gt;
+的有限元空间。 这些单元自然存在于泊松方程，Stokes流和弹性的混合公式中。 或者，这样的单元也可以以不符合的方式被使用，而不是直接施以所期望的弱连续性。 不连续Galerkin（DG）方法为此提供了一个典型例子。 在这种情况下，单元维面的数值通量被组合为弱形式的一部分。 DG方法的许多变体就是以不同的数值通量来定义的。 DG方法最初是针对双曲问题开发的，但现已成功应用于许多椭圆和抛物线问题中。 而且，每个单独单元的去耦化为并行性和hp适应性提供了更多的机会。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>常见有限元（二）【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0101/</link>
+      <pubDate>Mon, 21 Dec 2020 13:59:23 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0101/</guid>
+      <description>&lt;h1 id=&#34;i方法论3常见有限元二&#34;&gt;I.方法论》3.常见有限元（二）&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e4%b8%89%e7%ab%a0-%e5%b8%b8%e8%a7%81%e6%9c%89%e9%99%90%e5%85%83&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;h2 id=&#34;34-hdiv有限元&#34;&gt;3·4 H（div）有限元&lt;/h2&gt;
+&lt;p&gt;Sobolev空间
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(H(\mathrm{div})\)
+&lt;/span&gt;
+由分量和弱散度（the weak divergence）都平方可积的&lt;code&gt;矢量场&lt;/code&gt;组成。 这是一个比d-矢量场（
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \([H^1]^d, \quad d \ge 2\)
+&lt;/span&gt;
+）还要更弱的要求。 这个空间自然是与二阶椭圆问题，多孔介质流和弹性方程的混合形式有关的。 对于
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(H(\mathrm{div})\)
+&lt;/span&gt;
+-符合的有限元族，虽然每个分量不必是连续的，但是法向分量必须是连续的。 为了确保这种连续性，
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(H(\mathrm{div})\)
+&lt;/span&gt;
+-符合的单元的自由度通常包括单元的维面（facets）上的法向分量。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>常见有限元（一）【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0100/</link>
+      <pubDate>Sat, 19 Dec 2020 17:51:51 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0100/</guid>
+      <description>&lt;h1 id=&#34;i方法论3常见有限元一&#34;&gt;I.方法论》3.常见有限元（一）&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e4%b8%89%e7%ab%a0-%e5%b8%b8%e8%a7%81%e6%9c%89%e9%99%90%e5%85%83&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;p&gt;本章简要介绍了文献中的有限元。 这里介绍的许多单元已经作为FEniCS项目的一部分实现了； 一些是未来的工作。 有限元的范围远远超出了我们在此考虑的范围。 特别是，我们仅考虑基于简单多项式的单元。 因此，我们绕过了在四边形和六面体，复合和宏单元技术以及XFEM类型方法中定义的单元。 即使在基于简单多项式单元中，也可以扩展单元列表。 尽管如此，本章还是全面介绍了一些最常见的和较不寻常的有限元。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>有限元方法（三）【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0099/</link>
+      <pubDate>Fri, 18 Dec 2020 15:43:50 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0099/</guid>
+      <description>&lt;h1 id=&#34;i方法论2有限元方法三&#34;&gt;I.方法论》2.有限元方法（三）&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e4%ba%8c%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e6%96%b9%e6%b3%95&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;h2 id=&#34;26-有限元误差估计和适应性&#34;&gt;2·6 有限元误差估计和适应性&lt;/h2&gt;
+&lt;p&gt;相对于（2.20）精确解
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(u\)
+&lt;/span&gt;
+，有限元近似解
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(u_h\)
+&lt;/span&gt;
+的误差
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(e = u - u_h\)
+&lt;/span&gt;
+可以是&lt;code&gt;先验的&lt;/code&gt;，也可以是&lt;code&gt;后验的&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;先验&lt;/code&gt;误差估计表示精确（未知）解的规则性方面（terms of the regularity）的误差，并且可以提供有关有限元方法收敛顺序的有用信息。 &lt;code&gt;后验&lt;/code&gt;误差估计以则可表示为计算量（如残差）的误差，并且（可能）表示为辅助对偶问题的解，具体如下所述。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>有限元方法（二）【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0098/</link>
+      <pubDate>Thu, 17 Dec 2020 22:22:30 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0098/</guid>
+      <description>&lt;h1 id=&#34;i方法论2有限元方法二&#34;&gt;I.方法论》2·有限元方法（二）&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e4%ba%8c%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e6%96%b9%e6%b3%95&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;h2 id=&#34;24-有限元函数空间&#34;&gt;2·4 有限元函数空间&lt;/h2&gt;
+&lt;p&gt;在前面的讨论中，我们假设总可以构造无限维函数空间的离散子空间
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(V_h \subset V\)
+&lt;/span&gt;
+。有限元方法的一个核心方面是通过将由一组有限元定义的局部函数空间拼凑在一起来构造此类子空间。至此，我们对有限元函数空间的构造进行了总体概述，并将在第3章和第4章中回头讨论一些特定函数空间的构造：
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(H^1, H(\mathrm{curl}), H(\mathrm{div}), L^2\)
+&lt;/span&gt;
+。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>有限元方法（一）【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0097/</link>
+      <pubDate>Wed, 16 Dec 2020 16:49:14 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0097/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/julia/0094/&#34;&gt;有限元法解偏微分方程（FEniCS）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/julia/0096/&#34;&gt;有限元法求解牛顿流体（FEniCS）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这两篇笔记仅做入门之用。  为了深入掌握，建议阅读《Automated Solution of Differential Equations by the Finite Element Method》。 为此，我一边学习一边翻译权当笔记。&lt;/p&gt;
+&lt;h1 id=&#34;i方法论2有限元方法一&#34;&gt;I.方法论》2.有限元方法（一）&lt;/h1&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e4%ba%8c%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e6%96%b9%e6%b3%95&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;p&gt;有限元方法已经成为求解微分方程的通用方法。有限元方法的成功大部分可以归因于它的通用性和优雅性，它允许在一个通用框架内分析和求解来自科学所有领域的各种微分方程。有限元方法成功的另一个因素是公式的灵活性，可以通过选择近似的有限元空间来控制离散化的属性。&lt;/p&gt;
+&lt;p&gt;在本章中，我们回顾有限元方法，并总结整本书中使用的一些基本概念和符号。&lt;/p&gt;
+&lt;p&gt;在接下来的章节中，我们将更详细地讨论这些概念，并特别关注有限元方法的实现和自动化，这是FEniCS项目的一部分。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>有限元法求解牛顿流体（FEniCS）</title>
+      <link>https://chaoskey.gitee.io/notes/docs/julia/0096/</link>
+      <pubDate>Wed, 18 Nov 2020 22:17:27 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/julia/0096/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;在Julia环境中，使用&lt;a href=&#34;https://gitee.com/chaoskey/FenicsPy.jl&#34;&gt;FenicsPy.jl&lt;/a&gt;调用&lt;code&gt;FEniCS&lt;/code&gt;库，求解偏微分方程。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;纳维-斯托克斯方程组&#34;&gt;纳维-斯托克斯方程组&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;纳维-斯托克斯方程&lt;/strong&gt;:&lt;/p&gt;
+
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+\color{red}{\frac{\partial \boldsymbol{u}}{\partial t}+(\boldsymbol{u} \cdot \nabla)\boldsymbol{u}=\frac{1}{\rho}\nabla\cdot \boldsymbol{\sigma}+\boldsymbol{f}}
+\]
+&lt;/span&gt;
+
+&lt;p&gt;其中，张量
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{\sigma}\)
+&lt;/span&gt;
+是&lt;code&gt;应力张量&lt;/code&gt;, 取决于具体流体的特性假设，比如：&lt;code&gt;牛顿流体&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;连续性方程&lt;/strong&gt;：&lt;/p&gt;
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+\frac{\partial \rho}{\partial t}+\nabla \cdot (\rho \boldsymbol{u})=0
+\]
+&lt;/span&gt;</description>
+    </item>
+    
+    <item>
+      <title>科学计算环境搭建（Win10&#43;WSL2&#43;Ubuntu）</title>
+      <link>https://chaoskey.gitee.io/notes/docs/julia/0095/</link>
+      <pubDate>Fri, 13 Nov 2020 20:09:40 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/julia/0095/</guid>
+      <description>&lt;h2 id=&#34;概要&#34;&gt;概要&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;系统平台： Win10_64 + WSL2 + Ubuntu&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;目标：Python3.7+Julia1.5.3+JupyterLab+MatplotLib+SymPy+SciPy+FEniCS2019&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;以Julia作为我主要的使用语言，确保能调用Python的库&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;目前FEniCS不支持Windows，所以我选择 Win10+WSL+Ubuntu&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;del&gt;目前FEniCS2019有问题（至少存在折磨我的问题），所以我选择FEniCS2018&lt;/del&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;FEniCS2019的问题已经解决，所以我还是选择FEniCS2019（详细见后）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>有限元法解偏微分方程（FEniCS）</title>
+      <link>https://chaoskey.gitee.io/notes/docs/julia/0094/</link>
+      <pubDate>Fri, 13 Nov 2020 16:27:30 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/julia/0094/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;在Julia环境中，使用&lt;a href=&#34;https://gitee.com/chaoskey/FenicsPy.jl&#34;&gt;FenicsPy.jl&lt;/a&gt;调用&lt;code&gt;FEniCS&lt;/code&gt;库，求解偏微分方程。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;以泊松方程第一边界条件为例&#34;&gt;以泊松方程（第一边界条件）为例&lt;/h1&gt;
+
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+-\Delta u = f \qquad \boldsymbol{x} \in \Omega \\ u|_{\partial \Omega} =g
+\]
+&lt;/span&gt;
+
+&lt;p&gt;范例而已， 本例提供的套路是通用的，大不了多看看文档。&lt;/p&gt;
+&lt;p&gt;关键的地方，我特意列出相关链接。&lt;/p&gt;
+&lt;p&gt;本文采用软件包： FEniCS。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>有限元之Delaunay三角剖分</title>
+      <link>https://chaoskey.gitee.io/notes/docs/julia/0093/</link>
+      <pubDate>Fri, 06 Nov 2020 09:55:10 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/julia/0093/</guid>
+      <description>&lt;p&gt;上一篇笔记，讨论了一个单独的&lt;code&gt;三角单元&lt;/code&gt;。 本篇讨论，如何将任意给定平面区域刨分成&lt;code&gt;三角单元序列&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;本文用到了 python库&lt;code&gt;scipy.spatial.Delaunay&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参考文献&lt;/strong&gt;： &lt;a href=&#34;https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html&#34;&gt;https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>有限元之平面三角单元</title>
+      <link>https://chaoskey.gitee.io/notes/docs/julia/0092/</link>
+      <pubDate>Wed, 04 Nov 2020 08:56:50 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/julia/0092/</guid>
+      <description>&lt;p&gt;本文是有限元法基础之一：三角单元。&lt;/p&gt;
+&lt;p&gt;用
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\color{red}{红色}\)
+&lt;/span&gt;
+标注的公式，都给了完整的符号推导（基于Julia）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参考文献&lt;/strong&gt;： 微分方程数值解法（第4版）-李荣华＆刘播-高等教育出版社-2009&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>有限元法解常微分方程边值问题</title>
+      <link>https://chaoskey.gitee.io/notes/docs/julia/0091/</link>
+      <pubDate>Mon, 02 Nov 2020 12:25:49 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/julia/0091/</guid>
+      <description>&lt;p&gt;有限元法可归结为如下几个步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;转换成变分问题（应该会用到边界条件）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;2）对解域进行刨分（可以是不均匀）&lt;/p&gt;
+&lt;p&gt;3）构造基函数（本篇采用基于线性插值的基函数）&lt;/p&gt;
+&lt;p&gt;4）推导出有限元方程&lt;/p&gt;
+&lt;p&gt;5）求解有限元方程&lt;/p&gt;
+&lt;p&gt;6）收敛性和误差估计&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Galerkin法解常微分方程边值问题</title>
+      <link>https://chaoskey.gitee.io/notes/docs/julia/0090/</link>
+      <pubDate>Sun, 01 Nov 2020 11:11:40 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/julia/0090/</guid>
+      <description>&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 奇怪：这个库必须放在最前面才能一次加载成功&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; Plots
+gr()
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# 解决Colab不显示输出数学公式的问题&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; Markdown&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; MD, LaTeX
+&lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; latex(expr)
+    expr &lt;span style=&#34;color:#f92672&#34;&gt;|&amp;gt;&lt;/span&gt; sympy&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;latex &lt;span style=&#34;color:#f92672&#34;&gt;|&amp;gt;&lt;/span&gt; LaTeX
+&lt;span style=&#34;color:#66d9ef&#34;&gt;end&lt;/span&gt;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>有限差分法求解一维热传导方程</title>
+      <link>https://chaoskey.gitee.io/notes/docs/julia/0089/</link>
+      <pubDate>Sun, 01 Nov 2020 11:06:14 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/julia/0089/</guid>
+      <description>&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 奇怪：这个库必须放在最前面才能一次加载成功&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; Plots
+gr()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;Plots.GRBackend()
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>平面三体问题（Julia版）</title>
+      <link>https://chaoskey.gitee.io/notes/docs/julia/0088/</link>
+      <pubDate>Sun, 01 Nov 2020 10:15:47 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/julia/0088/</guid>
+      <description>&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 奇怪：这个库必须放在最前面才能一次加载成功&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; Plots
+&lt;span style=&#34;color:#75715e&#34;&gt;# gr()&lt;/span&gt;
+pyplot()
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; SciPy
+&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; LinearAlgebra
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;Plots.GRBackend()
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>自由场--现代物理的基础</title>
+      <link>https://chaoskey.gitee.io/notes/docs/theophy/0087/</link>
+      <pubDate>Wed, 13 May 2020 17:10:52 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0087/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;本篇紧接上一篇笔记《半单李代数的Casimir不变算符》。&lt;/p&gt;
+&lt;p&gt;分两种情况（有质量、无质量）探讨单粒子的物理态表示。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>庞加莱群的单粒子态的表示</title>
+      <link>https://chaoskey.gitee.io/notes/docs/theophy/0086/</link>
+      <pubDate>Tue, 12 May 2020 15:22:50 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0086/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;本篇紧接上一篇笔记《半单李代数的Casimir不变算符》。&lt;/p&gt;
+&lt;p&gt;分两种情况（有质量、无质量）探讨单粒子的物理态表示。&lt;/p&gt;
+&lt;p&gt;本篇及上一篇笔记涉及的代码：https://gitee.com/chaoskey/notes/blob/master/code/0085.ipynb&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>半单李代数的Casimir不变算符</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0085/</link>
+      <pubDate>Sat, 09 May 2020 19:32:38 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0085/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;本篇主题是Casimir算符。&lt;/p&gt;
+&lt;p&gt;半单李群李代数的Casimir算符可以完全确定。&lt;/p&gt;
+&lt;p&gt;而非半单李群李代数的Casimir算符，只能算出独立Casimir算符的个数，具体形式似乎要靠猜测试探？？？？？&lt;/p&gt;
+&lt;p&gt;一旦确定了Casimir算符，可以仿照二次Casimir算符的本征值的计算方法确定对应本征值。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>半单李代数的根系、权系和Dynkin图</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0084/</link>
+      <pubDate>Thu, 07 May 2020 10:23:40 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0084/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Dynkin图&lt;/code&gt;，可以完全确定“单根矢量几何”，所有根矢量都可用单根线性表出。&lt;/p&gt;
+&lt;p&gt;根系虽然不唯一，但这种不唯一性不会导致“几何”意义上的变化。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;权&lt;/code&gt;，就是零根空间（嘉当子代数）所有基底的共同本征矢对应的本征根组成的矢量。而这个共同本征矢被称作&lt;code&gt;权矢量&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;非零根标准基底对应升降算符。正根对应升算符，负根对应降算符。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;权矢量&lt;/code&gt;在升降算符的作用后，依然是&lt;code&gt;权矢量&lt;/code&gt;，并且对应的&lt;code&gt;权&lt;/code&gt;被提高或降低了。&lt;/p&gt;
+&lt;p&gt;如果某个&lt;code&gt;权矢量&lt;/code&gt;被升算符作用后得零，那么该&lt;code&gt;权矢量&lt;/code&gt;是最高权矢量，对应的权是最高权。&lt;/p&gt;
+&lt;p&gt;通过&lt;code&gt;Dynkin图&lt;/code&gt;可衍生出不可约表示图，利用相关性质容易计算出不可约表示维度。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>半单李代数的标准形式</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0083/</link>
+      <pubDate>Fri, 01 May 2020 08:32:10 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0083/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;用图示方法梳理典型群。&lt;/p&gt;
+&lt;p&gt;一个半单李代数的结构由一组&lt;code&gt;根向量&lt;/code&gt;决定。&lt;/p&gt;
+&lt;p&gt;所谓&lt;code&gt;根矢量&lt;/code&gt;，就是在&lt;code&gt;标准形式&lt;/code&gt;下，非零本征根在&lt;code&gt;零根空间&lt;/code&gt;中的分量。&lt;/p&gt;
+&lt;p&gt;所谓&lt;code&gt;标准形式&lt;/code&gt;，选择某个特定基底的李代数表示，这组特定基底满足：具有最多非重根数（实数根）。&lt;/p&gt;
+&lt;p&gt;所谓&lt;code&gt;零根空间&lt;/code&gt;，就是零本征根（可能有重根）的所有本征矢量张成的空间。&lt;/p&gt;
+&lt;p&gt;所谓&lt;code&gt;根系&lt;/code&gt;，就是半单李代数标准形式下的所有本征根，有时简称“根”。如果没有加粗，表示实数根
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\alpha\)
+&lt;/span&gt;
+；如果加粗了，表示根矢量
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{\alpha}\)
+&lt;/span&gt;
+。&lt;/p&gt;
+&lt;p&gt;嗅到一股量子力学的味道。&lt;/p&gt;
+&lt;p&gt;最后是根矢量图示法。&lt;/p&gt;
+&lt;p&gt;本篇草稿： &lt;a href=&#34;https://gitee.com/chaoskey/notes/blob/master/code/0083.ipynb&#34;&gt;https://gitee.com/chaoskey/notes/blob/master/code/0083.ipynb&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>李群李代数伴随表示和Killing型、Casimir算符</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0082/</link>
+      <pubDate>Tue, 28 Apr 2020 09:42:55 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0082/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;同一李群（李代数）有无数表示，本篇侧重&lt;code&gt;伴随表示&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;对半单李代数而言，Killing型就是李代数上的度规，称作嘉当度规。&lt;/p&gt;
+&lt;p&gt;Casimir算符，就是和李代数任意元素对易的算符。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>场及其对称性</title>
+      <link>https://chaoskey.gitee.io/notes/docs/theophy/0081/</link>
+      <pubDate>Fri, 24 Apr 2020 20:13:17 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0081/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;场的拉格朗日形式，保持明显的洛伦兹协变性。&lt;/p&gt;
+&lt;p&gt;场的哈密顿形式，依赖于时空的1+3分解，因为时间变量在&lt;code&gt;共轭动量密度&lt;/code&gt;中扮演了特殊的角色。&lt;/p&gt;
+&lt;p&gt;有限维Noether定理，条件更松，&lt;strong&gt;每个单参微分同胚群对应一个守恒量&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;场的Noether定理，有更严格的要求，&lt;strong&gt;每个单参等度规群对应一个守恒流&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>闵氏时空对称性的三种观点</title>
+      <link>https://chaoskey.gitee.io/notes/docs/theophy/0080/</link>
+      <pubDate>Wed, 15 Apr 2020 09:14:20 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0080/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;本篇依次从Killing矢量场、张量（矩阵）、旋量三个角度考察闵氏时空的对称性。&lt;/p&gt;
+&lt;p&gt;最后，从旋量概念引入自旋概念。&lt;/p&gt;
+&lt;p&gt;本篇涉及的草稿：https://gitee.com/chaoskey/notes/blob/master/code/0080.ipynb&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>流形上的旋量和旋量场（自旋系数和克氏符）</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0079/</link>
+      <pubDate>Fri, 10 Apr 2020 18:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0079/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;上两篇，引入旋量概念以及旋量代数，以及旋量的一个直观的几何解释。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;自旋系数&lt;/code&gt;，是和&lt;code&gt;克氏符&lt;/code&gt;对标的概念。&lt;/p&gt;
+&lt;p&gt;引入了新的记号，复用度规符号
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\textcolor{red}{g_\mu^{\ \ a}}\)
+&lt;/span&gt;
+来表示&lt;code&gt;矢量基底&lt;/code&gt;；
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\textcolor{red}{g_\mu^{\ \ AA&#39;}}\)
+&lt;/span&gt;
+表示泡利矩阵，复用旋量度规符号
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\textcolor{red}{\epsilon_\Sigma^{\ \ A}}\)
+&lt;/span&gt;
+来表示&lt;code&gt;旋量基底&lt;/code&gt;;&lt;/p&gt;
+&lt;p&gt;张量指标和旋量指标混用。&lt;/p&gt;
+&lt;p&gt;本篇虽然看起来公式“巨复杂”，但是掌握了指标的提升、降低、置换、缩并，完全可以无脑写出。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>流形上的旋量和旋量场（导数算符和曲率）</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0078/</link>
+      <pubDate>Thu, 02 Apr 2020 10:39:12 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0078/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;上两篇，引入旋量概念以及旋量代数，以及旋量的一个直观的几何解释。&lt;/p&gt;
+&lt;p&gt;本篇，引入&lt;code&gt;旋量场导数算符&lt;/code&gt;和&lt;code&gt;曲率旋量&lt;/code&gt;两个概念。&lt;/p&gt;
+&lt;p&gt;本篇限定讨论时空流形上的旋量分析，始终选择正交归一标架场（约定
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \((-1,1,1,1)\)
+&lt;/span&gt;
+度规）。特殊情况下，就是闵氏时空。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>流形上的旋量和旋量场（几何解释）</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0077/</link>
+      <pubDate>Sat, 28 Mar 2020 19:32:42 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0077/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;上一篇，引入旋量概念以及旋量代数。本篇在此基础上给出旋量的一个直观的几何解释。&lt;/p&gt;
+&lt;p&gt;本篇限定讨论闵氏时空上的旋量。&lt;/p&gt;
+&lt;p&gt;本篇的计算草稿：https://gitee.com/chaoskey/notes/blob/master/code/0077.ipynb&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>流形上的旋量和旋量场（初步）</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0076/</link>
+      <pubDate>Sun, 22 Mar 2020 13:42:42 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0076/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;带度规流形任意点的切空间和平直空间没有数学上的差别，进而平直空间上发展起来的旋量都是可以移到带度规流形上而无需改变。&lt;/p&gt;
+&lt;p&gt;旋量概念是度规依赖的，进而可始终在正交归一基底下讨论。&lt;/p&gt;
+&lt;p&gt;旋量概念源自
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathrm{SU}(2)\)
+&lt;/span&gt;
+对
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathrm{SO}(3)\)
+&lt;/span&gt;
+是双重覆盖，将表示空间（或 时空）的旋转“劈”为两半，其中一半就是旋量空间上的逆变旋量，另一半是其共轭空间的共轭逆变旋量。&lt;/p&gt;
+&lt;p&gt;一个逆变矢量可以表示成一个逆变旋量与一个共轭逆变旋量的张量积。&lt;/p&gt;
+&lt;p&gt;一个协变矢量可以表示成一个协变旋量与一个共轭协变旋量的张量积。&lt;/p&gt;
+&lt;p&gt;引入了旋量的抽象指标表示，可以方便无歧义地进行相关的运算。&lt;/p&gt;
+&lt;p&gt;关于旋量运算的约定：1）旋量度规按指标左上右下缩并；2）泡利矩阵前加因子
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(1/\sqrt{2}\)
+&lt;/span&gt;
+。&lt;/p&gt;
+&lt;p&gt;本篇的计算草稿：https://gitee.com/chaoskey/notes/blob/master/code/0076.ipynb&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>辛流形上的哈密顿力学</title>
+      <link>https://chaoskey.gitee.io/notes/docs/theophy/0075/</link>
+      <pubDate>Sun, 01 Mar 2020 14:52:58 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0075/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;有了《辛群及其李代数》和《辛流形》的学习，关于辛流形上的哈密顿力学就水到渠成了。&lt;/p&gt;
+&lt;p&gt;首先，借助切丛上的拉格朗日量函数，构造一个特别的切丛到余切丛的同构映射。&lt;/p&gt;
+&lt;p&gt;然后，在构造这个同构映射中，对1-形式的动量作外微分，得到一个自然的辛构造，进而余切丛空间（相空间）成为辛流形。&lt;/p&gt;
+&lt;p&gt;这个同构映射的构造，实际对应&lt;code&gt;Legendre变换&lt;/code&gt;，进而构造出余切丛上的哈密顿函数。&lt;/p&gt;
+&lt;p&gt;最后，利用《辛流形》的知识，得到一系列哈密顿力学的结论。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>辛流形</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0074/</link>
+      <pubDate>Fri, 28 Feb 2020 16:55:40 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0074/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;通过类比(维)黎曼流形掌握辛流形的基本概念。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;辛构造&lt;/code&gt;，就是&lt;code&gt;闭的反称度规&lt;/code&gt;。&lt;code&gt;辛流形&lt;/code&gt;，就是配备了&lt;code&gt;辛构造&lt;/code&gt;的流形。&lt;/p&gt;
+&lt;p&gt;具有相同维度的所有辛流形均&lt;code&gt;局域辛同构&lt;/code&gt;（保辛结构的微分同胚映射）。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;辛矢量场&lt;/code&gt;是Killing矢量场的类似概念，是&lt;code&gt;无穷小对称生成元&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;如果
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(X^b\omega_{ba}\)
+&lt;/span&gt;
+是&lt;code&gt;恰当的&lt;/code&gt;，那么对应的辛矢量场
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(X^a\)
+&lt;/span&gt;
+就是&lt;code&gt;哈密顿矢量场&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;泊松括号&lt;/code&gt;，  把&lt;code&gt;哈密顿力学&lt;/code&gt;和&lt;code&gt;辛流形&lt;/code&gt;联系到一起。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>辛群及其李代数</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0073/</link>
+      <pubDate>Thu, 27 Feb 2020 17:16:07 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0073/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;通过类比正交群掌握辛群的基本概念。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;反称度规&lt;/code&gt;
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(s_{ab}\)
+&lt;/span&gt;
+，是一个2-形式。只有偶数阶时，才是非奇异的。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;辛群&lt;/code&gt;，是保&lt;code&gt;反称度规&lt;/code&gt;的线性映射集合，也是李群。&lt;/p&gt;
+&lt;p&gt;辛群的元素，作为线性映射而言，就是正则变换。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;辛群的李代数&lt;/code&gt;的元素，可以看成
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(S^{-1}\)
+&lt;/span&gt;
+乘上一个对称矩阵。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>对称性与守恒律（Noether定理）</title>
+      <link>https://chaoskey.gitee.io/notes/docs/theophy/0072/</link>
+      <pubDate>Wed, 26 Feb 2020 20:14:33 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0072/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;如果知道所有对称性，原则上可以写出具体拉格朗日量。如果只知道部分对称性，也可根据&lt;code&gt;Noether定理&lt;/code&gt;得知对称性所关联的守恒律。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Noether定理&lt;/code&gt;：每一个保持拉格朗日量不变的单参微分同胚群（对称性），必有运动方程组对应的一个首次积分（守恒律）。&lt;/p&gt;
+&lt;p&gt;套路：研究无穷小变换下的拉格朗日量变换。&lt;/p&gt;
+&lt;p&gt;然后，就是三个经典范例。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>流形视角下的牛顿力学(杀鸡用牛刀)</title>
+      <link>https://chaoskey.gitee.io/notes/docs/theophy/0071/</link>
+      <pubDate>Tue, 25 Feb 2020 08:19:37 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0071/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;本文真是杀鸡用牛刀，但好处是彻底厘清了如何用对称性构造拉格朗日量的一般套路。&lt;/p&gt;
+&lt;p&gt;本文通过强算Killing方程的笨方法，来确定伽利略时空，特别是欧氏空间的完整对称性，进而得到无穷小生成元（变换），最后用这组无穷小变换在拉格朗日量上的不变性来确定拉格朗日量。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>微分几何中的计算（Julia版 计划长期维护）</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0070/</link>
+      <pubDate>Mon, 24 Feb 2020 09:44:05 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0070/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Julia&lt;/code&gt;，对数学符号真太友好了。&lt;/p&gt;
+&lt;p&gt;前面的笔记中，我曾穿插了些相关的符号计算，本文作为一个汇总，并且未来的一些有特点的代码，我也将汇总于此，用作备忘。&lt;/p&gt;
+&lt;p&gt;用&lt;code&gt;Julia&lt;/code&gt;进行张量符号计算的关键：1）先要写出（多重）数组友好的公式，然后用&lt;code&gt;Julia&lt;/code&gt;实现之； 2）使用了&lt;code&gt;SymPy&lt;/code&gt;，外加&lt;code&gt;Julia&lt;/code&gt;本身的语法优势。&lt;/p&gt;
+&lt;p&gt;我曾想过将代码封装成函数，但发现直接用代码似乎更好。首先代码不复杂，其次， 暴露代码细节还能和数学公式相互对照，不容易出错。 有种“所见即所得”的感觉。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>李变换群</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0069/</link>
+      <pubDate>Sun, 23 Feb 2020 10:04:08 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0069/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;李变换群&lt;/code&gt;，就是李群作用于流形，这种“作用”其实就是变换，这种变换的集合构成的群。 就是&lt;code&gt;李群的实现&lt;/code&gt;，或 &lt;code&gt;李群的表示&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>常用李群及其李代数</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0068/</link>
+      <pubDate>Fri, 21 Feb 2020 11:02:10 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0068/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;一般线性群
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(GL(m)\)
+&lt;/span&gt;
+，全体可逆线性映射的集合。&lt;/p&gt;
+&lt;p&gt;正交群
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(O(m)\)
+&lt;/span&gt;
+，正定度规下，全体保度规线性映射的集合。【正定度规下，保度规 
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\Longrightarrow\)
+&lt;/span&gt;
+ 保内积。】&lt;/p&gt;
+&lt;p&gt;洛伦兹群
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(O(1,3)\)
+&lt;/span&gt;
+，正交归一基底下度规矩阵是
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathrm{diag}(-1,1,1,1)\)
+&lt;/span&gt;
+时，全体保度规线性映射的集合。&lt;/p&gt;
+&lt;p&gt;酉群
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(U(m)\)
+&lt;/span&gt;
+，就是复数域中的全体保内积线性算符（即酉算符）的集合。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>李群李代数</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0016/</link>
+      <pubDate>Sat, 25 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0016/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;李群&lt;/code&gt;是分析&lt;code&gt;流形对称性&lt;/code&gt;的重要工具。&lt;/p&gt;
+&lt;p&gt;从李群
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(G\)
+&lt;/span&gt;
+自身来看，李群
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(G\)
+&lt;/span&gt;
+也是一个流形。&lt;/p&gt;
+&lt;p&gt;李群
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(G\)
+&lt;/span&gt;
+作为流形在恒等元
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(e\)
+&lt;/span&gt;
+有切空间
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(V_e\)
+&lt;/span&gt;
+，在这切空间上定义双线性映射的&lt;code&gt;李括号&lt;/code&gt;，以此作为切空间上的乘法，进而定义了&lt;code&gt;李代数&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;通过&lt;code&gt;指数映射&lt;/code&gt;，可以在李群的李代数和李群自身之间建立关系。&lt;/p&gt;
+&lt;p&gt;李代数的&lt;code&gt;结构张量&lt;/code&gt;，则是李括号双线性特征的显式表现。&lt;/p&gt;
+&lt;p&gt;符号说明：由于本节讨论的矢量场，并不涉及具体指标。所以简单用
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(A\)
+&lt;/span&gt;
+代表矢量场
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(A^a\)
+&lt;/span&gt;
+，用
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(A_g\)
+&lt;/span&gt;
+代表点
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(g\)
+&lt;/span&gt;
+的矢量。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>流形上的拉格朗日力学</title>
+      <link>https://chaoskey.gitee.io/notes/docs/theophy/0015/</link>
+      <pubDate>Fri, 24 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0015/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;一个具有约束的力学系的&lt;code&gt;位形空间&lt;/code&gt;是一个&lt;code&gt;微分流形&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;拉格朗日力学&lt;/code&gt;其实就是个理论框架。&lt;/p&gt;
+&lt;p&gt;有限自由度系统可直接&lt;code&gt;拉格朗日量&lt;/code&gt;描述。&lt;/p&gt;
+&lt;p&gt;场论（无限自由度系统）则可用&lt;code&gt;拉格朗日密度&lt;/code&gt;描述。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>流形上的微积分</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0014/</link>
+      <pubDate>Thu, 23 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0014/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;流形上微积分的作用对象是微分形式。&lt;/p&gt;
+&lt;p&gt;普通微分对应微分形式的外微分，普通积分则对应微分形式在流形上的积分。&lt;/p&gt;
+&lt;p&gt;微积分基本定理对应流形上的Stokes定理。&lt;/p&gt;
+&lt;p&gt;流形上的Gauss定理则成为Stokes定理特例。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>流形上的微分形式及其对偶</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0013/</link>
+      <pubDate>Wed, 22 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0013/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;微分形式就是全反称全下指标张量，是流形上微积分的作用对象。&lt;/p&gt;
+&lt;p&gt;对偶矢量基底的楔积构成微分形式的基底。由于全反称性，这个基底张成的线性空间维度是一个组合数。&lt;/p&gt;
+&lt;p&gt;为流形上每个点选一个微分形式，就得到微分形式场。&lt;/p&gt;
+&lt;p&gt;流形的定向，由处处连续非零的
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(n\)
+&lt;/span&gt;
+形式场（体元场）确定。&lt;/p&gt;
+&lt;p&gt;度规适配体元，就是正交归一基底下的分量为
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\pm 1\)
+&lt;/span&gt;
+的体元。右手系取1，左手系取-1。&lt;/p&gt;
+&lt;p&gt;利用适配体元引入霍奇星算子（求微分形式的对偶）。&lt;/p&gt;
+&lt;p&gt;用普通导数算符和抽象指标可简化欧氏空间上矢量代数公式的推导。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>子流形和超曲面</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0012/</link>
+      <pubDate>Tue, 21 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0012/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;嵌入&lt;/code&gt;，就是&amp;quot;足够像&amp;quot;地映射到更高维流形“内部”。这种“内部”区域就是&lt;code&gt;子流形&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;超曲面&lt;/code&gt;，就是低一维的&lt;code&gt;子流形&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;法余矢&lt;/code&gt;，就是能够和超曲面矢量基底一起张成&amp;quot;母&amp;quot;流形的一个矢量基底所对应的对偶矢量基底。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;法矢&lt;/code&gt;，就是存在度规情况下，用度规将&lt;code&gt;法余矢&lt;/code&gt;的指标&amp;quot;提升&amp;quot;得到矢量。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;诱导度规&lt;/code&gt;，就是和&amp;quot;母&amp;quot;流形度规保持&amp;quot;自然一致&amp;quot;的子流形度规。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;投影映射&lt;/code&gt;，就是&lt;code&gt;诱导度规&lt;/code&gt;&amp;ldquo;下降&amp;quot;一个指标，也是将&amp;quot;母&amp;quot;流形任意矢量投影到子流形切空间的映射。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>Killing矢量场</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0011/</link>
+      <pubDate>Mon, 20 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0011/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Killing矢量场&lt;/code&gt;描述了&lt;code&gt;(伪)黎曼流形&lt;/code&gt;的对称性，每一种对称性都与一个&lt;code&gt;Killing矢量场&lt;/code&gt;相关联。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>流形上的李导数</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0010/</link>
+      <pubDate>Sun, 19 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0010/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;李导数是沿矢量场对张量场的导数，也是沿矢量场坐标线对张量分量的普通导数。&lt;/p&gt;
+&lt;p&gt;为了清晰定义李导数，引入了&lt;code&gt;单参数微分同胚群&lt;/code&gt;
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\phi:\mathbb{R}\times M\to M\)
+&lt;/span&gt;
+，然后利用&lt;code&gt;拉回映射&lt;/code&gt;及其逆映射
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\phi_t^*=(\phi^{-1}_t)_*=(\phi_{-t})_*\)
+&lt;/span&gt;
+将同一轨道上的
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(q=\phi(p)\)
+&lt;/span&gt;
+点上的张量&lt;code&gt;拉回&lt;/code&gt;成点
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p\)
+&lt;/span&gt;
+的张量，于是可以进行相加减，进而可以合理定义极限。&lt;/p&gt;
+&lt;p&gt;引入矢量场的适配坐标系，得到李导数在适配坐标系中的分量表达式。&lt;/p&gt;
+&lt;p&gt;然后，有李导数作用到任意张量的一般表达式。&lt;/p&gt;
+&lt;p&gt;最后，分析了李导数和方向导数的关系&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>流形间的映射</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0009/</link>
+      <pubDate>Sun, 19 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0009/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;流形间的&lt;code&gt;点映射&lt;/code&gt;
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\phi\)
+&lt;/span&gt;
+，可以看作对点的&lt;code&gt;推前映射&lt;/code&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\phi=\phi_*\)
+&lt;/span&gt;
+；对张量(场)
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(T\)
+&lt;/span&gt;
+的&lt;code&gt;拉回映射&lt;/code&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\phi^*\)
+&lt;/span&gt;
+，可看成该张量(场)
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(T\)
+&lt;/span&gt;
+与某种推前映射
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\phi_*\)
+&lt;/span&gt;
+的&lt;code&gt;复合映射&lt;/code&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\phi^*T=T\circ\phi_*\)
+&lt;/span&gt;
+；对张量(场)
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(T\)
+&lt;/span&gt;
+的&lt;code&gt;推前映射&lt;/code&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\phi_*\)
+&lt;/span&gt;
+，可看成该张量(场)
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(T\)
+&lt;/span&gt;
+与某种拉回映射
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\phi^*\)
+&lt;/span&gt;
+的&lt;code&gt;复合映射&lt;/code&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\phi_*T=T\circ\phi^*\)
+&lt;/span&gt;
+。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>黎曼曲率张量</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0008/</link>
+      <pubDate>Sat, 18 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0008/</guid>
+      <description>&lt;h2 id=&#34;曲率概念的意义&#34;&gt;曲率概念的意义&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;导数算符对易子&lt;/code&gt;
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \([\nabla_a,\nabla_b]=\nabla_a\nabla_b-\nabla_b\nabla_a\)
+&lt;/span&gt;
+：对标量场的作用结果为０(无挠性决定的)，但对一般张量场未必为０。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;黎曼曲率张量&lt;/code&gt;就是这种非对易性的表现。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>流形上的平移</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0007/</link>
+      <pubDate>Fri, 17 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0007/</guid>
+      <description>&lt;h2 id=&#34;平移是路径无关的吗&#34;&gt;平移是路径无关的吗？&lt;/h2&gt;
+&lt;p&gt;我们知道，欧氏空间的平移是路径无关的，任意两个位置，平移的结果是唯一的。&lt;/p&gt;
+&lt;p&gt;那么在流形上呢？结论是：&lt;code&gt;流形上的平移是路径依赖的&lt;/code&gt;。只需要一个例子就足以说明，如图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://chaoskey.gitee.io/notes/notes/images/0012.jpg&#34; alt=&#34;0012.jpg&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>流形上的导数算符</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0006/</link>
+      <pubDate>Wed, 15 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0006/</guid>
+      <description>&lt;h2 id=&#34;定义&#34;&gt;定义&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;导数算符&lt;/code&gt;，就是欧氏空间我们所熟悉的
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\vec\nabla\)
+&lt;/span&gt;
+，作用于标量场
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(f\)
+&lt;/span&gt;
+就是&lt;code&gt;梯度&lt;/code&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\vec\nabla f\)
+&lt;/span&gt;
+，作用于矢量场
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\vec v\)
+&lt;/span&gt;
+再缩并就是&lt;code&gt;散度&lt;/code&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\vec\nabla \cdot \vec v\)
+&lt;/span&gt;
+。欧氏空间是有度规的，我们知道在有度规的情况下，度规可对张量指标进行“上升下降操作”，所以任何矢量都存在其自然对应的对偶矢量。如果要推广到任意流形，就必须分清楚矢量和对偶矢量（因为没有度规了）。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>基于抽象指标的张量分析</title>
+      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0005/</link>
+      <pubDate>Tue, 14 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0005/</guid>
+      <description>&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;抽象指标记号&lt;/code&gt;（英语：&lt;code&gt;abstract index notation&lt;/code&gt;）是由&lt;code&gt;罗杰·彭罗斯&lt;/code&gt;发明的一种用来表示张量与旋量的数学记号。与不带指标的字母（如T）表示张量相比，这种表示法能够显示张量的类型，同时可清楚地表明缩并等运算。而与用分量（张量在某一特定基底下的分量）表示张量不同，该表示法与特定的基底无关，可以表示出张量等式。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>小技巧备忘</title>
+      <link>https://chaoskey.gitee.io/notes/posts/0004/</link>
+      <pubDate>Mon, 13 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/posts/0004/</guid>
+      <description>&lt;h2 id=&#34;1-本地mdlatex如何完美发布到知乎&#34;&gt;1 本地md+LaTex如何完美发布到知乎？&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我已写成了脚本：&lt;a href=&#34;https://gitee.com/chaoskey/notes/raw/master/forzhihu&#34;&gt;forzhihu&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;答：知乎编辑器提供了md上传，还提供了&lt;code&gt;https://www.zhihu.com/equation?tex=...&lt;/code&gt;接口，并且支持贴图自动上传。　因此完全支持本地Markdown+LaTex完美发布到知乎，具体步骤如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用本地Markdown编辑器放心写作。【我使用&lt;code&gt;Typora&lt;/code&gt;】&lt;/li&gt;
+&lt;li&gt;将本地图片换成网上图片，我个人的做法是先发布到&lt;code&gt;gitbook&lt;/code&gt;，比如我的&lt;a href=&#34;https://chaoskey.gitee.io/notes/&#34;&gt;&lt;code&gt;https://chaoskey.gitee.io/notes/&lt;/code&gt;&lt;/a&gt;。然后复制图片链接，替换原本地图片链接，图片数量一般不多，手工替换也不麻烦。&lt;/li&gt;
+&lt;li&gt;将LaTex代码用&lt;code&gt;https://www.zhihu.com/equation?tex=...&lt;/code&gt;替换。首先得有支持正则表达全文置换编辑器【我使用&lt;code&gt;Visual Studio Code&lt;/code&gt;】，然后将　&lt;code&gt;\$\$(\n*)\s*(.*?)(\n*)\s*\$\$&lt;/code&gt;　替换成　&lt;code&gt;$1&amp;lt;img src=&amp;quot;https://www.zhihu.com/equation?tex=$2&amp;quot; alt=&amp;quot;$2&amp;quot; class=&amp;quot;ee_img tr_noresize&amp;quot; eeimg=&amp;quot;1&amp;quot;&amp;gt;$3&lt;/code&gt;。 当然前面这个正则表达式的形式要以实际为准。&lt;/li&gt;
+&lt;li&gt;最后，保存文件，然后打开知乎编辑器，上传md文件，简单调整后，发布，完工。&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>基于Julia的科学计算功能库整理</title>
+      <link>https://chaoskey.gitee.io/notes/docs/julia/0003/</link>
+      <pubDate>Sun, 12 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/julia/0003/</guid>
+      <description>&lt;h2 id=&#34;线性代数&#34;&gt;线性代数&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;julia&lt;/code&gt;标准库中包括了&lt;code&gt;LinearAlgebra&lt;/code&gt;，直接&lt;code&gt;using LinearAlgebra&lt;/code&gt;就能用。详细务必移步&lt;a href=&#34;https://docs.julialang.org/en/v1/stdlib/LinearAlgebra/&#34;&gt;官方文档&lt;/a&gt; 和 &lt;a href=&#34;https://github.com/JuliaLang/julia/blob/master/stdlib/LinearAlgebra/docs/src/index.md&#34;&gt;GitHub文档&lt;/a&gt;阅读。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Julia中的数学符号演算</title>
+      <link>https://chaoskey.gitee.io/notes/docs/julia/0002/</link>
+      <pubDate>Sat, 11 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/julia/0002/</guid>
+      <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;在&lt;a href=&#34;https://joistwang.gitbook.io/notes/self/0001&#34;&gt;整合Julia和Python的集成环境&lt;/a&gt;中已经配置好环境，可以在&lt;strong&gt;Jupyter&lt;/strong&gt;中进行学习研究了。&lt;/p&gt;
+&lt;p&gt;由于Julia本身暂时还没有好用的符号演算库，只好借用Python的SymPy库。所以，标题应该是“Julia和Python中的数学符号演算”，但由于本文都在Julia环境下进行，单独说Julia将就也可以。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>整合Julia和Python的集成环境（Win10）</title>
+      <link>https://chaoskey.gitee.io/notes/docs/julia/0001/</link>
+      <pubDate>Wed, 08 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/julia/0001/</guid>
+      <description>&lt;h2 id=&#34;目标&#34;&gt;目标&lt;/h2&gt;
+&lt;p&gt;１） 统一利用&lt;strong&gt;Visual Studio Code&lt;/strong&gt;作为Julia和Python的ＩＤＥ&lt;/p&gt;
+&lt;p&gt;２） 统一利用&lt;strong&gt;Jupyter&lt;/strong&gt;作为Julia和Python的Notebook&lt;/p&gt;
+&lt;p&gt;３） 以Julia作为我主要的使用语言，确保能调用Python的库包&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>通过实例掌握流编辑器sed</title>
+      <link>https://chaoskey.gitee.io/notes/posts/0067/</link>
+      <pubDate>Wed, 08 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/posts/0067/</guid>
+      <description>&lt;h2 id=&#34;缘由&#34;&gt;缘由&lt;/h2&gt;
+&lt;p&gt;由于Hugo对Markdown的解析和LaTeX存在诸多冲突。比如：当LaTex中出现&lt;code&gt;\\&lt;/code&gt;、&lt;code&gt;\{&lt;/code&gt;、&lt;code&gt;\}&lt;/code&gt;之类的东西，Hugo就无法正常解析数学公式。&lt;/p&gt;
+&lt;p&gt;解决方案之一就是用Hugo的&lt;code&gt;shortcodes&lt;/code&gt;机制，在md文件中用形如&lt;code&gt;{{&amp;lt; katex [display] &amp;gt;}}latex code{{&amp;lt; /katex &amp;gt;}}&lt;/code&gt;格式。&lt;/p&gt;
+&lt;p&gt;这样一来，网站显示正常了，但在本地Typora就无法识别了。 个人体验不好。&lt;/p&gt;
+&lt;p&gt;于是我想到用流编编器&lt;code&gt;sed&lt;/code&gt;对md内容进行替换。 我以前用&lt;code&gt;sed&lt;/code&gt;都是简单的情况，复杂需求我就不会用了。 于是有了此文。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用Hugo&#43;码云搭建支持Markdown&#43;LaTeX的云笔记</title>
+      <link>https://chaoskey.gitee.io/notes/posts/0000/</link>
+      <pubDate>Tue, 07 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/posts/0000/</guid>
+      <description>&lt;h2 id=&#34;目标配置好后的日常操作&#34;&gt;目标(配置好后的日常操作)&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;更新流程简单舒服，页面主题简洁，完全支持Markdown+LaTeX。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;1）&lt;strong&gt;本地撰写&lt;/strong&gt;内容：用&lt;a href=&#34;https://www.typora.io/&#34;&gt;Typora&lt;/a&gt;写基于Markdown+LaTeX的内容。&lt;/p&gt;
+&lt;p&gt;2）利用静态网站生成器Hugo生成待发布的静态文件： 执行&lt;code&gt;./forgitee&lt;/code&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;这个脚本实际依次执行了：1. 对所有md文件进行部分内容替换，确保站点可以完全解析； 2. 执行&lt;code&gt;hugo -D&lt;/code&gt;,生成待发布的静态文件，生成文件夹&lt;code&gt;public&lt;/code&gt;;  3. 执行&lt;code&gt;./fortypora&lt;/code&gt;对所有md文件进行逆向置换复原，确保Typora打开能完全显示正常。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;3） 将站点&lt;strong&gt;git提交&lt;/strong&gt;到&lt;a href=&#34;https://gitee.com&#34;&gt;码云（gitee）&lt;/a&gt;： &lt;a href=&#34;https://gitee.com/chaoskey/notes&#34;&gt;https://gitee.com/chaoskey/notes&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;包括站点全部源码（相当于文档云同步）和生成的静态文件目录&lt;code&gt;public&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;4） 部署到： &lt;a href=&#34;https://chaoskey.gitee.io/notes&#34;&gt;https://chaoskey.gitee.io/notes&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;5） 一键发布的脚本&lt;code&gt;./publish&lt;/code&gt;（注意，必须根据你自己的情况修改之），依次执行了： 1.  &lt;code&gt;./forgitee&lt;/code&gt;;  2.  将修改过的笔记提交到&lt;code&gt;master&lt;/code&gt;分支； 3. 将&lt;code&gt;public&lt;/code&gt;提交到&lt;code&gt;gh-pages&lt;/code&gt;分支；  4. 将&lt;code&gt;gh-pages&lt;/code&gt;分支&lt;code&gt;push&lt;/code&gt;到&lt;code&gt;gitee&lt;/code&gt;和&lt;code&gt;github&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://chaoskey.gitee.io/notes/notes/images/0103.jpg&#34; alt=&#34;0103.jpg&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>7.6 贝叶斯线性回归</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0065/</link>
+      <pubDate>Tue, 23 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0065/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;虽然岭回归是计算点估计的有用方法，但有时我们想要计算关于
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{w}\)
+&lt;/span&gt;
+和
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\sigma^2\)
+&lt;/span&gt;
+的完全后验。 为简单起见，我们首先假设噪声方差
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\sigma^2\)
+&lt;/span&gt;
+是已知的，因此我们专注于计算
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(\boldsymbol{w}| \mathcal{D},\sigma^2)\)
+&lt;/span&gt;
+。 然后在7.6.3节我们将考虑一般情况，也就是计算
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(\boldsymbol{w},\sigma^2|\mathcal{D})\)
+&lt;/span&gt;
+。 我们假设始终是高斯似然模型。 以稳健拟然执行贝叶斯推断也是可能的，但需要更高级的技术（参见练习24.5）。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Exercises</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0066/</link>
+      <pubDate>Tue, 23 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0066/</guid>
+      <description>返回本章目录</description>
+    </item>
+    
+    <item>
+      <title>7.5 岭回归</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0064/</link>
+      <pubDate>Mon, 22 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0064/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;最大拟然估计(MLE)的一个问题是它可能导致过拟合。 在本节中，我们将讨论一种通过使用高斯先验的最大后验估计(MAP)的方法来改善此问题。 为简单起见，我们假设高斯似然，而不是稳定性拟然。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>7.4 稳健线性回归*</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0063/</link>
+      <pubDate>Sun, 21 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0063/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在回归模型中，使用零均值和常数方差的高斯分布对噪声进行建模是很常见的。
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\epsilon_i \sim \mathcal{N}(0,\sigma^2)\)
+&lt;/span&gt;
+ ，其中
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\epsilon_i=y_i-\boldsymbol{w}^T \boldsymbol{x}_i\)
+&lt;/span&gt;
+。 在这种情况下，最大化拟然等价于最小化残差平方和。 但是，如果我们的数据中存在&lt;strong&gt;异常值&lt;/strong&gt;，则可能导致拟合不良，如图7.6（a）所示。 （异常值是图底部的点。）这是因为平方误差以二次方处理偏差，因此远离线的点对拟合的影响大于线附近的点。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>7.3 最大似然估计（最小二乘）</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0062/</link>
+      <pubDate>Sat, 20 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0062/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;估计统计模型参数的常用方法是计算MLE，其定义为&lt;/p&gt;
+
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+\hat{\boldsymbol{\theta}} \overset{\Delta}{=} \underset{\boldsymbol{\theta}}{\rm argmax} \log p(\mathcal{D}|\boldsymbol{\theta})  \tag{7.4}
+\]
+&lt;/span&gt;</description>
+    </item>
+    
+    <item>
+      <title>7.2 模型选择</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0061/</link>
+      <pubDate>Fri, 19 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0061/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;正如我们在1.4.5节中讨论的那样，线性回归是一个形如下式的模型&lt;/p&gt;
+
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+p(y|\boldsymbol{x},\boldsymbol{\theta})=\mathcal{N}(y | \boldsymbol{w}^T\boldsymbol{x},\sigma^2)    \tag{7.1}
+\]
+&lt;/span&gt;</description>
+    </item>
+    
+    <item>
+      <title>7.1 导论</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0060/</link>
+      <pubDate>Thu, 18 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0060/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;线性回归是统计学和（监督）机器学习的“驮马(work horse)”。 当对核或其他形式的基函数进行扩展时，它也能模拟非线性关系。 当用伯努利或广义伯努利分布代替高斯分布输出时，它可以用于分类，我们将在下面看到这点。 因此，详细研究这个模型是值得的。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>习题</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0059/</link>
+      <pubDate>Wed, 17 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0059/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;练习6.1&lt;/strong&gt; LOOCV的最坏情况&lt;/p&gt;
+&lt;p&gt;（来源：Witten05，p152。）。 假设我们有一个完全随机标记的数据集（即，特征
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{x}\)
+&lt;/span&gt;
+没有告诉我们关于类标签
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(y\)
+&lt;/span&gt;
+的任何内容），其中类1有
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(N_1\)
+&lt;/span&gt;
+个样本，类2有
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(N_2\)
+&lt;/span&gt;
+个样本，并且
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(N_1 = N_2\)
+&lt;/span&gt;
+。 任何方法可以实现的最佳错分率是多少？ 使用LOOCV对同一方法的估计的错分类率是多少？&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>6.5 经验风险最小化</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0057/</link>
+      <pubDate>Tue, 16 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0057/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;频率派决策理论存在一个根本问题，即人们实际上无法计算风险函数，因为它依赖于知道真实的数据分布。 （相比之下，贝叶斯后验预期损失总是可以计算，因为它更取决于数据，而不是
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\theta^{\\*}\)
+&lt;/span&gt;
+。）但是，有一个设置可以避免这个问题，这就是预测可观察性量的任务，而不是估计隐藏变量或参数。 也就是说，不再关注形如
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(L(\boldsymbol{\theta},\delta(\mathcal{D}))\)
+&lt;/span&gt;
+的损失函数，其中
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{\theta}\)
+&lt;/span&gt;
+是真实但未知的参数，而
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\delta(\mathcal{D})\)
+&lt;/span&gt;
+是我们的估计器; 而是让我们关注形如
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(L(y,\delta(\boldsymbol{x}))\)
+&lt;/span&gt;
+的损失函数，其中
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(y\)
+&lt;/span&gt;
+是真实但未知的响应，
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\delta(\boldsymbol{x})\)
+&lt;/span&gt;
+是给定输入
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{x}\)
+&lt;/span&gt;
+的预测。 在这种情况下，频率派风险变为&lt;/p&gt;
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+R(p_{\\*},\delta)\overset{\Delta}{=}\mathbb{E}_{(\boldsymbol{x},y) \sim p_{\\*}}\left[L(y,\delta(\boldsymbol{x}))\right]=\sum_{\boldsymbol{x}}{\sum_y{L(y,\delta(\boldsymbol{x}))p_{\\*}(\boldsymbol{x},y)}}   \tag{6.47}
+\]
+&lt;/span&gt;</description>
+    </item>
+    
+    <item>
+      <title>6.6 频率派统计的病态*</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0058/</link>
+      <pubDate>Tue, 16 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0058/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我认为说服一个认为&amp;quot;现在的[频率派]统计实践是明智的&amp;quot;的聪明人是很难的，但通过拟然和贝叶斯定理的方法困难会更少。 - George Box，1962年。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;频率派统计表现出各种形式的奇怪和不良行为，称之为&lt;strong&gt;病态&lt;/strong&gt;(&lt;strong&gt;pathologies&lt;/strong&gt;)。 我们在下面举几个例子，以提醒读者; 这些和其他实例在（Lindley 1972; Lindley和Phillips 1976; Lindley 1982; Berger 1985; Jaynes 2003; Minka 1999）中有更详细的解释。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>6.4 估计器的理想属性</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0056/</link>
+      <pubDate>Mon, 15 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0056/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;由于频率派决策理论没有提供选择最佳估计器的自动方法，我们需要提出其他启发式方法来选择它们。 在本节中，我们将讨论我们所希望估计器应该具有的一些属性。 不幸的是，我们将看到我们无法同时实现所有这些属性。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>6.3 频率派决策理论</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0055/</link>
+      <pubDate>Sun, 14 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0055/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在频率派或经典决策理论中，存在一个损失函数和一个拟然，但没有先验因而没有后验或后验预期损失。 因此，与贝叶斯情况不同，没有自动推导出最优估计器的方法。 相反，在频率派方法中，我们可以自由选择我们想要的任何估计器或决策程序
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\delta：\mathcal{X} \to \mathcal{A}\)
+&lt;/span&gt;
+。&lt;/p&gt;
+&lt;p&gt;选择估计器后，我们将其预期损失或&lt;strong&gt;风险&lt;/strong&gt;定义如下：&lt;/p&gt;
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+R(\theta^{\\*},\delta)\overset{\Delta}{=}\mathbb{E}_{p(\tilde{\mathcal{D}}|\theta^{\\*})}\left[L(\theta^{\\*},\delta(\tilde{\mathcal{D}}))\right]=\int{L(\theta^{\\*},\delta(\tilde{\mathcal{D}}))p(\tilde{\mathcal{D}}|\theta^{\\*})d\tilde{\mathcal{D}}} \tag{6.9}
+\]
+&lt;/span&gt;</description>
+    </item>
+    
+    <item>
+      <title>6.2 估计器的采样分布</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0054/</link>
+      <pubDate>Sat, 13 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0054/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在频率派统计中，通过将&lt;strong&gt;估计器&lt;/strong&gt;
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\delta\)
+&lt;/span&gt;
+应用在某些数据
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathcal{D}\)
+&lt;/span&gt;
+来计算参数估计
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\hat{\boldsymbol{\theta}}\)
+&lt;/span&gt;
+，因此
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\hat{\boldsymbol{\theta}}=δ(\mathcal{D})\)
+&lt;/span&gt;
+。 该参数被视为固定的，并且数据被视为随机的，这与贝叶斯方法完全相反。 可以通过计算估计器的&lt;strong&gt;采样分布&lt;/strong&gt;来测量参数估计的不确定性。 为了理解这个概念，想象从一些真实模型
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(·|\boldsymbol{\theta}^*)\)
+&lt;/span&gt;
+中采样许多不同的数据集
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathcal{D}^{(s)}\)
+&lt;/span&gt;
+，即让
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathcal{D}^{(s)}= \left\{x_i^{(s)}\right\}_{i=1}^N\)
+&lt;/span&gt;
+，其中
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(x_i^s \sim p(·|\boldsymbol{\theta}^*)\)
+&lt;/span&gt;
+，
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{\theta}^*\)
+&lt;/span&gt;
+是真实参数。 这里
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(s = 1:S\)
+&lt;/span&gt;
+已采样数据集的索引，
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(N\)
+&lt;/span&gt;
+是每个这样的数据集的大小。 现在将估计器
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\hat{\theta}(·)\)
+&lt;/span&gt;
+应用到每个
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathcal{D}^{(s)}\)
+&lt;/span&gt;
+以获得一组估计
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\{\hat{\boldsymbol{\theta}}(\mathcal{D}^{(s)})\}\)
+&lt;/span&gt;
+。 当我们让
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(S\to \infty\)
+&lt;/span&gt;
+时，在
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\hat{\theta}(·)\)
+&lt;/span&gt;
+上诱导的分布就是估计器的采样分布。 我们将在后面的章节中讨论使用采样分布的各种方法。 但首先我们描绘了两种计算采样分布本身的方法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>6.1 导论</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0053/</link>
+      <pubDate>Fri, 12 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0053/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我们在第5章中描述的统计推断方法称为贝叶斯统计。 也许令人惊讶的是，这被一些人认为是有争议的，而贝叶斯应用于非统计问题 - 例如医疗诊断（第2.2.3.1节），垃圾邮件过滤（第3.4.4.1节）或飞机跟踪（第18.2.1节）。 - 没有争议。 反对的原因与统计模型的参数和其他类型的未知量之间的误导性区别有关。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>习题</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0052/</link>
+      <pubDate>Thu, 11 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0052/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;习题5.1&lt;/strong&gt; 证明共轭先验的混合确实是共轭的&lt;/p&gt;
+&lt;p&gt;推导等式5.69.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>5.7 贝叶斯决策理论</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0051/</link>
+      <pubDate>Wed, 10 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0051/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我们已经看到概率论如何用来表示和更新我们对世界状况的信念( beliefs)。 然而，最终我们的目标是将我们的信念转化为行动。 在本节中，我们将讨论实现此目的的最佳方法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>5.6 经验贝叶斯</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0050/</link>
+      <pubDate>Tue, 09 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0050/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在分层贝叶斯模型中，我们需要计算多个级别潜在变量的后验。 例如，在两级模型中，我们需要计算&lt;/p&gt;
+
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+p(\boldsymbol{\eta}, \boldsymbol{\theta} | \mathcal{D}) \propto p(\mathcal{D} | \boldsymbol{\theta}) p(\boldsymbol{\theta} | \boldsymbol{\eta}) p(\boldsymbol{\eta})  \tag{5.78}
+\]
+&lt;/span&gt;</description>
+    </item>
+    
+    <item>
+      <title>5.5 分层贝叶斯</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0049/</link>
+      <pubDate>Mon, 08 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0049/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;计算后验
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(\boldsymbol{\theta} | \mathcal{D})\)
+&lt;/span&gt;
+的关键要求是先验
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(\boldsymbol{\theta} | \boldsymbol{\eta})\)
+&lt;/span&gt;
+的指定，其中
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{\eta}\)
+&lt;/span&gt;
+是超参数。 如果我们不知道如何设置
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{\eta}\)
+&lt;/span&gt;
+怎么办？ 在某些情况下，我们可以使用无信息的先验，我们在上面讨论过。 更多贝叶斯方法是在我们的先验前再放置一个先验！ 在图模型（第10章）术语下，我们可以表示如下情况：&lt;/p&gt;
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+\boldsymbol{\eta} \to \boldsymbol{\theta} \to \mathcal{D} \tag{5.76}
+\]
+&lt;/span&gt;</description>
+    </item>
+    
+    <item>
+      <title>5.4 先验</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0048/</link>
+      <pubDate>Sun, 07 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0048/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;贝叶斯统计数据中最具争议的方面是它依赖于先验。 贝叶斯认为这是不可避免的，因为没有人是&lt;strong&gt;白板&lt;/strong&gt;(&lt;strong&gt;tabula rasa&lt;/strong&gt;或&lt;strong&gt;blank slate&lt;/strong&gt;)：所有的推论都必须以某些关于世界的假设为条件。 然而，人们可能有兴趣尽量减少先验假设的影响。 我们将在下面简要讨论一些方法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>5.3贝叶斯模型选择</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0047/</link>
+      <pubDate>Sat, 06 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0047/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在图1.18中，我们看到使用过高度数多项式会导致过拟合，而使用过低度数会导致欠拟合。类似地，在图7.8（a）中，我们看到使用太小正则化参数会导致过拟合，而太大值会导致欠拟合。一般来说，当面对一组不同复杂度的模型（即参数分布族）时，我们应该如何选择最好的模型呢？这称为&lt;strong&gt;模型选择&lt;/strong&gt;问题。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>5.2 后验分布总结</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0046/</link>
+      <pubDate>Fri, 05 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0046/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;后验
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(\boldsymbol{\theta} | \mathcal{D})\)
+&lt;/span&gt;
+总结了我们所知道的关于未知量
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{\theta}\)
+&lt;/span&gt;
+的一切。 在本节中，我们将讨论一些可以从概率分布中导出的简单量，例如后验。这些摘要统计数据通常比完整联合更容易理解和可视化。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>5.1 导言</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0045/</link>
+      <pubDate>Thu, 04 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0045/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我们已经看到了各种不同的概率模型，并且也讨论了如何拟合数据，即我们讨论过使用各种不同的先验来计算MAP参数估计
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\hat{\boldsymbol{\theta}}={\rm argmax} \ p(\boldsymbol{\theta} | \mathcal{D})\)
+&lt;/span&gt;
+。 我们还讨论了对于某些特殊情况如何计算完整的后验
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(\boldsymbol{\theta} | \mathcal{D})\)
+&lt;/span&gt;
+，以及后验预测密度
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(\boldsymbol{x} | \mathcal{D})\)
+&lt;/span&gt;
+（在后面的章节中，我们将讨论一般情况下的算法）。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>第四章 高斯模型</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/04gaussian_models/</link>
+      <pubDate>Wed, 03 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/04gaussian_models/</guid>
+      <description>待续</description>
+    </item>
+    
+    <item>
+      <title>Exercises</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0044/</link>
+      <pubDate>Tue, 02 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0044/</guid>
+      <description>返回本章目录</description>
+    </item>
+    
+    <item>
+      <title>3.5 朴素贝叶斯分类器</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0043/</link>
+      <pubDate>Mon, 01 Jul 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0043/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在本节中，我们将讨论如何对离散值特征的向量进行分类，
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{x} \in {1,\dots,K}^D\)
+&lt;/span&gt;
+，其中
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(K\)
+&lt;/span&gt;
+是每个特征的值域数， 
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(D\)
+&lt;/span&gt;
+是特征的数量。我们将使用生成方法。这要求我们指定类条件分布
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(\boldsymbol{x} | y=c)\)
+&lt;/span&gt;
+。最简单的方法是假设特征是&lt;strong&gt;条件独立的&lt;/strong&gt;, 对给定类标签。这使我们可以将类条件密度写成一维密度的乘积:&lt;/p&gt;
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+p(\boldsymbol{x} | y=c, \boldsymbol{\theta}) = \prod_{j=1}^D {p(\boldsymbol{x}_j | y=c, \theta_{jc}) } \tag{3.54}
+\]
+&lt;/span&gt;
+
+&lt;p&gt;此模型被称为 &lt;strong&gt;朴素贝叶斯分类器&lt;/strong&gt; （NBC）。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>3.4 狄利克雷-多项模型</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0042/</link>
+      <pubDate>Sun, 30 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0042/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在上一节中，我们讨论了如何推断硬币&amp;quot;正面&amp;quot;出现的概率。在本节中，我们推广这些结果，以推断出有
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(K\)
+&lt;/span&gt;
+面的骰子出现第
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(k\)
+&lt;/span&gt;
+面的概率。这似乎是另一种玩具练习，但将在后面看到, 我们的研究方法将被广泛用于分析文本数据，生物序列数据等。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>3.3 贝塔-二项模型</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0041/</link>
+      <pubDate>Sat, 29 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0041/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在给定一离散观察序列的情况下, 数字游戏涉及从有限假设空间推断出离散变量的分布, 
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(h \in \mathcal{H}\)
+&lt;/span&gt;
+。这使计算变得特别简单：我们只需要求和，乘和除。然而，在许多应用中，未知参数是连续的，因此假设空间是
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathbb{R}^K\)
+&lt;/span&gt;
+的某个子集, 其中
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(K\)
+&lt;/span&gt;
+是参数的个数. 这使数学变得复杂，因为我们必须用积分代替和。但是，基本思路是一样的。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>3.2 贝叶斯概念学习</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0040/</link>
+      <pubDate>Fri, 28 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0040/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;考虑孩子如何学习理解单词的含义，例如“狗”。据推测，孩子的父母指出了这个概念的正面例子，说“看着可爱的小狗！”或“小心小狗”等等。然而，他们提供反面的例子是不太可能的，“看看那只非狗“?。当然，在积极的学习过程中可能会得到负面的例子 - 孩子说“看狗”，父母说“那是猫，亲爱的，不是狗” - 但心理学研究表明，人们可以仅从正面例子来学习概念（Xu和Tenenbaum 2007）。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>3.1 引言</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0039/</link>
+      <pubDate>Thu, 27 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0039/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在第2.2.3.2中，我们讨论了如何对特征矢量
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{x}\)
+&lt;/span&gt;
+进行分类: 应用贝叶斯法则得到形如下式的生成式分类器:&lt;/p&gt;
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+p(y=c | \boldsymbol{x},\boldsymbol{\theta}) \propto p(\boldsymbol{x} | y=c ,\boldsymbol{\theta}) p(y=c |\boldsymbol{\theta}) \tag{3.1}
+\]
+&lt;/span&gt;</description>
+    </item>
+    
+    <item>
+      <title>Exercises</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0038/</link>
+      <pubDate>Wed, 26 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0038/</guid>
+      <description>返回本章目录</description>
+    </item>
+    
+    <item>
+      <title>2.6 Transformations of random variables</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0035/</link>
+      <pubDate>Tue, 25 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0035/</guid>
+      <description>返回本章目录</description>
+    </item>
+    
+    <item>
+      <title>2.7 Monte Carlo approximation</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0036/</link>
+      <pubDate>Tue, 25 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0036/</guid>
+      <description>返回本章目录</description>
+    </item>
+    
+    <item>
+      <title>2.8 Information theory</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0037/</link>
+      <pubDate>Tue, 25 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0037/</guid>
+      <description>返回本章目录</description>
+    </item>
+    
+    <item>
+      <title>2.5 联合概率分布</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0034/</link>
+      <pubDate>Mon, 24 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0034/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;到目前为止，我们一直专注于建模单变量概率分布。 在本节中，我们开始讨论在多个相关随机变量上建立联合概率分布的更具挑战性的问题; 这将是本书的核心主题。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;联合概率分布&lt;/strong&gt;形如
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(x_1,\dots,x_D),D&gt;1\)
+&lt;/span&gt;
+，并且模拟变量之间的（随机）关系。 如果所有变量都是离散的，我们可以将联合分布表示为一个大的多维数组，每个维度有一个变量。 但是，定义这种模型所需的参数数量是
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(O(K^D)\)
+&lt;/span&gt;
+，其中K是每个变量的状态数。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2.4 一些常见的连续分布</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0033/</link>
+      <pubDate>Sun, 23 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0033/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在本节中，我们展现了一些常用的单变量（一维）连续概率分布。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2.3 一些常见的离散分布</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0032/</link>
+      <pubDate>Sat, 22 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0032/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在本节中，我们将回顾在离散状态空间(包括有限状态和可数无限状态)上定义的一些常用参数分布。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2.2 概率论的简要回顾</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0031/</link>
+      <pubDate>Fri, 21 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0031/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;本节是对概率论基础知识的简要回顾，仅仅是对可能“荒疏”的读者的复习。 已经熟悉这些基础知识的读者可以安全地跳过本节。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2.1 导论</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0030/</link>
+      <pubDate>Thu, 20 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0030/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;概率论只不过是把常识归纳为计算问题。 - 皮埃尔·拉普拉斯，1812年&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在前一章中，我们看到了概率如何在机器学习中发挥有用的作用。 在本章中，我们将更详细地讨论概率论。 我们没有足够的空间来详细说明 - 为此，你最好查阅一些关于这个主题的优秀教科书，例如（Jaynes 2003; Bertsekas和Tsitsiklis 2008; Wasserman 2004）。 但我们将简要回顾一下您在后面章节中需要的许多关键想法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Exercises</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0029/</link>
+      <pubDate>Wed, 19 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0029/</guid>
+      <description>返回本章目录</description>
+    </item>
+    
+    <item>
+      <title>1.4 机器学习的一些基本概念</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0028/</link>
+      <pubDate>Tue, 18 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0028/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/01introduction/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在本节中，我们将介绍机器学习中的一些关键思想。 我们将在本书后面对这些概念进行扩展，但我们将在此简要介绍它们，以便给引起大家兴趣。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>1.3 无监督学习</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0027/</link>
+      <pubDate>Mon, 17 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0027/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/01introduction/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我们现在考虑&lt;strong&gt;无监督学习&lt;/strong&gt;，我们只给出输出数据，没有任何输入。目标是在数据中发现“有趣的结构”;这有时被称为&lt;strong&gt;知识发现&lt;/strong&gt;。与监督学习不同，我们没有被告知每个输入所期望输出是什么。相反，我们将我们的任务形式化为&lt;strong&gt;密度估计&lt;/strong&gt;中的一种，也就是说，我们想要构建形如
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(\boldsymbol{x}_i | \boldsymbol{\theta})\)
+&lt;/span&gt;
+的模型。与有监督情形有两点不同。首先，我们写了
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(\boldsymbol{x}_i | \boldsymbol{\theta})\)
+&lt;/span&gt;
+而不是
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(p(y_i | \boldsymbol{x}_i,\boldsymbol{\theta})\)
+&lt;/span&gt;
+;也就是说，监督学习是条件密度估计，而无监督学习是无条件密度估计。其次，
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\boldsymbol{x}_i\)
+&lt;/span&gt;
+是特征向量，因此我们需要创建多变量概率模型。相比之下，在监督学习中，
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(y_i\)
+&lt;/span&gt;
+通常只是我们试图预测的单个变量。这意味着对于大多数监督学习问题，我们可以使用单变量概率模型（参数依赖的输入），这显着简化了问题。 （我们将在第19章讨论多输出分类，我们将在其中看到它还涉及多变量概率模型。）&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>1.2 监督学习</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0026/</link>
+      <pubDate>Sun, 16 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0026/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/01introduction/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;我们通过讨论监督学习来开始我们对机器学习的研究，监督学习是在实践中最广泛使用的ML的形式。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>1.1 机器学习：什么和为什么？</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0025/</link>
+      <pubDate>Sat, 15 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/01introduction/0025/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/01introduction/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我们淹没在信息中，渴望知识。 — John Naisbitt。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我们正在进入&lt;strong&gt;大数据&lt;/strong&gt;时代。 例如，有大约1万亿个网页; YouTube一个小时的视频上传，每天相当于10年的内容;1000多人的基因组，每个人的长度为3.8×109个碱基对，已被各种实验室测序; 沃尔玛每小时处理超过1M笔交易，数据库包含超过2.5千兆字节（2.5×1015）的信息（Cukier 2010）; 等等。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>第八章 估值理论</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0024/</link>
+      <pubDate>Sat, 26 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0024/</guid>
+      <description>&lt;h2 id=&#34;离散随机模型&#34;&gt;离散随机模型&lt;/h2&gt;
+&lt;p&gt;考虑
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(N+1\)
+&lt;/span&gt;
+个资产，经历
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(T\)
+&lt;/span&gt;
+个时间单位的，关于价格的离散随机过程：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;前续&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;当前&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;后续&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;时刻&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(t-1\)
+&lt;/span&gt;
+&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(t\)
+&lt;/span&gt;
+&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(t+1\)
+&lt;/span&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;状态&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\phi(s,t)\)
+&lt;/span&gt;
+&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(s=\phi(z,t+1)\)
+&lt;/span&gt;
+&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(z\)
+&lt;/span&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;时刻
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(t\)
+&lt;/span&gt;
+的每个&lt;strong&gt;状态&lt;/strong&gt;
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(s\)
+&lt;/span&gt;
+代表：在时刻
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(t\)
+&lt;/span&gt;
+的历史价格路径。如果给定时刻
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(t\)
+&lt;/span&gt;
+的状态
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(s\)
+&lt;/span&gt;
+，那么
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(s\)
+&lt;/span&gt;
+有确定的&lt;strong&gt;前续状态&lt;/strong&gt;记为
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\phi(s,t)\)
+&lt;/span&gt;
+，而
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(s\)
+&lt;/span&gt;
+的&lt;strong&gt;后续状态&lt;/strong&gt;是不确定的，将
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(s\)
+&lt;/span&gt;
+所有可能的&lt;strong&gt;后续状态集&lt;/strong&gt;记为
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\Omega(s,t)\)
+&lt;/span&gt;
+；并且将时刻
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(t\)
+&lt;/span&gt;
+的&lt;strong&gt;所有状态集&lt;/strong&gt;记为
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\Phi(t)\)
+&lt;/span&gt;
+。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>第七章 预期收益率和套利定价理论</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0023/</link>
+      <pubDate>Fri, 25 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0023/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;套利定价理论(APT)是资本资产定价模型(CAPM)在预测预期收益率上的一个有趣而强力的替代选择。&lt;/p&gt;
+&lt;p&gt;尽管CAPM抓住了最重要的角色－－市场，但是忽略了其它因素对预期收益率的影响，必然在某些时期会出现系统性缺陷。&lt;/p&gt;
+&lt;p&gt;APT是生成预期收益率的模型。&lt;/p&gt;
+&lt;p&gt;APT的应用是艺术，而非科学。&lt;/p&gt;
+&lt;p&gt;APT关注因子和预期收益率之间的关系。&lt;/p&gt;
+&lt;p&gt;APT的灵活性导致它不适合作为一致预期收益率的模型。&lt;/p&gt;
+&lt;p&gt;APT是主动投资经理的一个信息来源。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>第六章 主动管理基本定律</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0022/</link>
+      <pubDate>Thu, 24 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0022/</guid>
+      <description>&lt;h2 id=&#34;基本定律&#34;&gt;基本定律&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;主动管理基本定律&lt;/strong&gt;是信息率的一种近似表达。&lt;/p&gt;
+&lt;p&gt;这条定律基于投资策略的两条基本属性：&lt;/p&gt;
+&lt;p&gt;１）投资策略的&lt;strong&gt;广度&lt;/strong&gt;（
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathrm{BR}\)
+&lt;/span&gt;
+）：策略每年对超常收益率作出的独立预测的数目。&lt;/p&gt;
+&lt;p&gt;２）投资经理的&lt;strong&gt;信息系数&lt;/strong&gt;（
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathrm{IC}\)
+&lt;/span&gt;
+）：每个预测与实现结果之间的相关系数，表征投资经理的能力。简化假设：所有预测的
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathrm{IC}\)
+&lt;/span&gt;
+都是相同的。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>第五章 残差风险和残差收益率：信息率</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0021/</link>
+      <pubDate>Wed, 23 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0021/</guid>
+      <description>&lt;h2 id=&#34;阿尔法&#34;&gt;阿尔法&lt;/h2&gt;
+&lt;p&gt;向未来看（先验），阿尔法是对残差收益率的预测；向过去看（后验），阿尔法是实现的残差收益率的均值。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;阿尔法&lt;/strong&gt;和&lt;strong&gt;贝塔&lt;/strong&gt;都源自线性回归模型（见第2章笔记：超额收益率分解）。&lt;/p&gt;
+&lt;p&gt;本章专注阿尔法的预测；第１２章将评估阿尔法预测的质量；第１７章考虑实现的阿尔法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>第四章 超常收益率、业绩基准和附加值</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0020/</link>
+      <pubDate>Tue, 22 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0020/</guid>
+      <description>&lt;p&gt;CAPM提供一致预期收益率，多因子模型可以帮助控制风险。本章讨论如何进行预期收益率的预测，并概述如何将预测转化成投资组合。&lt;/p&gt;
+&lt;h2 id=&#34;业绩基准&#34;&gt;业绩基准&lt;/h2&gt;
+&lt;p&gt;业绩基准组合的别称：标杆、规范组合。业绩基准组合是投资管理机构化的产物。&lt;/p&gt;
+&lt;p&gt;弃用&lt;strong&gt;市场组合&lt;/strong&gt;，转而使用&lt;strong&gt;业绩基准组合&lt;/strong&gt;。 在新的分析框架下，贝塔、残差风险都是相对某个业绩基准组合而言。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>第三章 风险</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0019/</link>
+      <pubDate>Mon, 21 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0019/</guid>
+      <description>&lt;h2 id=&#34;标准差&#34;&gt;标准差&lt;/h2&gt;
+&lt;p&gt;书中介绍了风险的各种定义及其优劣，最终还是选择标准差作为本书的风险定义。&lt;/p&gt;
+&lt;p&gt;尽管&lt;strong&gt;标准差&lt;/strong&gt;具有某些不足，只要我的假设中依赖或近似依赖正态分布，那么推荐标准差这个风险度量定义。因为它能满足我们普适，对称，灵活和可精确预测的要求。若无特殊要求，我们讨论的风险总是指收益率的年化标准差（以百分之一为单位）。&lt;/p&gt;
+&lt;p&gt;投资组合
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(r_P=\sum_i{w_i r_i}\)
+&lt;/span&gt;
+的标准差：&lt;/p&gt;
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \[
+\begin{aligned}
+   \sigma_P &amp; =\sqrt{\sum_{i,j}{\rho_{i,j}(w_i \sigma_i)(w_j \sigma_j)}} \\
+   &amp; \le \sqrt{(\sum_i{w_i \sigma_i})^2}  \\
+   &amp; = \sum_i{w_i \sigma_i}
+\end{aligned}
+\]
+&lt;/span&gt;</description>
+    </item>
+    
+    <item>
+      <title>第二章 一致预期收益率：资本资产定价模型</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0018/</link>
+      <pubDate>Sun, 20 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0018/</guid>
+      <description>&lt;h2 id=&#34;几个概念&#34;&gt;几个概念&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;收益率&lt;/strong&gt;
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(R_P\)
+&lt;/span&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;某个资产P在某个期间的收益率。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;超额收益率&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;超额&lt;/strong&gt;是相对无风险资产而言的，于是资产的超额收益率
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(r_P\)
+&lt;/span&gt;
+就是资产收益率
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(R_P\)
+&lt;/span&gt;
+与同期无风险资产收益率
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(R_f\)
+&lt;/span&gt;
+的差额：&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>第一章 绪论</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0017/</link>
+      <pubDate>Sat, 19 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0017/</guid>
+      <description>&lt;p&gt;投资的艺术正在演变成投资的科学。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;有效市场理论&lt;/strong&gt;任务无法战胜市场；而&lt;strong&gt;量化主动管理&lt;/strong&gt;则试图战胜市场。&lt;/p&gt;
+&lt;p&gt;尽管&lt;strong&gt;量化主动管理&lt;/strong&gt;试图战胜市场，但承认这的确不容易。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;量化主动管理&lt;/strong&gt;是&lt;strong&gt;现代投资组合理论&lt;/strong&gt;的穷亲戚：有现代投资组合理论的威力和结构，却没有合法的名分。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

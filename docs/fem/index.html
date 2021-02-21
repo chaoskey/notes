@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="《有限元法自动求解微分方程》【翻译】"><meta property="og:title" content="《有限元法自动求解微分方程》【翻译】" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/" />
+<meta property="og:updated_time" content="2020-12-16T15:20:35+08:00" />
+<title>《有限元法自动求解微分方程》【翻译】 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<link rel="alternate" type="application/rss+xml" href="https://chaoskey.gitee.io/notes/docs/fem/index.xml" title="学习笔记" />
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"class=active><strong>有限元法自动求解微分方程</strong></a>
+<ul>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E6%96%B9%E6%B3%95">第二章 有限元方法</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%B8%B8%E8%A7%81%E6%9C%89%E9%99%90%E5%85%83">第三章 常见有限元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8%E5%8F%82%E8%80%83%E5%8D%95%E5%85%83">第四章 构造通用参考单元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F">第五章 有限元变分形式</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%BB%84%E8%A3%85">第六章 有限元组装</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%AD%A3%E4%BA%A4%E8%A1%A8%E7%A4%BA">第七章 有限元变分形式的正交表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA">第八章 有限元变分形式的张量表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E7%9A%84%E7%A6%BB%E6%95%A3%E4%BC%98%E5%8C%96">第九章 有限元矩阵计算的离散优化</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E7%AB%A0-dolfincpython%E6%9C%89%E9%99%90%E5%85%83%E5%BA%93">第十章 DOLFIN：C++/Python有限元库</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-ufl%E6%9C%89%E9%99%90%E5%85%83%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80">第十七章 UFL：有限元形式语言</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-unicorn%E7%BB%9F%E4%B8%80%E7%9A%84%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6%E6%B1%82%E8%A7%A3%E5%99%A8">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>《有限元法自动求解微分方程》【翻译】</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#有限元法自动求解微分方程翻译">《有限元法自动求解微分方程》【翻译】</a>
+      <ul>
+        <li><a href="#------------i方法论------------"><strong>&mdash;&mdash;&mdash;&ndash; I.方法论 &mdash;&mdash;&mdash;&ndash;</strong></a></li>
+        <li><a href="#第二章-有限元方法">第二章 有限元方法</a></li>
+        <li><a href="#第三章-常见有限元">第三章 常见有限元</a></li>
+        <li><a href="#第四章-构造通用参考单元">第四章 构造通用参考单元</a></li>
+        <li><a href="#第五章-有限元变分形式">第五章 有限元变分形式</a></li>
+        <li><a href="#第六章-有限元组装">第六章 有限元组装</a></li>
+        <li><a href="#第七章-有限元变分形式的正交表示">第七章 有限元变分形式的正交表示</a></li>
+        <li><a href="#第八章-有限元变分形式的张量表示">第八章 有限元变分形式的张量表示</a></li>
+        <li><a href="#第九章-有限元矩阵计算的离散优化">第九章 有限元矩阵计算的离散优化</a></li>
+        <li><a href="#------------ii实现------------"><strong>&mdash;&mdash;&mdash;&ndash; II·实现 &mdash;&mdash;&mdash;&ndash;</strong></a></li>
+        <li><a href="#第十章-dolfincpython有限元库">第十章 DOLFIN：C＋＋／Python有限元库</a></li>
+        <li><a href="#第十七章-ufl有限元形式语言">第十七章 UFL：有限元形式语言</a></li>
+        <li><a href="#第十八章-unicorn统一的连续介质力学求解器">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+<article class="markdown"><h1 id="有限元法自动求解微分方程翻译">《有限元法自动求解微分方程》【翻译】</h1>
+<p><a href="/notes/docs/julia/0094/">有限元法解偏微分方程（FEniCS）</a></p>
+<p><a href="/notes/docs/julia/0096/">有限元法求解牛顿流体（FEniCS）</a></p>
+<p>这两篇笔记仅做入门之用【用来代替第1章】。</p>
+<p>为了深入掌握，建议阅读《Automated Solution of Differential Equations by the Finite Element Method》。 为此，我一边学习一边翻译权当笔记。</p>
+<p>原书链接：https://pan.baidu.com/s/1v-hqfK0Z6HzA5AAQoaVRvg
+提取码：ulss
+【如果链接失效，评论中通知我，我看到会更新】</p>
+
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(\color{red}{学习进行中...}\)
+</span>
+
+<h2 id="------------i方法论------------"><strong>&mdash;&mdash;&mdash;&ndash; I.方法论 &mdash;&mdash;&mdash;&ndash;</strong></h2>
+<h2 id="第二章-有限元方法">第二章 有限元方法</h2>
+<div class="book-columns flex flex-wrap">
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li><a href="/notes/docs/fem/0097/">有限元方法</a>
+<ul>
+<li><a href="/notes/docs/fem/0097/#21-%e4%b8%80%e4%b8%aa%e7%ae%80%e5%8d%95%e7%9a%84%e6%a8%a1%e5%9e%8b%e9%97%ae%e9%a2%98">2·1 一个简单的模型问题</a></li>
+<li><a href="/notes/docs/fem/0097/#22-%e6%9c%89%e9%99%90%e5%85%83%e7%a6%bb%e6%95%a3%e5%8c%96">2·2 有限元离散化</a>
+<ul>
+<li><a href="/notes/docs/fem/0097/#221-%e6%b3%8a%e6%9d%be%e6%96%b9%e7%a8%8b%e7%a6%bb%e6%95%a3%e5%8c%96">2·2·1 泊松方程离散化</a></li>
+<li><a href="/notes/docs/fem/0097/#222-%e4%b8%80%e9%98%b6%e6%96%b9%e7%a8%8b%e7%bb%84%e7%a6%bb%e6%95%a3%e5%8c%96">2·2·2 一阶方程组离散化</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0097/#23-%e6%9c%89%e9%99%90%e5%85%83%e6%8a%bd%e8%b1%a1%e5%bd%a2%e5%bc%8f">2·3 有限元抽象形式</a>
+<ul>
+<li><a href="/notes/docs/fem/0097/#231-%e7%ba%bf%e6%80%a7%e9%97%ae%e9%a2%98">2·3·1 线性问题</a></li>
+<li><a href="/notes/docs/fem/0097/#232-%e9%9d%9e%e7%ba%bf%e6%80%a7%e9%97%ae%e9%a2%98">2·3·2 非线性问题</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0098/#24-%e6%9c%89%e9%99%90%e5%85%83%e5%87%bd%e6%95%b0%e7%a9%ba%e9%97%b4">2·4 有限元函数空间</a>
+<ul>
+<li><a href="/notes/docs/fem/0098/#241-%e7%bd%91%e6%a0%bc">2·4·1 网格</a></li>
+<li><a href="/notes/docs/fem/0098/#242-%e6%9c%89%e9%99%90%e5%85%83%e5%ae%9a%e4%b9%89">2·4·2 有限元定义</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="/notes/docs/fem/0098/#243-%e8%8a%82%e7%82%b9%e5%9f%ba%e5%ba%95">2·4·3 节点基底</a></li>
+<li><a href="/notes/docs/fem/0098/#244-%e5%b1%80%e9%83%a8%e5%88%b0%e5%85%a8%e5%b1%80%e6%98%a0%e5%b0%84">2·4·4 局部到全局映射</a></li>
+<li><a href="/notes/docs/fem/0098/#245-%e5%85%a8%e5%b1%80%e5%87%bd%e6%95%b0%e7%a9%ba%e9%97%b4">2·4·5 全局函数空间</a></li>
+<li><a href="/notes/docs/fem/0098/#246-%e5%8f%82%e8%80%83%e5%8d%95%e5%85%83%e7%9a%84%e6%98%a0%e5%b0%84">2·4·6 参考单元的映射</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0098/#25-%e6%9c%89%e9%99%90%e5%85%83%e6%b1%82%e8%a7%a3%e5%99%a8">2·5 有限元求解器</a></li>
+<li><a href="/notes/docs/fem/0099/#26-%e6%9c%89%e9%99%90%e5%85%83%e8%af%af%e5%b7%ae%e4%bc%b0%e8%ae%a1%e5%92%8c%e9%80%82%e5%ba%94%e6%80%a7">2·6 有限元误差估计和适应性</a>
+<ul>
+<li><a href="/notes/docs/fem/0099/#261-%e5%85%88%e9%aa%8c%e8%af%af%e5%b7%ae%e5%88%86%e6%9e%90">2·6·1 先验误差分析</a></li>
+<li><a href="/notes/docs/fem/0099/#262-%e5%90%8e%e9%aa%8c%e8%af%af%e5%b7%ae%e5%88%86%e6%9e%90">2·6·2 后验误差分析</a></li>
+<li><a href="/notes/docs/fem/0099/#263-%e9%80%82%e5%ba%94%e6%80%a7">2·6·3 适应性</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0099/#27-%e8%87%aa%e5%8a%a8%e5%8c%96%e6%9c%89%e9%99%90%e5%85%83%e6%96%b9%e6%b3%95">2·7 自动化有限元方法</a></li>
+<li><a href="/notes/docs/fem/0099/#28-%e5%8e%86%e5%8f%b2%e8%af%84%e6%b3%a8">2·8 历史评注</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+</div>
+
+<h2 id="第三章-常见有限元">第三章 常见有限元</h2>
+<div class="book-columns flex flex-wrap">
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li><a href="/notes/docs/fem/0100/">常见有限元</a>
+<ul>
+<li><a href="/notes/docs/fem/0100/#31-%e6%9c%89%e9%99%90%e5%85%83%e5%ae%9a%e4%b9%89">3·1 有限元定义</a></li>
+<li><a href="/notes/docs/fem/0100/#32-%e8%ae%b0%e5%8f%b7">3·2 记号</a></li>
+<li><a href="/notes/docs/fem/0100/#33-h%e6%9c%89%e9%99%90%e5%85%83">3·3 H¹有限元</a>
+<ul>
+<li><a href="/notes/docs/fem/0100/#331-%e6%8b%89%e6%a0%bc%e6%9c%97%e6%97%a5%e5%8d%95%e5%85%83">3·3·1 拉格朗日单元</a></li>
+<li><a href="/notes/docs/fem/0100/#332-crouzeixraviart%e5%8d%95%e5%85%83">3·3·2 Crouzeix–Raviart单元</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0101/#34-hdiv%e6%9c%89%e9%99%90%e5%85%83">3·4 H(div) 有限元</a>
+<ul>
+<li><a href="/notes/docs/fem/0101/#341-raviartthomas%e5%8d%95%e5%85%83">3·4·1 Raviart–Thomas单元</a></li>
+<li><a href="/notes/docs/fem/0101/#342-brezzidouglasmarini%e5%8d%95%e5%85%83">3·4·2 Brezzi–Douglas–Marini单元</a></li>
+<li><a href="/notes/docs/fem/0101/#343-mardaltaiwinther%e5%8d%95%e5%85%83">3·4·3 Mardal-Tai-Winther单元</a></li>
+<li><a href="/notes/docs/fem/0101/#344-arnoldwinther%e5%8d%95%e5%85%83">3·4·4 Arnold–Winther单元</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li>
+<ul>
+<li><a href="/notes/docs/fem/0101/#35-hcurl%e6%9c%89%e9%99%90%e5%85%83">3·5 H(curl) 有限元</a>
+<ul>
+<li><a href="/notes/docs/fem/0101/#351-%e7%ac%ac%e4%b8%80%e7%a7%8dnedelec-hcurl%e5%8d%95%e5%85%83">3·5·1 第一种Nédélec H(curl)单元</a></li>
+<li><a href="/notes/docs/fem/0101/#352-%e7%ac%ac%e4%ba%8c%e7%a7%8dnedelec-hcurl%e5%8d%95%e5%85%83">3·5·2 第二种Nédélec H(curl)单元</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0102/#36-l-%e6%9c%89%e9%99%90%e5%85%83">3·6 L² 有限元</a>
+<ul>
+<li><a href="/notes/docs/fem/0102/#361-%e4%b8%8d%e8%bf%9e%e7%bb%ad%e6%8b%89%e6%a0%bc%e6%9c%97%e6%97%a5">3·6·1 不连续拉格朗日</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0102/#37-h%e6%9c%89%e9%99%90%e5%85%83">3·7 H²有限元</a>
+<ul>
+<li><a href="/notes/docs/fem/0102/#371-argyris%e5%8d%95%e5%85%83">3·7·1 Argyris单元</a></li>
+<li><a href="/notes/docs/fem/0102/#372-hermite%e5%8d%95%e5%85%83">3·7·2 Hermite单元</a></li>
+<li><a href="/notes/docs/fem/0102/#373-morley%e5%8d%95%e5%85%83">3·7·3 Morley单元</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0102/#38-%e5%bc%ba%e5%8c%96%e6%9c%89%e9%99%90%e5%85%83">3·8 强化有限元</a></li>
+<li><a href="/notes/docs/fem/0102/#39-%e6%9c%89%e9%99%90%e5%85%83%e5%a4%96%e5%be%ae%e7%a7%af%e5%88%86feec">3·9 有限元外微积分(FEEC)</a></li>
+<li><a href="/notes/docs/fem/0102/#310-%e5%b0%8f%e7%bb%93">3·10 小结</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+</div>
+
+<h2 id="第四章-构造通用参考单元">第四章 构造通用参考单元</h2>
+<div class="book-columns flex flex-wrap">
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li><a href="/notes/docs/fem/0103/">构造通用参考单元</a>
+<ul>
+<li><a href="/notes/docs/fem/0103/#41-%e8%83%8c%e6%99%af">4·1 背景</a></li>
+<li><a href="/notes/docs/fem/0103/#42-%e9%a2%84%e5%a4%87">4·2 预备</a></li>
+<li><a href="/notes/docs/fem/0103/#43-%e6%95%b0%e5%ad%a6%e6%a1%86%e6%9e%b6">4·3 数学框架</a>
+<ul>
+<li><a href="/notes/docs/fem/0103/#431-%e5%9f%ba%e5%ba%95%e5%8f%98%e6%9b%b4">4·3·1 基底变更</a></li>
+<li><a href="/notes/docs/fem/0103/#432-%e5%a4%9a%e9%a1%b9%e5%bc%8f%e7%a9%ba%e9%97%b4">4·3·2 多项式空间</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0104/#44-%e5%8d%95%e5%85%83%e7%9a%84%e4%be%8b%e5%ad%90">4·4 单元的例子</a>
+<ul>
+<li><a href="/notes/docs/fem/0104/#441-%e5%85%b6%e5%ae%83%e5%a4%9a%e9%a1%b9%e5%bc%8f%e7%a9%ba%e9%97%b4%e7%9a%84%e5%9f%ba%e5%ba%95">4·4·1 其它多项式空间的基底</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li>
+<ul>
+<li><a href="/notes/docs/fem/0104/#45-%e5%a4%9a%e9%a1%b9%e5%bc%8f%e7%a9%ba%e9%97%b4%e4%b8%8a%e7%9a%84%e6%93%8d%e4%bd%9c">4·5 多项式空间上的操作</a>
+<ul>
+<li><a href="/notes/docs/fem/0104/#451-%e6%b1%82%e5%80%bc">4·5·1 求值</a></li>
+<li><a href="/notes/docs/fem/0104/#452-%e5%be%ae%e5%88%86">4·5·2 微分</a></li>
+<li><a href="/notes/docs/fem/0104/#453-%e7%a7%af%e5%88%86">4·5·3 积分</a></li>
+<li><a href="/notes/docs/fem/0104/#454-%e7%bb%b4%e9%9d%a2facet%e5%85%b3%e8%81%94">4·5·4 维面（facet）关联</a></li>
+<li><a href="/notes/docs/fem/0104/#455-%e7%ba%bf%e6%80%a7%e6%b3%9b%e5%87%bd">4·5·5 线性泛函</a></li>
+<li><a href="/notes/docs/fem/0104/#456-%e5%8f%82%e8%80%83%e5%8d%95%e5%85%83%e7%9a%84%e6%98%a0%e5%b0%84">4·5·6 参考单元的映射</a></li>
+<li><a href="/notes/docs/fem/0104/#457-%e5%b1%80%e9%83%a8%e5%88%b0%e5%85%a8%e5%b1%80%e7%9a%84%e8%87%aa%e7%94%b1%e5%ba%a6%e6%98%a0%e5%b0%84">4·5·7 局部到全局的自由度映射</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+</div>
+
+<h2 id="第五章-有限元变分形式">第五章 有限元变分形式</h2>
+<div class="book-columns flex flex-wrap">
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li><a href="/notes/docs/fem/0105/">有限元变分形式</a>
+<ul>
+<li><a href="/notes/docs/fem/0105/#51-%e8%83%8c%e6%99%af">5·1 背景</a></li>
+<li><a href="/notes/docs/fem/0105/#52-%e5%a4%9a%e9%87%8d%e7%ba%bf%e6%80%a7%e5%bd%a2%e5%bc%8f">5·2 多重线性形式</a>
+<ul>
+<li><a href="/notes/docs/fem/0105/#521-%e4%be%8b%e5%ad%90">5·2·1 例子</a></li>
+<li><a href="/notes/docs/fem/0105/#522-%e6%ad%a3%e5%88%99%e5%bd%a2%e5%bc%8f">5·2·2 正则形式</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li>
+<ul>
+<li><a href="/notes/docs/fem/0105/#53-%e7%a6%bb%e6%95%a3%e5%a4%9a%e9%87%8d%e7%ba%bf%e6%80%a7%e5%bd%a2%e5%bc%8f">5·3 离散多重线性形式</a></li>
+<li><a href="/notes/docs/fem/0105/#54-%e5%a4%9a%e9%87%8d%e7%ba%bf%e6%80%a7%e5%bd%a2%e5%bc%8f%e7%9a%84%e4%bd%9c%e7%94%a8">5·4 多重线性形式的作用</a></li>
+<li><a href="/notes/docs/fem/0105/#55-%e5%a4%9a%e9%87%8d%e7%ba%bf%e6%80%a7%e5%bd%a2%e5%bc%8f%e7%9a%84%e5%af%bc%e6%95%b0">5·5 多重线性形式的导数</a></li>
+<li><a href="/notes/docs/fem/0105/#56-%e5%8f%8c%e7%ba%bf%e6%80%a7%e5%bd%a2%e5%bc%8f%e7%9a%84%e4%bc%b4%e9%9a%8f">5·6 双线性形式的伴随</a></li>
+<li><a href="/notes/docs/fem/0105/#57-%e5%85%b3%e4%ba%8e%e8%af%95%e6%8e%a2%e5%87%bd%e6%95%b0%e5%92%8c%e6%b5%8b%e8%af%95%e5%87%bd%e6%95%b0%e7%9a%84%e8%af%b4%e6%98%8e">5·7 关于试探函数和测试函数的说明</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+</div>
+
+<h2 id="第六章-有限元组装">第六章 有限元组装</h2>
+<div class="book-columns flex flex-wrap">
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li><a href="/notes/docs/fem/0106/">有限元组装</a>
+<ul>
+<li><a href="/notes/docs/fem/0106/#61-%e7%bb%84%e8%a3%85%e7%ae%97%e6%b3%95">6·1 组装算法</a></li>
+<li><a href="/notes/docs/fem/0106/#62-%e5%ae%9e%e7%8e%b0">6·2 实现</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li>
+<ul>
+<li><a href="/notes/docs/fem/0106/#63-%e8%be%b9%e7%95%8c%e6%9d%a1%e4%bb%b6%e7%9a%84%e5%af%b9%e7%a7%b0%e5%ba%94%e7%94%a8">6·3 边界条件的对称应用</a></li>
+<li><a href="/notes/docs/fem/0106/#64-%e5%b9%b6%e8%a1%8c%e7%bb%84%e8%a3%85">6·4 并行组装</a></li>
+<li><a href="/notes/docs/fem/0106/#65-%e6%97%a0%e7%9f%a9%e9%98%b5%e6%96%b9%e6%b3%95">6·5 无矩阵方法</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+</div>
+
+<h2 id="第七章-有限元变分形式的正交表示">第七章 有限元变分形式的正交表示</h2>
+<div class="book-columns flex flex-wrap">
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li><a href="/notes/docs/fem/0107/">有限元变分形式的正交表示</a>
+<ul>
+<li><a href="/notes/docs/fem/0107/#71-%e6%a0%87%e5%87%86%e6%ad%a3%e4%ba%a4%e8%a1%a8%e7%a4%ba">7·1 标准正交表示</a></li>
+<li><a href="/notes/docs/fem/0107/#72-%e6%ad%a3%e4%ba%a4%e4%bc%98%e5%8c%96">7·2 正交优化</a>
+<ul>
+<li><a href="/notes/docs/fem/0107/#721-%e9%9b%b6%e6%b6%88%e9%99%a4%e6%93%8d%e4%bd%9c">7·2·1 零消除操作</a></li>
+<li><a href="/notes/docs/fem/0107/#722-%e5%8c%96%e7%ae%80%e8%a1%a8%e8%be%be%e5%bc%8f">7·2·2 化简表达式</a></li>
+<li><a href="/notes/docs/fem/0107/#723-%e7%a7%af%e5%88%86%e7%82%b9%e5%b8%b8%e9%87%8f%e9%a2%84%e8%ae%a1%e7%ae%97">7·2·3 积分点常量预计算</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="/notes/docs/fem/0107/#724-%e5%9f%ba%e5%b8%b8%e9%87%8f%e9%a2%84%e8%ae%a1%e7%ae%97">7·2·4 基常量预计算</a></li>
+<li><a href="/notes/docs/fem/0107/#725-%e8%bf%9b%e4%b8%80%e6%ad%a5%e4%bc%98%e5%8c%96">7·2·5 进一步优化</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0108/#73-%e6%80%a7%e8%83%bd%e6%af%94%e8%be%83">7·3 性能比较</a>
+<ul>
+<li><a href="/notes/docs/fem/0108/#731-%e6%ad%a3%e4%ba%a4%e4%bc%98%e5%8c%96%e7%9a%84%e6%80%a7%e8%83%bd">7·3·1 正交优化的性能</a></li>
+<li><a href="/notes/docs/fem/0108/#732-%e6%ad%a3%e4%ba%a4%e5%92%8c%e5%bc%a0%e9%87%8f%e8%a1%a8%e7%a4%ba%e7%9a%84%e7%9b%b8%e5%af%b9%e6%80%a7%e8%83%bd">7·3·2 正交和张量表示的相对性能</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0108/#74-%e8%a1%a8%e7%a4%ba%e7%9a%84%e8%87%aa%e5%8a%a8%e9%80%89%e6%8b%a9">7·4 表示的自动选择</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+</div>
+
+<h2 id="第八章-有限元变分形式的张量表示">第八章 有限元变分形式的张量表示</h2>
+<div class="book-columns flex flex-wrap">
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li><a href="/notes/docs/fem/0109/">有限元变分形式的张量表示</a>
+<ul>
+<li><a href="/notes/docs/fem/0109/#81-%e6%b3%8a%e6%9d%be%e6%96%b9%e7%a8%8b%e7%9a%84%e5%bc%a0%e9%87%8f%e8%a1%a8%e7%a4%ba">8·1 泊松方程的张量表示</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li>
+<ul>
+<li><a href="/notes/docs/fem/0109/#82-%e8%a1%a8%e7%a4%ba%e5%ae%9a%e7%90%86">8·2 表示定理</a></li>
+<li><a href="/notes/docs/fem/0109/#83-%e6%89%a9%e5%b1%95%e5%92%8c%e9%99%90%e5%88%b6">8·3 扩展和限制</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+</div>
+
+<h2 id="第九章-有限元矩阵计算的离散优化">第九章 有限元矩阵计算的离散优化</h2>
+<div class="book-columns flex flex-wrap">
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li><a href="/notes/docs/fem/0110/">有限元矩阵计算的离散优化</a>
+<ul>
+<li><a href="/notes/docs/fem/0110/#91-%e4%bc%98%e5%8c%96%e6%a1%86%e6%9e%b6">9·1 优化框架</a></li>
+<li><a href="/notes/docs/fem/0110/#92-%e6%8b%93%e6%89%91%e4%bc%98%e5%8c%96">9·2 拓扑优化</a></li>
+<li><a href="/notes/docs/fem/0110/#93-%e5%9b%be%e9%97%ae%e9%a2%98">9·3 图问题</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li>
+<ul>
+<li><a href="/notes/docs/fem/0110/#94-%e5%87%a0%e4%bd%95%e4%bc%98%e5%8c%96">9·4 几何优化</a></li>
+<li><a href="/notes/docs/fem/0110/#95-%e7%a8%a0%e5%af%86%e7%ba%bf%e6%80%a7%e4%bb%a3%e6%95%b0%e7%9a%84%e4%bc%98%e5%8c%96">9·5 稠密线性代数的优化</a></li>
+<li><a href="/notes/docs/fem/0110/#96-%e5%ae%9e%e7%8e%b0%e6%b3%a8%e8%ae%b0">9·6 实现注记</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+</div>
+
+<h2 id="------------ii实现------------"><strong>&mdash;&mdash;&mdash;&ndash; II·实现 &mdash;&mdash;&mdash;&ndash;</strong></h2>
+<h2 id="第十章-dolfincpython有限元库">第十章 DOLFIN：C＋＋／Python有限元库</h2>
+<div class="book-columns flex flex-wrap">
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li><a href="/notes/docs/fem/0111/">DOLFIN：C++/Python有限元库</a>
+<ul>
+<li><a href="/notes/docs/fem/0111/#101-%e6%a6%82%e8%bf%b0">10·1 概述</a></li>
+<li><a href="/notes/docs/fem/0111/#102-%e7%94%a8%e6%88%b7%e6%8e%a5%e5%8f%a3">10·2 用户接口</a>
+<ul>
+<li><a href="/notes/docs/fem/0111/#1021-c%e6%8e%a5%e5%8f%a3">10·2·1 C++接口</a></li>
+<li><a href="/notes/docs/fem/0111/#1022-python%e6%8e%a5%e5%8f%a3">10·2·2 Python接口</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0112/#103-%e5%8a%9f%e8%83%bd">10·3 功能</a>
+<ul>
+<li><a href="/notes/docs/fem/0112/#1031-%e7%ba%bf%e6%80%a7%e4%bb%a3%e6%95%b0">10·3·1 线性代数</a></li>
+<li><a href="/notes/docs/fem/0113/#1032-%e7%bd%91%e6%a0%bc">10·3·2 网格</a></li>
+<li><a href="/notes/docs/fem/0114/#1033-%e6%9c%89%e9%99%90%e5%85%83">10·3·3 有限元</a></li>
+<li><a href="/notes/docs/fem/0114/#1034-%e5%87%bd%e6%95%b0%e7%a9%ba%e9%97%b4">10·3·4 函数空间</a></li>
+<li><a href="/notes/docs/fem/0114/#1035-%e5%87%bd%e6%95%b0">10·3·5 函数</a></li>
+<li><a href="/notes/docs/fem/0114/#1036-%e8%a1%a8%e8%be%be%e5%bc%8f">10·3·6 表达式</a></li>
+<li><a href="/notes/docs/fem/0115/#1037-%e5%8f%98%e5%88%86%e5%bd%a2%e5%bc%8f">10·3·7 变分形式</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="/notes/docs/fem/0115/#1038-%e6%9c%89%e9%99%90%e5%85%83%e7%bb%84%e8%a3%85">10·3·8 有限元组装</a></li>
+<li><a href="/notes/docs/fem/0115/#1039-%e8%be%b9%e7%95%8c%e6%9d%a1%e4%bb%b6">10·3·9 边界条件</a></li>
+<li><a href="/notes/docs/fem/0116/#10310-%e5%8f%98%e5%88%86%e9%97%ae%e9%a2%98">10·3·10 变分问题</a></li>
+<li><a href="/notes/docs/fem/0116/#10311-%e6%96%87%e4%bb%b6io%e5%92%8c%e5%8f%af%e8%a7%86%e5%8c%96">10·3·11 文件I/O和可视化</a></li>
+<li><a href="/notes/docs/fem/0117/#10312-%e6%97%a5%e5%bf%97%e8%af%8a%e6%96%ad">10·3·12 日志/诊断</a></li>
+<li><a href="/notes/docs/fem/0117/#10313-%e5%8f%82%e6%95%b0">10·3·13 参数</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0118/#104-%e5%ae%9e%e7%8e%b0%e6%b3%a8%e8%ae%b0">10·4 实现注记</a>
+<ul>
+<li><a href="/notes/docs/fem/0118/#1041-%e5%b9%b6%e8%a1%8c%e8%ae%a1%e7%ae%97">10·4·1 并行计算</a></li>
+<li><a href="/notes/docs/fem/0118/#1042-%e5%ae%9e%e7%8e%b0%e5%92%8cpython%e6%8e%a5%e5%8f%a3%e7%94%9f%e6%88%90">10·4·2 实现和Python接口生成</a></li>
+<li><a href="/notes/docs/fem/0118/#1043-ufl%e9%9b%86%e6%88%90%e5%92%8c%e5%8d%b3%e6%97%b6%e7%bc%96%e8%af%91%e5%99%a8">10·4·3 UFL集成和即时编译器</a></li>
+<li><a href="/notes/docs/fem/0118/#1044-numpy%e5%92%8cscipy%e6%95%b4%e5%90%88">10·4·4 NumPy和SciPy整合</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0118/#105-%e5%8e%86%e5%8f%b2%e6%b3%a8%e8%ae%b0">10·5 历史注记</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+</div>
+
+<h2 id="第十七章-ufl有限元形式语言">第十七章 UFL：有限元形式语言</h2>
+<div class="book-columns flex flex-wrap">
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li><a href="/notes/docs/fem/0119/">UFL：有限元形式语言</a></li>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="/notes/docs/fem/0119/#1701-%e7%9b%b8%e5%85%b3%e5%b7%a5%e4%bd%9c">17·0·1 相关工作</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0119/#171-%e6%a6%82%e8%bf%b0">17·1 概述</a>
+<ul>
+<li><a href="/notes/docs/fem/0119/#1711-%e8%ae%be%e8%ae%a1%e7%9b%ae%e6%a0%87">17·1·1 设计目标</a></li>
+<li><a href="/notes/docs/fem/0119/#1712-%e5%8a%a8%e6%9c%ba%e7%9a%84%e4%be%8b%e5%ad%90">17·1·2 动机的例子</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0119/#172-%e5%ae%9a%e4%b9%89%e6%9c%89%e9%99%90%e5%85%83%e7%a9%ba%e9%97%b4">17·2 定义有限元空间</a></li>
+<li><a href="/notes/docs/fem/0119/#173-%e5%ae%9a%e4%b9%89%e5%bd%a2%e5%bc%8f">17·3 定义形式</a></li>
+<li><a href="/notes/docs/fem/0120/#174-%e5%ae%9a%e4%b9%89%e8%a1%a8%e8%be%be%e5%bc%8f">17·4 定义表达式</a>
+<ul>
+<li><a href="/notes/docs/fem/0120/#1741-%e5%bd%a2%e5%bc%8f%e7%9a%84%e5%8f%82%e6%95%b0">17·4·1 形式的参数</a></li>
+<li><a href="/notes/docs/fem/0120/#1742-%e7%b4%a2%e5%bc%95%e8%ae%b0%e5%8f%b7">17·4·2 索引记号</a></li>
+<li><a href="/notes/docs/fem/0120/#1743-%e4%bb%a3%e6%95%b0%e7%ae%97%e7%ac%a6%e5%92%8c%e5%87%bd%e6%95%b0">17·4·3 代数算符和函数</a></li>
+<li><a href="/notes/docs/fem/0120/#1744-%e5%be%ae%e5%88%86%e7%ae%97%e7%ac%a6">17·4·4 微分算符</a></li>
+<li><a href="/notes/docs/fem/0120/#1745-%e5%85%b6%e4%bb%96%e7%ae%97%e7%ac%a6">17·4·5 其他算符</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0121/#175-%e5%bd%a2%e5%bc%8f%e7%ae%97%e7%ac%a6">17·5 形式算符</a>
+<ul>
+<li><a href="/notes/docs/fem/0121/#1751-%e5%bd%a2%e5%bc%8f%e7%9a%84%e5%be%ae%e5%88%86">17·5·1 形式的微分</a></li>
+<li><a href="/notes/docs/fem/0121/#1752-%e4%bc%b4%e9%9a%8f">17·5·2 伴随</a></li>
+<li><a href="/notes/docs/fem/0121/#1753-%e6%9b%bf%e6%8d%a2%e5%87%bd%e6%95%b0">17·5·3 替换函数</a></li>
+<li><a href="/notes/docs/fem/0121/#1754-%e4%bd%9c%e7%94%a8">17·5·4 作用</a></li>
+<li><a href="/notes/docs/fem/0121/#1755-%e7%b3%bb%e7%bb%9f%e5%88%86%e5%89%b2">17·5·5 系统分割</a></li>
+<li><a href="/notes/docs/fem/0121/#1756-%e8%ae%a1%e7%ae%97%e5%87%bd%e6%95%b0%e7%9a%84%e6%95%8f%e6%84%9f%e6%80%a7">17·5·6 计算函数的敏感性</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0121/#176-%e8%a1%a8%e8%be%be%e5%bc%8f%e7%9a%84%e8%a1%a8%e7%a4%ba">17·6 表达式的表示</a>
+<ul>
+<li><a href="/notes/docs/fem/0121/#1761-%e8%a1%a8%e8%be%be%e5%bc%8f%e7%9a%84%e7%bb%93%e6%9e%84">17·6·1 表达式的结构</a></li>
+<li><a href="/notes/docs/fem/0121/#1762-%e8%a1%a8%e8%be%be%e5%bc%8f%e5%af%b9%e8%b1%a1">17·6·2 表达式对象</a></li>
+<li><a href="/notes/docs/fem/0121/#1763-%e8%a1%a8%e8%be%be%e5%bc%8f%e5%b1%9e%e6%80%a7">17·6·3 表达式属性</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="/notes/docs/fem/0121/#1764-%e6%a0%91%e8%a1%a8%e7%a4%ba">17·6·4 树表示</a></li>
+<li><a href="/notes/docs/fem/0121/#1765-%e5%9b%be%e8%a1%a8%e7%a4%ba">17·6·5 图表示</a></li>
+<li><a href="/notes/docs/fem/0121/#1766-%e5%88%92%e5%88%86">17·6·6 划分</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0122/#177-%e8%ae%a1%e7%ae%97%e5%af%bc%e6%95%b0">17·7 计算导数</a>
+<ul>
+<li><a href="/notes/docs/fem/0122/#1771-%e8%ae%a1%e7%ae%97%e5%af%bc%e6%95%b0%e7%9a%84%e6%96%b9%e6%b3%95">17·7·1 计算导数的方法</a></li>
+<li><a href="/notes/docs/fem/0122/#1772-%e5%89%8d%e5%90%91%e6%a8%a1%e5%bc%8f%e8%87%aa%e5%8a%a8%e5%be%ae%e5%88%86">17·7·2 前向模式自动微分</a></li>
+<li><a href="/notes/docs/fem/0122/#1773-%e5%bc%a0%e9%87%8f%e5%92%8c%e7%b4%a2%e5%bc%95%e8%a1%a8%e8%be%be%e5%bc%8f%e7%9a%84%e6%89%a9%e5%b1%95">17·7·3 张量和索引表达式的扩展</a></li>
+<li><a href="/notes/docs/fem/0122/#1774-%e9%ab%98%e9%98%b6%e5%af%bc%e6%95%b0">17·7·4 高阶导数</a></li>
+<li><a href="/notes/docs/fem/0122/#1775-%e5%9f%ba%e6%9c%ac%e5%be%ae%e5%88%86%e8%a7%84%e5%88%99">17·7·5 基本微分规则</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0122/#178-%e7%ae%97%e6%b3%95">17·8 算法</a>
+<ul>
+<li><a href="/notes/docs/fem/0122/#1781-python%e4%b8%ad%e7%9a%84%e6%9c%89%e6%95%88%e6%a0%91%e9%81%8d%e5%8e%86">17·8·1 Python中的有效树遍历</a></li>
+<li><a href="/notes/docs/fem/0122/#1782-python%e4%b8%ad%e5%9f%ba%e4%ba%8e%e7%b1%bb%e5%9e%8b%e7%9a%84%e5%87%bd%e6%95%b0%e5%88%86%e6%b4%be">17·8·2 Python中基于类型的函数分派</a></li>
+<li><a href="/notes/docs/fem/0122/#1783-%e8%a1%a8%e8%be%be%e5%bc%8f%e5%8f%98%e6%8d%a2%e7%9a%84%e5%ae%9e%e7%8e%b0">17·8·3 表达式变换的实现</a></li>
+<li><a href="/notes/docs/fem/0123/#1784-%e9%87%8d%e8%a6%81%e7%9a%84%e5%8f%98%e6%8d%a2">17·8·4 重要的变换</a></li>
+<li><a href="/notes/docs/fem/0123/#1785-%e8%a1%a8%e8%be%be%e5%bc%8f%e6%b1%82%e5%80%bc">17·8·5 表达式求值</a></li>
+<li><a href="/notes/docs/fem/0123/#1786-%e8%a1%a8%e8%be%be%e5%bc%8f%e6%9f%a5%e7%9c%8b">17·8·6 表达式查看</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0123/#179-%e5%ae%9e%e7%8e%b0%e7%9a%84%e9%97%ae%e9%a2%98">17·9 实现的问题</a>
+<ul>
+<li><a href="/notes/docs/fem/0123/#1791-python%e4%bd%9c%e4%b8%ba%e9%a2%86%e5%9f%9f%e4%b8%93%e7%94%a8%e8%af%ad%e8%a8%80%e7%9a%84%e5%9f%ba%e7%a1%80">17·9·1 Python作为领域专用语言的基础</a></li>
+<li><a href="/notes/docs/fem/0123/#1792-%e7%a1%ae%e4%bf%9d%e5%bd%a2%e5%bc%8f%e7%ad%be%e5%90%8d%e7%9a%84%e5%94%af%e4%b8%80%e6%80%a7">17·9·2 确保形式签名的唯一性</a></li>
+<li><a href="/notes/docs/fem/0123/#1793-%e6%95%88%e7%8e%87%e8%80%83%e9%87%8f">17·9·3 效率考量</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0123/#1710-%e7%bb%93%e8%ae%ba%e5%92%8c%e6%9c%aa%e6%9d%a5%e6%96%b9%e5%90%91">17·10 结论和未来方向</a></li>
+<li><a href="/notes/docs/fem/0123/#1711-%e8%87%b4%e8%b0%a2">17·11 致谢</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+</div>
+
+<h2 id="第十八章-unicorn统一的连续介质力学求解器">第十八章 Unicorn：统一的连续介质力学求解器</h2>
+<div class="book-columns flex flex-wrap">
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li><a href="/notes/docs/fem/0124/">Unicorn：统一的连续介质力学求解器</a>
+<ul>
+<li><a href="/notes/docs/fem/0124/#181-%e8%83%8c%e6%99%af">18·1 背景</a></li>
+<li><a href="/notes/docs/fem/0124/#182-%e7%bb%9f%e4%b8%80%e7%9a%84%e8%bf%9e%e7%bb%ad%e4%bb%8b%e8%b4%a8%e5%bb%ba%e6%a8%a1">18·2 统一的连续介质建模</a></li>
+<li><a href="/notes/docs/fem/0124/#183-%e6%97%b6%e7%a9%ba%e7%9a%84%e4%b8%80%e8%88%acgalerkin%e7%a6%bb%e6%95%a3%e5%8c%96">18·3 时空的一般Galerkin离散化</a>
+<ul>
+<li><a href="/notes/docs/fem/0124/#1831-%e6%a0%87%e5%87%86galerkin">18·3·1 标准Galerkin</a></li>
+<li><a href="/notes/docs/fem/0124/#1832-%e5%b1%80%e5%9f%9fale">18·3·2 局域ALE</a></li>
+<li><a href="/notes/docs/fem/0124/#1833-%e5%8a%a0%e6%9d%83%e6%9c%80%e5%b0%8f%e4%ba%8c%e4%b9%98%e7%a8%b3%e5%ae%9a%e5%8c%96">18·3·3 加权最小二乘稳定化</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0125/#184-%e5%ae%9e%e7%8e%b0">18·4 实现</a>
+<ul>
+<li><a href="/notes/docs/fem/0125/#1841-unicorn%e7%b1%bb%e6%8e%a5%e5%8f%a3">18·4·1 Unicorn类/接口</a></li>
+<li><a href="/notes/docs/fem/0125/#1842-timedependentpde">18·4·2 TimeDependentPDE</a></li>
+<li><a href="/notes/docs/fem/0125/#1843-errorestimate">18·4·3 ErrorEstimate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="/notes/docs/fem/0125/#1844-spacetimefunction">18·4·4 SpaceTimeFunction</a></li>
+<li><a href="/notes/docs/fem/0125/#1845-slipbc">18·4·5 SlipBC</a></li>
+<li><a href="/notes/docs/fem/0125/#1846-elasticsmoother">18·4·6 ElasticSmoother</a></li>
+<li><a href="/notes/docs/fem/0125/#1847-meshadaptinterface">18·4·7 MeshAdaptInterface</a></li>
+</ul>
+</li>
+<li>18·5 解决连续介质力学问题
+<ul>
+<li>18·5·1 流固耦合</li>
+<li>18·5·2 适应性</li>
+<li>18·5·3 Unicorn-HPC安装和基本测试</li>
+</ul>
+</li>
+<li>18·6 致谢</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+</div></article>
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/_index.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/fem/_index.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#有限元法自动求解微分方程翻译">《有限元法自动求解微分方程》【翻译】</a>
+      <ul>
+        <li><a href="#------------i方法论------------"><strong>&mdash;&mdash;&mdash;&ndash; I.方法论 &mdash;&mdash;&mdash;&ndash;</strong></a></li>
+        <li><a href="#第二章-有限元方法">第二章 有限元方法</a></li>
+        <li><a href="#第三章-常见有限元">第三章 常见有限元</a></li>
+        <li><a href="#第四章-构造通用参考单元">第四章 构造通用参考单元</a></li>
+        <li><a href="#第五章-有限元变分形式">第五章 有限元变分形式</a></li>
+        <li><a href="#第六章-有限元组装">第六章 有限元组装</a></li>
+        <li><a href="#第七章-有限元变分形式的正交表示">第七章 有限元变分形式的正交表示</a></li>
+        <li><a href="#第八章-有限元变分形式的张量表示">第八章 有限元变分形式的张量表示</a></li>
+        <li><a href="#第九章-有限元矩阵计算的离散优化">第九章 有限元矩阵计算的离散优化</a></li>
+        <li><a href="#------------ii实现------------"><strong>&mdash;&mdash;&mdash;&ndash; II·实现 &mdash;&mdash;&mdash;&ndash;</strong></a></li>
+        <li><a href="#第十章-dolfincpython有限元库">第十章 DOLFIN：C＋＋／Python有限元库</a></li>
+        <li><a href="#第十七章-ufl有限元形式语言">第十七章 UFL：有限元形式语言</a></li>
+        <li><a href="#第十八章-unicorn统一的连续介质力学求解器">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

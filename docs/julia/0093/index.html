@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="有限元之Delaunay三角剖分"><meta property="og:title" content="有限元之Delaunay三角剖分" />
+<meta property="og:description" content="上一篇笔记，讨论了一个单独的三角单元。 本篇讨论，如何将任意给定平面区域刨分成三角单元序列。
+本文用到了 python库scipy.spatial.Delaunay
+参考文献： https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/julia/0093/" />
+<meta property="article:published_time" content="2020-11-06T09:55:10+08:00" />
+<meta property="article:modified_time" content="2020-11-06T09:55:10+08:00" />
+<title>有限元之Delaunay三角剖分 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a>
+<ul>
+<li><a href="/notes/docs/julia/0001/">整合Julia和Python的集成环境（Win10）</a></li>
+<li><a href="/notes/docs/julia/0095/">科学计算环境搭建（Win10+WSL2+Ubuntu）</a></li>
+<li><a href="/notes/docs/julia/0002/">Julia中的数学符号演算</a></li>
+<li><a href="/notes/docs/julia/0003/">基于Julia的科学计算功能库整理</a></li>
+<li><a href="/notes/docs/diffgeo/0070/">微分几何中的计算</a></li>
+<li><a href="/notes/docs/julia/0088/">平面三体问题</a></li>
+<li><a href="/notes/docs/julia/0089/">有限差分法求解一维热传导方程</a></li>
+<li><a href="/notes/docs/julia/0090/">Galerkin法解常微分方程边值问题</a></li>
+<li><a href="/notes/docs/julia/0091/">有限元法解常微分方程边值问题</a></li>
+<li><a href="/notes/docs/julia/0092/">有限元之平面三角单元</a></li>
+<li><a href="/notes/docs/julia/0093/"class=active>有限元之Delaunay三角剖分</a></li>
+<li><a href="/notes/docs/julia/0094/">有限元法解偏微分方程（FEniCS）</a></li>
+<li><a href="/notes/docs/julia/0096/">有限元法求解牛顿流体（FEniCS）</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>有限元之Delaunay三角剖分</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-随机生成玩具点集">1) 随机生成玩具点集</a></li>
+        <li><a href="#2-生成delaunay三角刨分">2) 生成Delaunay三角刨分</a></li>
+        <li><a href="#3面积坐标重心坐标和普通坐标">3）面积坐标（重心坐标）和普通坐标</a>
+          <ul>
+            <li><a href="#1根据普通坐标计算重心坐标">1）根据普通坐标计算重心坐标</a></li>
+            <li><a href="#2根据重心坐标计算普通坐标">2）根据重心坐标计算普通坐标</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/julia/0094/">
+    下一页<br>有限元法解偏微分方程（FEniCS）
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/julia/0092/">
+      上一页<br>有限元之平面三角单元
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/julia/0093/">有限元之Delaunay三角剖分</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-11-06</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/julia">julia</a>
+      , 
+      <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95">有限元法</a>
+      , 
+      <a href="/notes/tags/Delaunay">Delaunay</a>
+      , 
+      <a href="/notes/tags/%E4%B8%89%E8%A7%92%E5%89%96%E5%88%86">三角剖分</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/julia/0093.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<p>上一篇笔记，讨论了一个单独的<code>三角单元</code>。 本篇讨论，如何将任意给定平面区域刨分成<code>三角单元序列</code>。</p>
+<p>本文用到了 python库<code>scipy.spatial.Delaunay</code></p>
+<p><strong>参考文献</strong>： <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html">https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 奇怪：这个库必须放在最前面才能一次加载成功</span>
+<span style="color:#66d9ef">using</span> Plots
+gr()
+</code></pre></div><pre><code>Plots.GRBackend()
+</code></pre>
+<h2 id="1-随机生成玩具点集">1) 随机生成玩具点集</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#66d9ef">using</span> LinearAlgebra
+<span style="color:#66d9ef">using</span> Random
+
+<span style="color:#75715e"># 随机生成平面点序(要求任意两点的距离不得太小)</span>
+n <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+dmin <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>
+
+X <span style="color:#f92672">=</span> zeros(n,<span style="color:#ae81ff">2</span>)
+X[<span style="color:#ae81ff">1</span>,<span style="color:#f92672">:</span>] <span style="color:#f92672">=</span> [rand(),rand()]
+
+i<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>
+<span style="color:#66d9ef">while</span> i <span style="color:#f92672">&lt;=</span> n
+    x <span style="color:#f92672">=</span> [rand(),rand()]
+    <span style="color:#66d9ef">if</span> min([norm(X[j,<span style="color:#f92672">:</span>]<span style="color:#f92672">-</span>x) <span style="color:#66d9ef">for</span> j <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">...</span>) <span style="color:#f92672">&gt;=</span> dmin
+        X[i,<span style="color:#f92672">:</span>] <span style="color:#f92672">=</span> x
+        i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">end</span> 
+<span style="color:#66d9ef">end</span>
+</code></pre></div><h2 id="2-生成delaunay三角刨分">2) 生成Delaunay三角刨分</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#66d9ef">using</span> SciPy<span style="color:#f92672">:</span> spatial
+
+tri <span style="color:#f92672">=</span> spatial<span style="color:#f92672">.</span>Delaunay(X)
+
+plot()
+<span style="color:#75715e">#plot(X[:,1], X[:,2], seriestype = :scatter, label=&#34;&#34;)</span>
+<span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>size(X)[<span style="color:#ae81ff">1</span>]
+    plot!(; annotations<span style="color:#f92672">=</span>[ (X[i,<span style="color:#ae81ff">1</span>]<span style="color:#f92672">+</span><span style="color:#ae81ff">0.01</span>,X[i,<span style="color:#ae81ff">2</span>]<span style="color:#f92672">+</span><span style="color:#ae81ff">0.01</span>,text(i,<span style="color:#ae81ff">10</span>)) ] );
+<span style="color:#66d9ef">end</span>
+
+sp <span style="color:#f92672">=</span> tri<span style="color:#f92672">.</span>simplices <span style="color:#f92672">.+</span> <span style="color:#ae81ff">1</span> 
+n, <span style="color:#f92672">=</span> size(sp)
+
+<span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>n
+    idx <span style="color:#f92672">=</span> sp[i,<span style="color:#f92672">:</span>] 
+    pts <span style="color:#f92672">=</span> X[idx,<span style="color:#f92672">:</span>]
+    plot!(pts[<span style="color:#f92672">:</span>,<span style="color:#ae81ff">1</span>], pts[<span style="color:#f92672">:</span>,<span style="color:#ae81ff">2</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;black&#34;</span>,label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)
+    plot!(pts[[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>],<span style="color:#ae81ff">1</span>], pts[[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>],<span style="color:#ae81ff">2</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;black&#34;</span>,label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)
+<span style="color:#66d9ef">end</span>
+plot!()
+</code></pre></div><p><img src="/notes/images/0163.svg" alt="0163.svg"></p>
+<p>通过下面的代码，可以准确理解<code>simplices</code>（三角形序列）和<code>neighbors</code>（邻居序列）这两个变量的含义。</p>
+<p><code>simplices</code>每一行代表：三个顶点索引（0起始索引）
+<code>neighbors</code>每一行代表：三个顶点对面的三角形索引（0起始索引）</p>
+<p>【注意： Julia数组是1起始索引，为了避免错误不妨先作转换】</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 转换成1起始索引，确保和Julia习惯一致</span>
+sp <span style="color:#f92672">=</span> tri<span style="color:#f92672">.</span>simplices <span style="color:#f92672">.+</span> <span style="color:#ae81ff">1</span>
+<span style="color:#75715e"># 注意，原本-1代表没有邻居，转换后0代表没有邻居</span>
+nb <span style="color:#f92672">=</span> tri<span style="color:#f92672">.</span>neighbors <span style="color:#f92672">.+</span> <span style="color:#ae81ff">1</span>
+
+println(<span style="color:#e6db74">&#34;【和前图图对照即可明白】</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>)
+<span style="color:#66d9ef">for</span> j <span style="color:#66d9ef">in</span> eachindex(sp[<span style="color:#f92672">:</span>,<span style="color:#ae81ff">1</span>])
+    println(<span style="color:#e6db74">&#34;第&#34;</span>,j,<span style="color:#e6db74">&#34;个三角形：&#34;</span>,sp[j,<span style="color:#f92672">:</span>])
+    <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>
+        <span style="color:#66d9ef">if</span> nb[j,i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>
+            println(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">此三角形的顶点&#34;</span>,sp[j,i],<span style="color:#e6db74">&#34;对面没有三角形邻居&#34;</span>)
+        <span style="color:#66d9ef">else</span>
+            println(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">此三角形的顶点&#34;</span>,sp[j,i],<span style="color:#e6db74">&#34;对面的邻居第&#34;</span>,nb[j,i],<span style="color:#e6db74">&#34;个三角形：&#34;</span>,sp[nb[j,i],<span style="color:#f92672">:</span>])
+        <span style="color:#66d9ef">end</span>
+    <span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><pre><code>【和前图图对照即可明白】
+
+第1个三角形：[4, 10, 7]
+    此三角形的顶点4对面没有三角形邻居
+    此三角形的顶点10对面的邻居第5个三角形：[6, 4, 7]
+    此三角形的顶点7对面的邻居第11个三角形：[4, 8, 10]
+第2个三角形：[6, 2, 1]
+    此三角形的顶点6对面没有三角形邻居
+    此三角形的顶点2对面的邻居第3个三角形：[4, 6, 1]
+    此三角形的顶点1对面的邻居第4个三角形：[2, 6, 7]
+第3个三角形：[4, 6, 1]
+    此三角形的顶点4对面的邻居第2个三角形：[6, 2, 1]
+    此三角形的顶点6对面的邻居第6个三角形：[3, 4, 1]
+    此三角形的顶点1对面的邻居第5个三角形：[6, 4, 7]
+第4个三角形：[2, 6, 7]
+    此三角形的顶点2对面的邻居第5个三角形：[6, 4, 7]
+    此三角形的顶点6对面没有三角形邻居
+    此三角形的顶点7对面的邻居第2个三角形：[6, 2, 1]
+第5个三角形：[6, 4, 7]
+    此三角形的顶点6对面的邻居第1个三角形：[4, 10, 7]
+    此三角形的顶点4对面的邻居第4个三角形：[2, 6, 7]
+    此三角形的顶点7对面的邻居第3个三角形：[4, 6, 1]
+第6个三角形：[3, 4, 1]
+    此三角形的顶点3对面的邻居第3个三角形：[4, 6, 1]
+    此三角形的顶点4对面的邻居第7个三角形：[9, 3, 1]
+    此三角形的顶点1对面的邻居第12个三角形：[3, 8, 4]
+第7个三角形：[9, 3, 1]
+    此三角形的顶点9对面的邻居第6个三角形：[3, 4, 1]
+    此三角形的顶点3对面没有三角形邻居
+    此三角形的顶点1对面的邻居第8个三角形：[5, 3, 9]
+第8个三角形：[5, 3, 9]
+    此三角形的顶点5对面的邻居第7个三角形：[9, 3, 1]
+    此三角形的顶点3对面没有三角形邻居
+    此三角形的顶点9对面的邻居第10个三角形：[5, 8, 3]
+第9个三角形：[8, 5, 10]
+    此三角形的顶点8对面没有三角形邻居
+    此三角形的顶点5对面的邻居第11个三角形：[4, 8, 10]
+    此三角形的顶点10对面的邻居第10个三角形：[5, 8, 3]
+第10个三角形：[5, 8, 3]
+    此三角形的顶点5对面的邻居第12个三角形：[3, 8, 4]
+    此三角形的顶点8对面的邻居第8个三角形：[5, 3, 9]
+    此三角形的顶点3对面的邻居第9个三角形：[8, 5, 10]
+第11个三角形：[4, 8, 10]
+    此三角形的顶点4对面的邻居第9个三角形：[8, 5, 10]
+    此三角形的顶点8对面的邻居第1个三角形：[4, 10, 7]
+    此三角形的顶点10对面的邻居第12个三角形：[3, 8, 4]
+第12个三角形：[3, 8, 4]
+    此三角形的顶点3对面的邻居第11个三角形：[4, 8, 10]
+    此三角形的顶点8对面的邻居第6个三角形：[3, 4, 1]
+    此三角形的顶点4对面的邻居第10个三角形：[5, 8, 3]
+</code></pre>
+<h2 id="3面积坐标重心坐标和普通坐标">3）面积坐标（重心坐标）和普通坐标</h2>
+<p>在三角形情形中，<code>重心坐标</code>也叫<code>面积坐标</code>。</p>
+<h3 id="1根据普通坐标计算重心坐标">1）根据普通坐标计算重心坐标</h3>
+<p>原则上，我们可根据下面的公式（参见：笔记
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(\color{blue}{《有限元之平面三角单元》}\)
+</span>
+）算出<code>重心坐标</code>。</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\color{red}{\left\{\begin{aligned}l_1&=\frac{1}{2S}\left[(x_2 y_3-x_3 y_2)+(y_2-y_3)x+(x_3-x_2)y\right]\\ l_2&=\frac{1}{2S}\left[(x_3 y_1-x_1 y_3)+(y_3-y_1)x+(x_1-x_3)y\right]\\ l_3&=\frac{1}{2S}\left[(x_1 y_2-x_2 y_1)+(y_1-y_2)x+(x_2-x_1)y\right]\end{aligned} \right.}} \\ 2S=\begin{vmatrix}1 & x_1 & y_1 \\ 1 & x_2 & y_2 \\ 1 & x_3 & y_3 \end{vmatrix}  \\ \quad \\ l_1+l_2+l_3=1
+\]
+</span>
+
+<p>但<code>scipy.spatial.Delaunay</code>提供了相关的数据支持，我们可更方便计算（具体说明见代码注释）：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 在三角形情形中，重心坐标也叫面积坐标</span>
+<span style="color:#75715e"># 函数说明，transform(nsimplex, ndim+1, ndim)</span>
+<span style="color:#75715e"># 定义： Tc = x - r</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e"># 第i个三角形的inv(T)：transform(i, 1:ndim, 1:ndim)</span>
+<span style="color:#75715e"># 第i个三角形的r：     transform(i, ndim+1, 1:ndim)</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e"># 据此, 给定x可算出对应的重心坐标c </span>
+<span style="color:#75715e"># 注意：c是头两个重心坐标，第3个可用l3=1-l1-l2算出</span>
+<span style="color:#75715e"># c = invT (x-r)</span>
+
+<span style="color:#75715e"># 算出X所有点，相对第1个三角形的重心坐标</span>
+invT <span style="color:#f92672">=</span> tri<span style="color:#f92672">.</span>transform[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>]
+r <span style="color:#f92672">=</span> tri<span style="color:#f92672">.</span>transform[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>]
+<span style="color:#75715e"># C的第i行，对应X第i行相对第1个三角形的重心坐标</span>
+C <span style="color:#f92672">=</span> (invT <span style="color:#f92672">*</span> (X <span style="color:#f92672">.-</span> r)<span style="color:#f92672">&#39;</span>)
+C <span style="color:#f92672">=</span> vcat(C,<span style="color:#ae81ff">1</span> <span style="color:#f92672">.-</span> sum(C,dims<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>))<span style="color:#f92672">&#39;</span>
+</code></pre></div><pre><code>10×3 Adjoint{Float64,Array{Float64,2}}:
+  3.50116      -0.986905    -1.51426
+  2.55659      -1.8306       0.274005
+  1.42283       0.235182    -0.658013
+  1.0          -1.4325e-17   0.0
+  0.979481      0.704615    -0.684097
+  1.01646      -0.297105     0.280642
+  0.0           0.0          1.0
+  0.716278      0.575829    -0.292108
+  2.0356        0.0987344   -1.13434
+ -4.01303e-17   1.0          0.0
+</code></pre>
+<h3 id="2根据重心坐标计算普通坐标">2）根据重心坐标计算普通坐标</h3>
+<p>直接用下面这个公式可直接算出：</p>
+
+
+
+<span class="katex">
+  \[
+\color{red}{\boxed{\left\{\begin{aligned}x&=l_1 x_1 + l_2 x_2 + l_3 x_3 \\ y&=l_1 y_1 + l_2 y_2 + l_3 y_3 \end{aligned} \right.}}
+\]
+</span>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 根据这个公式容易从相对第1个三角元的C算出（复原出）X</span>
+XX <span style="color:#f92672">=</span> C <span style="color:#f92672">*</span> X[sp[<span style="color:#ae81ff">1</span>,<span style="color:#f92672">:</span>],<span style="color:#f92672">:</span>]
+</code></pre></div><pre><code>10×2 Array{Float64,2}:
+ 0.979552   0.281205
+ 0.227496   0.0412066
+ 0.717759   0.712636
+ 0.445581   0.649614
+ 0.756364   0.869728
+ 0.3176     0.556612
+ 0.0535513  0.673927
+ 0.594907   0.835987
+ 0.896243   0.655209
+ 0.506035   0.985608
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 验证是否正确复原</span>
+
+XX <span style="color:#f92672">-</span> X  <span style="color:#f92672">|&gt;</span>  (expr<span style="color:#f92672">-&gt;</span>all(e<span style="color:#f92672">-&gt;</span>(e<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">0.000001</span>),expr))  <span style="color:#75715e"># 全零判断</span>
+</code></pre></div><pre><code>true
+</code></pre></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/julia/0094/">
+    下一页<br>有限元法解偏微分方程（FEniCS）
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/julia/0092/">
+      上一页<br>有限元之平面三角单元
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/julia/0093.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/julia/0093.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-随机生成玩具点集">1) 随机生成玩具点集</a></li>
+        <li><a href="#2-生成delaunay三角刨分">2) 生成Delaunay三角刨分</a></li>
+        <li><a href="#3面积坐标重心坐标和普通坐标">3）面积坐标（重心坐标）和普通坐标</a>
+          <ul>
+            <li><a href="#1根据普通坐标计算重心坐标">1）根据普通坐标计算重心坐标</a></li>
+            <li><a href="#2根据重心坐标计算普通坐标">2）根据重心坐标计算普通坐标</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

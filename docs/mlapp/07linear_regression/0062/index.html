@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="7.3 最大似然估计（最小二乘）"><meta property="og:title" content="7.3 最大似然估计（最小二乘）" />
+<meta property="og:description" content="返回本章目录
+估计统计模型参数的常用方法是计算MLE，其定义为
+
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+  \[
+\hat{\boldsymbol{\theta}} \overset{\Delta}{=} \underset{\boldsymbol{\theta}}{\rm argmax} \log p(\mathcal{D}|\boldsymbol{\theta})  \tag{7.4}
+\]
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0062/" />
+<meta property="article:published_time" content="2019-07-20T20:20:35+08:00" />
+<meta property="article:modified_time" content="2019-07-20T20:20:35+08:00" />
+<title>7.3 最大似然估计（最小二乘） | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a>
+<ul>
+<li><a href="/notes/docs/mlapp/01introduction/">第一章 导论</a></li>
+<li><a href="/notes/docs/mlapp/02probability/">第二章 概率</a></li>
+<li><a href="/notes/docs/mlapp/03generative_models_for_discrete_data/">第三章 基于离散数据的生成式模型</a></li>
+<li><a href="/notes/docs/mlapp/04gaussian_models/">第四章 高斯模型</a></li>
+<li><a href="/notes/docs/mlapp/05bayesian_statistics/">第五章 贝叶斯统计</a></li>
+<li><a href="/notes/docs/mlapp/06frequentist_statistics/">第六章 频率派统计</a></li>
+<li><a href="/notes/docs/mlapp/07linear_regression/">第七章 线性回归</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>7.3 最大似然估计（最小二乘）</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#731-mle的推导">7.3.1 MLE的推导</a></li>
+        <li><a href="#732-几何解释">7.3.2 几何解释</a></li>
+        <li><a href="#733-凸性">7.3.3 凸性</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0063/">
+    下一页<br>7.4 稳健线性回归*
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0061/">
+      上一页<br>7.2 模型选择
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/mlapp/07linear_regression/0062/">7.3 最大似然估计（最小二乘）</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2019-07-20</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">机器学习</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92">线性回归</a>
+      , 
+      <a href="/notes/tags/%E4%BC%BC%E7%84%B6">似然</a>
+      , 
+      <a href="/notes/tags/%E5%87%B8%E6%80%A7">凸性</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/07linear_regression/0062.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<p><a href="/notes/docs/mlapp/07linear_regression/"><strong>返回本章目录</strong></a></p>
+<p>估计统计模型参数的常用方法是计算MLE，其定义为</p>
+
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \[
+\hat{\boldsymbol{\theta}} \overset{\Delta}{=} \underset{\boldsymbol{\theta}}{\rm argmax} \log p(\mathcal{D}|\boldsymbol{\theta})  \tag{7.4}
+\]
+</span>
+
+<p>通常假设训练样本是独立同分布的，通常缩写为<strong>iid</strong>。 这意味着我们可以将对数似然写成：</p>
+
+
+
+<span class="katex">
+  \[
+\ell(\boldsymbol{\theta}) \overset{\Delta}{=} \log p(\mathcal{D}|\boldsymbol{\theta})=\sum_{i=1}^N{\log p(y_i|\boldsymbol{x}_i,\boldsymbol{\theta})}   \tag{7.5}
+\]
+</span>
+
+<p>作为最大化对数似然性的替代, 我们可以使用等价的最小化<strong>负对数似然</strong>或<strong>NLL</strong>：</p>
+
+
+
+<span class="katex">
+  \[
+{\rm NLL}(\boldsymbol{\theta}) \overset{\Delta}{=} - \sum_{i=1}^N{\log p(y_i|\boldsymbol{x}_i,\boldsymbol{\theta})}   \tag{7.6}
+\]
+</span>
+
+<p>NLL公式有时更方便，因为许多优化软件包被设计成寻找函数的最小值，而不是最大值。</p>
+<p>现在让我们将MLE方法应用于线性回归。 将高斯的定义插入，我们获得具体的对数似然</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\ell(\boldsymbol{\theta}) = &\sum_{i=1}^N{\log \left[\dfrac{1}{\sqrt{2 \pi \sigma^2}} \exp\left(-\dfrac{1}{2\sigma^2}(y_i-\boldsymbol{w}^T\boldsymbol{x}_i)^2\right) \right]}    \\
+\quad = & -\dfrac{1}{2\sigma^2} {\rm RSS}(\boldsymbol{w}) - \dfrac{N}{2} \log (2 \pi \sigma^2)   \\
+\end{aligned}  \tag{7.7-8}
+\]
+</span>
+
+<p>RSS代表<strong>残差平方和</strong>(<strong>residual sum of squares</strong>)，由下式定义</p>
+
+
+
+<span class="katex">
+  \[
+{\rm RSS}(\boldsymbol{w}) \overset{\Delta}{=}\sum_{i=1}^N{(y_i-\boldsymbol{w}^T\boldsymbol{x}_i)^2}   \tag{7.9}
+\]
+</span>
+
+<p>RSS也称为<strong>误差平方和</strong>或<strong>SSE</strong>，
+
+
+<span class="katex">
+  \({\rm SSE}/N\)
+</span>
+称为<strong>均方误差</strong>或<strong>MSE</strong>。 可以写成残差向量的
+
+
+<span class="katex">
+  \(\ell_2\)
+</span>
+<strong>范数</strong>的平方：</p>
+
+
+
+<span class="katex">
+  \[
+{\rm RSS}(\boldsymbol{w}) = \|\boldsymbol{\epsilon}\|_2^2 = \sum_{i=1}^N{\epsilon_i^2} \tag{7.10}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(\epsilon_i =y_i-\boldsymbol{w}^T\boldsymbol{x}_i\)
+</span>
+ 。</p>
+<p><img src="" alt="0094.jpg"></p>
+<blockquote>
+<p>图7.2 （a）在线性最小二乘中，我们试图最小化从每个训练点（用红色圆圈表示）到其近似点（用蓝色十字表示）的平方距离之和，也就是说，我们最小化小的垂直蓝线长度之和。 用
+
+
+<span class="katex">
+  \(\hat{y}(x)= w_0 + w_1 x\)
+</span>
+表示的红色对角线，就是最小二乘回归线。 注意，与图12.5相比，这些残差线并不垂直于最小二乘线。 由_residualsDemo_生成的图。 （b）同一个例子的RSS误差曲面的等高线。 红十字代表MLE，
+
+
+<span class="katex">
+  \(\boldsymbol{w} =(1.45,0.93)\)
+</span>
+。 由contoursSSEdemo生成的图。</p>
+</blockquote>
+<p>注意关于
+
+
+<span class="katex">
+  \(\boldsymbol{w}\)
+</span>
+的MLE就是最小化RSS的那个，因此这种方法被称为<strong>最小二乘法</strong>。 该方法如图7.2（a）所示。 训练数据
+
+
+<span class="katex">
+  \((x_i,y_i)\)
+</span>
+显示为红色圆圈，估计值
+
+
+<span class="katex">
+  \((x_i,\hat{y}_i)\)
+</span>
+显示为蓝色十字形，残差
+
+
+<span class="katex">
+  \(\epsilon_i= y_i-\hat{y}_i\)
+</span>
+显示为垂直蓝线。 目标是找到合适的参数设置（斜率
+
+
+<span class="katex">
+  \(w_1\)
+</span>
+和截距
+
+
+<span class="katex">
+  \(w_0\)
+</span>
+），进而使对应的红线满足最小化残差平方和（垂直蓝线的长度）。</p>
+<p>在图7.2（b）中，我们绘制了线性回归示例的NLL曲面。 我们看到它是一个具有唯一最小值的二次“碗” （重要的是，即使我们使用基函数展开，例如多项式也是如此，因为NLL对参数
+
+
+<span class="katex">
+  \(\boldsymbol{w}\)
+</span>
+而言仍然是线性的，即使它在输入
+
+
+<span class="katex">
+  \(\boldsymbol{x}\)
+</span>
+中不是线性的。）</p>
+<h2 id="731-mle的推导">7.3.1 MLE的推导</h2>
+<p>首先，以更容易微分的形式重写目标函数(译者注: 每一个等号都忽略了不影响最小化的常数或比例项)：</p>
+
+
+
+<span class="katex">
+  \[
+{\rm NLL}(\boldsymbol{w})=\dfrac{1}{2}(\boldsymbol{y}-\boldsymbol{X}\boldsymbol{w})^T(\boldsymbol{y}-\boldsymbol{X}\boldsymbol{w})=\dfrac{1}{2}\boldsymbol{w}^T(\boldsymbol{X}^T\boldsymbol{X})\boldsymbol{w}-\boldsymbol{w}^T(\boldsymbol{X}^T\boldsymbol{y})     \tag{7.11}
+\]
+</span>
+
+<p>其中</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{X}^T\boldsymbol{X}=\sum_{i=1}^N{\boldsymbol{x}_i \boldsymbol{x}_i^T}=\sum_{i=1}^N{\left(
+\begin{matrix}
+x_{i,1}^2 & \dots & x_{i,1}x_{i,D} \\
+\vdots & \ddots & \vdots \\
+x_{D,i}x_{i,1} & \dots & x_{i,D}^2 \\
+\end{matrix}
+\right)} \tag{7.12}
+\]
+</span>
+
+<p>是方阵求和，并且</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{X}^T\boldsymbol{y} = \sum_{i=1}^N{\boldsymbol{x}_i y_i}   \tag{7.13}
+\]
+</span>
+
+<p>使用公式4.10的结果，我们看到它的梯度由下式给出</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{g}(\boldsymbol{w})=\boldsymbol{X}^T\boldsymbol{X}\boldsymbol{w}-\boldsymbol{X}^T\boldsymbol{y}=\sum_{i=1}^N{\boldsymbol{x}_i (\boldsymbol{w}^T\boldsymbol{x}_i-y_i)}     \tag{7.14}
+\]
+</span>
+
+<p>梯度取零，得到</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{X}^T\boldsymbol{X}\boldsymbol{w}=\boldsymbol{X}^T\boldsymbol{y}     \tag{7.15}
+\]
+</span>
+
+<p>这就是所谓的<strong>正则方程</strong>。 该线性方程组的相应解
+
+
+<span class="katex">
+  \(\hat{\boldsymbol{w}}\)
+</span>
+被称为<strong>普通最小二乘</strong>或<strong>OLS</strong>解，由下式给出</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\hat{\boldsymbol{w}}_{\rm OLS}=(\boldsymbol{X}^T\boldsymbol{X})^{-1}\boldsymbol{X}^T\boldsymbol{y}}    \tag{7.16}
+\]
+</span>
+
+<h2 id="732-几何解释">7.3.2 几何解释</h2>
+<p>这个等式具有优雅的几何解释。 我们假设
+
+
+<span class="katex">
+  \(N> D\)
+</span>
+，所以我们的样本比特征多。 
+
+
+<span class="katex">
+  \(\boldsymbol{X}\)
+</span>
+的列被定义成嵌入在N维中的D维线性子空间。 令第
+
+
+<span class="katex">
+  \(j\)
+</span>
+列为
+
+
+<span class="katex">
+  \(\tilde{\boldsymbol{x}}_j \in \mathbb{R}^N\)
+</span>
+ （不要与
+
+
+<span class="katex">
+  \(\boldsymbol{x}_i \in \mathbb{R}^D\)
+</span>
+混淆，后者代表第
+
+
+<span class="katex">
+  \(i\)
+</span>
+个样本）。同样，
+
+
+<span class="katex">
+  \(\boldsymbol{y}\)
+</span>
+也是
+
+
+<span class="katex">
+  \(\mathbb{R}^N\)
+</span>
+中的向量。 例如，假设我们有
+
+
+<span class="katex">
+  \(N = 3\)
+</span>
+个样本，
+
+
+<span class="katex">
+  \(D = 2\)
+</span>
+个特征：</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{X}=\left(
+\begin{matrix}
+1 & 2 \\
+1 & -2 \\
+1 & 2 \\
+\end{matrix}
+\right), y=\left(
+\begin{matrix}
+8.8957 \\
+0.6130 \\
+1.7761 \\
+\end{matrix}
+\right) \tag{7.17}
+\]
+</span>
+
+<p>这些向量描述于如图7.3。</p>
+<p><img src="" alt="0095.jpg"></p>
+<blockquote>
+<p>图7.3 
+
+
+<span class="katex">
+  \(N = 3\)
+</span>
+个样本和
+
+
+<span class="katex">
+  \(D = 2\)
+</span>
+个特征的最小二乘法图解。 
+
+
+<span class="katex">
+  \(\tilde{\boldsymbol{x}}_1\)
+</span>
+和
+
+
+<span class="katex">
+  \(\tilde{\boldsymbol{x}}_2\)
+</span>
+是
+
+
+<span class="katex">
+  \(\mathbb{R}^3\)
+</span>
+中的向量; 他们一起定义了2维平面。 
+
+
+<span class="katex">
+  \(\boldsymbol{y}\)
+</span>
+也是
+
+
+<span class="katex">
+  \(\mathbb{R}^3\)
+</span>
+中的矢量，但不位于此2维平面上。 
+
+
+<span class="katex">
+  \(\boldsymbol{y}\)
+</span>
+在该平面上的正交投影表示为
+
+
+<span class="katex">
+  \(\hat{\boldsymbol{y}}\)
+</span>
+ 。 从
+
+
+<span class="katex">
+  \(\boldsymbol{y}\)
+</span>
+到
+
+
+<span class="katex">
+  \(\hat{\boldsymbol{y}}\)
+</span>
+的红线是残差，我们想要最小化它的范数。 为了清晰起见，所有向量都已转换为单位范数。 由_leastSquaresProjection_生成的图。</p>
+</blockquote>
+<p>我们需要寻找一个在这D维线性子空间中的向量
+
+
+<span class="katex">
+  \(\hat{\boldsymbol{y}} \in \mathbb{R}^N\)
+</span>
+ ，并且尽可能接近
+
+
+<span class="katex">
+  \(\boldsymbol{y}\)
+</span>
+，即我们想要找到</p>
+
+
+
+<span class="katex">
+  \[
+\underset{\hat{\boldsymbol{y}} \in {\rm span({\tilde{\boldsymbol{x}}_1,\dots,\tilde{\boldsymbol{x}}_D})}}{\rm argmin} \ \|\boldsymbol{y}-\hat{\boldsymbol{y}}\|_2   \tag{7.18}
+\]
+</span>
+
+<p>由于
+
+
+<span class="katex">
+  \(\hat{\boldsymbol{y}} \in {\rm span(\boldsymbol{X})}\)
+</span>
+ ，因此存在一些权重向量
+
+
+<span class="katex">
+  \(\boldsymbol{w}\)
+</span>
+ 满足</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\boldsymbol{y}} = w_1 \tilde{\boldsymbol{x}}_1+\dots+w_D \tilde{\boldsymbol{x}}_D=\boldsymbol{X}\boldsymbol{w}  \tag{7.19}
+\]
+</span>
+
+<p>为了最小化残差
+
+
+<span class="katex">
+  \(\boldsymbol{y}-\hat{\boldsymbol{y}}\)
+</span>
+的范数，我们希望残差向量与
+
+
+<span class="katex">
+  \(\boldsymbol{X}\)
+</span>
+的每一列都正交，即
+
+
+<span class="katex">
+  \(\tilde{\boldsymbol{x}}_j^T(\boldsymbol{y}-\hat{\boldsymbol{y}})=0, \forall j=1:D\)
+</span>
+。因此</p>
+
+
+
+<span class="katex">
+  \[
+\tilde{\boldsymbol{x}}_j^T(\boldsymbol{y}-\hat{\boldsymbol{y}})=0 \Rightarrow \boldsymbol{X}^T(\boldsymbol{y}-\boldsymbol{X}\boldsymbol{w})=0 \Rightarrow \boldsymbol{w} = (\boldsymbol{X}^T\boldsymbol{X})^{-1}\boldsymbol{X}^T\boldsymbol{y}   \tag{7.20}
+\]
+</span>
+
+<p>因此， 
+
+
+<span class="katex">
+  \(\boldsymbol{y}\)
+</span>
+的投影值是</p>
+
+
+
+<span class="katex">
+  \[
+\hat{\boldsymbol{y}} =\boldsymbol{X}\hat{\boldsymbol{w}}= \boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1}\boldsymbol{X}^T\boldsymbol{y} \tag{7.21}
+\]
+</span>
+
+<p>这对应于
+
+
+<span class="katex">
+  \(\boldsymbol{y}\)
+</span>
+在
+
+
+<span class="katex">
+  \(\boldsymbol{X}\)
+</span>
+的列空间上的<strong>正交投影</strong>。投影矩阵
+
+
+<span class="katex">
+  \(P\overset{\Delta}{=}\boldsymbol{X}(\boldsymbol{X}^T\boldsymbol{X})^{-1}\boldsymbol{X}^T\)
+</span>
+被称为<strong>帽子矩阵</strong>(<strong>hat matrix</strong>)，因为它“将帽子^放在
+
+
+<span class="katex">
+  \(\boldsymbol{y}\)
+</span>
+上”。</p>
+<h2 id="733-凸性">7.3.3 凸性</h2>
+<p>在讨论最小二乘时，我们注意到NLL是具有唯一的最小值的碗形。 像这样的函数的技术术语是<strong>凸的</strong>。 凸函数在机器学习中起着非常重要的作用。</p>
+<p>让我们更准确地定义这个概念。我们称
+
+
+<span class="katex">
+  \(\mathcal{S}\)
+</span>
+集是<strong>凸的</strong>， 如果对于任何
+
+
+<span class="katex">
+  \(\boldsymbol{\theta},\boldsymbol{\theta}' \in \mathcal{S}\)
+</span>
+，有</p>
+
+
+
+<span class="katex">
+  \[
+\lambda \boldsymbol{\theta}+(1-\lambda)\boldsymbol{\theta}' \in \mathcal{S}, \forall \lambda \in [0,1]  \tag{7.22}
+\]
+</span>
+
+<p>也就是说，如果我们画一条从
+
+
+<span class="katex">
+  \(\boldsymbol{\theta}\)
+</span>
+到
+
+
+<span class="katex">
+  \(\boldsymbol{\theta}'\)
+</span>
+的线，那么线上的所有点都在集合内。有关凸集的说明，请参见图7.4（a）;有关非凸集的说明，请参见图7.4（b）。</p>
+<p><img src="" alt="0096.jpg"></p>
+<blockquote>
+<p>图7.4 （a）凸集的图示。 （b）非凸集的图示。</p>
+</blockquote>
+<p><img src="" alt="0097.jpg"></p>
+<blockquote>
+<p>图7.5 （a）凸函数的图示。 我们看到和弦连接
+
+
+<span class="katex">
+  \((x,f(x))\)
+</span>
+ 到
+
+
+<span class="katex">
+  \((y,f(y))\)
+</span>
+ 位于函数之上。 （b）既不凸也不凹的函数。 A是局部最小值，B是全局最小值。 由_convexFnHand_生成的图。</p>
+</blockquote>
+<p>一个函数
+
+
+<span class="katex">
+  \(f(\boldsymbol{\theta})\)
+</span>
+ 是凸的，如果其<strong>上境图</strong>（<strong>epigraph</strong>, 函数上方的点集）是凸集。 等价地，一个函数
+
+
+<span class="katex">
+  \(f(\boldsymbol{\theta})\)
+</span>
+被称为凸的， 是定义在凸集上，并且对任何
+
+
+<span class="katex">
+  \(\boldsymbol{\theta},\boldsymbol{\theta}' \in \mathcal{S}\)
+</span>
+，任何
+
+
+<span class="katex">
+  \(0 \le \lambda \le 1\)
+</span>
+，我们有</p>
+
+
+
+<span class="katex">
+  \[
+f(\lambda \boldsymbol{\theta}+(1-\lambda)\boldsymbol{\theta}') \le \lambda f(\boldsymbol{\theta})+(1-\lambda)f(\boldsymbol{\theta}')  \tag{7.23}
+\]
+</span>
+
+<p>参见图7.5的1维的例子。 如果不等式是严格的，则该函数被称为<strong>严格凸</strong>。 如果函数
+
+
+<span class="katex">
+  \(-f(\boldsymbol{\theta})\)
+</span>
+ 是凸的，那么函数
+
+
+<span class="katex">
+  \(f(\boldsymbol{\theta})\)
+</span>
+ 是凹的。 标量凸函数的例子包括
+
+
+<span class="katex">
+  \(\theta^2\)
+</span>
+，
+
+
+<span class="katex">
+  \(e^\theta\)
+</span>
+和
+
+
+<span class="katex">
+  \(\theta \log \theta,\forall \theta>0\)
+</span>
+。 标量凹函数的例子包括
+
+
+<span class="katex">
+  \(\log \theta\)
+</span>
+和
+
+
+<span class="katex">
+  \(\sqrt{\theta}\)
+</span>
+。</p>
+<p>直观地，（严格地）凸函数具有“碗形”，因此具有对应于碗底部的唯一全局最小
+
+
+<span class="katex">
+  \(\theta^{\\*}\)
+</span>
+。 因此它的二阶导数在任何地方都必须是正的
+
+
+<span class="katex">
+  \(\frac{d^2}{d\theta^2}f(\theta)> 0\)
+</span>
+ 。 一个二次连续可微多元函数
+
+
+<span class="katex">
+  \(f\)
+</span>
+是凸的， 当且仅当，其Hessian矩阵对所有
+
+
+<span class="katex">
+  \(\boldsymbol{\theta}\)
+</span>
+都是正定的。在机器学习环境中，函数
+
+
+<span class="katex">
+  \(f\)
+</span>
+经常 对应于NLL。</p>
+<p>NLL是凸的模型是可取的，因为这意味着我们总能找到全局最优的MLE。 我们将在本书后面看到许多这方面的例子。 然而，许多感兴趣的模型不会有凹的拟然。 在这种情况下，我们将讨论导出局部最优参数估计的方法。</p>
+<p><a href="/notes/docs/mlapp/07linear_regression/"><strong>返回本章目录</strong></a></p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0063/">
+    下一页<br>7.4 稳健线性回归*
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0061/">
+      上一页<br>7.2 模型选择
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/07linear_regression/0062.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/mlapp/07linear_regression/0062.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#731-mle的推导">7.3.1 MLE的推导</a></li>
+        <li><a href="#732-几何解释">7.3.2 几何解释</a></li>
+        <li><a href="#733-凸性">7.3.3 凸性</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

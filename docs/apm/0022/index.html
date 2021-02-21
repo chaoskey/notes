@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="第六章 主动管理基本定律"><meta property="og:title" content="第六章 主动管理基本定律" />
+<meta property="og:description" content="基本定律
+主动管理基本定律是信息率的一种近似表达。
+这条定律基于投资策略的两条基本属性：
+１）投资策略的广度（
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+  \(\mathrm{BR}\)
+
+）：策略每年对超常收益率作出的独立预测的数目。
+２）投资经理的信息系数（
+
+
+
+  \(\mathrm{IC}\)
+
+）：每个预测与实现结果之间的相关系数，表征投资经理的能力。简化假设：所有预测的
+
+
+
+  \(\mathrm{IC}\)
+
+都是相同的。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/apm/0022/" />
+<meta property="article:published_time" content="2018-05-24T20:20:35+08:00" />
+<meta property="article:modified_time" content="2018-05-24T20:20:35+08:00" />
+<title>第六章 主动管理基本定律 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a>
+<ul>
+<li><a href="/notes/docs/apm/0017/">第一章 绪论</a></li>
+<li><a href="/notes/docs/apm/0018/">第二章 一致预期收益率：资本资产定价模型</a></li>
+<li><a href="/notes/docs/apm/0019/">第三章 风险</a></li>
+<li><a href="/notes/docs/apm/0020/">第四章 超常收益率、业绩基准和附加值</a></li>
+<li><a href="/notes/docs/apm/0021/">第五章 残差风险和残差收益率：信息率</a></li>
+<li><a href="/notes/docs/apm/0022/"class=active>第六章 主动管理基本定律</a></li>
+<li><a href="/notes/docs/apm/0023/">第七章 预期收益率和套利定价理论</a></li>
+<li><a href="/notes/docs/apm/0024/">第八章 估值理论</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>第六章 主动管理基本定律</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#基本定律">基本定律</a></li>
+        <li><a href="#基本定律的应用">基本定律的应用</a>
+          <ul>
+            <li><a href="#赌场老板">赌场老板</a></li>
+            <li><a href="#残差收益率的半年预测">残差收益率的半年预测</a></li>
+            <li><a href="#市场方向的季度预测">市场方向的季度预测</a></li>
+          </ul>
+        </li>
+        <li><a href="#信息率的平方可加性">信息率的平方可加性</a></li>
+        <li><a href="#假设">假设</a></li>
+        <li><a href="#信息模型">信息模型</a></li>
+        <li><a href="#目标">目标</a></li>
+        <li><a href="#最优主动头寸">最优主动头寸</a></li>
+        <li><a href="#信息率的严格计算">信息率的严格计算</a></li>
+        <li><a href="#信息率的近似计算">信息率的近似计算</a></li>
+        <li><a href="#其它">其它</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0023/">
+    下一页<br>第七章 预期收益率和套利定价理论
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0021/">
+      上一页<br>第五章 残差风险和残差收益率：信息率
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/apm/0022/">第六章 主动管理基本定律</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2018-05-24</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84">量化投资</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E6%8A%95%E8%B5%84">投资</a>
+      , 
+      <a href="/notes/tags/%E4%B8%BB%E5%8A%A8%E7%AE%A1%E7%90%86">主动管理</a>
+      , 
+      <a href="/notes/tags/%E6%AE%8B%E5%B7%AE">残差</a>
+      , 
+      <a href="/notes/tags/%E4%BF%A1%E6%81%AF%E7%8E%87">信息率</a>
+      , 
+      <a href="/notes/tags/%E5%A4%B4%E5%AF%B8">头寸</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/apm/0022.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h2 id="基本定律">基本定律</h2>
+<p><strong>主动管理基本定律</strong>是信息率的一种近似表达。</p>
+<p>这条定律基于投资策略的两条基本属性：</p>
+<p>１）投资策略的<strong>广度</strong>（
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(\mathrm{BR}\)
+</span>
+）：策略每年对超常收益率作出的独立预测的数目。</p>
+<p>２）投资经理的<strong>信息系数</strong>（
+
+
+<span class="katex">
+  \(\mathrm{IC}\)
+</span>
+）：每个预测与实现结果之间的相关系数，表征投资经理的能力。简化假设：所有预测的
+
+
+<span class="katex">
+  \(\mathrm{IC}\)
+</span>
+都是相同的。</p>
+<p><strong>主动管理基本定律</strong>：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{IR} = \mathrm{IC} \ \sqrt{\mathrm{BR}}
+\]
+</span>
+
+<p>此定律的近似条件：忽略我的预测在降低风险方面的作用，
+
+
+<span class="katex">
+  \(\mathrm{IC}\)
+</span>
+越小，主动管理基本定律的正确性越高。</p>
+<p>根据基本定律以及第５章的最优残差风险水平与信息率之间的关系，最优残差风险可重新表述成：</p>
+
+
+
+<span class="katex">
+  \[
+\omega^*=\frac{\mathrm{IC} \ \sqrt{\mathrm{BR}}}{2 \lambda_R}
+\]
+</span>
+
+<p>这意味着：能力越高可以采用更激进的策略（因为成功概率更大）；广度越高也可以适当增加激进水平（因为有更多机会去分散风险）。</p>
+<p>投资经理所能创造的最大附加值也可表述为：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{VA}^* = \frac{\mathrm{IC}^2 \ \mathrm{BR}}{4 \lambda_R}
+\]
+</span>
+
+<p>主动管理基本定律说明的真谛：需要在增加投资测的广度
+
+
+<span class="katex">
+  \(\mathrm{BR}\)
+</span>
+（覆盖更多的股票或缩短预测时间）和提高能力
+
+
+<span class="katex">
+  \(\mathrm{IC}\)
+</span>
+之间进行权衡。战略上，这种权衡很快速简单；但具体精确估计广度
+
+
+<span class="katex">
+  \(\mathrm{BR}\)
+</span>
+是困难的，因为广度定义要求各个预测之间是独立的。</p>
+<h2 id="基本定律的应用">基本定律的应用</h2>
+<h3 id="赌场老板">赌场老板</h3>
+<p>轮盘赌：１８个红格，１８个黑格，１个绿格，赌徒只能压黑或压红。</p>
+<p>从赌场视角看：１）如果赌徒压错则赌场赢；２）赌徒下注后，赌场作为对手方下同等注；３）赌场赢，额外获得赌徒所下的注（100%收益率）；如果赌场输，将所下注赔给赌徒（-100%收益率）。</p>
+<p>赌场单局赢率
+
+
+<span class="katex">
+  \(\dfrac{19}{37}\)
+</span>
+，单局盈利能力
+
+
+<span class="katex">
+  \(\mathrm{IC}=\dfrac{1}{37}\)
+</span>
+。</p>
+<p>进而可算出：赌场单局预期收益率
+
+
+<span class="katex">
+  \(f=\mathrm{E}\{r\}=2.7027\%\)
+</span>
+；赌场单局收益率标准差
+
+
+<span class="katex">
+  \(\sigma=\sqrt{\mathrm{E}\{(r-f)^2\}}=99.9634\%\)
+</span>
+。</p>
+<p>假设赌场每年的赌局数为
+
+
+<span class="katex">
+  \(\mathrm{BR}=1000000\)
+</span>
+。赌场年预期收益率依然是
+
+
+<span class="katex">
+  \(f\)
+</span>
+，但年收益率标准差为
+
+
+<span class="katex">
+  \(\dfrac{\sigma}{\sqrt{\mathrm{BR}}}\)
+</span>
+。进而可算出年信息率为：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{IR}=\dfrac{f}{\sigma_{年}}=\sqrt{\mathrm{BR}} \ \dfrac{f}{\sigma}=27.037
+\]
+</span>
+
+<p>而通过基本定律算出的结果：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{IR} = \mathrm{IC} \ \sqrt{\mathrm{BR}}=27.027
+\]
+</span>
+
+<p>赌场老板秒杀一切投资经理。</p>
+<h3 id="残差收益率的半年预测">残差收益率的半年预测</h3>
+<p>考虑每次预测的股票数
+
+
+<span class="katex">
+  \(N=200\)
+</span>
+，那么
+
+
+<span class="katex">
+  \(\mathrm{BR}=2 N\)
+</span>
+，并假设：</p>
+<p>１）不同股票残差收益率相互独立；</p>
+<p>２）股票预期残差收益率为零；</p>
+<p>３）每只股票半年残差收益率的标准差都为
+
+
+<span class="katex">
+  \(\sigma=17.32\%\)
+</span>
+。</p>
+<p>根据这三个假设，不妨将每只股票的残差收益率分解为M个独立变量之和：</p>
+
+
+
+<span class="katex">
+  \[
+\theta_i=\sum_{j=1}^M{\theta_{i,j}}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(\theta_{i,j}\)
+</span>
+以相等概率取值
+
+
+<span class="katex">
+  \(1\%\)
+</span>
+和
+
+
+<span class="katex">
+  \(-1\%\)
+</span>
+，于是每个独立变量都具有零均值和
+
+
+<span class="katex">
+  \(1\%\)
+</span>
+标准差。</p>
+<p>每支股票的残差收益率
+
+
+<span class="katex">
+  \(\theta_i\)
+</span>
+的标准差为：
+
+
+<span class="katex">
+  \(\sigma=\sqrt{M}/100\)
+</span>
+，意味着独立变量数应该是
+
+
+<span class="katex">
+  \(M=(100 \ \sigma)^2=300\)
+</span>
+。</p>
+<p>进而可算出残差收益率与每个独立变量的相关系数(即，信息系数)为
+
+
+<span class="katex">
+  \(\mathrm{IC}=\dfrac{\mathrm{Cov}\{\theta_i,\theta_{i,j}\}}{\mathrm{Var}\{\theta_i\}\mathrm{Var}\{\theta_{ij}\}}=\dfrac{0.01}{\sigma}=0.0577\)
+</span>
+。</p>
+<p>根据基本定律可以算出信息率
+
+
+<span class="katex">
+  \(\mathrm{IR}=\mathrm{IC} \ \sqrt{2 N}=1.154\)
+</span>
+。</p>
+<p>实现这个信息率的一种策略方案：假设业绩基准组合是这200只股票的等权组合，每半年的预测结果：100只股票预期残差收益率为
+
+
+<span class="katex">
+  \(1\%\)
+</span>
+,另100只股票预期收益率
+
+
+<span class="katex">
+  \(-1\%\)
+</span>
+。那么等权买入正预期的股票，卖出负预期的股票。这种方案下，每半年，预期主动收益率为
+
+
+<span class="katex">
+  \(0.5\ (1\%)+(-0.5)\ (-1\%)=1\%\)
+</span>
+，主动标准差为
+
+
+<span class="katex">
+  \(\dfrac{\sigma}{\sqrt{N}}=1.2247\%\)
+</span>
+，进而算出信息率
+
+
+<span class="katex">
+  \(\mathrm{IR}=\dfrac{1\%}{1.2247\%}=0.8165\)
+</span>
+，转换成年化信息率
+
+
+<span class="katex">
+  \(\sqrt{2}\ 0.8165=1.1547\)
+</span>
+。略高于基本定律的计算值。</p>
+<h3 id="市场方向的季度预测">市场方向的季度预测</h3>
+<p>用变量
+
+
+<span class="katex">
+  \(x(t)=\pm1\)
+</span>
+表示市场方向，
+
+
+<span class="katex">
+  \(y(t)=\pm1\)
+</span>
+则表示预测值，
+
+
+<span class="katex">
+  \(x\)
+</span>
+和
+
+
+<span class="katex">
+  \(y\)
+</span>
+都具有零均值和单位标准差。如果考虑市场的N次预测（
+
+
+<span class="katex">
+  \(t=1,\dots,N\)
+</span>
+），那么信息系数
+
+
+<span class="katex">
+  \(\mathrm{IC}\)
+</span>
+的计算公式为：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{IC}=\mathrm{Cov}\{x,y\}=\mathrm{E}\{x y\}=\frac{1}{N} \sum_t^N{x(t) y(t)}
+\]
+</span>
+
+<p>如果
+
+
+<span class="katex">
+  \(N\)
+</span>
+次预测中，
+
+
+<span class="katex">
+  \(N_1\)
+</span>
+次正确(
+
+
+<span class="katex">
+  \(x=y\)
+</span>
+)，
+
+
+<span class="katex">
+  \(N-N_1\)
+</span>
+次错误(
+
+
+<span class="katex">
+  \(x=-y\)
+</span>
+)，那么信息率
+
+
+<span class="katex">
+  \(\mathrm{IC}\)
+</span>
+为：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{IC}=\frac{1}{N} (N_1-(N-N_1) )=2 \ \frac{N_1}{N}-1
+\]
+</span>
+
+<p>前面曾看到0.0577的信息系数可产生高于1.0的信息率，而这里可看到为了达到0.0577的信息率，我们只需要在
+
+
+<span class="katex">
+  \(52.885\%\)
+</span>
+的时间里正确地预测出市场方向（这个要求不高）。</p>
+<h2 id="信息率的平方可加性">信息率的平方可加性</h2>
+<p>信息率的平方可加性将在基本定律的推导中附带证明，和基本定律一样，也是近似成立的。</p>
+<p>书中分别给出了四种情况：１）不同广度；２）不同信息系数；３）国际化投资组合；４）不同投资经理。</p>
+<h2 id="假设">假设</h2>
+<p>基本定律告诉我们：要想获得最高附加值，就要做的频繁（高广度
+
+
+<span class="katex">
+  \(\mathrm{BR}\)
+</span>
+）并且做的出色（高能力
+
+
+<span class="katex">
+  \(\mathrm{IC}\)
+</span>
+）。和其它理论一样，主动管理基本定律也是基于一些不太实际的假设。</p>
+<p><strong>假设１（完美胜任假设）</strong>：投资经理能够精确衡量自己的能力（计算信息的价值）并以最优的方式利用这种能力。</p>
+<p><strong>假设２</strong>：各个预测之间应该是独立的。</p>
+<p>预测之间（信息源之间）的相关性会降低你的整体能力。如果用表示两个相同能力
+
+
+<span class="katex">
+  \(\mathrm{IC}\)
+</span>
+信息源之间的相关系数
+
+
+<span class="katex">
+  \(\gamma\)
+</span>
+，那么合并信息源的能力
+
+
+<span class="katex">
+  \(\mathrm{IC}_{合并}\)
+</span>
+将是：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{IC}_{合并}＝\mathrm{IC} \ \sqrt{ \frac{2}{1+\gamma}}
+\]
+</span>
+
+<p>如果两个信息源不相关，那么
+
+
+<span class="katex">
+  \(\mathrm{IC}_{合并}^2＝2 \ \mathrm{IC}^2\)
+</span>
+。</p>
+<p><strong>假设３</strong>：
+
+
+<span class="katex">
+  \(\mathrm{BR}\)
+</span>
+个主动赌注中的每一个都具有相同的能力。</p>
+<h2 id="信息模型">信息模型</h2>
+<p>以业绩基准为基础的超额收益率分解：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+& \boldsymbol{r}=\boldsymbol{\beta} \ r_B + \boldsymbol{\theta} \\
+\quad \\
+其中， & \boldsymbol{\beta}=(\beta_1,\dots,\beta_N)^T \quad 资产相对业绩基准B的贝塔列向量 \\
+& \boldsymbol{\theta}=(\theta_1,\dots,\theta_N)^T \quad 残差收益率列向量 \\
+& r_B \quad 业绩基准的超额收益率
+\end{aligned}
+\]
+</span>
+
+<p>进而一步对残差收益率
+
+
+<span class="katex">
+  \(\boldsymbol{\theta}\)
+</span>
+进行建模：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+& \boldsymbol{\theta}=\boldsymbol{A} \boldsymbol{x} \\
+\quad \\
+其中， & \boldsymbol{x}=(x_1,\dots,x_N)^T \quad \mathrm{E}\{\boldsymbol{x}\}=\boldsymbol{0}_{N \times 1},\mathrm{Var}\{\boldsymbol{x}\}=\boldsymbol{I}_{N \times N} \\
+& \boldsymbol{A}=(A_{i,j})_{N \times N} \quad \boldsymbol{r}的残差协方差矩阵的平方根矩阵 \\
+& \mathrm{Var}\{\boldsymbol{\theta}\}=\boldsymbol{A}\boldsymbol{A}^T
+\end{aligned}
+\]
+</span>
+
+<p>关于矩阵
+
+
+<span class="katex">
+  \(\boldsymbol{A}\)
+</span>
+，有：</p>
+<p>１）
+
+
+<span class="katex">
+  \(\boldsymbol{V}=\sigma_B^2 \ \boldsymbol{\beta} \ \boldsymbol{\beta}^T+\boldsymbol{A} \boldsymbol{A}^T\)
+</span>
+；</p>
+<p>２）
+
+
+<span class="katex">
+  \(\boldsymbol{A}^T \boldsymbol{h}_B=0\)
+</span>
+，所以矩阵
+
+
+<span class="katex">
+  \(\boldsymbol{A}\)
+</span>
+的秩为
+
+
+<span class="katex">
+  \(N-1\)
+</span>
+；</p>
+<p>３）当残差收益率之间互不相关时，
+
+
+<span class="katex">
+  \(\boldsymbol{A}\)
+</span>
+恰好是以残差风险为对角线元素的对角矩阵。</p>
+<p>在更一般的情况下，
+
+
+<span class="katex">
+  \(\boldsymbol{A}\)
+</span>
+是从一组不相关的基础变量到相互关联的残差收益率变量的线性变换矩阵。</p>
+<p>假如我们的信息以信号列向量
+
+
+<span class="katex">
+  \(\boldsymbol{z}=(z_1,\dots,z_{\mathrm{BR}})^T\)
+</span>
+的形式到达。不失一般性，假设信号
+
+
+<span class="katex">
+  \(\boldsymbol{z}\)
+</span>
+服从零均值、１标准差的联合正态分布，于是可将写成：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+& \boldsymbol{z}=\boldsymbol{E} \ \boldsymbol{y} \\
+\quad \\
+其中， & \boldsymbol{y}=(y_1,\dots,y_{\mathrm{BR}})^T \quad \mathrm{E}\{\boldsymbol{y}\}=\boldsymbol{0}_{\mathrm{BR} \times 1},\mathrm{Var}\{\boldsymbol{y}\}=\boldsymbol{I}_{\mathrm{BR} \times \mathrm{BR}} \\
+& \boldsymbol{E}=(E_{i,j})_{\mathrm{BR} \times \mathrm{BR}} \quad \boldsymbol{z}的协方差矩阵的平方根矩阵且可逆 \\
+& \mathrm{Var}\{\boldsymbol{z}\}=\boldsymbol{E}\boldsymbol{E}^T 
+\end{aligned}
+\]
+</span>
+
+<p>记</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\boldsymbol{Q}&=\mathrm{Cov}\{\boldsymbol{\theta},\boldsymbol{z}\}=(\mathrm{Cov}\{\theta_i,z_j\})_{N \times \mathrm{BR}} \\
+\boldsymbol{P}&=\mathrm{Corr}\{\boldsymbol{x},\boldsymbol{y}\}=(\mathrm{Corr}\{x_i,y_j\})_{N \times \mathrm{BR}}=\left(\dfrac{\mathrm{Cov}\{x_i,y_j\}}{\mathrm{Std}\{x_i\} \mathrm{Std}\{y_j\}}\right)_{N \times \mathrm{BR}} \\
+&=(\mathrm{Cov}\{x_i,y_j\})_{N \times \mathrm{BR}}=\mathrm{Cov}\{\boldsymbol{x},\boldsymbol{y}\} 
+\end{aligned}
+\]
+</span>
+
+<p>于是有
+
+
+<span class="katex">
+  \(\boldsymbol{Q}=\boldsymbol{A} \boldsymbol{P} \boldsymbol{E}^T\)
+</span>
+。</p>
+<p>已知
+
+
+<span class="katex">
+  \(\boldsymbol{z}\)
+</span>
+信号的情况下，残差收益率
+
+
+<span class="katex">
+  \(\boldsymbol{\theta}\)
+</span>
+的条件均值列向量和条件协方差矩阵：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\mathrm{E}\{\boldsymbol{\theta} | \boldsymbol{z}\}= \boldsymbol{A} \boldsymbol{P} \boldsymbol{E}^{-1} \boldsymbol{z} \overset{\Delta}{=} \boldsymbol{\alpha}(\boldsymbol{z})\\
+\mathrm{Var}\{\boldsymbol{\theta} | \boldsymbol{z}\}=\boldsymbol{A}(\boldsymbol{I}-\boldsymbol{P}\boldsymbol{P}^T)\boldsymbol{A}^T\overset{\Delta}{=}\boldsymbol{G}
+\end{aligned}
+\]
+</span>
+
+<p>【提示】1）
+
+
+<span class="katex">
+  \(\boldsymbol{\theta} = \boldsymbol{A} \boldsymbol{x} \sim \boldsymbol{A} \boldsymbol{P} \boldsymbol{y}=\boldsymbol{A} \boldsymbol{P} \boldsymbol{E}^{-1} \boldsymbol{z}\)
+</span>
+;2）
+
+
+<span class="katex">
+  \(\mathrm{E}\{\boldsymbol{A}\boldsymbol{x}|\boldsymbol{z}\}=\boldsymbol{A} \mathrm{E}\{\boldsymbol{x}|\boldsymbol{z}\}\)
+</span>
+;3）
+
+
+<span class="katex">
+  \(\mathrm{Var}\{\boldsymbol{\theta} | \boldsymbol{z}\}=\mathrm{E}\{(\boldsymbol{\theta}-\mathrm{E}\{\boldsymbol{\theta}|\boldsymbol{z}\})(\boldsymbol{\theta}-\mathrm{E}\{\boldsymbol{\theta}|\boldsymbol{z}\})^T\}\)
+</span>
+.</p>
+<p>注意：</p>
+<p>１）
+
+
+<span class="katex">
+  \(\boldsymbol{\alpha}(\boldsymbol{z})\)
+</span>
+的无条件期望值为零；</p>
+<p>２）
+
+
+<span class="katex">
+  \(\boldsymbol{\alpha}(\boldsymbol{z})\)
+</span>
+的无条件方差为
+
+
+<span class="katex">
+  \(\mathrm{Var}\{\boldsymbol{\alpha}(\boldsymbol{z})\}=\boldsymbol{A}\boldsymbol{P}\boldsymbol{P}^T\boldsymbol{A}^T\)
+</span>
+；</p>
+<p>３）残差收益率的条件协方差矩阵
+
+
+<span class="katex">
+  \(\mathrm{Var}\{\boldsymbol{\theta} | \boldsymbol{z}\}\)
+</span>
+不依赖于
+
+
+<span class="katex">
+  \(\boldsymbol{z}\)
+</span>
+。</p>
+<h2 id="目标">目标</h2>
+<p>我们的目标是：给定信号
+
+
+<span class="katex">
+  \(\boldsymbol{z}\)
+</span>
+的前提下，最大化附加值（忽略业绩基准择时），即求解如下优化问题（最优残差头寸
+
+
+<span class="katex">
+  \(\boldsymbol{h}^*\)
+</span>
+）：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\mathrm{VA}(\boldsymbol{z}) =& \underset{\boldsymbol{h}=\boldsymbol{h}^*}{\max} \left\{\boldsymbol{h}^T \boldsymbol{\alpha}(\boldsymbol{z})-\lambda \boldsymbol{h}^T \boldsymbol{G} \boldsymbol{h} \right\} \\
+s.t. & \boldsymbol{\beta}^T h =0
+\end{aligned}
+\]
+</span>
+
+<h2 id="最优主动头寸">最优主动头寸</h2>
+<p>通过拉格朗日乘子法，容易求出最优残差头寸
+
+
+<span class="katex">
+  \(\boldsymbol{h}^*\)
+</span>
+：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\boldsymbol{h}^* &= \dfrac{1}{2\lambda} \left( \boldsymbol{G}^{-1} \boldsymbol{\alpha}(\boldsymbol{z})-\phi \ \boldsymbol{G}^{-1} \boldsymbol{\beta} \right) \\
+\phi &= \dfrac{\boldsymbol{\beta}^T \boldsymbol{G}^{-1}\boldsymbol{\alpha}(\boldsymbol{z})}{\boldsymbol{\beta}^T \boldsymbol{G}^{-1}\boldsymbol{\beta}}
+\end{aligned}
+\]
+</span>
+
+<h2 id="信息率的严格计算">信息率的严格计算</h2>
+<p>最优组合的阿尔法：</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{h}^{*T}(\boldsymbol{z})\ \boldsymbol{\alpha}(\boldsymbol{z}) = \frac{1}{2\lambda}\left(\boldsymbol{\alpha}^T(\boldsymbol{z}) \boldsymbol{G}^{-1}\boldsymbol{\alpha}(\boldsymbol{z})-\frac{\left( \boldsymbol{\beta}^T \boldsymbol{G}^{-1}\boldsymbol{\alpha}(\boldsymbol{z}) \right)^2}{\boldsymbol{\beta}^T\boldsymbol{G}^{-1}\boldsymbol{\beta}} \right)
+\]
+</span>
+
+<p>最优组合的残差方差：</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{h}^{*T}(\boldsymbol{z})\ \boldsymbol{G}\ \boldsymbol{h}^{*}(\boldsymbol{z}) = \frac{1}{4 \lambda^2}\left(\boldsymbol{\alpha}^T(\boldsymbol{z}) \boldsymbol{G}^{-1}\boldsymbol{\alpha}(\boldsymbol{z})-\frac{\left( \boldsymbol{\beta}^T \boldsymbol{G}^{-1}\boldsymbol{\alpha}(\boldsymbol{z}) \right)^2}{\boldsymbol{\beta}^T\boldsymbol{G}^{-1}\boldsymbol{\beta}} \right)
+\]
+</span>
+
+<p>于是信息率的平方：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+&\mathrm{IR}^2(\boldsymbol{z}) &=& \boldsymbol{\alpha}^T(\boldsymbol{z}) \boldsymbol{G}^{-1}\boldsymbol{\alpha}(\boldsymbol{z})-\dfrac{\left( \boldsymbol{\beta}^T \boldsymbol{G}^{-1}\boldsymbol{\alpha}(\boldsymbol{z}) \right)^2}{\boldsymbol{\beta}^T\boldsymbol{G}^{-1}\boldsymbol{\beta}} \\
+& &=& \boldsymbol{y}^T \boldsymbol{P}^T \boldsymbol{D} \boldsymbol{P} \boldsymbol{y} - \dfrac{\boldsymbol{\beta}^T \left(\boldsymbol{A}^{-1}\right)^T \boldsymbol{D} \boldsymbol{P}\ \boldsymbol{y}\ \boldsymbol{y}^T \boldsymbol{P}^T \boldsymbol{D} \boldsymbol{A}^{-1}\boldsymbol{\beta}}{\boldsymbol{\beta}^T \left(\boldsymbol{A}^{-1}\right)^T \boldsymbol{D} \boldsymbol{A}^{-1}\boldsymbol{\beta}} \\
+其中，& \quad \quad \boldsymbol{D} &=& \left(\boldsymbol{I} - \boldsymbol{P} \boldsymbol{P}^T \right)^{-1} \\
+& \quad \quad \boldsymbol{y} &=& \boldsymbol{E}^{-1} \boldsymbol{z} , \quad 相互独立的标准随机变量列向量
+\end{aligned}
+\]
+</span>
+
+<p>有了
+
+
+<span class="katex">
+  \(\boldsymbol{z}\)
+</span>
+已知条件的信息率，进而可求出信息率平方的无条件期望值：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{IR}^2 = \mathrm{E}\{\mathrm{IR}^2(\boldsymbol{z})\} = \mathrm{Tr}\{\boldsymbol{P}^T \boldsymbol{D} \boldsymbol{P}\} - \dfrac{\boldsymbol{\beta}^T \left(\boldsymbol{A}^{-1}\right)^T \boldsymbol{D} \boldsymbol{D} \boldsymbol{A}^{-1}\boldsymbol{\beta}}{\boldsymbol{\beta}^T \left(\boldsymbol{A}^{-1}\right)^T \boldsymbol{D} \boldsymbol{A}^{-1}\boldsymbol{\beta}} + 1
+\]
+</span>
+
+<h2 id="信息率的近似计算">信息率的近似计算</h2>
+<p>首先将
+
+
+<span class="katex">
+  \(\boldsymbol{D}\)
+</span>
+展开：</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{D}=\left(\boldsymbol{I}-\boldsymbol{P}\boldsymbol{P}^T \right)^{-1}=\boldsymbol{I}+\left(\boldsymbol{P}\boldsymbol{P}^T\right)+\left(\boldsymbol{P}\boldsymbol{P}^T\boldsymbol{P}\boldsymbol{P}^T\right)+\left(\boldsymbol{P}\boldsymbol{P}^T\boldsymbol{P}\boldsymbol{P}^T\boldsymbol{P}\boldsymbol{P}^T\right)+\dots
+\]
+</span>
+
+<p>进而有：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\boldsymbol{P}^T \boldsymbol{D} \boldsymbol{P} &= \left(\boldsymbol{P}^T \boldsymbol{P}\right) + \left(\boldsymbol{P}^T \boldsymbol{P} \boldsymbol{P}^T \boldsymbol{P}\right) + \dots \\
+\boldsymbol{D} \boldsymbol{D} &=\boldsymbol{I}+2 \left(\boldsymbol{P}\boldsymbol{P}^T\right)+3 \left(\boldsymbol{P}\boldsymbol{P}^T\boldsymbol{P}\boldsymbol{P}^T\right)+4 \left(\boldsymbol{P}\boldsymbol{P}^T\boldsymbol{P}\boldsymbol{P}^T\boldsymbol{P}\boldsymbol{P}^T\right)+\dots
+\end{aligned}
+\]
+</span>
+
+<p>投资中遇到的相关系数通常非常接近零（最乐观也不超过
+
+
+<span class="katex">
+  \(0.1\)
+</span>
+），所以：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\boldsymbol{P}^T \boldsymbol{D} \boldsymbol{P} \approx \boldsymbol{P}^T \boldsymbol{P} \\
+\boldsymbol{D} \boldsymbol{D} \approx \boldsymbol{D}
+\end{aligned}
+\]
+</span>
+
+<p>这种近似意味着：忽略已知信息
+
+
+<span class="katex">
+  \(z\)
+</span>
+对方差的降低。进而有信息率的近似计算：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{IR}^2 \approx \mathrm{Tr}\{\boldsymbol{P}^T \boldsymbol{P}\}=\sum_{i,j}{\rho_{i,j}^2}
+\]
+</span>
+
+<p>记
+
+
+<span class="katex">
+  \(\xi_j^2=\sum_i^N{\rho_{i,j}^2}\)
+</span>
+，于是有(同时展示了基本定律的可加性)：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{IR}^2=\sum_j^{\mathrm{BR}}{\xi_j^2}
+\]
+</span>
+
+<p>根据假设，所有信号都具有相同的价值，即：</p>
+
+
+
+<span class="katex">
+  \[
+\xi_j^2=\rho^2=\mathrm{IC}^2
+\]
+</span>
+
+<p>最后就得到主动管理基本定律：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{IR}^2=\mathrm{BR}\ \mathrm{IC}^2
+\]
+</span>
+
+<h2 id="其它">其它</h2>
+<p>１）主动管理基本定律并非大数定律的投资学版本</p>
+<p>证明过程表明，基本定律近似成立源自独立信息源和驱动残差收益率的独立变量之间相关系数很小；而大数定律近似成立，则源于大样本数。</p>
+<p>类似的部分：更高的广度可充分分散残差风险；而大样本量可充分分散样本误差。</p>
+<p>２）根据模拟阿尔法信号产生的最优组合和后验信息率与基本定律给出的预测值在统计上无法区分。</p>
+<p>３）基本定律鼓励基金经理采用兼收并蓄的投资风格。</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0023/">
+    下一页<br>第七章 预期收益率和套利定价理论
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0021/">
+      上一页<br>第五章 残差风险和残差收益率：信息率
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/apm/0022.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/apm/0022.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#基本定律">基本定律</a></li>
+        <li><a href="#基本定律的应用">基本定律的应用</a>
+          <ul>
+            <li><a href="#赌场老板">赌场老板</a></li>
+            <li><a href="#残差收益率的半年预测">残差收益率的半年预测</a></li>
+            <li><a href="#市场方向的季度预测">市场方向的季度预测</a></li>
+          </ul>
+        </li>
+        <li><a href="#信息率的平方可加性">信息率的平方可加性</a></li>
+        <li><a href="#假设">假设</a></li>
+        <li><a href="#信息模型">信息模型</a></li>
+        <li><a href="#目标">目标</a></li>
+        <li><a href="#最优主动头寸">最优主动头寸</a></li>
+        <li><a href="#信息率的严格计算">信息率的严格计算</a></li>
+        <li><a href="#信息率的近似计算">信息率的近似计算</a></li>
+        <li><a href="#其它">其它</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

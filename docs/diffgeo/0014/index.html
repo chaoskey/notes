@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="流形上的微积分"><meta property="og:title" content="流形上的微积分" />
+<meta property="og:description" content="
+流形上微积分的作用对象是微分形式。
+普通微分对应微分形式的外微分，普通积分则对应微分形式在流形上的积分。
+微积分基本定理对应流形上的Stokes定理。
+流形上的Gauss定理则成为Stokes定理特例。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/diffgeo/0014/" />
+<meta property="article:published_time" content="2020-01-23T19:20:35+08:00" />
+<meta property="article:modified_time" content="2020-01-23T19:20:35+08:00" />
+<title>流形上的微积分 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a>
+<ul>
+<li><a href="/notes/docs/diffgeo/0005/">基于抽象指标的张量分析</a></li>
+<li><a href="/notes/docs/diffgeo/0006/">流形上的导数算符</a></li>
+<li><a href="/notes/docs/diffgeo/0007/">流形上的平移</a></li>
+<li><a href="/notes/docs/diffgeo/0008/">黎曼曲率张量</a></li>
+<li><a href="/notes/docs/diffgeo/0009/">流形间的映射</a></li>
+<li><a href="/notes/docs/diffgeo/0010/">流形上的李导数</a></li>
+<li><a href="/notes/docs/diffgeo/0011/">Killing矢量场</a></li>
+<li><a href="/notes/docs/diffgeo/0012/">子流形和超曲面</a></li>
+<li><a href="/notes/docs/diffgeo/0013/">流形上的微分形式及其对偶</a></li>
+<li><a href="/notes/docs/diffgeo/0014/"class=active>流形上的微积分</a></li>
+<li><a href="/notes/docs/diffgeo/0016/">李群李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0068/">常用李群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0069/">李变换群</a></li>
+<li><a href="/notes/docs/diffgeo/0070/">微分几何中的计算（Julia版）</a></li>
+<li><a href="/notes/docs/diffgeo/0073/">辛群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0074/">辛流形</a></li>
+<li><a href="/notes/docs/diffgeo/0076/">流形上的旋量和旋量场（初步）</a></li>
+<li><a href="/notes/docs/diffgeo/0077/">流形上的旋量和旋量场（几何解释）</a></li>
+<li><a href="/notes/docs/diffgeo/0078/">流形上的旋量和旋量场（导数算符和曲率)</a></li>
+<li><a href="/notes/docs/diffgeo/0079/">流形上的旋量和旋量场（自旋系数和克氏符）</a></li>
+<li><a href="/notes/docs/diffgeo/0082/">李群李代数伴随表示和Killing型、Casimir算符</a></li>
+<li><a href="/notes/docs/diffgeo/0083/">半单李代数的标准形式</a></li>
+<li><a href="/notes/docs/diffgeo/0084/">半单李代数的根系、权系和Dynkin图</a></li>
+<li><a href="/notes/docs/diffgeo/0085/">半单李代数的Casimir不变算符</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>流形上的微积分</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#流形上的微分外微分算符">流形上的微分、外微分算符</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#流形上的积分">流形上的积分</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#stokes定理流形上微积分基本定理">Stokes定理　流形上微积分基本定理</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#gauss定理">Gauss定理</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#三维欧氏空间矢量算子的外微分表示">三维欧氏空间矢量算子的外微分表示</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/theophy/0015/">
+    下一页<br>流形上的拉格朗日力学
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0013/">
+      上一页<br>流形上的微分形式及其对偶
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/diffgeo/0014/">流形上的微积分</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-01-23</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95">微分几何</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E6%B5%81%E5%BD%A2">流形</a>
+      , 
+      <a href="/notes/tags/%E5%BE%AE%E7%A7%AF%E5%88%86">微积分</a>
+      , 
+      <a href="/notes/tags/%E5%BE%AE%E5%88%86%E5%BD%A2%E5%BC%8F">微分形式</a>
+      , 
+      <a href="/notes/tags/%E5%A4%96%E5%BE%AE%E5%88%86">外微分</a>
+      , 
+      <a href="/notes/tags/Stokes%E5%AE%9A%E7%90%86">Stokes定理</a>
+      , 
+      <a href="/notes/tags/Gauss%E5%AE%9A%E7%90%86">Gauss定理</a>
+      , 
+      <a href="/notes/tags/%E4%BD%93%E5%85%83">体元</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0014.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<blockquote>
+<p>流形上微积分的作用对象是微分形式。</p>
+<p>普通微分对应微分形式的外微分，普通积分则对应微分形式在流形上的积分。</p>
+<p>微积分基本定理对应流形上的Stokes定理。</p>
+<p>流形上的Gauss定理则成为Stokes定理特例。</p>
+</blockquote>
+<h2 id="流形上的微分外微分算符">流形上的微分、外微分算符</h2>
+<p>流形
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(M\)
+</span>
+上的<code>外微分算符</code>
+
+
+<span class="katex">
+  \(d\)
+</span>
+是一个映射：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\begin{aligned}d:&\Lambda_M(l)&\to& & &\Lambda_M(l+1)\\ &\omega_{a_1\dots a_l}&\mapsto& & & (d\omega)_{b a_1\dots a_l} \overset{\Delta}{=}(l+1)\nabla_{[b}\omega_{a_1 \dots a_l]}\end{aligned}}
+\]
+</span>
+
+<p>特别地，
+
+
+<span class="katex">
+  \((df)_a=\nabla_b f\)
+</span>
+，意味着标量场的外微分就是导数算符对标量场的作用。</p>
+<h4 id="1-定义中的导数算符可任意选择">1. 定义中的导数算符可任意选择</h4>
+<p>此外，在坐标基矢下，根据定义全反称性和克氏符的下标对称性(因为括号内加异种括号为０)，上面的定义式可改写成：</p>
+
+
+
+<span class="katex">
+  \[
+(d\omega)_{b a_1\dots a_l}=(l+1)\partial_{[b}\omega_{a_1 \dots a_l]}
+\]
+</span>
+
+<p>同样道理，前面的外微分的定义和导数算符选择无关，都有相同的结果。</p>
+<h4 id="2坐标基矢下的外微分作用后的展开式">2.坐标基矢下的外微分作用后的展开式</h4>
+<p>在坐标基矢下，外微分算符对微分形式作用后的展开式：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{(d\omega)_{b a_1\dots a_l}=\sum_C{(d\omega_{\mu_1\dots \mu_l})_b\wedge(dx^{\mu_1})_{a_1}\wedge\dots\wedge(dx^{\mu_l})_{a_l}}}
+\]
+</span>
+
+<p>这里根据定义的全反称性能产生
+
+
+<span class="katex">
+  \((l+1)\)
+</span>
+个重复项进而可被定义吸收掉，最后就必然得到上式。</p>
+<h4 id="3-连续两次外微分作用得０">3. 连续两次外微分作用得０</h4>
+<p>连续求两次外微分的结果得０，即
+
+
+<span class="katex">
+  \(\boxed{d\circ d=0}\)
+</span>
+。因为
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}[d(d\omega)]_{c b a_1\dots a_l}=&(l+2)(l+1)\partial_{[c}\partial_{[b}\omega_{a_1 \dots a_l]]}\quad \text{根据定义嵌套}\\ =&(l+2)(l+1)\partial_{[c}\partial_b\omega_{a_1 \dots a_l]}\quad \text{扩号内同种括号可删除}\\ =&(l+2)(l+1)\partial_{[(c}\partial_{b)}\omega_{a_1 \dots a_l]}\quad \text{普通导数可交换}\\=&0\quad \text{异种括号得０}\end{aligned}
+\]
+</span>
+</p>
+<h4 id="4-闭的恰当的微分形式">4. 闭的、恰当的微分形式</h4>
+<p>微分形式场
+
+
+<span class="katex">
+  \(\boldsymbol{\omega}\in \Lambda_M(l)\)
+</span>
+被称作<code>闭的</code>，若
+
+
+<span class="katex">
+  \(d \boldsymbol{\omega}=0\)
+</span>
+。</p>
+<p>微分形式场
+
+
+<span class="katex">
+  \(\boldsymbol{\omega}\in \Lambda_M(l)\)
+</span>
+被称<code>恰当的</code>，若
+
+
+<span class="katex">
+  \(  \boldsymbol{\omega}=d \boldsymbol{\mu},\quad \exists \boldsymbol{\mu}\in \Lambda_M(l-1)\)
+</span>
+。</p>
+<p><strong>结论１</strong>：若
+
+
+<span class="katex">
+  \(\boldsymbol{\omega}\)
+</span>
+是<code>恰当的</code>，那必然也是<code>闭的</code>。因为连续两次外微分得０。</p>
+<p><strong>结论2</strong>：若
+
+
+<span class="katex">
+  \(\boldsymbol{\omega}\)
+</span>
+是<code>闭的</code>，那么至少也是<code>局域恰当的</code>。</p>
+<h4 id="5-cartan公式">5. <code>Cartan公式</code></h4>
+<p>由于对微分形式计算其李导数比较麻烦，不妨先引入一个缩并算子：</p>
+
+
+
+<span class="katex">
+  \[
+i_X\omega_{a_1\dots a_r}\overset{\Delta}{=}X^{a_1}\omega_{a_1\dots a_r}
+\]
+</span>
+
+<p>于是，李导数算子
+
+
+<span class="katex">
+  \(\mathscr{L}_X\)
+</span>
+、外微分算子
+
+
+<span class="katex">
+  \(d\)
+</span>
+、缩并算子
+
+
+<span class="katex">
+  \(i_X\)
+</span>
+之间有一个<code>Cartan公式</code>的关系：</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\mathscr{L}_X=d \circ i_X+i_X \circ d}
+\]
+</span>
+
+<p>也可以写成抽象指标形式：</p>
+
+
+
+<span class="katex">
+  \[
+\mathscr{L}_X \omega_{a_1\dots a_r}=d_{a_1}(X^c\omega_{c a_2\dots a_r})+X^c(d\omega)_{c a_1\dots a_r}
+\]
+</span>
+
+<h2 id="流形上的积分">流形上的积分</h2>
+<h4 id="1-流形上的局域积分">1. 流形上的局域积分</h4>
+<p>设
+
+
+<span class="katex">
+  \((O,\psi)\)
+</span>
+是
+
+
+<span class="katex">
+  \(n\)
+</span>
+维定向流形
+
+
+<span class="katex">
+  \(M\)
+</span>
+上的右手坐标系，
+
+
+<span class="katex">
+  \(\boldsymbol{\omega}\)
+</span>
+是开子集
+
+
+<span class="katex">
+  \(G\subset O\)
+</span>
+上的连续
+
+
+<span class="katex">
+  \(n\)
+</span>
+形式场，那么
+
+
+<span class="katex">
+  \(\boldsymbol{\omega}\)
+</span>
+在上
+
+
+<span class="katex">
+  \(G\)
+</span>
+的积分定义成：
+
+
+
+<span class="katex">
+  \[
+\boxed{\int_G{\boldsymbol{\omega}} \overset{\Delta}{=} \int_{\psi[G]}{\omega_{1\dots n}dx^1\dots dx^n}}
+\]
+</span>
+
+这个定义和右手坐标系的选择是无关的。因为，可另选新的右手坐标系
+
+
+<span class="katex">
+  \((O',\psi'),\quad G\subset O\cap O'\)
+</span>
+，那么
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\int_{\psi'[G]}{\omega'_{1\dots n}dx'^1\dots dx'^n}=& \int_{\psi'[G]}{\frac{\partial x^{\mu_1}}{\partial x'^1}\dots\frac{\partial x^{\mu_n}}{\partial x'^n}\omega_{\mu_1\dots\mu_n}dx'^1\dots dx'^n}\quad \text{坐标变换}\\ =& \int_{\psi'[G]}{\omega_{1\dots n}\det\left(\frac{\partial x^\mu}{\partial x'^\upsilon}\right)dx'^1\dots dx'^n}\quad \text{写成雅可比行列式}\\ =& \int_{\psi[G]}{\omega_{1\dots n}dx^1\dots dx^n}\quad \text{变量替换}\end{aligned}
+\]
+</span>
+</p>
+<h4 id="2-流形上的大范围积分">2. 流形上的大范围积分</h4>
+<p>考虑流形
+
+
+<span class="katex">
+  \(M\)
+</span>
+上的有限坐标图册
+
+
+<span class="katex">
+  \(\{(O_\alpha,\varphi_\alpha)\}\)
+</span>
+，根据“单位分解定理”，必然存在这组开覆盖所对应的一组单位分解
+
+
+<span class="katex">
+  \(\{\pi_\alpha\}\)
+</span>
+，即满足：
+
+
+
+<span class="katex">
+  \[
+\sum_\alpha{\pi_\alpha(p)}=1,\quad 0\le \pi_\alpha(p)\le 1,\quad \mathrm{supp}(\pi_\alpha)\subset O_\alpha,\quad \forall p\in M
+\]
+</span>
+
+然后将
+
+
+<span class="katex">
+  \(\{\pi_\alpha\}\)
+</span>
+定义域全部限制在区域
+
+
+<span class="katex">
+  \(D\subset M\)
+</span>
+，不在此区域的全部取０，那么可对大范围进行积分：
+
+
+
+<span class="katex">
+  \[
+\boxed{\int_D{\boldsymbol{\omega}}=(\sum_\alpha{\pi_\alpha})\int_D{\boldsymbol{\omega}}=\sum_\alpha{\int_{D\cap O_\alpha}{\pi_\alpha\boldsymbol{\omega}}}\overset{\Delta}{=}\sum_\alpha{\int_{D\cap O_\alpha}{\boldsymbol{\omega}}_\alpha}}
+\]
+</span>
+</p>
+<h4 id="3-子流形上的积分">3. 子流形上的积分</h4>
+<p>考虑
+
+
+<span class="katex">
+  \(n\)
+</span>
+维流形
+
+
+<span class="katex">
+  \(M\)
+</span>
+的
+
+
+<span class="katex">
+  \(l(\lt n)\)
+</span>
+维嵌入子流形
+
+
+<span class="katex">
+  \(\phi[S]\)
+</span>
+，
+
+
+<span class="katex">
+  \(\phi:S\to M\)
+</span>
+是对应的嵌入。 从流形
+
+
+<span class="katex">
+  \(M\)
+</span>
+角度看的
+
+
+<span class="katex">
+  \(l\)
+</span>
+形式场
+
+
+<span class="katex">
+  \(\boldsymbol{\mu}=\mu_{a_1\dots a_l}\in \Lambda_M(l)\)
+</span>
+，但从子流形
+
+
+<span class="katex">
+  \(\phi[S]\)
+</span>
+角度只能看见
+
+
+<span class="katex">
+  \(\boldsymbol{\mu}\)
+</span>
+在
+
+
+<span class="katex">
+  \(\Lambda_{\phi[S]}(l)\)
+</span>
+上的“投影”
+
+
+<span class="katex">
+  \(\tilde{\boldsymbol{\mu}}=\tilde{\mu}_{a_1\dots a_l}\in \Lambda_{\phi[S]}(l)\)
+</span>
+，称为
+
+
+<span class="katex">
+  \(\boldsymbol{\mu}\)
+</span>
+在
+
+
+<span class="katex">
+  \(\phi[S]\)
+</span>
+上的<code>限制</code>，若</p>
+
+
+
+<span class="katex">
+  \[
+\left.\tilde{\mu}_{a_1\dots a_l}\right|_q(w_1)^{a_1}\dots(w_l)^{a_l}=\left.\mu_{a_1\dots a_l}\right|_q(w_1)^{a_1}\dots(w_l)^{a_l}\\ \forall q\in\phi[S],(w_1)^{a_1},\dots,(w_l)^{a_l}\in W_q
+\]
+</span>
+
+<p>所以子流形上的积分可理解为：
+
+
+
+<span class="katex">
+  \[
+\boxed{\int_{\phi[S]}{\boldsymbol{\mu}}\overset{\Delta}{=}\int_{\phi[S]}{\tilde{\boldsymbol{\mu}}}}
+\]
+</span>
+</p>
+<h2 id="stokes定理流形上微积分基本定理">Stokes定理　流形上微积分基本定理</h2>
+<h4 id="1-局域上的stokes定理">1. 局域上的Stokes定理</h4>
+
+
+
+<span class="katex">
+  \[
+\int_{A}{d\boldsymbol{\omega}}=\int_{\partial A}{\boldsymbol{\omega}}, \quad \boldsymbol{\omega}\in \Lambda_M(n-1)\quad \exists \alpha \ A\subset O_\alpha
+\]
+</span>
+
+<p>下面是非严格的证明过程示意（带帽^的项代表不存在的项）:
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\boldsymbol{\omega}=& \sum_C{\omega_{\mu_1\dots \mu_{n-1}}(dx^{\mu_1})_{a_1}\wedge\dots\wedge(dx^{\mu_{n-1}})_{a_{n-1}}}\\ =& \sum_{i=1}^n{\omega_i(dx^1)_{a_1}\wedge\dots\wedge(d \hat{x}^i)_{a_i}\wedge\dots\wedge(dx^n)_{a_n}} \\
+d\boldsymbol{\omega}_\alpha=& \sum_{i=1}^n{(d\omega_i)_{a_i}\wedge(dx^1)_{a_1}\wedge\dots\wedge(d \hat{x}^i)_{a_i}\wedge\dots\wedge(dx^n)_{a_n}}\\ =& \sum_{i=1}^n{\left[\sum_s{\frac{\partial \omega_i}{\partial x^s}(dx^s)_{a_i}}\right]\wedge(dx^1)_{a_1}\wedge\dots\wedge(d \hat{x}^i)_{a_i}\wedge\dots\wedge(dx^n)_{a_n}}\\=& \sum_{i=1}^n{\frac{\partial \omega_i}{\partial x^i}(dx^i)_{a_i}\wedge(dx^1)_{a_1}\wedge\dots\wedge(d \hat{x}^i)_{a_i}\wedge\dots\wedge(dx^n)_{a_n}} \\ \int_A{d\boldsymbol{\omega}}_\alpha=& \int_{\varphi[A]}{\sum_{i=1}^n{\frac{\partial \omega_i}{\partial x^i}dx^i dx^1 \dots d \hat{x}^i \dots dx^n} }\\ =& \sum_{i=1}^n{\int_{\varphi[A]\overset{\Delta}{=}I_n}{\frac{\partial \omega_i}{\partial x^i}dx^i dx^1 \dots d \hat{x}^i \dots dx^n} } \\ =& \sum_{i=1}^n{\int_{I_{n-1}}{\left[\int_{I_1}{\frac{\partial \omega_i}{\partial x^i}dx^i}\right] dx^1 \dots d \hat{x}^i \dots dx^n} }\\ =& \sum_{i=1}^n{\int_{\partial A\overset{\Delta}{=}I_{n-1}}{\omega_i dx^1 \dots d \hat{x}^i \dots dx^n} }\\ =& \int_{\partial A}{\sum_{i=1}^n{\omega_i dx^1 \dots d \hat{x}^i \dots dx^n} }\\ =& \int_{\partial A}{\boldsymbol{\omega}}\end{aligned}
+\]
+</span>
+</p>
+<h4 id="2-大范围上的stokes定理">2. 大范围上的Stokes定理</h4>
+
+
+
+<span class="katex">
+  \[
+\boxed{\int_{D}{d\boldsymbol{\omega}}=\int_{\partial D}{\boldsymbol{\omega}}, \quad \boldsymbol{\omega}\in \Lambda_M(n-1)\quad D\subset M}
+\]
+</span>
+
+<p>因为(利用了单位分解)
+
+
+
+<span class="katex">
+  \[
+\int_D{d\boldsymbol{\omega}}=\sum_\alpha{\int_{D\cap O_\alpha}{d\boldsymbol{\omega}}_\alpha}=\sum_\alpha{\int_{\partial D\cap O_\alpha}{\boldsymbol{\omega}}_\alpha}=\int_{\partial D}{\boldsymbol{\omega}}
+\]
+</span>
+</p>
+<h2 id="gauss定理">Gauss定理</h2>
+<h4 id="1-函数在流形上的积分">1. 函数在流形上的积分</h4>
+<p>考虑流形
+
+
+<span class="katex">
+  \((M,g_{ab})\)
+</span>
+，有对应度规适配体元
+
+
+<span class="katex">
+  \(\boldsymbol{\varepsilon}\)
+</span>
+，还有标量场(流形上的函数)
+
+
+<span class="katex">
+  \(f\in \mathscr{F}_M\)
+</span>
+,那么
+
+
+<span class="katex">
+  \(f\)
+</span>
+在
+
+
+<span class="katex">
+  \(M\)
+</span>
+上的积分定义为
+
+
+<span class="katex">
+  \(n\)
+</span>
+形式场
+
+
+<span class="katex">
+  \(f\boldsymbol{\varepsilon}\)
+</span>
+在
+
+
+<span class="katex">
+  \(M\)
+</span>
+上的积分，即</p>
+
+
+
+<span class="katex">
+  \[
+\boxed{\int_M{f}\overset{\Delta}{=}\int_M{^*f}=\int_M{f\boldsymbol{\varepsilon}}}
+\]
+</span>
+
+<p>其中用到了霍奇星算子
+
+
+<span class="katex">
+  \(^*\)
+</span>
+。</p>
+<h4 id="2-gauss定理雏形">2. Gauss定理雏形</h4>
+<p>考虑定向流形
+
+
+<span class="katex">
+  \((M,g_{ab})\)
+</span>
+，
+
+
+<span class="katex">
+  \(\boldsymbol{\varepsilon}\)
+</span>
+和
+
+
+<span class="katex">
+  \(\nabla_a\)
+</span>
+分别时适配体元和适配导数算符，
+
+
+<span class="katex">
+  \(v^a\in \mathscr{F}_M(1,0)\)
+</span>
+，取
+
+
+<span class="katex">
+  \((n-1)\)
+</span>
+形式场
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{\omega}=v^b \varepsilon_{b a_1\dots a_{n-1}}\in \Lambda_M(n-1)
+\]
+</span>
+
+那么求外微分后时
+
+
+<span class="katex">
+  \(n\)
+</span>
+形式场(
+
+
+<span class="katex">
+  \(h\)
+</span>
+待定)
+
+
+
+<span class="katex">
+  \[
+d\boldsymbol{\omega}=n\nabla_{[c}v^b\varepsilon_{|b| a_1 \dots a_{n-1}]}\overset{\Delta}{=}h \varepsilon_{c a_1\dots a_{n-1}} \in \Lambda_M(n)
+\]
+</span>
+
+进而可以求出
+
+
+<span class="katex">
+  \(h\)
+</span>
+(两边与
+
+
+<span class="katex">
+  \(\varepsilon^{c a_1\dots a_{n-1}}\)
+</span>
+缩并)</p>
+
+
+
+<span class="katex">
+  \[
+h \varepsilon^{c a_1\dots a_{n-1}}\varepsilon_{c a_1\dots a_{n-1}}= n \varepsilon^{c a_1\dots a_{n-1}} \nabla_{[c}v^b\varepsilon_{|b| a_1 \dots a_{n-1}]} \\ \quad  \\ \Longrightarrow \begin{aligned}& (-1)^s n! h &=& n\varepsilon^{[c a_1\dots a_{n-1}]} \nabla_{c}v^b\varepsilon_{b a_1 \dots a_{n-1}}\\ & &=& n\varepsilon^{c a_1\dots a_{n-1}} \varepsilon_{b a_1 \dots a_{n-1}}(\nabla_{c}v^b) \\ & &=& n(-1)^s(n-1)!1!\delta^c_{\ b}(\nabla_{c}v^b) \\ & &=& (-1)^s n! (\nabla_{b}v^b)  \end{aligned}
+\]
+</span>
+
+<p>这意味着
+
+
+
+<span class="katex">
+  \[
+h = \nabla_{b}v^b  \Longrightarrow  d\boldsymbol{\omega} =(\nabla_{b}v^b) \varepsilon_{c a_1\dots a_{n-1}}
+\]
+</span>
+
+带入Stokes定理得到Gauss定理雏形
+
+
+
+<span class="katex">
+  \[
+\boxed{\int_{D}{(\nabla_{b}v^b) \boldsymbol{\varepsilon}}=\int_{\partial D}{v^b \varepsilon_{b a_1\dots a_{n-1}}}}
+\]
+</span>
+</p>
+<h4 id="3-诱导适配体元">3. 诱导适配体元</h4>
+<p>
+
+
+<span class="katex">
+  \(\partial D\)
+</span>
+超曲面(不考虑类光超曲面的情况)，可谈归一化法矢
+
+
+<span class="katex">
+  \(n^a,\quad n^a n_b=\pm 1\)
+</span>
+，并有
+
+
+<span class="katex">
+  \(\partial D\)
+</span>
+上的诱导度规
+
+
+<span class="katex">
+  \(h_{ab}=g_{ab}\mp n_a n_b\)
+</span>
+。那么
+
+
+<span class="katex">
+  \(h_{ab}\)
+</span>
+的适配体元
+
+
+<span class="katex">
+  \(\hat{\varepsilon}_{a_1\dots a_{n-1}}\)
+</span>
+必须满足：（1）与
+
+
+<span class="katex">
+  \(\partial D\)
+</span>
+的诱导定向相容；（2）与度规
+
+
+<span class="katex">
+  \(h_{ab}\)
+</span>
+相适配，即
+
+
+
+<span class="katex">
+  \[
+\boxed{\hat{\varepsilon}^{a_1\dots a_{n-1}}\hat{\varepsilon}_{a_1\dots a_{n-1}}=(-1)^{\hat{s}}(n-1)!}
+\]
+</span>
+</p>
+<p>考虑正交归一基底
+
+
+<span class="katex">
+  \(\{(e_\mu)^a\},\quad (e_1)^a=n^a\)
+</span>
+，那么
+
+
+
+<span class="katex">
+  \[
+\varepsilon_{a_1\dots a_n}=(e^1\wedge\dots \wedge e^n)_{a_1\dots a_n}=\pm n_{a_1}\wedge(e^2\wedge\dots\wedge e^n)_{a_2\dots a_n}
+\]
+</span>
+
+由诱导定向的相容性要求：
+
+
+
+<span class="katex">
+  \[
+\boxed{\hat{\varepsilon}_{a_2\dots a_n}=K (e^2\wedge\dots\wedge e^n)_{a_2\dots a_n},\quad K>0}
+\]
+</span>
+
+于是
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}& K \varepsilon_{a_1\dots a_{n-1}}=\pm n_{b}\wedge \hat{\varepsilon}_{a_1\dots a_{n-1}}\\ \Rightarrow \quad &  K n^b\varepsilon_{b a_1\dots a_{n-1}}=\pm n^b (n_b\wedge\hat{\varepsilon}_{a_1\dots a_{n-1}})= \hat{\varepsilon}_{a_1\dots a_{n-1}}\\ \Rightarrow \quad & \hat{\varepsilon}_{a_1\dots a_{n-1}}=K n^b\varepsilon_{b a_1\dots a_{n-1}} \quad K>0\end{aligned}
+\]
+</span>
+</p>
+<p>由诱导度规适配性要求：</p>
+<p>
+
+
+<span class="katex">
+  \[
+\begin{aligned}(-1)^{\hat{s}}(n-1)!&=K^2 n_b\varepsilon^{b a_1\dots a_{n-1}} n^c\varepsilon_{c a_1\dots a_{n-1}}\\ &= K^2 (n_b n^c)((-1)^s(n-1)!1!\delta^b_{\ c})\\ &= (-1)^s (n-1)! n_b n^b K^2\\ \Rightarrow \quad &K=1 \end{aligned}
+\]
+</span>
+
+即，诱导适配体元是法矢与适配体元的缩并：
+
+
+
+<span class="katex">
+  \[
+\boxed{\hat{\varepsilon}_{a_1\dots a_{n-1}}=n^b\varepsilon_{b a_1\dots a_{n-1}}}
+\]
+</span>
+</p>
+<h4 id="4-gauss定理">4. Gauss定理</h4>
+<p>前面Gauss定理雏形右边被积分的部分
+
+
+<span class="katex">
+  \(v^b \varepsilon_{b a_1\dots a_{n-1}}\)
+</span>
+，而积分区域是在
+
+
+<span class="katex">
+  \(\partial D\)
+</span>
+超曲面上，所以一个很自然的想法就是写成标量场（流形函数）与
+
+
+<span class="katex">
+  \(\partial D\)
+</span>
+上诱导适配体元的乘积，即
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}& \boxed{v^b \varepsilon_{b a_1\dots a_{n-1}}=K \hat{\varepsilon}_{a_1\dots a_{n-1}}} \\ \Rightarrow \quad  &v^b \varepsilon_{b a_1\dots a_{n-1}}=K n^b\varepsilon_{b a_1\dots a_{n-1}}\\ \Rightarrow \quad  &v^b \varepsilon^{c a_1\dots a_{n-1}} \varepsilon_{b a_1\dots a_{n-1}}=K n^b \varepsilon^{c a_1\dots a_{n-1}}  \varepsilon_{b a_1\dots a_{n-1}}\\ \Rightarrow \quad  &v^b=K n^b\\ \Rightarrow \quad  &K n^b n_b = v^b n_b\\ \Rightarrow \quad  &K = \pm v^b n_b  \quad \text{符号}n^a n_a\text{和一致}  \end{aligned}
+\]
+</span>
+
+最后得到标准的Gauss定理：
+
+
+
+<span class="katex">
+  \[
+\boxed{\int_D{(\nabla_a v^a)\boldsymbol{\varepsilon}}=\int_{\partial D}{v^a n_a \hat{\boldsymbol{\varepsilon}}}}
+\]
+</span>
+</p>
+<h2 id="三维欧氏空间矢量算子的外微分表示">三维欧氏空间矢量算子的外微分表示</h2>
+<p>梯度、旋度、散度可用外微分表示：
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\mathrm{grad}\ f &= df\\ \mathrm{curl} \ \vec{A}&= ^*d \boldsymbol{A}\\ \mathrm{div} \ \vec{A}&= ^*d (^*\boldsymbol{A})\end{aligned}
+\]
+</span>
+
+欧氏空间这个种平凡流形，必然是恰当的，所以有:</p>
+<ol>
+<li>
+<p>无旋矢量场必可表示为梯度
+
+
+
+<span class="katex">
+  \(
+   \mathrm{curl}\ \vec{E}=0 \Longrightarrow \exists \phi, \ \  \vec{E}=\mathrm{grad}\ \phi
+   \)
+</span>
+</p>
+</li>
+<li>
+<p>无散矢量场必可表示为旋度
+
+
+
+<span class="katex">
+  \(
+   \mathrm{div}\ \vec{B}=0 \Longrightarrow \exists \vec{A}, \ \ \vec{B}=\mathrm{curl} \ \vec{A}
+   \)
+</span>
+</p>
+</li>
+</ol></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/theophy/0015/">
+    下一页<br>流形上的拉格朗日力学
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0013/">
+      上一页<br>流形上的微分形式及其对偶
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0014.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/diffgeo/0014.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#流形上的微分外微分算符">流形上的微分、外微分算符</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#流形上的积分">流形上的积分</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#stokes定理流形上微积分基本定理">Stokes定理　流形上微积分基本定理</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#gauss定理">Gauss定理</a>
+          <ul>
+            <li></li>
+          </ul>
+        </li>
+        <li><a href="#三维欧氏空间矢量算子的外微分表示">三维欧氏空间矢量算子的外微分表示</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

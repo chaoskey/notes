@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="子流形和超曲面"><meta property="og:title" content="子流形和超曲面" />
+<meta property="og:description" content="
+嵌入，就是&quot;足够像&quot;地映射到更高维流形“内部”。这种“内部”区域就是子流形。
+超曲面，就是低一维的子流形。
+法余矢，就是能够和超曲面矢量基底一起张成&quot;母&quot;流形的一个矢量基底所对应的对偶矢量基底。
+法矢，就是存在度规情况下，用度规将法余矢的指标&quot;提升&quot;得到矢量。
+诱导度规，就是和&quot;母&quot;流形度规保持&quot;自然一致&quot;的子流形度规。
+投影映射，就是诱导度规&ldquo;下降&quot;一个指标，也是将&quot;母&quot;流形任意矢量投影到子流形切空间的映射。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/diffgeo/0012/" />
+<meta property="article:published_time" content="2020-01-21T19:20:35+08:00" />
+<meta property="article:modified_time" content="2020-01-21T19:20:35+08:00" />
+<title>子流形和超曲面 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a>
+<ul>
+<li><a href="/notes/docs/diffgeo/0005/">基于抽象指标的张量分析</a></li>
+<li><a href="/notes/docs/diffgeo/0006/">流形上的导数算符</a></li>
+<li><a href="/notes/docs/diffgeo/0007/">流形上的平移</a></li>
+<li><a href="/notes/docs/diffgeo/0008/">黎曼曲率张量</a></li>
+<li><a href="/notes/docs/diffgeo/0009/">流形间的映射</a></li>
+<li><a href="/notes/docs/diffgeo/0010/">流形上的李导数</a></li>
+<li><a href="/notes/docs/diffgeo/0011/">Killing矢量场</a></li>
+<li><a href="/notes/docs/diffgeo/0012/"class=active>子流形和超曲面</a></li>
+<li><a href="/notes/docs/diffgeo/0013/">流形上的微分形式及其对偶</a></li>
+<li><a href="/notes/docs/diffgeo/0014/">流形上的微积分</a></li>
+<li><a href="/notes/docs/diffgeo/0016/">李群李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0068/">常用李群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0069/">李变换群</a></li>
+<li><a href="/notes/docs/diffgeo/0070/">微分几何中的计算（Julia版）</a></li>
+<li><a href="/notes/docs/diffgeo/0073/">辛群及其李代数</a></li>
+<li><a href="/notes/docs/diffgeo/0074/">辛流形</a></li>
+<li><a href="/notes/docs/diffgeo/0076/">流形上的旋量和旋量场（初步）</a></li>
+<li><a href="/notes/docs/diffgeo/0077/">流形上的旋量和旋量场（几何解释）</a></li>
+<li><a href="/notes/docs/diffgeo/0078/">流形上的旋量和旋量场（导数算符和曲率)</a></li>
+<li><a href="/notes/docs/diffgeo/0079/">流形上的旋量和旋量场（自旋系数和克氏符）</a></li>
+<li><a href="/notes/docs/diffgeo/0082/">李群李代数伴随表示和Killing型、Casimir算符</a></li>
+<li><a href="/notes/docs/diffgeo/0083/">半单李代数的标准形式</a></li>
+<li><a href="/notes/docs/diffgeo/0084/">半单李代数的根系、权系和Dynkin图</a></li>
+<li><a href="/notes/docs/diffgeo/0085/">半单李代数的Casimir不变算符</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>子流形和超曲面</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#嵌入映射与嵌入子流形">嵌入映射与嵌入子流形</a></li>
+        <li><a href="#超曲面得切平面法余矢法矢">超曲面得切平面、法余矢、法矢</a></li>
+        <li><a href="#超曲面单位法余矢的唯一性">超曲面单位法余矢的唯一性</a></li>
+        <li><a href="#标量场梯度是对应等值超曲面的法余矢">标量场梯度是对应等值超曲面的法余矢</a></li>
+        <li><a href="#超曲面的分类">超曲面的分类</a></li>
+        <li><a href="#子流形诱导度规投影映射">子流形诱导度规、投影映射</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0013/">
+    下一页<br>流形上的微分形式及其对偶
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0011/">
+      上一页<br>Killing矢量场
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/diffgeo/0012/">子流形和超曲面</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-01-21</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95">微分几何</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E6%B5%81%E5%BD%A2">流形</a>
+      , 
+      <a href="/notes/tags/%E5%AD%90%E6%B5%81%E5%BD%A2">子流形</a>
+      , 
+      <a href="/notes/tags/%E8%B6%85%E6%9B%B2%E9%9D%A2">超曲面</a>
+      , 
+      <a href="/notes/tags/%E5%B5%8C%E5%85%A5">嵌入</a>
+      , 
+      <a href="/notes/tags/%E6%B3%95%E4%BD%99%E7%9F%A2">法余矢</a>
+      , 
+      <a href="/notes/tags/%E6%B3%95%E7%9F%A2">法矢</a>
+      , 
+      <a href="/notes/tags/%E8%AF%B1%E5%AF%BC%E5%BA%A6%E8%A7%84">诱导度规</a>
+      , 
+      <a href="/notes/tags/%E6%8A%95%E5%BD%B1%E6%98%A0%E5%B0%84">投影映射</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0012.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<blockquote>
+<p><code>嵌入</code>，就是&quot;足够像&quot;地映射到更高维流形“内部”。这种“内部”区域就是<code>子流形</code>。</p>
+<p><code>超曲面</code>，就是低一维的<code>子流形</code>。</p>
+<p><code>法余矢</code>，就是能够和超曲面矢量基底一起张成&quot;母&quot;流形的一个矢量基底所对应的对偶矢量基底。</p>
+<p><code>法矢</code>，就是存在度规情况下，用度规将<code>法余矢</code>的指标&quot;提升&quot;得到矢量。</p>
+<p><code>诱导度规</code>，就是和&quot;母&quot;流形度规保持&quot;自然一致&quot;的子流形度规。</p>
+<p><code>投影映射</code>，就是<code>诱导度规</code>&ldquo;下降&quot;一个指标，也是将&quot;母&quot;流形任意矢量投影到子流形切空间的映射。</p>
+</blockquote>
+<h2 id="嵌入映射与嵌入子流形">嵌入映射与嵌入子流形</h2>
+<p>映射
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \(\phi:S\to M,\quad \dim S \le \dim M=n\)
+</span>
+称为<code>嵌入</code>，如果：</p>
+<ol>
+<li>
+
+
+<span class="katex">
+  \(\phi:S\to \phi[S](\subset M)\)
+</span>
+是同胚映射；</li>
+<li>
+
+
+<span class="katex">
+  \(\phi_*V_p \to V_{\phi(p)},\quad \forall p\in S\)
+</span>
+是非退化的，即
+
+
+<span class="katex">
+  \(\phi_* v^a \Rightarrow v^a=0\)
+</span>
+。</li>
+</ol>
+<p>利用<code>嵌入映射</code>
+
+
+<span class="katex">
+  \(\phi\)
+</span>
+,可以称
+
+
+<span class="katex">
+  \(S\)
+</span>
+或
+
+
+<span class="katex">
+  \(\phi[S]\)
+</span>
+是
+
+
+<span class="katex">
+  \(M\)
+</span>
+<code>(嵌入)子流形</code>。</p>
+<p>特别地，如果
+
+
+<span class="katex">
+  \(\dim S=n-1\)
+</span>
+，那么称
+
+
+<span class="katex">
+  \(S\)
+</span>
+或
+
+
+<span class="katex">
+  \(\phi[S]\)
+</span>
+是
+
+
+<span class="katex">
+  \(M\)
+</span>
+的一张<code>超曲面</code>。</p>
+<h2 id="超曲面得切平面法余矢法矢">超曲面得切平面、法余矢、法矢</h2>
+<p>设
+
+
+<span class="katex">
+  \(\phi[S]\)
+</span>
+是
+
+
+<span class="katex">
+  \(M\)
+</span>
+的超曲面及上的点
+
+
+<span class="katex">
+  \(q\in\phi[S]\subset M\)
+</span>
+。</p>
+<p>从
+
+
+<span class="katex">
+  \(M\)
+</span>
+角度来看，有
+
+
+<span class="katex">
+  \(q\)
+</span>
+点的
+
+
+<span class="katex">
+  \(n\)
+</span>
+维切空间
+
+
+<span class="katex">
+  \(V_q\)
+</span>
+。　从
+
+
+<span class="katex">
+  \(\phi[S]\)
+</span>
+角度来看，也有
+
+
+<span class="katex">
+  \(q\)
+</span>
+点的
+
+
+<span class="katex">
+  \((n-1)\)
+</span>
+维切空间
+
+
+<span class="katex">
+  \(W_q\)
+</span>
+。 任意
+
+
+<span class="katex">
+  \(w^a\in W_q\)
+</span>
+都是沿
+
+
+<span class="katex">
+  \(\phi[S]\)
+</span>
+上的某曲线的切矢，这条曲线同时也是
+
+
+<span class="katex">
+  \(M\)
+</span>
+上的曲线，所以
+
+
+<span class="katex">
+  \(w^a\in V_q\)
+</span>
+，即
+
+
+<span class="katex">
+  \(W_q \subset V_q\)
+</span>
+。</p>
+<p>非零对偶矢量
+
+
+<span class="katex">
+  \(n_a\in V^*_q\)
+</span>
+称为超曲面
+
+
+<span class="katex">
+  \(\phi[S]\)
+</span>
+在
+
+
+<span class="katex">
+  \(q\)
+</span>
+点<code>法余矢</code>，若
+
+
+<span class="katex">
+  \(n_a w^a=0,\quad \forall w^a\in W_q\)
+</span>
+。</p>
+<p>如果
+
+
+<span class="katex">
+  \(M\)
+</span>
+上有度规
+
+
+<span class="katex">
+  \(g_{ab}\)
+</span>
+，那么
+
+
+<span class="katex">
+  \(n^a\overset{\Delta}{=}g^{ab}n_a\in V_q\)
+</span>
+与
+
+
+<span class="katex">
+  \(\phi[S]\)
+</span>
+的所有矢量正交。因为,
+
+
+
+<span class="katex">
+  \[
+g_{ab}n^a w^a=n_a w^a=0,\quad \forall w^a\in W_q
+\]
+</span>
+
+所以可称
+
+
+<span class="katex">
+  \(n^a\)
+</span>
+为超曲面
+
+
+<span class="katex">
+  \(\phi[S]\)
+</span>
+在
+
+
+<span class="katex">
+  \(p\)
+</span>
+点的<code>法矢</code>。</p>
+<h2 id="超曲面单位法余矢的唯一性">超曲面单位法余矢的唯一性</h2>
+<p>我们知道
+
+
+<span class="katex">
+  \(W_q\)
+</span>
+可由最大线性无关基底
+
+
+<span class="katex">
+  \(\{(e_2)^a,\dots,(e_n)^a\}\)
+</span>
+张成，自然也可选作
+
+
+<span class="katex">
+  \(V_q\)
+</span>
+的
+
+
+<span class="katex">
+  \((n-1)\)
+</span>
+个线性无关基底，必然可从
+
+
+<span class="katex">
+  \(V_q\)
+</span>
+选出与这
+
+
+<span class="katex">
+  \((n-1)\)
+</span>
+都线性无关的元素，记做
+
+
+<span class="katex">
+  \((e_1)^a\)
+</span>
+。于是
+
+
+<span class="katex">
+  \(V_q\)
+</span>
+可由最大线性无关基底
+
+
+<span class="katex">
+  \(\{(e_\mu)^a|\mu=1,\dots,n\}\)
+</span>
+张成，进而有一组对偶基底
+
+
+<span class="katex">
+  \(\{(e^\mu)_a\}\)
+</span>
+。 可取
+
+
+<span class="katex">
+  \(n_a=(e^1)_a\)
+</span>
+，有
+
+
+<span class="katex">
+  \(n_a(e_\tau)^a=\delta^1_{\ \tau}=0,\quad \tau=2,\dots,n\)
+</span>
+，因此这个
+
+
+<span class="katex">
+  \(n_a\)
+</span>
+就是<code>法余矢</code>。若
+
+
+<span class="katex">
+  \(m_a\ne n_a\)
+</span>
+也是法余矢，那么
+
+
+<span class="katex">
+  \(m_\tau =m_a(e_\tau)^a=0(\tau=2,\dots)\)
+</span>
+，进而
+
+
+<span class="katex">
+  \(m_a=m_1(e^1)_a=m_1 n_a\)
+</span>
+。</p>
+<p>所以，超曲面
+
+
+<span class="katex">
+  \(\phi[S]\)
+</span>
+上任意点
+
+
+<span class="katex">
+  \(q\)
+</span>
+必有<code>法余矢</code>，唯一到相差常数因子。　但对一般的嵌入子流形(比如三维流形中的曲线)的法余矢没有这样的唯一性。</p>
+<h2 id="标量场梯度是对应等值超曲面的法余矢">标量场梯度是对应等值超曲面的法余矢</h2>
+<p>考虑
+
+
+<span class="katex">
+  \(\phi[S]\)
+</span>
+是由
+
+
+<span class="katex">
+  \(f=const. \quad f\in \mathscr{F}_M\)
+</span>
+给出的超平面。对任意
+
+
+<span class="katex">
+  \(w^a\in V_q\)
+</span>
+，
+
+
+<span class="katex">
+  \(w^a\)
+</span>
+总切于超曲面
+
+
+<span class="katex">
+  \(\phi[S]\)
+</span>
+上的某条曲线
+
+
+<span class="katex">
+  \(C(t)\)
+</span>
+，于是：
+
+
+
+<span class="katex">
+  \[
+w^a (\nabla_a f)=w^a \partial_a f=0
+\]
+</span>
+
+着意味着
+
+
+<span class="katex">
+  \(\nabla_a f\)
+</span>
+的确是
+
+
+<span class="katex">
+  \(\phi[S]\)
+</span>
+的<code>法余矢</code>。</p>
+<h2 id="超曲面的分类">超曲面的分类</h2>
+<p>对黎曼流形而言，给定的度规是正定的，必然有
+
+
+<span class="katex">
+  \(n^a n_b=g_{ab}n^a n^b > 0\)
+</span>
+。但对非正定度规的伪黎曼流形而言，
+
+
+<span class="katex">
+  \(n^a n_b\)
+</span>
+正负零都可能。</p>
+<p>法矢处处类时（
+
+
+<span class="katex">
+  \(n^a n_b<0\)
+</span>
+）的超曲面是<code>类空的</code>；法矢处处类空（
+
+
+<span class="katex">
+  \(n^a n_b>0\)
+</span>
+）的超曲面是<code>类时的</code>；法矢处处类光（
+
+
+<span class="katex">
+  \(n^a n_b=0\)
+</span>
+）的超曲面也是<code>类光的</code>。</p>
+<p>所以黎曼流形中的超平面都是类时的，对应的法矢是类空的。</p>
+<p>类光超曲面的法矢就躺在超曲面切空间上，即 
+
+
+<span class="katex">
+  \(n^a\in W_q \Leftrightarrow n^a n_b=0\)
+</span>
+。</p>
+<p>对类空和类时的超平面的而言，今后谈法矢时都特指<code>归一化法矢</code>,即
+
+
+<span class="katex">
+  \(n^a n_a=\pm 1\)
+</span>
+。</p>
+<h2 id="子流形诱导度规投影映射">子流形诱导度规、投影映射</h2>
+<p>所谓
+
+
+<span class="katex">
+  \(\phi[S]\subset M\)
+</span>
+<code>诱导度规</code>
+
+
+<span class="katex">
+  \(h_{ab}\)
+</span>
+就是将
+
+
+<span class="katex">
+  \(M\)
+</span>
+上的度规
+
+
+<span class="katex">
+  \(g_{ab}\)
+</span>
+作用对象限制在
+
+
+<span class="katex">
+  \(\phi[S]\)
+</span>
+的切平面
+
+
+<span class="katex">
+  \(W_q\)
+</span>
+上的结果。　也就是说：
+
+
+
+<span class="katex">
+  \[
+h_{ab} u^a w^a=g_{ab}u^a w^a,\quad \forall u^a,w^a\in W_q
+\]
+</span>
+
+注意
+
+
+<span class="katex">
+  \(n_a n_b u^a w^a=(n_a u^a)(n_b w^a)=0\)
+</span>
+，所以一个合理猜测，并做变换：
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}&h_{ab}=g_{ab}-\lambda n_a n_b\\ \Leftrightarrow \quad & h^a_{\ b}=g^{ac}h_{cb}=\delta^a_{\ b}-\lambda n^a n_b\\ \Leftrightarrow \quad & h^a_{\ b}v^b=v^a-\lambda n^a (n_b v^b)\quad \forall v^a\in V_q\\ \Leftrightarrow \quad & v^a=h^a_{\ b}v^b+n^a (\lambda n_b v^b)\end{aligned}
+\]
+</span>
+</p>
+<p>很明显，最后一个式子似乎代表矢量
+
+
+<span class="katex">
+  \(v^a\in V_q\)
+</span>
+的某种分解。我们更希望这是一种正交分解，就是希望：
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}0=& n_a(h^a_{\ b}v^b)\\ =& n_a(\delta^a_{\ b}-\lambda n^a n_b)v^b\\ =& n_b v^b-\lambda n^a n_a n_b v^b\\ =& (1-\lambda n^a n_a )n_b v^b \quad \forall v^b\in V_q\end{aligned}
+\]
+</span>
+
+考虑到
+
+
+<span class="katex">
+  \(v^b\)
+</span>
+选择的任意性以及
+
+
+<span class="katex">
+  \(n^a\)
+</span>
+默认是归一化法矢，于是有
+
+
+<span class="katex">
+  \(\lambda=\pm1\)
+</span>
+。根据上述分析，可直接写出下面的两个结论：</p>
+<ol>
+<li><code>诱导度规</code>可表示成：
+
+
+
+<span class="katex">
+  \[
+h_{ab}=g_{ab}\mp n_a n_b,\quad \text{加减号与}n^a n_a\text{的符号相反}
+\]
+</span>
+</li>
+<li>任意矢量
+
+
+<span class="katex">
+  \(v^a\in V_q\)
+</span>
+可进行正交分解：
+
+
+
+<span class="katex">
+  \[
+v^a=h^a_{\ b}v^b\pm n^a (n_b v^b),\quad \text{加减号与}n^a n_a\text{的符号一致}
+\]
+</span>
+
+其中，
+
+
+<span class="katex">
+  \(v^a_{\parallel}\overset{\Delta}{=}h^a_{\ b} v^b\in W_q\)
+</span>
+称为
+
+
+<span class="katex">
+  \(v^a\)
+</span>
+在
+
+
+<span class="katex">
+  \(\phi[S]\)
+</span>
+<code>切向分量</code>，
+
+
+<span class="katex">
+  \(h^a_{\ b}:V_q\to W_q\)
+</span>
+则是<code>投影映射</code>。
+
+
+<span class="katex">
+  \(v^a_{\perp}\overset{\Delta}{=}\pm n^a(n_b v^b)\)
+</span>
+是与法矢
+
+
+<span class="katex">
+  \(n^a\)
+</span>
+平行的<code>法向分量</code>。</li>
+</ol></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0013/">
+    下一页<br>流形上的微分形式及其对偶
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/diffgeo/0011/">
+      上一页<br>Killing矢量场
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/diffgeo/0012.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/diffgeo/0012.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#嵌入映射与嵌入子流形">嵌入映射与嵌入子流形</a></li>
+        <li><a href="#超曲面得切平面法余矢法矢">超曲面得切平面、法余矢、法矢</a></li>
+        <li><a href="#超曲面单位法余矢的唯一性">超曲面单位法余矢的唯一性</a></li>
+        <li><a href="#标量场梯度是对应等值超曲面的法余矢">标量场梯度是对应等值超曲面的法余矢</a></li>
+        <li><a href="#超曲面的分类">超曲面的分类</a></li>
+        <li><a href="#子流形诱导度规投影映射">子流形诱导度规、投影映射</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

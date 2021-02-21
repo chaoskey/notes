@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="常见有限元（一）【翻译】"><meta property="og:title" content="常见有限元（一）【翻译】" />
+<meta property="og:description" content="I.方法论》3.常见有限元（一）
+【章节目录】
+本章简要介绍了文献中的有限元。 这里介绍的许多单元已经作为FEniCS项目的一部分实现了； 一些是未来的工作。 有限元的范围远远超出了我们在此考虑的范围。 特别是，我们仅考虑基于简单多项式的单元。 因此，我们绕过了在四边形和六面体，复合和宏单元技术以及XFEM类型方法中定义的单元。 即使在基于简单多项式单元中，也可以扩展单元列表。 尽管如此，本章还是全面介绍了一些最常见的和较不寻常的有限元。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/0100/" />
+<meta property="article:published_time" content="2020-12-19T17:51:51+08:00" />
+<meta property="article:modified_time" content="2020-12-19T17:51:51+08:00" />
+<title>常见有限元（一）【翻译】 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a>
+<ul>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E6%96%B9%E6%B3%95">第二章 有限元方法</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%B8%B8%E8%A7%81%E6%9C%89%E9%99%90%E5%85%83">第三章 常见有限元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8%E5%8F%82%E8%80%83%E5%8D%95%E5%85%83">第四章 构造通用参考单元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F">第五章 有限元变分形式</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%BB%84%E8%A3%85">第六章 有限元组装</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%AD%A3%E4%BA%A4%E8%A1%A8%E7%A4%BA">第七章 有限元变分形式的正交表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA">第八章 有限元变分形式的张量表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E7%9A%84%E7%A6%BB%E6%95%A3%E4%BC%98%E5%8C%96">第九章 有限元矩阵计算的离散优化</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E7%AB%A0-dolfincpython%E6%9C%89%E9%99%90%E5%85%83%E5%BA%93">第十章 DOLFIN：C++/Python有限元库</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-ufl%E6%9C%89%E9%99%90%E5%85%83%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80">第十七章 UFL：有限元形式语言</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-unicorn%E7%BB%9F%E4%B8%80%E7%9A%84%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6%E6%B1%82%E8%A7%A3%E5%99%A8">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>常见有限元（一）【翻译】</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#i方法论3常见有限元一">I.方法论》3.常见有限元（一）</a>
+      <ul>
+        <li><a href="#31-有限元定义">3·1 有限元定义</a></li>
+        <li><a href="#32-记号">3·2 记号</a></li>
+        <li><a href="#33-h有限元">3·3 H¹有限元</a>
+          <ul>
+            <li><a href="#331-拉格朗日单元">3·3·1 拉格朗日单元</a></li>
+            <li><a href="#332-crouzeixraviart单元">3·3·2 Crouzeix–Raviart单元</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0101/">
+    下一页<br>常见有限元（二）【翻译】
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0099/">
+      上一页<br>有限元方法（三）【翻译】
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/fem/0100/">常见有限元（一）【翻译】</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-12-19</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/FEniCS">FEniCS</a>
+      , 
+      <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95">有限元法</a>
+      , 
+      <a href="/notes/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">偏微分方程</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0100.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h1 id="i方法论3常见有限元一">I.方法论》3.常见有限元（一）</h1>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e4%b8%89%e7%ab%a0-%e5%b8%b8%e8%a7%81%e6%9c%89%e9%99%90%e5%85%83">章节目录</a>】</p>
+<p>本章简要介绍了文献中的有限元。 这里介绍的许多单元已经作为FEniCS项目的一部分实现了； 一些是未来的工作。 有限元的范围远远超出了我们在此考虑的范围。 特别是，我们仅考虑基于简单多项式的单元。 因此，我们绕过了在四边形和六面体，复合和宏单元技术以及XFEM类型方法中定义的单元。 即使在基于简单多项式单元中，也可以扩展单元列表。 尽管如此，本章还是全面介绍了一些最常见的和较不寻常的有限元。</p>
+<h2 id="31-有限元定义">3·1 有限元定义</h2>
+<p>Ciarlet（1975）在一系列讲义中首次引入了有限元的Ciarlet定义，并在其1978年的著作（Ciarlet，2002）之后变得流行。 今天，它仍然是标准定义，例如参见Brenner和Scott（2008）。 第2章也介绍了该定义，内容如下：</p>
+<p><strong>定义3.1（有限元（Ciarlet，2002年））</strong> 有限元被定义成一个三元组
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \((T, \mathcal{V}, \mathcal{L})\)
+</span>
+，其中</p>
+<ul>
+<li>
+<p>域
+
+
+<span class="katex">
+  \(T\)
+</span>
+是
+
+
+<span class="katex">
+  \(\mathbb{R}^d\)
+</span>
+的有界封闭子集（对于
+
+
+<span class="katex">
+  \(d = 1, 2, 3, \dots\)
+</span>
+），具有非空内部和分段光滑边界；</p>
+</li>
+<li>
+<p>
+
+
+<span class="katex">
+  \(\mathcal{V} = \mathcal{V}(T)\)
+</span>
+是在
+
+
+<span class="katex">
+  \(T\)
+</span>
+上的
+
+
+<span class="katex">
+  \(n\)
+</span>
+维有限维函数空间；</p>
+</li>
+<li>
+<p>自由度（节点）的集合
+
+
+<span class="katex">
+  \(\mathcal{L} = \{\ell_1, \ell_2, \dots , \ell_n\}\)
+</span>
+是对偶空间
+
+
+<span class="katex">
+  \(\mathcal{V'}\)
+</span>
+的基底; 也就是
+
+
+<span class="katex">
+  \(\mathcal{V}\)
+</span>
+上的有界线性泛函的空间。</p>
+</li>
+</ul>
+<p>相似的想法早在Ciarlet和Raviart（1972）中已有介绍，其中讨论了一组插值点
+
+
+<span class="katex">
+  \(\{x^i\}_i\)
+</span>
+的唯一可解性（unisolvence）。 当由
+
+
+<span class="katex">
+  \(\ell_i(v) = v(x^i)\)
+</span>
+给出自由度时，就与
+
+
+<span class="katex">
+  \(\mathcal{L}\)
+</span>
+的唯一可解性（unisolvence）密切相关。 Bramble和Zlámal（1970）也讨论了基于一组点上的插值函数值和导数值，唯一确定多项式的条件，尽管未使用术语“唯一可解性（unisolvence）”。</p>
+<p>对于任何有限元，都可以定义
+
+
+<span class="katex">
+  \(\mathcal{V}\)
+</span>
+的局部基底，这就是自由度的对偶。 满足
+
+
+<span class="katex">
+  \(\ell_i(\phi_j^T) = \delta_{ij}, \quad 1 \le i, j \le n\)
+</span>
+的基底
+
+
+<span class="katex">
+  \(\{\phi_1^T, \phi_2^T, \dots , \phi_n^T\}\)
+</span>
+，被称为<code>节点基底</code>（nodal basis）。 通常在有限元计算中要使用此基底。</p>
+<p>与有限元关联的<code>局部插值算子</code>，有时也称为<code>节点插值</code>（nodal interpolant）。  给定
+
+
+<span class="katex">
+  \(T\)
+</span>
+上的函数
+
+
+<span class="katex">
+  \(f\)
+</span>
+，<code>节点插值</code>由下式定义：</p>
+
+
+
+<span class="katex">
+  \[
+\Pi_T(f) = \sum_{i=1}^n{\ell_i(f) \phi_i^T}  \tag{3.1}
+\]
+</span>
+
+<p>假设
+
+
+<span class="katex">
+  \(f\)
+</span>
+足够光滑，对于可以很好定义的、作用与其上的所有自由度。</p>
+<p>一旦一个局部有限元空间被定义了，那么定义一个镶嵌在
+
+
+<span class="katex">
+  \(\mathcal{T}_h\)
+</span>
+上的全局有限元空间，就相对简单了。 一个全局空间定义所包含的任意函数，在每个
+
+
+<span class="katex">
+  \(T \in \mathcal{T}_h\)
+</span>
+上的限制都是躺在局部空间
+
+
+<span class="katex">
+  \(\mathcal{V}(T)\)
+</span>
+中的函数，这些函数还满足任何所需的连续性要求。 通常，所选择的每个局部单元的自由度，满足：如果两个相邻胞元
+
+
+<span class="katex">
+  \(T\)
+</span>
+和
+
+
+<span class="katex">
+  \(T'\)
+</span>
+的公共面上的自由度一致，则函数将满足所需的连续性条件。</p>
+<p>在构造全局有限元空间时，通常会构造单个参考有限元
+
+
+<span class="katex">
+  \((\hat{T}, \hat{\mathcal{V}}, \hat{\mathcal{L}})\)
+</span>
+，并将其映射 到网格中的每个胞元。 当我们处理简单几何时，在
+
+
+<span class="katex">
+  \(\hat{T}\)
+</span>
+和每个
+
+
+<span class="katex">
+  \(T \in \mathcal{T}_h\)
+</span>
+间的这个映射是仿射的。 仿射等价（afﬁne equivalence）这个概念，虽然最初是为误差估计而定义的，但是对计算也很有用的。 令
+
+
+<span class="katex">
+  \(F_T : \hat{T} \to T\)
+</span>
+表示这个仿射映射。 让
+
+
+<span class="katex">
+  \(v \in \mathcal{V}\)
+</span>
+。 那么这个仿射映射所关联的<code>拉回映射</code>（pullback），由
+
+
+<span class="katex">
+  \(\mathcal{F}^*(v)(\hat{x}) = v(F_T(\hat{x})),\quad \forall \hat{x} \in \hat{T}\)
+</span>
+给出。 给定一个
+
+
+<span class="katex">
+  \(\hat{\ell} \in \hat{\mathcal{V}}'\)
+</span>
+，其<code>推前映射</code>（pushforward）作用于
+
+
+<span class="katex">
+  \(v \in \mathcal{V}\)
+</span>
+中的函数的结果，则由
+
+
+<span class="katex">
+  \(\mathcal{F}_*(\hat{\ell})(v) = \hat{\ell}(\mathcal{F}^*(v))\)
+</span>
+给出。</p>
+<p><strong>定义3.2（仿射等价）</strong> 令 
+
+
+<span class="katex">
+  \((\hat{T}, \hat{\mathcal{V}}, \hat{\mathcal{L}})\)
+</span>
+和
+
+
+<span class="katex">
+  \((T, \mathcal{V}, \mathcal{L})\)
+</span>
+都是有限元，并且
+
+
+<span class="katex">
+  \(F_T : \hat{T} \to T\)
+</span>
+是一个非退化的仿射映射。 如果
+
+
+<span class="katex">
+  \(\mathcal{F}^*(\mathcal{V}) = \hat{\mathcal{V}}\)
+</span>
+,并且
+
+
+<span class="katex">
+  \(\mathcal{F}_*(\hat{\mathcal{L}}) = \mathcal{L}\)
+</span>
+，那么称这两个有限元是<code>仿射等价</code>的。</p>
+<p>仿射等效的一个推论是：只需要构造一个节点基底，然后就可以将其映射到网格中的每个胞元。 而且，当使用某些类型的Piola映射时，这种等价概念还可以扩展到某些矢量值单元。 在这种情况下，仿射映射是相同的，但是相应的拉回映射（pull-back）和推前映射（push-forward）需要进行了适当的修改。 还值得指出的是，并非所有有限元都生成仿射等价族或Piola等价族。 拉格朗日单元在
+
+
+<span class="katex">
+  \(H^1\)
+</span>
+中是仿射等价的，而Hermite单元和Argyris单元则不是。 Raviart–Thomas单元在
+
+
+<span class="katex">
+  \(H(\mathrm{div})\)
+</span>
+中Piola等价的，而Mardal–Tai–Winther单元则不是。</p>
+<p>表3.1列出了本章讨论的有限元字典。</p>
+<p><img src="/notes/images/0186.jpg" alt="0186.jpg"></p>
+<center>表3.1 本章讨论的有限元字典，包括全名和相应的（最高阶次）Sobolev空间单元，还有符合与否。</center>
+<h2 id="32-记号">3·2 记号</h2>
+<ul>
+<li>
+<p>域
+
+
+<span class="katex">
+  \(T \subset \mathbb{R}^d\)
+</span>
+上阶次最高为
+
+
+<span class="katex">
+  \(q\)
+</span>
+的多项式空间，被记作
+
+
+<span class="katex">
+  \(\mathcal{P}_q(T)\)
+</span>
+；而相应的d-矢量场，则被记作
+
+
+<span class="katex">
+  \([\mathcal{P}_q(T)]^d\)
+</span>
+。</p>
+</li>
+<li>
+<p>如果
+
+
+<span class="katex">
+  \(E \subseteq V\)
+</span>
+，那么有限元空间
+
+
+<span class="katex">
+  \(E\)
+</span>
+被称为V-符合的（V-conforming）。 如果不是，则称为（V-）不符合的。</p>
+</li>
+<li>
+<p>
+
+
+<span class="katex">
+  \(\mathcal{L}\)
+</span>
+的元素，通常是指单元
+
+
+<span class="katex">
+  \((T, \mathcal{V}, \mathcal{L})\)
+</span>
+的<code>自由度</code>。 当描述有限元族时，通常以某种示意记号来表示自由度。 我们在下面的列表和图3.1中总结了此处使用的表示法。</p>
+</li>
+</ul>
+<p><img src="/notes/images/0187.jpg" alt="0187.jpg"></p>
+<center>图3.1 用于自由度的记号摘要。  比如，三个同心球表示一组由内部矩定义的三个自由度。</center>
+<p><strong>点值（Point evaluation）</strong>。 点
+
+
+<span class="katex">
+  \(x\)
+</span>
+处的黑色球体（圆盘）表示函数
+
+
+<span class="katex">
+  \(v\)
+</span>
+在该点处的值：</p>
+
+
+
+<span class="katex">
+  \[
+\ell(v) = v(x) \tag{3.2}
+\]
+</span>
+
+<p>对于具有
+
+
+<span class="katex">
+  \(d\)
+</span>
+个分量的矢量值函数
+
+
+<span class="katex">
+  \(v\)
+</span>
+，黑色球体表示对所有分量的求值，因此对应
+
+
+<span class="katex">
+  \(d\)
+</span>
+个自由度。</p>
+<p><strong>所有一阶导数值</strong>。 点
+
+
+<span class="katex">
+  \(x\)
+</span>
+处的深灰色略大的球体（圆盘）表示该点上函数
+
+
+<span class="katex">
+  \(v\)
+</span>
+的所有一阶导数的值：</p>
+
+
+
+<span class="katex">
+  \[
+\ell_i(v) =\frac{\partial v(x)}{\partial x_i} \quad i = 1,\dots, d  \tag{3.3}
+\]
+</span>
+
+<p>因此对应于
+
+
+<span class="katex">
+  \(d\)
+</span>
+个自由度。</p>
+<p><strong>所有二阶导数值</strong>。  点
+
+
+<span class="katex">
+  \(x\)
+</span>
+处的浅灰色甚至更大的球体（圆盘）表示该点上函数
+
+
+<span class="katex">
+  \(v\)
+</span>
+的所有二阶导数的值：</p>
+
+
+
+<span class="katex">
+  \[
+\ell_{ij}(v) = \frac{\partial^2 v(x)}{\partial x_i \partial x_j} \quad 1 \le i \le j \le d \tag{3.4}
+\]
+</span>
+
+<p>因此对应
+
+
+<span class="katex">
+  \(d(d + 1)/2\)
+</span>
+个自由度。</p>
+<p><strong>方向分量的值</strong>。  点
+
+
+<span class="katex">
+  \(x\)
+</span>
+处沿方向
+
+
+<span class="katex">
+  \(n\)
+</span>
+的箭头，表示在点
+
+
+<span class="katex">
+  \(x\)
+</span>
+处的矢量值函数
+
+
+<span class="katex">
+  \(v\)
+</span>
+的沿方向
+
+
+<span class="katex">
+  \(n\)
+</span>
+的值：</p>
+
+
+
+<span class="katex">
+  \[
+\ell(v) = v(x) \cdot n \tag{3.5}
+\]
+</span>
+
+<p>方向
+
+
+<span class="katex">
+  \(n\)
+</span>
+通常是维面（facet）的法线方向，或者是维面或边的切线方向。 有时，我们会在某点使用箭头来表示一个函数在维面或边上分量的矩（对权重函数积分）。</p>
+<p><strong>方向导数的值</strong>。 点
+
+
+<span class="katex">
+  \(x\)
+</span>
+处沿方向
+
+
+<span class="katex">
+  \(n\)
+</span>
+的黑线，表示在点
+
+
+<span class="katex">
+  \(x\)
+</span>
+处标量函数
+
+
+<span class="katex">
+  \(v\)
+</span>
+沿方向
+
+
+<span class="katex">
+  \(n\)
+</span>
+的方向导数的值：</p>
+
+
+
+<span class="katex">
+  \[
+\ell(v) = \nabla v(x) \cdot n \tag{3.6}
+\]
+</span>
+
+<p><strong>内部矩的值（Evaluation of interior moments）</strong>。 一组同心球（圆盘）表示内部矩自由度； 也就是说，这种自由度，是通过在域
+
+
+<span class="katex">
+  \(T\)
+</span>
+内部，对权重函数进行积分而定义得到的。 球体颜色为白色，黑色，白色等。</p>
+<p>我们注意到，对于下面介绍的某些有限元，文献将使用不同的符号和编号方案，因此我们的表示形式可能与单元的原始表示形式完全不同。 特别是，Raviart–Thomas单元族和第一种Nédélec空间的族传统上从0开始编号，而我们随后对有限元外微积分，采用了最新的方案-从1开始编号。</p>
+<h2 id="33-h有限元">3·3 H¹有限元</h2>
+<p>
+
+
+<span class="katex">
+  \(H^1\)
+</span>
+空间是分析和离散化二阶椭圆问题弱形式的基础，而且
+
+
+<span class="katex">
+  \(H^1\)
+</span>
+的有限元子空间可产生了一些最著名的有限元。 通常，这些单元使用
+
+
+<span class="katex">
+  \(C^0\)
+</span>
+近似空间，因为有界域上的分段光滑函数属于
+
+
+<span class="katex">
+  \(H^1\)
+</span>
+，当且仅当它连续的（Braess，2007，定理5.2）。 我们考虑经典的拉格朗日单元，以及一个不符合的的例子，Crouzeix-Raviart空间。 值得注意的是，稍后考虑的Hermite单元在技术上仅是
+
+
+<span class="katex">
+  \(H^1\)
+</span>
+单元，但可以用作更光滑空间的不符合的单元。 同样，更光滑的单元（例如Argyris）可用于离散化
+
+
+<span class="katex">
+  \(H^1\)
+</span>
+，尽管这在实践中不太常见。</p>
+<h3 id="331-拉格朗日单元">3·3·1 拉格朗日单元</h3>
+<p>最著名和使用最广泛的有限元是
+
+
+<span class="katex">
+  \(\mathcal{P}_1\)
+</span>
+拉格朗日单元。 这个最低阶次三角形有时称为<code>Courant</code>三角形，在Courant（1943）发表的开创性论文之后，其中变分技术与
+
+
+<span class="katex">
+  \(\mathcal{P}_1\)
+</span>
+三角形一起使用导出有限差分法。 有时，这被视为“有限元法”，但实际上，这是由多项式阶次参数化得到单元族，这些单元族将单变量拉格朗日多项式一般化为单纯形，方盒形和其他形状。 较高阶次的拉格朗日单元提供较高阶的近似性质。 而且，这些可以减轻使用线性单元时观察到的锁定现象，或者改进的离散稳定性。 参见Taylor和Hood（1973）； Scott和Vogelius（1985）。</p>
+<p><strong>定义3.3（拉格朗日单元）</strong> <code>拉格朗日单元</code>（CGq）被定义为（对
+
+
+<span class="katex">
+  \(q = 1, 2, \dots\)
+</span>
+）：</p>
+
+
+
+<span class="katex">
+  \[
+T \in \{\mathrm{interval}, \mathrm{triangle}, \mathrm{tetrahedron}\}  \tag{3.7}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+\mathcal{V} = \mathcal{P}_q(T)  \tag{3.8}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+\mathcal{l}_i(v) = v(x^i), i = 1, \dots , n(q)  \tag{3.9}
+\]
+</span>
+
+<p>其中， 
+
+
+<span class="katex">
+  \(\{x^i\}^{n(q)}_{i=1}\)
+</span>
+是
+
+
+<span class="katex">
+  \(T\)
+</span>
+中<code>点的枚举</code>：</p>
+
+
+
+<span class="katex">
+  \[
+x = \left\{\begin{aligned} i/q & \quad 0 \le i \le q \quad T \  \mathrm{interval} \\ (i/q, j/q) & \quad  0 \le i + j \le q \quad T\  \mathrm{triangle} \\ (i/q, j/q, k/q) & \quad 0 \le i + j + k \le q \quad T \  \mathrm{tetrahedron} \end{aligned} \right. \tag{3.10}
+\]
+</span>
+
+<p>因此，拉格朗日有限元的维数对应于
+
+
+<span class="katex">
+  \(T\)
+</span>
+上
+
+
+<span class="katex">
+  \(q\)
+</span>
+次完全多项式的维数，即为：</p>
+
+
+
+<span class="katex">
+  \[
+n(q) = \left\{\begin{aligned} q+1 & \quad T \  \mathrm{interval} \\ \frac{1}{2}(q+1)(q+2) & \quad T\  \mathrm{triangle} \\ \frac{1}{6}(q+1)(q+2)(q+3) &  \quad T \  \mathrm{tetrahedron} \end{aligned} \right. \tag{3.11}
+\]
+</span>
+
+<p>上面的定义为点集
+
+
+<span class="katex">
+  \(\{x^i\}\)
+</span>
+提供了一个选择。 但是，这不是唯一可能的选择。 通常，可以保证点集
+
+
+<span class="katex">
+  \(\{x^i\}\)
+</span>
+是唯一可解的，并且允许边界点进行
+
+
+<span class="katex">
+  \(C^0\)
+</span>
+拼接。 该点集必须包括顶点，每个边上的
+
+
+<span class="katex">
+  \(q-1\)
+</span>
+个点，每个面的
+
+
+<span class="katex">
+  \(\frac{1}{2}(q-1)(q-2)\)
+</span>
+个点，依此类推。 边界点应对称放置，以使相邻胞元上的点匹配。 尽管通过巧妙地选择这些点可以极大地改善数值条件和插值属性（Warburton，2005），但出于本章的目的，可以假定这些点位于等距晶格（an equispaced lattice）上。 参见图3.2、3.3和3.4。</p>
+<p><img src="/notes/images/0188.jpg" alt="0188.jpg"></p>
+<center>图3.2 线性拉格朗日区间，三角形和四面体。</center>
+<p><img src="/notes/images/0189.jpg" alt="0189.jpg"></p>
+<center>图3.3 拉格朗日CGq三角形 q = 1, 2, 3, 4, 5, 6.</center>
+<p><img src="/notes/images/0190.jpg" alt="0190.jpg"></p>
+<center>图3.4 拉格朗日CGq四面体 q = 1, 2, 3, 4, 5, 6.</center>
+<p>令
+
+
+<span class="katex">
+  \(\Pi^q_T\)
+</span>
+表示由
+
+
+<span class="katex">
+  \(q\)
+</span>
+次拉格朗日单元的自由度定义的插值，我们从Brenner和Scott（2008）得到</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\|u − \Pi^q_T u\|_{H^1(T)} &\le C h^q_T|u|_{H^{q+1}(T)} \\  \|u - \Pi^q_T u\|_{L^2(T)} &\le C h^{q+1}_T|u|_{H^{q+1}(T)} \end{aligned} \tag{3.12}
+\]
+</span>
+
+<p>其中，在这里和始终，
+
+
+<span class="katex">
+  \(C\)
+</span>
+被用来表示正常数，不依赖
+
+
+<span class="katex">
+  \(h_T\)
+</span>
+，而是依赖阶次
+
+
+<span class="katex">
+  \(q\)
+</span>
+和单纯形的长宽比（the aspect ratio），并且
+
+
+<span class="katex">
+  \(u\)
+</span>
+是足够正则的函数（或矢量场）。</p>
+<p>向量值或张量值的拉格朗日单元通常是通过对每个分量使用拉格朗日单元来构造的。</p>
+<h3 id="332-crouzeixraviart单元">3·3·2 Crouzeix–Raviart单元</h3>
+<p>Crouzeix–Raviart单元在Crouzeix和Raviart（1973）中引入，被作为一种求解固定Stokes方程的技术。 对于线性拉格朗日单元，全局单元空间由分段线性多项式组成。 但是，与拉格朗日单元相反，全局基函数并不一定要在所有点上都是连续的。 连续性仅在维面的中点被要求。 因此，该单元不是
+
+
+<span class="katex">
+  \(H^1\)
+</span>
+-符合的，但通常用于
+
+
+<span class="katex">
+  \(H^1\)
+</span>
+函数（和矢量场）的非符合的近似。 Crouzeix-Raviart单元的其他应用包括线性弹性（Hansbo和Larson，2003）和Reissner-Mindlin板（Arnold和Falk，1989）。</p>
+<p><img src="/notes/images/0191.jpg" alt="0191.jpg"></p>
+<center>图3.5 Crouzeix–Raviart单元在三角形和四面体上。自由度是每个维面中点的点值。</center>
+<p><strong>定义3.4（Crouzeix–Raviart单元）</strong> （线性）Crouzeix–Raviart单元（CR）由下式定义：</p>
+
+
+
+<span class="katex">
+  \[
+T \in \{\mathrm{triangle}, \mathrm{tetrahedron}\} \tag{3.13}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+\mathcal{V} = \mathcal{P}_1(T) \tag{3.14}
+\]
+</span>
+
+
+
+
+<span class="katex">
+  \[
+\mathcal{l}_i(v) = v(x^i), i = 1, \dots , n \tag{3.15}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(\{x_i\}\)
+</span>
+是域
+
+
+<span class="katex">
+  \(T\)
+</span>
+每个维面的质心（中点）。</p>
+<p>因此，
+
+
+<span class="katex">
+  \(T \subset \mathbb{R}^d\)
+</span>
+上Crouzeix–Raviart单元的维度为</p>
+
+
+
+<span class="katex">
+  \[
+n = d + 1, d = 2, 3 \tag{3.16}
+\]
+</span>
+
+<p>令
+
+
+<span class="katex">
+  \(\Pi_T\)
+</span>
+表示由自由度定义的插值算符，Crouzeix-Raviart单元作为线性拉格朗日单元来进行插值（Braess，2007，第3章.I）：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}\|u - \Pi_T u\|_{H^1(T)} &\le C h_T|u|_{H^2(T)} \\  \|u - \Pi_T u\|_{L^2(T)} &\le C h^2_T|u|_{H^2(T)} \end{aligned} \tag{3.17}
+\]
+</span>
+
+<p>向量值的Crouzeix-Raviart单元可以通过对每个分量使用Crouzeix-Raviart单元来定义，或者通过在每个维面的中点使用维面法线和维面切向分量作为自由度来定义。 Crouzeix-Raviart单元可以扩展到更高的奇数阶次（q = 3、5、7 &hellip;）（Crouzeix和Falk，1989）。</p>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e4%b8%89%e7%ab%a0-%e5%b8%b8%e8%a7%81%e6%9c%89%e9%99%90%e5%85%83">章节目录</a>】</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0101/">
+    下一页<br>常见有限元（二）【翻译】
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0099/">
+      上一页<br>有限元方法（三）【翻译】
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0100.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/fem/0100.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#i方法论3常见有限元一">I.方法论》3.常见有限元（一）</a>
+      <ul>
+        <li><a href="#31-有限元定义">3·1 有限元定义</a></li>
+        <li><a href="#32-记号">3·2 记号</a></li>
+        <li><a href="#33-h有限元">3·3 H¹有限元</a>
+          <ul>
+            <li><a href="#331-拉格朗日单元">3·3·1 拉格朗日单元</a></li>
+            <li><a href="#332-crouzeixraviart单元">3·3·2 Crouzeix–Raviart单元</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

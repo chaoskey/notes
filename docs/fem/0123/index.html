@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="UFL：有限元形式语言》算法(二)&amp;实现的问题【翻译】"><meta property="og:title" content="UFL：有限元形式语言》算法(二)&amp;实现的问题【翻译】" />
+<meta property="og:description" content="II.实现》17.UFL：有限元形式语言》算法(二)&amp;实现的问题
+【章节目录】
+17·8 算法（续前）
+17·8·4 重要的变换
+有很多方法可以操纵表达式的表示。 在这里，我们描述了三个特别重要的变换。 注意，这里每一个算法都删除了一些抽象，因此可能删除了一些分析或优化的机会。 为了展示其效果，下面将每种变换应用到下面的表达式
+
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+  \[
+a = \mathrm{grad}(f u) \cdot \mathrm{grad}\ v \tag{17.77}
+\]
+
+
+在本节的最后，给出了一些示例代码来演示更多的表示细节。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/0123/" />
+<meta property="article:published_time" content="2021-02-04T11:01:25+08:00" />
+<meta property="article:modified_time" content="2021-02-04T11:01:25+08:00" />
+<title>UFL：有限元形式语言》算法(二)&amp;实现的问题【翻译】 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a>
+<ul>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E6%96%B9%E6%B3%95">第二章 有限元方法</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%B8%B8%E8%A7%81%E6%9C%89%E9%99%90%E5%85%83">第三章 常见有限元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8%E5%8F%82%E8%80%83%E5%8D%95%E5%85%83">第四章 构造通用参考单元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F">第五章 有限元变分形式</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%BB%84%E8%A3%85">第六章 有限元组装</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%AD%A3%E4%BA%A4%E8%A1%A8%E7%A4%BA">第七章 有限元变分形式的正交表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA">第八章 有限元变分形式的张量表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E7%9A%84%E7%A6%BB%E6%95%A3%E4%BC%98%E5%8C%96">第九章 有限元矩阵计算的离散优化</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E7%AB%A0-dolfincpython%E6%9C%89%E9%99%90%E5%85%83%E5%BA%93">第十章 DOLFIN：C++/Python有限元库</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-ufl%E6%9C%89%E9%99%90%E5%85%83%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80">第十七章 UFL：有限元形式语言</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-unicorn%E7%BB%9F%E4%B8%80%E7%9A%84%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6%E6%B1%82%E8%A7%A3%E5%99%A8">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>UFL：有限元形式语言》算法(二)&amp;实现的问题【翻译】</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ii实现17ufl有限元形式语言算法二实现的问题">II.实现》17.UFL：有限元形式语言》算法(二)&amp;实现的问题</a>
+      <ul>
+        <li><a href="#178-算法续前">17·8 算法（续前）</a>
+          <ul>
+            <li><a href="#1784-重要的变换">17·8·4 重要的变换</a></li>
+            <li><a href="#1785-表达式求值">17·8·5 表达式求值</a></li>
+            <li><a href="#1786-表达式查看">17·8·6 表达式查看</a></li>
+          </ul>
+        </li>
+        <li><a href="#179-实现的问题">17·9 实现的问题</a>
+          <ul>
+            <li><a href="#1791-python作为领域专用语言的基础">17·9·1 Python作为领域专用语言的基础</a></li>
+            <li><a href="#1792-确保形式签名的唯一性">17·9·2 确保形式签名的唯一性</a></li>
+            <li><a href="#1793-效率考量">17·9·3 效率考量</a></li>
+          </ul>
+        </li>
+        <li><a href="#1710-结论和未来方向">17·10 结论和未来方向</a></li>
+        <li><a href="#1711-致谢">17·11 致谢</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0124/">
+    下一页<br>Unicorn：统一的连续介质力学求解器（上）【翻译】
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0122/">
+      上一页<br>UFL：有限元形式语言》计算导数&amp;算法(一)【翻译】
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/fem/0123/">UFL：有限元形式语言》算法(二)&amp;实现的问题【翻译】</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2021-02-04</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/FEniCS">FEniCS</a>
+      , 
+      <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95">有限元法</a>
+      , 
+      <a href="/notes/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">偏微分方程</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0123.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h1 id="ii实现17ufl有限元形式语言算法二实现的问题">II.实现》17.UFL：有限元形式语言》算法(二)&amp;实现的问题</h1>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80">章节目录</a>】</p>
+<h2 id="178-算法续前">17·8 算法（续前）</h2>
+<h3 id="1784-重要的变换">17·8·4 重要的变换</h3>
+<p>有很多方法可以操纵表达式的表示。 在这里，我们描述了三个特别重要的变换。 注意，这里每一个算法都删除了一些抽象，因此可能删除了一些分析或优化的机会。 为了展示其效果，下面将每种变换应用到下面的表达式</p>
+
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \[
+a = \mathrm{grad}(f u) \cdot \mathrm{grad}\ v \tag{17.77}
+\]
+</span>
+
+<p>在本节的最后，给出了一些示例代码来演示更多的表示细节。</p>
+<p>UFL中的某些算符称为“复合”算符，这意味着它们可以由其他更基本的算符表示。 尝试定义一个表达式<code>a = dot(grad(f*u), grad(v))</code>，然后打印<code>repr(a)</code>。 如您所见，<code>a</code>的表示是<code>Dot(Grad(Product(f, u)), Grad(v))</code>，其中一些详细信息代替了<code>f</code>，<code>u</code>和<code>v</code>。 通过直接使用高级别类型Grad（而不是更多低级别类型）来表示梯度，输入表达式在表示中更容易识别，并且将表达式呈现为比如LATEX格式可以显示终端用户所写的原始复合算符。 但是，由于许多算法必须为每种算符类型实现操作，因此函数<code>expand_compounds</code>可以将所有“ 复合”类型的表达式节点替换为使用基本类型的等效表达式。 当将此操作应用于来自用户的输入形式时，UFL和形式编译器中的算法仍可以纯粹用更基本的算符来编写。 展开方程式（17.77）的复合表达式可得到表达式</p>
+
+
+
+<span class="katex">
+  \[
+a_c = \sum_i\frac{\partial v}{\partial x_i}\frac{\partial (uf)}{\partial x_i}  \tag{17.78}
+\]
+</span>
+
+<p>另一个重要的变换是<code>expand_derivatives</code>，递归地且对所有类型的导数，应用对表达式的自动微分。 最终结果是大多数导数都能被计算，并且表达式树中剩余的仅有导数算符类型是应用到终端表达式的。  该算法的前提是已应用过<code>expand_compounds</code>。 根据公式（17.78）对ac展开求导可得出</p>
+
+
+
+<span class="katex">
+  \[
+a_d = \sum_i\frac{\partial v}{\partial x_i}\left(u \frac{\partial f}{\partial x_i}+ f \frac{\partial u}{\partial x_i}\right) \tag{17.79}
+\]
+</span>
+
+<p>索引记号和<code>IndexSum</code>表达式节点类型在某种程度上使表达式树的解释复杂化，尤其是在具有嵌套索引求和的表达式中。 由于具有自由索引的表达式将具有多个值，因此每个表达式对象不仅代表一个值，而且代表一组值。 变换<code>expand_indices</code>便派上用场了。 该算法的前提是已应用过<code>expand_compounds</code>和<code>expand_derivatives</code>。 该算法的后置条件是表达式中没有剩余的自由索引。 最终将公式（17.79）展开索引，得到</p>
+
+
+
+<span class="katex">
+  \[
+a_i = \frac{\partial v}{\partial x_0}\left(u\frac{\partial f}{\partial x_0}+ f \frac{\partial u}{\partial x_0}\right) +\frac{\partial v}{\partial x_1}\left(u\frac{\partial f}{\partial x_1}+ f \frac{\partial u}{\partial x_1}\right)  \tag{17.80}
+\]
+</span>
+
+<p>我们从等式（17.77）中的更高层次的概念梯度和点积开始，最后仅以形式参数的标量加法，乘法和偏导数结束。 形式编译器通常以ad或ai开头，插入参数导数值，并在最终生成代码之前应用一些其他变换。</p>
+<p>一些示例代码可以帮助您理解这些算法在表达式的表示级别上的作用。 由于此代码的打印输出有点长，因此下面仅输出要重复的关键方面。 将此代码复制到python文件或在python解释器中运行以查看完整的输出。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+
+<span style="color:#f92672">from</span> ufl <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+V <span style="color:#f92672">=</span> FiniteElement(<span style="color:#e6db74">&#34;Lagrange&#34;</span>, triangle, <span style="color:#ae81ff">1</span>)
+u <span style="color:#f92672">=</span> TestFunction(V)
+v <span style="color:#f92672">=</span> TrialFunction(V)
+f <span style="color:#f92672">=</span> Coefficient(V)
+
+<span style="color:#75715e"># Note no *dx! This is an expression, not a form.</span>
+a <span style="color:#f92672">=</span> dot(grad(f<span style="color:#f92672">*</span>u), grad(v))
+
+<span style="color:#f92672">from</span> ufl.algorithms <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+ac <span style="color:#f92672">=</span> expand_compounds(a)
+ad <span style="color:#f92672">=</span> expand_derivatives(ac)
+ai <span style="color:#f92672">=</span> expand_indices(ad)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">a: &#34;</span>, str(a), <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, tree_format(a))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">ac:&#34;</span>, str(ac), <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, tree_format(ac))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">ad:&#34;</span>, str(ad), <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, tree_format(ad))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">ai:&#34;</span>, str(ai), <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, tree_format(ai))
+</code></pre></div><p>显示为
+
+
+<span class="katex">
+  \(a\)
+</span>
+的打印输出是（有限元对象的详细信息，已切除部分信息，以缩短行数）：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># Output
+a: (grad(v_{-2} * w_0)) . (grad(v_{-1}))
+Dot
+(
+    Grad
+        Product
+        (
+            Argument(FiniteElement(...), -2)
+            Coefficient(FiniteElement(...), 0)
+        )
+    Grad
+        Argument(FiniteElement(...), -1)
+)
+</code></pre></div><p>标为-1和-2的参数分别引用v和u。</p>
+<p>在
+
+
+<span class="katex">
+  \(a_c\)
+</span>
+中，<code>Dot</code>乘法已展开为具有两个<code>Indexed</code>操作数的<code>Product</code>的<code>IndexSum</code>：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># Output
+IndexSum
+(
+    Product
+    (
+        Indexed
+        (
+            ...
+            MultiIndex((Index(10),), {Index(10): 2})
+        )
+        Indexed
+        (
+            ...
+            MultiIndex((Index(10),), {Index(10): 2})
+        )
+    )
+    MultiIndex((Index(10),), {Index(10): 2})
+)
+</code></pre></div><p>看起来有点复杂的表达式<code>MultiIndex((Index(10),), {Index(10): 2})</code>可以简单地理解为“绑定到第2维轴的名为
+
+
+<span class="katex">
+  \(i_{10}\)
+</span>
+的索引”。</p>
+<p>放大到上面的&hellip;行之一，将grad(f u)的表示变换为更多基本表达式后，仍必须保持矢量形状，这就是为什么<code>SpatialDerivative</code>对象包装在<code>ComponentTensor</code>对象中的原因：  【译者注：较新版本显示的信息和这里不一样，具体以实际打印信息为准，后面不再作此说明】</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># Output
+ComponentTensor
+(
+    SpatialDerivative
+    (
+        Product
+        (
+            u
+            f
+        )
+        MultiIndex((Index(8),), {Index(8): 2})
+    )
+    MultiIndex((Index(8),), {Index(8): 2})
+)
+</code></pre></div><p>在展开表达式的算法中，出现的常见模式：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># Output
+Indexed
+(
+    ComponentTensor
+    (
+        ...
+        MultiIndex((Index(8),), {Index(8): 2})
+    )
+    MultiIndex((Index(10),), {Index(10): 2})
+)
+</code></pre></div><p>此模式用作索引对象的重新标记，将. . .所再内部的
+
+
+<span class="katex">
+  \(i_8\)
+</span>
+重命名为外部的
+
+
+<span class="katex">
+  \(i_{10}\)
+</span>
+。  当查看
+
+
+<span class="katex">
+  \(a_d\)
+</span>
+的打印结果时，链式规则
+
+
+<span class="katex">
+  \(((f u)′ = u f ′ + f u′)\)
+</span>
+的结果可以看作是两个Product对象的Sum。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># Output
+Sum
+(
+    Product
+    (
+        u
+        SpatialDerivative
+        (
+            f
+            MultiIndex((Index(8),), {Index(8): 2})
+        )
+    )
+    Product
+    (
+        f
+        SpatialDerivative
+        (
+            u
+            MultiIndex((Index(8),), {Index(8): 2})
+        )
+    )
+)
+</code></pre></div><p>最终，在
+
+
+<span class="katex">
+  \(a_i\)
+</span>
+（此处未显示）中进行索引展开之后，没有剩余自由的<code>Index</code>对象，反而在
+
+
+<span class="katex">
+  \(a_i\)
+</span>
+的打印中看到很多<code>FixedIndex</code>对象。 如果您想很好地了解此处显示的三个变换，强烈建议您仔细阅读上面示例代码的全部输出。</p>
+<h3 id="1785-表达式求值">17·8·5 表达式求值</h3>
+<p>即使UFL表达式打算由形式编译器进行编译，将其直接求值得浮点值也很有用的。 特别是，这使得UFL的测试和调试更加容易，并且在单元测试中得到了广泛的使用。 要对UFL表达式求值，必须指定形式参数和几何量的值。 通过将带有坐标的元组传递给调用算符，可对只依赖于空间坐标的表达式求值。 可以直接复制到交互式Python会话的如下代码展示了这种语法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+<span style="color:#f92672">from</span> ufl <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+cell <span style="color:#f92672">=</span> triangle
+<span style="color:#75715e"># 在较新的版本中，cell没有x这个成员，改用随后的代码</span>
+<span style="color:#75715e"># x = cell.x</span>
+x <span style="color:#f92672">=</span> SpatialCoordinate(cell)
+e <span style="color:#f92672">=</span> x[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> x[<span style="color:#ae81ff">1</span>]
+<span style="color:#66d9ef">print</span>(e((<span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">0.7</span>))) <span style="color:#75715e"># prints 1.2</span>
+</code></pre></div><p>可以使用从终端表达式实例到值的映射字典来指定其他终端表达式。 此代码通过映射扩展了上面的代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+c <span style="color:#f92672">=</span> Constant(cell)
+e <span style="color:#f92672">=</span> c<span style="color:#f92672">*</span>(x[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> x[<span style="color:#ae81ff">1</span>])
+<span style="color:#66d9ef">print</span>(e((<span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">0.7</span>), { c: <span style="color:#ae81ff">10</span> })) <span style="color:#75715e"># prints 12.0</span>
+</code></pre></div><p>如果函数和基函数依赖于空间坐标，那么这个映射可以指定一个Python可调用函数，而不是字面常量。 这个可调用函数必须是将空间坐标作为输入并返回一个浮点值。 如果要映射的函数是向量函数，则可调用函数必须返回值的元组。 这些扩展可以在以下代码中看到：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+element <span style="color:#f92672">=</span> VectorElement(<span style="color:#e6db74">&#34;Lagrange&#34;</span>, triangle, <span style="color:#ae81ff">1</span>)
+c <span style="color:#f92672">=</span> Constant(triangle)
+f <span style="color:#f92672">=</span> Coefficient(element)
+e <span style="color:#f92672">=</span> c<span style="color:#f92672">*</span>(f[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> f[<span style="color:#ae81ff">1</span>])
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fh</span>(x):
+    <span style="color:#66d9ef">return</span> (x[<span style="color:#ae81ff">0</span>], x[<span style="color:#ae81ff">1</span>])
+<span style="color:#66d9ef">print</span>(e((<span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">0.7</span>), { c: <span style="color:#ae81ff">10</span>, f: fh })) <span style="color:#75715e"># prints 12.0</span>
+</code></pre></div><p>为了使用表达式求值来验证导数计算是否正确，还可以指定形式参数的空间导数。 然后，可调用函数必须携带第二个参数，该参数是指定要微分的空间方向的整数元组。  最终的示例代码，对
+
+
+<span class="katex">
+  \(g = x_0 x_1\)
+</span>
+，计算出
+
+
+<span class="katex">
+  \(g^2 + g^2_{，0} + g^2_{，1}\)
+</span>
+。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+element <span style="color:#f92672">=</span> FiniteElement(<span style="color:#e6db74">&#34;Lagrange&#34;</span>, triangle, <span style="color:#ae81ff">1</span>)
+g <span style="color:#f92672">=</span> Coefficient(element)
+e <span style="color:#f92672">=</span> g<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> g<span style="color:#f92672">.</span>dx(<span style="color:#ae81ff">0</span>)<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> g<span style="color:#f92672">.</span>dx(<span style="color:#ae81ff">1</span>)<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">gh</span>(x, der<span style="color:#f92672">=</span>()):
+    <span style="color:#66d9ef">if</span> der <span style="color:#f92672">==</span> (): <span style="color:#66d9ef">return</span> x[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">*</span>x[<span style="color:#ae81ff">1</span>]
+    <span style="color:#66d9ef">if</span> der <span style="color:#f92672">==</span> (<span style="color:#ae81ff">0</span>,): <span style="color:#66d9ef">return</span> x[<span style="color:#ae81ff">1</span>]
+    <span style="color:#66d9ef">if</span> der <span style="color:#f92672">==</span> (<span style="color:#ae81ff">1</span>,): <span style="color:#66d9ef">return</span> x[<span style="color:#ae81ff">0</span>]
+<span style="color:#66d9ef">print</span>(e((<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>), { g: gh })) <span style="color:#75715e"># prints 49</span>
+</code></pre></div><h3 id="1786-表达式查看">17·8·6 表达式查看</h3>
+<p>可以用各种方式格式化表达式以进行检查，这在调试时特别有用。 内置的Python字符串转换算符<code>str(e)</code>提供了紧凑的人类可读字符串。 如果在交互式Python会话中键入<code>print(e)</code>，则显示<code>str(e)</code>。 另一个Python内置字符串算符是<code>repr(e)</code>。 UFL所正确实现的<code>repr</code>，满足对任何表达式<code>e</code>，<code>e == eval(repr(e))</code>都成立。 字符串repr(e)反映表达式中使用的所有确切表示类型，因此对于调试很有用。 另一个格式化函数是<code>tree_format(e)</code>，它产生一个缩进的多行字符串，该字符串清楚地显示了表达式的树结构，而<code>repr</code>则相反，后者可能返回很长且难以阅读的字符串。 可以在手册中找到有关将表达式格式化为LATEX和点图可视化格式的信息。</p>
+<h2 id="179-实现的问题">17·9 实现的问题</h2>
+<h3 id="1791-python作为领域专用语言的基础">17·9·1 Python作为领域专用语言的基础</h3>
+<p>将UFL作为一个嵌入在Python的语言， 最初的这种选择会影响本节中详细介绍的许多实现细节。 因此，这里有一些关于为什么Python适用于此，为什么不适用的说法。</p>
+<p>Python提供了一种简单的语法，通常被认为类似于伪代码。这是一个领域专用语言的很好起点。 很好地支持面向对象和操作符重载，这是UFL设计的基础。 Python的函数式编程功能（例如生成器表达式）在算法和形式编译器的实现中很有用。 内置的数据结构列表，字典和集合在可伸缩算法的快速实现中起着核心作用。</p>
+<p>Python中的运算符重载有一个问题，那就是比较运算符。  问题源于以下事实：<code>__eq__</code>或<code>__cmp__</code>被用于内置数据结构字典，并将其设置为比较键，这意味着<code>a == b</code>必须返回布尔值，即使Expr也是如此。 结果是<code>__eq__</code>不能被重载，用来返回某些Expr类型的表示（比如<code>Equals(a, b)</code>）供形式编译器稍后处理。 另一个问题是<code>and</code>和<code>or</code>也不能被重载，因此不能在条件表达式中使用。 在Python中，这些设计选择是有充分的理由。 而这又是UFL中比较运算符设计有些不直观的原因。</p>
+<h3 id="1792-确保形式签名的唯一性">17·9·2 确保形式签名的唯一性</h3>
+<p>形式编译器需要计算每个形式的唯一签名，以便在缓存系统中使用，避免重新编译。 定义签名的便捷方法是使用<code>repr(form)</code>，因为在Python中的此定义是<code>eval(repr(form)) == form</code>。 因此，对所有Expr子类都实现了<code>__repr__</code>。</p>
+<p>有些形式在数学上是等效的，即使它们的表示不完全相同。 UFL的表达式没有使用真正的规范形式，而是采取了一些措施来确保识别这些平凡的等价形式。</p>
+<p>Expr类层次结构中的某些类型（Counted的子类）具有全局计数器，用于标识创建它们的顺序。 形式参数（Argument和Coefficient）都使用了此计数器来标识它们在形式参数列表中的相对顺序。 其他要计数类型有Index和Label，它们仅将计数器用作唯一标识符。 实现了对所有Counted类型进行重新编号的算法，以使所有计数均从0开始。</p>
+<p>另外，某些算符类型（例如Sum和Product）要维护操作数的排序列表，使得<code>a + b</code>和<code>b + a</code>都表示为<code>Sum(a, b)</code>。 此操作数排序有意与索引编号无关，因为那样会不稳定。 这种不稳定的原因是索引重编号算法的结果取决于操作数的顺序。  操作数排序和重编号相结合，可确保相等的形式的签名保持不变。 请注意，形式的表示以及签名可能会随UFL版本的变化而变化。 下面的行打印了应用了<code>expand_derivatives</code>并重新编号的形式签名。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+<span style="color:#66d9ef">print</span>(repr(preprocess(myform)<span style="color:#f92672">.</span>preprocessed_form))
+</code></pre></div><h3 id="1793-效率考量">17·9·3 效率考量</h3>
+<p>在Python中编写UFL，我们显然没有将最高性能作为第一要务。 如果形式编译过程可以融合到应用程序构建过程中，那么性能就足够了。 但是，我们确实关心可扩展性能以有效地处理复杂的方程，因此，我们关心的是所使用算法的渐近复杂性。</p>
+<p>要用Python编写清晰有效的算法，正确使用内置数据结构非常重要。 这些数据结构特别包括列表，字典和集合。 CPython（van Rossum等人），Python的参考实现，将数据结构列表实现为数组，这意味着append和pop以及随机读写访问都是O(1)操作。 但是，随机插入为O(n)。 字典和集合都实现为哈希映射，后者仅不具有与键关联的值而已。 在哈希映射中，只要键类型有效地实现了<code>__hash__</code>和<code>__eq__</code>，随机读写，插入和删除都是O(1)操作。 字典数据结构被Python语言广泛使用，因此要特别注意使其高效（Kuchling，2007年）。 因此，要享受高效地利用这些容器，所有Expr子类都必须有效地实现这两个特殊函数。 如此考虑对于使UFL的有效实现非常重要。</p>
+<h2 id="1710-结论和未来方向">17·10 结论和未来方向</h2>
+<p>更多的其它功能可以引入到UFL。 添加哪些功能将取决于FEniCS用户和开发人员的需求。 某些功能可以单独在UFL中实现，但是大多数功能将需要更新FEniCS项目的其他部分。 因此，UFL的未来方向与整个FEniCS项目的发展紧密相关。</p>
+<p>在UFL中，很容易对有限元的声明进行改进。 附加的复杂性主要是在形式编译器中。 当前的建议包括时空单元和时间导数。 具有不均匀胞元类型的其他几何映射和有限元空间也是有可能扩展。</p>
+<p>可以添加其他算符以使语言更具表现力。 一些算符很容易添加，因为它们的实现只影响一小部分代码。 很容易添加更多的使用基本算符表示的复合算符。 只要知道其导数，其他特殊函数也很容易添加。 其他功能可能需要更全面的设计考量，例如对复数的支持，这会影响大部分代码。</p>
+<p>用户友好的记号和对快速开发的支持是UFL设计的核心价值。  使用接近数学抽象符号可以更轻松地表达特定的想法，从而可以减少用户代码中错误的可能性。 但是，元编程和代码生成的概念增加了另一层抽象，这可能使终端用户对框架的理解更加困难。 因此，每处都进行良好的错误检查非常重要，尽可能地检测用户输入错误。 错误消息，文档和单元测试套件的改进将始终对您有所帮助，以避免新用户频繁重复出现错误和误解。</p>
+<p>为了支持形式编译器项目，可以在UFL中包含用于更有效地生成更好代码的算法和实用程序。 这样的算法可能应该局限于诸如表达图的一般变换之类的算法，独立于形式编译器特定方法。 在这一领域，更多的关于自动微分算法替代方案的工作（Forth等，2004； Tadjouddine，2008）可能有用。</p>
+<p>总而言之，UFL是FEniCS框架的核心组件，在此框架中，它提供了丰富的形式语言，自动微分功能以及高效形式编译器的构建块。 这些对于快速求解偏微分方程的应用程序很有用。 UFL提供了离散自动化的用户接口，这是FEniCS的核心功能，并将线性自动化添加到了框架中。 凭借这些功能，UFL使FEniCS距其总体目标“自动化数学建模”又近了一步。</p>
+<h2 id="1711-致谢">17·11 致谢</h2>
+<p>这项工作得到了挪威研究委员会（grant 162730）和Simula研究实验室的支持。 我要感谢通过建议和测试帮助改善UFL的所有人，特别是Anders Logg，KristianØlgaard，Garth Wells，Harish Narayanan和Marie Rognes。 除了两位匿名评论， Kent-André Mardal和Marie Rognes都进行了严格的评论，极大地改善了本章。</p>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80">章节目录</a>】</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0124/">
+    下一页<br>Unicorn：统一的连续介质力学求解器（上）【翻译】
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0122/">
+      上一页<br>UFL：有限元形式语言》计算导数&amp;算法(一)【翻译】
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0123.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/fem/0123.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ii实现17ufl有限元形式语言算法二实现的问题">II.实现》17.UFL：有限元形式语言》算法(二)&amp;实现的问题</a>
+      <ul>
+        <li><a href="#178-算法续前">17·8 算法（续前）</a>
+          <ul>
+            <li><a href="#1784-重要的变换">17·8·4 重要的变换</a></li>
+            <li><a href="#1785-表达式求值">17·8·5 表达式求值</a></li>
+            <li><a href="#1786-表达式查看">17·8·6 表达式查看</a></li>
+          </ul>
+        </li>
+        <li><a href="#179-实现的问题">17·9 实现的问题</a>
+          <ul>
+            <li><a href="#1791-python作为领域专用语言的基础">17·9·1 Python作为领域专用语言的基础</a></li>
+            <li><a href="#1792-确保形式签名的唯一性">17·9·2 确保形式签名的唯一性</a></li>
+            <li><a href="#1793-效率考量">17·9·3 效率考量</a></li>
+          </ul>
+        </li>
+        <li><a href="#1710-结论和未来方向">17·10 结论和未来方向</a></li>
+        <li><a href="#1711-致谢">17·11 致谢</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

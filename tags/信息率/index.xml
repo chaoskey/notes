@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>信息率 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E4%BF%A1%E6%81%AF%E7%8E%87/</link>
+    <description>Recent content in 信息率 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Thu, 24 May 2018 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E4%BF%A1%E6%81%AF%E7%8E%87/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>第六章 主动管理基本定律</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0022/</link>
+      <pubDate>Thu, 24 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0022/</guid>
+      <description>&lt;h2 id=&#34;基本定律&#34;&gt;基本定律&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;主动管理基本定律&lt;/strong&gt;是信息率的一种近似表达。&lt;/p&gt;
+&lt;p&gt;这条定律基于投资策略的两条基本属性：&lt;/p&gt;
+&lt;p&gt;１）投资策略的&lt;strong&gt;广度&lt;/strong&gt;（
+  
+    
+
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css&#34; integrity=&#34;sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq&#34; crossorigin=&#34;anonymous&#34;&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js&#34; integrity=&#34;sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz&#34; crossorigin=&#34;anonymous&#34;&gt;&lt;/script&gt;
+    
+    
+    &lt;script defer src=&#34;https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js&#34; integrity=&#34;sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI&#34; crossorigin=&#34;anonymous&#34;
+            onload=&#34;renderMathInElement(document.body,
+                {delimiters: [{left: &#39;$$\n&#39;, right: &#39;\n$$&#39;, display: true}, {left: &#39;$$&#39;, right: &#39;$$&#39;, display: false}, 
+                              {left: &#39;\\[&#39;, right: &#39;\\]&#39;, display: true}, {left: &#39;\\(&#39;, right: &#39;\\)&#39;, display: false}]});&#34;&gt;&lt;/script&gt;
+    
+  
+
+
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathrm{BR}\)
+&lt;/span&gt;
+）：策略每年对超常收益率作出的独立预测的数目。&lt;/p&gt;
+&lt;p&gt;２）投资经理的&lt;strong&gt;信息系数&lt;/strong&gt;（
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathrm{IC}\)
+&lt;/span&gt;
+）：每个预测与实现结果之间的相关系数，表征投资经理的能力。简化假设：所有预测的
+
+
+&lt;span class=&#34;katex&#34;&gt;
+  \(\mathrm{IC}\)
+&lt;/span&gt;
+都是相同的。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>第五章 残差风险和残差收益率：信息率</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0021/</link>
+      <pubDate>Wed, 23 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0021/</guid>
+      <description>&lt;h2 id=&#34;阿尔法&#34;&gt;阿尔法&lt;/h2&gt;
+&lt;p&gt;向未来看（先验），阿尔法是对残差收益率的预测；向过去看（后验），阿尔法是实现的残差收益率的均值。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;阿尔法&lt;/strong&gt;和&lt;strong&gt;贝塔&lt;/strong&gt;都源自线性回归模型（见第2章笔记：超额收益率分解）。&lt;/p&gt;
+&lt;p&gt;本章专注阿尔法的预测；第１２章将评估阿尔法预测的质量；第１７章考虑实现的阿尔法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>第一章 绪论</title>
+      <link>https://chaoskey.gitee.io/notes/docs/apm/0017/</link>
+      <pubDate>Sat, 19 May 2018 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/apm/0017/</guid>
+      <description>&lt;p&gt;投资的艺术正在演变成投资的科学。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;有效市场理论&lt;/strong&gt;任务无法战胜市场；而&lt;strong&gt;量化主动管理&lt;/strong&gt;则试图战胜市场。&lt;/p&gt;
+&lt;p&gt;尽管&lt;strong&gt;量化主动管理&lt;/strong&gt;试图战胜市场，但承认这的确不容易。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;量化主动管理&lt;/strong&gt;是&lt;strong&gt;现代投资组合理论&lt;/strong&gt;的穷亲戚：有现代投资组合理论的威力和结构，却没有合法的名分。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

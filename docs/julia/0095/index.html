@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="科学计算环境搭建（Win10&#43;WSL2&#43;Ubuntu）"><meta property="og:title" content="科学计算环境搭建（Win10&#43;WSL2&#43;Ubuntu）" />
+<meta property="og:description" content="概要
+
+
+系统平台： Win10_64 &#43; WSL2 &#43; Ubuntu
+
+
+目标：Python3.7&#43;Julia1.5.3&#43;JupyterLab&#43;MatplotLib&#43;SymPy&#43;SciPy&#43;FEniCS2019
+
+
+以Julia作为我主要的使用语言，确保能调用Python的库
+
+
+目前FEniCS不支持Windows，所以我选择 Win10&#43;WSL&#43;Ubuntu
+
+
+目前FEniCS2019有问题（至少存在折磨我的问题），所以我选择FEniCS2018
+
+
+FEniCS2019的问题已经解决，所以我还是选择FEniCS2019（详细见后）。
+
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/julia/0095/" />
+<meta property="article:published_time" content="2020-11-13T20:09:40+08:00" />
+<meta property="article:modified_time" content="2020-11-13T20:09:40+08:00" />
+<title>科学计算环境搭建（Win10&#43;WSL2&#43;Ubuntu） | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a>
+<ul>
+<li><a href="/notes/docs/julia/0001/">整合Julia和Python的集成环境（Win10）</a></li>
+<li><a href="/notes/docs/julia/0095/"class=active>科学计算环境搭建（Win10+WSL2+Ubuntu）</a></li>
+<li><a href="/notes/docs/julia/0002/">Julia中的数学符号演算</a></li>
+<li><a href="/notes/docs/julia/0003/">基于Julia的科学计算功能库整理</a></li>
+<li><a href="/notes/docs/diffgeo/0070/">微分几何中的计算</a></li>
+<li><a href="/notes/docs/julia/0088/">平面三体问题</a></li>
+<li><a href="/notes/docs/julia/0089/">有限差分法求解一维热传导方程</a></li>
+<li><a href="/notes/docs/julia/0090/">Galerkin法解常微分方程边值问题</a></li>
+<li><a href="/notes/docs/julia/0091/">有限元法解常微分方程边值问题</a></li>
+<li><a href="/notes/docs/julia/0092/">有限元之平面三角单元</a></li>
+<li><a href="/notes/docs/julia/0093/">有限元之Delaunay三角剖分</a></li>
+<li><a href="/notes/docs/julia/0094/">有限元法解偏微分方程（FEniCS）</a></li>
+<li><a href="/notes/docs/julia/0096/">有限元法求解牛顿流体（FEniCS）</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>科学计算环境搭建（Win10&#43;WSL2&#43;Ubuntu）</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#概要">概要</a></li>
+        <li><a href="#第0步在win10上配置安装好-wsl--ubuntu">第0步：在Win10上，配置安装好 WSL + Ubuntu</a></li>
+        <li><a href="#第1步安装miniconda">第1步：安装Miniconda</a></li>
+        <li><a href="#第2步配置国内源">第2步：配置国内源</a></li>
+        <li><a href="#第3步安装科学计算环境python">第3步：安装科学计算环境（Python）</a></li>
+        <li><a href="#第4步安装julia">第4步：安装Julia</a></li>
+        <li><a href="#第5步配置整合">第5步：配置整合</a></li>
+        <li><a href="#第6步安装科学计算环境julia">第6步：安装科学计算环境（Julia）</a></li>
+        <li><a href="#可能问题的解决若没问题则忽略之">可能问题的解决（若没问题，则忽略之）</a></li>
+        <li><a href="#常用命令备忘">常用命令（备忘）</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/julia/0096/">
+    下一页<br>有限元法求解牛顿流体（FEniCS）
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/julia/0094/">
+      上一页<br>有限元法解偏微分方程（FEniCS）
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/julia/0095/">科学计算环境搭建（Win10&#43;WSL2&#43;Ubuntu）</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2020-11-13</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/julia">julia</a>
+      , 
+      <a href="/notes/tags/python">python</a>
+      , 
+      <a href="/notes/tags/jupyter">jupyter</a>
+      , 
+      <a href="/notes/tags/fenics">fenics</a>
+      , 
+      <a href="/notes/tags/sympy">sympy</a>
+      , 
+      <a href="/notes/tags/scipy">scipy</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/julia/0095.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h2 id="概要">概要</h2>
+<ul>
+<li>
+<p>系统平台： Win10_64 + WSL2 + Ubuntu</p>
+</li>
+<li>
+<p>目标：Python3.7+Julia1.5.3+JupyterLab+MatplotLib+SymPy+SciPy+FEniCS2019</p>
+</li>
+<li>
+<p>以Julia作为我主要的使用语言，确保能调用Python的库</p>
+</li>
+<li>
+<p>目前FEniCS不支持Windows，所以我选择 Win10+WSL+Ubuntu</p>
+</li>
+<li>
+<p><del>目前FEniCS2019有问题（至少存在折磨我的问题），所以我选择FEniCS2018</del></p>
+</li>
+<li>
+<p>FEniCS2019的问题已经解决，所以我还是选择FEniCS2019（详细见后）。</p>
+</li>
+</ul>
+<h2 id="第0步在win10上配置安装好-wsl--ubuntu">第0步：在Win10上，配置安装好 WSL + Ubuntu</h2>
+<p>不是本文主题，略。  后面实际以Ubuntu为例。</p>
+<h2 id="第1步安装miniconda">第1步：安装Miniconda</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh  <span style="color:#75715e"># 一路yes</span>
+
+source .bashrc <span style="color:#75715e"># 激活</span>
+</code></pre></div><h2 id="第2步配置国内源">第2步：配置国内源</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">conda config --add channels https://mirrors.bfsu.edu.cn/anaconda/pkgs/main/
+conda config --add channels https://mirrors.bfsu.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.bfsu.edu.cn/anaconda/cloud/conda-forge/
+conda config --remove channels  defaults
+conda config --set show_channel_urls yes
+conda clean -i <span style="color:#75715e"># 立刻生效</span>
+
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple  
+
+conda update conda <span style="color:#75715e"># 升级conda</span>
+conda clean -p <span style="color:#75715e"># 清除没用</span>
+</code></pre></div><h2 id="第3步安装科学计算环境python">第3步：安装科学计算环境（Python）</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">conda create --name fenics2019 python<span style="color:#f92672">=</span>3.7 jupyterlab matplotlib sympy scipy 
+
+conda activate fenics2019 <span style="color:#75715e"># 激活环境</span>
+
+<span style="color:#75715e"># conda install  fenics=2019 mshr=2019 有问题</span>
+<span style="color:#75715e"># 建议安装下面这个组合</span>
+conda install  fenics<span style="color:#f92672">=</span>2019.1.0<span style="color:#f92672">=</span>py37_9
+conda install  mshr<span style="color:#f92672">=</span>2019.1.0<span style="color:#f92672">=</span>py37hf9f41d3_3
+
+conda clean -p <span style="color:#75715e"># 清除没用</span>
+
+conda list  <span style="color:#75715e"># 核对已安装版本</span>
+
+python
+&gt;&gt;&gt; import matplotlib, sympy, scipy, fenics, mshr   <span style="color:#75715e"># 核对正常加载否</span>
+</code></pre></div><h2 id="第4步安装julia">第4步：安装Julia</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">wget https://mirrors.tuna.tsinghua.edu.cn/julia-releases/bin/linux/x64/1.5/julia-1.5.3-linux-x86_64.tar.gz
+tar -x -f julia-1.5.3-linux-x86_64.tar.gz
+</code></pre></div><h2 id="第5步配置整合">第5步：配置整合</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">#  设定工作目录</span>
+jupyter notebook --generate-config
+</code></pre></div><p>务必仔细检查，根据您的实际情况修改：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># 修改配置：vim ~/.jupyter/jupyter_notebook_config.py
+c.NotebookApp.notebook_dir = &#39;/home/chaoskey/sci&#39;
+c.NotebookApp.use_redirect_file = False
+</code></pre></div><p>务必仔细检查，根据您的实际情况修改：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># 在文件末尾添加：vim .bashrc
+export BROWSER=&#39;/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe&#39;
+export PATH=&#34;/home/chaoskey/julia-1.5.3/bin:$PATH&#34;
+export JULIA_PKG_SERVER=&#34;https://mirrors.bfsu.edu.cn/julia&#34;
+export CONDAENV=fenics2019
+conda activate $CONDAENV
+export JUPYTER=&#34;/home/chaoskey/miniconda3/envs/$CONDAENV/bin/jupyter&#34;
+export PYTHON=&#34;/home/chaoskey/miniconda3/envs/$CONDAENV/bin/python&#34;
+</code></pre></div><h2 id="第6步安装科学计算环境julia">第6步：安装科学计算环境（Julia）</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">julia
+]
+
+pkg<span style="color:#f92672">&gt;</span> add PyCall PyPlot SymPy SciPy
+pkg<span style="color:#f92672">&gt;</span> add https<span style="color:#f92672">://</span>github<span style="color:#f92672">.</span>com<span style="color:#f92672">/</span>chaoskey<span style="color:#f92672">/</span>FenicsPy<span style="color:#f92672">.</span>jl
+pkg<span style="color:#f92672">&gt;</span> add GR Plots IJulia 
+pkg<span style="color:#f92672">&gt;</span> gc   <span style="color:#75715e"># 清除没用</span>
+pkg<span style="color:#f92672">&gt;</span> st    <span style="color:#75715e"># 核对已安装版本</span>
+
+<span style="color:#66d9ef">using</span> PyCall, PyPlot, SymPy, SciPy, FenicsPy, GR, Plots, IJulia  <span style="color:#75715e"># 核对正常加载否 </span>
+</code></pre></div><h2 id="可能问题的解决若没问题则忽略之">可能问题的解决（若没问题，则忽略之）</h2>
+<ul>
+<li>1） 每次切换Python环境后，为了确保jupyter和Julia能正常调用，务必执行：</li>
+</ul>
+<p>务必仔细检查，根据您的实际情况修改：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># vim .bashrc （手工修改）
+export CONDAENV=fenics2019
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">julia
+]
+pkg<span style="color:#f92672">&gt;</span> build PyCall
+pkg<span style="color:#f92672">&gt;</span> precompile
+
+<span style="color:#66d9ef">using</span> PyCall, PyPlot, SymPy, SciPy, FenicsPy
+</code></pre></div><ul>
+<li>2）Error: Tree Hash Mismatch!</li>
+</ul>
+<p>根据错误提示，依次将 ~/.julia/artifacts/ 中对应的文件夹名作修改（可能要修改的会比较多），然后重新build</p>
+<p>Downloading artifact: Xorg_xcb_util       <br>
+###################################################### 100.0%       <br>
+┌ Error: Tree Hash Mismatch！     <br>
+│   Expected git-tree-sha1:   cacd8c147f866d6672e1aca9bb01fb919a81e96a    （修改后的文件名）<br>
+│   Calculated git-tree-sha1: 11f8623eb889dadcbbb39a3cd52e8d5e0340a0ca    （修改前的文件名）</p>
+<p>注意：如果要修改的很多，我建议将错误信息复制到文本编辑器，通过正则替换，变成修改文件名的 shell脚本，最后执行，就可以批量修改文件名。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">julia
+]
+
+pkg<span style="color:#f92672">&gt;</span> build GR Plots IJulia 
+pkg<span style="color:#f92672">&gt;</span> precompile
+</code></pre></div><h2 id="常用命令备忘">常用命令（备忘）</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># 环境列表</span>
+conda info -e
+
+<span style="color:#75715e"># 删除指定环境</span>
+conda remove -n tf --all
+<span style="color:#75715e"># 创建环境 </span>
+conda create --name tf     
+<span style="color:#75715e"># 克隆环境</span>
+conda create --clone tensorflow --name tf  
+
+<span style="color:#75715e"># 激活特定环境</span>
+conda activate tf  
+<span style="color:#75715e"># 退出当前环境 </span>
+conda deactivate  
+
+<span style="color:#75715e"># 当前环境安装库包</span>
+conda list 
+
+<span style="color:#75715e"># 启动Jupyter</span>
+nohup jupyter-lab  &gt; nb.log  2&gt;&amp;<span style="color:#ae81ff">1</span> &amp; 
+
+<span style="color:#75715e"># 查看日志</span>
+tail -f nb.log
+
+<span style="color:#75715e"># 退出Jupyter</span>
+jobs
+fg %1
+
+ps -ef | grep lab
+kill -9 id
+
+<span style="color:#75715e"># 清理Python无用库</span>
+conda clean -p
+
+<span style="color:#75715e"># 清理Julia无用库</span>
+julia
+<span style="color:#f92672">]</span>
+pkg&gt; gc
+
+<span style="color:#75715e"># 清理ubuntu无用包</span>
+sudo apt autoremove
+</code></pre></div></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/julia/0096/">
+    下一页<br>有限元法求解牛顿流体（FEniCS）
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/julia/0094/">
+      上一页<br>有限元法解偏微分方程（FEniCS）
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/julia/0095.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/julia/0095.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#概要">概要</a></li>
+        <li><a href="#第0步在win10上配置安装好-wsl--ubuntu">第0步：在Win10上，配置安装好 WSL + Ubuntu</a></li>
+        <li><a href="#第1步安装miniconda">第1步：安装Miniconda</a></li>
+        <li><a href="#第2步配置国内源">第2步：配置国内源</a></li>
+        <li><a href="#第3步安装科学计算环境python">第3步：安装科学计算环境（Python）</a></li>
+        <li><a href="#第4步安装julia">第4步：安装Julia</a></li>
+        <li><a href="#第5步配置整合">第5步：配置整合</a></li>
+        <li><a href="#第6步安装科学计算环境julia">第6步：安装科学计算环境（Julia）</a></li>
+        <li><a href="#可能问题的解决若没问题则忽略之">可能问题的解决（若没问题，则忽略之）</a></li>
+        <li><a href="#常用命令备忘">常用命令（备忘）</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

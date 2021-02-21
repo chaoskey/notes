@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="第四章 超常收益率、业绩基准和附加值"><meta property="og:title" content="第四章 超常收益率、业绩基准和附加值" />
+<meta property="og:description" content="CAPM提供一致预期收益率，多因子模型可以帮助控制风险。本章讨论如何进行预期收益率的预测，并概述如何将预测转化成投资组合。
+业绩基准
+业绩基准组合的别称：标杆、规范组合。业绩基准组合是投资管理机构化的产物。
+弃用市场组合，转而使用业绩基准组合。 在新的分析框架下，贝塔、残差风险都是相对某个业绩基准组合而言。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/apm/0020/" />
+<meta property="article:published_time" content="2018-05-22T20:20:35+08:00" />
+<meta property="article:modified_time" content="2018-05-22T20:20:35+08:00" />
+<title>第四章 超常收益率、业绩基准和附加值 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a>
+<ul>
+<li><a href="/notes/docs/apm/0017/">第一章 绪论</a></li>
+<li><a href="/notes/docs/apm/0018/">第二章 一致预期收益率：资本资产定价模型</a></li>
+<li><a href="/notes/docs/apm/0019/">第三章 风险</a></li>
+<li><a href="/notes/docs/apm/0020/"class=active>第四章 超常收益率、业绩基准和附加值</a></li>
+<li><a href="/notes/docs/apm/0021/">第五章 残差风险和残差收益率：信息率</a></li>
+<li><a href="/notes/docs/apm/0022/">第六章 主动管理基本定律</a></li>
+<li><a href="/notes/docs/apm/0023/">第七章 预期收益率和套利定价理论</a></li>
+<li><a href="/notes/docs/apm/0024/">第八章 估值理论</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>第四章 超常收益率、业绩基准和附加值</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#业绩基准">业绩基准</a></li>
+        <li><a href="#预期收益率的组成">预期收益率的组成</a></li>
+        <li><a href="#管理总风险和总收益率">管理总风险和总收益率</a></li>
+        <li><a href="#效用函数的分解">效用函数的分解</a></li>
+        <li><a href="#聚焦于附加值">聚焦于附加值</a></li>
+        <li><a href="#业绩基准择时">业绩基准择时</a></li>
+        <li><a href="#主动收益率与残差收益率">主动收益率与残差收益率</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0021/">
+    下一页<br>第五章 残差风险和残差收益率：信息率
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0019/">
+      上一页<br>第三章 风险
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/apm/0020/">第四章 超常收益率、业绩基准和附加值</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2018-05-22</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84">量化投资</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E6%8A%95%E8%B5%84">投资</a>
+      , 
+      <a href="/notes/tags/capm">capm</a>
+      , 
+      <a href="/notes/tags/%E4%B8%9A%E7%BB%A9%E5%9F%BA%E5%87%86">业绩基准</a>
+      , 
+      <a href="/notes/tags/%E9%A3%8E%E9%99%A9">风险</a>
+      , 
+      <a href="/notes/tags/%E6%94%B6%E7%9B%8A">收益</a>
+      , 
+      <a href="/notes/tags/%E6%95%88%E7%94%A8">效用</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/apm/0020.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<p>CAPM提供一致预期收益率，多因子模型可以帮助控制风险。本章讨论如何进行预期收益率的预测，并概述如何将预测转化成投资组合。</p>
+<h2 id="业绩基准">业绩基准</h2>
+<p>业绩基准组合的别称：标杆、规范组合。业绩基准组合是投资管理机构化的产物。</p>
+<p>弃用<strong>市场组合</strong>，转而使用<strong>业绩基准组合</strong>。 在新的分析框架下，贝塔、残差风险都是相对某个业绩基准组合而言。</p>
+<p><strong>主动头寸</strong>是组合头寸与业绩基准头寸之差：</p>
+
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{h}_{P\!B} = \boldsymbol{h}_P - \boldsymbol{h}_B
+\]
+</span>
+
+<p><strong>主动方差</strong>则是主动头寸收益率的方差：</p>
+
+
+
+<span class="katex">
+  \[
+\psi_P^2 = \boldsymbol{h}_{P\!B}^T \boldsymbol{V} \ \boldsymbol{h}_{P\!B} = \sigma_P^2 + \sigma_B^2 - 2 \sigma_{P,B}
+\]
+</span>
+
+<p>如果我们使用相对业绩基准的贝塔和相对业绩基准的残差收益率，即：</p>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{r}_P = \boldsymbol{\beta} \ r_B + \boldsymbol{\theta}_P
+\]
+</span>
+
+<p>那么主动方差可以改写成：</p>
+
+
+
+<span class="katex">
+  \[
+\psi_P^2 = \beta_{P\!B}^2 \sigma_B^2 + \omega_P^2
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(\beta_{P\!B}\)
+</span>
+是主动贝塔（即
+
+
+<span class="katex">
+  \(\beta_P-1\)
+</span>
+），
+
+
+<span class="katex">
+  \(\omega_P\)
+</span>
+是残差风险。</p>
+<p>选择业绩基准将有助于把预期收益率分解成不同的组成部分。</p>
+<h2 id="预期收益率的组成">预期收益率的组成</h2>
+<p>预期收益率的预测值可分解为四个部分：无风险部分（时间溢价）、业绩基准部分（风险溢价）、基准择时部分（超常业绩基准收益率）、阿尔法部分（预期残差收益率）。设
+
+
+<span class="katex">
+  \(\boldsymbol{R}=(R_1,\dots,R_N)^T\)
+</span>
+代表资产的总收益率向量，那么：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{E} \boldsymbol{R} = \boldsymbol{i}_F + \boldsymbol{\beta} \ \mu_B + \boldsymbol{\beta} \ \mathrm{\Delta}f_B + \boldsymbol{\alpha}
+\]
+</span>
+
+<ol>
+<li><strong>时间溢价</strong>
+
+
+<span class="katex">
+  \(\boldsymbol{i}_F\)
+</span>
+　投资者放弃其它投资一年所获得的回报。可以事先确定时间溢价。</li>
+<li><strong>风险溢价</strong>
+
+
+<span class="katex">
+  \(\boldsymbol{\beta} \ \mu_B\)
+</span>
+　其中
+
+
+<span class="katex">
+  \(\mu_B\)
+</span>
+是业绩基准的预期超额收益率，估计的方法之一：用极长期（７０年以上）平均值。</li>
+<li><strong>超常业绩基准收益率</strong>
+
+
+<span class="katex">
+  \(\boldsymbol{\beta} \ \mathrm{\Delta}f_B\)
+</span>
+　其中
+
+
+<span class="katex">
+  \(\mathrm{\Delta}f_B\)
+</span>
+衡量了业绩基准在临近的未来时期上的预期超额收益率与长期预期超额收益率之差。</li>
+<li><strong>阿尔法</strong>
+
+
+<span class="katex">
+  \(\boldsymbol{\alpha}\)
+</span>
+　预期残差收益率
+
+
+<span class="katex">
+  \(\boldsymbol{\alpha}=\mathrm{E} \boldsymbol{\theta}\)
+</span>
+</li>
+</ol>
+<p>上述四个部分的几种常用组合：</p>
+<ol>
+<li><strong>一致预期超额收益率</strong>
+
+
+<span class="katex">
+  \(\boldsymbol{\beta} \ \mu_B\)
+</span>
+　</li>
+<li><strong>预期超额收益率</strong>
+
+
+<span class="katex">
+  \(\boldsymbol{f}=\boldsymbol{\beta} \ \mu_B + \boldsymbol{\beta} \ \mathrm{\Delta}f_B + \boldsymbol{\alpha}\)
+</span>
+</li>
+<li><strong>预期超常收益率</strong>
+
+
+<span class="katex">
+  \(\boldsymbol{\beta} \ \mathrm{\Delta}f_B + \boldsymbol{\alpha}\)
+</span>
+　主动管理的关键。第一项衡量了基准择时收益，第二项衡量了选股收益。</li>
+</ol>
+<h2 id="管理总风险和总收益率">管理总风险和总收益率</h2>
+<ul>
+<li>预期超额收益率的一致预测：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{\mu} = \boldsymbol{\beta} \ \mu_B
+\]
+</span>
+
+<p>此时，具有最高夏普率的全额投资组合就是业绩基准B。</p>
+<ul>
+<li>预测超额收益率的主动管理预测：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{f} = \boldsymbol{\beta} \ f_B + \boldsymbol{\alpha}
+\]
+</span>
+
+<p>此时，具有最高夏普率的全额投资组合就是组合Q（就是第２章技术附录中的组合Ｑ）。业绩基准Ｂ不在有效前沿上，存在战胜组合Ｂ的机会，那就是组合Q。 
+
+
+<span class="katex">
+  \(\boldsymbol{f}\)
+</span>
+偏离一致预测的程度由
+
+
+<span class="katex">
+  \(f_B\)
+</span>
+偏离一致预测
+
+
+<span class="katex">
+  \(\mu_B\)
+</span>
+的程度和
+
+
+<span class="katex">
+  \(\alpha\)
+</span>
+偏离0的程度决定。</p>
+<ul>
+<li>总收益率/总风险权衡</li>
+</ul>
+<p>这种权衡就是使用传统的均值/方差目标函数来指导组合挑选，这种权衡标准称为<strong>预期效用</strong>，表示为
+
+
+<span class="katex">
+  \(U[P]\)
+</span>
+，定义为：</p>
+
+
+
+<span class="katex">
+  \[
+U[P] = f_P - \lambda_T \sigma_P^2
+\]
+</span>
+
+<p>其中，等号右边第一项是预期超额收益率，第二项是风险惩罚项，参数
+
+
+<span class="katex">
+  \(\lambda_T\)
+</span>
+衡量了对总风险的厌恶程度。这里的总风险包括系统性风险（源自业绩基准）和残差风险（源自资产选择）。</p>
+<p>剩下的任务就是求解一个优化问题：</p>
+
+
+
+<span class="katex">
+  \[
+\underset{P}{\max} \ U[P]
+\]
+</span>
+
+<p>再求解这个优化问题前，还需要确定
+
+
+<span class="katex">
+  \(\lambda_T\)
+</span>
+。不妨合理假设在如下两种情况下的优化问题具有相同的参数
+
+
+<span class="katex">
+  \(\lambda_T\)
+</span>
+：</p>
+<p>１）允许组合中持有现金，那么有效前沿将由无风险组合F到组合Q的直线段构成，即：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+f_P = \beta_P f_B \\
+\sigma_P^2 = \beta_P^2 \sigma_B^2
+\end{aligned}
+\]
+</span>
+
+<p>于是优化问题变成：</p>
+
+
+
+<span class="katex">
+  \[
+\underset{\beta_P}{\max} \ \{ \beta_P \ f_B - \lambda_T \beta_P^2 \sigma_B^2 \}
+\]
+</span>
+
+<p>
+
+
+<span class="katex">
+  \(\beta_P\)
+</span>
+最优解是：</p>
+
+
+
+<span class="katex">
+  \[
+\beta_P=\dfrac{f_B}{2 \lambda_T \sigma_B^2}
+\]
+</span>
+
+<p>２）并且，没有额外信息（
+
+
+<span class="katex">
+  \(\boldsymbol{f}=\boldsymbol{\mu},\ \ \beta_P=1\)
+</span>
+），进而获得
+
+
+<span class="katex">
+  \(\lambda_T\)
+</span>
+的一个合理表达式：</p>
+
+
+
+<span class="katex">
+  \[
+\lambda_T=\frac{\mu_B}{2 \sigma_B^2}
+\]
+</span>
+
+<p>进而
+
+
+<span class="katex">
+  \(\beta_P\)
+</span>
+最优解可改写成：</p>
+
+
+
+<span class="katex">
+  \[
+\beta_P=1+ \frac{\mathrm{\Delta}f_B}{\mu_B}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(\mathrm{\Delta}f_B=f_B-\mu_B\)
+</span>
+被称作<strong>超常业绩基准收益率的预测</strong>。</p>
+<p>一旦确定了参数
+
+
+<span class="katex">
+  \(\lambda_T\)
+</span>
+，就可回过头求解目标优化问题：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+& \underset{P}{\max} \ U[P] \\
+& =  \underset{\boldsymbol{h}_P}{\max} \ \{ \boldsymbol{f}^T \boldsymbol{h}_P - \lambda_T \boldsymbol{h}_P^T \boldsymbol{V} \boldsymbol{h}_P \}
+\end{aligned}
+\]
+</span>
+
+<p>头寸
+
+
+<span class="katex">
+  \(\boldsymbol{h}_P\)
+</span>
+最优解是：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\boldsymbol{h}_P &= \dfrac{1}{2 \lambda_T} \boldsymbol{V}^{-1} \boldsymbol{f} \\
+&= \dfrac{1}{2 \lambda_T \sigma_q^2} \boldsymbol{h}_q = \dfrac{e_q}{2 \lambda_T \sigma_q^2} \boldsymbol{h}_Q \\
+&= \dfrac{f_Q}{2 \lambda_T \sigma_Q^2} \boldsymbol{h}_Q
+\end{aligned}
+\]
+</span>
+
+<p>如果将超额收益率分解成系统部分和残差部分，那么头寸
+
+
+<span class="katex">
+  \(\boldsymbol{h}_P\)
+</span>
+最优解可改写成：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\boldsymbol{h}_P &= \dfrac{f_B}{2 \lambda_T} \boldsymbol{V}^{-1} \boldsymbol{\beta} + \dfrac{1}{2 \lambda_T} \boldsymbol{V}^{-1} \boldsymbol{\alpha} \\
+&= \dfrac{f_B}{2 \lambda_T \sigma_B^2} \boldsymbol{h}_B + \dfrac{1}{2 \lambda_T \sigma_A^2} \boldsymbol{h}_A \\
+&= \beta_P \boldsymbol{h}_B + \dfrac{1}{2 \lambda_T \sigma_A^2} \boldsymbol{h}_A \overset{\Delta}{=} \beta_P \boldsymbol{h}_B + \dfrac{\mathrm{IR}}{2 \lambda_T} \boldsymbol{h}_A
+\end{aligned}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(\mathrm{IR}\)
+</span>
+，是第５章将要讨论的<strong>信息率</strong>：预期残差收益率与残差风险的比值（形式上类似“夏普率”的概念）。</p>
+<p>在总风险/总收益率分析框架下，较低水平的信息也会导致很高水平的残差风险。</p>
+<h2 id="效用函数的分解">效用函数的分解</h2>
+<ul>
+<li>组合持仓权重
+
+
+<span class="katex">
+  \(\boldsymbol{h}_P\)
+</span>
+的分解：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\boldsymbol{h}_P = \beta_P \boldsymbol{h}_B + \boldsymbol{h}_{\mathrm{PR}}
+\]
+</span>
+
+<p>其中，
+
+
+<span class="katex">
+  \(\boldsymbol{h}_{\mathrm{PR}}\)
+</span>
+被称作<strong>残差头寸</strong>。</p>
+<ul>
+<li>超额收益率预测
+
+
+<span class="katex">
+  \(f\)
+</span>
+的分解：</li>
+</ul>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+f_P &= \beta_P f_B + \alpha_P \\
+&= f_B + \beta_{\mathrm{PB}} f_B + \alpha_P \\
+&= f_B + \beta_{\mathrm{PB}} \mu_B + \beta_{\mathrm{PB}} \mathrm{\Delta} f_B + \alpha_P 
+\end{aligned}
+\]
+</span>
+
+<p>其中：</p>
+<ol>
+<li>
+
+
+<span class="katex">
+  \(f_B\)
+</span>
+，预期业绩基准超额收益率；</li>
+<li>
+
+
+<span class="katex">
+  \(\beta_{\mathrm{PB}} \mu_B\)
+</span>
+，主动贝塔
+
+
+<span class="katex">
+  \(\times\)
+</span>
+一致预期产生的收益率；</li>
+<li>
+
+
+<span class="katex">
+  \(\beta_{\mathrm{PB}} \mathrm{\Delta} f_B\)
+</span>
+，主动贝塔
+
+
+<span class="katex">
+  \(\times\)
+</span>
+超常预测产生的收益率；</li>
+<li>
+
+
+<span class="katex">
+  \(\alpha_P\)
+</span>
+，股票阿尔法，即选股产生的收益率。</li>
+<li>组合方差
+
+
+<span class="katex">
+  \(\sigma_P^2\)
+</span>
+的分解：</li>
+</ol>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+\sigma_P^2 &= \beta_P^2 \sigma_B^2 + \omega_P^2 \\
+&= (1+\beta_{\mathrm{PB}})^2 \sigma_B^2 + \omega_P^2 \\
+&= \sigma_B^2 + 2 \beta_{\mathrm{PB}} \sigma_B^2 + \beta_{\mathrm{PB}}^2 \sigma_B^2 + \omega_P^2 
+\end{aligned}
+\]
+</span>
+
+<p>其中：</p>
+<ol>
+<li>
+
+
+<span class="katex">
+  \(\sigma_B^2\)
+</span>
+，业绩基准方差；</li>
+<li>
+
+
+<span class="katex">
+  \(2 \beta_{\mathrm{PB}} \sigma_B^2\)
+</span>
+，主动贝塔产生的协方差；</li>
+<li>
+
+
+<span class="katex">
+  \(\beta_{\mathrm{PB}}^2 \sigma_B^2\)
+</span>
+，主动贝塔产生的方差；</li>
+<li>
+
+
+<span class="katex">
+  \(\omega_P^2\)
+</span>
+，选股产生的方差。</li>
+<li>效用函数一般形式的分解(第二个等号右边第３和４项分别
+
+
+<span class="katex">
+  \(\lambda_{\mathrm{BT}},\lambda_R\)
+</span>
+用分别代替
+
+
+<span class="katex">
+  \(\lambda_T\)
+</span>
+)：</li>
+</ol>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+U[P] &= f_P - \lambda_T \sigma_P^2 \\
+&= (f_B - \lambda_T \sigma_B^2) + \beta_{\mathrm{PB}} (\mu_B - 2 \lambda_T \sigma_B^2) + (\beta_{\mathrm{PB}} \mathrm{\Delta} f_B - \lambda_{\mathrm{BT}} \beta_{\mathrm{PB}}^2 \sigma_B^2) + (\alpha_P - \lambda_R \omega_P^2)
+\end{aligned}
+\]
+</span>
+
+<p>其中：</p>
+<ol>
+<li>
+
+
+<span class="katex">
+  \(f_B - \lambda_T \sigma_B^2\)
+</span>
+，业绩基准部分，纯粹的预测，与投资行为无关（不影响最优组合）；</li>
+<li>
+
+
+<span class="katex">
+  \(\beta_{\mathrm{PB}} (\mu_B - 2 \lambda_T \sigma_B^2 )\)
+</span>
+，交叉项，与投资行为相关，但没有预测；</li>
+<li>
+
+
+<span class="katex">
+  \(\beta_{\mathrm{PB}} \mathrm{\Delta} f_B - \lambda_{\mathrm{BT}} \beta_{\mathrm{PB}}^2 \sigma_B^2\)
+</span>
+，业绩基准择时，既包含预测，也与投资行为相关；</li>
+<li>
+
+
+<span class="katex">
+  \(\alpha_P - \lambda_R \omega_P^2\)
+</span>
+，选股，，既包含预测，也与投资行为相关。</li>
+</ol>
+<p>容易证明，无论
+
+
+<span class="katex">
+  \(\beta_{\mathrm{PB}}\)
+</span>
+如何选择，第二项都为0。于是效用函数可精确该写成：</p>
+
+
+
+<span class="katex">
+  \[
+U[P] = (f_B - \lambda_T \sigma_B^2) +(\beta_{\mathrm{PB}} \mathrm{\Delta} f_B - \lambda_{\mathrm{BT}} \beta_{\mathrm{PB}}^2 \sigma_B^2) + (\alpha_P - \lambda_R \omega_P^2)
+\]
+</span>
+
+<h2 id="聚焦于附加值">聚焦于附加值</h2>
+<p>再次观察目标效用函数的分解式：将风险和收益率拆分成三个部分：</p>
+<ol>
+<li><strong>内蕴部分</strong>，
+
+
+<span class="katex">
+  \(f_B-\lambda_T \sigma_B\)
+</span>
+。这部分不在投资经理的掌控范围内。
+
+
+<span class="katex">
+  \(\lambda_T\)
+</span>
+是对总风险厌恶系数。</li>
+<li><strong>择时部分</strong>，
+
+
+<span class="katex">
+  \(\beta_{\mathrm{PB}} \mathrm{\Delta}f_B-\lambda_{\mathrm{BT}} \beta_{\mathrm{PB}^2} \sigma_B^2\)
+</span>
+。它由投资经理主动贝塔决定。
+
+
+<span class="katex">
+  \(\lambda_{\mathrm{BT}}\)
+</span>
+是对业绩基准择时风险恶系数。</li>
+<li><strong>残差部分</strong>，
+
+
+<span class="katex">
+  \(\alpha_P - \lambda_R \omega_P^2\)
+</span>
+。它有投资经理的残差头寸产生。
+
+
+<span class="katex">
+  \(\lambda_R\)
+</span>
+是对残差风险恶系数。</li>
+</ol>
+<p>其中<strong>内蕴部分</strong>如果确定了业绩基准组合和对总风险厌恶系数，那么是一个常数。所以后面两部分之和才与衡量了投资经理增加价值的能力有关，称之为<strong>附加值</strong>：</p>
+
+
+
+<span class="katex">
+  \[
+\mathrm{V\!A} = (\beta_{\mathrm{PB}} \mathrm{\Delta}f_B-\lambda_{\mathrm{BT}} \beta_{\mathrm{PB}^2} \sigma_B^2) + (\alpha_P - \lambda_R \omega_P^2)
+\]
+</span>
+
+<p>附加值是一种<strong>风险调整预期收益率</strong>，忽略了业绩基准对风险和预期收益率的贡献。</p>
+<h2 id="业绩基准择时">业绩基准择时</h2>
+<p>业绩基准择时是指逐个时期选择合适的贝塔。</p>
+<p>主动贝塔的最优水平（以
+
+
+<span class="katex">
+  \(\mathrm{VA}\)
+</span>
+第一部分最大为目标）：</p>
+
+
+
+<span class="katex">
+  \[
+\beta_{\mathrm{PB}} = \frac{\mathrm{\Delta}f_B}{2 \lambda_{\mathrm{BT}} \sigma_B^2}
+\]
+</span>
+
+<p>非常高的业绩基准择时风险厌恶系数，或不进行业绩基准择时，都使得主动贝塔为0。</p>
+<p>&ldquo;主动管理基本定律&quot;告诉我们：通过业绩基准择时产生显著附加值的机会较少。</p>
+<h2 id="主动收益率与残差收益率">主动收益率与残差收益率</h2>
+<p>主动收益率和风险：</p>
+
+
+
+<span class="katex">
+  \[
+\begin{aligned}
+r_{\mathrm{PB}} = r_P - r_B = \theta_P + \beta_{\mathrm{PB}} r_B \\
+\psi_P = \mathrm{std}\{r_{\mathrm{PB}}\} = \sqrt{\omega_P^2 + \beta_{\mathrm{PB}}^2 \sigma_B^2 }
+\end{aligned}
+\]
+</span>
+
+<p>特别地，如果不进行业绩基准择时，则有
+
+
+<span class="katex">
+  \(\beta_P=1,\ \beta_{\mathrm{PB}}=\beta_P-1=0\)
+</span>
+，进而主动收益率和风险就等于残差收益率和风险。</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0021/">
+    下一页<br>第五章 残差风险和残差收益率：信息率
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/apm/0019/">
+      上一页<br>第三章 风险
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/apm/0020.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/apm/0020.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#业绩基准">业绩基准</a></li>
+        <li><a href="#预期收益率的组成">预期收益率的组成</a></li>
+        <li><a href="#管理总风险和总收益率">管理总风险和总收益率</a></li>
+        <li><a href="#效用函数的分解">效用函数的分解</a></li>
+        <li><a href="#聚焦于附加值">聚焦于附加值</a></li>
+        <li><a href="#业绩基准择时">业绩基准择时</a></li>
+        <li><a href="#主动收益率与残差收益率">主动收益率与残差收益率</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

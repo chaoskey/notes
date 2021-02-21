@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DOLFIN：C&#43;&#43;/Python有限元库》日志/诊断/参数【翻译】"><meta property="og:title" content="DOLFIN：C&#43;&#43;/Python有限元库》日志/诊断/参数【翻译】" />
+<meta property="og:description" content="II.实现》10.DOLFIN：C&#43;&#43;/Python有限元库》日志/诊断/参数
+【章节目录】
+10·3·12 日志／诊断
+DOLFIN提供了一个简单的接口来统一处理日志消息，包括警告和错误。  所有消息都收集到单个流中，这使整个程序（包括DOLFIN库）的输出的目的地和格式可由用户控制。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/0117/" />
+<meta property="article:published_time" content="2021-01-12T20:56:49+08:00" />
+<meta property="article:modified_time" content="2021-01-12T20:56:49+08:00" />
+<title>DOLFIN：C&#43;&#43;/Python有限元库》日志/诊断/参数【翻译】 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a>
+<ul>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E6%96%B9%E6%B3%95">第二章 有限元方法</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%B8%B8%E8%A7%81%E6%9C%89%E9%99%90%E5%85%83">第三章 常见有限元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%9E%84%E9%80%A0%E9%80%9A%E7%94%A8%E5%8F%82%E8%80%83%E5%8D%95%E5%85%83">第四章 构造通用参考单元</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F">第五章 有限元变分形式</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%BB%84%E8%A3%85">第六章 有限元组装</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%AD%A3%E4%BA%A4%E8%A1%A8%E7%A4%BA">第七章 有限元变分形式的正交表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E5%8F%98%E5%88%86%E5%BD%A2%E5%BC%8F%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA">第八章 有限元变分形式的张量表示</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97%E7%9A%84%E7%A6%BB%E6%95%A3%E4%BC%98%E5%8C%96">第九章 有限元矩阵计算的离散优化</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E7%AB%A0-dolfincpython%E6%9C%89%E9%99%90%E5%85%83%E5%BA%93">第十章 DOLFIN：C++/Python有限元库</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-ufl%E6%9C%89%E9%99%90%E5%85%83%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80">第十七章 UFL：有限元形式语言</a></li>
+<li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-unicorn%E7%BB%9F%E4%B8%80%E7%9A%84%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6%E6%B1%82%E8%A7%A3%E5%99%A8">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a></li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>DOLFIN：C&#43;&#43;/Python有限元库》日志/诊断/参数【翻译】</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ii实现10dolfincpython有限元库日志诊断参数">II.实现》10.DOLFIN：C++/Python有限元库》日志/诊断/参数</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#10312-日志诊断">10·3·12 日志／诊断</a></li>
+            <li><a href="#10313-参数">10·3·13 参数</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0118/">
+    下一页<br>DOLFIN：C&#43;&#43;/Python有限元库》注记【翻译】
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0116/">
+      上一页<br>DOLFIN：C&#43;&#43;/Python有限元库》变分问题/文件/可视化【翻译】
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/fem/0117/">DOLFIN：C&#43;&#43;/Python有限元库》日志/诊断/参数【翻译】</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2021-01-12</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97">科学计算</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/FEniCS">FEniCS</a>
+      , 
+      <a href="/notes/tags/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95">有限元法</a>
+      , 
+      <a href="/notes/tags/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">偏微分方程</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0117.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<h1 id="ii实现10dolfincpython有限元库日志诊断参数">II.实现》10.DOLFIN：C++/Python有限元库》日志/诊断/参数</h1>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93">章节目录</a>】</p>
+<h3 id="10312-日志诊断">10·3·12 日志／诊断</h3>
+<p>DOLFIN提供了一个简单的接口来统一处理日志消息，包括警告和错误。  所有消息都收集到单个流中，这使整个程序（包括DOLFIN库）的输出的目的地和格式可由用户控制。</p>
+<p><strong>打印消息</strong>。  通常使用<code>info</code>命令打印来自DOLFIN的消息报文。  该命令采用字符串参数和要格式化的变量的可选列表，与标准C printf命令非常相似。  请注意，<code>info</code>命令自动将换行符附加到给定的字符串。  另外，C++用户可以将<code>dolfin::cout</code>和<code>dolfin::endl</code>对象用于消息的C++样式格式，如下所示。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>info(<span style="color:#e6db74">&#34;Assembling system of size %d x %d.&#34;</span>, M, N);
+cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Assembling system of size &#34;</span> <span style="color:#f92672">&lt;&lt;</span> M <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; x &#34;</span> <span style="color:#f92672">&lt;&lt;</span> N <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+info(<span style="color:#e6db74">&#34;Assembling system of size </span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> x </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">.&#34;</span> <span style="color:#f92672">%</span> (M, N))
+</code></pre></div><p><code>info</code>命令和<code>dolfin::cout/endl</code>对象与标准C printf命令和<code>std::cout/endl</code>对象的不同之处在于，输出定向到特殊的流中，其输出可以重定向到标准输以及其他目标。  特别是，可能会完全禁用DOLFIN的输出，或选择打印消息的详细程度，如下所述。</p>
+<p><strong>警告和错误</strong>。  除了<code>info</code>命令之外，DOLFIN还提供了<code>warning</code>和<code>error</code>命令，可分别用于发出警告和错误。  这两个命令的工作方式与info命令大致相同。  但是，<code>warning</code>命令将在给定的消息前加上<code>*** Warning: </code>，而<code>error</code>命令在C++和Python将引发可以捕获的异常。  这两个命令还将以比使用info打印的消息更高的日志级别打印消息。</p>
+<p><strong>设置日志级别</strong>。  DOLFIN日志级别确定通过日志系统打印的消息路由。 仅打印高于或等于当前日志级别的消息。 可以使用<code>set_log_level</code>函数设置DOLFIN的日志级别。  该函数需要一个指定日志级别的整数值。  为了简化日志级别的规范，可以使用表10.5中列出的许多预定日志级别之一。  默认日志级别为INFO。  通过从C++调用命令<code>set_log_active(false)</code>和从Python调用<code>set_log_active(False)</code>，可以完全关闭日志消息。  出于技术原因，用于调试消息的日志级别在C++中称为DBG，在Python中称为DEBUG。  表10.5中对此进行了总结。</p>
+<p><img src="/notes/images/0247.jpg" alt="0247.jpg"></p>
+<center>表10.5 DOLFIN中的日志级别。</center>
+<p>要以任意日志级别打印消息，可以指定<code>log</code>命令的日志级别，如下面的代码示例所示。 【译者注：目前较近Python版DOLFIN已经不支持<code>log</code>命令了，只支持前面<code>info</code>, <code>warning</code>，<code>error</code>这三个日志命令和日志级别设置命令<code>set_log_level</code>,<code>get_log_level</code>和<code>set_log_active</code>。】</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>
+info(<span style="color:#e6db74">&#34;Test message&#34;</span>); <span style="color:#75715e">// will be printed
+</span><span style="color:#75715e"></span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Test message&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl; <span style="color:#75715e">// will be printed
+</span><span style="color:#75715e"></span>log(DBG, <span style="color:#e6db74">&#34;Test message&#34;</span>); <span style="color:#75715e">// will not be printed
+</span><span style="color:#75715e"></span>log(<span style="color:#ae81ff">15</span>, <span style="color:#e6db74">&#34;Test message&#34;</span>); <span style="color:#75715e">// will not be printed
+</span><span style="color:#75715e"></span>
+set_log_level(DBG);
+info(<span style="color:#e6db74">&#34;Test message&#34;</span>); <span style="color:#75715e">// will be printed
+</span><span style="color:#75715e"></span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Test message&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl; <span style="color:#75715e">// will be printed
+</span><span style="color:#75715e"></span>log(DBG, <span style="color:#e6db74">&#34;Test message&#34;</span>); <span style="color:#75715e">// will be printed
+</span><span style="color:#75715e"></span>log(<span style="color:#ae81ff">15</span>, <span style="color:#e6db74">&#34;Test message&#34;</span>); <span style="color:#75715e">// will be printed
+</span><span style="color:#75715e"></span>
+set_log_level(WARNING);
+info(<span style="color:#e6db74">&#34;Test message&#34;</span>); <span style="color:#75715e">// will not be printed
+</span><span style="color:#75715e"></span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Test message&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl; <span style="color:#75715e">// will not be printed
+</span><span style="color:#75715e"></span>warning(<span style="color:#e6db74">&#34;Test message&#34;</span>); <span style="color:#75715e">// will be printed
+</span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Test message&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl; <span style="color:#75715e">// will be printed!
+</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+
+info(<span style="color:#e6db74">&#34;Test message&#34;</span>) <span style="color:#75715e"># will be printed</span>
+log(DEBUG, <span style="color:#e6db74">&#34;Test message&#34;</span>) <span style="color:#75715e"># will not be printed</span>
+log(<span style="color:#ae81ff">15</span>, <span style="color:#e6db74">&#34;Test message&#34;</span>) <span style="color:#75715e"># will not be printed</span>
+
+set_log_level(DEBUG)
+info(<span style="color:#e6db74">&#34;Test message&#34;</span>) <span style="color:#75715e"># will be printed</span>
+log(DEBUG, <span style="color:#e6db74">&#34;Test message&#34;</span>) <span style="color:#75715e"># will be printed</span>
+log(<span style="color:#ae81ff">15</span>, <span style="color:#e6db74">&#34;Test message&#34;</span>) <span style="color:#75715e"># will be printed</span>
+
+set_log_level(WARNING)
+info(<span style="color:#e6db74">&#34;Test message&#34;</span>) <span style="color:#75715e"># will not be printed</span>
+warning(<span style="color:#e6db74">&#34;Test message&#34;</span>) <span style="color:#75715e"># will be printed</span>
+<span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34;Test message&#34;</span> <span style="color:#75715e"># will be printed!</span>
+</code></pre></div><p><strong>对象打印</strong>。  可以使用<code>info</code>命令来打印许多标准的DOLFIN对象，如下面的代码示例所示。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>info(vector);
+info(matrix);
+info(solver);
+info(mesh);
+info(mesh_function);
+info(function);
+info(function_space);
+info(parameters);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+info(vector)
+info(matrix)
+info(solver)
+info(mesh)
+info(mesh_function)
+info(function)
+info(function_space)
+info(parameters)
+</code></pre></div><p>上面的命令将打印简短的非正式消息。 例如，命令<code>info(mesh)</code>可能会导致以下输出：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">&lt;Mesh of topological dimension 2 (triangles) with 25 vertices and 32 cells, ordered&gt;
+</code></pre></div><p>在Python接口中，也可以通过调用<code>print mesh</code>来打印相同的非正式消息。  要打印更详细的数据，可以将<code>info</code>函数的详细参数设置为true（默认为false），这将打印对象的详细摘要。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>info(mesh, true);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+info(mesh, True)
+</code></pre></div><p>一些对象的详细输出可能很长。</p>
+<p><strong>任务和进度条</strong>。  除了用于打印消息的基本命令外，DOLFIN还提供了许多命令来组织模拟程序的诊断输出。  两个这样的命令是<code>begin</code>和<code>end</code>。 这些命令可用于程序的嵌套输出。 每次调用<code>begin</code>将缩进级别增加一个单位（两个空格），而每次调用<code>end</code>将缩进级别减小一个单位。</p>
+<p>提供反馈的另一种方法是通过进度条。  DOLFIN为此提供了Progress类。  尽管已经尽力减少了更新进度条的开销，但还是要谨慎使用。  如果在循环的每次迭代中仅执行少量工作，则使用进度条的相对开销可能会很大。  下面的代码示例说明了<code>begin/end</code>命令和进度条的用法。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>begin(<span style="color:#e6db74">&#34;Starting nonlinear iteration.&#34;</span>);
+info(<span style="color:#e6db74">&#34;Updating velocity.&#34;</span>);
+info(<span style="color:#e6db74">&#34;Updating pressure.&#34;</span>);
+info(<span style="color:#e6db74">&#34;Computing residual.&#34;</span>);
+end();
+
+Progress <span style="color:#a6e22e">p</span>(<span style="color:#e6db74">&#34;Iterating over all cells.&#34;</span>, mesh.num_cells());
+<span style="color:#66d9ef">for</span> (CellIterator cell(mesh); <span style="color:#f92672">!</span>cell.end(); <span style="color:#f92672">++</span>cell)
+{
+    ...
+    p<span style="color:#f92672">++</span>;
+}
+
+Progress <span style="color:#a6e22e">q</span>(<span style="color:#e6db74">&#34;Time-stepping&#34;</span>);
+<span style="color:#66d9ef">while</span> (t <span style="color:#f92672">&lt;</span> T)
+{
+    ...
+    t <span style="color:#f92672">+=</span> dt;
+    q <span style="color:#f92672">=</span> t <span style="color:#f92672">/</span> T;
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+begin(<span style="color:#e6db74">&#34;Starting nonlinear iteration.&#34;</span>)
+info(<span style="color:#e6db74">&#34;Updating velocity.&#34;</span>)
+info(<span style="color:#e6db74">&#34;Updating pressure.&#34;</span>)
+info(<span style="color:#e6db74">&#34;Computing residual.&#34;</span>)
+end()
+
+p <span style="color:#f92672">=</span> Progress(<span style="color:#e6db74">&#34;Iterating over all cells.&#34;</span>, mesh<span style="color:#f92672">.</span>num_cells())
+<span style="color:#66d9ef">for</span> cell <span style="color:#f92672">in</span> cells(mesh):
+    <span style="color:#f92672">...</span>
+    p <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+
+q <span style="color:#f92672">=</span> Progress(<span style="color:#e6db74">&#34;Time-stepping&#34;</span>)
+<span style="color:#66d9ef">while</span> t <span style="color:#f92672">&lt;</span> T:
+    <span style="color:#f92672">...</span>
+    t <span style="color:#f92672">+=</span> dt
+    q<span style="color:#f92672">.</span>update(t <span style="color:#f92672">/</span> T)
+</code></pre></div><p><strong>设定计时器</strong>。 可以使用Timer类完成计时。  Timer在创建时会自动启动，并在超出范围时自动停止。  Timer在创建时会自动启动，并在超出范围时自动停止。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">solve</span>(<span style="color:#66d9ef">const</span> Matrix<span style="color:#f92672">&amp;</span> A, Vector<span style="color:#f92672">&amp;</span> x, <span style="color:#66d9ef">const</span> Vector<span style="color:#f92672">&amp;</span> b)
+{
+    Timer timer(<span style="color:#e6db74">&#34;Linear solve&#34;</span>);
+    ...
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solve</span>(A, b):
+    timer <span style="color:#f92672">=</span> Timer(<span style="color:#e6db74">&#34;Linear solve&#34;</span>)
+    <span style="color:#f92672">...</span>
+    <span style="color:#66d9ef">return</span> x
+</code></pre></div><p>可以显式调用Timer的start和stop成员函数。  要直接访问计时器的值，可以调用成员函数<code>value</code>。【译者注：成员函数<code>value</code>已经没有了，改用<a href="https://fenicsproject.org/olddocs/dolfinx/dev/python/_autogenerated/dolfin.common.timer.html"><code>elapsed</code></a>。】  可以通过调用<code>list_timings</code>函数来打印在程序执行期间创建的所有计时器的值摘要。</p>
+<h3 id="10313-参数">10·3·13 参数</h3>
+<p>DOLFIN保留了控制其各个组件行为的参数全局数据库。 通过统一的类型无关的接口（允许检索参数值）来控制参数，修改参数值以及向数据库添加新参数。  DOLFIN的不同组件（类）也依赖于该类每个本地实例的参数。  这允许为类的不同对象设置不同的参数值。</p>
+<p>参数值可以是整数值，实值（标准双精度），字符串值或布尔值。 参数名称不得包含空格。</p>
+<p><strong>访问参数</strong>。  可以通过全局变量<code>parameters</code>访问全局参数。  以下代码说明了如何打印全局参数数据库中所有参数的值，以及如何访问和更改参数值。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>info(parameters, True);
+uint num_threads <span style="color:#f92672">=</span> parameters[<span style="color:#e6db74">&#34;num_threads&#34;</span>];
+<span style="color:#66d9ef">bool</span> allow_extrapolation <span style="color:#f92672">=</span> parameters[<span style="color:#e6db74">&#34;allow_extrapolation&#34;</span>];
+parameters[<span style="color:#e6db74">&#34;num_threads&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>;
+parameters[<span style="color:#e6db74">&#34;allow_extrapolation&#34;</span>] <span style="color:#f92672">=</span> true;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+info(parameters, True)
+num_threads <span style="color:#f92672">=</span> parameters[<span style="color:#e6db74">&#34;num_threads&#34;</span>]
+allow_extrapolation <span style="color:#f92672">=</span> parameters[<span style="color:#e6db74">&#34;allow_extrapolation&#34;</span>]
+parameters[<span style="color:#e6db74">&#34;num_threads&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>
+parameters[<span style="color:#e6db74">&#34;allow_extrapolation&#34;</span>] <span style="color:#f92672">=</span> True
+</code></pre></div><p>可以通过访问名为<code>parameter</code>的成员变量来控制DOLFIN特定组件本地的参数。  以下代码说明了如何为Krylov求解器设置一些参数：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>KrylovSolver solver;
+solver.parameters[<span style="color:#e6db74">&#34;absolute_tolerance&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e-6</span>;
+solver.parameters[<span style="color:#e6db74">&#34;report&#34;</span>] <span style="color:#f92672">=</span> true;
+solver.parameters(<span style="color:#e6db74">&#34;gmres&#34;</span>)[<span style="color:#e6db74">&#34;restart&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>;
+solver.parameters(<span style="color:#e6db74">&#34;preconditioner&#34;</span>)[<span style="color:#e6db74">&#34;reuse&#34;</span>] <span style="color:#f92672">=</span> true;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+solver <span style="color:#f92672">=</span> KrylovSolver()
+solver<span style="color:#f92672">.</span>parameters[<span style="color:#e6db74">&#34;absolute_tolerance&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e-6</span>
+solver<span style="color:#f92672">.</span>parameters[<span style="color:#e6db74">&#34;report&#34;</span>] <span style="color:#f92672">=</span> True
+solver<span style="color:#f92672">.</span>parameters[<span style="color:#e6db74">&#34;gmres&#34;</span>][<span style="color:#e6db74">&#34;restart&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>
+solver<span style="color:#f92672">.</span>parameters[<span style="color:#e6db74">&#34;preconditioner&#34;</span>][<span style="color:#e6db74">&#34;reuse&#34;</span>] <span style="color:#f92672">=</span> True
+</code></pre></div><p>上面的示例访问嵌套参数数据库&quot;gmres&quot;和&quot;preconditioner&quot;。  DOLFIN参数可以嵌套到任意深度，这有助于将参数组织到不同的类别中。  注意在两个接口中访问嵌套参数的细微差别。  在C++接口中，嵌套参数用方括号(&quot;&hellip;&quot;)访问，而在Python接口中，嵌套参数用方括号[&quot;&hellip;&quot;]访问。  可以使用<code>info</code>函数查看某个组件可用的参数。</p>
+<p><strong>添加参数</strong>。  可以用<code>add</code>成员函数将参数（新参数的名称及其默认值）添加到现有参数数据库中。  通过创建Parameters类新实例来创建新参数数据库也很简单。  以下代码演示了如何创建一个新的参数数据库，并向其中添加一对整数值和浮点值参数：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>Parameters <span style="color:#a6e22e">parameters</span>(<span style="color:#e6db74">&#34;my_parameters&#34;</span>);
+my_parameters.add(<span style="color:#e6db74">&#34;foo&#34;</span>, <span style="color:#ae81ff">3</span>);
+my_parameters.add(<span style="color:#e6db74">&#34;bar&#34;</span>, <span style="color:#ae81ff">0.1</span>);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+my_parameters <span style="color:#f92672">=</span> Parameters(<span style="color:#e6db74">&#34;my_parameters&#34;</span>)
+my_parameters<span style="color:#f92672">.</span>add(<span style="color:#e6db74">&#34;foo&#34;</span>, <span style="color:#ae81ff">3</span>)
+my_parameters<span style="color:#f92672">.</span>add(<span style="color:#e6db74">&#34;bar&#34;</span>, <span style="color:#ae81ff">0.1</span>)
+</code></pre></div><p>参数数据库类似于Python接口中的字典类。 用户可以遍历键，值和项：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+<span style="color:#66d9ef">for</span> key, value <span style="color:#f92672">in</span> parameters<span style="color:#f92672">.</span>items():
+    <span style="color:#66d9ef">print</span> key, value
+</code></pre></div><p>Python字典也可以用于更新参数数据库：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">//</span> Python code
+d <span style="color:#f92672">=</span> dict(num_threads<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>, krylov_solver<span style="color:#f92672">=</span>dict(absolute_tolerance<span style="color:#f92672">=</span><span style="color:#ae81ff">1e-6</span>))
+parameters<span style="color:#f92672">.</span>update(d)
+</code></pre></div><p>也可以在Python接口中以更紧凑的方式创建参数数据库：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">//</span> Python code
+my_parameters <span style="color:#f92672">=</span> Parameters(<span style="color:#e6db74">&#34;my_parameters&#34;</span>, foo<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, bar<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>,
+                           nested<span style="color:#f92672">=</span>Parameters(<span style="color:#e6db74">&#34;nested&#34;</span>, baz<span style="color:#f92672">=</span>True))
+</code></pre></div><p><strong>解析命令行参数</strong>。  命令行参数可以解析到全局参数数据库或任何其他参数数据库。  以下代码说明了如何在C++和Python中解析命令行参数，以及如何将命令行参数传递给程序：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> argv[])
+{
+    ...
+    parameters.parse(argc, argv);
+    ...
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+parameters<span style="color:#f92672">.</span>parse()
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Bash code</span>
+python myprogram.py --num_threads <span style="color:#ae81ff">8</span> --allow_extrapolation true
+</code></pre></div><p><strong>存储参数至文件</strong>。  将参数值存储到文件中可能很有用，例如，记录哪些参数值用于运行模拟或重用上一次运行中的一组参数值。  以下代码说明了如何向DOLFIN XML文件中写入参数值，然后从中读取参数值：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">// C++ code
+</span><span style="color:#75715e"></span>File <span style="color:#a6e22e">file</span>(<span style="color:#e6db74">&#34;parameters.xml&#34;</span>);
+file <span style="color:#f92672">&lt;&lt;</span> parameters;
+file <span style="color:#f92672">&gt;&gt;</span> parameters;
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Python code</span>
+file <span style="color:#f92672">=</span> File(<span style="color:#e6db74">&#34;parameters.xml&#34;</span>)
+file <span style="color:#f92672">&lt;&lt;</span> parameters
+file <span style="color:#f92672">&gt;&gt;</span> parameters
+</code></pre></div><p>在启动时，DOLFIN自动扫描当前目录和用户主目录（按此顺序）中的目录<code>.config/fenics</code>以查找名为<code>dolfin_parameters.xml</code>的文件。  如果找到，这些参数将被读入DOLFIN的全局参数数据库。</p>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93">章节目录</a>】</p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0118/">
+    下一页<br>DOLFIN：C&#43;&#43;/Python有限元库》注记【翻译】
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0116/">
+      上一页<br>DOLFIN：C&#43;&#43;/Python有限元库》变分问题/文件/可视化【翻译】
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/fem/0117.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/fem/0117.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ii实现10dolfincpython有限元库日志诊断参数">II.实现》10.DOLFIN：C++/Python有限元库》日志/诊断/参数</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#10312-日志诊断">10·3·12 日志／诊断</a></li>
+            <li><a href="#10313-参数">10·3·13 参数</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

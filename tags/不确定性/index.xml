@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>不确定性 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/tags/%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7/</link>
+    <description>Recent content in 不确定性 on 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>一切都是我的</copyright>
+    <lastBuildDate>Thu, 20 Jun 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2.1 导论</title>
+      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0030/</link>
+      <pubDate>Thu, 20 Jun 2019 20:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0030/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;概率论只不过是把常识归纳为计算问题。 - 皮埃尔·拉普拉斯，1812年&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在前一章中，我们看到了概率如何在机器学习中发挥有用的作用。 在本章中，我们将更详细地讨论概率论。 我们没有足够的空间来详细说明 - 为此，你最好查阅一些关于这个主题的优秀教科书，例如（Jaynes 2003; Bertsekas和Tsitsiklis 2008; Wasserman 2004）。 但我们将简要回顾一下您在后面章节中需要的许多关键想法。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

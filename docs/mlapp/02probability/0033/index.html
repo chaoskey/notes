@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="2.4 一些常见的连续分布"><meta property="og:title" content="2.4 一些常见的连续分布" />
+<meta property="og:description" content="返回本章目录
+在本节中，我们展现了一些常用的单变量（一维）连续概率分布。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0033/" />
+<meta property="article:published_time" content="2019-06-23T20:20:35+08:00" />
+<meta property="article:modified_time" content="2019-06-23T20:20:35+08:00" />
+<title>2.4 一些常见的连续分布 | 学习笔记</title>
+<link rel="icon" href="/notes/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+
+
+<script defer src="/notes/cn.search.min.d1c6aa77add781ac6d33c28dc2572e4eda52fc8fd7f5a629c4ac0c43eaf39ed2.js" integrity="sha256-0caqd63XgaxtM8KNwlcuTtpS/I/X9aYpxKwMQ&#43;rzntI="></script>
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/notes"><img src="/notes/logo.png" alt="Logo" /><span>学习笔记</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="搜索" aria-label="搜索" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+<ul>
+<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
+<li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
+<li><a href="/notes/docs/theophy/"><strong>理论物理学习笔记</strong></a></li>
+<li><a href="/notes/docs/diffgeo/"><strong>微分几何笔记</strong></a></li>
+<li><a href="/notes/docs/mlapp/"><strong>机器学习：概率视角</strong></a>
+<ul>
+<li><a href="/notes/docs/mlapp/01introduction/">第一章 导论</a></li>
+<li><a href="/notes/docs/mlapp/02probability/">第二章 概率</a></li>
+<li><a href="/notes/docs/mlapp/03generative_models_for_discrete_data/">第三章 基于离散数据的生成式模型</a></li>
+<li><a href="/notes/docs/mlapp/04gaussian_models/">第四章 高斯模型</a></li>
+<li><a href="/notes/docs/mlapp/05bayesian_statistics/">第五章 贝叶斯统计</a></li>
+<li><a href="/notes/docs/mlapp/06frequentist_statistics/">第六章 频率派统计</a></li>
+<li><a href="/notes/docs/mlapp/07linear_regression/">第七章 线性回归</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/apm/"><strong>主动投资组合管理</strong></a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/notes/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>2.4 一些常见的连续分布</strong>
+
+  <label for="toc-control">
+    <img src="/notes/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#241-高斯正态分布">2.4.1 高斯（正态）分布</a></li>
+        <li><a href="#242-退化pdf">2.4.2 退化pdf</a></li>
+        <li><a href="#243-拉普拉斯分布">2.4.3 拉普拉斯分布</a></li>
+        <li><a href="#244-伽玛分布">2.4.4 伽玛分布</a></li>
+        <li><a href="#245-贝塔分布">2.4.5 贝塔分布</a></li>
+        <li><a href="#246-帕累托分布">2.4.6 帕累托分布</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0034/">
+    下一页<br>2.5 联合概率分布
+  </a>
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0032/">
+      上一页<br>2.3 一些常见的离散分布
+  </a>
+  
+</nav>
+
+<hr>
+
+<article class="markdown">
+  <h1>
+    <a href="/notes/docs/mlapp/02probability/0033/">2.4 一些常见的连续分布</a>
+  </h1>
+  
+
+<div>
+
+  <h5>2019-06-23</h5>
+
+
+<div>
+
+  
+    |
+    
+      <a href="/notes/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">机器学习</a>
+      
+    |
+  
+
+  
+    |
+    
+      <a href="/notes/tags/%E5%88%86%E5%B8%83">分布</a>
+      
+    |
+  
+
+
+
+
+    <a href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/02probability/0033.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      评论
+    </a>
+
+
+</div>
+
+
+</div>
+
+<p><a href="/notes/docs/mlapp/02probability/"><strong>返回本章目录</strong></a></p>
+<p>在本节中，我们展现了一些常用的单变量（一维）连续概率分布。</p>
+<h2 id="241-高斯正态分布">2.4.1 高斯（正态）分布</h2>
+<p>统计学和机器学习中使用最广泛的分布是高斯分布或正态分布。 它的pdf是</p>
+
+  
+    
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
+    
+    <script defer src="https://cdn.bootcss.com/KaTeX/0.11.1/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body,
+                {delimiters: [{left: '$$\n', right: '\n$$', display: true}, {left: '$$', right: '$$', display: false}, 
+                              {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+    
+  
+
+
+
+
+<span class="katex">
+  \[
+\mathcal{N}(x|\mu,\sigma^2) \overset{\Delta}{=} \dfrac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{1}{2\sigma^2}(x-\mu)^2}   \tag{2.43}
+\]
+</span>
+
+<p>这里
+
+
+<span class="katex">
+  \(\mu = \mathbb{E} [X]\)
+</span>
+是均值（和众数），
+
+
+<span class="katex">
+  \(\sigma^2= {\rm var} [X]\)
+</span>
+是方差。 
+
+
+<span class="katex">
+  \(\sqrt{2 \pi \sigma^2}\)
+</span>
+是确保密度积分为1的归一化常数（见练习2.11）。</p>
+<p>我们用
+
+
+<span class="katex">
+  \(X \sim \mathcal{N}(\mu,\sigma^2)\)
+</span>
+来表示
+
+
+<span class="katex">
+  \(p(X=x)=\mathcal{N}(x |\mu,\sigma^2)\)
+</span>
+。 如果
+
+
+<span class="katex">
+  \(X \sim \mathcal{N}(0,1)\)
+</span>
+，则说
+
+
+<span class="katex">
+  \(X\)
+</span>
+服从<strong>标准正态分布</strong>。 有关此pdf的绘制参见图2.3（b）; 有时被称为<strong>钟形曲线</strong>。</p>
+<p>我们经常谈的高斯<strong>精度</strong>，指的是逆方差：
+
+
+<span class="katex">
+  \(\lambda = 1 /\sigma^2\)
+</span>
+。 高精度意味着以
+
+
+<span class="katex">
+  \(\mu\)
+</span>
+为中心的窄分布（低方差）。</p>
+<p>请注意，由于这是一个pdf，可以有
+
+
+<span class="katex">
+  \(p(x)> 1\)
+</span>
+。为了看到这一点，考虑计算其中心
+
+
+<span class="katex">
+  \(x=\mu\)
+</span>
+的密度。 我们有
+
+
+<span class="katex">
+  \(N(\mu|\mu,\sigma^2)=(\sigma \sqrt{2 \pi})^{-1} e^0\)
+</span>
+，所以如果
+
+
+<span class="katex">
+  \(\sigma<1 /\sqrt{2\pi}\)
+</span>
+，我们有
+
+
+<span class="katex">
+  \(p(x)>1\)
+</span>
+。</p>
+<p>高斯的累积分布函数或cdf定义为</p>
+
+
+
+<span class="katex">
+  \[
+\Phi(x;\mu,\sigma^2) \overset{\Delta}{=} \int_{-\infty}^x{\mathcal{N}(z|\mu,\sigma^2)dz}   \tag{2.44}
+\]
+</span>
+
+<p>当
+
+
+<span class="katex">
+  \(\mu = 0,\sigma^2= 1\)
+</span>
+ 时，cdf绘制见图2.3（a）。该积分没有封闭形式表达式，但内置于大多数软件包中。 特别是，我们可以根据<strong>误差函数</strong>（<strong>erf</strong>）计算它：</p>
+
+
+
+<span class="katex">
+  \[
+\Phi(x;\mu,\sigma^2) = \dfrac{1}{2}[1+{\rm erf}(z/\sqrt{z})]  \tag{2.45}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(z = (x-\mu)/\sigma\)
+</span>
+ 及</p>
+
+
+
+<span class="katex">
+  \[
+{\rm erf}(x)\overset{\Delta}{=}\dfrac{2}{\sqrt{\pi}}\int_0^x{e^{-t^2}dt}   \tag{2.46}
+\]
+</span>
+
+<p>高斯分布是统计学中使用最广泛的分布。 有几个原因。 首先，它有两个易于解释的参数，它们捕获分布的一些最基本的属性，即它的均值和方差。 其次，中心极限定理（第2.6.3节）告诉我们，独立随机变量的总和近似高斯分布，使其成为建模残差或“噪声”的良好选择。 第三，高斯分布假设具有最小数量的假设（具有最大熵），受限于具有指定的均值和方差，如第9.2.6节所示; 这使它在许多情况下成为一个很好的默认选择。 最后，它有一个简单的数学形式，这导致易于实现，但通常是高效的方法(我们将看到)。 参见（Jaynes 2003，第7章）有关高斯如此广泛使用的更多讨论。</p>
+<h2 id="242-退化pdf">2.4.2 退化pdf</h2>
+<p>在
+
+
+<span class="katex">
+  \(\sigma^2 \to 0\)
+</span>
+的极限中，高斯变为以
+
+
+<span class="katex">
+  \(\mu\)
+</span>
+为中心的无限高且无限薄的“尖峰”：</p>
+
+
+
+<span class="katex">
+  \[
+\lim_{\sigma^2 \to 0} \mathcal{N}(x|\mu,\sigma^2) = \delta(x-\mu)   \tag{2.47}
+\]
+</span>
+
+<p>其中δ称为<strong>狄拉克函数</strong>，定义为</p>
+
+
+
+<span class="katex">
+  \[
+\delta(x)=\left\{
+\begin{aligned}
+\infty \quad & if \quad x=0 \\
+0 \quad & if \quad x \ne 0 \\
+\end{aligned}
+\right.   \tag{2.48}
+\]
+</span>
+
+<p>满足</p>
+
+
+
+<span class="katex">
+  \[
+\int_{-\infty}^{+\infty} {\delta(x)dx}=1   \tag{2.49}
+\]
+</span>
+
+<p>delta函数的一个有用性质是<strong>筛选属性</strong>(<strong>sifting property</strong>)，它从求和或积分中选择一个单独项：</p>
+
+
+
+<span class="katex">
+  \[
+\int_{-\infty}^{+\infty} {f(x)\delta(x-\mu)dx}=f(\mu)   \tag{2.50}
+\]
+</span>
+
+<p>因为被积函数只在
+
+
+<span class="katex">
+  \(x=\mu\)
+</span>
+处非零。</p>
+<p>高斯分布的一个问题是它对异常值敏感，因为对数概率仅随距离中心的距离而平方衰减。 更稳健的分布是<strong>学生t分布</strong>，其pdf如下：</p>
+
+
+
+<span class="katex">
+  \[
+\mathcal{T}(x|\mu,\sigma^2,\upsilon) \propto \left[1+\dfrac{1}{\upsilon}\left(\dfrac{x-\mu}{\sigma}\right)^2\right]^{-(\frac{\upsilon+1}{2})}    \tag{2.51}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(\mu\)
+</span>
+是均值，
+
+
+<span class="katex">
+  \(\sigma^2> 0\)
+</span>
+是比例参数，
+
+
+<span class="katex">
+  \(\upsilon> 0\)
+</span>
+称为<strong>自由度</strong>。 参见图2.7。 供以后参考，我们注意到该分布具有以下属性：</p>
+
+
+
+<span class="katex">
+  \[
+{\rm mean}=\mu,  {\rm mode}=\mu, {\rm var}=\dfrac{\upsilon \sigma^2}{(\upsilon-2)}  \tag{2.52}
+\]
+</span>
+
+<p>仅在
+
+
+<span class="katex">
+  \(\upsilon > 2\)
+</span>
+ 时方差才有定义。仅在
+
+
+<span class="katex">
+  \(\upsilon> 1\)
+</span>
+时均值才有定义。</p>
+<p><img src="" alt="0048.jpg"></p>
+<blockquote>
+<p>图2.7 （a）对于
+
+
+<span class="katex">
+  \(\mathcal{N}(0,1)\)
+</span>
+，
+
+
+<span class="katex">
+  \(\mathcal{T}(0,1,1)\)
+</span>
+和
+
+
+<span class="katex">
+  \({\rm Lap}(0,1/\sqrt{2})\)
+</span>
+的pdf。 对于高斯和拉普拉斯，其均值都为0并且其方差都为1。 当
+
+
+<span class="katex">
+  \(\upsilon= 1\)
+</span>
+时，学生的均值和方差是不确定的。（b）这些pdf的对数。 请注意，对于任何参数值，学生分布都不是对数凹的，不像拉普拉斯分布，它总是对数凹（和对数凸&hellip;）然而，两者都是单峰的。 由_studentLaplacePdfPlot_生成的图。</p>
+</blockquote>
+<p>为了说明学生分布的稳健性，请考虑图2.8。 在左侧，我们显示高斯和学生都适合某些数据，没有异常值。 在右边，我们添加了一些异常值。 我们看到高斯受到很大影响，而学生分布几乎没有变化。 这是因为学生有更重的尾巴，至少对于小的
+
+
+<span class="katex">
+  \(\upsilon\)
+</span>
+（见图2.7）。</p>
+<p><img src="" alt="0049.jpg"></p>
+<blockquote>
+<p>图2.8 异常值对拟合高斯，学生和拉普拉斯分布的影响的例证。 （a）没有异常值（高斯和学生曲线相互叠加）。 （b）有异常值。 我们看到高斯更多地受到异常值的影响而不是学生和拉普拉斯分布。 基于（Bishop 2006a）的图2.16。 由_robustDemo_生成的图。</p>
+</blockquote>
+<p>如果
+
+
+<span class="katex">
+  \(\upsilon= 1\)
+</span>
+，则该分布称为<strong>柯西</strong>或<strong>洛伦兹</strong>分布。 这是值得注意的是，具有如此重的尾部使得定义均值的积分不会收敛。</p>
+<p>为了确保有限方差，我们要求
+
+
+<span class="katex">
+  \(\upsilon> 2\)
+</span>
+。通常使用
+
+
+<span class="katex">
+  \(\upsilon= 4\)
+</span>
+，这样就能在一系列问题中表现出良好的性能（Lange等，1989）。 对于
+
+
+<span class="katex">
+  \(\upsilon \gg 5\)
+</span>
+ ，学生分布快速接近高斯分布并失去其稳健性(鲁棒性)。</p>
+<h2 id="243-拉普拉斯分布">2.4.3 拉普拉斯分布</h2>
+<p>具有重尾的另一种分布是<strong>拉普拉斯分布</strong> ，也称为<strong>双侧指数分布</strong>。 有以下pdf：</p>
+
+
+
+<span class="katex">
+  \[
+{\rm Lap}(x|\mu,b) \overset{\Delta}{=}\dfrac{1}{2b} \exp\left(-\dfrac{|x-\mu|}{b}\right)   \tag{2.53}
+\]
+</span>
+
+<p>这里
+
+
+<span class="katex">
+  \(\mu\)
+</span>
+是位置参数，
+
+
+<span class="katex">
+  \(b> 0\)
+</span>
+是比例参数。 有关绘图参见图2.7。 此分布具有以下性质：</p>
+
+
+
+<span class="katex">
+  \[
+{\rm mean}=\mu, {\rm mode}=\mu, {\rm var}=2b^2   \tag{2.54}
+\]
+</span>
+
+<p>它对异常值的稳健性如图2.8所示。 它还比高斯将更多的概率密度设置为0。 这个性质是在模型中增强稀疏的有用方法，我们将在第13.3节中看到。</p>
+<h2 id="244-伽玛分布">2.4.4 伽玛分布</h2>
+<p><strong>伽玛分布</strong>是对正实值随机变量
+
+
+<span class="katex">
+  \(x>0\)
+</span>
+的灵活分布。它是根据两个参数定义的，称为形状
+
+
+<span class="katex">
+  \(a> 0\)
+</span>
+且比率
+
+
+<span class="katex">
+  \(b> 0\)
+</span>
+ ：</p>
+
+
+
+<span class="katex">
+  \[
+{\rm Ga}(T|{\rm shap}=a,{\rm rate}=b)\overset{\Delta}{=}\dfrac{b^2}{\Gamma(a)}T^{a-1}e^{-Tb}   \tag{2.55}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(\Gamma(a)\)
+</span>
+是伽马函数：</p>
+
+
+
+<span class="katex">
+  \[
+\Gamma(x) \overset{\Delta}{=} \int_0^\infty {u^{x-1}e^{-u}du} \tag{2.56}
+\]
+</span>
+
+<p>参见图2.9。 供以后参考，我们注意到该分布具有以下属性：</p>
+
+
+
+<span class="katex">
+  \[
+{\rm mean}=\dfrac{a}{b},{\rm mode}=\dfrac{a-1}{b},{\rm var}=\dfrac{a}{b^2}    \tag{2.57}
+\]
+</span>
+
+<p><img src="" alt="0050.jpg"></p>
+<blockquote>
+<p>图2.9 （a）一些
+
+
+<span class="katex">
+  \({\rm Ga}(a,b = 1)\)
+</span>
+分布。 如果
+
+
+<span class="katex">
+  \(a \le 1\)
+</span>
+，则众数为0，否则为
+
+
+<span class="katex">
+  \(> 0\)
+</span>
+。当我们增加速率b时，可以减小水平尺度，从而向左和向上挤压一切。 由_gammaPlotDemo_生成的图。 （b）一些降雨数据的经验pdf，叠加了拟合的Gamma分布。 由_gammaRainfallDemo_生成的图。</p>
+</blockquote>
+<p>有几种分布只是Gamma的特殊情况，我们将在下面讨论。</p>
+<ul>
+<li><strong>指数分布</strong> 这由
+
+
+<span class="katex">
+  \({\rm Expon}(x | \lambda) \overset{\Delta}{=} {\rm Ga}(x | 1, \lambda)\)
+</span>
+定义，其中
+
+
+<span class="katex">
+  \(\lambda\)
+</span>
+ 是速率参数。 该分布描述了泊松过程中事件之间的时间，即事件以恒定平均速率
+
+
+<span class="katex">
+  \(\lambda\)
+</span>
+连续且独立地发生的过程。</li>
+<li><strong>Erlang分布</strong> 与伽马分布相同，其中
+
+
+<span class="katex">
+  \(a\)
+</span>
+是整数。 固定
+
+
+<span class="katex">
+  \(a = 2\)
+</span>
+是常见的，产生单参数Erlang分布，
+
+
+<span class="katex">
+  \({\rm Erlang}(x |\lambda) = {\rm Ga}(x | 2, \lambda)\)
+</span>
+，其中
+
+
+<span class="katex">
+  \(\lambda\)
+</span>
+是速率参数。</li>
+<li><strong>卡方分布</strong> 由
+
+
+<span class="katex">
+  \(\chi^2(x |\upsilon) \overset{\Delta}{=} {\rm Ga}(x |\frac{\upsilon}{2},\frac{1}{2})\)
+</span>
+ 定义。 这是平方高斯随机变量之和的分布。 更确切地说，如果
+
+
+<span class="katex">
+  \(Z_i \sim \mathcal{N}(0,1)\)
+</span>
+ ，并且
+
+
+<span class="katex">
+  \(S =\sum_{i= 1}^\upsilon{Z_i^2}\)
+</span>
+ ，那么
+
+
+<span class="katex">
+  \(S \sim \chi_\upsilon^2\)
+</span>
+。</li>
+</ul>
+<p>另一个有用的结果如下：如果
+
+
+<span class="katex">
+  \(X \sim {\rm Ga}(a,b)\)
+</span>
+，则可以证明（练习2.10）
+
+
+<span class="katex">
+  \(\frac{1}{X} \sim {\rm IG}(a,b)\)
+</span>
+，其中
+
+
+<span class="katex">
+  \({\rm IG}\)
+</span>
+是由下式定义的<strong>反伽马分布</strong>：</p>
+
+
+
+<span class="katex">
+  \[
+{\rm IG}(x|{\rm shape}=a, {\rm scale}=b)\overset{\Delta}{=}\dfrac{b^2}{\Gamma(a)}x^{-(a+1)}e^{-b/x}   \tag{2.58}
+\]
+</span>
+
+<p>分布具有这些性质</p>
+
+
+
+<span class="katex">
+  \[
+{\rm mean}=\dfrac{b}{a-1}, {\rm mode}=\dfrac{b}{a+1},{\rm var}=\dfrac{b^2}{(a-1)^2(a-2)}   \tag{2.59}
+\]
+</span>
+
+<p>均值只在
+
+
+<span class="katex">
+  \(a> 1\)
+</span>
+时存在。方差仅在
+
+
+<span class="katex">
+  \(a> 2\)
+</span>
+时存在。</p>
+<p>稍后我们将看到这些分布的应用。</p>
+<h2 id="245-贝塔分布">2.4.5 贝塔分布</h2>
+<p><strong>贝塔分布</strong>支持区间[0,1]，并定义如下：</p>
+
+
+
+<span class="katex">
+  \[
+{\rm Beta}(x|a,b)=\dfrac{1}{B(a,b)}x^{a-1}(1-x)^{b-1}  \tag{2.60}
+\]
+</span>
+
+<p>其中
+
+
+<span class="katex">
+  \(B(a,b)\)
+</span>
+是贝塔函数，</p>
+
+
+
+<span class="katex">
+  \[
+B(a,b)\overset{\Delta}{=}\dfrac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}   \tag{2.61}
+\]
+</span>
+
+<p>有关一些贝塔分布，参见图2.10。 我们要求
+
+
+<span class="katex">
+  \(a,b> 0\)
+</span>
+以确保分布是可积的（即，确保
+
+
+<span class="katex">
+  \(B(a,b)\)
+</span>
+存在）。 如果
+
+
+<span class="katex">
+  \(a = b = 1\)
+</span>
+，我们得到均匀分布。 如果a和b都小于1，我们得到双峰分布，其中“尖峰”为0和1; 如果a和b都大于1，则得到单峰分布。 为了以后的参考，我们注意到该分布具有以下属性（练习2.16）：</p>
+
+
+
+<span class="katex">
+  \[
+{\rm mean}=\dfrac{a}{a+b},{\rm mode}=\dfrac{a-1}{a+b-2},{\rm var}=\dfrac{a b}{(a+b)^2(a+b+1)}    \tag{2.62}
+\]
+</span>
+
+<p><img src="" alt="0051.jpg"></p>
+<blockquote>
+<p>图2.10 一些贝塔分布。 由_betaPlotDemo_生成的图。</p>
+</blockquote>
+<h2 id="246-帕累托分布">2.4.6 帕累托分布</h2>
+<p><strong>帕累托分布</strong>用于模拟表现出<strong>长尾</strong>(<strong>重尾</strong>)量的分布。 例如，已经观察到英语中最频繁的单词（“the”）出现的频率大约是第二个最频繁的单词（“of”）的两倍，其发生频率是第四个最频繁的单词的两倍，等等。 如果我们绘制单词的频率与他们的等级，我们将得到一个幂律; 这被称为<strong>齐夫定律</strong>(<strong>Zipf’s law</strong>)。 财富有类似的偏差分布，特别是在美国这样的富豪中 。</p>
+<p>帕累托的pdf定义如下：</p>
+
+
+
+<span class="katex">
+  \[
+{\rm Pareto}(x|k,m)=k m^k x^{-(k+1)}\mathbb{I}(x \ge m)  \tag{2.63}
+\]
+</span>
+
+<p>这个密度断言
+
+
+<span class="katex">
+  \(x\)
+</span>
+必须大于某个常数
+
+
+<span class="katex">
+  \(m\)
+</span>
+，但不能太大，其中
+
+
+<span class="katex">
+  \(k\)
+</span>
+控制的是“太多”。 当
+
+
+<span class="katex">
+  \(k \to \infty\)
+</span>
+时，分布接近
+
+
+<span class="katex">
+  \(\delta(x-m)\)
+</span>
+。 参见图2.11（a）。 如果我们在对数-对数标度上绘制分布，它形成一条直线，形如
+
+
+<span class="katex">
+  \(\log p(x)=a \log x +c\)
+</span>
+, 其中a和c是常数。 有关说明参见图2.11（b）（这称为<strong>幂律</strong>）。 此分布具有以下属性</p>
+
+
+
+<span class="katex">
+  \[
+{\rm mean}=\dfrac{k m}{k-1}\quad if \quad k>1,  {\rm mode}=m, {\rm var}=\dfrac{m^2 k}{(k-1)^2(k-2)} \quad if \quad k>2  \tag{2.64}
+\]
+</span>
+
+<p><img src="" alt="0052.jpg"></p>
+<blockquote>
+<p>图2.11 （a）帕累托分布
+
+
+<span class="katex">
+  \({\rm Pareto}(x | m,k)（,m = 1\)
+</span>
+ 。（b）对数-对数刻度上的pdf。 由_paretoPlot_生成的图。</p>
+</blockquote>
+<p><a href="/notes/docs/mlapp/02probability/"><strong>返回本章目录</strong></a></p></article>
+
+<hr>
+
+<nav class="post-pagination">
+  
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0034/">
+    下一页<br>2.5 联合概率分布
+  </a>
+  
+  
+  
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0032/">
+      上一页<br>2.3 一些常见的离散分布
+  </a>
+  
+</nav>
+
+ 
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://gitee.com/chaoskey/notes/blob/master/content/docs/mlapp/02probability/0033.md#blob-comment" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Comment" />
+      <span>评论</span>
+    </a>
+  </div>
+  
+  
+  <div>
+    <a class="flex align-center" href="https://gitee.com/-/ide/project/chaoskey/notes/edit/master/-/content/docs/mlapp/02probability/0033.md" target="_blank" rel="noopener">
+      <img src="/notes/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>编辑本页</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+  
+      </footer>
+      
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#241-高斯正态分布">2.4.1 高斯（正态）分布</a></li>
+        <li><a href="#242-退化pdf">2.4.2 退化pdf</a></li>
+        <li><a href="#243-拉普拉斯分布">2.4.3 拉普拉斯分布</a></li>
+        <li><a href="#244-伽玛分布">2.4.4 伽玛分布</a></li>
+        <li><a href="#245-贝塔分布">2.4.5 贝塔分布</a></li>
+        <li><a href="#246-帕累托分布">2.4.6 帕累托分布</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
