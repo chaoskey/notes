@@ -21,6 +21,8 @@ tags: ["hugo","码云","obsidian","markdown","latex"]
 >
 > 本笔记系统是我自用，仅供参考。
 
+<!--more-->
+
 ## 回顾基于Typora＋Hugo＋Gitee的笔记系统
 
 改进后的笔记系统，支持形如```[[...]]```以及```![[...]]```的双向链接（后者支持图片），自然就支持`Obsidian`； 如果你不使用双向链接，也可以使用`Typora`（甚至任意文本编辑器）。 所以`Typora＋Hugo＋Gitee的笔记系统`是基础，具体使用方法参见我的笔记主页：[https://gitee.com/chaoskey/notes](https://gitee.com/chaoskey/notes)。此处不再多说！

@@ -5,7 +5,7 @@ type: docs
 
 ----------
 
-## 站点维护记录
+## 杂事记录
 [<img src="/notes/link.jpg" width="20" height="20"/>]({{< relref "/posts" >}})
 
 {{< columns >}}
@@ -34,14 +34,15 @@ type: docs
 - [[docs/fem/_index#第五章 有限元变分形式|第五章 有限元变分形式]]
 - [[docs/fem/_index#第六章 有限元组装|第六章 有限元组装]]
 - [[docs/fem/_index#第七章 有限元变分形式的正交表示|第七章 有限元变分形式的正交表示]]    
+- [[docs/fem/_index#第八章 有限元变分形式的张量表示|第八章 有限元变分形式的张量表示]]    
 
 <--->    
 
-- [[docs/fem/_index#第八章 有限元变分形式的张量表示|第八章 有限元变分形式的张量表示]]    
 - [[docs/fem/_index#第九章 有限元矩阵计算的离散优化|第九章 有限元矩阵计算的离散优化]] 
 - [[docs/fem/_index#第十章 DOLFIN：C＋＋／Python有限元库|第十章 DOLFIN：C＋＋／Python有限元库]]   
 - [[docs/fem/_index#第十七章 UFL：有限元形式语言|第十七章 UFL：有限元形式语言]]   
 - [[docs/fem/_index#第十八章 Unicorn：统一的连续介质力学求解器|第十八章 Unicorn：统一的连续介质力学求解器]]
+- [[docs/fem/_index#第二十章 不可压缩流体的有限元|第二十章 不可压缩流体的有限元]]
 
 {{< /columns >}}
 
