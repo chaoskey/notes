@@ -6,7 +6,17 @@
     <description>Recent content in 索引 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Sun, 21 Feb 2021 11:24:41 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Mar 2021 09:41:03 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>不可压缩流体的有限元【翻译】</title>
+      <link>https://chaoskey.gitee.io/notes/docs/fem/0127/</link>
+      <pubDate>Mon, 01 Mar 2021 09:41:03 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/docs/fem/0127/</guid>
+      <description>&lt;h1 id=&#34;iii应用20不可压缩流体的有限元&#34;&gt;III·应用》20.不可压缩流体的有限元&lt;/h1&gt;
+&lt;p&gt;有限元方法的结构为用户提供了一个选择范围。 对于解决不可压缩的流体问题尤其如此，因为理论上指出了许多稳定的有限元公式。 我们使用自动化工具来实现和检查稳态Stokes方程的各种稳定公式。 事实证明，FEniCS项目组件的表达能力使Stokes问题的求解器可以轻松创建使用各种单元公式。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Unicorn：统一的连续介质力学求解器（下）【翻译】</title>
       <link>https://chaoskey.gitee.io/notes/docs/fem/0126/</link>
@@ -60,20 +70,14 @@
       <pubDate>Thu, 18 Feb 2021 11:04:32 +0800</pubDate>
       
       <guid>https://chaoskey.gitee.io/notes/posts/%E5%9F%BA%E4%BA%8EObsidianHugoGitee%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/</guid>
-      <description>本文基于Typora＋Hugo＋Gitee的笔记系统，仅把Typora改成Obsidian而已。
-Obsidian是一个强大的知识库，可在纯文本Markdown文件的本地文件夹上运行。 支持双向链接（Roam Link）。
-通过gitee可实现云同步；通过gitee pages可以发布成网页。
-但是，Hugo无法解析Obsidian的双向链接，解决这个问题是本文的目标。
-【解决方案】 我通过shell脚本和Hugo短代码的配合解决这个问题。 通过shell脚本将Obsidian的双向链接转换成Hugo可以识别的自定义格式；Hugo短代码则负责解析这种自定义格式。
-本笔记系统是我自用，仅供参考。
- 回顾基于Typora＋Hugo＋Gitee的笔记系统 改进后的笔记系统，支持形如[[...]]以及![[...]]的双向链接（后者支持图片），自然就支持Obsidian； 如果你不使用双向链接，也可以使用Typora（甚至任意文本编辑器）。 所以Typora＋Hugo＋Gitee的笔记系统是基础，具体使用方法参见我的笔记主页：https://gitee.com/chaoskey/notes。此处不再多说！
-用Hugo短代码获得目标页面路径 使用方式 在md文件中需要的地方插入：{{&amp;lt; roamlink &amp;quot;docs/fem/_index#第五章 有限元变分形式&amp;quot; &amp;gt;}} 。 能在插入的地方显示对应的页面相对路径，就我的笔记而言，结果是：/notes/docs/fem/#第五章-有限元变分形式。
-又比如：{{&amp;lt; roamlink &amp;quot;0097&amp;quot; &amp;gt;}} ， 就我的笔记而言，结果是：/notes/docs/fem/0097/。
-如果没有重复的文件名，无须指定路径，通过hugo自定义短代吗，可以获得实际的页面路径（如第2例）；如果有重复文件名，则需要指定更详细的相对路径（如第1例）。
-这种功能，就是为双向链接量身定制的，因为[[...]]或![[...]]可能只给出一个文件名，而非完整的路径。
-实现方式 具体代码（Hugo短代码）见项目文件： roamlink.html 。
-为了避免获取的页面路径含空格和换行符，代码被压缩成一行。为清晰起见，我见代码展开如下：
-{{ if gt (len .Params) 0 }} &amp;lt;!-- 输入解析 --&amp;gt; {{ $keys := (split (index .Params 0) &amp;#34;#&amp;#34;) }} {{ $tag := &amp;#34;&amp;#34; }} {{ if (gt (len $keys) 1) }} &amp;lt;!</description>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;本文基于&lt;code&gt;Typora＋Hugo＋Gitee的笔记系统&lt;/code&gt;，仅把&lt;code&gt;Typora&lt;/code&gt;改成&lt;code&gt;Obsidian&lt;/code&gt;而已。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Obsidian&lt;/code&gt;是一个强大的知识库，可在纯文本Markdown文件的本地文件夹上运行。 支持&lt;code&gt;双向链接&lt;/code&gt;（Roam Link）。&lt;/p&gt;
+&lt;p&gt;通过&lt;code&gt;gitee&lt;/code&gt;可实现云同步；通过&lt;code&gt;gitee pages&lt;/code&gt;可以发布成网页。&lt;/p&gt;
+&lt;p&gt;但是，&lt;code&gt;Hugo&lt;/code&gt;无法解析&lt;code&gt;Obsidian&lt;/code&gt;的&lt;code&gt;双向链接&lt;/code&gt;，解决这个问题是本文的目标。&lt;/p&gt;
+&lt;p&gt;【解决方案】 我通过&lt;code&gt;shell脚本&lt;/code&gt;和&lt;code&gt;Hugo短代码&lt;/code&gt;的配合解决这个问题。 通过&lt;code&gt;shell脚本&lt;/code&gt;将&lt;code&gt;Obsidian&lt;/code&gt;的&lt;code&gt;双向链接&lt;/code&gt;转换成&lt;code&gt;Hugo&lt;/code&gt;可以识别的自定义格式；&lt;code&gt;Hugo短代码&lt;/code&gt;则负责解析这种自定义格式。&lt;/p&gt;
+&lt;p&gt;本笔记系统是我自用，仅供参考。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>

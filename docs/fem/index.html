@@ -8,15 +8,15 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/" />
-<meta property="og:updated_time" content="2020-12-16T15:20:35+08:00" />
+
 <title>《有限元法自动求解微分方程》【翻译】 | 学习笔记</title>
 <link rel="icon" href="/notes/favicon.png" type="image/x-icon">
 
 
-<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+<link rel="stylesheet" href="/notes/book.min.0253b76936e9496c1a48e74d90cdc268fd0e96366c60a1f43994801cc334588a.css" integrity="sha256-AlO3aTbpSWwaSOdNkM3CaP0OljZsYKH0OZSAHMM0WIo=">
 
 
-<script defer src="/notes/cn.search.min.ae40ea0b51c8339faa91e6c7185b6b7a562a2c37dc01ce6818eaab312cbe1d25.js" integrity="sha256-rkDqC1HIM5&#43;qkebHGFtrelYqLDfcAc5oGOqrMSy&#43;HSU="></script>
+<script defer src="/notes/cn.search.min.f734b55049115fd51afdc9f74cd5d979d8ff31b218dc3721a5f645b9690cfef4.js" integrity="sha256-9zS1UEkRX9Ua/cn3TNXZedj/MbIY3DchpfZFuWkM/vQ="></script>
 
 <link rel="alternate" type="application/rss+xml" href="https://chaoskey.gitee.io/notes/docs/fem/index.xml" title="学习笔记" />
 <!--
@@ -70,7 +70,7 @@ https://github.com/alex-shpak/hugo-book
 
 
 <ul>
-<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/posts/"><strong>杂事记录</strong></a></li>
 <li><a href="/notes/docs/fem/"class=active><strong>有限元法自动求解微分方程</strong></a>
 <ul>
 <li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E6%96%B9%E6%B3%95">第二章 有限元方法</a></li>
@@ -84,6 +84,7 @@ https://github.com/alex-shpak/hugo-book
 <li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E7%AB%A0-dolfincpython%E6%9C%89%E9%99%90%E5%85%83%E5%BA%93">第十章 DOLFIN：C++/Python有限元库</a></li>
 <li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-ufl%E6%9C%89%E9%99%90%E5%85%83%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80">第十七章 UFL：有限元形式语言</a></li>
 <li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-unicorn%E7%BB%9F%E4%B8%80%E7%9A%84%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6%E6%B1%82%E8%A7%A3%E5%99%A8">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+<li><a href="/notes/docs/fem/#%e7%ac%ac%e4%ba%8c%e5%8d%81%e7%ab%a0-%e4%b8%8d%e5%8f%af%e5%8e%8b%e7%bc%a9%e6%b5%81%e4%bd%93%e7%9a%84%e6%9c%89%e9%99%90%e5%85%83">第二十章 不可压缩流体的有限元</a></li>
 </ul>
 </li>
 <li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
@@ -109,7 +110,7 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+  <script>(function(){var a=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
 
 
  
@@ -152,6 +153,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#第十章-dolfincpython有限元库">第十章 DOLFIN：C＋＋／Python有限元库</a></li>
         <li><a href="#第十七章-ufl有限元形式语言">第十七章 UFL：有限元形式语言</a></li>
         <li><a href="#第十八章-unicorn统一的连续介质力学求解器">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+        <li><a href="#第二十章-不可压缩流体的有限元">第二十章 不可压缩流体的有限元</a></li>
       </ul>
     </li>
   </ul>
@@ -760,6 +762,46 @@ https://github.com/alex-shpak/hugo-book
 
   </div>
   
+</div>
+
+<h2 id="第二十章-不可压缩流体的有限元">第二十章 不可压缩流体的有限元</h2>
+<div class="book-columns flex flex-wrap">
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li><a href="/notes/docs/fem/0127/">不可压缩流体的有限元</a>
+<ul>
+<li><a href="/notes/docs/fem/0127/#201-stokes%e6%96%b9%e7%a8%8b">20·1 Stokes方程</a></li>
+<li><a href="/notes/docs/fem/0127/#202-%e6%b7%b7%e5%90%88stokes%e9%97%ae%e9%a2%98%e7%9a%84%e6%9c%89%e9%99%90%e5%85%83%e5%85%ac%e5%bc%8f">20·2 混合Stokes问题的有限元公式</a>
+<ul>
+<li><a href="/notes/docs/fem/0127/#2021-%e5%9f%ba%e4%ba%8e%e5%85%bc%e5%ae%b9%e5%87%bd%e6%95%b0%e7%a9%ba%e9%97%b4%e7%9a%84%e5%85%ac%e5%bc%8f">20·2·1 基于兼容函数空间的公式</a></li>
+<li><a href="/notes/docs/fem/0127/#2022-%e5%8e%8b%e5%8a%9b%e7%a8%b3%e5%ae%9a%e6%b3%95">20·2·2 压力稳定法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
+  <div class="flex-even markdown-inner">
+    <ul>
+<li>
+<ul>
+<li><a href="/notes/docs/fem/0127/#203-%e6%83%a9%e7%bd%9a%e6%96%b9%e6%b3%95scottvogelius%e6%96%b9%e6%b3%95">20·3 惩罚方法：Scott–Vogelius方法</a></li>
+<li><a href="/notes/docs/fem/0127/#204-%e6%95%b0%e5%80%bc%e6%b5%8b%e8%af%95">20·4 数值测试</a>
+<ul>
+<li><a href="/notes/docs/fem/0127/#2041-%e6%a8%a1%e6%8b%9f%e8%ae%be%e7%bd%ae">20·4·1 模拟设置</a></li>
+<li><a href="/notes/docs/fem/0127/#2042-%e7%bb%93%e6%9e%9c">20·4·2 结果</a></li>
+</ul>
+</li>
+<li><a href="/notes/docs/fem/0127/#205-%e7%bb%93%e8%ae%ba">20·5 结论</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  
 </div></article>
  
 
@@ -820,6 +862,7 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#第十章-dolfincpython有限元库">第十章 DOLFIN：C＋＋／Python有限元库</a></li>
         <li><a href="#第十七章-ufl有限元形式语言">第十七章 UFL：有限元形式语言</a></li>
         <li><a href="#第十八章-unicorn统一的连续介质力学求解器">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+        <li><a href="#第二十章-不可压缩流体的有限元">第二十章 不可压缩流体的有限元</a></li>
       </ul>
     </li>
   </ul>

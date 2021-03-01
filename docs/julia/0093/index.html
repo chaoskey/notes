@@ -9,17 +9,18 @@
 本文用到了 python库scipy.spatial.Delaunay
 参考文献： https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/julia/0093/" />
-<meta property="article:published_time" content="2020-11-06T09:55:10+08:00" />
-<meta property="article:modified_time" content="2020-11-06T09:55:10+08:00" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/julia/0093/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2020-11-06T09:55:10&#43;08:00" />
+<meta property="article:modified_time" content="2020-11-06T09:55:10&#43;08:00" />
+
 <title>有限元之Delaunay三角剖分 | 学习笔记</title>
 <link rel="icon" href="/notes/favicon.png" type="image/x-icon">
 
 
-<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+<link rel="stylesheet" href="/notes/book.min.0253b76936e9496c1a48e74d90cdc268fd0e96366c60a1f43994801cc334588a.css" integrity="sha256-AlO3aTbpSWwaSOdNkM3CaP0OljZsYKH0OZSAHMM0WIo=">
 
 
-<script defer src="/notes/cn.search.min.ae40ea0b51c8339faa91e6c7185b6b7a562a2c37dc01ce6818eaab312cbe1d25.js" integrity="sha256-rkDqC1HIM5&#43;qkebHGFtrelYqLDfcAc5oGOqrMSy&#43;HSU="></script>
+<script defer src="/notes/cn.search.min.f734b55049115fd51afdc9f74cd5d979d8ff31b218dc3721a5f645b9690cfef4.js" integrity="sha256-9zS1UEkRX9Ua/cn3TNXZedj/MbIY3DchpfZFuWkM/vQ="></script>
 
 <!--
 Made with Book Theme
@@ -72,7 +73,7 @@ https://github.com/alex-shpak/hugo-book
 
 
 <ul>
-<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/posts/"><strong>杂事记录</strong></a></li>
 <li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a></li>
 <li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a>
 <ul>
@@ -113,7 +114,7 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+  <script>(function(){var a=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
 
 
  
@@ -300,53 +301,53 @@ println(<span style="color:#e6db74">&#34;【和前图图对照即可明白】</s
 </code></pre></div><pre><code>【和前图图对照即可明白】
 
 第1个三角形：[4, 10, 7]
-    此三角形的顶点4对面没有三角形邻居
-    此三角形的顶点10对面的邻居第5个三角形：[6, 4, 7]
-    此三角形的顶点7对面的邻居第11个三角形：[4, 8, 10]
+	此三角形的顶点4对面没有三角形邻居
+	此三角形的顶点10对面的邻居第5个三角形：[6, 4, 7]
+	此三角形的顶点7对面的邻居第11个三角形：[4, 8, 10]
 第2个三角形：[6, 2, 1]
-    此三角形的顶点6对面没有三角形邻居
-    此三角形的顶点2对面的邻居第3个三角形：[4, 6, 1]
-    此三角形的顶点1对面的邻居第4个三角形：[2, 6, 7]
+	此三角形的顶点6对面没有三角形邻居
+	此三角形的顶点2对面的邻居第3个三角形：[4, 6, 1]
+	此三角形的顶点1对面的邻居第4个三角形：[2, 6, 7]
 第3个三角形：[4, 6, 1]
-    此三角形的顶点4对面的邻居第2个三角形：[6, 2, 1]
-    此三角形的顶点6对面的邻居第6个三角形：[3, 4, 1]
-    此三角形的顶点1对面的邻居第5个三角形：[6, 4, 7]
+	此三角形的顶点4对面的邻居第2个三角形：[6, 2, 1]
+	此三角形的顶点6对面的邻居第6个三角形：[3, 4, 1]
+	此三角形的顶点1对面的邻居第5个三角形：[6, 4, 7]
 第4个三角形：[2, 6, 7]
-    此三角形的顶点2对面的邻居第5个三角形：[6, 4, 7]
-    此三角形的顶点6对面没有三角形邻居
-    此三角形的顶点7对面的邻居第2个三角形：[6, 2, 1]
+	此三角形的顶点2对面的邻居第5个三角形：[6, 4, 7]
+	此三角形的顶点6对面没有三角形邻居
+	此三角形的顶点7对面的邻居第2个三角形：[6, 2, 1]
 第5个三角形：[6, 4, 7]
-    此三角形的顶点6对面的邻居第1个三角形：[4, 10, 7]
-    此三角形的顶点4对面的邻居第4个三角形：[2, 6, 7]
-    此三角形的顶点7对面的邻居第3个三角形：[4, 6, 1]
+	此三角形的顶点6对面的邻居第1个三角形：[4, 10, 7]
+	此三角形的顶点4对面的邻居第4个三角形：[2, 6, 7]
+	此三角形的顶点7对面的邻居第3个三角形：[4, 6, 1]
 第6个三角形：[3, 4, 1]
-    此三角形的顶点3对面的邻居第3个三角形：[4, 6, 1]
-    此三角形的顶点4对面的邻居第7个三角形：[9, 3, 1]
-    此三角形的顶点1对面的邻居第12个三角形：[3, 8, 4]
+	此三角形的顶点3对面的邻居第3个三角形：[4, 6, 1]
+	此三角形的顶点4对面的邻居第7个三角形：[9, 3, 1]
+	此三角形的顶点1对面的邻居第12个三角形：[3, 8, 4]
 第7个三角形：[9, 3, 1]
-    此三角形的顶点9对面的邻居第6个三角形：[3, 4, 1]
-    此三角形的顶点3对面没有三角形邻居
-    此三角形的顶点1对面的邻居第8个三角形：[5, 3, 9]
+	此三角形的顶点9对面的邻居第6个三角形：[3, 4, 1]
+	此三角形的顶点3对面没有三角形邻居
+	此三角形的顶点1对面的邻居第8个三角形：[5, 3, 9]
 第8个三角形：[5, 3, 9]
-    此三角形的顶点5对面的邻居第7个三角形：[9, 3, 1]
-    此三角形的顶点3对面没有三角形邻居
-    此三角形的顶点9对面的邻居第10个三角形：[5, 8, 3]
+	此三角形的顶点5对面的邻居第7个三角形：[9, 3, 1]
+	此三角形的顶点3对面没有三角形邻居
+	此三角形的顶点9对面的邻居第10个三角形：[5, 8, 3]
 第9个三角形：[8, 5, 10]
-    此三角形的顶点8对面没有三角形邻居
-    此三角形的顶点5对面的邻居第11个三角形：[4, 8, 10]
-    此三角形的顶点10对面的邻居第10个三角形：[5, 8, 3]
+	此三角形的顶点8对面没有三角形邻居
+	此三角形的顶点5对面的邻居第11个三角形：[4, 8, 10]
+	此三角形的顶点10对面的邻居第10个三角形：[5, 8, 3]
 第10个三角形：[5, 8, 3]
-    此三角形的顶点5对面的邻居第12个三角形：[3, 8, 4]
-    此三角形的顶点8对面的邻居第8个三角形：[5, 3, 9]
-    此三角形的顶点3对面的邻居第9个三角形：[8, 5, 10]
+	此三角形的顶点5对面的邻居第12个三角形：[3, 8, 4]
+	此三角形的顶点8对面的邻居第8个三角形：[5, 3, 9]
+	此三角形的顶点3对面的邻居第9个三角形：[8, 5, 10]
 第11个三角形：[4, 8, 10]
-    此三角形的顶点4对面的邻居第9个三角形：[8, 5, 10]
-    此三角形的顶点8对面的邻居第1个三角形：[4, 10, 7]
-    此三角形的顶点10对面的邻居第12个三角形：[3, 8, 4]
+	此三角形的顶点4对面的邻居第9个三角形：[8, 5, 10]
+	此三角形的顶点8对面的邻居第1个三角形：[4, 10, 7]
+	此三角形的顶点10对面的邻居第12个三角形：[3, 8, 4]
 第12个三角形：[3, 8, 4]
-    此三角形的顶点3对面的邻居第11个三角形：[4, 8, 10]
-    此三角形的顶点8对面的邻居第6个三角形：[3, 4, 1]
-    此三角形的顶点4对面的邻居第10个三角形：[5, 8, 3]
+	此三角形的顶点3对面的邻居第11个三角形：[4, 8, 10]
+	此三角形的顶点8对面的邻居第6个三角形：[3, 4, 1]
+	此三角形的顶点4对面的邻居第10个三角形：[5, 8, 3]
 </code></pre>
 <h2 id="3面积坐标重心坐标和普通坐标">3）面积坐标（重心坐标）和普通坐标</h2>
 <p>在三角形情形中，<code>重心坐标</code>也叫<code>面积坐标</code>。</p>

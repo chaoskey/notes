@@ -30,17 +30,18 @@
 
 稳定化系数，也作为求解器的一部分（而不是作为形式）来进行计算。 求解器计算自适应算法的一次迭代（主求解，对偶求解和网格划分），其中，自适应循环是通过迭代运行一系列网格的求解器来实现的。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/0125/" />
-<meta property="article:published_time" content="2021-02-19T11:04:02+08:00" />
-<meta property="article:modified_time" content="2021-02-19T11:04:02+08:00" />
+<meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/0125/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2021-02-19T11:04:02&#43;08:00" />
+<meta property="article:modified_time" content="2021-02-19T11:04:02&#43;08:00" />
+
 <title>Unicorn：统一的连续介质力学求解器（中）【翻译】 | 学习笔记</title>
 <link rel="icon" href="/notes/favicon.png" type="image/x-icon">
 
 
-<link rel="stylesheet" href="/notes/book.min.3a0afab795624b6557eb098eddc1c880180827e07fdb828f747c01148048289e.css" integrity="sha256-Ogr6t5ViS2VX6wmO3cHIgBgIJ&#43;B/24KPdHwBFIBIKJ4=">
+<link rel="stylesheet" href="/notes/book.min.0253b76936e9496c1a48e74d90cdc268fd0e96366c60a1f43994801cc334588a.css" integrity="sha256-AlO3aTbpSWwaSOdNkM3CaP0OljZsYKH0OZSAHMM0WIo=">
 
 
-<script defer src="/notes/cn.search.min.ae40ea0b51c8339faa91e6c7185b6b7a562a2c37dc01ce6818eaab312cbe1d25.js" integrity="sha256-rkDqC1HIM5&#43;qkebHGFtrelYqLDfcAc5oGOqrMSy&#43;HSU="></script>
+<script defer src="/notes/cn.search.min.f734b55049115fd51afdc9f74cd5d979d8ff31b218dc3721a5f645b9690cfef4.js" integrity="sha256-9zS1UEkRX9Ua/cn3TNXZedj/MbIY3DchpfZFuWkM/vQ="></script>
 
 <!--
 Made with Book Theme
@@ -93,7 +94,7 @@ https://github.com/alex-shpak/hugo-book
 
 
 <ul>
-<li><a href="/notes/posts/"><strong>站点维护记录</strong></a></li>
+<li><a href="/notes/posts/"><strong>杂事记录</strong></a></li>
 <li><a href="/notes/docs/fem/"><strong>有限元法自动求解微分方程</strong></a>
 <ul>
 <li><a href="/notes/docs/fem/#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%9C%89%E9%99%90%E5%85%83%E6%96%B9%E6%B3%95">第二章 有限元方法</a></li>
@@ -107,6 +108,7 @@ https://github.com/alex-shpak/hugo-book
 <li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E7%AB%A0-dolfincpython%E6%9C%89%E9%99%90%E5%85%83%E5%BA%93">第十章 DOLFIN：C++/Python有限元库</a></li>
 <li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0-ufl%E6%9C%89%E9%99%90%E5%85%83%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80">第十七章 UFL：有限元形式语言</a></li>
 <li><a href="/notes/docs/fem/#%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0-unicorn%E7%BB%9F%E4%B8%80%E7%9A%84%E8%BF%9E%E7%BB%AD%E4%BB%8B%E8%B4%A8%E5%8A%9B%E5%AD%A6%E6%B1%82%E8%A7%A3%E5%99%A8">第十八章 Unicorn：统一的连续介质力学求解器</a></li>
+<li><a href="/notes/docs/fem/#%e7%ac%ac%e4%ba%8c%e5%8d%81%e7%ab%a0-%e4%b8%8d%e5%8f%af%e5%8e%8b%e7%bc%a9%e6%b5%81%e4%bd%93%e7%9a%84%e6%9c%89%e9%99%90%e5%85%83">第二十章 不可压缩流体的有限元</a></li>
 </ul>
 </li>
 <li><a href="/notes/docs/julia/"><strong>基于Julia科学计算</strong></a></li>
@@ -132,7 +134,7 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+  <script>(function(){var a=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
 
 
  
