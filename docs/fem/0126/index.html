@@ -5,8 +5,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Unicorn：统一的连续介质力学求解器（下）【翻译】"><meta property="og:title" content="Unicorn：统一的连续介质力学求解器（下）【翻译】" />
-<meta property="og:description" content="II.实现》18.Unicorn：统一的连续介质力学求解器（下）
-【章节目录】
+<meta property="og:description" content="【章节目录】
 18·5 解决连续介质力学问题
 在本节中，我们介绍一些使用Unicorn计算的示例。 第一个例子是没有自适应性的流固耦合问题，我们讨论了几何和子域的建模，系数（形式中使用的函数），主程序的参数和规范（运行求解器的接口）。 接下来，我们给出一个用自适应性解决湍流纯流体问题的示例，其中我们涵盖了对偶问题的数据建模，自适应回路，并指定了用于建模湍流边界层的滑移/摩擦边界条件。" />
 <meta property="og:type" content="article" />
@@ -21,7 +20,7 @@
 <link rel="stylesheet" href="/notes/book.min.0253b76936e9496c1a48e74d90cdc268fd0e96366c60a1f43994801cc334588a.css" integrity="sha256-AlO3aTbpSWwaSOdNkM3CaP0OljZsYKH0OZSAHMM0WIo=">
 
 
-<script defer src="/notes/cn.search.min.f734b55049115fd51afdc9f74cd5d979d8ff31b218dc3721a5f645b9690cfef4.js" integrity="sha256-9zS1UEkRX9Ua/cn3TNXZedj/MbIY3DchpfZFuWkM/vQ="></script>
+<script defer src="/notes/cn.search.min.931425f5f0ab21add8e03442a057660859e5500f0bd435548f5b8929d2f92f97.js" integrity="sha256-kxQl9fCrIa3Y4DRCoFdmCFnlUA8L1DVUj1uJKdL5L5c="></script>
 
 <!--
 Made with Book Theme
@@ -142,7 +141,7 @@ https://github.com/alex-shpak/hugo-book
       
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#ii实现18unicorn统一的连续介质力学求解器下">II.实现》18.Unicorn：统一的连续介质力学求解器（下）</a>
+    <li>
       <ul>
         <li><a href="#185-解决连续介质力学问题">18·5 解决连续介质力学问题</a>
           <ul>
@@ -167,8 +166,8 @@ https://github.com/alex-shpak/hugo-book
 
 <nav class="post-pagination">
   
-  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0127/">
-    下一页<br>不可压缩流体的有限元【翻译】
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/posts/%E7%BB%99%E5%AE%B6%E4%B8%AD%E9%95%BF%E8%BE%88%E7%9A%84%E7%94%B5%E8%84%91%E6%89%93%E5%AD%97%E6%96%B9%E6%A1%88/">
+    下一页<br>给家中长辈的电脑打字方案
   </a>
   
   
@@ -227,7 +226,6 @@ https://github.com/alex-shpak/hugo-book
 
 </div>
 
-<h1 id="ii实现18unicorn统一的连续介质力学求解器下">II.实现》18.Unicorn：统一的连续介质力学求解器（下）</h1>
 <p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e5%85%ab%e7%ab%a0-unicorn%e7%bb%9f%e4%b8%80%e7%9a%84%e8%bf%9e%e7%bb%ad%e4%bb%8b%e8%b4%a8%e5%8a%9b%e5%ad%a6%e6%b1%82%e8%a7%a3%e5%99%a8">章节目录</a>】</p>
 <h2 id="185-解决连续介质力学问题">18·5 解决连续介质力学问题</h2>
 <p>在本节中，我们介绍一些使用Unicorn计算的示例。 第一个例子是没有自适应性的流固耦合问题，我们讨论了几何和子域的建模，系数（形式中使用的函数），主程序的参数和规范（运行求解器的接口）。 接下来，我们给出一个用自适应性解决湍流纯流体问题的示例，其中我们涵盖了对偶问题的数据建模，自适应回路，并指定了用于建模湍流边界层的滑移/摩擦边界条件。</p>
@@ -376,8 +374,8 @@ primal_bc_mom.push_back(<span style="color:#f92672">&amp;</span>slip_bc);
 
 <nav class="post-pagination">
   
-  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0127/">
-    下一页<br>不可压缩流体的有限元【翻译】
+  <a class="newer-posts" href="https://chaoskey.gitee.io/notes/posts/%E7%BB%99%E5%AE%B6%E4%B8%AD%E9%95%BF%E8%BE%88%E7%9A%84%E7%94%B5%E8%84%91%E6%89%93%E5%AD%97%E6%96%B9%E6%A1%88/">
+    下一页<br>给家中长辈的电脑打字方案
   </a>
   
   
@@ -432,7 +430,7 @@ primal_bc_mom.push_back(<span style="color:#f92672">&amp;</span>slip_bc);
       
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#ii实现18unicorn统一的连续介质力学求解器下">II.实现》18.Unicorn：统一的连续介质力学求解器（下）</a>
+    <li>
       <ul>
         <li><a href="#185-解决连续介质力学问题">18·5 解决连续介质力学问题</a>
           <ul>

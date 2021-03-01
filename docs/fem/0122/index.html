@@ -5,8 +5,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="UFL：有限元形式语言》计算导数&amp;算法(一)【翻译】"><meta property="og:title" content="UFL：有限元形式语言》计算导数&amp;算法(一)【翻译】" />
-<meta property="og:description" content="II.实现》17.UFL：有限元形式语言》计算导数&amp;算法(一)
-【章节目录】
+<meta property="og:description" content="【章节目录】
 17·7 计算导数
 当由形式语言的终端用户声明任何种类的导数表达式时，都会构造一个表达式对象来表示它，但不会计算任何内容。 这种表达式对象的类型是Derivative的子类。在从导数表达式生成低级代码之前，必须应用某种求导数的算法，因为差分算符本身在C&#43;&#43;等低级语言中不可用。 计算精确的导数很重要，它消除了差分除法的近似。 存在几种用于计算精确导数的替代算法。 所有相关算法都基于链规则，并结合每种表达式对象类型的规则差异。 算法之间的主要区别在于子表达式的重用程度以及子表达式的累积方式。" />
 <meta property="og:type" content="article" />
@@ -21,7 +20,7 @@
 <link rel="stylesheet" href="/notes/book.min.0253b76936e9496c1a48e74d90cdc268fd0e96366c60a1f43994801cc334588a.css" integrity="sha256-AlO3aTbpSWwaSOdNkM3CaP0OljZsYKH0OZSAHMM0WIo=">
 
 
-<script defer src="/notes/cn.search.min.f734b55049115fd51afdc9f74cd5d979d8ff31b218dc3721a5f645b9690cfef4.js" integrity="sha256-9zS1UEkRX9Ua/cn3TNXZedj/MbIY3DchpfZFuWkM/vQ="></script>
+<script defer src="/notes/cn.search.min.931425f5f0ab21add8e03442a057660859e5500f0bd435548f5b8929d2f92f97.js" integrity="sha256-kxQl9fCrIa3Y4DRCoFdmCFnlUA8L1DVUj1uJKdL5L5c="></script>
 
 <!--
 Made with Book Theme
@@ -142,7 +141,7 @@ https://github.com/alex-shpak/hugo-book
       
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#ii实现17ufl有限元形式语言计算导数算法一">II.实现》17.UFL：有限元形式语言》计算导数&amp;算法(一)</a>
+    <li>
       <ul>
         <li><a href="#177-计算导数">17·7 计算导数</a>
           <ul>
@@ -235,7 +234,6 @@ https://github.com/alex-shpak/hugo-book
 
 </div>
 
-<h1 id="ii实现17ufl有限元形式语言计算导数算法一">II.实现》17.UFL：有限元形式语言》计算导数&amp;算法(一)</h1>
 <p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80">章节目录</a>】</p>
 <h2 id="177-计算导数">17·7 计算导数</h2>
 <p>当由形式语言的终端用户声明任何种类的导数表达式时，都会构造一个表达式对象来表示它，但不会计算任何内容。 这种表达式对象的类型是Derivative的子类。在从导数表达式生成低级代码之前，必须应用某种求导数的算法，因为差分算符本身在C++等低级语言中不可用。 计算精确的导数很重要，它消除了差分除法的近似。 存在几种用于计算精确导数的替代算法。 所有相关算法都基于链规则，并结合每种表达式对象类型的规则差异。 算法之间的主要区别在于子表达式的重用程度以及子表达式的累积方式。</p>
@@ -830,7 +828,7 @@ g <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>visi
       
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#ii实现17ufl有限元形式语言计算导数算法一">II.实现》17.UFL：有限元形式语言》计算导数&amp;算法(一)</a>
+    <li>
       <ul>
         <li><a href="#177-计算导数">17·7 计算导数</a>
           <ul>

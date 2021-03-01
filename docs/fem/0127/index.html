@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="不可压缩流体的有限元【翻译】"><meta property="og:title" content="不可压缩流体的有限元【翻译】" />
-<meta property="og:description" content="III·应用》20.不可压缩流体的有限元
+<meta property="og:description" content="【章节目录】
 有限元方法的结构为用户提供了一个选择范围。 对于解决不可压缩的流体问题尤其如此，因为理论上指出了许多稳定的有限元公式。 我们使用自动化工具来实现和检查稳态Stokes方程的各种稳定公式。 事实证明，FEniCS项目组件的表达能力使Stokes问题的求解器可以轻松创建使用各种单元公式。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/0127/" /><meta property="article:section" content="docs" />
@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="/notes/book.min.0253b76936e9496c1a48e74d90cdc268fd0e96366c60a1f43994801cc334588a.css" integrity="sha256-AlO3aTbpSWwaSOdNkM3CaP0OljZsYKH0OZSAHMM0WIo=">
 
 
-<script defer src="/notes/cn.search.min.f734b55049115fd51afdc9f74cd5d979d8ff31b218dc3721a5f645b9690cfef4.js" integrity="sha256-9zS1UEkRX9Ua/cn3TNXZedj/MbIY3DchpfZFuWkM/vQ="></script>
+<script defer src="/notes/cn.search.min.931425f5f0ab21add8e03442a057660859e5500f0bd435548f5b8929d2f92f97.js" integrity="sha256-kxQl9fCrIa3Y4DRCoFdmCFnlUA8L1DVUj1uJKdL5L5c="></script>
 
 <!--
 Made with Book Theme
@@ -140,7 +140,7 @@ https://github.com/alex-shpak/hugo-book
       
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#iii应用20不可压缩流体的有限元">III·应用》20.不可压缩流体的有限元</a>
+    <li>
       <ul>
         <li><a href="#201-stokes方程">20·1 Stokes方程</a></li>
         <li><a href="#202-混合stokes问题的有限元公式">20·2 混合Stokes问题的有限元公式</a>
@@ -177,8 +177,8 @@ https://github.com/alex-shpak/hugo-book
   </a>
   
   
-  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0126/">
-      上一页<br>Unicorn：统一的连续介质力学求解器（下）【翻译】
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/posts/%E6%88%91%E7%94%A8%E4%B8%80%E4%B8%AA%E4%B8%8B%E5%8D%88%E6%8E%8C%E6%8F%A1%E5%B0%8F%E9%B9%A4%E5%8F%8C%E6%8B%BC/">
+      上一页<br>我用一个下午掌握小鹤双拼
   </a>
   
 </nav>
@@ -232,7 +232,7 @@ https://github.com/alex-shpak/hugo-book
 
 </div>
 
-<h1 id="iii应用20不可压缩流体的有限元">III·应用》20.不可压缩流体的有限元</h1>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e4%ba%8c%e5%8d%81%e7%ab%a0-%e4%b8%8d%e5%8f%af%e5%8e%8b%e7%bc%a9%e6%b5%81%e4%bd%93%e7%9a%84%e6%9c%89%e9%99%90%e5%85%83">章节目录</a>】</p>
 <p>有限元方法的结构为用户提供了一个选择范围。 对于解决不可压缩的流体问题尤其如此，因为理论上指出了许多稳定的有限元公式。 我们使用自动化工具来实现和检查稳态Stokes方程的各种稳定公式。 事实证明，FEniCS项目组件的表达能力使Stokes问题的求解器可以轻松创建使用各种单元公式。</p>
 <h2 id="201-stokes方程">20·1 Stokes方程</h2>
 <p>Stokes方程描述了稳定的不可压缩的低雷诺数流体。 对于域
@@ -774,7 +774,8 @@ p = \pi \cos(4\pi x) \cos(4\pi y) \tag{20.15}
 <p><img src="/notes/images/0297.jpg" alt="图20.17"></p>
 <center>图20.17 使用P2-P1 Taylor-Hood单元的盖驱动腔中的局部散度误差。尤其要注意在盖子角落处的较大误差。</center>
 <h2 id="205-结论">20·5 结论</h2>
-<p>提出了Stokes问题的不同有限元之间的比较。 通过自动生成各种方法的求解器，已经证明了自动代码生成提供的灵活性。 在所有情况下观察到的收敛速度与先验估计一致。 在所检查过的单元中，Crouzeix-Raviart单元和Scott-Vogelius导致的散度误差最小，而Taylor-Hood的速度误差最小。 如果质量守恒特性不是至关重要的，那么Taylor–Hood或STAB等单元的简单性就很有吸引力。</p></article>
+<p>提出了Stokes问题的不同有限元之间的比较。 通过自动生成各种方法的求解器，已经证明了自动代码生成提供的灵活性。 在所有情况下观察到的收敛速度与先验估计一致。 在所检查过的单元中，Crouzeix-Raviart单元和Scott-Vogelius导致的散度误差最小，而Taylor-Hood的速度误差最小。 如果质量守恒特性不是至关重要的，那么Taylor–Hood或STAB等单元的简单性就很有吸引力。</p>
+<p>【<a href="/notes/docs/fem/#%e7%ac%ac%e4%ba%8c%e5%8d%81%e7%ab%a0-%e4%b8%8d%e5%8f%af%e5%8e%8b%e7%bc%a9%e6%b5%81%e4%bd%93%e7%9a%84%e6%9c%89%e9%99%90%e5%85%83">章节目录</a>】</p></article>
 
 <hr>
 
@@ -786,8 +787,8 @@ p = \pi \cos(4\pi x) \cos(4\pi y) \tag{20.15}
   
   
   
-  <a class="older-posts" href="https://chaoskey.gitee.io/notes/docs/fem/0126/">
-      上一页<br>Unicorn：统一的连续介质力学求解器（下）【翻译】
+  <a class="older-posts" href="https://chaoskey.gitee.io/notes/posts/%E6%88%91%E7%94%A8%E4%B8%80%E4%B8%AA%E4%B8%8B%E5%8D%88%E6%8E%8C%E6%8F%A1%E5%B0%8F%E9%B9%A4%E5%8F%8C%E6%8B%BC/">
+      上一页<br>我用一个下午掌握小鹤双拼
   </a>
   
 </nav>
@@ -836,7 +837,7 @@ p = \pi \cos(4\pi x) \cos(4\pi y) \tag{20.15}
       
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#iii应用20不可压缩流体的有限元">III·应用》20.不可压缩流体的有限元</a>
+    <li>
       <ul>
         <li><a href="#201-stokes方程">20·1 Stokes方程</a></li>
         <li><a href="#202-混合stokes问题的有限元公式">20·2 混合Stokes问题的有限元公式</a>

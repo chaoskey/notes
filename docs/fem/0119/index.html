@@ -5,8 +5,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="UFL：有限元形式语言》概述&amp;有限元空间&amp;形式【翻译】"><meta property="og:title" content="UFL：有限元形式语言》概述&amp;有限元空间&amp;形式【翻译】" />
-<meta property="og:description" content="II.实现》17.UFL：有限元形式语言》概述&amp;有限元空间&amp;形式
-【章节目录】
+<meta property="og:description" content="【章节目录】
 统一形式语言（UFL，Alnæs和Logg，2009年）是一种领域专用语言，用于描述变分形式和函数的有限元离散化。 更准确地说，该语言定义了一个灵活的用户接口，用于定义近似于数学符号弱形式的有限元空间和表达式。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/0119/" /><meta property="article:section" content="docs" />
@@ -20,7 +19,7 @@
 <link rel="stylesheet" href="/notes/book.min.0253b76936e9496c1a48e74d90cdc268fd0e96366c60a1f43994801cc334588a.css" integrity="sha256-AlO3aTbpSWwaSOdNkM3CaP0OljZsYKH0OZSAHMM0WIo=">
 
 
-<script defer src="/notes/cn.search.min.f734b55049115fd51afdc9f74cd5d979d8ff31b218dc3721a5f645b9690cfef4.js" integrity="sha256-9zS1UEkRX9Ua/cn3TNXZedj/MbIY3DchpfZFuWkM/vQ="></script>
+<script defer src="/notes/cn.search.min.931425f5f0ab21add8e03442a057660859e5500f0bd435548f5b8929d2f92f97.js" integrity="sha256-kxQl9fCrIa3Y4DRCoFdmCFnlUA8L1DVUj1uJKdL5L5c="></script>
 
 <!--
 Made with Book Theme
@@ -141,7 +140,7 @@ https://github.com/alex-shpak/hugo-book
       
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#ii实现17ufl有限元形式语言概述有限元空间形式">II.实现》17.UFL：有限元形式语言》概述&amp;有限元空间&amp;形式</a>
+    <li>
       <ul>
         <li>
           <ul>
@@ -231,7 +230,6 @@ https://github.com/alex-shpak/hugo-book
 
 </div>
 
-<h1 id="ii实现17ufl有限元形式语言概述有限元空间形式">II.实现》17.UFL：有限元形式语言》概述&amp;有限元空间&amp;形式</h1>
 <p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80">章节目录</a>】</p>
 <p>统一形式语言（UFL，Alnæs和Logg，2009年）是一种领域专用语言，用于描述变分形式和函数的有限元离散化。 更准确地说，该语言定义了一个灵活的用户接口，用于定义近似于数学符号弱形式的有限元空间和表达式。</p>
 <p>FEniCS项目提供了一个框架，用于构建求解偏微分方程（PDE）的应用程序。 UFL是此框架的核心组件之一。 它定义了你表示PDE的语言。 它是形式编译器FFC和SFC的输入语言和前端，这在第11章和第15章中介绍过。 UFL实现还提供了可以用形式编译器简化编译过程的算法。 这些形式编译器的输出是符合UFC规范的C++代码（Stroustrup，1997），这在第16章中说明过。 该代码可与第10章介绍的C++/Python库DOLFIN一起使用，以有效地组装线性系统并计算PDE的解。 请注意，本章并未涵盖如何实际求解UFL中定义的方程。 有关如何使用完整的FEniCS框架求解方程式的教程，请参见第1章。</p>
@@ -776,7 +774,7 @@ L <span style="color:#f92672">=</span> f<span style="color:#f92672">*</span>v<sp
       
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#ii实现17ufl有限元形式语言概述有限元空间形式">II.实现》17.UFL：有限元形式语言》概述&amp;有限元空间&amp;形式</a>
+    <li>
       <ul>
         <li>
           <ul>

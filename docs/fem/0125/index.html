@@ -5,8 +5,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Unicorn：统一的连续介质力学求解器（中）【翻译】"><meta property="og:title" content="Unicorn：统一的连续介质力学求解器（中）【翻译】" />
-<meta property="og:description" content="II.实现》18.Unicorn：统一的连续介质力学求解器（中）
-【章节目录】
+<meta property="og:description" content="【章节目录】
 18·4 实现
 在这里，我们概述了Unicorn的设计。 Unicorn求解器类UCSolver将Unicorn库中的技术与FEniCS的其他部分结合，合在一起公开一个接口（请参见清单18.6），以模拟连续介质力学中的应用。 求解器实现的主要部分是UC模型的G2离散化的弱形式（请参见图18.4），以及用于误差估计的应力和残差的形式。 来自应用程序的系数被连接到形式，然后由TimeDependentPDE类执行时间步进。 某些系数，例如
   
@@ -41,7 +40,7 @@
 <link rel="stylesheet" href="/notes/book.min.0253b76936e9496c1a48e74d90cdc268fd0e96366c60a1f43994801cc334588a.css" integrity="sha256-AlO3aTbpSWwaSOdNkM3CaP0OljZsYKH0OZSAHMM0WIo=">
 
 
-<script defer src="/notes/cn.search.min.f734b55049115fd51afdc9f74cd5d979d8ff31b218dc3721a5f645b9690cfef4.js" integrity="sha256-9zS1UEkRX9Ua/cn3TNXZedj/MbIY3DchpfZFuWkM/vQ="></script>
+<script defer src="/notes/cn.search.min.931425f5f0ab21add8e03442a057660859e5500f0bd435548f5b8929d2f92f97.js" integrity="sha256-kxQl9fCrIa3Y4DRCoFdmCFnlUA8L1DVUj1uJKdL5L5c="></script>
 
 <!--
 Made with Book Theme
@@ -162,7 +161,7 @@ https://github.com/alex-shpak/hugo-book
       
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#ii实现18unicorn统一的连续介质力学求解器中">II.实现》18.Unicorn：统一的连续介质力学求解器（中）</a>
+    <li>
       <ul>
         <li><a href="#184-实现">18·4 实现</a>
           <ul>
@@ -250,7 +249,6 @@ https://github.com/alex-shpak/hugo-book
 
 </div>
 
-<h1 id="ii实现18unicorn统一的连续介质力学求解器中">II.实现》18.Unicorn：统一的连续介质力学求解器（中）</h1>
 <p>【<a href="/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e5%85%ab%e7%ab%a0-unicorn%e7%bb%9f%e4%b8%80%e7%9a%84%e8%bf%9e%e7%bb%ad%e4%bb%8b%e8%b4%a8%e5%8a%9b%e5%ad%a6%e6%b1%82%e8%a7%a3%e5%99%a8">章节目录</a>】</p>
 <h2 id="184-实现">18·4 实现</h2>
 <p>在这里，我们概述了Unicorn的设计。 Unicorn求解器类<code>UCSolver</code>将Unicorn库中的技术与FEniCS的其他部分结合，合在一起公开一个接口（请参见清单18.6），以模拟连续介质力学中的应用。 求解器实现的主要部分是UC模型的G2离散化的弱形式（请参见图18.4），以及用于误差估计的应力和残差的形式。 来自应用程序的系数被连接到形式，然后由<code>TimeDependentPDE</code>类执行时间步进。 某些系数，例如
@@ -748,7 +746,7 @@ Q =\frac{d\|F\|^2_F}{\det(F)^{\frac{d}{2}}}
       
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#ii实现18unicorn统一的连续介质力学求解器中">II.实现》18.Unicorn：统一的连续介质力学求解器（中）</a>
+    <li>
       <ul>
         <li><a href="#184-实现">18·4 实现</a>
           <ul>

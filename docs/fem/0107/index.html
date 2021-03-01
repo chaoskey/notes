@@ -5,8 +5,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="有限元变分形式的正交表示（一）【翻译】"><meta property="og:title" content="有限元变分形式的正交表示（一）【翻译】" />
-<meta property="og:description" content="I.方法论》7.有限元变分形式的正交表示（一）
-【章节目录】
+<meta property="og:description" content="【章节目录】
 本章介绍了与有限元变分形式相关的局部单元张量数值积分的常规运行时正交方法，尤其是可以减少浮点运算次数的自动优化。  运行时正交方法的替代方法是第8章中介绍的张量表示。  正交和张量方法都在FFC中实现了（参见第11章）。  在本章中，我们讨论了四种用于优化所生成代码的运行时性能的正交表示策略，并表明优化策略比单纯的实现带来了运行时性能的显着提高。  我们还研究了针对不同方程的正交和张量方法的性能，这将导致人们希望能够在两种表示形式之间进行选择。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://chaoskey.gitee.io/notes/docs/fem/0107/" /><meta property="article:section" content="docs" />
@@ -20,7 +19,7 @@
 <link rel="stylesheet" href="/notes/book.min.0253b76936e9496c1a48e74d90cdc268fd0e96366c60a1f43994801cc334588a.css" integrity="sha256-AlO3aTbpSWwaSOdNkM3CaP0OljZsYKH0OZSAHMM0WIo=">
 
 
-<script defer src="/notes/cn.search.min.f734b55049115fd51afdc9f74cd5d979d8ff31b218dc3721a5f645b9690cfef4.js" integrity="sha256-9zS1UEkRX9Ua/cn3TNXZedj/MbIY3DchpfZFuWkM/vQ="></script>
+<script defer src="/notes/cn.search.min.931425f5f0ab21add8e03442a057660859e5500f0bd435548f5b8929d2f92f97.js" integrity="sha256-kxQl9fCrIa3Y4DRCoFdmCFnlUA8L1DVUj1uJKdL5L5c="></script>
 
 <!--
 Made with Book Theme
@@ -141,7 +140,7 @@ https://github.com/alex-shpak/hugo-book
       
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#i方法论7有限元变分形式的正交表示一">I.方法论》7.有限元变分形式的正交表示（一）</a>
+    <li>
       <ul>
         <li><a href="#71-标准正交表示">7·1 标准正交表示</a></li>
         <li><a href="#72-正交优化">7·2 正交优化</a>
@@ -228,7 +227,6 @@ https://github.com/alex-shpak/hugo-book
 
 </div>
 
-<h1 id="i方法论7有限元变分形式的正交表示一">I.方法论》7.有限元变分形式的正交表示（一）</h1>
 <p>【<a href="/notes/docs/fem/#%e7%ac%ac%e4%b8%83%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e5%8f%98%e5%88%86%e5%bd%a2%e5%bc%8f%e7%9a%84%e6%ad%a3%e4%ba%a4%e8%a1%a8%e7%a4%ba">章节目录</a>】</p>
 <p>本章介绍了与有限元变分形式相关的局部单元张量数值积分的常规运行时正交方法，尤其是可以减少浮点运算次数的自动优化。  运行时正交方法的替代方法是第8章中介绍的张量表示。  正交和张量方法都在FFC中实现了（参见第11章）。  在本章中，我们讨论了四种用于优化所生成代码的运行时性能的正交表示策略，并表明优化策略比单纯的实现带来了运行时性能的显着提高。  我们还研究了针对不同方程的正交和张量方法的性能，这将导致人们希望能够在两种表示形式之间进行选择。</p>
 <h2 id="71-标准正交表示">7·1 标准正交表示</h2>
@@ -726,7 +724,7 @@ A_{T,i} = \int_T{ w\nabla\phi_{i_1}^T \cdot \nabla\phi_{i_2}^T dx} \tag{7.3}
       
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#i方法论7有限元变分形式的正交表示一">I.方法论》7.有限元变分形式的正交表示（一）</a>
+    <li>
       <ul>
         <li><a href="#71-标准正交表示">7·1 标准正交表示</a></li>
         <li><a href="#72-正交优化">7·2 正交优化</a>

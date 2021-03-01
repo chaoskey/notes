@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>维护 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/categories/%E7%BB%B4%E6%8A%A4/</link>
-    <description>Recent content in 维护 on 学习笔记</description>
+    <title>杂事 on 学习笔记</title>
+    <link>https://chaoskey.gitee.io/notes/categories/%E6%9D%82%E4%BA%8B/</link>
+    <description>Recent content in 杂事 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Thu, 18 Feb 2021 11:04:32 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/categories/%E7%BB%B4%E6%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 27 Feb 2021 12:27:21 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/categories/%E6%9D%82%E4%BA%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>我用一个下午掌握小鹤双拼</title>
+      <link>https://chaoskey.gitee.io/notes/posts/%E6%88%91%E7%94%A8%E4%B8%80%E4%B8%AA%E4%B8%8B%E5%8D%88%E6%8E%8C%E6%8F%A1%E5%B0%8F%E9%B9%A4%E5%8F%8C%E6%8B%BC/</link>
+      <pubDate>Sat, 27 Feb 2021 12:27:21 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/posts/%E6%88%91%E7%94%A8%E4%B8%80%E4%B8%AA%E4%B8%8B%E5%8D%88%E6%8E%8C%E6%8F%A1%E5%B0%8F%E9%B9%A4%E5%8F%8C%E6%8B%BC/</guid>
+      <description>&lt;p&gt;昨天，我决定全拼转向双拼，选择了“小鹤双拼”方案。&lt;/p&gt;
+&lt;p&gt;今天，我简要描述了要点总结和个人体验！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>给家中长辈的电脑打字方案</title>
+      <link>https://chaoskey.gitee.io/notes/posts/%E7%BB%99%E5%AE%B6%E4%B8%AD%E9%95%BF%E8%BE%88%E7%9A%84%E7%94%B5%E8%84%91%E6%89%93%E5%AD%97%E6%96%B9%E6%A1%88/</link>
+      <pubDate>Wed, 24 Feb 2021 17:05:53 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/posts/%E7%BB%99%E5%AE%B6%E4%B8%AD%E9%95%BF%E8%BE%88%E7%9A%84%E7%94%B5%E8%84%91%E6%89%93%E5%AD%97%E6%96%B9%E6%A1%88/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;前提条件&lt;/strong&gt;：1）老人会用智能手机。 2）老会基本的电脑操作，就是不会打字。 3） 当然也不会拼音。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>基于Obsidian＋Hugo＋Gitee的笔记系统</title>
       <link>https://chaoskey.gitee.io/notes/posts/%E5%9F%BA%E4%BA%8EObsidianHugoGitee%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/</link>
@@ -21,6 +40,25 @@
 &lt;p&gt;【解决方案】 我通过&lt;code&gt;shell脚本&lt;/code&gt;和&lt;code&gt;Hugo短代码&lt;/code&gt;的配合解决这个问题。 通过&lt;code&gt;shell脚本&lt;/code&gt;将&lt;code&gt;Obsidian&lt;/code&gt;的&lt;code&gt;双向链接&lt;/code&gt;转换成&lt;code&gt;Hugo&lt;/code&gt;可以识别的自定义格式；&lt;code&gt;Hugo短代码&lt;/code&gt;则负责解析这种自定义格式。&lt;/p&gt;
 &lt;p&gt;本笔记系统是我自用，仅供参考。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>小技巧备忘</title>
+      <link>https://chaoskey.gitee.io/notes/posts/0004/</link>
+      <pubDate>Mon, 13 Jan 2020 19:20:35 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/posts/0004/</guid>
+      <description>&lt;h2 id=&#34;1-本地mdlatex如何完美发布到知乎&#34;&gt;1 本地md+LaTex如何完美发布到知乎？&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我已写成了脚本：&lt;a href=&#34;https://gitee.com/chaoskey/notes/raw/master/forzhihu&#34;&gt;forzhihu&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;答：知乎编辑器提供了md上传，还提供了&lt;code&gt;https://www.zhihu.com/equation?tex=...&lt;/code&gt;接口，并且支持贴图自动上传。　因此完全支持本地Markdown+LaTex完美发布到知乎，具体步骤如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用本地Markdown编辑器放心写作。【我使用&lt;code&gt;Typora&lt;/code&gt;】&lt;/li&gt;
+&lt;li&gt;将本地图片换成网上图片，我个人的做法是先发布到&lt;code&gt;gitbook&lt;/code&gt;，比如我的&lt;a href=&#34;https://chaoskey.gitee.io/notes/&#34;&gt;&lt;code&gt;https://chaoskey.gitee.io/notes/&lt;/code&gt;&lt;/a&gt;。然后复制图片链接，替换原本地图片链接，图片数量一般不多，手工替换也不麻烦。&lt;/li&gt;
+&lt;li&gt;将LaTex代码用&lt;code&gt;https://www.zhihu.com/equation?tex=...&lt;/code&gt;替换。首先得有支持正则表达全文置换编辑器【我使用&lt;code&gt;Visual Studio Code&lt;/code&gt;】，然后将　&lt;code&gt;\$\$(\n*)\s*(.*?)(\n*)\s*\$\$&lt;/code&gt;　替换成　&lt;code&gt;$1&amp;lt;img src=&amp;quot;https://www.zhihu.com/equation?tex=$2&amp;quot; alt=&amp;quot;$2&amp;quot; class=&amp;quot;ee_img tr_noresize&amp;quot; eeimg=&amp;quot;1&amp;quot;&amp;gt;$3&lt;/code&gt;。 当然前面这个正则表达式的形式要以实际为准。&lt;/li&gt;
+&lt;li&gt;最后，保存文件，然后打开知乎编辑器，上传md文件，简单调整后，发布，完工。&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
     <item>

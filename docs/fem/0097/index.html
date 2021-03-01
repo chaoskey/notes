@@ -8,7 +8,6 @@
 <meta property="og:description" content="有限元法解偏微分方程（FEniCS）
 有限元法求解牛顿流体（FEniCS）
 这两篇笔记仅做入门之用。  为了深入掌握，建议阅读《Automated Solution of Differential Equations by the Finite Element Method》。 为此，我一边学习一边翻译权当笔记。
-I.方法论》2.有限元方法（一）
 【章节目录】
 有限元方法已经成为求解微分方程的通用方法。有限元方法的成功大部分可以归因于它的通用性和优雅性，它允许在一个通用框架内分析和求解来自科学所有领域的各种微分方程。有限元方法成功的另一个因素是公式的灵活性，可以通过选择近似的有限元空间来控制离散化的属性。
 在本章中，我们回顾有限元方法，并总结整本书中使用的一些基本概念和符号。
@@ -25,7 +24,7 @@ I.方法论》2.有限元方法（一）
 <link rel="stylesheet" href="/notes/book.min.0253b76936e9496c1a48e74d90cdc268fd0e96366c60a1f43994801cc334588a.css" integrity="sha256-AlO3aTbpSWwaSOdNkM3CaP0OljZsYKH0OZSAHMM0WIo=">
 
 
-<script defer src="/notes/cn.search.min.f734b55049115fd51afdc9f74cd5d979d8ff31b218dc3721a5f645b9690cfef4.js" integrity="sha256-9zS1UEkRX9Ua/cn3TNXZedj/MbIY3DchpfZFuWkM/vQ="></script>
+<script defer src="/notes/cn.search.min.931425f5f0ab21add8e03442a057660859e5500f0bd435548f5b8929d2f92f97.js" integrity="sha256-kxQl9fCrIa3Y4DRCoFdmCFnlUA8L1DVUj1uJKdL5L5c="></script>
 
 <!--
 Made with Book Theme
@@ -146,7 +145,7 @@ https://github.com/alex-shpak/hugo-book
       
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#i方法论2有限元方法一">I.方法论》2.有限元方法（一）</a>
+    <li>
       <ul>
         <li><a href="#21-一个简单的模型问题">2·1 一个简单的模型问题</a></li>
         <li><a href="#22-有限元离散化">2·2 有限元离散化</a>
@@ -239,7 +238,6 @@ https://github.com/alex-shpak/hugo-book
 <p><a href="/notes/docs/julia/0094/">有限元法解偏微分方程（FEniCS）</a></p>
 <p><a href="/notes/docs/julia/0096/">有限元法求解牛顿流体（FEniCS）</a></p>
 <p>这两篇笔记仅做入门之用。  为了深入掌握，建议阅读《Automated Solution of Differential Equations by the Finite Element Method》。 为此，我一边学习一边翻译权当笔记。</p>
-<h1 id="i方法论2有限元方法一">I.方法论》2.有限元方法（一）</h1>
 <p>【<a href="/notes/docs/fem/#%e7%ac%ac%e4%ba%8c%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e6%96%b9%e6%b3%95">章节目录</a>】</p>
 <p>有限元方法已经成为求解微分方程的通用方法。有限元方法的成功大部分可以归因于它的通用性和优雅性，它允许在一个通用框架内分析和求解来自科学所有领域的各种微分方程。有限元方法成功的另一个因素是公式的灵活性，可以通过选择近似的有限元空间来控制离散化的属性。</p>
 <p>在本章中，我们回顾有限元方法，并总结整本书中使用的一些基本概念和符号。</p>
@@ -1349,7 +1347,7 @@ F'(u_h; \delta u, v) = \int_\Omega{(\delta u\nabla u)\cdot \nabla v dx}  + \int_
       
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#i方法论2有限元方法一">I.方法论》2.有限元方法（一）</a>
+    <li>
       <ul>
         <li><a href="#21-一个简单的模型问题">2·1 一个简单的模型问题</a></li>
         <li><a href="#22-有限元离散化">2·2 有限元离散化</a>
