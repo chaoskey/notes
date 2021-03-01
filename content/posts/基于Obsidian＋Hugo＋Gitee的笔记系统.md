@@ -2,7 +2,7 @@
 title: "基于Obsidian＋Hugo＋Gitee的笔记系统"
 date: 2021-02-18T11:04:32+08:00
 draft: true
-categories: ["维护"]
+categories: ["杂事"]
 tags: ["hugo","码云","obsidian","markdown","latex"]
 ---
 
