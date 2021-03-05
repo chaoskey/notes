@@ -6,7 +6,19 @@
     <description>Recent content in 索引 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Mon, 01 Mar 2021 09:41:03 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 05 Mar 2021 10:32:20 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>安卓手机上的Git服务器</title>
+      <link>https://chaoskey.gitee.io/notes/posts/%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E7%9A%84Git%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+      <pubDate>Fri, 05 Mar 2021 10:32:20 +0800</pubDate>
+      
+      <guid>https://chaoskey.gitee.io/notes/posts/%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E7%9A%84Git%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+      <description>&lt;h2 id=&#34;缘由&#34;&gt;缘由&lt;/h2&gt;
+&lt;p&gt;今天，收到阿里云的密钥泄露通知短信：密钥被公开到Github代码库中。　可我明明是私有库呀！！　　吓得我立刻将Github和Gitee的私有库删除，　私有库不安全呀。&lt;/p&gt;
+&lt;p&gt;通过一番网上搜索，我选择了用手机充当Git服务器的方案，对私有库而言，好处就不用我多说了。&lt;/p&gt;
+&lt;p&gt;此外，此方案具有一般性，本文仅仅以Ｇｉｔ为例，其实完全可以充当其他特定功能的服务器。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>不可压缩流体的有限元【翻译】</title>
       <link>https://chaoskey.gitee.io/notes/docs/fem/0127/</link>
