@@ -35,6 +35,16 @@ function action(){
 
 if [ -d "./content" ]
 then
+
+    if [ "$1"x = "server"x ] 
+    then
+        # 私有数据备份
+        rm -rd ../private
+        rm -rd ../.obsidian
+        mv ./content/private ../
+        mv ./content/.obsidian ../
+    fi
+
     echo "确保站点可解析,转换中..."
     action ./content
     echo "确保站点可解析,转换完成！"
@@ -49,6 +59,13 @@ then
 
     # 复原
     ./fortypora
+
+    if [ "$1"x = "server"x ] 
+    then
+        # 私有数据复位
+        mv ../private ./content/ 
+        mv ../.obsidian ./content/
+    fi
 else
     echo "此脚本只能在包含content的目录notes中执行"    
 fi
