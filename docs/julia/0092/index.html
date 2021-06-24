@@ -37,10 +37,10 @@
 <link rel="icon" href="/notes/favicon.png" type="image/x-icon">
 
 
-<link rel="stylesheet" href="/notes/book.min.0253b76936e9496c1a48e74d90cdc268fd0e96366c60a1f43994801cc334588a.css" integrity="sha256-AlO3aTbpSWwaSOdNkM3CaP0OljZsYKH0OZSAHMM0WIo=">
+<link rel="stylesheet" href="/notes/book.min.07a0a866d76192b38577628c20f8f349c797682bd8a0d6b3d18465b8420bd2fb.css" integrity="sha256-B6CoZtdhkrOFd2KMIPjzSceXaCvYoNaz0YRluEIL0vs=">
 
 
-<script defer src="/notes/cn.search.min.c9e07669544fa8ea9d43c2a1f23a11bae508039b3f5d99b0b5d1502251caeda8.js" integrity="sha256-yeB2aVRPqOqdQ8Kh8joRuuUIA5s/XZmwtdFQIlHK7ag="></script>
+<script defer src="/notes/cn.search.min.7478184bec8c1596b39dd6644b3d22a4548027de995c3895807c8ed6287aad32.js" integrity="sha256-dHgYS&#43;yMFZazndZkSz0ipFSAJ96ZXDiVgHyO1ih6rTI="></script>
 
 <!--
 Made with Book Theme
@@ -336,14 +336,14 @@ https://github.com/alex-shpak/hugo-book
     expr <span style="color:#f92672">|&gt;</span> sympy<span style="color:#f92672">.</span>latex <span style="color:#f92672">|&gt;</span> LaTeX
 <span style="color:#66d9ef">end</span>;
 
-<span style="color:#a6e22e">@vars</span> x y real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+<span style="color:#a6e22e">@vars</span> x y real<span style="color:#f92672">=</span>true
 
 <span style="color:#75715e"># 三个顶点坐标（逆时针排序）</span>
-X <span style="color:#f92672">=</span> [symbols(<span style="color:#e6db74">&#34;x</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>, real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]
-Y <span style="color:#f92672">=</span> [symbols(<span style="color:#e6db74">&#34;y</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>, real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]
+X <span style="color:#f92672">=</span> [symbols(<span style="color:#e6db74">&#34;x</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>, real<span style="color:#f92672">=</span>true) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]
+Y <span style="color:#f92672">=</span> [symbols(<span style="color:#e6db74">&#34;y</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>, real<span style="color:#f92672">=</span>true) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]
 
 <span style="color:#75715e"># 面积坐标</span>
-L<span style="color:#f92672">=</span>[symbols(<span style="color:#e6db74">&#34;l</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>, positive<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]
+L<span style="color:#f92672">=</span>[symbols(<span style="color:#e6db74">&#34;l</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>, positive<span style="color:#f92672">=</span>true) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]
 
 A <span style="color:#f92672">=</span> sympy<span style="color:#f92672">.</span>ones(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>)
 A[<span style="color:#f92672">:</span>,<span style="color:#ae81ff">2</span>]<span style="color:#f92672">=</span>X
@@ -357,7 +357,7 @@ LL <span style="color:#f92672">=</span> [S(X[i]<span style="color:#f92672">=&gt;
 LL <span style="color:#f92672">=</span> LL <span style="color:#f92672">.|&gt;</span> t<span style="color:#f92672">-&gt;</span>collect(t,[x,y])
 
 <span style="color:#75715e"># 显示</span>
-[L[i]⩵LL[i] <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>] <span style="color:#f92672">.|&gt;</span> latex <span style="color:#f92672">|&gt;</span> MD
+[L[i]<span style="color:#f92672">⩵</span>LL[i] <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>] <span style="color:#f92672">.|&gt;</span> latex <span style="color:#f92672">|&gt;</span> MD
 </code></pre></div>
 
 
@@ -413,7 +413,7 @@ sum(LL) <span style="color:#f92672">.|&gt;</span> simplify
 
 <p>推导如下（用到了归一化条件，保存在变量<code>XX</code>和<code>YY</code>中）：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 反过来，可用面积坐标表示(x,y)</span>
-eqs <span style="color:#f92672">=</span> [LL[i]⩵L[i] <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>]
+eqs <span style="color:#f92672">=</span> [LL[i]<span style="color:#f92672">⩵</span>L[i] <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>]
 sol <span style="color:#f92672">=</span> solve(eqs,[x,y])
 (XX,YY) <span style="color:#f92672">=</span> [x,y] <span style="color:#f92672">.|&gt;</span> (t<span style="color:#f92672">-&gt;</span>t(sol)) <span style="color:#f92672">.|&gt;</span>   
         (t<span style="color:#f92672">-&gt;</span>collect(t, [X[<span style="color:#ae81ff">3</span>],Y[<span style="color:#ae81ff">3</span>]]))  <span style="color:#f92672">.|&gt;</span> 
@@ -538,9 +538,9 @@ p_1(l_1,l_2,l_3)=c_1 l_1 + c_2 l_2 + c_3 l_3
 
 <p>推导如下（保存在变量<code>pl</code>中，其实这个结果一望而知）：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 3个节点值</span>
-U <span style="color:#f92672">=</span> [symbols(<span style="color:#e6db74">&#34;u</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>, real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]
+U <span style="color:#f92672">=</span> [symbols(<span style="color:#e6db74">&#34;u</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>, real<span style="color:#f92672">=</span>true) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]
 <span style="color:#75715e"># 3个待定系数</span>
-C <span style="color:#f92672">=</span> [symbols(<span style="color:#e6db74">&#34;c</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>, real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]
+C <span style="color:#f92672">=</span> [symbols(<span style="color:#e6db74">&#34;c</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>, real<span style="color:#f92672">=</span>true) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]
 
 <span style="color:#75715e"># 3个顶点面积坐标</span>
 M<span style="color:#f92672">=</span> [LL[j](x<span style="color:#f92672">=&gt;</span>X[i],y<span style="color:#f92672">=&gt;</span>Y[i]) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>, j <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]  <span style="color:#f92672">.|&gt;</span>  simplify
@@ -549,14 +549,14 @@ M<span style="color:#f92672">=</span> [LL[j](x<span style="color:#f92672">=&gt;<
 p(r,s,t)<span style="color:#f92672">=</span>C[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">*</span>r <span style="color:#f92672">+</span> C[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">*</span>s <span style="color:#f92672">+</span> C[<span style="color:#ae81ff">3</span>]<span style="color:#f92672">*</span>t
 
 <span style="color:#75715e"># 3个节点方程</span>
-eqs <span style="color:#f92672">=</span> [ p(M[i,<span style="color:#ae81ff">1</span>],M[i,<span style="color:#ae81ff">2</span>],M[i,<span style="color:#ae81ff">3</span>])⩵U[i] <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]
+eqs <span style="color:#f92672">=</span> [ p(M[i,<span style="color:#ae81ff">1</span>],M[i,<span style="color:#ae81ff">2</span>],M[i,<span style="color:#ae81ff">3</span>])<span style="color:#f92672">⩵</span>U[i] <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]
 
 <span style="color:#75715e"># 求解这个线性方程组</span>
 solC <span style="color:#f92672">=</span> solve(eqs,C)
 pl <span style="color:#f92672">=</span> p(L[<span style="color:#ae81ff">1</span>],L[<span style="color:#ae81ff">2</span>],L[<span style="color:#ae81ff">3</span>])(solC) 
 
 <span style="color:#75715e"># 显示</span>
-[symbols(<span style="color:#e6db74">&#34;p1&#34;</span>)⩵pl]  <span style="color:#f92672">.|&gt;</span> latex <span style="color:#f92672">|&gt;</span> MD
+[symbols(<span style="color:#e6db74">&#34;p1&#34;</span>)<span style="color:#f92672">⩵</span>pl]  <span style="color:#f92672">.|&gt;</span> latex <span style="color:#f92672">|&gt;</span> MD
 </code></pre></div>
 
 
@@ -589,9 +589,9 @@ p_2(l_1,l_2,l_3)=c_1 l_1^2 + c_2 l_2^2   + c_3 l_3^2  + c_4 l_1 l_2 + c_5 l_2 l_
 
 <p>推导如下（用到了归一化条件，保存在变量<code>pl2</code>中）：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 六个节点值</span>
-U <span style="color:#f92672">=</span> [symbols(<span style="color:#e6db74">&#34;u</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>, real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">6</span>]
+U <span style="color:#f92672">=</span> [symbols(<span style="color:#e6db74">&#34;u</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>, real<span style="color:#f92672">=</span>true) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">6</span>]
 <span style="color:#75715e"># 六个待定系数</span>
-C <span style="color:#f92672">=</span> [symbols(<span style="color:#e6db74">&#34;c</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>, real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">6</span>]
+C <span style="color:#f92672">=</span> [symbols(<span style="color:#e6db74">&#34;c</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>, real<span style="color:#f92672">=</span>true) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">6</span>]
 
 <span style="color:#75715e"># 3个顶点面积坐标</span>
 M<span style="color:#f92672">=</span> [LL[j](x<span style="color:#f92672">=&gt;</span>X[i],y<span style="color:#f92672">=&gt;</span>Y[i]) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>, j <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]  <span style="color:#f92672">.|&gt;</span>  simplify
@@ -602,7 +602,7 @@ M <span style="color:#f92672">=</span> vcat(M,[(M[i<span style="color:#f92672">%
 p2(r,s,t)<span style="color:#f92672">=</span>C[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">*</span>r<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> C[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">*</span>s<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> C[<span style="color:#ae81ff">3</span>]<span style="color:#f92672">*</span>t<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> C[<span style="color:#ae81ff">4</span>]<span style="color:#f92672">*</span>r<span style="color:#f92672">*</span>s <span style="color:#f92672">+</span> C[<span style="color:#ae81ff">5</span>]<span style="color:#f92672">*</span>s<span style="color:#f92672">*</span>t <span style="color:#f92672">+</span> C[<span style="color:#ae81ff">6</span>]<span style="color:#f92672">*</span>t<span style="color:#f92672">*</span>r
 
 <span style="color:#75715e"># 6个节点方程</span>
-eqs <span style="color:#f92672">=</span> [ p2(M[i,<span style="color:#ae81ff">1</span>],M[i,<span style="color:#ae81ff">2</span>],M[i,<span style="color:#ae81ff">3</span>])⩵U[i] <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">6</span>]
+eqs <span style="color:#f92672">=</span> [ p2(M[i,<span style="color:#ae81ff">1</span>],M[i,<span style="color:#ae81ff">2</span>],M[i,<span style="color:#ae81ff">3</span>])<span style="color:#f92672">⩵</span>U[i] <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">6</span>]
 
 <span style="color:#75715e"># 求解这个线性方程组</span>
 solC <span style="color:#f92672">=</span> solve(eqs,C)
@@ -617,7 +617,7 @@ pl2 <span style="color:#f92672">=</span> pl2(L[<span style="color:#ae81ff">1</sp
 pl2 <span style="color:#f92672">=</span> collect(pl2 <span style="color:#f92672">|&gt;</span> expand, U) <span style="color:#f92672">|&gt;</span>  simplify
 
 <span style="color:#75715e"># 显示</span>
-[symbols(<span style="color:#e6db74">&#34;p2&#34;</span>)⩵pl2]  <span style="color:#f92672">.|&gt;</span> latex <span style="color:#f92672">|&gt;</span> MD
+[symbols(<span style="color:#e6db74">&#34;p2&#34;</span>)<span style="color:#f92672">⩵</span>pl2]  <span style="color:#f92672">.|&gt;</span> latex <span style="color:#f92672">|&gt;</span> MD
 </code></pre></div>
 
 
@@ -688,9 +688,9 @@ p_3(l_1,l_2,l_3)=c_1 l_1^3 + c_2 l_2^3   + c_3 l_3^3  + c_4 l_1^2 l_2 + c_5 l_1^
 偏导数值</p>
 <p>推导如下（保存在变量<code>pl3</code>中，对应的系数保持在数组<code>αβγ</code>中）：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#75715e"># 10个节点值</span>
-U <span style="color:#f92672">=</span> [symbols(<span style="color:#e6db74">&#34;u</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>, real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>]
+U <span style="color:#f92672">=</span> [symbols(<span style="color:#e6db74">&#34;u</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>, real<span style="color:#f92672">=</span>true) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>]
 <span style="color:#75715e"># 10个待定系数</span>
-C <span style="color:#f92672">=</span> [symbols(<span style="color:#e6db74">&#34;c</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>, real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>]
+C <span style="color:#f92672">=</span> [symbols(<span style="color:#e6db74">&#34;c</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>, real<span style="color:#f92672">=</span>true) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>]
 
 <span style="color:#75715e"># 三次多项式插值（有待定系数）</span>
 p3(r,s,t)<span style="color:#f92672">=</span>C[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">*</span>r<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span><span style="color:#f92672">+</span>C[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">*</span>s<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span><span style="color:#f92672">+</span>C[<span style="color:#ae81ff">3</span>]<span style="color:#f92672">*</span>t<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span><span style="color:#f92672">+</span>C[<span style="color:#ae81ff">4</span>]<span style="color:#f92672">*</span>r<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>s<span style="color:#f92672">+</span>C[<span style="color:#ae81ff">5</span>]<span style="color:#f92672">*</span>r<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>t<span style="color:#f92672">+</span>C[<span style="color:#ae81ff">6</span>]<span style="color:#f92672">*</span>s<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>r<span style="color:#f92672">+</span>C[<span style="color:#ae81ff">7</span>]<span style="color:#f92672">*</span>s<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>t<span style="color:#f92672">+</span>C[<span style="color:#ae81ff">8</span>]<span style="color:#f92672">*</span>t<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>r<span style="color:#f92672">+</span>C[<span style="color:#ae81ff">9</span>]<span style="color:#f92672">*</span>t<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>s<span style="color:#f92672">+</span>C[<span style="color:#ae81ff">10</span>]<span style="color:#f92672">*</span>r<span style="color:#f92672">*</span>s<span style="color:#f92672">*</span>t
@@ -705,14 +705,14 @@ dpy(r,s,t)<span style="color:#f92672">=</span>ex2(L[<span style="color:#ae81ff">
 M<span style="color:#f92672">=</span> [LL[j](x<span style="color:#f92672">=&gt;</span>X[i],y<span style="color:#f92672">=&gt;</span>Y[i]) <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>, j <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>] <span style="color:#f92672">.|&gt;</span>  simplify
 
 <span style="color:#75715e"># 3个顶点方程</span>
-eqs <span style="color:#f92672">=</span> [ p3(M[i,<span style="color:#ae81ff">1</span>],M[i,<span style="color:#ae81ff">2</span>],M[i,<span style="color:#ae81ff">3</span>])⩵U[i] <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]
+eqs <span style="color:#f92672">=</span> [ p3(M[i,<span style="color:#ae81ff">1</span>],M[i,<span style="color:#ae81ff">2</span>],M[i,<span style="color:#ae81ff">3</span>])<span style="color:#f92672">⩵</span>U[i] <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]
 
 <span style="color:#75715e"># 6个偏导数方程</span>
-eqs <span style="color:#f92672">=</span> vcat(eqs,[dpx(M[i,<span style="color:#ae81ff">1</span>],M[i,<span style="color:#ae81ff">2</span>],M[i,<span style="color:#ae81ff">3</span>])⩵U[<span style="color:#ae81ff">3</span><span style="color:#f92672">+</span>i] <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>])
-eqs <span style="color:#f92672">=</span> vcat(eqs,[dpy(M[i,<span style="color:#ae81ff">1</span>],M[i,<span style="color:#ae81ff">2</span>],M[i,<span style="color:#ae81ff">3</span>])⩵U[<span style="color:#ae81ff">6</span><span style="color:#f92672">+</span>i] <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>])
+eqs <span style="color:#f92672">=</span> vcat(eqs,[dpx(M[i,<span style="color:#ae81ff">1</span>],M[i,<span style="color:#ae81ff">2</span>],M[i,<span style="color:#ae81ff">3</span>])<span style="color:#f92672">⩵</span>U[<span style="color:#ae81ff">3</span><span style="color:#f92672">+</span>i] <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>])
+eqs <span style="color:#f92672">=</span> vcat(eqs,[dpy(M[i,<span style="color:#ae81ff">1</span>],M[i,<span style="color:#ae81ff">2</span>],M[i,<span style="color:#ae81ff">3</span>])<span style="color:#f92672">⩵</span>U[<span style="color:#ae81ff">6</span><span style="color:#f92672">+</span>i] <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>])
 
 <span style="color:#75715e"># 1个中点方程</span>
-eqs <span style="color:#f92672">=</span> vcat(eqs,[p3(sum(M[<span style="color:#f92672">:</span>,<span style="color:#ae81ff">1</span>])<span style="color:#f92672">/</span><span style="color:#ae81ff">3</span>,sum(M[<span style="color:#f92672">:</span>,<span style="color:#ae81ff">2</span>])<span style="color:#f92672">/</span><span style="color:#ae81ff">3</span>,sum(M[<span style="color:#f92672">:</span>,<span style="color:#ae81ff">3</span>])<span style="color:#f92672">/</span><span style="color:#ae81ff">3</span>)⩵U[<span style="color:#ae81ff">10</span>]])
+eqs <span style="color:#f92672">=</span> vcat(eqs,[p3(sum(M[<span style="color:#f92672">:</span>,<span style="color:#ae81ff">1</span>])<span style="color:#f92672">/</span><span style="color:#ae81ff">3</span>,sum(M[<span style="color:#f92672">:</span>,<span style="color:#ae81ff">2</span>])<span style="color:#f92672">/</span><span style="color:#ae81ff">3</span>,sum(M[<span style="color:#f92672">:</span>,<span style="color:#ae81ff">3</span>])<span style="color:#f92672">/</span><span style="color:#ae81ff">3</span>)<span style="color:#f92672">⩵</span>U[<span style="color:#ae81ff">10</span>]])
 
 <span style="color:#75715e"># 解出待定系数</span>
 <span style="color:#a6e22e">@time</span> solC <span style="color:#f92672">=</span> solve(eqs,C)
@@ -733,10 +733,10 @@ ls <span style="color:#f92672">=</span> [L[<span style="color:#ae81ff">1</span>]
 αβγ <span style="color:#f92672">=</span> αβγ <span style="color:#f92672">.|&gt;</span>  t<span style="color:#f92672">-&gt;</span>collect(t, ls) 
 
 <span style="color:#75715e"># 显示</span>
-tmp <span style="color:#f92672">=</span> [symbols(<span style="color:#e6db74">&#34;α0&#34;</span>)⩵αβγ[<span style="color:#ae81ff">10</span>]] 
-tmp <span style="color:#f92672">=</span> vcat(tmp,[symbols(<span style="color:#e6db74">&#34;α</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>)⩵αβγ[i] <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>])
-tmp <span style="color:#f92672">=</span> vcat(tmp,[symbols(<span style="color:#e6db74">&#34;β</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>)⩵αβγ[<span style="color:#ae81ff">3</span><span style="color:#f92672">+</span>i] <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>])
-tmp <span style="color:#f92672">=</span> vcat(tmp,[symbols(<span style="color:#e6db74">&#34;γ</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>)⩵αβγ[<span style="color:#ae81ff">6</span><span style="color:#f92672">+</span>i] <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>])
+tmp <span style="color:#f92672">=</span> [symbols(<span style="color:#e6db74">&#34;α0&#34;</span>)<span style="color:#f92672">⩵</span>αβγ[<span style="color:#ae81ff">10</span>]] 
+tmp <span style="color:#f92672">=</span> vcat(tmp,[symbols(<span style="color:#e6db74">&#34;α</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">⩵</span>αβγ[i] <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>])
+tmp <span style="color:#f92672">=</span> vcat(tmp,[symbols(<span style="color:#e6db74">&#34;β</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">⩵</span>αβγ[<span style="color:#ae81ff">3</span><span style="color:#f92672">+</span>i] <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>])
+tmp <span style="color:#f92672">=</span> vcat(tmp,[symbols(<span style="color:#e6db74">&#34;γ</span><span style="color:#e6db74">$i</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">⩵</span>αβγ[<span style="color:#ae81ff">6</span><span style="color:#f92672">+</span>i] <span style="color:#66d9ef">for</span> i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>])
 tmp <span style="color:#f92672">.|&gt;</span> latex <span style="color:#f92672">|&gt;</span> MD
 </code></pre></div><pre><code> 15.244530 seconds (597 allocations: 18.047 KiB)
 </code></pre>

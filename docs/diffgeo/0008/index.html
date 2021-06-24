@@ -37,10 +37,10 @@
 <link rel="icon" href="/notes/favicon.png" type="image/x-icon">
 
 
-<link rel="stylesheet" href="/notes/book.min.0253b76936e9496c1a48e74d90cdc268fd0e96366c60a1f43994801cc334588a.css" integrity="sha256-AlO3aTbpSWwaSOdNkM3CaP0OljZsYKH0OZSAHMM0WIo=">
+<link rel="stylesheet" href="/notes/book.min.07a0a866d76192b38577628c20f8f349c797682bd8a0d6b3d18465b8420bd2fb.css" integrity="sha256-B6CoZtdhkrOFd2KMIPjzSceXaCvYoNaz0YRluEIL0vs=">
 
 
-<script defer src="/notes/cn.search.min.c9e07669544fa8ea9d43c2a1f23a11bae508039b3f5d99b0b5d1502251caeda8.js" integrity="sha256-yeB2aVRPqOqdQ8Kh8joRuuUIA5s/XZmwtdFQIlHK7ag="></script>
+<script defer src="/notes/cn.search.min.7478184bec8c1596b39dd6644b3d22a4548027de995c3895807c8ed6287aad32.js" integrity="sha256-dHgYS&#43;yMFZazndZkSz0ipFSAJ96ZXDiVgHyO1ih6rTI="></script>
 
 <!--
 Made with Book Theme
@@ -747,7 +747,7 @@ R_{\mu \sigma}=R^{\ \quad \upsilon}_{\mu \upsilon \sigma}=\Gamma^\upsilon_{\ \ \
 <p>用<code>julia</code>解决这个问题。首先设置变量，设置度规张量，并计算逆度规：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#66d9ef">using</span> SymPy
 
-<span style="color:#a6e22e">@vars</span> t x y z real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+<span style="color:#a6e22e">@vars</span> t x y z real<span style="color:#f92672">=</span>true
 xv <span style="color:#f92672">=</span> [t,x,y,z]
 
 <span style="color:#75715e"># 度规张量及其逆</span>
@@ -761,7 +761,7 @@ gi <span style="color:#f92672">=</span> inv(g);
     <span style="color:#66d9ef">for</span> ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>)
 
 <span style="color:#75715e"># 显示所有分量（剔除了０分量和对称分量）</span>
-[symbols(<span style="color:#e6db74">&#34;Γ^{</span><span style="color:#e6db74">$σ</span><span style="color:#e6db74">}_{</span><span style="color:#e6db74">$μ$υ</span><span style="color:#e6db74">}&#34;</span>)⩵Γ[μ,υ,σ] 
+[symbols(<span style="color:#e6db74">&#34;Γ^{</span><span style="color:#e6db74">$σ</span><span style="color:#e6db74">}_{</span><span style="color:#e6db74">$μ$υ</span><span style="color:#e6db74">}&#34;</span>)<span style="color:#f92672">⩵</span>Γ[μ,υ,σ] 
         <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,υ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span> ,σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>
             <span style="color:#66d9ef">if</span> Γ[μ,υ,σ]<span style="color:#f92672">!=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> μ<span style="color:#f92672">&lt;=</span>υ]<span style="color:#f92672">.</span>T
 </code></pre></div><p><img src="/notes/images/0015.jpg" alt="0015.jpg"></p>
@@ -773,7 +773,7 @@ R<span style="color:#f92672">=</span>[diff(Γ[μ,σ,ρ],xv[υ])<span style="colo
     <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,υ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span> ,σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>]
 
 <span style="color:#75715e"># 显示所有分量（剔除了０分量和反对称分量）</span>
-reshape([symbols(<span style="color:#e6db74">&#34;R_{</span><span style="color:#e6db74">$μ$υ$σ</span><span style="color:#e6db74">}^{</span><span style="color:#e6db74">$ρ</span><span style="color:#e6db74">}&#34;</span>)⩵R[μ,υ,σ,ρ] 
+reshape([symbols(<span style="color:#e6db74">&#34;R_{</span><span style="color:#e6db74">$μ$υ$σ</span><span style="color:#e6db74">}^{</span><span style="color:#e6db74">$ρ</span><span style="color:#e6db74">}&#34;</span>)<span style="color:#f92672">⩵</span>R[μ,υ,σ,ρ] 
         <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,υ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span> ,σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span> 
             <span style="color:#66d9ef">if</span> R[μ,υ,σ,ρ]<span style="color:#f92672">!=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> μ<span style="color:#f92672">&lt;=</span>υ],(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>))
 </code></pre></div><p><img src="/notes/images/0016.jpg" alt="0016.jpg"></p>

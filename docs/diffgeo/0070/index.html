@@ -20,10 +20,10 @@ Julia，对数学符号真太友好了。
 <link rel="icon" href="/notes/favicon.png" type="image/x-icon">
 
 
-<link rel="stylesheet" href="/notes/book.min.0253b76936e9496c1a48e74d90cdc268fd0e96366c60a1f43994801cc334588a.css" integrity="sha256-AlO3aTbpSWwaSOdNkM3CaP0OljZsYKH0OZSAHMM0WIo=">
+<link rel="stylesheet" href="/notes/book.min.07a0a866d76192b38577628c20f8f349c797682bd8a0d6b3d18465b8420bd2fb.css" integrity="sha256-B6CoZtdhkrOFd2KMIPjzSceXaCvYoNaz0YRluEIL0vs=">
 
 
-<script defer src="/notes/cn.search.min.c9e07669544fa8ea9d43c2a1f23a11bae508039b3f5d99b0b5d1502251caeda8.js" integrity="sha256-yeB2aVRPqOqdQ8Kh8joRuuUIA5s/XZmwtdFQIlHK7ag="></script>
+<script defer src="/notes/cn.search.min.7478184bec8c1596b39dd6644b3d22a4548027de995c3895807c8ed6287aad32.js" integrity="sha256-dHgYS&#43;yMFZazndZkSz0ipFSAJ96ZXDiVgHyO1ih6rTI="></script>
 
 <!--
 Made with Book Theme
@@ -287,7 +287,7 @@ https://github.com/alex-shpak/hugo-book
 <p>以笛卡尔坐标到球坐标的变换为例求球坐标下的度规，用<code>Julia</code>实现之：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#66d9ef">using</span> SymPy
 
-<span style="color:#a6e22e">@vars</span> r θ φ real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+<span style="color:#a6e22e">@vars</span> r θ φ real<span style="color:#f92672">=</span>true
 
 <span style="color:#75715e"># 笛卡尔坐标到球坐标的变换</span>
 X <span style="color:#f92672">=</span> [r<span style="color:#f92672">*</span>sin(θ)<span style="color:#f92672">*</span>cos(φ), r<span style="color:#f92672">*</span>sin(θ)<span style="color:#f92672">*</span>sin(φ), r<span style="color:#f92672">*</span>cos(θ)]
@@ -311,7 +311,7 @@ h
 <span style="color:#75715e">#</span>
 <span style="color:#66d9ef">using</span> SymPy
 
-<span style="color:#a6e22e">@vars</span> r, θ φ real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+<span style="color:#a6e22e">@vars</span> r, θ φ real<span style="color:#f92672">=</span>true
 
 X <span style="color:#f92672">=</span> [r<span style="color:#f92672">*</span>sin(θ)<span style="color:#f92672">*</span>cos(φ), r<span style="color:#f92672">*</span>sin(θ)<span style="color:#f92672">*</span>sin(φ), r<span style="color:#f92672">*</span>cos(θ)]
 <span style="color:#75715e"># 球面只有两个参数， r是常量，所以不在坐标列表中</span>
@@ -395,7 +395,7 @@ h
 <p>有了这些约定，很容易用<code>Julia</code>计算之：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#66d9ef">using</span> SymPy
 
-<span style="color:#a6e22e">@vars</span> t x y z real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+<span style="color:#a6e22e">@vars</span> t x y z real<span style="color:#f92672">=</span>true
 
 <span style="color:#75715e"># 坐标变量</span>
 X <span style="color:#f92672">=</span> [t,x,y,z]
@@ -411,7 +411,7 @@ gi <span style="color:#f92672">=</span> inv(g);
     <span style="color:#66d9ef">for</span> ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>)  <span style="color:#75715e"># 缩并求和指标</span>
 
 <span style="color:#75715e"># 显示所有分量（剔除了０分量和对称分量）</span>
-[symbols(<span style="color:#e6db74">&#34;Γ^{</span><span style="color:#e6db74">$σ</span><span style="color:#e6db74">}_{</span><span style="color:#e6db74">$μ$υ</span><span style="color:#e6db74">}&#34;</span>)⩵Γ[μ,υ,σ] 
+[symbols(<span style="color:#e6db74">&#34;Γ^{</span><span style="color:#e6db74">$σ</span><span style="color:#e6db74">}_{</span><span style="color:#e6db74">$μ$υ</span><span style="color:#e6db74">}&#34;</span>)<span style="color:#f92672">⩵</span>Γ[μ,υ,σ] 
         <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,υ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span> ,σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>
             <span style="color:#66d9ef">if</span> Γ[μ,υ,σ]<span style="color:#f92672">!=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> μ<span style="color:#f92672">&lt;=</span>υ]<span style="color:#f92672">.</span>T
 </code></pre></div><p><img src="/notes/images/0111.jpg" alt="0111.jpg"></p>
@@ -447,7 +447,7 @@ R<span style="color:#f92672">=</span>[diff(Γ[μ,σ,ρ],X[υ])<span style="color
     <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,υ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span> ,σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>] <span style="color:#75715e"># 四重数组生成指标</span>
 
 <span style="color:#75715e"># 显示所有分量（剔除了０分量和反对称分量）</span>
-reshape([symbols(<span style="color:#e6db74">&#34;R_{</span><span style="color:#e6db74">$μ$υ$σ</span><span style="color:#e6db74">}^{</span><span style="color:#e6db74">$ρ</span><span style="color:#e6db74">}&#34;</span>)⩵R[μ,υ,σ,ρ] 
+reshape([symbols(<span style="color:#e6db74">&#34;R_{</span><span style="color:#e6db74">$μ$υ$σ</span><span style="color:#e6db74">}^{</span><span style="color:#e6db74">$ρ</span><span style="color:#e6db74">}&#34;</span>)<span style="color:#f92672">⩵</span>R[μ,υ,σ,ρ] 
         <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,υ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span> ,σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>,ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span> 
             <span style="color:#66d9ef">if</span> R[μ,υ,σ,ρ]<span style="color:#f92672">!=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> μ<span style="color:#f92672">&lt;=</span>υ],(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>))
 </code></pre></div><p><img src="/notes/images/0112.jpg" alt="0112.jpg"></p>
@@ -483,7 +483,7 @@ RR<span style="color:#f92672">=</span>[sum(R[μ,υ,σ,υ]
 。根据方框中的公式用<code>Julia</code>很容易列出所有Killing方程</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#66d9ef">using</span> SymPy
 
-<span style="color:#a6e22e">@vars</span> θ φ real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+<span style="color:#a6e22e">@vars</span> θ φ real<span style="color:#f92672">=</span>true
 
 <span style="color:#75715e"># 待求的Killing矢量场的分量</span>
 ξ <span style="color:#f92672">=</span> SymFunction(<span style="color:#e6db74">&#34;ξ^1,ξ^2&#34;</span>)
@@ -507,7 +507,7 @@ hi <span style="color:#f92672">=</span> inv(h)
     <span style="color:#66d9ef">for</span> ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>)
 
 <span style="color:#75715e"># 列出所有独立Killing方程</span>
-eqs <span style="color:#f92672">=</span> [(<span style="color:#ae81ff">0</span>⩵diff(sum(h[υ,ρ]<span style="color:#f92672">*</span>ξ[ρ](θ,φ) <span style="color:#66d9ef">for</span> ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>),Q[μ])<span style="color:#f92672">+</span>
+eqs <span style="color:#f92672">=</span> [(<span style="color:#ae81ff">0</span><span style="color:#f92672">⩵</span>diff(sum(h[υ,ρ]<span style="color:#f92672">*</span>ξ[ρ](θ,φ) <span style="color:#66d9ef">for</span> ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>),Q[μ])<span style="color:#f92672">+</span>
         diff(sum(h[μ,ρ]<span style="color:#f92672">*</span>ξ[ρ](θ,φ) <span style="color:#66d9ef">for</span> ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>),Q[υ])<span style="color:#f92672">-</span>
         <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>sum(Γ[μ,υ,σ]<span style="color:#f92672">*</span>sum(h[σ,ρ]<span style="color:#f92672">*</span>ξ[ρ](θ,φ) <span style="color:#66d9ef">for</span> ρ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>) 
             <span style="color:#66d9ef">for</span> σ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>)) 
@@ -603,7 +603,7 @@ eqs <span style="color:#f92672">=</span> [(<span style="color:#ae81ff">0</span>�
 <span style="color:#75715e"># E[1:4] 对应4个平移生成元</span>
 <span style="color:#75715e"># E[5:7] 对应3个转动生成元</span>
 <span style="color:#75715e"># E[8:10]对应3个伪转动生成元</span>
-<span style="color:#a6e22e">@vars</span> P0 P1 P2 P3 J1 J2 J3 K1 K2 K3 real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+<span style="color:#a6e22e">@vars</span> P0 P1 P2 P3 J1 J2 J3 K1 K2 K3 real<span style="color:#f92672">=</span>true
 E<span style="color:#f92672">=</span>[P0,P1,P2,P3,J1,J2,J3,K1,K2,K3];
                             
 <span style="color:#75715e"># J:  两上标洛伦兹生成元矩阵</span>
@@ -633,7 +633,7 @@ PP <span style="color:#f92672">=</span> sum(P[μ]<span style="color:#f92672">*</
 WW <span style="color:#f92672">=</span> sum(W[μ]<span style="color:#f92672">*</span>Wi[μ] <span style="color:#66d9ef">for</span> μ <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>);
 [PP,WW] <span style="color:#f92672">.|&gt;</span> simplify
 
-<span style="color:#a6e22e">@vars</span> m ω  real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>  positive<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+<span style="color:#a6e22e">@vars</span> m ω  real<span style="color:#f92672">=</span>true  positive<span style="color:#f92672">=</span>true
 
 <span style="color:#75715e"># 有质量：m &gt; 0</span>
 [PP,WW] <span style="color:#f92672">.|&gt;</span> (expr<span style="color:#f92672">-&gt;</span>expr(P0<span style="color:#f92672">=&gt;</span>m,P1<span style="color:#f92672">=&gt;</span><span style="color:#ae81ff">0</span>,P2<span style="color:#f92672">=&gt;</span><span style="color:#ae81ff">0</span>,P3<span style="color:#f92672">=&gt;</span><span style="color:#ae81ff">0</span>)) <span style="color:#f92672">.|&gt;</span> simplify

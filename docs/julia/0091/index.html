@@ -23,10 +23,10 @@
 <link rel="icon" href="/notes/favicon.png" type="image/x-icon">
 
 
-<link rel="stylesheet" href="/notes/book.min.0253b76936e9496c1a48e74d90cdc268fd0e96366c60a1f43994801cc334588a.css" integrity="sha256-AlO3aTbpSWwaSOdNkM3CaP0OljZsYKH0OZSAHMM0WIo=">
+<link rel="stylesheet" href="/notes/book.min.07a0a866d76192b38577628c20f8f349c797682bd8a0d6b3d18465b8420bd2fb.css" integrity="sha256-B6CoZtdhkrOFd2KMIPjzSceXaCvYoNaz0YRluEIL0vs=">
 
 
-<script defer src="/notes/cn.search.min.c9e07669544fa8ea9d43c2a1f23a11bae508039b3f5d99b0b5d1502251caeda8.js" integrity="sha256-yeB2aVRPqOqdQ8Kh8joRuuUIA5s/XZmwtdFQIlHK7ag="></script>
+<script defer src="/notes/cn.search.min.7478184bec8c1596b39dd6644b3d22a4548027de995c3895807c8ed6287aad32.js" integrity="sha256-dHgYS&#43;yMFZazndZkSz0ipFSAJ96ZXDiVgHyO1ih6rTI="></script>
 
 <!--
 Made with Book Theme
@@ -548,7 +548,7 @@ q(t) <span style="color:#f92672">=</span> pi<span style="color:#f92672">^</span>
 <span style="color:#a6e22e">@vars</span> t
 y <span style="color:#f92672">=</span> SymFunction(<span style="color:#e6db74">&#34;y&#34;</span>)
 
-diffeq <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>diff(y(t),t,<span style="color:#ae81ff">2</span>)<span style="color:#f92672">+</span>(PI<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">/</span><span style="color:#ae81ff">4</span>)y(t)⩵(PI<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">*</span>sin(t<span style="color:#f92672">*</span>PI<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)
+diffeq <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>diff(y(t),t,<span style="color:#ae81ff">2</span>)<span style="color:#f92672">+</span>(PI<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">/</span><span style="color:#ae81ff">4</span>)y(t)<span style="color:#f92672">⩵</span>(PI<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">*</span>sin(t<span style="color:#f92672">*</span>PI<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)
 
 <span style="color:#75715e"># 通解</span>
 ex <span style="color:#f92672">=</span> dsolve(diffeq, y(t))
@@ -556,7 +556,7 @@ ex <span style="color:#f92672">=</span> dsolve(diffeq, y(t))
 <span style="color:#75715e"># 根据边界条件确定积分常数</span>
 ex1 <span style="color:#f92672">=</span> rhs(ex)
 ex2 <span style="color:#f92672">=</span> diff(ex1,t)
-eqs <span style="color:#f92672">=</span> [ex1(t<span style="color:#f92672">=&gt;</span><span style="color:#ae81ff">0</span>)⩵0,ex2(t<span style="color:#f92672">=&gt;</span><span style="color:#ae81ff">1</span>)⩵0]
+eqs <span style="color:#f92672">=</span> [ex1(t<span style="color:#f92672">=&gt;</span><span style="color:#ae81ff">0</span>)<span style="color:#f92672">⩵</span><span style="color:#ae81ff">0</span>,ex2(t<span style="color:#f92672">=&gt;</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">⩵</span><span style="color:#ae81ff">0</span>]
 C <span style="color:#f92672">=</span> solve(eqs,[Sym(<span style="color:#e6db74">&#34;C1&#34;</span>),Sym(<span style="color:#e6db74">&#34;C2&#34;</span>)])
 
 <span style="color:#75715e"># 解析解</span>

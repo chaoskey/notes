@@ -17,10 +17,10 @@
 <link rel="icon" href="/notes/favicon.png" type="image/x-icon">
 
 
-<link rel="stylesheet" href="/notes/book.min.0253b76936e9496c1a48e74d90cdc268fd0e96366c60a1f43994801cc334588a.css" integrity="sha256-AlO3aTbpSWwaSOdNkM3CaP0OljZsYKH0OZSAHMM0WIo=">
+<link rel="stylesheet" href="/notes/book.min.07a0a866d76192b38577628c20f8f349c797682bd8a0d6b3d18465b8420bd2fb.css" integrity="sha256-B6CoZtdhkrOFd2KMIPjzSceXaCvYoNaz0YRluEIL0vs=">
 
 
-<script defer src="/notes/cn.search.min.c9e07669544fa8ea9d43c2a1f23a11bae508039b3f5d99b0b5d1502251caeda8.js" integrity="sha256-yeB2aVRPqOqdQ8Kh8joRuuUIA5s/XZmwtdFQIlHK7ag="></script>
+<script defer src="/notes/cn.search.min.7478184bec8c1596b39dd6644b3d22a4548027de995c3895807c8ed6287aad32.js" integrity="sha256-dHgYS&#43;yMFZazndZkSz0ipFSAJ96ZXDiVgHyO1ih6rTI="></script>
 
 <!--
 Made with Book Theme
@@ -286,15 +286,15 @@ a,b,c <span style="color:#f92672">=</span> Sym(<span style="color:#e6db74">&#34;
 </code></pre></div><h2 id="带假设的变量符号">带假设的变量符号</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">u <span style="color:#f92672">=</span> symbols(<span style="color:#e6db74">&#34;u&#34;</span>)            <span style="color:#75715e"># 无假设变量定义３</span>
 
-t <span style="color:#f92672">=</span> symbols(<span style="color:#e6db74">&#34;t&#34;</span>, real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>) <span style="color:#75715e"># 带假设变量定义</span>
-y1, y2 <span style="color:#f92672">=</span> symbols(<span style="color:#e6db74">&#34;y1, y2&#34;</span>, positive<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>)
-alpha <span style="color:#f92672">=</span> symbols(<span style="color:#e6db74">&#34;alpha&#34;</span>, integer<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>, positive<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>)
+t <span style="color:#f92672">=</span> symbols(<span style="color:#e6db74">&#34;t&#34;</span>, real<span style="color:#f92672">=</span>true) <span style="color:#75715e"># 带假设变量定义</span>
+y1, y2 <span style="color:#f92672">=</span> symbols(<span style="color:#e6db74">&#34;y1, y2&#34;</span>, positive<span style="color:#f92672">=</span>true)
+alpha <span style="color:#f92672">=</span> symbols(<span style="color:#e6db74">&#34;alpha&#34;</span>, integer<span style="color:#f92672">=</span>true, positive<span style="color:#f92672">=</span>true)
 
-<span style="color:#a6e22e">@vars</span> u1 u2 positive<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>   <span style="color:#75715e"># @vars也能定义带假设变量</span>
+<span style="color:#a6e22e">@vars</span> u1 u2 positive<span style="color:#f92672">=</span>true   <span style="color:#75715e"># @vars也能定义带假设变量</span>
 </code></pre></div><p>比如：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#66d9ef">using</span> SymPy
 
-<span style="color:#a6e22e">@vars</span> x real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span> y
+<span style="color:#a6e22e">@vars</span> x real<span style="color:#f92672">=</span>true y
 
 solve(x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)  <span style="color:#75715e"># 应该无解（没实数解）</span>
 
@@ -448,7 +448,7 @@ collect(q, x)
 <h2 id="指数化简">指数化简</h2>
 <p>可以对含指数的表达式进行无条件或有条件的化简。背后实际是调用powsimp</p>
 <p>有条件化简：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x y nonnegative<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span> a real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x y nonnegative<span style="color:#f92672">=</span>true a real<span style="color:#f92672">=</span>true
 simplify(x<span style="color:#f92672">^</span>a <span style="color:#f92672">*</span> y<span style="color:#f92672">^</span>a <span style="color:#f92672">-</span> (x<span style="color:#f92672">*</span>y)<span style="color:#f92672">^</span>a)
 </code></pre></div><p>结果是：0</p>
 <p>无条件化简：</p>
@@ -463,7 +463,7 @@ simplify(x<span style="color:#f92672">^</span>a <span style="color:#f92672">*</s
 </p>
 <h2 id="三角化简">三角化简</h2>
 <p>三角表达式的化简，背后实际是调用trigsimp，当然我们可以不关心。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> θ real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> θ real<span style="color:#f92672">=</span>true
 
 simplify(cos(θ)<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> sin(θ)<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>)
 simplify(sin(<span style="color:#ae81ff">2</span>θ) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>sin(θ)<span style="color:#f92672">*</span>cos(θ))
@@ -570,7 +570,7 @@ elements(v) <span style="color:#75715e"># 也可以直接获得</span>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">nsolve(cos(x) <span style="color:#f92672">-</span> x, <span style="color:#ae81ff">1</span>)
 </code></pre></div><p>结果是：0.7390851332151606416553120876738734040134117589007574649656806357732846548836</p>
 <p>尽管不是什么都是能求解，但可能的话，能够给出一般形式的解，比如：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> a b c real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> a b c real<span style="color:#f92672">=</span>true
 p <span style="color:#f92672">=</span> a<span style="color:#f92672">*</span>x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> b<span style="color:#f92672">*</span>x <span style="color:#f92672">+</span> c
 
 solve(p, x)
@@ -589,7 +589,7 @@ solveset(p, x)
 </span>
 </p>
 <p>还可以求解方程组：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x y real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x y real<span style="color:#f92672">=</span>true
 exs <span style="color:#f92672">=</span> [<span style="color:#ae81ff">2</span>x<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>y<span style="color:#f92672">-</span><span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">3</span>x<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>y<span style="color:#f92672">-</span><span style="color:#ae81ff">12</span>]
 d <span style="color:#f92672">=</span> solve(exs)
 Sym(d)
@@ -610,7 +610,7 @@ Sym(d)
 </span>
 </p>
 <p>我们也可以选定求解变量：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> a b c h real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> a b c h real<span style="color:#f92672">=</span>true
 p <span style="color:#f92672">=</span> a<span style="color:#f92672">*</span>x<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> b<span style="color:#f92672">*</span>x <span style="color:#f92672">+</span> c
 fn <span style="color:#f92672">=</span> cos
 exs <span style="color:#f92672">=</span> [fn(<span style="color:#ae81ff">0</span><span style="color:#f92672">*</span>h)<span style="color:#f92672">-</span>p(x<span style="color:#f92672">=&gt;</span><span style="color:#ae81ff">0</span>), fn(h)<span style="color:#f92672">-</span>p(x <span style="color:#f92672">=&gt;</span> h), fn(<span style="color:#ae81ff">2</span>h)<span style="color:#f92672">-</span>p(x <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">2</span>h)]
@@ -688,8 +688,8 @@ Sym(d)
 </span>
 )。</p>
 <p>比如：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x y real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
-exs <span style="color:#f92672">=</span> [<span style="color:#ae81ff">2</span>x<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>y ⩵ <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">3</span>x<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>y ⩵ <span style="color:#ae81ff">12</span>]    <span style="color:#75715e">## Using \Equal[tab]</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x y real<span style="color:#f92672">=</span>true
+exs <span style="color:#f92672">=</span> [<span style="color:#ae81ff">2</span>x<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>y <span style="color:#f92672">⩵</span> <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">3</span>x<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>y <span style="color:#f92672">⩵</span> <span style="color:#ae81ff">12</span>]    <span style="color:#75715e">## Using \Equal[tab]</span>
 d <span style="color:#f92672">=</span> solve(exs)
 Sym(d)
 </code></pre></div><p>结果是： 
@@ -739,7 +739,7 @@ limit(sin(x)<span style="color:#f92672">/</span>x, x<span style="color:#f92672">
 </span>
 </p>
 <p>再比如：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> a positive<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> a positive<span style="color:#f92672">=</span>true
 
 ex <span style="color:#f92672">=</span> (sqrt(<span style="color:#ae81ff">2</span>a<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span><span style="color:#f92672">*</span>x<span style="color:#f92672">-</span>x<span style="color:#f92672">^</span><span style="color:#ae81ff">4</span>) <span style="color:#f92672">-</span> a<span style="color:#f92672">*</span>(a<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>x)<span style="color:#f92672">^</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">//</span><span style="color:#ae81ff">3</span>)) <span style="color:#f92672">/</span> (a <span style="color:#f92672">-</span> (a<span style="color:#f92672">*</span>x<span style="color:#f92672">^</span><span style="color:#ae81ff">3</span>)<span style="color:#f92672">^</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">//</span><span style="color:#ae81ff">4</span>))
 
@@ -861,7 +861,7 @@ ex1 <span style="color:#f92672">=</span> ex(y<span style="color:#f92672">=&gt;</
 ex2 <span style="color:#f92672">=</span> diff(ex1, x)          <span style="color:#75715e"># 求导</span>
 ex3 <span style="color:#f92672">=</span> solve(ex2, F<span style="color:#f92672">&#39;</span>(x))[<span style="color:#ae81ff">1</span>]  <span style="color:#75715e"># 求隐函数导数的形式解</span>
 ex4 <span style="color:#f92672">=</span> ex3(F(x) <span style="color:#f92672">=&gt;</span> y)        <span style="color:#75715e"># 隐函数复原后，就是隐式求导结果</span>
-[ex⩵0,ex1⩵0,ex2⩵0,F<span style="color:#f92672">&#39;</span>(x)⩵ex3,F<span style="color:#f92672">&#39;</span>(x)⩵ex4]
+[ex⩵0,ex1⩵0,ex2⩵0,F<span style="color:#f92672">&#39;</span>(x)<span style="color:#f92672">⩵</span>ex3,F<span style="color:#f92672">&#39;</span>(x)<span style="color:#f92672">⩵</span>ex4]
 </code></pre></div><p>计算过程：</p>
 
 
@@ -875,7 +875,7 @@ ex4 <span style="color:#f92672">=</span> ex3(F(x) <span style="color:#f92672">=&
 <h4 id="范例最大化诺尔曼窗口的面积">范例：最大化诺尔曼窗口的面积</h4>
 <p>如下图（诺尔曼窗口），周长固定的前提下，求诺尔曼窗口面积最大的宽高。</p>
 <p><img src="/notes/images/0003.jpg" alt="0003.jpg"></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> w h P nonnegative<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span> <span style="color:#75715e"># 宽w,高h, 周长P（固定）</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> w h P nonnegative<span style="color:#f92672">=</span>true <span style="color:#75715e"># 宽w,高h, 周长P（固定）</span>
 r <span style="color:#f92672">=</span> w<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>                      <span style="color:#75715e"># 半圆的半径r</span>
 A <span style="color:#f92672">=</span> w<span style="color:#f92672">*</span>h <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">//</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> (pi <span style="color:#f92672">*</span> r<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span>)  <span style="color:#75715e"># 诺尔曼窗口面积</span>
 p <span style="color:#f92672">=</span> w <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>h <span style="color:#f92672">+</span> pi<span style="color:#f92672">*</span>r            <span style="color:#75715e"># 周长</span>
@@ -931,7 +931,7 @@ b <span style="color:#f92672">=</span> solve((P<span style="color:#f92672">-</sp
 <p>这个结果表明：宽是高的２倍为此问题的最优解。</p>
 <h3 id="3-积分">3 积分</h3>
 <p>首先来一个不定积分：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x n real<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x n real<span style="color:#f92672">=</span>true
 
 ex <span style="color:#f92672">=</span> integrate(x<span style="color:#f92672">^</span>n, x)  <span style="color:#75715e"># 不定积分的参数和diff基本一致</span>
 </code></pre></div><p>返回结果： 
@@ -1114,7 +1114,7 @@ A <span style="color:#f92672">-</span> P<span style="color:#f92672">*</span>D<sp
 的通解：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x
 y <span style="color:#f92672">=</span> SymFunction(<span style="color:#e6db74">&#34;y&#34;</span>)
-diffeq <span style="color:#f92672">=</span> diff(y(x), x, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>diff(y(x)) <span style="color:#f92672">+</span> y(x)⩵ sin(x)
+diffeq <span style="color:#f92672">=</span> diff(y(x), x, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>diff(y(x)) <span style="color:#f92672">+</span> y(x)<span style="color:#f92672">⩵</span> sin(x)
 ex <span style="color:#f92672">=</span> dsolve(diffeq, y(x))
 </code></pre></div><p>结果是：
 
@@ -1124,7 +1124,7 @@ ex <span style="color:#f92672">=</span> dsolve(diffeq, y(x))
 </span>
 </p>
 <p>上面这个微分方程也可以写成：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">diffeq <span style="color:#f92672">=</span> y<span style="color:#f92672">&#39;</span><span style="color:#960050;background-color:#1e0010">&#39;</span>(x) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>y<span style="color:#f92672">&#39;</span>(x) <span style="color:#f92672">+</span> y(x) ⩵ sin(x)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia">diffeq <span style="color:#f92672">=</span> y<span style="color:#f92672">&#39;&#39;</span>(x) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>y<span style="color:#f92672">&#39;</span>(x) <span style="color:#f92672">+</span> y(x) <span style="color:#f92672">⩵</span> sin(x)
 </code></pre></div><p>如果给定初值条件：
 
 
@@ -1156,7 +1156,7 @@ ex3 <span style="color:#f92672">=</span> ex2(Sym(<span style="color:#e6db74">&#3
 <p>前面通过比较麻烦方法，先求通解，再初值回代解出积分常数。　其实可以直接解出初值问题，只需要简单加上边值条件的参数即可：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-julia" data-lang="julia"><span style="color:#a6e22e">@vars</span> x
 y <span style="color:#f92672">=</span> SymFunction(<span style="color:#e6db74">&#34;y&#34;</span>)
-diffeq <span style="color:#f92672">=</span> y<span style="color:#f92672">&#39;</span><span style="color:#960050;background-color:#1e0010">&#39;</span>(x) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>y<span style="color:#f92672">&#39;</span>(x) <span style="color:#f92672">+</span> y(x) ⩵ sin(x)
+diffeq <span style="color:#f92672">=</span> y<span style="color:#f92672">&#39;&#39;</span>(x) <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>y<span style="color:#f92672">&#39;</span>(x) <span style="color:#f92672">+</span> y(x) <span style="color:#f92672">⩵</span> sin(x)
 ex <span style="color:#f92672">=</span> dsolve(diffeq, y(x), ics<span style="color:#f92672">=</span>((y, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>), (y<span style="color:#f92672">&#39;</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>)))
 </code></pre></div><p>结果和前面一样。</p>
 <h2 id="最后说明">最后说明</h2>
