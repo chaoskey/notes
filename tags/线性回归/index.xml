@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>线性回归 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</link>
     <description>Recent content in 线性回归 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Tue, 23 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 23 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>7.6 贝叶斯线性回归</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0065/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/07linear_regression/0065/</link>
       <pubDate>Tue, 23 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0065/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/07linear_regression/0065/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;虽然岭回归是计算点估计的有用方法，但有时我们想要计算关于
   
     
@@ -66,21 +66,21 @@
     
     <item>
       <title>7.5 岭回归</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0064/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/07linear_regression/0064/</link>
       <pubDate>Mon, 22 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0064/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/07linear_regression/0064/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;最大拟然估计(MLE)的一个问题是它可能导致过拟合。 在本节中，我们将讨论一种通过使用高斯先验的最大后验估计(MAP)的方法来改善此问题。 为简单起见，我们假设高斯似然，而不是稳定性拟然。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>7.4 稳健线性回归*</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0063/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/07linear_regression/0063/</link>
       <pubDate>Sun, 21 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0063/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/07linear_regression/0063/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在回归模型中，使用零均值和常数方差的高斯分布对噪声进行建模是很常见的。
   
     
@@ -115,11 +115,11 @@
     
     <item>
       <title>7.3 最大似然估计（最小二乘）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0062/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/07linear_regression/0062/</link>
       <pubDate>Sat, 20 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0062/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/07linear_regression/0062/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;估计统计模型参数的常用方法是计算MLE，其定义为&lt;/p&gt;
 
   
@@ -150,11 +150,11 @@
     
     <item>
       <title>7.2 模型选择</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0061/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/07linear_regression/0061/</link>
       <pubDate>Fri, 19 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0061/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/07linear_regression/0061/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;正如我们在1.4.5节中讨论的那样，线性回归是一个形如下式的模型&lt;/p&gt;
 
   
@@ -185,11 +185,11 @@ p(y|\boldsymbol{x},\boldsymbol{\theta})=\mathcal{N}(y | \boldsymbol{w}^T\boldsym
     
     <item>
       <title>7.1 导论</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0060/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/07linear_regression/0060/</link>
       <pubDate>Thu, 18 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0060/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/07linear_regression/0060/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;线性回归是统计学和（监督）机器学习的“驮马(work horse)”。 当对核或其他形式的基函数进行扩展时，它也能模拟非线性关系。 当用伯努利或广义伯努利分布代替高斯分布输出时，它可以用于分类，我们将在下面看到这点。 因此，详细研究这个模型是值得的。&lt;/p&gt;</description>
     </item>
     

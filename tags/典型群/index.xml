@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>典型群 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E5%85%B8%E5%9E%8B%E7%BE%A4/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E5%85%B8%E5%9E%8B%E7%BE%A4/</link>
     <description>Recent content in 典型群 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Fri, 01 May 2020 08:32:10 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E5%85%B8%E5%9E%8B%E7%BE%A4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 May 2020 08:32:10 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E5%85%B8%E5%9E%8B%E7%BE%A4/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>半单李代数的标准形式</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0083/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0083/</link>
       <pubDate>Fri, 01 May 2020 08:32:10 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0083/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0083/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;用图示方法梳理典型群。&lt;/p&gt;
 &lt;p&gt;一个半单李代数的结构由一组&lt;code&gt;根向量&lt;/code&gt;决定。&lt;/p&gt;

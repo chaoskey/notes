@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>obsidian on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/obsidian/</link>
+    <link>https://chaoskey.github.io/notes/tags/obsidian/</link>
     <description>Recent content in obsidian on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Thu, 18 Feb 2021 11:04:32 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/obsidian/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 18 Feb 2021 11:04:32 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/obsidian/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>基于Obsidian＋Hugo＋Gitee的笔记系统</title>
-      <link>https://chaoskey.gitee.io/notes/posts/%E5%9F%BA%E4%BA%8EObsidianHugoGitee%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/</link>
+      <link>https://chaoskey.github.io/notes/posts/%E5%9F%BA%E4%BA%8EObsidianHugoGitee%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/</link>
       <pubDate>Thu, 18 Feb 2021 11:04:32 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/posts/%E5%9F%BA%E4%BA%8EObsidianHugoGitee%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/</guid>
+      <guid>https://chaoskey.github.io/notes/posts/%E5%9F%BA%E4%BA%8EObsidianHugoGitee%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;本文基于&lt;code&gt;Typora＋Hugo＋Gitee的笔记系统&lt;/code&gt;，仅把&lt;code&gt;Typora&lt;/code&gt;改成&lt;code&gt;Obsidian&lt;/code&gt;而已。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Obsidian&lt;/code&gt;是一个强大的知识库，可在纯文本Markdown文件的本地文件夹上运行。 支持&lt;code&gt;双向链接&lt;/code&gt;（Roam Link）。&lt;/p&gt;

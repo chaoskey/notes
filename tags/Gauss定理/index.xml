@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Gauss定理 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/Gauss%E5%AE%9A%E7%90%86/</link>
+    <link>https://chaoskey.github.io/notes/tags/Gauss%E5%AE%9A%E7%90%86/</link>
     <description>Recent content in Gauss定理 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Thu, 23 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/Gauss%E5%AE%9A%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 23 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/Gauss%E5%AE%9A%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>流形上的微积分</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0014/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0014/</link>
       <pubDate>Thu, 23 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0014/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0014/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;流形上微积分的作用对象是微分形式。&lt;/p&gt;
 &lt;p&gt;普通微分对应微分形式的外微分，普通积分则对应微分形式在流形上的积分。&lt;/p&gt;

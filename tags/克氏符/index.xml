@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>克氏符 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E5%85%8B%E6%B0%8F%E7%AC%A6/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E5%85%8B%E6%B0%8F%E7%AC%A6/</link>
     <description>Recent content in 克氏符 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Mon, 24 Feb 2020 09:44:05 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E5%85%8B%E6%B0%8F%E7%AC%A6/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Feb 2020 09:44:05 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E5%85%8B%E6%B0%8F%E7%AC%A6/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>微分几何中的计算（Julia版 计划长期维护）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0070/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0070/</link>
       <pubDate>Mon, 24 Feb 2020 09:44:05 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0070/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0070/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;Julia&lt;/code&gt;，对数学符号真太友好了。&lt;/p&gt;
 &lt;p&gt;前面的笔记中，我曾穿插了些相关的符号计算，本文作为一个汇总，并且未来的一些有特点的代码，我也将汇总于此，用作备忘。&lt;/p&gt;
@@ -23,22 +23,22 @@
     
     <item>
       <title>流形上的平移</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0007/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0007/</link>
       <pubDate>Fri, 17 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0007/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0007/</guid>
       <description>&lt;h2 id=&#34;平移是路径无关的吗&#34;&gt;平移是路径无关的吗？&lt;/h2&gt;
 &lt;p&gt;我们知道，欧氏空间的平移是路径无关的，任意两个位置，平移的结果是唯一的。&lt;/p&gt;
 &lt;p&gt;那么在流形上呢？结论是：&lt;code&gt;流形上的平移是路径依赖的&lt;/code&gt;。只需要一个例子就足以说明，如图：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://chaoskey.gitee.io/notes/notes/images/0012.jpg&#34; alt=&#34;0012.jpg&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://chaoskey.github.io/notes/notes/images/0012.jpg&#34; alt=&#34;0012.jpg&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>流形上的导数算符</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0006/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0006/</link>
       <pubDate>Wed, 15 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0006/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0006/</guid>
       <description>&lt;h2 id=&#34;定义&#34;&gt;定义&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;导数算符&lt;/code&gt;，就是欧氏空间我们所熟悉的
   

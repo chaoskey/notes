@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>定向 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E5%AE%9A%E5%90%91/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E5%AE%9A%E5%90%91/</link>
     <description>Recent content in 定向 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Wed, 22 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E5%AE%9A%E5%90%91/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E5%AE%9A%E5%90%91/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>流形上的微分形式及其对偶</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0013/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0013/</link>
       <pubDate>Wed, 22 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0013/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0013/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;微分形式就是全反称全下指标张量，是流形上微积分的作用对象。&lt;/p&gt;
 &lt;p&gt;对偶矢量基底的楔积构成微分形式的基底。由于全反称性，这个基底张成的线性空间维度是一个组合数。&lt;/p&gt;

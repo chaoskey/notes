@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/posts/images/</link>
+    <link>https://chaoskey.github.io/notes/posts/images/</link>
     <description>Recent content on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>一切都是我的</copyright><atom:link href="https://chaoskey.gitee.io/notes/posts/images/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>一切都是我的</copyright><atom:link href="https://chaoskey.github.io/notes/posts/images/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

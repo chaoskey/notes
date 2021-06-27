@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>julia on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/categories/julia/</link>
+    <link>https://chaoskey.github.io/notes/categories/julia/</link>
     <description>Recent content in julia on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Sun, 01 Nov 2020 09:15:47 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/categories/julia/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Nov 2020 09:15:47 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/categories/julia/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>基于Julia科学计算</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/</link>
       <pubDate>Sun, 01 Nov 2020 09:15:47 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/</guid>
-      <description>基于Julia科学计算 目录  1. 整合Julia和Python的集成环境（Win10） 2. 科学计算环境搭建（Win10+WSL2+Ubuntu） 3. Julia中的数学符号演算 4. 基于Julia的科学计算功能库整理 5. 微分几何中的计算 6. 平面三体问题    7. 有限差分法求解一维热传导方程 8. Galerkin法解常微分方程边值问题 9. 有限元法解常微分方程边值问题 10. 有限元之平面三角单元 11. 有限元之Delaunay三角剖分 12. 有限元法解偏微分方程（FEniCS） 13. 有限元法求解牛顿流体（FEniCS）    </description>
+      <guid>https://chaoskey.github.io/notes/docs/julia/</guid>
+      <description>基于Julia科学计算 目录  1. 整合Julia和Python的集成环境（Win10） 2. 科学计算环境搭建（Win10+WSL2+Ubuntu） 3. Julia中的数学符号演算 4. 基于Julia的科学计算功能库整理 5. 微分几何中的计算 6. 平面三体问题   7. 有限差分法求解一维热传导方程 8. Galerkin法解常微分方程边值问题 9. 有限元法解常微分方程边值问题 10. 有限元之平面三角单元 11. 有限元之Delaunay三角剖分 12. 有限元法解偏微分方程（FEniCS） 13. 有限元法求解牛顿流体（FEniCS）  </description>
     </item>
     
   </channel>

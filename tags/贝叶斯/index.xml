@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>贝叶斯 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF/</link>
     <description>Recent content in 贝叶斯 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Tue, 23 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 23 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>7.6 贝叶斯线性回归</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0065/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/07linear_regression/0065/</link>
       <pubDate>Tue, 23 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0065/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/07linear_regression/0065/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;虽然岭回归是计算点估计的有用方法，但有时我们想要计算关于
   
     
@@ -66,11 +66,11 @@
     
     <item>
       <title>6.6 频率派统计的病态*</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0058/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0058/</link>
       <pubDate>Tue, 16 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0058/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0058/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;我认为说服一个认为&amp;quot;现在的[频率派]统计实践是明智的&amp;quot;的聪明人是很难的，但通过拟然和贝叶斯定理的方法困难会更少。 - George Box，1962年。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -79,11 +79,11 @@
     
     <item>
       <title>6.3 频率派决策理论</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0055/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0055/</link>
       <pubDate>Sun, 14 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0055/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0055/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在频率派或经典决策理论中，存在一个损失函数和一个拟然，但没有先验因而没有后验或后验预期损失。 因此，与贝叶斯情况不同，没有自动推导出最优估计器的方法。 相反，在频率派方法中，我们可以自由选择我们想要的任何估计器或决策程序
   
     
@@ -121,31 +121,31 @@ R(\theta^{\\*},\delta)\overset{\Delta}{=}\mathbb{E}_{p(\tilde{\mathcal{D}}|\thet
     
     <item>
       <title>6.1 导论</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0053/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0053/</link>
       <pubDate>Fri, 12 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0053/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0053/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;我们在第5章中描述的统计推断方法称为贝叶斯统计。 也许令人惊讶的是，这被一些人认为是有争议的，而贝叶斯应用于非统计问题 - 例如医疗诊断（第2.2.3.1节），垃圾邮件过滤（第3.4.4.1节）或飞机跟踪（第18.2.1节）。 - 没有争议。 反对的原因与统计模型的参数和其他类型的未知量之间的误导性区别有关。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>5.7 贝叶斯决策理论</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0051/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0051/</link>
       <pubDate>Wed, 10 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0051/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0051/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;我们已经看到概率论如何用来表示和更新我们对世界状况的信念( beliefs)。 然而，最终我们的目标是将我们的信念转化为行动。 在本节中，我们将讨论实现此目的的最佳方法。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>5.5 分层贝叶斯</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0049/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0049/</link>
       <pubDate>Mon, 08 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0049/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0049/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;计算后验
   
     
@@ -200,21 +200,21 @@ R(\theta^{\\*},\delta)\overset{\Delta}{=}\mathbb{E}_{p(\tilde{\mathcal{D}}|\thet
     
     <item>
       <title>5.3贝叶斯模型选择</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0047/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0047/</link>
       <pubDate>Sat, 06 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0047/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0047/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在图1.18中，我们看到使用过高度数多项式会导致过拟合，而使用过低度数会导致欠拟合。类似地，在图7.8（a）中，我们看到使用太小正则化参数会导致过拟合，而太大值会导致欠拟合。一般来说，当面对一组不同复杂度的模型（即参数分布族）时，我们应该如何选择最好的模型呢？这称为&lt;strong&gt;模型选择&lt;/strong&gt;问题。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>5.1 导言</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0045/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0045/</link>
       <pubDate>Thu, 04 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0045/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0045/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;我们已经看到了各种不同的概率模型，并且也讨论了如何拟合数据，即我们讨论过使用各种不同的先验来计算MAP参数估计
   
     
@@ -255,11 +255,11 @@ R(\theta^{\\*},\delta)\overset{\Delta}{=}\mathbb{E}_{p(\tilde{\mathcal{D}}|\thet
     
     <item>
       <title>3.5 朴素贝叶斯分类器</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0043/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/03generative_models_for_discrete_data/0043/</link>
       <pubDate>Mon, 01 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0043/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/03generative_models_for_discrete_data/0043/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在本节中，我们将讨论如何对离散值特征的向量进行分类，
   
     
@@ -316,11 +316,11 @@ p(\boldsymbol{x} | y=c, \boldsymbol{\theta}) = \prod_{j=1}^D {p(\boldsymbol{x}_j
     
     <item>
       <title>3.1 引言</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0039/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/03generative_models_for_discrete_data/0039/</link>
       <pubDate>Thu, 27 Jun 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0039/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/03generative_models_for_discrete_data/0039/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在第2.2.3.2中，我们讨论了如何对特征矢量
   
     
@@ -357,11 +357,11 @@ p(y=c | \boldsymbol{x},\boldsymbol{\theta}) \propto p(\boldsymbol{x} | y=c ,\bol
     
     <item>
       <title>2.1 导论</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0030/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/02probability/0030/</link>
       <pubDate>Thu, 20 Jun 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0030/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/02probability/0030/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;概率论只不过是把常识归纳为计算问题。 - 皮埃尔·拉普拉斯，1812年&lt;/p&gt;
 &lt;/blockquote&gt;

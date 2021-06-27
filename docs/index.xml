@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Docs on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/docs/</link>
+    <link>https://chaoskey.github.io/notes/docs/</link>
     <description>Recent content in Docs on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Mon, 01 Mar 2021 09:41:03 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/docs/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Mar 2021 09:41:03 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/docs/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

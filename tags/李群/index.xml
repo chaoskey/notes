@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>李群 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E6%9D%8E%E7%BE%A4/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E6%9D%8E%E7%BE%A4/</link>
     <description>Recent content in 李群 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Tue, 12 May 2020 15:22:50 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E6%9D%8E%E7%BE%A4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 12 May 2020 15:22:50 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E6%9D%8E%E7%BE%A4/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>庞加莱群的单粒子态的表示</title>
-      <link>https://chaoskey.gitee.io/notes/docs/theophy/0086/</link>
+      <link>https://chaoskey.github.io/notes/docs/theophy/0086/</link>
       <pubDate>Tue, 12 May 2020 15:22:50 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0086/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/theophy/0086/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;本篇紧接上一篇笔记《半单李代数的Casimir不变算符》。&lt;/p&gt;
 &lt;p&gt;分两种情况（有质量、无质量）探讨单粒子的物理态表示。&lt;/p&gt;
@@ -22,10 +22,10 @@
     
     <item>
       <title>李群李代数伴随表示和Killing型、Casimir算符</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0082/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0082/</link>
       <pubDate>Tue, 28 Apr 2020 09:42:55 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0082/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0082/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;同一李群（李代数）有无数表示，本篇侧重&lt;code&gt;伴随表示&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;对半单李代数而言，Killing型就是李代数上的度规，称作嘉当度规。&lt;/p&gt;
@@ -35,10 +35,10 @@
     
     <item>
       <title>李变换群</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0069/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0069/</link>
       <pubDate>Sun, 23 Feb 2020 10:04:08 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0069/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0069/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;李变换群&lt;/code&gt;，就是李群作用于流形，这种“作用”其实就是变换，这种变换的集合构成的群。 就是&lt;code&gt;李群的实现&lt;/code&gt;，或 &lt;code&gt;李群的表示&lt;/code&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -46,10 +46,10 @@
     
     <item>
       <title>常用李群及其李代数</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0068/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0068/</link>
       <pubDate>Fri, 21 Feb 2020 11:02:10 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0068/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0068/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;一般线性群
   
@@ -113,10 +113,10 @@
     
     <item>
       <title>李群李代数</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0016/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0016/</link>
       <pubDate>Sat, 25 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0016/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0016/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;李群&lt;/code&gt;是分析&lt;code&gt;流形对称性&lt;/code&gt;的重要工具。&lt;/p&gt;
 &lt;p&gt;从李群

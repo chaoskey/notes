@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>科学计算 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/</link>
     <description>Recent content in 科学计算 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Sun, 12 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>基于Julia的科学计算功能库整理</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/0003/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/0003/</link>
       <pubDate>Sun, 12 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/0003/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/julia/0003/</guid>
       <description>&lt;h2 id=&#34;线性代数&#34;&gt;线性代数&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;julia&lt;/code&gt;标准库中包括了&lt;code&gt;LinearAlgebra&lt;/code&gt;，直接&lt;code&gt;using LinearAlgebra&lt;/code&gt;就能用。详细务必移步&lt;a href=&#34;https://docs.julialang.org/en/v1/stdlib/LinearAlgebra/&#34;&gt;官方文档&lt;/a&gt; 和 &lt;a href=&#34;https://github.com/JuliaLang/julia/blob/master/stdlib/LinearAlgebra/docs/src/index.md&#34;&gt;GitHub文档&lt;/a&gt;阅读。&lt;/p&gt;</description>
     </item>

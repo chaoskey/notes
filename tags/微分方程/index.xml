@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>微分方程 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/</link>
     <description>Recent content in 微分方程 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Mon, 02 Nov 2020 12:25:49 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 02 Nov 2020 12:25:49 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>有限元法解常微分方程边值问题</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/0091/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/0091/</link>
       <pubDate>Mon, 02 Nov 2020 12:25:49 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/0091/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/julia/0091/</guid>
       <description>&lt;p&gt;有限元法可归结为如下几个步骤：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;转换成变分问题（应该会用到边界条件）&lt;/li&gt;
@@ -26,10 +26,10 @@
     
     <item>
       <title>Galerkin法解常微分方程边值问题</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/0090/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/0090/</link>
       <pubDate>Sun, 01 Nov 2020 11:11:40 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/0090/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/julia/0090/</guid>
       <description>&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 奇怪：这个库必须放在最前面才能一次加载成功&lt;/span&gt;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; Plots
 gr()
@@ -44,10 +44,10 @@ gr()
     
     <item>
       <title>有限差分法求解一维热传导方程</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/0089/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/0089/</link>
       <pubDate>Sun, 01 Nov 2020 11:06:14 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/0089/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/julia/0089/</guid>
       <description>&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 奇怪：这个库必须放在最前面才能一次加载成功&lt;/span&gt;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; Plots
 gr()
@@ -57,10 +57,10 @@ gr()
     
     <item>
       <title>平面三体问题（Julia版）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/0088/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/0088/</link>
       <pubDate>Sun, 01 Nov 2020 10:15:47 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/0088/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/julia/0088/</guid>
       <description>&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 奇怪：这个库必须放在最前面才能一次加载成功&lt;/span&gt;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; Plots
 &lt;span style=&#34;color:#75715e&#34;&gt;# gr()&lt;/span&gt;

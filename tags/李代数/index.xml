@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>李代数 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E6%9D%8E%E4%BB%A3%E6%95%B0/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E6%9D%8E%E4%BB%A3%E6%95%B0/</link>
     <description>Recent content in 李代数 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Sat, 09 May 2020 19:32:38 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E6%9D%8E%E4%BB%A3%E6%95%B0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 09 May 2020 19:32:38 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E6%9D%8E%E4%BB%A3%E6%95%B0/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>半单李代数的Casimir不变算符</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0085/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0085/</link>
       <pubDate>Sat, 09 May 2020 19:32:38 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0085/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0085/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;本篇主题是Casimir算符。&lt;/p&gt;
 &lt;p&gt;半单李群李代数的Casimir算符可以完全确定。&lt;/p&gt;
@@ -23,10 +23,10 @@
     
     <item>
       <title>半单李代数的根系、权系和Dynkin图</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0084/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0084/</link>
       <pubDate>Thu, 07 May 2020 10:23:40 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0084/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0084/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;Dynkin图&lt;/code&gt;，可以完全确定“单根矢量几何”，所有根矢量都可用单根线性表出。&lt;/p&gt;
 &lt;p&gt;根系虽然不唯一，但这种不唯一性不会导致“几何”意义上的变化。&lt;/p&gt;
@@ -40,10 +40,10 @@
     
     <item>
       <title>半单李代数的标准形式</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0083/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0083/</link>
       <pubDate>Fri, 01 May 2020 08:32:10 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0083/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0083/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;用图示方法梳理典型群。&lt;/p&gt;
 &lt;p&gt;一个半单李代数的结构由一组&lt;code&gt;根向量&lt;/code&gt;决定。&lt;/p&gt;
@@ -88,10 +88,10 @@
     
     <item>
       <title>李变换群</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0069/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0069/</link>
       <pubDate>Sun, 23 Feb 2020 10:04:08 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0069/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0069/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;李变换群&lt;/code&gt;，就是李群作用于流形，这种“作用”其实就是变换，这种变换的集合构成的群。 就是&lt;code&gt;李群的实现&lt;/code&gt;，或 &lt;code&gt;李群的表示&lt;/code&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -99,10 +99,10 @@
     
     <item>
       <title>常用李群及其李代数</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0068/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0068/</link>
       <pubDate>Fri, 21 Feb 2020 11:02:10 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0068/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0068/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;一般线性群
   
@@ -166,10 +166,10 @@
     
     <item>
       <title>李群李代数</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0016/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0016/</link>
       <pubDate>Sat, 25 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0016/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0016/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;李群&lt;/code&gt;是分析&lt;code&gt;流形对称性&lt;/code&gt;的重要工具。&lt;/p&gt;
 &lt;p&gt;从李群

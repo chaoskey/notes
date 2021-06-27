@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>p值 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/p%E5%80%BC/</link>
+    <link>https://chaoskey.github.io/notes/tags/p%E5%80%BC/</link>
     <description>Recent content in p值 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Tue, 16 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/p%E5%80%BC/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 16 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/p%E5%80%BC/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>6.6 频率派统计的病态*</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0058/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0058/</link>
       <pubDate>Tue, 16 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0058/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0058/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;我认为说服一个认为&amp;quot;现在的[频率派]统计实践是明智的&amp;quot;的聪明人是很难的，但通过拟然和贝叶斯定理的方法困难会更少。 - George Box，1962年。&lt;/p&gt;
 &lt;/blockquote&gt;

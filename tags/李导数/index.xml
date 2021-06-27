@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>李导数 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E6%9D%8E%E5%AF%BC%E6%95%B0/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E6%9D%8E%E5%AF%BC%E6%95%B0/</link>
     <description>Recent content in 李导数 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Sun, 19 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E6%9D%8E%E5%AF%BC%E6%95%B0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E6%9D%8E%E5%AF%BC%E6%95%B0/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>流形上的李导数</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0010/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0010/</link>
       <pubDate>Sun, 19 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0010/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0010/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;李导数是沿矢量场对张量场的导数，也是沿矢量场坐标线对张量分量的普通导数。&lt;/p&gt;
 &lt;p&gt;为了清晰定义李导数，引入了&lt;code&gt;单参数微分同胚群&lt;/code&gt;

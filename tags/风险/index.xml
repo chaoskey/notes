@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>风险 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E9%A3%8E%E9%99%A9/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E9%A3%8E%E9%99%A9/</link>
     <description>Recent content in 风险 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Tue, 16 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E9%A3%8E%E9%99%A9/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 16 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E9%A3%8E%E9%99%A9/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>6.5 经验风险最小化</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0057/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0057/</link>
       <pubDate>Tue, 16 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0057/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0057/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;频率派决策理论存在一个根本问题，即人们实际上无法计算风险函数，因为它依赖于知道真实的数据分布。 （相比之下，贝叶斯后验预期损失总是可以计算，因为它更取决于数据，而不是
   
     
@@ -92,11 +92,11 @@ R(p_{\\*},\delta)\overset{\Delta}{=}\mathbb{E}_{(\boldsymbol{x},y) \sim p_{\\*}}
     
     <item>
       <title>6.3 频率派决策理论</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0055/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0055/</link>
       <pubDate>Sun, 14 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0055/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0055/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在频率派或经典决策理论中，存在一个损失函数和一个拟然，但没有先验因而没有后验或后验预期损失。 因此，与贝叶斯情况不同，没有自动推导出最优估计器的方法。 相反，在频率派方法中，我们可以自由选择我们想要的任何估计器或决策程序
   
     
@@ -134,10 +134,10 @@ R(\theta^{\\*},\delta)\overset{\Delta}{=}\mathbb{E}_{p(\tilde{\mathcal{D}}|\thet
     
     <item>
       <title>第八章 估值理论</title>
-      <link>https://chaoskey.gitee.io/notes/docs/apm/0024/</link>
+      <link>https://chaoskey.github.io/notes/docs/apm/0024/</link>
       <pubDate>Sat, 26 May 2018 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/apm/0024/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/apm/0024/</guid>
       <description>&lt;h2 id=&#34;离散随机模型&#34;&gt;离散随机模型&lt;/h2&gt;
 &lt;p&gt;考虑
   
@@ -306,10 +306,10 @@ R(\theta^{\\*},\delta)\overset{\Delta}{=}\mathbb{E}_{p(\tilde{\mathcal{D}}|\thet
     
     <item>
       <title>第四章 超常收益率、业绩基准和附加值</title>
-      <link>https://chaoskey.gitee.io/notes/docs/apm/0020/</link>
+      <link>https://chaoskey.github.io/notes/docs/apm/0020/</link>
       <pubDate>Tue, 22 May 2018 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/apm/0020/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/apm/0020/</guid>
       <description>&lt;p&gt;CAPM提供一致预期收益率，多因子模型可以帮助控制风险。本章讨论如何进行预期收益率的预测，并概述如何将预测转化成投资组合。&lt;/p&gt;
 &lt;h2 id=&#34;业绩基准&#34;&gt;业绩基准&lt;/h2&gt;
 &lt;p&gt;业绩基准组合的别称：标杆、规范组合。业绩基准组合是投资管理机构化的产物。&lt;/p&gt;
@@ -318,10 +318,10 @@ R(\theta^{\\*},\delta)\overset{\Delta}{=}\mathbb{E}_{p(\tilde{\mathcal{D}}|\thet
     
     <item>
       <title>第三章 风险</title>
-      <link>https://chaoskey.gitee.io/notes/docs/apm/0019/</link>
+      <link>https://chaoskey.github.io/notes/docs/apm/0019/</link>
       <pubDate>Mon, 21 May 2018 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/apm/0019/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/apm/0019/</guid>
       <description>&lt;h2 id=&#34;标准差&#34;&gt;标准差&lt;/h2&gt;
 &lt;p&gt;书中介绍了风险的各种定义及其优劣，最终还是选择标准差作为本书的风险定义。&lt;/p&gt;
 &lt;p&gt;尽管&lt;strong&gt;标准差&lt;/strong&gt;具有某些不足，只要我的假设中依赖或近似依赖正态分布，那么推荐标准差这个风险度量定义。因为它能满足我们普适，对称，灵活和可精确预测的要求。若无特殊要求，我们讨论的风险总是指收益率的年化标准差（以百分之一为单位）。&lt;/p&gt;

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>估值 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E4%BC%B0%E5%80%BC/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E4%BC%B0%E5%80%BC/</link>
     <description>Recent content in 估值 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Sat, 26 May 2018 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E4%BC%B0%E5%80%BC/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 26 May 2018 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E4%BC%B0%E5%80%BC/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>第八章 估值理论</title>
-      <link>https://chaoskey.gitee.io/notes/docs/apm/0024/</link>
+      <link>https://chaoskey.github.io/notes/docs/apm/0024/</link>
       <pubDate>Sat, 26 May 2018 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/apm/0024/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/apm/0024/</guid>
       <description>&lt;h2 id=&#34;离散随机模型&#34;&gt;离散随机模型&lt;/h2&gt;
 &lt;p&gt;考虑
   

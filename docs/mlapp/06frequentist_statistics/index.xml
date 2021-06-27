@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>第六章 频率派统计 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/</link>
+    <link>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/</link>
     <description>Recent content in 第六章 频率派统计 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Fri, 12 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 12 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>习题</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0059/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0059/</link>
       <pubDate>Wed, 17 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0059/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0059/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;练习6.1&lt;/strong&gt; LOOCV的最坏情况&lt;/p&gt;
 &lt;p&gt;（来源：Witten05，p152。）。 假设我们有一个完全随机标记的数据集（即，特征
   
@@ -67,11 +67,11 @@
     
     <item>
       <title>6.5 经验风险最小化</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0057/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0057/</link>
       <pubDate>Tue, 16 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0057/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0057/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;频率派决策理论存在一个根本问题，即人们实际上无法计算风险函数，因为它依赖于知道真实的数据分布。 （相比之下，贝叶斯后验预期损失总是可以计算，因为它更取决于数据，而不是
   
     
@@ -150,11 +150,11 @@ R(p_{\\*},\delta)\overset{\Delta}{=}\mathbb{E}_{(\boldsymbol{x},y) \sim p_{\\*}}
     
     <item>
       <title>6.6 频率派统计的病态*</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0058/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0058/</link>
       <pubDate>Tue, 16 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0058/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0058/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;我认为说服一个认为&amp;quot;现在的[频率派]统计实践是明智的&amp;quot;的聪明人是很难的，但通过拟然和贝叶斯定理的方法困难会更少。 - George Box，1962年。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -163,21 +163,21 @@ R(p_{\\*},\delta)\overset{\Delta}{=}\mathbb{E}_{(\boldsymbol{x},y) \sim p_{\\*}}
     
     <item>
       <title>6.4 估计器的理想属性</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0056/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0056/</link>
       <pubDate>Mon, 15 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0056/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0056/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;由于频率派决策理论没有提供选择最佳估计器的自动方法，我们需要提出其他启发式方法来选择它们。 在本节中，我们将讨论我们所希望估计器应该具有的一些属性。 不幸的是，我们将看到我们无法同时实现所有这些属性。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>6.3 频率派决策理论</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0055/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0055/</link>
       <pubDate>Sun, 14 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0055/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0055/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在频率派或经典决策理论中，存在一个损失函数和一个拟然，但没有先验因而没有后验或后验预期损失。 因此，与贝叶斯情况不同，没有自动推导出最优估计器的方法。 相反，在频率派方法中，我们可以自由选择我们想要的任何估计器或决策程序
   
     
@@ -215,11 +215,11 @@ R(\theta^{\\*},\delta)\overset{\Delta}{=}\mathbb{E}_{p(\tilde{\mathcal{D}}|\thet
     
     <item>
       <title>6.2 估计器的采样分布</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0054/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0054/</link>
       <pubDate>Sat, 13 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0054/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0054/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在频率派统计中，通过将&lt;strong&gt;估计器&lt;/strong&gt;
   
     
@@ -338,11 +338,11 @@ R(\theta^{\\*},\delta)\overset{\Delta}{=}\mathbb{E}_{p(\tilde{\mathcal{D}}|\thet
     
     <item>
       <title>6.1 导论</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0053/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0053/</link>
       <pubDate>Fri, 12 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0053/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0053/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;我们在第5章中描述的统计推断方法称为贝叶斯统计。 也许令人惊讶的是，这被一些人认为是有争议的，而贝叶斯应用于非统计问题 - 例如医疗诊断（第2.2.3.1节），垃圾邮件过滤（第3.4.4.1节）或飞机跟踪（第18.2.1节）。 - 没有争议。 反对的原因与统计模型的参数和其他类型的未知量之间的误导性区别有关。&lt;/p&gt;</description>
     </item>
     

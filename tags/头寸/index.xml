@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>头寸 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E5%A4%B4%E5%AF%B8/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E5%A4%B4%E5%AF%B8/</link>
     <description>Recent content in 头寸 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Sat, 26 May 2018 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E5%A4%B4%E5%AF%B8/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 26 May 2018 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E5%A4%B4%E5%AF%B8/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>第八章 估值理论</title>
-      <link>https://chaoskey.gitee.io/notes/docs/apm/0024/</link>
+      <link>https://chaoskey.github.io/notes/docs/apm/0024/</link>
       <pubDate>Sat, 26 May 2018 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/apm/0024/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/apm/0024/</guid>
       <description>&lt;h2 id=&#34;离散随机模型&#34;&gt;离散随机模型&lt;/h2&gt;
 &lt;p&gt;考虑
   
@@ -181,10 +181,10 @@
     
     <item>
       <title>第六章 主动管理基本定律</title>
-      <link>https://chaoskey.gitee.io/notes/docs/apm/0022/</link>
+      <link>https://chaoskey.github.io/notes/docs/apm/0022/</link>
       <pubDate>Thu, 24 May 2018 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/apm/0022/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/apm/0022/</guid>
       <description>&lt;h2 id=&#34;基本定律&#34;&gt;基本定律&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;主动管理基本定律&lt;/strong&gt;是信息率的一种近似表达。&lt;/p&gt;
 &lt;p&gt;这条定律基于投资策略的两条基本属性：&lt;/p&gt;

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>理论物理学习笔记 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/docs/theophy/</link>
+    <link>https://chaoskey.github.io/notes/docs/theophy/</link>
     <description>Recent content in 理论物理学习笔记 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Sun, 01 Mar 2020 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/docs/theophy/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Mar 2020 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/docs/theophy/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>自由场--现代物理的基础</title>
-      <link>https://chaoskey.gitee.io/notes/docs/theophy/0087/</link>
+      <link>https://chaoskey.github.io/notes/docs/theophy/0087/</link>
       <pubDate>Wed, 13 May 2020 17:10:52 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0087/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/theophy/0087/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;本篇紧接上一篇笔记《半单李代数的Casimir不变算符》。&lt;/p&gt;
 &lt;p&gt;分两种情况（有质量、无质量）探讨单粒子的物理态表示。&lt;/p&gt;
@@ -21,10 +21,10 @@
     
     <item>
       <title>庞加莱群的单粒子态的表示</title>
-      <link>https://chaoskey.gitee.io/notes/docs/theophy/0086/</link>
+      <link>https://chaoskey.github.io/notes/docs/theophy/0086/</link>
       <pubDate>Tue, 12 May 2020 15:22:50 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0086/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/theophy/0086/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;本篇紧接上一篇笔记《半单李代数的Casimir不变算符》。&lt;/p&gt;
 &lt;p&gt;分两种情况（有质量、无质量）探讨单粒子的物理态表示。&lt;/p&gt;
@@ -34,10 +34,10 @@
     
     <item>
       <title>场及其对称性</title>
-      <link>https://chaoskey.gitee.io/notes/docs/theophy/0081/</link>
+      <link>https://chaoskey.github.io/notes/docs/theophy/0081/</link>
       <pubDate>Fri, 24 Apr 2020 20:13:17 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0081/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/theophy/0081/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;场的拉格朗日形式，保持明显的洛伦兹协变性。&lt;/p&gt;
 &lt;p&gt;场的哈密顿形式，依赖于时空的1+3分解，因为时间变量在&lt;code&gt;共轭动量密度&lt;/code&gt;中扮演了特殊的角色。&lt;/p&gt;
@@ -48,10 +48,10 @@
     
     <item>
       <title>闵氏时空对称性的三种观点</title>
-      <link>https://chaoskey.gitee.io/notes/docs/theophy/0080/</link>
+      <link>https://chaoskey.github.io/notes/docs/theophy/0080/</link>
       <pubDate>Wed, 15 Apr 2020 09:14:20 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0080/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/theophy/0080/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;本篇依次从Killing矢量场、张量（矩阵）、旋量三个角度考察闵氏时空的对称性。&lt;/p&gt;
 &lt;p&gt;最后，从旋量概念引入自旋概念。&lt;/p&gt;
@@ -61,10 +61,10 @@
     
     <item>
       <title>辛流形上的哈密顿力学</title>
-      <link>https://chaoskey.gitee.io/notes/docs/theophy/0075/</link>
+      <link>https://chaoskey.github.io/notes/docs/theophy/0075/</link>
       <pubDate>Sun, 01 Mar 2020 14:52:58 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0075/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/theophy/0075/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;有了《辛群及其李代数》和《辛流形》的学习，关于辛流形上的哈密顿力学就水到渠成了。&lt;/p&gt;
 &lt;p&gt;首先，借助切丛上的拉格朗日量函数，构造一个特别的切丛到余切丛的同构映射。&lt;/p&gt;
@@ -76,10 +76,10 @@
     
     <item>
       <title>对称性与守恒律（Noether定理）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/theophy/0072/</link>
+      <link>https://chaoskey.github.io/notes/docs/theophy/0072/</link>
       <pubDate>Wed, 26 Feb 2020 20:14:33 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0072/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/theophy/0072/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;如果知道所有对称性，原则上可以写出具体拉格朗日量。如果只知道部分对称性，也可根据&lt;code&gt;Noether定理&lt;/code&gt;得知对称性所关联的守恒律。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Noether定理&lt;/code&gt;：每一个保持拉格朗日量不变的单参微分同胚群（对称性），必有运动方程组对应的一个首次积分（守恒律）。&lt;/p&gt;
@@ -90,10 +90,10 @@
     
     <item>
       <title>流形视角下的牛顿力学(杀鸡用牛刀)</title>
-      <link>https://chaoskey.gitee.io/notes/docs/theophy/0071/</link>
+      <link>https://chaoskey.github.io/notes/docs/theophy/0071/</link>
       <pubDate>Tue, 25 Feb 2020 08:19:37 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0071/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/theophy/0071/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;本文真是杀鸡用牛刀，但好处是彻底厘清了如何用对称性构造拉格朗日量的一般套路。&lt;/p&gt;
 &lt;p&gt;本文通过强算Killing方程的笨方法，来确定伽利略时空，特别是欧氏空间的完整对称性，进而得到无穷小生成元（变换），最后用这组无穷小变换在拉格朗日量上的不变性来确定拉格朗日量。&lt;/p&gt;
@@ -102,10 +102,10 @@
     
     <item>
       <title>流形上的拉格朗日力学</title>
-      <link>https://chaoskey.gitee.io/notes/docs/theophy/0015/</link>
+      <link>https://chaoskey.github.io/notes/docs/theophy/0015/</link>
       <pubDate>Fri, 24 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0015/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/theophy/0015/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;一个具有约束的力学系的&lt;code&gt;位形空间&lt;/code&gt;是一个&lt;code&gt;微分流形&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;拉格朗日力学&lt;/code&gt;其实就是个理论框架。&lt;/p&gt;

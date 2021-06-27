@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>有限元法 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/categories/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95/</link>
+    <link>https://chaoskey.github.io/notes/categories/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95/</link>
     <description>Recent content in 有限元法 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Wed, 16 Dec 2020 15:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/categories/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 Dec 2020 15:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/categories/%E6%9C%89%E9%99%90%E5%85%83%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>《有限元法自动求解微分方程》【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/</link>
       <pubDate>Wed, 16 Dec 2020 15:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/fem/</guid>
       <description>&lt;h1 id=&#34;有限元法自动求解微分方程翻译&#34;&gt;《有限元法自动求解微分方程》【翻译】&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/julia/0094/&#34;&gt;有限元法解偏微分方程（FEniCS）&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/julia/0096/&#34;&gt;有限元法求解牛顿流体（FEniCS）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/julia/0094/&#34;&gt;有限元法解偏微分方程（FEniCS）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/julia/0096/&#34;&gt;有限元法求解牛顿流体（FEniCS）&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;这两篇笔记仅做入门之用【用来代替第1章】。&lt;/p&gt;
 &lt;p&gt;为了深入掌握，建议阅读《Automated Solution of Differential Equations by the Finite Element Method》。 为此，我一边学习一边翻译权当笔记。&lt;/p&gt;
 &lt;p&gt;原书链接：https://pan.baidu.com/s/1v-hqfK0Z6HzA5AAQoaVRvg

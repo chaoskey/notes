@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>权系 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E6%9D%83%E7%B3%BB/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E6%9D%83%E7%B3%BB/</link>
     <description>Recent content in 权系 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Thu, 07 May 2020 10:23:40 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E6%9D%83%E7%B3%BB/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 May 2020 10:23:40 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E6%9D%83%E7%B3%BB/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>半单李代数的根系、权系和Dynkin图</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0084/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0084/</link>
       <pubDate>Thu, 07 May 2020 10:23:40 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0084/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0084/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;Dynkin图&lt;/code&gt;，可以完全确定“单根矢量几何”，所有根矢量都可用单根线性表出。&lt;/p&gt;
 &lt;p&gt;根系虽然不唯一，但这种不唯一性不会导致“几何”意义上的变化。&lt;/p&gt;

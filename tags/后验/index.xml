@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>后验 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E5%90%8E%E9%AA%8C/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E5%90%8E%E9%AA%8C/</link>
     <description>Recent content in 后验 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Tue, 23 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E5%90%8E%E9%AA%8C/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 23 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E5%90%8E%E9%AA%8C/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>7.6 贝叶斯线性回归</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0065/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/07linear_regression/0065/</link>
       <pubDate>Tue, 23 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/07linear_regression/0065/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/07linear_regression/0065/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/07linear_regression/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;虽然岭回归是计算点估计的有用方法，但有时我们想要计算关于
   
     
@@ -66,11 +66,11 @@
     
     <item>
       <title>5.2 后验分布总结</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0046/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0046/</link>
       <pubDate>Fri, 05 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0046/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0046/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;后验
   
     
@@ -105,11 +105,11 @@
     
     <item>
       <title>3.4 狄利克雷-多项模型</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0042/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/03generative_models_for_discrete_data/0042/</link>
       <pubDate>Sun, 30 Jun 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0042/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/03generative_models_for_discrete_data/0042/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在上一节中，我们讨论了如何推断硬币&amp;quot;正面&amp;quot;出现的概率。在本节中，我们推广这些结果，以推断出有
   
     
@@ -144,11 +144,11 @@
     
     <item>
       <title>3.3 贝塔-二项模型</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0041/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/03generative_models_for_discrete_data/0041/</link>
       <pubDate>Sat, 29 Jun 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0041/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/03generative_models_for_discrete_data/0041/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在给定一离散观察序列的情况下, 数字游戏涉及从有限假设空间推断出离散变量的分布, 
   
     
@@ -189,11 +189,11 @@
     
     <item>
       <title>3.2 贝叶斯概念学习</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0040/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/03generative_models_for_discrete_data/0040/</link>
       <pubDate>Fri, 28 Jun 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0040/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/03generative_models_for_discrete_data/0040/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;考虑孩子如何学习理解单词的含义，例如“狗”。据推测，孩子的父母指出了这个概念的正面例子，说“看着可爱的小狗！”或“小心小狗”等等。然而，他们提供反面的例子是不太可能的，“看看那只非狗“?。当然，在积极的学习过程中可能会得到负面的例子 - 孩子说“看狗”，父母说“那是猫，亲爱的，不是狗” - 但心理学研究表明，人们可以仅从正面例子来学习概念（Xu和Tenenbaum 2007）。&lt;/p&gt;</description>
     </item>
     

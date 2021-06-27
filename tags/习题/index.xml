@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>习题 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E4%B9%A0%E9%A2%98/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E4%B9%A0%E9%A2%98/</link>
     <description>Recent content in 习题 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Wed, 17 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E4%B9%A0%E9%A2%98/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 17 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E4%B9%A0%E9%A2%98/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>习题</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0059/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0059/</link>
       <pubDate>Wed, 17 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0059/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0059/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;练习6.1&lt;/strong&gt; LOOCV的最坏情况&lt;/p&gt;
 &lt;p&gt;（来源：Witten05，p152。）。 假设我们有一个完全随机标记的数据集（即，特征
   
@@ -67,11 +67,11 @@
     
     <item>
       <title>习题</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0052/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0052/</link>
       <pubDate>Thu, 11 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0052/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0052/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;习题5.1&lt;/strong&gt; 证明共轭先验的混合确实是共轭的&lt;/p&gt;
 &lt;p&gt;推导等式5.69.&lt;/p&gt;</description>
     </item>

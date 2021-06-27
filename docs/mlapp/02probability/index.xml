@@ -2,54 +2,54 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>第二章 概率 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/</link>
+    <link>https://chaoskey.github.io/notes/docs/mlapp/02probability/</link>
     <description>Recent content in 第二章 概率 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Thu, 20 Jun 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/docs/mlapp/02probability/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 20 Jun 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/docs/mlapp/02probability/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Exercises</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0038/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/02probability/0038/</link>
       <pubDate>Wed, 26 Jun 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0038/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/02probability/0038/</guid>
       <description>返回本章目录</description>
     </item>
     
     <item>
       <title>2.6 Transformations of random variables</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0035/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/02probability/0035/</link>
       <pubDate>Tue, 25 Jun 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0035/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/02probability/0035/</guid>
       <description>返回本章目录</description>
     </item>
     
     <item>
       <title>2.7 Monte Carlo approximation</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0036/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/02probability/0036/</link>
       <pubDate>Tue, 25 Jun 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0036/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/02probability/0036/</guid>
       <description>返回本章目录</description>
     </item>
     
     <item>
       <title>2.8 Information theory</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0037/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/02probability/0037/</link>
       <pubDate>Tue, 25 Jun 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0037/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/02probability/0037/</guid>
       <description>返回本章目录</description>
     </item>
     
     <item>
       <title>2.5 联合概率分布</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0034/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/02probability/0034/</link>
       <pubDate>Mon, 24 Jun 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0034/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/02probability/0034/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;到目前为止，我们一直专注于建模单变量概率分布。 在本节中，我们开始讨论在多个相关随机变量上建立联合概率分布的更具挑战性的问题; 这将是本书的核心主题。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;联合概率分布&lt;/strong&gt;形如
   
@@ -85,41 +85,41 @@
     
     <item>
       <title>2.4 一些常见的连续分布</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0033/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/02probability/0033/</link>
       <pubDate>Sun, 23 Jun 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0033/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/02probability/0033/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在本节中，我们展现了一些常用的单变量（一维）连续概率分布。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>2.3 一些常见的离散分布</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0032/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/02probability/0032/</link>
       <pubDate>Sat, 22 Jun 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0032/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/02probability/0032/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在本节中，我们将回顾在离散状态空间(包括有限状态和可数无限状态)上定义的一些常用参数分布。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>2.2 概率论的简要回顾</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0031/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/02probability/0031/</link>
       <pubDate>Fri, 21 Jun 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0031/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/02probability/0031/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;本节是对概率论基础知识的简要回顾，仅仅是对可能“荒疏”的读者的复习。 已经熟悉这些基础知识的读者可以安全地跳过本节。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>2.1 导论</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0030/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/02probability/0030/</link>
       <pubDate>Thu, 20 Jun 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0030/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/02probability/0030/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;概率论只不过是把常识归纳为计算问题。 - 皮埃尔·拉普拉斯，1812年&lt;/p&gt;
 &lt;/blockquote&gt;

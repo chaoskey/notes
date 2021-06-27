@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>估计 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E4%BC%B0%E8%AE%A1/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E4%BC%B0%E8%AE%A1/</link>
     <description>Recent content in 估计 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Fri, 05 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E4%BC%B0%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 05 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E4%BC%B0%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>5.2 后验分布总结</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0046/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0046/</link>
       <pubDate>Fri, 05 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0046/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0046/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;后验
   
     

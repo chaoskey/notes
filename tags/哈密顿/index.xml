@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>哈密顿 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E5%93%88%E5%AF%86%E9%A1%BF/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E5%93%88%E5%AF%86%E9%A1%BF/</link>
     <description>Recent content in 哈密顿 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Sun, 01 Mar 2020 14:52:58 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E5%93%88%E5%AF%86%E9%A1%BF/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Mar 2020 14:52:58 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E5%93%88%E5%AF%86%E9%A1%BF/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>辛流形上的哈密顿力学</title>
-      <link>https://chaoskey.gitee.io/notes/docs/theophy/0075/</link>
+      <link>https://chaoskey.github.io/notes/docs/theophy/0075/</link>
       <pubDate>Sun, 01 Mar 2020 14:52:58 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0075/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/theophy/0075/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;有了《辛群及其李代数》和《辛流形》的学习，关于辛流形上的哈密顿力学就水到渠成了。&lt;/p&gt;
 &lt;p&gt;首先，借助切丛上的拉格朗日量函数，构造一个特别的切丛到余切丛的同构映射。&lt;/p&gt;
@@ -24,10 +24,10 @@
     
     <item>
       <title>辛流形</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0074/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0074/</link>
       <pubDate>Fri, 28 Feb 2020 16:55:40 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0074/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0074/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;通过类比(维)黎曼流形掌握辛流形的基本概念。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;辛构造&lt;/code&gt;，就是&lt;code&gt;闭的反称度规&lt;/code&gt;。&lt;code&gt;辛流形&lt;/code&gt;，就是配备了&lt;code&gt;辛构造&lt;/code&gt;的流形。&lt;/p&gt;

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>导数算符 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E5%AF%BC%E6%95%B0%E7%AE%97%E7%AC%A6/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E5%AF%BC%E6%95%B0%E7%AE%97%E7%AC%A6/</link>
     <description>Recent content in 导数算符 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Fri, 10 Apr 2020 18:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E5%AF%BC%E6%95%B0%E7%AE%97%E7%AC%A6/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Apr 2020 18:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E5%AF%BC%E6%95%B0%E7%AE%97%E7%AC%A6/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>流形上的旋量和旋量场（自旋系数和克氏符）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0079/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0079/</link>
       <pubDate>Fri, 10 Apr 2020 18:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0079/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0079/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;上两篇，引入旋量概念以及旋量代数，以及旋量的一个直观的几何解释。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;自旋系数&lt;/code&gt;，是和&lt;code&gt;克氏符&lt;/code&gt;对标的概念。&lt;/p&gt;
@@ -59,10 +59,10 @@
     
     <item>
       <title>流形上的旋量和旋量场（导数算符和曲率）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0078/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0078/</link>
       <pubDate>Thu, 02 Apr 2020 10:39:12 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0078/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0078/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;上两篇，引入旋量概念以及旋量代数，以及旋量的一个直观的几何解释。&lt;/p&gt;
 &lt;p&gt;本篇，引入&lt;code&gt;旋量场导数算符&lt;/code&gt;和&lt;code&gt;曲率旋量&lt;/code&gt;两个概念。&lt;/p&gt;
@@ -95,10 +95,10 @@
     
     <item>
       <title>黎曼曲率张量</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0008/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0008/</link>
       <pubDate>Sat, 18 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0008/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0008/</guid>
       <description>&lt;h2 id=&#34;曲率概念的意义&#34;&gt;曲率概念的意义&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;导数算符对易子&lt;/code&gt;
   
@@ -129,22 +129,22 @@
     
     <item>
       <title>流形上的平移</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0007/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0007/</link>
       <pubDate>Fri, 17 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0007/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0007/</guid>
       <description>&lt;h2 id=&#34;平移是路径无关的吗&#34;&gt;平移是路径无关的吗？&lt;/h2&gt;
 &lt;p&gt;我们知道，欧氏空间的平移是路径无关的，任意两个位置，平移的结果是唯一的。&lt;/p&gt;
 &lt;p&gt;那么在流形上呢？结论是：&lt;code&gt;流形上的平移是路径依赖的&lt;/code&gt;。只需要一个例子就足以说明，如图：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://chaoskey.gitee.io/notes/notes/images/0012.jpg&#34; alt=&#34;0012.jpg&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://chaoskey.github.io/notes/notes/images/0012.jpg&#34; alt=&#34;0012.jpg&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>流形上的导数算符</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0006/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0006/</link>
       <pubDate>Wed, 15 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0006/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0006/</guid>
       <description>&lt;h2 id=&#34;定义&#34;&gt;定义&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;导数算符&lt;/code&gt;，就是欧氏空间我们所熟悉的
   

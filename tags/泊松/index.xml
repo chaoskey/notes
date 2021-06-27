@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>泊松 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E6%B3%8A%E6%9D%BE/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E6%B3%8A%E6%9D%BE/</link>
     <description>Recent content in 泊松 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Fri, 28 Feb 2020 16:55:40 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E6%B3%8A%E6%9D%BE/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 28 Feb 2020 16:55:40 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E6%B3%8A%E6%9D%BE/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>辛流形</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0074/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0074/</link>
       <pubDate>Fri, 28 Feb 2020 16:55:40 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0074/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0074/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;通过类比(维)黎曼流形掌握辛流形的基本概念。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;辛构造&lt;/code&gt;，就是&lt;code&gt;闭的反称度规&lt;/code&gt;。&lt;code&gt;辛流形&lt;/code&gt;，就是配备了&lt;code&gt;辛构造&lt;/code&gt;的流形。&lt;/p&gt;
@@ -54,11 +54,11 @@
     
     <item>
       <title>2.3 一些常见的离散分布</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0032/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/02probability/0032/</link>
       <pubDate>Sat, 22 Jun 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0032/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/02probability/0032/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在本节中，我们将回顾在离散状态空间(包括有限状态和可数无限状态)上定义的一些常用参数分布。&lt;/p&gt;</description>
     </item>
     

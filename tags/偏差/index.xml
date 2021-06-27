@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>偏差 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E5%81%8F%E5%B7%AE/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E5%81%8F%E5%B7%AE/</link>
     <description>Recent content in 偏差 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Mon, 15 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E5%81%8F%E5%B7%AE/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 15 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E5%81%8F%E5%B7%AE/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>6.4 估计器的理想属性</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0056/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0056/</link>
       <pubDate>Mon, 15 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0056/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0056/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;由于频率派决策理论没有提供选择最佳估计器的自动方法，我们需要提出其他启发式方法来选择它们。 在本节中，我们将讨论我们所希望估计器应该具有的一些属性。 不幸的是，我们将看到我们无法同时实现所有这些属性。&lt;/p&gt;</description>
     </item>
     

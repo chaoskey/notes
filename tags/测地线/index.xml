@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>测地线 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E6%B5%8B%E5%9C%B0%E7%BA%BF/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E6%B5%8B%E5%9C%B0%E7%BA%BF/</link>
     <description>Recent content in 测地线 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Mon, 20 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E6%B5%8B%E5%9C%B0%E7%BA%BF/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E6%B5%8B%E5%9C%B0%E7%BA%BF/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Killing矢量场</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0011/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0011/</link>
       <pubDate>Mon, 20 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0011/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0011/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;Killing矢量场&lt;/code&gt;描述了&lt;code&gt;(伪)黎曼流形&lt;/code&gt;的对称性，每一种对称性都与一个&lt;code&gt;Killing矢量场&lt;/code&gt;相关联。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -20,14 +20,14 @@
     
     <item>
       <title>流形上的平移</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0007/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0007/</link>
       <pubDate>Fri, 17 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0007/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0007/</guid>
       <description>&lt;h2 id=&#34;平移是路径无关的吗&#34;&gt;平移是路径无关的吗？&lt;/h2&gt;
 &lt;p&gt;我们知道，欧氏空间的平移是路径无关的，任意两个位置，平移的结果是唯一的。&lt;/p&gt;
 &lt;p&gt;那么在流形上呢？结论是：&lt;code&gt;流形上的平移是路径依赖的&lt;/code&gt;。只需要一个例子就足以说明，如图：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://chaoskey.gitee.io/notes/notes/images/0012.jpg&#34; alt=&#34;0012.jpg&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://chaoskey.github.io/notes/notes/images/0012.jpg&#34; alt=&#34;0012.jpg&#34;&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

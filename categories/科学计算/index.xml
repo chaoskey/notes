@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>科学计算 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/</link>
+    <link>https://chaoskey.github.io/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/</link>
     <description>Recent content in 科学计算 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Mon, 01 Mar 2021 09:41:03 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Mar 2021 09:41:03 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/categories/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>不可压缩流体的有限元【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0127/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0127/</link>
       <pubDate>Mon, 01 Mar 2021 09:41:03 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0127/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e4%ba%8c%e5%8d%81%e7%ab%a0-%e4%b8%8d%e5%8f%af%e5%8e%8b%e7%bc%a9%e6%b5%81%e4%bd%93%e7%9a%84%e6%9c%89%e9%99%90%e5%85%83&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0127/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e4%ba%8c%e5%8d%81%e7%ab%a0-%e4%b8%8d%e5%8f%af%e5%8e%8b%e7%bc%a9%e6%b5%81%e4%bd%93%e7%9a%84%e6%9c%89%e9%99%90%e5%85%83&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;p&gt;有限元方法的结构为用户提供了一个选择范围。 对于解决不可压缩的流体问题尤其如此，因为理论上指出了许多稳定的有限元公式。 我们使用自动化工具来实现和检查稳态Stokes方程的各种稳定公式。 事实证明，FEniCS项目组件的表达能力使Stokes问题的求解器可以轻松创建使用各种单元公式。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Unicorn：统一的连续介质力学求解器（下）【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0126/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0126/</link>
       <pubDate>Sun, 21 Feb 2021 11:24:41 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0126/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e5%85%ab%e7%ab%a0-unicorn%e7%bb%9f%e4%b8%80%e7%9a%84%e8%bf%9e%e7%bb%ad%e4%bb%8b%e8%b4%a8%e5%8a%9b%e5%ad%a6%e6%b1%82%e8%a7%a3%e5%99%a8&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0126/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e5%85%ab%e7%ab%a0-unicorn%e7%bb%9f%e4%b8%80%e7%9a%84%e8%bf%9e%e7%bb%ad%e4%bb%8b%e8%b4%a8%e5%8a%9b%e5%ad%a6%e6%b1%82%e8%a7%a3%e5%99%a8&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;h2 id=&#34;185-解决连续介质力学问题&#34;&gt;18·5 解决连续介质力学问题&lt;/h2&gt;
 &lt;p&gt;在本节中，我们介绍一些使用Unicorn计算的示例。 第一个例子是没有自适应性的流固耦合问题，我们讨论了几何和子域的建模，系数（形式中使用的函数），主程序的参数和规范（运行求解器的接口）。 接下来，我们给出一个用自适应性解决湍流纯流体问题的示例，其中我们涵盖了对偶问题的数据建模，自适应回路，并指定了用于建模湍流边界层的滑移/摩擦边界条件。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Unicorn：统一的连续介质力学求解器（中）【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0125/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0125/</link>
       <pubDate>Fri, 19 Feb 2021 11:04:02 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0125/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e5%85%ab%e7%ab%a0-unicorn%e7%bb%9f%e4%b8%80%e7%9a%84%e8%bf%9e%e7%bb%ad%e4%bb%8b%e8%b4%a8%e5%8a%9b%e5%ad%a6%e6%b1%82%e8%a7%a3%e5%99%a8&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0125/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e5%85%ab%e7%ab%a0-unicorn%e7%bb%9f%e4%b8%80%e7%9a%84%e8%bf%9e%e7%bb%ad%e4%bb%8b%e8%b4%a8%e5%8a%9b%e5%ad%a6%e6%b1%82%e8%a7%a3%e5%99%a8&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;h2 id=&#34;184-实现&#34;&gt;18·4 实现&lt;/h2&gt;
 &lt;p&gt;在这里，我们概述了Unicorn的设计。 Unicorn求解器类&lt;code&gt;UCSolver&lt;/code&gt;将Unicorn库中的技术与FEniCS的其他部分结合，合在一起公开一个接口（请参见清单18.6），以模拟连续介质力学中的应用。 求解器实现的主要部分是UC模型的G2离散化的弱形式（请参见图18.4），以及用于误差估计的应力和残差的形式。 来自应用程序的系数被连接到形式，然后由&lt;code&gt;TimeDependentPDE&lt;/code&gt;类执行时间步进。 某些系数，例如
   
@@ -64,21 +64,21 @@
     
     <item>
       <title>Unicorn：统一的连续介质力学求解器（上）【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0124/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0124/</link>
       <pubDate>Sat, 06 Feb 2021 10:38:14 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0124/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e5%85%ab%e7%ab%a0-unicorn%e7%bb%9f%e4%b8%80%e7%9a%84%e8%bf%9e%e7%bb%ad%e4%bb%8b%e8%b4%a8%e5%8a%9b%e5%ad%a6%e6%b1%82%e8%a7%a3%e5%99%a8&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0124/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e5%85%ab%e7%ab%a0-unicorn%e7%bb%9f%e4%b8%80%e7%9a%84%e8%bf%9e%e7%bb%ad%e4%bb%8b%e8%b4%a8%e5%8a%9b%e5%ad%a6%e6%b1%82%e8%a7%a3%e5%99%a8&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;p&gt;本章介绍了Unicorn技术，重点介绍了用于统一连续介质（UC）概念和自适应通用Galerkin（G2）离散化的简单，高效和通用算法和软件，将其作为统一的连续介质力学方法。 我们将介绍Unicorn如何适应FEniCS框架，如何为其他FEniCS组件提供接口，Unicorn提供了哪些接口和功能以及如何设计实现的。 我们还将介绍一些使用Unicorn计算的流固耦合（ﬂuid–structure interaction）和适应性的例子。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>UFL：有限元形式语言》算法(二)&amp;实现的问题【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0123/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0123/</link>
       <pubDate>Thu, 04 Feb 2021 11:01:25 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0123/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0123/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;h2 id=&#34;178-算法续前&#34;&gt;17·8 算法（续前）&lt;/h2&gt;
 &lt;h3 id=&#34;1784-重要的变换&#34;&gt;17·8·4 重要的变换&lt;/h3&gt;
 &lt;p&gt;有很多方法可以操纵表达式的表示。 在这里，我们描述了三个特别重要的变换。 注意，这里每一个算法都删除了一些抽象，因此可能删除了一些分析或优化的机会。 为了展示其效果，下面将每种变换应用到下面的表达式&lt;/p&gt;
@@ -113,76 +113,76 @@ a = \mathrm{grad}(f u) \cdot \mathrm{grad}\ v \tag{17.77}
     
     <item>
       <title>UFL：有限元形式语言》计算导数&amp;算法(一)【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0122/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0122/</link>
       <pubDate>Wed, 03 Feb 2021 07:32:33 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0122/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0122/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;h2 id=&#34;177-计算导数&#34;&gt;17·7 计算导数&lt;/h2&gt;
 &lt;p&gt;当由形式语言的终端用户声明任何种类的导数表达式时，都会构造一个表达式对象来表示它，但不会计算任何内容。 这种表达式对象的类型是Derivative的子类。在从导数表达式生成低级代码之前，必须应用某种求导数的算法，因为差分算符本身在C++等低级语言中不可用。 计算精确的导数很重要，它消除了差分除法的近似。 存在几种用于计算精确导数的替代算法。 所有相关算法都基于链规则，并结合每种表达式对象类型的规则差异。 算法之间的主要区别在于子表达式的重用程度以及子表达式的累积方式。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>UFL：有限元形式语言》形式算符&amp;表达式的表示【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0121/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0121/</link>
       <pubDate>Tue, 02 Feb 2021 12:56:05 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0121/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0121/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;h2 id=&#34;175-形式算符&#34;&gt;17·5 形式算符&lt;/h2&gt;
 &lt;p&gt;一旦定义了一些形式，就有几种方法可以从中计算相关的形式。  上节的算符可用于定义表达式，本节中讨论的算符被用于形式，从而生成新的形式。 形式算符既可以使形式的定义更紧凑，又可以减少错误的可能，因为原始形式中的更改将自动传播到根据它所计算出的形式中。 这些形式算符可以任意组合； 给定一个半线性形式，只需要几条行即可计算出雅可比伴随的作用。  由于这些计算是在形式编译器处理之前完成的，因此在运行时没有任何开销。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>UFL：有限元形式语言》表达式【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0120/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0120/</link>
       <pubDate>Mon, 01 Feb 2021 10:46:53 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0120/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0120/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;h2 id=&#34;174-定义表达式&#34;&gt;17·4 定义表达式&lt;/h2&gt;
 &lt;p&gt;UFL的大多数内容涉及如何声明表达式，例如公式17.13中的积分表达式。 最基本的表达式是终值，它们不依赖于其他表达式。  其他表达式称为算符，将在17.4.2-17.4.5节中讨论。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>UFL：有限元形式语言》概述&amp;有限元空间&amp;形式【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0119/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0119/</link>
       <pubDate>Sun, 31 Jan 2021 09:41:19 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0119/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0119/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e4%b8%83%e7%ab%a0-ufl%e6%9c%89%e9%99%90%e5%85%83%e5%bd%a2%e5%bc%8f%e8%af%ad%e8%a8%80&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;p&gt;统一形式语言（UFL，Alnæs和Logg，2009年）是一种领域专用语言，用于描述变分形式和函数的有限元离散化。 更准确地说，该语言定义了一个灵活的用户接口，用于定义近似于数学符号弱形式的有限元空间和表达式。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>DOLFIN：C&#43;&#43;/Python有限元库》注记【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0118/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0118/</link>
       <pubDate>Wed, 13 Jan 2021 20:31:21 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0118/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0118/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;h2 id=&#34;104-实现注记&#34;&gt;10·4 实现注记&lt;/h2&gt;
 &lt;p&gt;在本节中，我们讨论DOLFIN实现的特定方面，包括并行计算，Python接口的生成，以及即时编译。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>DOLFIN：C&#43;&#43;/Python有限元库》日志/诊断/参数【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0117/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0117/</link>
       <pubDate>Tue, 12 Jan 2021 20:56:49 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0117/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0117/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;h3 id=&#34;10312-日志诊断&#34;&gt;10·3·12 日志／诊断&lt;/h3&gt;
 &lt;p&gt;DOLFIN提供了一个简单的接口来统一处理日志消息，包括警告和错误。  所有消息都收集到单个流中，这使整个程序（包括DOLFIN库）的输出的目的地和格式可由用户控制。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>DOLFIN：C&#43;&#43;/Python有限元库》变分问题/文件/可视化【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0116/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0116/</link>
       <pubDate>Mon, 11 Jan 2021 18:33:03 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0116/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0116/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;h3 id=&#34;10310-变分问题&#34;&gt;10·3·10 变分问题&lt;/h3&gt;
 &lt;p&gt;变分问题（偏微分方程的有限元离散化）可以在DOLFIN中使用&lt;code&gt;solve&lt;/code&gt;函数轻松解决。  线性和非线性问题都可以解决。  线性问题必须表示为以下规范形式：寻求
   
@@ -220,65 +220,65 @@ a(u, v) = L(v) \qquad \forall  v \in \hat{V} \tag{10.8}
     
     <item>
       <title>DOLFIN：C&#43;&#43;/Python有限元库》变分形式/组装/边界条件【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0115/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0115/</link>
       <pubDate>Mon, 11 Jan 2021 09:27:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0115/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0115/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;h3 id=&#34;1037-变分形式&#34;&gt;10·3·7 变分形式&lt;/h3&gt;
 &lt;p&gt;DOLFIN依靠FEniCS工具链FIAT–UFL–FFC / SFC–UFC来计算有限元变分形式。  使用形式编译器FFC或SFC（第11章和第15章）之一来编译以UFL形式语言表示的变分形式（第17章），DOLFIN使用生成的UFC代码（第16章）来计算（组装）变分形式 。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>DOLFIN：C&#43;&#43;/Python有限元库》有限元/函数/表达式【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0114/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0114/</link>
       <pubDate>Sat, 09 Jan 2021 09:19:08 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0114/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0114/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;h3 id=&#34;1033-有限元&#34;&gt;10·3·3 有限元&lt;/h3&gt;
 &lt;p&gt;第2章和第3章讨论的有限元的概念（Ciarlet定义）是由DOLFIN FiniteElement类实现的。  此类在C++和Python接口中的实现方式有所不同。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>DOLFIN：C&#43;&#43;/Python有限元库》网格【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0113/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0113/</link>
       <pubDate>Fri, 08 Jan 2021 10:12:53 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0113/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0113/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;h3 id=&#34;1032-网格&#34;&gt;10·3·2 网格&lt;/h3&gt;
 &lt;p&gt;DOLFIN的核心部分是其网格库和Mesh类。  网格库为计算网格提供了数据结构和算法，包括网格连通性（重合关系），网格细化，网格划分和网格相交的计算。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>DOLFIN：C&#43;&#43;/Python有限元库》线性代数【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0112/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0112/</link>
       <pubDate>Thu, 07 Jan 2021 10:05:30 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0112/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0112/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;h2 id=&#34;103-功能&#34;&gt;10·3 功能&lt;/h2&gt;
 &lt;p&gt;DOLFIN被组织为库（模块）的集合，每个库都覆盖某个功能区域。  我们在这里回顾这些领域，并解释最常用的类和函数的用途和用法。  回顾是自下而上的； 也就是说，我们首先描述DOLFIN的核心低层功能（线性代数和网格），然后向上移动以描述高层功能。  有关更多详细信息，请参阅FEniCS项目网页上的DOLFIN程序员参考和Logg and Wells（2010）。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>DOLFIN：C&#43;&#43;/Python有限元库》概述/接口【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0111/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0111/</link>
       <pubDate>Wed, 06 Jan 2021 16:58:50 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0111/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0111/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e5%8d%81%e7%ab%a0-dolfincpython%e6%9c%89%e9%99%90%e5%85%83%e5%ba%93&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;p&gt;DOLFIN是一个用作FEniCS主要用户接口的C++/Python库。  在本章中，我们将回顾DOLFIN的功能。  我们还将详细讨论DOLFIN某些关键特性的实现。  有关DOLFIN的设计和实现的一般讨论，请参见Logg and Wells（2010）。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>有限元矩阵计算的离散优化【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0110/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0110/</link>
       <pubDate>Wed, 06 Jan 2021 13:19:50 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0110/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e4%b9%9d%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e7%9f%a9%e9%98%b5%e8%ae%a1%e7%ae%97%e7%9a%84%e7%a6%bb%e6%95%a3%e4%bc%98%e5%8c%96&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0110/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e4%b9%9d%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e7%9f%a9%e9%98%b5%e8%ae%a1%e7%ae%97%e7%9a%84%e7%a6%bb%e6%95%a3%e4%bc%98%e5%8c%96&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;p&gt;第8章中，用于单元张量
   
     
@@ -325,11 +325,11 @@ a(u, v) = L(v) \qquad \forall  v \in \hat{V} \tag{10.8}
     
     <item>
       <title>有限元变分形式的张量表示【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0109/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0109/</link>
       <pubDate>Tue, 05 Jan 2021 14:13:50 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0109/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%85%ab%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e5%8f%98%e5%88%86%e5%bd%a2%e5%bc%8f%e7%9a%84%e5%bc%a0%e9%87%8f%e8%a1%a8%e7%a4%ba&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0109/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e5%85%ab%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e5%8f%98%e5%88%86%e5%bd%a2%e5%bc%8f%e7%9a%84%e5%bc%a0%e9%87%8f%e8%a1%a8%e7%a4%ba&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;p&gt;在第6章中，对有限元变分问题离散化，我们看到在矩阵和向量组装中的一个重要步骤是计算由下式定义的胞元（单元）张量
   
     
@@ -416,32 +416,32 @@ A_{T,i} = a_T(\phi_{i_\rho}^{T,\rho}, \dots , \phi_{i_2}^{T,2}, \phi_{i_1}^{T,1}
     
     <item>
       <title>有限元变分形式的正交表示（二）【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0108/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0108/</link>
       <pubDate>Tue, 05 Jan 2021 08:24:50 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0108/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e4%b8%83%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e5%8f%98%e5%88%86%e5%bd%a2%e5%bc%8f%e7%9a%84%e6%ad%a3%e4%ba%a4%e8%a1%a8%e7%a4%ba&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0108/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e4%b8%83%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e5%8f%98%e5%88%86%e5%bd%a2%e5%bc%8f%e7%9a%84%e6%ad%a3%e4%ba%a4%e8%a1%a8%e7%a4%ba&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;h2 id=&#34;73-性能比较&#34;&gt;7·3 性能比较&lt;/h2&gt;
 &lt;p&gt;在本节中，我们研究上一节概述的优化策略对运行时性能的影响。  关键不是要对优化进行严格的分析，而是要提供有关不同策略何时最有效的指示。  我们还将比较正交表示和张量表示的运行时性能（在第8章中进行了介绍），以说明两种方法的优缺点。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>有限元变分形式的正交表示（一）【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0107/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0107/</link>
       <pubDate>Mon, 04 Jan 2021 16:43:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0107/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e4%b8%83%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e5%8f%98%e5%88%86%e5%bd%a2%e5%bc%8f%e7%9a%84%e6%ad%a3%e4%ba%a4%e8%a1%a8%e7%a4%ba&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0107/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e4%b8%83%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e5%8f%98%e5%88%86%e5%bd%a2%e5%bc%8f%e7%9a%84%e6%ad%a3%e4%ba%a4%e8%a1%a8%e7%a4%ba&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;p&gt;本章介绍了与有限元变分形式相关的局部单元张量数值积分的常规运行时正交方法，尤其是可以减少浮点运算次数的自动优化。  运行时正交方法的替代方法是第8章中介绍的张量表示。  正交和张量方法都在FFC中实现了（参见第11章）。  在本章中，我们讨论了四种用于优化所生成代码的运行时性能的正交表示策略，并表明优化策略比单纯的实现带来了运行时性能的显着提高。  我们还研究了针对不同方程的正交和张量方法的性能，这将导致人们希望能够在两种表示形式之间进行选择。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>有限元组装【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0106/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0106/</link>
       <pubDate>Sun, 03 Jan 2021 16:42:15 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0106/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%85%ad%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e7%bb%84%e8%a3%85&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0106/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e5%85%ad%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e7%bb%84%e8%a3%85&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;p&gt;有限元方法可以看作是形成离散线性系统
   
     
@@ -482,42 +482,42 @@ A_{T,i} = a_T(\phi_{i_\rho}^{T,\rho}, \dots , \phi_{i_2}^{T,2}, \phi_{i_1}^{T,1}
     
     <item>
       <title>有限元变分形式【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0105/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0105/</link>
       <pubDate>Sat, 02 Jan 2021 22:00:53 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0105/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%85%ad%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e7%bb%84%e8%a3%85&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0105/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e5%85%ad%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e7%bb%84%e8%a3%85&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;p&gt;FEniCS软件的大部分都致力于变分形式的公式（UFL），变分形式的离散化（FIAT，FFC，SyFi）以及相应离散运算（UFC，DOLFIN）的组装。  本章总结了FEniCS所使用变分形式的表示。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>构造通用参考单元（二）【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0104/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0104/</link>
       <pubDate>Fri, 01 Jan 2021 08:41:20 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0104/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%9b%9b%e7%ab%a0-%e6%9e%84%e9%80%a0%e9%80%9a%e7%94%a8%e5%8f%82%e8%80%83%e5%8d%95%e5%85%83&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0104/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e5%9b%9b%e7%ab%a0-%e6%9e%84%e9%80%a0%e9%80%9a%e7%94%a8%e5%8f%82%e8%80%83%e5%8d%95%e5%85%83&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;h2 id=&#34;44-单元的例子&#34;&gt;4·4 单元的例子&lt;/h2&gt;
 &lt;p&gt;我们用一些标准的有限元来说明这些概念。 也请读者参考第3章，以便更全面地审查单元及其属性。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>构造通用参考单元（一）【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0103/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0103/</link>
       <pubDate>Thu, 24 Dec 2020 12:47:48 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0103/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e5%9b%9b%e7%ab%a0-%e6%9e%84%e9%80%a0%e9%80%9a%e7%94%a8%e5%8f%82%e8%80%83%e5%8d%95%e5%85%83&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0103/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e5%9b%9b%e7%ab%a0-%e6%9e%84%e9%80%a0%e9%80%9a%e7%94%a8%e5%8f%82%e8%80%83%e5%8d%95%e5%85%83&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;p&gt;本章介绍了在参考域上构造通用有限元类的数学框架。 FIAT和SyFi项目均使用此框架，请分别参见第13章和第15章。 我们的目标是提供一个框架，可以自动构建具有非常复杂基底的单纯有限元。 我们从有限元的经典Ciarlet定义及其“节点”基底（这个抽象概念，比标准的面向节点的拉格朗日多项式更加通用和强大）出发开展工作。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>常见有限元（三）【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0102/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0102/</link>
       <pubDate>Tue, 22 Dec 2020 10:35:40 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0102/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e4%b8%89%e7%ab%a0-%e5%b8%b8%e8%a7%81%e6%9c%89%e9%99%90%e5%85%83&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0102/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e4%b8%89%e7%ab%a0-%e5%b8%b8%e8%a7%81%e6%9c%89%e9%99%90%e5%85%83&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;h2 id=&#34;36-l-有限元&#34;&gt;3·6 L² 有限元&lt;/h2&gt;
 &lt;p&gt;
   
@@ -553,11 +553,11 @@ A_{T,i} = a_T(\phi_{i_\rho}^{T,\rho}, \dots , \phi_{i_2}^{T,2}, \phi_{i_1}^{T,1}
     
     <item>
       <title>常见有限元（二）【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0101/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0101/</link>
       <pubDate>Mon, 21 Dec 2020 13:59:23 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0101/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e4%b8%89%e7%ab%a0-%e5%b8%b8%e8%a7%81%e6%9c%89%e9%99%90%e5%85%83&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0101/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e4%b8%89%e7%ab%a0-%e5%b8%b8%e8%a7%81%e6%9c%89%e9%99%90%e5%85%83&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;h2 id=&#34;34-hdiv有限元&#34;&gt;3·4 H（div）有限元&lt;/h2&gt;
 &lt;p&gt;Sobolev空间
   
@@ -605,21 +605,21 @@ A_{T,i} = a_T(\phi_{i_\rho}^{T,\rho}, \dots , \phi_{i_2}^{T,2}, \phi_{i_1}^{T,1}
     
     <item>
       <title>常见有限元（一）【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0100/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0100/</link>
       <pubDate>Sat, 19 Dec 2020 17:51:51 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0100/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e4%b8%89%e7%ab%a0-%e5%b8%b8%e8%a7%81%e6%9c%89%e9%99%90%e5%85%83&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0100/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e4%b8%89%e7%ab%a0-%e5%b8%b8%e8%a7%81%e6%9c%89%e9%99%90%e5%85%83&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;p&gt;本章简要介绍了文献中的有限元。 这里介绍的许多单元已经作为FEniCS项目的一部分实现了； 一些是未来的工作。 有限元的范围远远超出了我们在此考虑的范围。 特别是，我们仅考虑基于简单多项式的单元。 因此，我们绕过了在四边形和六面体，复合和宏单元技术以及XFEM类型方法中定义的单元。 即使在基于简单多项式单元中，也可以扩展单元列表。 尽管如此，本章还是全面介绍了一些最常见的和较不寻常的有限元。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>有限元方法（三）【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0099/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0099/</link>
       <pubDate>Fri, 18 Dec 2020 15:43:50 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0099/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e4%ba%8c%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e6%96%b9%e6%b3%95&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0099/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e4%ba%8c%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e6%96%b9%e6%b3%95&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;h2 id=&#34;26-有限元误差估计和适应性&#34;&gt;2·6 有限元误差估计和适应性&lt;/h2&gt;
 &lt;p&gt;相对于（2.20）精确解
   
@@ -662,11 +662,11 @@ A_{T,i} = a_T(\phi_{i_\rho}^{T,\rho}, \dots , \phi_{i_2}^{T,2}, \phi_{i_1}^{T,1}
     
     <item>
       <title>有限元方法（二）【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0098/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0098/</link>
       <pubDate>Thu, 17 Dec 2020 22:22:30 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0098/</guid>
-      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e4%ba%8c%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e6%96%b9%e6%b3%95&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0098/</guid>
+      <description>&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e4%ba%8c%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e6%96%b9%e6%b3%95&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;h2 id=&#34;24-有限元函数空间&#34;&gt;2·4 有限元函数空间&lt;/h2&gt;
 &lt;p&gt;在前面的讨论中，我们假设总可以构造无限维函数空间的离散子空间
   
@@ -702,14 +702,14 @@ A_{T,i} = a_T(\phi_{i_\rho}^{T,\rho}, \dots , \phi_{i_2}^{T,2}, \phi_{i_1}^{T,1}
     
     <item>
       <title>有限元方法（一）【翻译】</title>
-      <link>https://chaoskey.gitee.io/notes/docs/fem/0097/</link>
+      <link>https://chaoskey.github.io/notes/docs/fem/0097/</link>
       <pubDate>Wed, 16 Dec 2020 16:49:14 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/fem/0097/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/julia/0094/&#34;&gt;有限元法解偏微分方程（FEniCS）&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/julia/0096/&#34;&gt;有限元法求解牛顿流体（FEniCS）&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/fem/0097/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/julia/0094/&#34;&gt;有限元法解偏微分方程（FEniCS）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/julia/0096/&#34;&gt;有限元法求解牛顿流体（FEniCS）&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;这两篇笔记仅做入门之用。  为了深入掌握，建议阅读《Automated Solution of Differential Equations by the Finite Element Method》。 为此，我一边学习一边翻译权当笔记。&lt;/p&gt;
-&lt;p&gt;【&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/fem/#%e7%ac%ac%e4%ba%8c%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e6%96%b9%e6%b3%95&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
+&lt;p&gt;【&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/fem/#%e7%ac%ac%e4%ba%8c%e7%ab%a0-%e6%9c%89%e9%99%90%e5%85%83%e6%96%b9%e6%b3%95&#34;&gt;章节目录&lt;/a&gt;】&lt;/p&gt;
 &lt;p&gt;有限元方法已经成为求解微分方程的通用方法。有限元方法的成功大部分可以归因于它的通用性和优雅性，它允许在一个通用框架内分析和求解来自科学所有领域的各种微分方程。有限元方法成功的另一个因素是公式的灵活性，可以通过选择近似的有限元空间来控制离散化的属性。&lt;/p&gt;
 &lt;p&gt;在本章中，我们回顾有限元方法，并总结整本书中使用的一些基本概念和符号。&lt;/p&gt;
 &lt;p&gt;在接下来的章节中，我们将更详细地讨论这些概念，并特别关注有限元方法的实现和自动化，这是FEniCS项目的一部分。&lt;/p&gt;</description>
@@ -717,10 +717,10 @@ A_{T,i} = a_T(\phi_{i_\rho}^{T,\rho}, \dots , \phi_{i_2}^{T,2}, \phi_{i_1}^{T,1}
     
     <item>
       <title>有限元法求解牛顿流体（FEniCS）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/0096/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/0096/</link>
       <pubDate>Wed, 18 Nov 2020 22:17:27 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/0096/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/julia/0096/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;在Julia环境中，使用&lt;a href=&#34;https://gitee.com/chaoskey/FenicsPy.jl&#34;&gt;FenicsPy.jl&lt;/a&gt;调用&lt;code&gt;FEniCS&lt;/code&gt;库，求解偏微分方程。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -772,10 +772,10 @@ A_{T,i} = a_T(\phi_{i_\rho}^{T,\rho}, \dots , \phi_{i_2}^{T,2}, \phi_{i_1}^{T,1}
     
     <item>
       <title>科学计算环境搭建（Win10&#43;WSL2&#43;Ubuntu）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/0095/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/0095/</link>
       <pubDate>Fri, 13 Nov 2020 20:09:40 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/0095/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/julia/0095/</guid>
       <description>&lt;h2 id=&#34;概要&#34;&gt;概要&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -801,10 +801,10 @@ A_{T,i} = a_T(\phi_{i_\rho}^{T,\rho}, \dots , \phi_{i_2}^{T,2}, \phi_{i_1}^{T,1}
     
     <item>
       <title>有限元法解偏微分方程（FEniCS）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/0094/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/0094/</link>
       <pubDate>Fri, 13 Nov 2020 16:27:30 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/0094/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/julia/0094/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;在Julia环境中，使用&lt;a href=&#34;https://gitee.com/chaoskey/FenicsPy.jl&#34;&gt;FenicsPy.jl&lt;/a&gt;调用&lt;code&gt;FEniCS&lt;/code&gt;库，求解偏微分方程。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -842,10 +842,10 @@ A_{T,i} = a_T(\phi_{i_\rho}^{T,\rho}, \dots , \phi_{i_2}^{T,2}, \phi_{i_1}^{T,1}
     
     <item>
       <title>有限元之Delaunay三角剖分</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/0093/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/0093/</link>
       <pubDate>Fri, 06 Nov 2020 09:55:10 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/0093/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/julia/0093/</guid>
       <description>&lt;p&gt;上一篇笔记，讨论了一个单独的&lt;code&gt;三角单元&lt;/code&gt;。 本篇讨论，如何将任意给定平面区域刨分成&lt;code&gt;三角单元序列&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;本文用到了 python库&lt;code&gt;scipy.spatial.Delaunay&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;参考文献&lt;/strong&gt;： &lt;a href=&#34;https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html&#34;&gt;https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html&lt;/a&gt;&lt;/p&gt;</description>
@@ -853,10 +853,10 @@ A_{T,i} = a_T(\phi_{i_\rho}^{T,\rho}, \dots , \phi_{i_2}^{T,2}, \phi_{i_1}^{T,1}
     
     <item>
       <title>有限元之平面三角单元</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/0092/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/0092/</link>
       <pubDate>Wed, 04 Nov 2020 08:56:50 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/0092/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/julia/0092/</guid>
       <description>&lt;p&gt;本文是有限元法基础之一：三角单元。&lt;/p&gt;
 &lt;p&gt;用
   
@@ -887,10 +887,10 @@ A_{T,i} = a_T(\phi_{i_\rho}^{T,\rho}, \dots , \phi_{i_2}^{T,2}, \phi_{i_1}^{T,1}
     
     <item>
       <title>有限元法解常微分方程边值问题</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/0091/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/0091/</link>
       <pubDate>Mon, 02 Nov 2020 12:25:49 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/0091/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/julia/0091/</guid>
       <description>&lt;p&gt;有限元法可归结为如下几个步骤：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;转换成变分问题（应该会用到边界条件）&lt;/li&gt;
@@ -904,10 +904,10 @@ A_{T,i} = a_T(\phi_{i_\rho}^{T,\rho}, \dots , \phi_{i_2}^{T,2}, \phi_{i_1}^{T,1}
     
     <item>
       <title>Galerkin法解常微分方程边值问题</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/0090/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/0090/</link>
       <pubDate>Sun, 01 Nov 2020 11:11:40 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/0090/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/julia/0090/</guid>
       <description>&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 奇怪：这个库必须放在最前面才能一次加载成功&lt;/span&gt;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; Plots
 gr()
@@ -922,10 +922,10 @@ gr()
     
     <item>
       <title>有限差分法求解一维热传导方程</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/0089/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/0089/</link>
       <pubDate>Sun, 01 Nov 2020 11:06:14 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/0089/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/julia/0089/</guid>
       <description>&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 奇怪：这个库必须放在最前面才能一次加载成功&lt;/span&gt;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; Plots
 gr()
@@ -935,10 +935,10 @@ gr()
     
     <item>
       <title>平面三体问题（Julia版）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/0088/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/0088/</link>
       <pubDate>Sun, 01 Nov 2020 10:15:47 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/0088/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/julia/0088/</guid>
       <description>&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 奇怪：这个库必须放在最前面才能一次加载成功&lt;/span&gt;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; Plots
 &lt;span style=&#34;color:#75715e&#34;&gt;# gr()&lt;/span&gt;
@@ -952,20 +952,20 @@ pyplot()
     
     <item>
       <title>基于Julia的科学计算功能库整理</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/0003/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/0003/</link>
       <pubDate>Sun, 12 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/0003/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/julia/0003/</guid>
       <description>&lt;h2 id=&#34;线性代数&#34;&gt;线性代数&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;julia&lt;/code&gt;标准库中包括了&lt;code&gt;LinearAlgebra&lt;/code&gt;，直接&lt;code&gt;using LinearAlgebra&lt;/code&gt;就能用。详细务必移步&lt;a href=&#34;https://docs.julialang.org/en/v1/stdlib/LinearAlgebra/&#34;&gt;官方文档&lt;/a&gt; 和 &lt;a href=&#34;https://github.com/JuliaLang/julia/blob/master/stdlib/LinearAlgebra/docs/src/index.md&#34;&gt;GitHub文档&lt;/a&gt;阅读。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Julia中的数学符号演算</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/0002/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/0002/</link>
       <pubDate>Sat, 11 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/0002/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/julia/0002/</guid>
       <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
 &lt;p&gt;在&lt;a href=&#34;https://joistwang.gitbook.io/notes/self/0001&#34;&gt;整合Julia和Python的集成环境&lt;/a&gt;中已经配置好环境，可以在&lt;strong&gt;Jupyter&lt;/strong&gt;中进行学习研究了。&lt;/p&gt;
 &lt;p&gt;由于Julia本身暂时还没有好用的符号演算库，只好借用Python的SymPy库。所以，标题应该是“Julia和Python中的数学符号演算”，但由于本文都在Julia环境下进行，单独说Julia将就也可以。&lt;/p&gt;</description>
@@ -973,10 +973,10 @@ pyplot()
     
     <item>
       <title>整合Julia和Python的集成环境（Win10）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/0001/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/0001/</link>
       <pubDate>Wed, 08 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/0001/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/julia/0001/</guid>
       <description>&lt;h2 id=&#34;目标&#34;&gt;目标&lt;/h2&gt;
 &lt;p&gt;１） 统一利用&lt;strong&gt;Visual Studio Code&lt;/strong&gt;作为Julia和Python的ＩＤＥ&lt;/p&gt;
 &lt;p&gt;２） 统一利用&lt;strong&gt;Jupyter&lt;/strong&gt;作为Julia和Python的Notebook&lt;/p&gt;

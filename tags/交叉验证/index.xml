@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>交叉验证 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81/</link>
     <description>Recent content in 交叉验证 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Tue, 16 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 16 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>6.5 经验风险最小化</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0057/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0057/</link>
       <pubDate>Tue, 16 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0057/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0057/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;频率派决策理论存在一个根本问题，即人们实际上无法计算风险函数，因为它依赖于知道真实的数据分布。 （相比之下，贝叶斯后验预期损失总是可以计算，因为它更取决于数据，而不是
   
     

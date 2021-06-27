@@ -2,28 +2,28 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>统计 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E7%BB%9F%E8%AE%A1/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E7%BB%9F%E8%AE%A1/</link>
     <description>Recent content in 统计 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Fri, 12 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E7%BB%9F%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 12 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E7%BB%9F%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>6.1 导论</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0053/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0053/</link>
       <pubDate>Fri, 12 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/06frequentist_statistics/0053/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/06frequentist_statistics/0053/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/06frequentist_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;我们在第5章中描述的统计推断方法称为贝叶斯统计。 也许令人惊讶的是，这被一些人认为是有争议的，而贝叶斯应用于非统计问题 - 例如医疗诊断（第2.2.3.1节），垃圾邮件过滤（第3.4.4.1节）或飞机跟踪（第18.2.1节）。 - 没有争议。 反对的原因与统计模型的参数和其他类型的未知量之间的误导性区别有关。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>5.1 导言</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0045/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0045/</link>
       <pubDate>Thu, 04 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0045/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0045/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;我们已经看到了各种不同的概率模型，并且也讨论了如何拟合数据，即我们讨论过使用各种不同的先验来计算MAP参数估计
   
     

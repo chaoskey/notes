@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>第五章 贝叶斯统计 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/</link>
+    <link>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/</link>
     <description>Recent content in 第五章 贝叶斯统计 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Thu, 04 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>习题</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0052/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0052/</link>
       <pubDate>Thu, 11 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0052/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0052/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;习题5.1&lt;/strong&gt; 证明共轭先验的混合确实是共轭的&lt;/p&gt;
 &lt;p&gt;推导等式5.69.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>5.7 贝叶斯决策理论</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0051/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0051/</link>
       <pubDate>Wed, 10 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0051/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0051/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;我们已经看到概率论如何用来表示和更新我们对世界状况的信念( beliefs)。 然而，最终我们的目标是将我们的信念转化为行动。 在本节中，我们将讨论实现此目的的最佳方法。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>5.6 经验贝叶斯</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0050/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0050/</link>
       <pubDate>Tue, 09 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0050/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0050/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在分层贝叶斯模型中，我们需要计算多个级别潜在变量的后验。 例如，在两级模型中，我们需要计算&lt;/p&gt;
 
   
@@ -65,11 +65,11 @@ p(\boldsymbol{\eta}, \boldsymbol{\theta} | \mathcal{D}) \propto p(\mathcal{D} | 
     
     <item>
       <title>5.5 分层贝叶斯</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0049/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0049/</link>
       <pubDate>Mon, 08 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0049/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0049/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;计算后验
   
     
@@ -124,31 +124,31 @@ p(\boldsymbol{\eta}, \boldsymbol{\theta} | \mathcal{D}) \propto p(\mathcal{D} | 
     
     <item>
       <title>5.4 先验</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0048/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0048/</link>
       <pubDate>Sun, 07 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0048/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0048/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;贝叶斯统计数据中最具争议的方面是它依赖于先验。 贝叶斯认为这是不可避免的，因为没有人是&lt;strong&gt;白板&lt;/strong&gt;(&lt;strong&gt;tabula rasa&lt;/strong&gt;或&lt;strong&gt;blank slate&lt;/strong&gt;)：所有的推论都必须以某些关于世界的假设为条件。 然而，人们可能有兴趣尽量减少先验假设的影响。 我们将在下面简要讨论一些方法。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>5.3贝叶斯模型选择</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0047/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0047/</link>
       <pubDate>Sat, 06 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0047/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0047/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在图1.18中，我们看到使用过高度数多项式会导致过拟合，而使用过低度数会导致欠拟合。类似地，在图7.8（a）中，我们看到使用太小正则化参数会导致过拟合，而太大值会导致欠拟合。一般来说，当面对一组不同复杂度的模型（即参数分布族）时，我们应该如何选择最好的模型呢？这称为&lt;strong&gt;模型选择&lt;/strong&gt;问题。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>5.2 后验分布总结</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0046/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0046/</link>
       <pubDate>Fri, 05 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0046/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0046/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;后验
   
     
@@ -183,11 +183,11 @@ p(\boldsymbol{\eta}, \boldsymbol{\theta} | \mathcal{D}) \propto p(\mathcal{D} | 
     
     <item>
       <title>5.1 导言</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0045/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0045/</link>
       <pubDate>Thu, 04 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0045/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0045/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;我们已经看到了各种不同的概率模型，并且也讨论了如何拟合数据，即我们讨论过使用各种不同的先验来计算MAP参数估计
   
     

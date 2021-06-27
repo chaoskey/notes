@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>拉回映射 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E6%8B%89%E5%9B%9E%E6%98%A0%E5%B0%84/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E6%8B%89%E5%9B%9E%E6%98%A0%E5%B0%84/</link>
     <description>Recent content in 拉回映射 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Sun, 19 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E6%8B%89%E5%9B%9E%E6%98%A0%E5%B0%84/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E6%8B%89%E5%9B%9E%E6%98%A0%E5%B0%84/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>流形间的映射</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0009/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0009/</link>
       <pubDate>Sun, 19 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0009/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0009/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;流形间的&lt;code&gt;点映射&lt;/code&gt;
   

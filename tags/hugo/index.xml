@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>hugo on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/hugo/</link>
+    <link>https://chaoskey.github.io/notes/tags/hugo/</link>
     <description>Recent content in hugo on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Thu, 18 Feb 2021 11:04:32 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 18 Feb 2021 11:04:32 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>基于Obsidian＋Hugo＋Gitee的笔记系统</title>
-      <link>https://chaoskey.gitee.io/notes/posts/%E5%9F%BA%E4%BA%8EObsidianHugoGitee%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/</link>
+      <link>https://chaoskey.github.io/notes/posts/%E5%9F%BA%E4%BA%8EObsidianHugoGitee%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/</link>
       <pubDate>Thu, 18 Feb 2021 11:04:32 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/posts/%E5%9F%BA%E4%BA%8EObsidianHugoGitee%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/</guid>
+      <guid>https://chaoskey.github.io/notes/posts/%E5%9F%BA%E4%BA%8EObsidianHugoGitee%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;本文基于&lt;code&gt;Typora＋Hugo＋Gitee的笔记系统&lt;/code&gt;，仅把&lt;code&gt;Typora&lt;/code&gt;改成&lt;code&gt;Obsidian&lt;/code&gt;而已。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Obsidian&lt;/code&gt;是一个强大的知识库，可在纯文本Markdown文件的本地文件夹上运行。 支持&lt;code&gt;双向链接&lt;/code&gt;（Roam Link）。&lt;/p&gt;
@@ -25,10 +25,10 @@
     
     <item>
       <title>通过实例掌握流编辑器sed</title>
-      <link>https://chaoskey.gitee.io/notes/posts/0067/</link>
+      <link>https://chaoskey.github.io/notes/posts/0067/</link>
       <pubDate>Wed, 08 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/posts/0067/</guid>
+      <guid>https://chaoskey.github.io/notes/posts/0067/</guid>
       <description>&lt;h2 id=&#34;缘由&#34;&gt;缘由&lt;/h2&gt;
 &lt;p&gt;由于Hugo对Markdown的解析和LaTeX存在诸多冲突。比如：当LaTex中出现&lt;code&gt;\\&lt;/code&gt;、&lt;code&gt;\{&lt;/code&gt;、&lt;code&gt;\}&lt;/code&gt;之类的东西，Hugo就无法正常解析数学公式。&lt;/p&gt;
 &lt;p&gt;解决方案之一就是用Hugo的&lt;code&gt;shortcodes&lt;/code&gt;机制，在md文件中用形如&lt;code&gt;{{&amp;lt; katex [display] &amp;gt;}}latex code{{&amp;lt; /katex &amp;gt;}}&lt;/code&gt;格式。&lt;/p&gt;
@@ -38,10 +38,10 @@
     
     <item>
       <title>用Hugo&#43;码云搭建支持Markdown&#43;LaTeX的云笔记</title>
-      <link>https://chaoskey.gitee.io/notes/posts/0000/</link>
+      <link>https://chaoskey.github.io/notes/posts/0000/</link>
       <pubDate>Tue, 07 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/posts/0000/</guid>
+      <guid>https://chaoskey.github.io/notes/posts/0000/</guid>
       <description>&lt;h2 id=&#34;目标配置好后的日常操作&#34;&gt;目标(配置好后的日常操作)&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;更新流程简单舒服，页面主题简洁，完全支持Markdown+LaTeX。&lt;/p&gt;
@@ -57,7 +57,7 @@
 &lt;/ul&gt;
 &lt;p&gt;4） 部署到： &lt;a href=&#34;https://chaoskey.gitee.io/notes&#34;&gt;https://chaoskey.gitee.io/notes&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;5） 一键发布的脚本&lt;code&gt;./publish&lt;/code&gt;（注意，必须根据你自己的情况修改之），依次执行了： 1.  &lt;code&gt;./forgitee&lt;/code&gt;;  2.  将修改过的笔记提交到&lt;code&gt;master&lt;/code&gt;分支； 3. 将&lt;code&gt;public&lt;/code&gt;提交到&lt;code&gt;gh-pages&lt;/code&gt;分支；  4. 将&lt;code&gt;gh-pages&lt;/code&gt;分支&lt;code&gt;push&lt;/code&gt;到&lt;code&gt;gitee&lt;/code&gt;和&lt;code&gt;github&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://chaoskey.gitee.io/notes/notes/images/0103.jpg&#34; alt=&#34;0103.jpg&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://chaoskey.github.io/notes/notes/images/0103.jpg&#34; alt=&#34;0103.jpg&#34;&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

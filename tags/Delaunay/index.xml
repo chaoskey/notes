@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Delaunay on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/Delaunay/</link>
+    <link>https://chaoskey.github.io/notes/tags/Delaunay/</link>
     <description>Recent content in Delaunay on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Fri, 06 Nov 2020 09:55:10 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/Delaunay/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 06 Nov 2020 09:55:10 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/Delaunay/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>有限元之Delaunay三角剖分</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/0093/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/0093/</link>
       <pubDate>Fri, 06 Nov 2020 09:55:10 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/0093/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/julia/0093/</guid>
       <description>&lt;p&gt;上一篇笔记，讨论了一个单独的&lt;code&gt;三角单元&lt;/code&gt;。 本篇讨论，如何将任意给定平面区域刨分成&lt;code&gt;三角单元序列&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;本文用到了 python库&lt;code&gt;scipy.spatial.Delaunay&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;参考文献&lt;/strong&gt;： &lt;a href=&#34;https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html&#34;&gt;https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html&lt;/a&gt;&lt;/p&gt;</description>

@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>模型 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E6%A8%A1%E5%9E%8B/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E6%A8%A1%E5%9E%8B/</link>
     <description>Recent content in 模型 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Tue, 09 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>5.6 经验贝叶斯</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0050/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0050/</link>
       <pubDate>Tue, 09 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0050/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0050/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在分层贝叶斯模型中，我们需要计算多个级别潜在变量的后验。 例如，在两级模型中，我们需要计算&lt;/p&gt;
 
   
@@ -44,10 +44,10 @@ p(\boldsymbol{\eta}, \boldsymbol{\theta} | \mathcal{D}) \propto p(\mathcal{D} | 
     
     <item>
       <title>第八章 估值理论</title>
-      <link>https://chaoskey.gitee.io/notes/docs/apm/0024/</link>
+      <link>https://chaoskey.github.io/notes/docs/apm/0024/</link>
       <pubDate>Sat, 26 May 2018 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/apm/0024/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/apm/0024/</guid>
       <description>&lt;h2 id=&#34;离散随机模型&#34;&gt;离散随机模型&lt;/h2&gt;
 &lt;p&gt;考虑
   

@@ -2,27 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>效用 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E6%95%88%E7%94%A8/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E6%95%88%E7%94%A8/</link>
     <description>Recent content in 效用 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Wed, 10 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E6%95%88%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 10 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E6%95%88%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>5.7 贝叶斯决策理论</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0051/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0051/</link>
       <pubDate>Wed, 10 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0051/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0051/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;我们已经看到概率论如何用来表示和更新我们对世界状况的信念( beliefs)。 然而，最终我们的目标是将我们的信念转化为行动。 在本节中，我们将讨论实现此目的的最佳方法。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>第四章 超常收益率、业绩基准和附加值</title>
-      <link>https://chaoskey.gitee.io/notes/docs/apm/0020/</link>
+      <link>https://chaoskey.github.io/notes/docs/apm/0020/</link>
       <pubDate>Tue, 22 May 2018 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/apm/0020/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/apm/0020/</guid>
       <description>&lt;p&gt;CAPM提供一致预期收益率，多因子模型可以帮助控制风险。本章讨论如何进行预期收益率的预测，并概述如何将预测转化成投资组合。&lt;/p&gt;
 &lt;h2 id=&#34;业绩基准&#34;&gt;业绩基准&lt;/h2&gt;
 &lt;p&gt;业绩基准组合的别称：标杆、规范组合。业绩基准组合是投资管理机构化的产物。&lt;/p&gt;

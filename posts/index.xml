@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/posts/</link>
+    <link>https://chaoskey.github.io/notes/posts/</link>
     <description>Recent content on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Fri, 05 Mar 2021 10:32:20 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 05 Mar 2021 10:32:20 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>安卓手机上的Git服务器</title>
-      <link>https://chaoskey.gitee.io/notes/posts/%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E7%9A%84Git%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+      <link>https://chaoskey.github.io/notes/posts/%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E7%9A%84Git%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
       <pubDate>Fri, 05 Mar 2021 10:32:20 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/posts/%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E7%9A%84Git%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+      <guid>https://chaoskey.github.io/notes/posts/%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E7%9A%84Git%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
       <description>&lt;h2 id=&#34;缘由&#34;&gt;缘由&lt;/h2&gt;
 &lt;p&gt;今天，收到阿里云的密钥泄露通知短信：密钥被公开到Github代码库中。　可我明明是私有库呀！！　　吓得我立刻将Github和Gitee的私有库删除，　私有库不安全呀。&lt;/p&gt;
 &lt;p&gt;通过一番网上搜索，我选择了用手机充当Git服务器的方案，对私有库而言，好处就不用我多说了。&lt;/p&gt;
@@ -21,29 +21,29 @@
     
     <item>
       <title>我用一个下午掌握小鹤双拼</title>
-      <link>https://chaoskey.gitee.io/notes/posts/%E6%88%91%E7%94%A8%E4%B8%80%E4%B8%AA%E4%B8%8B%E5%8D%88%E6%8E%8C%E6%8F%A1%E5%B0%8F%E9%B9%A4%E5%8F%8C%E6%8B%BC/</link>
+      <link>https://chaoskey.github.io/notes/posts/%E6%88%91%E7%94%A8%E4%B8%80%E4%B8%AA%E4%B8%8B%E5%8D%88%E6%8E%8C%E6%8F%A1%E5%B0%8F%E9%B9%A4%E5%8F%8C%E6%8B%BC/</link>
       <pubDate>Sat, 27 Feb 2021 12:27:21 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/posts/%E6%88%91%E7%94%A8%E4%B8%80%E4%B8%AA%E4%B8%8B%E5%8D%88%E6%8E%8C%E6%8F%A1%E5%B0%8F%E9%B9%A4%E5%8F%8C%E6%8B%BC/</guid>
+      <guid>https://chaoskey.github.io/notes/posts/%E6%88%91%E7%94%A8%E4%B8%80%E4%B8%AA%E4%B8%8B%E5%8D%88%E6%8E%8C%E6%8F%A1%E5%B0%8F%E9%B9%A4%E5%8F%8C%E6%8B%BC/</guid>
       <description>&lt;p&gt;昨天，我决定全拼转向双拼，选择了“小鹤双拼”方案。&lt;/p&gt;
 &lt;p&gt;今天，我简要描述了要点总结和个人体验！&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>给家中长辈的电脑打字方案</title>
-      <link>https://chaoskey.gitee.io/notes/posts/%E7%BB%99%E5%AE%B6%E4%B8%AD%E9%95%BF%E8%BE%88%E7%9A%84%E7%94%B5%E8%84%91%E6%89%93%E5%AD%97%E6%96%B9%E6%A1%88/</link>
+      <link>https://chaoskey.github.io/notes/posts/%E7%BB%99%E5%AE%B6%E4%B8%AD%E9%95%BF%E8%BE%88%E7%9A%84%E7%94%B5%E8%84%91%E6%89%93%E5%AD%97%E6%96%B9%E6%A1%88/</link>
       <pubDate>Wed, 24 Feb 2021 17:05:53 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/posts/%E7%BB%99%E5%AE%B6%E4%B8%AD%E9%95%BF%E8%BE%88%E7%9A%84%E7%94%B5%E8%84%91%E6%89%93%E5%AD%97%E6%96%B9%E6%A1%88/</guid>
+      <guid>https://chaoskey.github.io/notes/posts/%E7%BB%99%E5%AE%B6%E4%B8%AD%E9%95%BF%E8%BE%88%E7%9A%84%E7%94%B5%E8%84%91%E6%89%93%E5%AD%97%E6%96%B9%E6%A1%88/</guid>
       <description>&lt;p&gt;&lt;strong&gt;前提条件&lt;/strong&gt;：1）老人会用智能手机。 2）老会基本的电脑操作，就是不会打字。 3） 当然也不会拼音。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>基于Obsidian＋Hugo＋Gitee的笔记系统</title>
-      <link>https://chaoskey.gitee.io/notes/posts/%E5%9F%BA%E4%BA%8EObsidianHugoGitee%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/</link>
+      <link>https://chaoskey.github.io/notes/posts/%E5%9F%BA%E4%BA%8EObsidianHugoGitee%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/</link>
       <pubDate>Thu, 18 Feb 2021 11:04:32 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/posts/%E5%9F%BA%E4%BA%8EObsidianHugoGitee%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/</guid>
+      <guid>https://chaoskey.github.io/notes/posts/%E5%9F%BA%E4%BA%8EObsidianHugoGitee%E7%9A%84%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;本文基于&lt;code&gt;Typora＋Hugo＋Gitee的笔记系统&lt;/code&gt;，仅把&lt;code&gt;Typora&lt;/code&gt;改成&lt;code&gt;Obsidian&lt;/code&gt;而已。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Obsidian&lt;/code&gt;是一个强大的知识库，可在纯文本Markdown文件的本地文件夹上运行。 支持&lt;code&gt;双向链接&lt;/code&gt;（Roam Link）。&lt;/p&gt;
@@ -56,10 +56,10 @@
     
     <item>
       <title>小技巧备忘</title>
-      <link>https://chaoskey.gitee.io/notes/posts/0004/</link>
+      <link>https://chaoskey.github.io/notes/posts/0004/</link>
       <pubDate>Mon, 13 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/posts/0004/</guid>
+      <guid>https://chaoskey.github.io/notes/posts/0004/</guid>
       <description>&lt;h2 id=&#34;1-本地mdlatex如何完美发布到知乎&#34;&gt;1 本地md+LaTex如何完美发布到知乎？&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;我已写成了脚本：&lt;a href=&#34;https://gitee.com/chaoskey/notes/raw/master/forzhihu&#34;&gt;forzhihu&lt;/a&gt;&lt;/p&gt;
@@ -75,10 +75,10 @@
     
     <item>
       <title>通过实例掌握流编辑器sed</title>
-      <link>https://chaoskey.gitee.io/notes/posts/0067/</link>
+      <link>https://chaoskey.github.io/notes/posts/0067/</link>
       <pubDate>Wed, 08 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/posts/0067/</guid>
+      <guid>https://chaoskey.github.io/notes/posts/0067/</guid>
       <description>&lt;h2 id=&#34;缘由&#34;&gt;缘由&lt;/h2&gt;
 &lt;p&gt;由于Hugo对Markdown的解析和LaTeX存在诸多冲突。比如：当LaTex中出现&lt;code&gt;\\&lt;/code&gt;、&lt;code&gt;\{&lt;/code&gt;、&lt;code&gt;\}&lt;/code&gt;之类的东西，Hugo就无法正常解析数学公式。&lt;/p&gt;
 &lt;p&gt;解决方案之一就是用Hugo的&lt;code&gt;shortcodes&lt;/code&gt;机制，在md文件中用形如&lt;code&gt;{{&amp;lt; katex [display] &amp;gt;}}latex code{{&amp;lt; /katex &amp;gt;}}&lt;/code&gt;格式。&lt;/p&gt;
@@ -88,10 +88,10 @@
     
     <item>
       <title>用Hugo&#43;码云搭建支持Markdown&#43;LaTeX的云笔记</title>
-      <link>https://chaoskey.gitee.io/notes/posts/0000/</link>
+      <link>https://chaoskey.github.io/notes/posts/0000/</link>
       <pubDate>Tue, 07 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/posts/0000/</guid>
+      <guid>https://chaoskey.github.io/notes/posts/0000/</guid>
       <description>&lt;h2 id=&#34;目标配置好后的日常操作&#34;&gt;目标(配置好后的日常操作)&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;更新流程简单舒服，页面主题简洁，完全支持Markdown+LaTeX。&lt;/p&gt;
@@ -107,7 +107,7 @@
 &lt;/ul&gt;
 &lt;p&gt;4） 部署到： &lt;a href=&#34;https://chaoskey.gitee.io/notes&#34;&gt;https://chaoskey.gitee.io/notes&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;5） 一键发布的脚本&lt;code&gt;./publish&lt;/code&gt;（注意，必须根据你自己的情况修改之），依次执行了： 1.  &lt;code&gt;./forgitee&lt;/code&gt;;  2.  将修改过的笔记提交到&lt;code&gt;master&lt;/code&gt;分支； 3. 将&lt;code&gt;public&lt;/code&gt;提交到&lt;code&gt;gh-pages&lt;/code&gt;分支；  4. 将&lt;code&gt;gh-pages&lt;/code&gt;分支&lt;code&gt;push&lt;/code&gt;到&lt;code&gt;gitee&lt;/code&gt;和&lt;code&gt;github&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://chaoskey.gitee.io/notes/notes/images/0103.jpg&#34; alt=&#34;0103.jpg&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://chaoskey.github.io/notes/notes/images/0103.jpg&#34; alt=&#34;0103.jpg&#34;&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

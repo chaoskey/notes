@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>辛群 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E8%BE%9B%E7%BE%A4/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E8%BE%9B%E7%BE%A4/</link>
     <description>Recent content in 辛群 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Thu, 27 Feb 2020 17:16:07 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E8%BE%9B%E7%BE%A4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 27 Feb 2020 17:16:07 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E8%BE%9B%E7%BE%A4/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>辛群及其李代数</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0073/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0073/</link>
       <pubDate>Thu, 27 Feb 2020 17:16:07 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0073/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0073/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;通过类比正交群掌握辛群的基本概念。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;反称度规&lt;/code&gt;

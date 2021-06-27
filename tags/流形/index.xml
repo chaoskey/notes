@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>流形 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E6%B5%81%E5%BD%A2/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E6%B5%81%E5%BD%A2/</link>
     <description>Recent content in 流形 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Wed, 15 Apr 2020 09:14:20 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E6%B5%81%E5%BD%A2/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 15 Apr 2020 09:14:20 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E6%B5%81%E5%BD%A2/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>闵氏时空对称性的三种观点</title>
-      <link>https://chaoskey.gitee.io/notes/docs/theophy/0080/</link>
+      <link>https://chaoskey.github.io/notes/docs/theophy/0080/</link>
       <pubDate>Wed, 15 Apr 2020 09:14:20 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0080/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/theophy/0080/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;本篇依次从Killing矢量场、张量（矩阵）、旋量三个角度考察闵氏时空的对称性。&lt;/p&gt;
 &lt;p&gt;最后，从旋量概念引入自旋概念。&lt;/p&gt;
@@ -22,10 +22,10 @@
     
     <item>
       <title>流形上的旋量和旋量场（自旋系数和克氏符）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0079/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0079/</link>
       <pubDate>Fri, 10 Apr 2020 18:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0079/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0079/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;上两篇，引入旋量概念以及旋量代数，以及旋量的一个直观的几何解释。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;自旋系数&lt;/code&gt;，是和&lt;code&gt;克氏符&lt;/code&gt;对标的概念。&lt;/p&gt;
@@ -72,10 +72,10 @@
     
     <item>
       <title>流形上的旋量和旋量场（导数算符和曲率）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0078/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0078/</link>
       <pubDate>Thu, 02 Apr 2020 10:39:12 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0078/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0078/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;上两篇，引入旋量概念以及旋量代数，以及旋量的一个直观的几何解释。&lt;/p&gt;
 &lt;p&gt;本篇，引入&lt;code&gt;旋量场导数算符&lt;/code&gt;和&lt;code&gt;曲率旋量&lt;/code&gt;两个概念。&lt;/p&gt;
@@ -108,10 +108,10 @@
     
     <item>
       <title>流形上的旋量和旋量场（几何解释）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0077/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0077/</link>
       <pubDate>Sat, 28 Mar 2020 19:32:42 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0077/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0077/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;上一篇，引入旋量概念以及旋量代数。本篇在此基础上给出旋量的一个直观的几何解释。&lt;/p&gt;
 &lt;p&gt;本篇限定讨论闵氏时空上的旋量。&lt;/p&gt;
@@ -121,10 +121,10 @@
     
     <item>
       <title>流形上的旋量和旋量场（初步）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0076/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0076/</link>
       <pubDate>Sun, 22 Mar 2020 13:42:42 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0076/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0076/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;带度规流形任意点的切空间和平直空间没有数学上的差别，进而平直空间上发展起来的旋量都是可以移到带度规流形上而无需改变。&lt;/p&gt;
 &lt;p&gt;旋量概念是度规依赖的，进而可始终在正交归一基底下讨论。&lt;/p&gt;
@@ -174,10 +174,10 @@
     
     <item>
       <title>辛流形上的哈密顿力学</title>
-      <link>https://chaoskey.gitee.io/notes/docs/theophy/0075/</link>
+      <link>https://chaoskey.github.io/notes/docs/theophy/0075/</link>
       <pubDate>Sun, 01 Mar 2020 14:52:58 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0075/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/theophy/0075/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;有了《辛群及其李代数》和《辛流形》的学习，关于辛流形上的哈密顿力学就水到渠成了。&lt;/p&gt;
 &lt;p&gt;首先，借助切丛上的拉格朗日量函数，构造一个特别的切丛到余切丛的同构映射。&lt;/p&gt;
@@ -189,10 +189,10 @@
     
     <item>
       <title>辛流形</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0074/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0074/</link>
       <pubDate>Fri, 28 Feb 2020 16:55:40 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0074/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0074/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;通过类比(维)黎曼流形掌握辛流形的基本概念。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;辛构造&lt;/code&gt;，就是&lt;code&gt;闭的反称度规&lt;/code&gt;。&lt;code&gt;辛流形&lt;/code&gt;，就是配备了&lt;code&gt;辛构造&lt;/code&gt;的流形。&lt;/p&gt;
@@ -234,10 +234,10 @@
     
     <item>
       <title>辛群及其李代数</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0073/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0073/</link>
       <pubDate>Thu, 27 Feb 2020 17:16:07 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0073/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0073/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;通过类比正交群掌握辛群的基本概念。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;反称度规&lt;/code&gt;
@@ -278,10 +278,10 @@
     
     <item>
       <title>对称性与守恒律（Noether定理）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/theophy/0072/</link>
+      <link>https://chaoskey.github.io/notes/docs/theophy/0072/</link>
       <pubDate>Wed, 26 Feb 2020 20:14:33 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0072/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/theophy/0072/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;如果知道所有对称性，原则上可以写出具体拉格朗日量。如果只知道部分对称性，也可根据&lt;code&gt;Noether定理&lt;/code&gt;得知对称性所关联的守恒律。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Noether定理&lt;/code&gt;：每一个保持拉格朗日量不变的单参微分同胚群（对称性），必有运动方程组对应的一个首次积分（守恒律）。&lt;/p&gt;
@@ -292,10 +292,10 @@
     
     <item>
       <title>流形视角下的牛顿力学(杀鸡用牛刀)</title>
-      <link>https://chaoskey.gitee.io/notes/docs/theophy/0071/</link>
+      <link>https://chaoskey.github.io/notes/docs/theophy/0071/</link>
       <pubDate>Tue, 25 Feb 2020 08:19:37 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0071/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/theophy/0071/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;本文真是杀鸡用牛刀，但好处是彻底厘清了如何用对称性构造拉格朗日量的一般套路。&lt;/p&gt;
 &lt;p&gt;本文通过强算Killing方程的笨方法，来确定伽利略时空，特别是欧氏空间的完整对称性，进而得到无穷小生成元（变换），最后用这组无穷小变换在拉格朗日量上的不变性来确定拉格朗日量。&lt;/p&gt;
@@ -304,10 +304,10 @@
     
     <item>
       <title>微分几何中的计算（Julia版 计划长期维护）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0070/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0070/</link>
       <pubDate>Mon, 24 Feb 2020 09:44:05 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0070/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0070/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;Julia&lt;/code&gt;，对数学符号真太友好了。&lt;/p&gt;
 &lt;p&gt;前面的笔记中，我曾穿插了些相关的符号计算，本文作为一个汇总，并且未来的一些有特点的代码，我也将汇总于此，用作备忘。&lt;/p&gt;
@@ -318,10 +318,10 @@
     
     <item>
       <title>李变换群</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0069/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0069/</link>
       <pubDate>Sun, 23 Feb 2020 10:04:08 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0069/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0069/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;李变换群&lt;/code&gt;，就是李群作用于流形，这种“作用”其实就是变换，这种变换的集合构成的群。 就是&lt;code&gt;李群的实现&lt;/code&gt;，或 &lt;code&gt;李群的表示&lt;/code&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -329,10 +329,10 @@
     
     <item>
       <title>常用李群及其李代数</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0068/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0068/</link>
       <pubDate>Fri, 21 Feb 2020 11:02:10 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0068/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0068/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;一般线性群
   
@@ -396,10 +396,10 @@
     
     <item>
       <title>李群李代数</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0016/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0016/</link>
       <pubDate>Sat, 25 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0016/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0016/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;李群&lt;/code&gt;是分析&lt;code&gt;流形对称性&lt;/code&gt;的重要工具。&lt;/p&gt;
 &lt;p&gt;从李群
@@ -483,10 +483,10 @@
     
     <item>
       <title>流形上的拉格朗日力学</title>
-      <link>https://chaoskey.gitee.io/notes/docs/theophy/0015/</link>
+      <link>https://chaoskey.github.io/notes/docs/theophy/0015/</link>
       <pubDate>Fri, 24 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0015/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/theophy/0015/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;一个具有约束的力学系的&lt;code&gt;位形空间&lt;/code&gt;是一个&lt;code&gt;微分流形&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;拉格朗日力学&lt;/code&gt;其实就是个理论框架。&lt;/p&gt;
@@ -497,10 +497,10 @@
     
     <item>
       <title>流形上的微积分</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0014/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0014/</link>
       <pubDate>Thu, 23 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0014/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0014/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;流形上微积分的作用对象是微分形式。&lt;/p&gt;
 &lt;p&gt;普通微分对应微分形式的外微分，普通积分则对应微分形式在流形上的积分。&lt;/p&gt;
@@ -511,10 +511,10 @@
     
     <item>
       <title>流形上的微分形式及其对偶</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0013/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0013/</link>
       <pubDate>Wed, 22 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0013/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0013/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;微分形式就是全反称全下指标张量，是流形上微积分的作用对象。&lt;/p&gt;
 &lt;p&gt;对偶矢量基底的楔积构成微分形式的基底。由于全反称性，这个基底张成的线性空间维度是一个组合数。&lt;/p&gt;
@@ -557,10 +557,10 @@
     
     <item>
       <title>子流形和超曲面</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0012/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0012/</link>
       <pubDate>Tue, 21 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0012/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0012/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;嵌入&lt;/code&gt;，就是&amp;quot;足够像&amp;quot;地映射到更高维流形“内部”。这种“内部”区域就是&lt;code&gt;子流形&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;超曲面&lt;/code&gt;，就是低一维的&lt;code&gt;子流形&lt;/code&gt;。&lt;/p&gt;
@@ -573,10 +573,10 @@
     
     <item>
       <title>Killing矢量场</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0011/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0011/</link>
       <pubDate>Mon, 20 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0011/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0011/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;Killing矢量场&lt;/code&gt;描述了&lt;code&gt;(伪)黎曼流形&lt;/code&gt;的对称性，每一种对称性都与一个&lt;code&gt;Killing矢量场&lt;/code&gt;相关联。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -584,10 +584,10 @@
     
     <item>
       <title>流形上的李导数</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0010/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0010/</link>
       <pubDate>Sun, 19 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0010/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0010/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;李导数是沿矢量场对张量场的导数，也是沿矢量场坐标线对张量分量的普通导数。&lt;/p&gt;
 &lt;p&gt;为了清晰定义李导数，引入了&lt;code&gt;单参数微分同胚群&lt;/code&gt;
@@ -640,10 +640,10 @@
     
     <item>
       <title>流形间的映射</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0009/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0009/</link>
       <pubDate>Sun, 19 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0009/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0009/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;流形间的&lt;code&gt;点映射&lt;/code&gt;
   
@@ -740,10 +740,10 @@
     
     <item>
       <title>黎曼曲率张量</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0008/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0008/</link>
       <pubDate>Sat, 18 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0008/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0008/</guid>
       <description>&lt;h2 id=&#34;曲率概念的意义&#34;&gt;曲率概念的意义&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;导数算符对易子&lt;/code&gt;
   
@@ -774,22 +774,22 @@
     
     <item>
       <title>流形上的平移</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0007/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0007/</link>
       <pubDate>Fri, 17 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0007/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0007/</guid>
       <description>&lt;h2 id=&#34;平移是路径无关的吗&#34;&gt;平移是路径无关的吗？&lt;/h2&gt;
 &lt;p&gt;我们知道，欧氏空间的平移是路径无关的，任意两个位置，平移的结果是唯一的。&lt;/p&gt;
 &lt;p&gt;那么在流形上呢？结论是：&lt;code&gt;流形上的平移是路径依赖的&lt;/code&gt;。只需要一个例子就足以说明，如图：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://chaoskey.gitee.io/notes/notes/images/0012.jpg&#34; alt=&#34;0012.jpg&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://chaoskey.github.io/notes/notes/images/0012.jpg&#34; alt=&#34;0012.jpg&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>流形上的导数算符</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0006/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0006/</link>
       <pubDate>Wed, 15 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0006/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0006/</guid>
       <description>&lt;h2 id=&#34;定义&#34;&gt;定义&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;导数算符&lt;/code&gt;，就是欧氏空间我们所熟悉的
   
@@ -843,10 +843,10 @@
     
     <item>
       <title>基于抽象指标的张量分析</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0005/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0005/</link>
       <pubDate>Tue, 14 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0005/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0005/</guid>
       <description>&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;抽象指标记号&lt;/code&gt;（英语：&lt;code&gt;abstract index notation&lt;/code&gt;）是由&lt;code&gt;罗杰·彭罗斯&lt;/code&gt;发明的一种用来表示张量与旋量的数学记号。与不带指标的字母（如T）表示张量相比，这种表示法能够显示张量的类型，同时可清楚地表明缩并等运算。而与用分量（张量在某一特定基底下的分量）表示张量不同，该表示法与特定的基底无关，可以表示出张量等式。&lt;/p&gt;</description>
     </item>

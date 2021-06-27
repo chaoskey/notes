@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Galerkin on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/Galerkin/</link>
+    <link>https://chaoskey.github.io/notes/tags/Galerkin/</link>
     <description>Recent content in Galerkin on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Sun, 01 Nov 2020 11:11:40 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/Galerkin/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Nov 2020 11:11:40 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/Galerkin/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Galerkin法解常微分方程边值问题</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/0090/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/0090/</link>
       <pubDate>Sun, 01 Nov 2020 11:11:40 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/0090/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/julia/0090/</guid>
       <description>&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-julia&#34; data-lang=&#34;julia&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 奇怪：这个库必须放在最前面才能一次加载成功&lt;/span&gt;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; Plots
 gr()

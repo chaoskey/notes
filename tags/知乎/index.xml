@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>知乎 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E7%9F%A5%E4%B9%8E/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E7%9F%A5%E4%B9%8E/</link>
     <description>Recent content in 知乎 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Mon, 13 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E7%9F%A5%E4%B9%8E/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 13 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E7%9F%A5%E4%B9%8E/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>小技巧备忘</title>
-      <link>https://chaoskey.gitee.io/notes/posts/0004/</link>
+      <link>https://chaoskey.github.io/notes/posts/0004/</link>
       <pubDate>Mon, 13 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/posts/0004/</guid>
+      <guid>https://chaoskey.github.io/notes/posts/0004/</guid>
       <description>&lt;h2 id=&#34;1-本地mdlatex如何完美发布到知乎&#34;&gt;1 本地md+LaTex如何完美发布到知乎？&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;我已写成了脚本：&lt;a href=&#34;https://gitee.com/chaoskey/notes/raw/master/forzhihu&#34;&gt;forzhihu&lt;/a&gt;&lt;/p&gt;

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>变换群 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E5%8F%98%E6%8D%A2%E7%BE%A4/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E5%8F%98%E6%8D%A2%E7%BE%A4/</link>
     <description>Recent content in 变换群 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Sun, 23 Feb 2020 10:04:08 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E5%8F%98%E6%8D%A2%E7%BE%A4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 23 Feb 2020 10:04:08 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E5%8F%98%E6%8D%A2%E7%BE%A4/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>李变换群</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0069/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0069/</link>
       <pubDate>Sun, 23 Feb 2020 10:04:08 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0069/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0069/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;李变换群&lt;/code&gt;，就是李群作用于流形，这种“作用”其实就是变换，这种变换的集合构成的群。 就是&lt;code&gt;李群的实现&lt;/code&gt;，或 &lt;code&gt;李群的表示&lt;/code&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;</description>

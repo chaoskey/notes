@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>相关性 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E7%9B%B8%E5%85%B3%E6%80%A7/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E7%9B%B8%E5%85%B3%E6%80%A7/</link>
     <description>Recent content in 相关性 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Mon, 24 Jun 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E7%9B%B8%E5%85%B3%E6%80%A7/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Jun 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E7%9B%B8%E5%85%B3%E6%80%A7/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>2.5 联合概率分布</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0034/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/02probability/0034/</link>
       <pubDate>Mon, 24 Jun 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/02probability/0034/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/02probability/0034/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/02probability/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;到目前为止，我们一直专注于建模单变量概率分布。 在本节中，我们开始讨论在多个相关随机变量上建立联合概率分布的更具挑战性的问题; 这将是本书的核心主题。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;联合概率分布&lt;/strong&gt;形如
   

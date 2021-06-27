@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>预测 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E9%A2%84%E6%B5%8B/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E9%A2%84%E6%B5%8B/</link>
     <description>Recent content in 预测 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Tue, 09 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E9%A2%84%E6%B5%8B/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E9%A2%84%E6%B5%8B/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>5.6 经验贝叶斯</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0050/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0050/</link>
       <pubDate>Tue, 09 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0050/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0050/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在分层贝叶斯模型中，我们需要计算多个级别潜在变量的后验。 例如，在两级模型中，我们需要计算&lt;/p&gt;
 
   
@@ -44,11 +44,11 @@ p(\boldsymbol{\eta}, \boldsymbol{\theta} | \mathcal{D}) \propto p(\mathcal{D} | 
     
     <item>
       <title>3.5 朴素贝叶斯分类器</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0043/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/03generative_models_for_discrete_data/0043/</link>
       <pubDate>Mon, 01 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0043/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/03generative_models_for_discrete_data/0043/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在本节中，我们将讨论如何对离散值特征的向量进行分类，
   
     
@@ -105,11 +105,11 @@ p(\boldsymbol{x} | y=c, \boldsymbol{\theta}) = \prod_{j=1}^D {p(\boldsymbol{x}_j
     
     <item>
       <title>3.4 狄利克雷-多项模型</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0042/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/03generative_models_for_discrete_data/0042/</link>
       <pubDate>Sun, 30 Jun 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0042/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/03generative_models_for_discrete_data/0042/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在上一节中，我们讨论了如何推断硬币&amp;quot;正面&amp;quot;出现的概率。在本节中，我们推广这些结果，以推断出有
   
     
@@ -144,11 +144,11 @@ p(\boldsymbol{x} | y=c, \boldsymbol{\theta}) = \prod_{j=1}^D {p(\boldsymbol{x}_j
     
     <item>
       <title>3.3 贝塔-二项模型</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0041/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/03generative_models_for_discrete_data/0041/</link>
       <pubDate>Sat, 29 Jun 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0041/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/03generative_models_for_discrete_data/0041/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在给定一离散观察序列的情况下, 数字游戏涉及从有限假设空间推断出离散变量的分布, 
   
     

@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>理性行为 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E7%90%86%E6%80%A7%E8%A1%8C%E4%B8%BA/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E7%90%86%E6%80%A7%E8%A1%8C%E4%B8%BA/</link>
     <description>Recent content in 理性行为 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Wed, 10 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E7%90%86%E6%80%A7%E8%A1%8C%E4%B8%BA/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 10 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E7%90%86%E6%80%A7%E8%A1%8C%E4%B8%BA/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>5.7 贝叶斯决策理论</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0051/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0051/</link>
       <pubDate>Wed, 10 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0051/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0051/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;我们已经看到概率论如何用来表示和更新我们对世界状况的信念( beliefs)。 然而，最终我们的目标是将我们的信念转化为行动。 在本节中，我们将讨论实现此目的的最佳方法。&lt;/p&gt;</description>
     </item>
     

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>旋量 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E6%97%8B%E9%87%8F/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E6%97%8B%E9%87%8F/</link>
     <description>Recent content in 旋量 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Wed, 15 Apr 2020 09:14:20 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E6%97%8B%E9%87%8F/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 15 Apr 2020 09:14:20 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E6%97%8B%E9%87%8F/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>闵氏时空对称性的三种观点</title>
-      <link>https://chaoskey.gitee.io/notes/docs/theophy/0080/</link>
+      <link>https://chaoskey.github.io/notes/docs/theophy/0080/</link>
       <pubDate>Wed, 15 Apr 2020 09:14:20 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/theophy/0080/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/theophy/0080/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;本篇依次从Killing矢量场、张量（矩阵）、旋量三个角度考察闵氏时空的对称性。&lt;/p&gt;
 &lt;p&gt;最后，从旋量概念引入自旋概念。&lt;/p&gt;
@@ -22,10 +22,10 @@
     
     <item>
       <title>流形上的旋量和旋量场（自旋系数和克氏符）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0079/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0079/</link>
       <pubDate>Fri, 10 Apr 2020 18:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0079/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0079/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;上两篇，引入旋量概念以及旋量代数，以及旋量的一个直观的几何解释。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;自旋系数&lt;/code&gt;，是和&lt;code&gt;克氏符&lt;/code&gt;对标的概念。&lt;/p&gt;
@@ -72,10 +72,10 @@
     
     <item>
       <title>流形上的旋量和旋量场（导数算符和曲率）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0078/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0078/</link>
       <pubDate>Thu, 02 Apr 2020 10:39:12 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0078/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0078/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;上两篇，引入旋量概念以及旋量代数，以及旋量的一个直观的几何解释。&lt;/p&gt;
 &lt;p&gt;本篇，引入&lt;code&gt;旋量场导数算符&lt;/code&gt;和&lt;code&gt;曲率旋量&lt;/code&gt;两个概念。&lt;/p&gt;
@@ -108,10 +108,10 @@
     
     <item>
       <title>流形上的旋量和旋量场（几何解释）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0077/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0077/</link>
       <pubDate>Sat, 28 Mar 2020 19:32:42 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0077/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0077/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;上一篇，引入旋量概念以及旋量代数。本篇在此基础上给出旋量的一个直观的几何解释。&lt;/p&gt;
 &lt;p&gt;本篇限定讨论闵氏时空上的旋量。&lt;/p&gt;
@@ -121,10 +121,10 @@
     
     <item>
       <title>流形上的旋量和旋量场（初步）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0076/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0076/</link>
       <pubDate>Sun, 22 Mar 2020 13:42:42 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0076/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0076/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;带度规流形任意点的切空间和平直空间没有数学上的差别，进而平直空间上发展起来的旋量都是可以移到带度规流形上而无需改变。&lt;/p&gt;
 &lt;p&gt;旋量概念是度规依赖的，进而可始终在正交归一基底下讨论。&lt;/p&gt;

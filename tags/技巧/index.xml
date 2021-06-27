@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>技巧 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E6%8A%80%E5%B7%A7/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E6%8A%80%E5%B7%A7/</link>
     <description>Recent content in 技巧 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Mon, 13 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E6%8A%80%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 13 Jan 2020 19:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E6%8A%80%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>小技巧备忘</title>
-      <link>https://chaoskey.gitee.io/notes/posts/0004/</link>
+      <link>https://chaoskey.github.io/notes/posts/0004/</link>
       <pubDate>Mon, 13 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/posts/0004/</guid>
+      <guid>https://chaoskey.github.io/notes/posts/0004/</guid>
       <description>&lt;h2 id=&#34;1-本地mdlatex如何完美发布到知乎&#34;&gt;1 本地md+LaTex如何完美发布到知乎？&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;我已写成了脚本：&lt;a href=&#34;https://gitee.com/chaoskey/notes/raw/master/forzhihu&#34;&gt;forzhihu&lt;/a&gt;&lt;/p&gt;
@@ -28,11 +28,11 @@
     
     <item>
       <title>3.5 朴素贝叶斯分类器</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0043/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/03generative_models_for_discrete_data/0043/</link>
       <pubDate>Mon, 01 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/03generative_models_for_discrete_data/0043/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/03generative_models_for_discrete_data/0043/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/03generative_models_for_discrete_data/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在本节中，我们将讨论如何对离散值特征的向量进行分类，
   
     

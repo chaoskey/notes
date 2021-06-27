@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>黎曼曲率 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E9%BB%8E%E6%9B%BC%E6%9B%B2%E7%8E%87/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E9%BB%8E%E6%9B%BC%E6%9B%B2%E7%8E%87/</link>
     <description>Recent content in 黎曼曲率 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Mon, 24 Feb 2020 09:44:05 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E9%BB%8E%E6%9B%BC%E6%9B%B2%E7%8E%87/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Feb 2020 09:44:05 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E9%BB%8E%E6%9B%BC%E6%9B%B2%E7%8E%87/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>微分几何中的计算（Julia版 计划长期维护）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/diffgeo/0070/</link>
+      <link>https://chaoskey.github.io/notes/docs/diffgeo/0070/</link>
       <pubDate>Mon, 24 Feb 2020 09:44:05 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/diffgeo/0070/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/diffgeo/0070/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;Julia&lt;/code&gt;，对数学符号真太友好了。&lt;/p&gt;
 &lt;p&gt;前面的笔记中，我曾穿插了些相关的符号计算，本文作为一个汇总，并且未来的一些有特点的代码，我也将汇总于此，用作备忘。&lt;/p&gt;

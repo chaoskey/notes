@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>python on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/python/</link>
+    <link>https://chaoskey.github.io/notes/tags/python/</link>
     <description>Recent content in python on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Fri, 13 Nov 2020 20:09:40 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 13 Nov 2020 20:09:40 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>科学计算环境搭建（Win10&#43;WSL2&#43;Ubuntu）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/0095/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/0095/</link>
       <pubDate>Fri, 13 Nov 2020 20:09:40 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/0095/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/julia/0095/</guid>
       <description>&lt;h2 id=&#34;概要&#34;&gt;概要&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -38,10 +38,10 @@
     
     <item>
       <title>整合Julia和Python的集成环境（Win10）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/0001/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/0001/</link>
       <pubDate>Wed, 08 Jan 2020 19:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/0001/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/julia/0001/</guid>
       <description>&lt;h2 id=&#34;目标&#34;&gt;目标&lt;/h2&gt;
 &lt;p&gt;１） 统一利用&lt;strong&gt;Visual Studio Code&lt;/strong&gt;作为Julia和Python的ＩＤＥ&lt;/p&gt;
 &lt;p&gt;２） 统一利用&lt;strong&gt;Jupyter&lt;/strong&gt;作为Julia和Python的Notebook&lt;/p&gt;

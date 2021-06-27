@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>流体力学 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E6%B5%81%E4%BD%93%E5%8A%9B%E5%AD%A6/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E6%B5%81%E4%BD%93%E5%8A%9B%E5%AD%A6/</link>
     <description>Recent content in 流体力学 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Wed, 18 Nov 2020 22:17:27 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E6%B5%81%E4%BD%93%E5%8A%9B%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 18 Nov 2020 22:17:27 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E6%B5%81%E4%BD%93%E5%8A%9B%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>有限元法求解牛顿流体（FEniCS）</title>
-      <link>https://chaoskey.gitee.io/notes/docs/julia/0096/</link>
+      <link>https://chaoskey.github.io/notes/docs/julia/0096/</link>
       <pubDate>Wed, 18 Nov 2020 22:17:27 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/julia/0096/</guid>
+      <guid>https://chaoskey.github.io/notes/docs/julia/0096/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;在Julia环境中，使用&lt;a href=&#34;https://gitee.com/chaoskey/FenicsPy.jl&#34;&gt;FenicsPy.jl&lt;/a&gt;调用&lt;code&gt;FEniCS&lt;/code&gt;库，求解偏微分方程。&lt;/p&gt;
 &lt;/blockquote&gt;

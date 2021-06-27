@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>超参数 on 学习笔记</title>
-    <link>https://chaoskey.gitee.io/notes/tags/%E8%B6%85%E5%8F%82%E6%95%B0/</link>
+    <link>https://chaoskey.github.io/notes/tags/%E8%B6%85%E5%8F%82%E6%95%B0/</link>
     <description>Recent content in 超参数 on 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>一切都是我的</copyright>
-    <lastBuildDate>Tue, 09 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.gitee.io/notes/tags/%E8%B6%85%E5%8F%82%E6%95%B0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Jul 2019 20:20:35 +0800</lastBuildDate><atom:link href="https://chaoskey.github.io/notes/tags/%E8%B6%85%E5%8F%82%E6%95%B0/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>5.6 经验贝叶斯</title>
-      <link>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0050/</link>
+      <link>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0050/</link>
       <pubDate>Tue, 09 Jul 2019 20:20:35 +0800</pubDate>
       
-      <guid>https://chaoskey.gitee.io/notes/docs/mlapp/05bayesian_statistics/0050/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.gitee.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+      <guid>https://chaoskey.github.io/notes/docs/mlapp/05bayesian_statistics/0050/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://chaoskey.github.io/notes/notes/docs/mlapp/05bayesian_statistics/&#34;&gt;&lt;strong&gt;返回本章目录&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;在分层贝叶斯模型中，我们需要计算多个级别潜在变量的后验。 例如，在两级模型中，我们需要计算&lt;/p&gt;
 
   
